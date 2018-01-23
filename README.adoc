@@ -16,7 +16,7 @@ image::images/terms.png[]
 
 == Text Section Model
 
-image::images/section.png[]
+image::images/sections.png[]
 
 == Text Block Model
 
