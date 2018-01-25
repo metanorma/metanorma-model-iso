@@ -22,10 +22,6 @@ image::images/sections.png[]
 
 image::images/blocks.png[]
 
-== Text Paragraph Model
-
-image::images/paragraph.png[]
-
 == Text Model
 
 image::images/text.png[]
