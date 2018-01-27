@@ -251,7 +251,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFglkPKdkr42i8="
 							},
-							"name": "comments",
+							"name": "notes",
 							"visibility": "public",
 							"isStatic": false,
 							"isLeaf": false,
@@ -826,7 +826,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+comments: ParagraphBlock[0..*]",
+											"text": "+notes: ParagraphBlock[0..*]",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
