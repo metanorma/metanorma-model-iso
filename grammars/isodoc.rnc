@@ -1,0 +1,511 @@
+# instantiations of this grammar may replace leaf strings
+# with more elaborated types; e.g. title (text) replaced with
+# title_main, title_intro, title_part; type replaced with
+# enum.
+#
+# some renaming at leaf nodes is permissible
+#
+# obligations can change both from optional to mandatory,
+# and from mandatory to optional; optional elements may
+# be omitted; freely positioned alternatives may be replaced
+# with strict ordering
+
+grammar {
+
+start = standard-document
+
+standard-document =
+element standard-document {
+  title+, status, creator*, language, script, type?,
+  id*, version?, copyright,
+  sections+
+}
+
+title =
+  element title {
+    attribute language { text },
+    text
+}
+
+status =
+  element status { text }
+
+language =
+  element language { text }
+# ISO-639
+
+script =
+  element script { text }
+# ISO-15924: Latn
+
+type = element type { text }
+
+id = element id { string }
+
+version =
+  element version {
+    edition?, revision_date?, version*
+}
+
+edition = element edition { xsd:int }
+revision_date = element revision_date { xsd:date }
+version = element version { text }
+
+copyright =
+  element copyright {
+    from, to?, owner
+}
+
+from = element from { xsd:gYear }
+to = element to { xsd:gYear }
+
+owner =
+  element owner { CreatorInfo }
+
+sections =
+  element sections {
+    ( content | clause | terms | annex | references )+
+}
+
+section_title =
+  element title { text }
+
+content =
+  element content {
+    attribute id { xsd:ID }?,
+    section_title?,
+    (
+      BasicBlock* |
+      content_subsection+
+    )
+  }
+
+content_subsection =
+  element subsection {
+    attribute id { xsd:ID }?,
+    section_title?,
+    (
+      BasicBlock* |
+      content_subsection+
+    )
+  }
+
+clause =
+  element clause {
+    attribute id { xsd:ID }?,
+    section_title?,
+    (
+      BasicBlock* |
+      clause_subsection+
+    )
+  }
+
+clause_subsection =
+  element subsection {
+    attribute id { xsd:ID },
+    section_title?,
+    (
+      BasicBlock* |
+      clause_subsection+
+    )
+  }
+
+
+annex =
+  element annex {
+    attribute id { xsd:ID }?,
+    attribute type { ( "normative" | "informative" ) },
+    section_title?,
+    ( BasicBlock | clause_subsection+ )
+}
+
+references =
+  element references {
+    attribute id { xsd:ID }?,
+    section_title?,
+    bibItem*
+  }
+
+terms =
+  element terms {
+    attribute id { xsd:ID }?,
+    term+
+  }
+
+term =
+  element term {
+    attribute id { xsd:ID }?,
+    preferred+, admitted*, deprecates*,
+    termdomain?, definition, termnote*, termexample*, termsource*
+  }
+
+preferred =
+  element preferred { TextElement+ }
+
+admitted =
+  element admitted { TextElement+ }
+
+deprecates =
+  element deprecates { TextElement+ }
+
+termdomain =
+  element domain { TextElement+ }
+
+definition =
+  element definition {
+    ( para_no_fn )
+  }
+
+termnote =
+  element termnote { para_no_fn }
+
+termexample =
+  element termexample { BasicBlock }
+
+termsource =
+  element termsource {
+    attribute status { ( "identical" | "modified" ) },
+    origin, modification?
+}
+
+origin =
+  element origin { CitationType }
+
+
+modification =
+  element modification { para_no_fn }
+
+BasicBlock = ( figure | admonition | example | table | sourcecode | 
+               quote | paragraph_with_footnote )
+
+paragraph =
+  element p { ParagraphType }
+
+Alignments = ( "left" | "right" | "center" | "justified" )
+
+ParagraphType =
+    attribute id { xsd:ID },
+    attribute alignment { Alignments }?,
+   ( TextElement )*, review*
+
+paragraph_with_footnote =
+  element p {
+    attribute id { xsd:ID },
+    attribute alignment { Alignments }?,
+   ( TextElement | fn  )*, review*
+}
+
+review =
+  element review {
+  attribute id { xsd:ID },
+  attribute reviewer { text }?,
+  attribute date { text }?,
+  attribute from { xsd:ID },
+  attribute to { xsd:ID },
+  paragraph+
+}
+
+formula =
+  element formula {
+    attribute id { xsd:ID },
+    stem, dl?
+}
+
+quote =
+  element quote {
+    attribute id { xsd:ID },
+    attribute alignment { Alignments }?,
+    quote_source?,
+    quote_author?,
+    paragraph_with_footnote+
+}
+
+quote_source =
+  element source { CitationInfo }
+
+quote_author =
+  element author { CreatorInfo }
+
+sourcecode =
+  element sourcecode {
+    attribute id { xsd:ID },
+    tname?, ( text | callout )+, annotation*
+  }
+
+table =
+  element table {
+    attribute id { xsd:ID },
+    name?, thead?, tfoot?, tbody, table_note*, dl?
+  }
+
+thead = element thead { tr }
+tfoot = element tfoot { tr }
+tbody = element tbody { tr+ }
+
+table_note = element note { ParagraphType }
+
+tr =
+  element tr { ( td | th )+ }
+
+td =
+  element td {
+    attribute colspan { text }?,
+    attribute rowspan { text }?,
+    attribute align { "left" | "right" | "center" }?,
+    (
+      (TextElement | review )* |
+      paragraph_with_footnote+
+    )
+}
+
+th =
+  element th {
+    attribute colspan { text }?,
+    attribute rowspan { text }?,
+    attribute align { "left" | "right" | "center" }?,
+    (
+      (TextElement | review )* |
+      paragraph_with_footnote+
+    )
+}
+
+example =
+  element example {
+    attribute id { xsd:ID },
+    ( formula | ul | ol | dl | quote | sourcecode | paragraph_with_footnote | 
+      review )+
+}
+
+admonition =
+  element admonition {
+    attribute type { ( "warning" | "note" | "tip" | "important" | "caution" ) },
+    attribute id { xsd:ID },
+    paragraph_with_footnote*
+  }
+
+figure =
+  element figure {
+    attribute id { xsd:ID },
+     source?, tname?, ( figure+ |  ( TextElement*, note*, dl? ) )
+  }
+
+TextElement =
+  text | em | eref | strong | stem | sub | sup | tt |
+  strike | smallcap | xref | br | hyperlink | hr | pagebreak | bookmark
+
+
+em = element em { text }
+strong = element strong { text }
+sub = element sub { text }
+sup = element sup { text }
+strike = element strike { text }
+smallcap = element smallcap { smallcap }
+
+br = element br { empty }
+hr = element hr { empty }
+pagebreak = element pagebreak { empty }
+
+# bare ID element, used for referencing arbitrary spans of text
+bookmark =
+  element bookmark {
+  attribute id { xsd:ID },
+  empty
+}
+
+ReferenceFormat = ( "external" | "inline" | "footnote" | "callout" )
+
+eref =
+  element eref {
+    attribute normative { xsd:boolean }?,
+    attribute citeas { text },
+    attribute type { ReferenceFormat },
+    CitationType,
+    text
+}
+
+hyperlink =
+  element link {
+    attribute target { xsd:anyURI },
+    attribute type { ReferenceFormat },
+    text
+}
+
+xref =
+  element xref {
+     attribute target { xsd:IDREF },
+     attribute type { ReferenceFormat },
+     text
+}
+
+fn =
+  element fn {
+    attribute reference { text },
+    paragraph+
+}
+# This is xref with fixed @type="footnote", and @target built in as paragraph+
+# @reference replaces ReferenceElement/text
+# so <fn reference="2"><p>This is a footnote</p></fn>
+# corresponds to 
+# <xref type="footnote" target="fn2">2</xref> <p id="fn2">This is a footnote</p>
+
+callout =
+  element callout {
+    attribute target { xsd:IDREF },
+    text
+  }
+
+# This is xref with fixed @type="callout"; the target by convention is in an annotation in the same source code snippet
+# so <callout target="xyz">1</callout>
+# corresponds to <xref type="callout" target="xyz">1</xref>
+
+image =
+  element image {
+    attribute id { xsd:ID },
+    attribute source { xsd:anyURI }?,
+    attribute imageType { ("SVG" | "JPEG" | "GIF" | "PNG" | "PDF" ) }
+}
+
+stem =
+  element stem {
+    attribute type { "MathML" | "AsciiML" },
+    text
+}
+
+annotation =
+  element annotation {
+    attribute id { xsd:ID },
+    paragraph
+}
+
+ul =
+  element ul {
+    attribute id { xsd:ID },
+    li+
+}
+
+li =
+  element li { paragraph_with_footnote+ }
+
+ol =
+  element ol {
+    attribute id { xsd:ID },
+    attribute type { ( "roman" | "alphabet" | "arabic" | 
+                       "roman_upper" | "alphabet_upper" ) },
+    li+
+}
+
+dl =
+  element dl {
+    attribute id { xsd:ID },
+    (dt, dd)+
+}
+
+dt =
+  element dt { TextElement }
+
+dd =
+  element dd { paragraph_with_footnote* }
+
+creator =
+  element creator { CreatorInfo }
+
+CreatorInfo =
+    fullname?, affiliation?, role*, person_identifier*
+
+publisher = 
+  element publisher { CreatorInfo }
+# a publisher has a subset of the roles of a creator
+
+role =
+  element role {
+    attribute type { ( "author" | "edition" | "publisher" | "custom" ) }?,
+    attribute name {text},
+    text
+}
+
+fullname =
+  element fullname {
+    prefix*, forename*, initial*, surname, addition*
+}
+
+prefix = element prefix { text }
+initial = element initial { text }
+addition = element addition { text }
+surname = element surname { text }
+forename = element forename { text }
+
+affiliation =
+  element affiliation { Organization }
+
+Organization = 
+    orgname, uri?, address?, org_identifier*
+
+orgname =
+  element name { text }
+
+uri =
+  element uri { text }
+
+address =
+  element address {
+    # iso191606 TODO
+    street+, city, state?, country, postcode?
+}
+
+street = element street { text }
+city = element city { text }
+state = element state { text }
+country = element country { text }
+postcode = element postcode { text }
+
+person_identifier =
+  element identifier {
+    attribute type { ("isni" | "uri") },
+    text
+  }
+
+org_identifier =
+  element identifier {
+    attribute type { ("orcid" | "uri") },
+    text
+  }
+
+citation =
+  element citation { CitationType }
+
+CitationType = 
+    attribute bibItemId { xsd:IDREF },
+    locality*, date?
+
+date = element date { string }
+
+bibLocality =
+  element bibLocality {
+    attribute type { ( "section" | "clause" | "part" | "paragraph" | 
+                       "chapter" | "page" | "whole" ) },
+    text
+}
+
+bibItem =
+  element bibItem { BibliographicItem }
+
+BibliographicItem =
+     attribute id { xsd:ID },
+     attribute type { "article" | "book" | "booklet" | "conference" | "manual" |
+                      "proceedings" | "presentation" | "thesis" | "techreport" |
+                      "standard" | "unpublished" }?,
+    bname, source?, publishDate, docIdentifier*, accessedDate?, creator*, 
+    publisher*, edition?,
+    comment*, partOf*, creationDate?, language*, script*
+
+bname = element name { text }
+source = element source { xsd:anyURI }
+publishDate = element publishDate { text }
+docIdentifier = element docIdentifier { text }
+accessedDate = element accessedDate { text }
+creationDate = element creationDate { text }
+comments = element comments { paragraph+ }
+
+partOf = element partOf { BibliographicItem }
+
+}
