@@ -2,7 +2,7 @@
 <!--
   instantiations of this grammar may replace leaf strings
   with more elaborated types; e.g. title (text) replaced with
-  title_main, title_intro, title_part; type replaced with
+  title-main, title-intro, title-part; type replaced with
   enum.
   
   some renaming at leaf nodes is permissible
@@ -81,7 +81,7 @@
         <ref name="edition"/>
       </optional>
       <optional>
-        <ref name="revision_date"/>
+        <ref name="revision-date"/>
       </optional>
       <zeroOrMore>
         <ref name="version"/>
@@ -93,8 +93,8 @@
       <data type="int"/>
     </element>
   </define>
-  <define name="revision_date">
-    <element name="revision_date">
+  <define name="revision-date">
+    <element name="revision-date">
       <data type="date"/>
     </element>
   </define>
@@ -140,7 +140,7 @@
       </oneOrMore>
     </element>
   </define>
-  <define name="section_title">
+  <define name="section-title">
     <element name="title">
       <text/>
     </element>
@@ -153,19 +153,19 @@
         </attribute>
       </optional>
       <optional>
-        <ref name="section_title"/>
+        <ref name="section-title"/>
       </optional>
       <choice>
         <zeroOrMore>
           <ref name="BasicBlock"/>
         </zeroOrMore>
         <oneOrMore>
-          <ref name="content_subsection"/>
+          <ref name="content-subsection"/>
         </oneOrMore>
       </choice>
     </element>
   </define>
-  <define name="content_subsection">
+  <define name="content-subsection">
     <element name="subsection">
       <optional>
         <attribute name="id">
@@ -173,14 +173,14 @@
         </attribute>
       </optional>
       <optional>
-        <ref name="section_title"/>
+        <ref name="section-title"/>
       </optional>
       <choice>
         <zeroOrMore>
           <ref name="BasicBlock"/>
         </zeroOrMore>
         <oneOrMore>
-          <ref name="content_subsection"/>
+          <ref name="content-subsection"/>
         </oneOrMore>
       </choice>
     </element>
@@ -193,32 +193,32 @@
         </attribute>
       </optional>
       <optional>
-        <ref name="section_title"/>
+        <ref name="section-title"/>
       </optional>
       <choice>
         <zeroOrMore>
           <ref name="BasicBlock"/>
         </zeroOrMore>
         <oneOrMore>
-          <ref name="clause_subsection"/>
+          <ref name="clause-subsection"/>
         </oneOrMore>
       </choice>
     </element>
   </define>
-  <define name="clause_subsection">
+  <define name="clause-subsection">
     <element name="subsection">
       <attribute name="id">
         <data type="ID"/>
       </attribute>
       <optional>
-        <ref name="section_title"/>
+        <ref name="section-title"/>
       </optional>
       <choice>
         <zeroOrMore>
           <ref name="BasicBlock"/>
         </zeroOrMore>
         <oneOrMore>
-          <ref name="clause_subsection"/>
+          <ref name="clause-subsection"/>
         </oneOrMore>
       </choice>
     </element>
@@ -237,12 +237,12 @@
         </choice>
       </attribute>
       <optional>
-        <ref name="section_title"/>
+        <ref name="section-title"/>
       </optional>
       <choice>
         <ref name="BasicBlock"/>
         <oneOrMore>
-          <ref name="clause_subsection"/>
+          <ref name="clause-subsection"/>
         </oneOrMore>
       </choice>
     </element>
@@ -255,7 +255,7 @@
         </attribute>
       </optional>
       <optional>
-        <ref name="section_title"/>
+        <ref name="section-title"/>
       </optional>
       <zeroOrMore>
         <ref name="bibItem"/>
@@ -335,12 +335,12 @@
   </define>
   <define name="definition">
     <element name="definition">
-      <ref name="para_no_fn"/>
+      <ref name="para-no-fn"/>
     </element>
   </define>
   <define name="termnote">
     <element name="termnote">
-      <ref name="para_no_fn"/>
+      <ref name="para-no-fn"/>
     </element>
   </define>
   <define name="termexample">
@@ -369,7 +369,7 @@
   </define>
   <define name="modification">
     <element name="modification">
-      <ref name="para_no_fn"/>
+      <ref name="paragraph"/>
     </element>
   </define>
   <define name="BasicBlock">
@@ -380,7 +380,7 @@
       <ref name="table"/>
       <ref name="sourcecode"/>
       <ref name="quote"/>
-      <ref name="paragraph_with_footnote"/>
+      <ref name="paragraph-with-footnote"/>
     </choice>
   </define>
   <define name="paragraph">
@@ -412,7 +412,7 @@
       <ref name="review"/>
     </zeroOrMore>
   </define>
-  <define name="paragraph_with_footnote">
+  <define name="paragraph-with-footnote">
     <element name="p">
       <attribute name="id">
         <data type="ID"/>
@@ -477,22 +477,22 @@
         </attribute>
       </optional>
       <optional>
-        <ref name="quote_source"/>
+        <ref name="quote-source"/>
       </optional>
       <optional>
-        <ref name="quote_author"/>
+        <ref name="quote-author"/>
       </optional>
       <oneOrMore>
-        <ref name="paragraph_with_footnote"/>
+        <ref name="paragraph-with-footnote"/>
       </oneOrMore>
     </element>
   </define>
-  <define name="quote_source">
+  <define name="quote-source">
     <element name="source">
       <ref name="CitationInfo"/>
     </element>
   </define>
-  <define name="quote_author">
+  <define name="quote-author">
     <element name="author">
       <ref name="CreatorInfo"/>
     </element>
@@ -532,7 +532,7 @@
       </optional>
       <ref name="tbody"/>
       <zeroOrMore>
-        <ref name="table_note"/>
+        <ref name="table-note"/>
       </zeroOrMore>
       <optional>
         <ref name="dl"/>
@@ -556,7 +556,7 @@
       </oneOrMore>
     </element>
   </define>
-  <define name="table_note">
+  <define name="table-note">
     <element name="note">
       <ref name="ParagraphType"/>
     </element>
@@ -596,7 +596,7 @@
           </choice>
         </zeroOrMore>
         <oneOrMore>
-          <ref name="paragraph_with_footnote"/>
+          <ref name="paragraph-with-footnote"/>
         </oneOrMore>
       </choice>
     </element>
@@ -626,7 +626,7 @@
           </choice>
         </zeroOrMore>
         <oneOrMore>
-          <ref name="paragraph_with_footnote"/>
+          <ref name="paragraph-with-footnote"/>
         </oneOrMore>
       </choice>
     </element>
@@ -644,7 +644,7 @@
           <ref name="dl"/>
           <ref name="quote"/>
           <ref name="sourcecode"/>
-          <ref name="paragraph_with_footnote"/>
+          <ref name="paragraph-with-footnote"/>
           <ref name="review"/>
         </choice>
       </oneOrMore>
@@ -665,7 +665,7 @@
         <data type="ID"/>
       </attribute>
       <zeroOrMore>
-        <ref name="paragraph_with_footnote"/>
+        <ref name="paragraph-with-footnote"/>
       </zeroOrMore>
     </element>
   </define>
@@ -898,7 +898,7 @@
   <define name="li">
     <element name="li">
       <oneOrMore>
-        <ref name="paragraph_with_footnote"/>
+        <ref name="paragraph-with-footnote"/>
       </oneOrMore>
     </element>
   </define>
@@ -940,7 +940,7 @@
   <define name="dd">
     <element name="dd">
       <zeroOrMore>
-        <ref name="paragraph_with_footnote"/>
+        <ref name="paragraph-with-footnote"/>
       </zeroOrMore>
     </element>
   </define>
@@ -960,7 +960,7 @@
       <ref name="role"/>
     </zeroOrMore>
     <zeroOrMore>
-      <ref name="person_identifier"/>
+      <ref name="person-identifier"/>
     </zeroOrMore>
   </define>
   <define name="publisher">
@@ -1041,7 +1041,7 @@
       <ref name="address"/>
     </optional>
     <zeroOrMore>
-      <ref name="org_identifier"/>
+      <ref name="org-identifier"/>
     </zeroOrMore>
   </define>
   <define name="orgname">
@@ -1095,7 +1095,7 @@
       <text/>
     </element>
   </define>
-  <define name="person_identifier">
+  <define name="person-identifier">
     <element name="identifier">
       <attribute name="type">
         <choice>
@@ -1106,7 +1106,7 @@
       <text/>
     </element>
   </define>
-  <define name="org_identifier">
+  <define name="org-identifier">
     <element name="identifier">
       <attribute name="type">
         <choice>

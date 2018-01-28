@@ -1,6 +1,6 @@
 # instantiations of this grammar may replace leaf strings
 # with more elaborated types; e.g. title (text) replaced with
-# title_main, title_intro, title_part; type replaced with
+# title-main, title-intro, title-part; type replaced with
 # enum.
 #
 # some renaming at leaf nodes is permissible
@@ -44,11 +44,11 @@ id = element id { string }
 
 version =
   element version {
-    edition?, revision_date?, version*
+    edition?, revision-date?, version*
 }
 
 edition = element edition { xsd:int }
-revision_date = element revision_date { xsd:date }
+revision-date = element revision-date { xsd:date }
 version = element version { text }
 
 copyright =
@@ -67,46 +67,46 @@ sections =
     ( content | clause | terms | annex | references )+
 }
 
-section_title =
+section-title =
   element title { text }
 
 content =
   element content {
     attribute id { xsd:ID }?,
-    section_title?,
+    section-title?,
     (
       BasicBlock* |
-      content_subsection+
+      content-subsection+
     )
   }
 
-content_subsection =
+content-subsection =
   element subsection {
     attribute id { xsd:ID }?,
-    section_title?,
+    section-title?,
     (
       BasicBlock* |
-      content_subsection+
+      content-subsection+
     )
   }
 
 clause =
   element clause {
     attribute id { xsd:ID }?,
-    section_title?,
+    section-title?,
     (
       BasicBlock* |
-      clause_subsection+
+      clause-subsection+
     )
   }
 
-clause_subsection =
+clause-subsection =
   element subsection {
     attribute id { xsd:ID },
-    section_title?,
+    section-title?,
     (
       BasicBlock* |
-      clause_subsection+
+      clause-subsection+
     )
   }
 
@@ -115,14 +115,14 @@ annex =
   element annex {
     attribute id { xsd:ID }?,
     attribute type { ( "normative" | "informative" ) },
-    section_title?,
-    ( BasicBlock | clause_subsection+ )
+    section-title?,
+    ( BasicBlock | clause-subsection+ )
 }
 
 references =
   element references {
     attribute id { xsd:ID }?,
-    section_title?,
+    section-title?,
     bibItem*
   }
 
@@ -153,11 +153,11 @@ termdomain =
 
 definition =
   element definition {
-    ( para_no_fn )
+    ( para-no-fn )
   }
 
 termnote =
-  element termnote { para_no_fn }
+  element termnote { para-no-fn }
 
 termexample =
   element termexample { BasicBlock }
@@ -173,10 +173,10 @@ origin =
 
 
 modification =
-  element modification { para_no_fn }
+  element modification { paragraph }
 
 BasicBlock = ( figure | admonition | example | table | sourcecode | 
-               quote | paragraph_with_footnote )
+               quote | paragraph-with-footnote )
 
 paragraph =
   element p { ParagraphType }
@@ -188,7 +188,7 @@ ParagraphType =
     attribute alignment { Alignments }?,
    ( TextElement )*, review*
 
-paragraph_with_footnote =
+paragraph-with-footnote =
   element p {
     attribute id { xsd:ID },
     attribute alignment { Alignments }?,
@@ -215,15 +215,15 @@ quote =
   element quote {
     attribute id { xsd:ID },
     attribute alignment { Alignments }?,
-    quote_source?,
-    quote_author?,
-    paragraph_with_footnote+
+    quote-source?,
+    quote-author?,
+    paragraph-with-footnote+
 }
 
-quote_source =
+quote-source =
   element source { CitationInfo }
 
-quote_author =
+quote-author =
   element author { CreatorInfo }
 
 sourcecode =
@@ -235,14 +235,14 @@ sourcecode =
 table =
   element table {
     attribute id { xsd:ID },
-    name?, thead?, tfoot?, tbody, table_note*, dl?
+    name?, thead?, tfoot?, tbody, table-note*, dl?
   }
 
 thead = element thead { tr }
 tfoot = element tfoot { tr }
 tbody = element tbody { tr+ }
 
-table_note = element note { ParagraphType }
+table-note = element note { ParagraphType }
 
 tr =
   element tr { ( td | th )+ }
@@ -254,7 +254,7 @@ td =
     attribute align { "left" | "right" | "center" }?,
     (
       (TextElement | review )* |
-      paragraph_with_footnote+
+      paragraph-with-footnote+
     )
 }
 
@@ -265,14 +265,14 @@ th =
     attribute align { "left" | "right" | "center" }?,
     (
       (TextElement | review )* |
-      paragraph_with_footnote+
+      paragraph-with-footnote+
     )
 }
 
 example =
   element example {
     attribute id { xsd:ID },
-    ( formula | ul | ol | dl | quote | sourcecode | paragraph_with_footnote | 
+    ( formula | ul | ol | dl | quote | sourcecode | paragraph-with-footnote | 
       review )+
 }
 
@@ -280,7 +280,7 @@ admonition =
   element admonition {
     attribute type { ( "warning" | "note" | "tip" | "important" | "caution" ) },
     attribute id { xsd:ID },
-    paragraph_with_footnote*
+    paragraph-with-footnote*
   }
 
 figure =
@@ -384,7 +384,7 @@ ul =
 }
 
 li =
-  element li { paragraph_with_footnote+ }
+  element li { paragraph-with-footnote+ }
 
 ol =
   element ol {
@@ -404,13 +404,13 @@ dt =
   element dt { TextElement }
 
 dd =
-  element dd { paragraph_with_footnote* }
+  element dd { paragraph-with-footnote* }
 
 creator =
   element creator { CreatorInfo }
 
 CreatorInfo =
-    fullname?, affiliation?, role*, person_identifier*
+    fullname?, affiliation?, role*, person-identifier*
 
 publisher = 
   element publisher { CreatorInfo }
@@ -438,7 +438,7 @@ affiliation =
   element affiliation { Organization }
 
 Organization = 
-    orgname, uri?, address?, org_identifier*
+    orgname, uri?, address?, org-identifier*
 
 orgname =
   element name { text }
@@ -458,13 +458,13 @@ state = element state { text }
 country = element country { text }
 postcode = element postcode { text }
 
-person_identifier =
+person-identifier =
   element identifier {
     attribute type { ("isni" | "uri") },
     text
   }
 
-org_identifier =
+org-identifier =
   element identifier {
     attribute type { ("orcid" | "uri") },
     text
