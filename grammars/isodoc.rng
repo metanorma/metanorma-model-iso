@@ -1180,7 +1180,10 @@
         </choice>
       </attribute>
     </optional>
-    <ref name="bname"/>
+    <choice>
+      <ref name="bname"/>
+      <ref name="formatted"/>
+    </choice>
     <optional>
       <ref name="source"/>
     </optional>
@@ -1215,9 +1218,17 @@
     <zeroOrMore>
       <ref name="script"/>
     </zeroOrMore>
+    <optional>
+      <ref name="abstract"/>
+    </optional>
   </define>
   <define name="bname">
     <element name="name">
+      <text/>
+    </element>
+  </define>
+  <define name="formatted">
+    <element name="formatted">
       <text/>
     </element>
   </define>
@@ -1248,6 +1259,13 @@
   </define>
   <define name="comments">
     <element name="comments">
+      <oneOrMore>
+        <ref name="paragraph"/>
+      </oneOrMore>
+    </element>
+  </define>
+  <define name="abstract">
+    <element name="abstract">
       <oneOrMore>
         <ref name="paragraph"/>
       </oneOrMore>

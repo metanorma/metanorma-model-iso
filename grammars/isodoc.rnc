@@ -494,17 +494,19 @@ BibliographicItem =
      attribute type { "article" | "book" | "booklet" | "conference" | "manual" |
                       "proceedings" | "presentation" | "thesis" | "techreport" |
                       "standard" | "unpublished" }?,
-    bname, source?, publishDate, docIdentifier*, accessedDate?, creator*, 
+    (bname | formatted), source?, publishDate, docIdentifier*, accessedDate?, creator*, 
     publisher*, edition?,
-    comment*, partOf*, creationDate?, language*, script*
+    biblioNote*, partOf*, creationDate?, language*, script*, abstract?
 
 bname = element name { text }
+formatted = element formatted { text }
 source = element source { xsd:anyURI }
 publishDate = element publishDate { text }
 docIdentifier = element docIdentifier { text }
 accessedDate = element accessedDate { text }
 creationDate = element creationDate { text }
-comments = element comments { paragraph+ }
+biblioNote = element note { text }
+abstract = element abstract { text }
 
 partOf = element partOf { BibliographicItem }
 
