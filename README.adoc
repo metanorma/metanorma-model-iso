@@ -6,7 +6,11 @@ This is where we keep the IsoDoc model definitions.
 
 image::images/standard-document.png[]
 
-== Bibliographic images
+== ISO Standard Document Model
+
+image::images/iso-standard-document.png[]
+
+== Bibliographic Models
 
 image::images/bibliography.png[]
 
