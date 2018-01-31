@@ -1,0 +1,3 @@
+= Grammars for IsoDoc documents
+
+The base grammar of IsoDoc is expressed in RelaxNG Compact, as `isodoc.rnc`. Instances of IsoDoc are derived from the base grammar by creating a diff grammar, containing the productions (assignments) and declarations where the instance overrides the base (e.g. `isostandard_diff.rnc`). The two grammars are merged using the script `rnc.ebnf.rb`, and then RelaxNG schemas are generated from the RelaxNG Compact schemas, using the `jing-trang` gem. (The RelaxNG schemas are how documents are actually validated in the gems generating IsoDoc XML.)

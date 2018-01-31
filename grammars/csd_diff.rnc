@@ -1,0 +1,26 @@
+default namespace = "http://riboseinc.com/csd"
+
+# grammar {
+
+start = csd
+
+language = element language { ( "en" ) }
+
+id = element id { text }
+
+title = element title { attribute language { text }, text }
+
+csd =
+  element csd {
+    title,
+    status,
+    creator,
+    language,
+    script,
+    type,
+    id,
+    version?,
+    copyright,
+    sections
+  }
+

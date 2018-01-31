@@ -1,20 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-  instantiations of this grammar may replace leaf strings
-  with more elaborated types; e.g. title (text) replaced with
-  title-main, title-intro, title-part; type replaced with
-  enum.
-  
-  some renaming at leaf nodes is permissible
-  
-  obligations can change both from optional to mandatory,
-  and from mandatory to optional; optional elements may
-  be omitted; freely positioned alternatives may be replaced
-  with strict ordering
--->
-<grammar xmlns="http://relaxng.org/ns/structure/1.0" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+<grammar ns="http://riboseinc.com/csd" xmlns="http://relaxng.org/ns/structure/1.0" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
   <start>
-    <ref name="standard-document"/>
+    <ref name="csd"/>
   </start>
   <define name="standard-document">
     <element name="standard-document">
@@ -50,24 +37,32 @@
   </define>
   <define name="status">
     <element name="status">
-      <text/>
+      <ref name="stage"/>
+      <optional>
+        <ref name="substage"/>
+      </optional>
     </element>
   </define>
   <define name="language">
     <element name="language">
-      <text/>
+      <value>en</value>
     </element>
   </define>
-  <!-- ISO-639 -->
   <define name="script">
     <element name="script">
-      <text/>
+      <value>latn</value>
     </element>
   </define>
-  <!-- ISO-15924: Latn -->
   <define name="type">
     <element name="type">
-      <text/>
+      <choice>
+        <value>international-standard</value>
+        <value>technical-specification</value>
+        <value>technical-report</value>
+        <value>publicly-available-specification</value>
+        <value>international-workshop-agreement</value>
+        <value>guide</value>
+      </choice>
     </element>
   </define>
   <define name="id">
@@ -83,9 +78,6 @@
       <optional>
         <ref name="revision-date"/>
       </optional>
-      <zeroOrMore>
-        <ref name="version"/>
-      </zeroOrMore>
     </element>
   </define>
   <define name="edition">
@@ -98,17 +90,9 @@
       <data type="date"/>
     </element>
   </define>
-  <define name="version">
-    <element name="version">
-      <text/>
-    </element>
-  </define>
   <define name="copyright">
     <element name="copyright">
       <ref name="from"/>
-      <optional>
-        <ref name="to"/>
-      </optional>
       <ref name="owner"/>
     </element>
   </define>
@@ -124,20 +108,27 @@
   </define>
   <define name="owner">
     <element name="owner">
-      <ref name="CreatorInfo"/>
+      <ref name="owner-affiliation"/>
     </element>
   </define>
   <define name="sections">
     <element name="sections">
+      <ref name="content"/>
+      <optional>
+        <ref name="content"/>
+      </optional>
+      <ref name="clause"/>
+      <ref name="references"/>
+      <ref name="terms"/>
       <oneOrMore>
-        <choice>
-          <ref name="content"/>
-          <ref name="clause"/>
-          <ref name="terms"/>
-          <ref name="annex"/>
-          <ref name="references"/>
-        </choice>
+        <ref name="clause"/>
       </oneOrMore>
+      <zeroOrMore>
+        <ref name="annex"/>
+      </zeroOrMore>
+      <optional>
+        <ref name="references"/>
+      </optional>
     </element>
   </define>
   <define name="section-title">
@@ -208,21 +199,23 @@
           <data type="ID"/>
         </attribute>
       </optional>
-      <attribute name="type">
-        <choice>
-          <value>normative</value>
-          <value>informative</value>
-        </choice>
-      </attribute>
+      <optional>
+        <attribute name="subtype">
+          <choice>
+            <value>normative</value>
+            <value>informative</value>
+          </choice>
+        </attribute>
+      </optional>
       <optional>
         <ref name="section-title"/>
       </optional>
-      <choice>
+      <zeroOrMore>
         <ref name="BasicBlock"/>
-        <oneOrMore>
-          <ref name="clause-subsection"/>
-        </oneOrMore>
-      </choice>
+      </zeroOrMore>
+      <zeroOrMore>
+        <ref name="clause-hanging-paragraph-with-footnote"/>
+      </zeroOrMore>
     </element>
   </define>
   <define name="references">
@@ -236,7 +229,10 @@
         <ref name="section-title"/>
       </optional>
       <zeroOrMore>
-        <ref name="bibItem"/>
+        <ref name="bibitem"/>
+      </zeroOrMore>
+      <zeroOrMore>
+        <ref name="references"/>
       </zeroOrMore>
     </element>
   </define>
@@ -247,9 +243,23 @@
           <data type="ID"/>
         </attribute>
       </optional>
-      <oneOrMore>
-        <ref name="term"/>
-      </oneOrMore>
+      <optional>
+        <ref name="section-title"/>
+      </optional>
+      <zeroOrMore>
+        <ref name="paragraph-with-footnote"/>
+      </zeroOrMore>
+      <optional>
+        <ref name="ul"/>
+      </optional>
+      <choice>
+        <oneOrMore>
+          <ref name="term"/>
+        </oneOrMore>
+        <optional>
+          <ref name="terms"/>
+        </optional>
+      </choice>
     </element>
   </define>
   <define name="term">
@@ -259,9 +269,7 @@
           <data type="ID"/>
         </attribute>
       </optional>
-      <oneOrMore>
-        <ref name="preferred"/>
-      </oneOrMore>
+      <ref name="preferred"/>
       <zeroOrMore>
         <ref name="admitted"/>
       </zeroOrMore>
@@ -271,7 +279,9 @@
       <optional>
         <ref name="termdomain"/>
       </optional>
-      <ref name="definition"/>
+      <optional>
+        <ref name="definition"/>
+      </optional>
       <zeroOrMore>
         <ref name="termnote"/>
       </zeroOrMore>
@@ -313,7 +323,13 @@
   </define>
   <define name="definition">
     <element name="definition">
-      <ref name="paragraph"/>
+      <oneOrMore>
+        <choice>
+          <ref name="paragraph"/>
+          <ref name="figure"/>
+          <ref name="formula"/>
+        </choice>
+      </oneOrMore>
     </element>
   </define>
   <define name="termnote">
@@ -348,6 +364,7 @@
   </define>
   <define name="origin">
     <element name="origin">
+      <attribute name="citeas"/>
       <ref name="CitationType"/>
     </element>
   </define>
@@ -547,7 +564,9 @@
   </define>
   <define name="thead">
     <element name="thead">
-      <ref name="tr"/>
+      <oneOrMore>
+        <ref name="tr"/>
+      </oneOrMore>
     </element>
   </define>
   <define name="tfoot">
@@ -658,21 +677,21 @@
   </define>
   <define name="admonition">
     <element name="admonition">
-      <attribute name="type">
-        <choice>
-          <value>warning</value>
-          <value>note</value>
-          <value>tip</value>
-          <value>important</value>
-          <value>caution</value>
-        </choice>
-      </attribute>
       <attribute name="id">
         <data type="ID"/>
       </attribute>
-      <zeroOrMore>
+      <attribute name="type">
+        <choice>
+          <value>danger</value>
+          <value>caution</value>
+          <value>warning</value>
+          <value>important</value>
+          <value>safety precautions</value>
+        </choice>
+      </attribute>
+      <oneOrMore>
         <ref name="paragraph-with-footnote"/>
-      </zeroOrMore>
+      </oneOrMore>
     </element>
   </define>
   <define name="figure">
@@ -681,27 +700,23 @@
         <data type="ID"/>
       </attribute>
       <optional>
-        <ref name="source"/>
-      </optional>
-      <optional>
         <ref name="tname"/>
       </optional>
       <choice>
+        <ref name="image"/>
         <oneOrMore>
           <ref name="figure"/>
         </oneOrMore>
-        <group>
-          <zeroOrMore>
-            <ref name="TextElement"/>
-          </zeroOrMore>
-          <zeroOrMore>
-            <ref name="note"/>
-          </zeroOrMore>
-          <optional>
-            <ref name="dl"/>
-          </optional>
-        </group>
       </choice>
+      <zeroOrMore>
+        <ref name="fn"/>
+      </zeroOrMore>
+      <optional>
+        <ref name="dl"/>
+      </optional>
+      <zeroOrMore>
+        <ref name="note"/>
+      </zeroOrMore>
     </element>
   </define>
   <define name="TextElement">
@@ -769,7 +784,6 @@
       <empty/>
     </element>
   </define>
-  <!-- bare ID element, used for referencing arbitrary spans of text -->
   <define name="bookmark">
     <element name="bookmark">
       <attribute name="id">
@@ -806,9 +820,6 @@
       <attribute name="target">
         <data type="anyURI"/>
       </attribute>
-      <attribute name="type">
-        <ref name="ReferenceFormat"/>
-      </attribute>
       <text/>
     </element>
   </define>
@@ -816,9 +827,6 @@
     <element name="xref">
       <attribute name="target">
         <data type="IDREF"/>
-      </attribute>
-      <attribute name="type">
-        <ref name="ReferenceFormat"/>
       </attribute>
       <text/>
     </element>
@@ -831,13 +839,6 @@
       </oneOrMore>
     </element>
   </define>
-  <!--
-    This is xref with fixed @type="footnote", and @target built in as paragraph+
-    @reference replaces ReferenceElement/text
-    so <fn reference="2"><p>This is a footnote</p></fn>
-    corresponds to 
-    <xref type="footnote" target="fn2">2</xref> <p id="fn2">This is a footnote</p>
-  -->
   <define name="callout">
     <element name="callout">
       <attribute name="target">
@@ -846,11 +847,6 @@
       <text/>
     </element>
   </define>
-  <!--
-    This is xref with fixed @type="callout"; the target by convention is in an annotation in the same source code snippet
-    so <callout target="xyz">1</callout>
-    corresponds to <xref type="callout" target="xyz">1</xref>
-  -->
   <define name="image">
     <element name="image">
       <attribute name="id">
@@ -914,7 +910,7 @@
   <define name="li">
     <element name="li">
       <oneOrMore>
-        <ref name="paragraph-with-footnote"/>
+        <ref name="BasicBlock"/>
       </oneOrMore>
     </element>
   </define>
@@ -955,14 +951,22 @@
   </define>
   <define name="dd">
     <element name="dd">
-      <zeroOrMore>
-        <ref name="paragraph-with-footnote"/>
-      </zeroOrMore>
+      <ref name="BasicBlock"/>
     </element>
   </define>
   <define name="creator">
     <element name="creator">
-      <ref name="CreatorInfo"/>
+      <attribute name="role"/>
+      <ref name="technical-committee"/>
+      <optional>
+        <ref name="subcommittee"/>
+      </optional>
+      <optional>
+        <ref name="workgroup"/>
+      </optional>
+      <optional>
+        <ref name="secretariat"/>
+      </optional>
     </element>
   </define>
   <define name="CreatorInfo">
@@ -982,7 +986,6 @@
       <ref name="CreatorInfo"/>
     </element>
   </define>
-  <!-- a publisher has a subset of the roles of a creator -->
   <define name="role">
     <element name="role">
       <optional>
@@ -1071,7 +1074,6 @@
   <define name="address">
     <element name="address">
       <oneOrMore>
-        <!-- iso191606 TODO -->
         <ref name="street"/>
       </oneOrMore>
       <ref name="city"/>
@@ -1287,6 +1289,157 @@
   <define name="partOf">
     <element name="partOf">
       <ref name="BibliographicItem"/>
+    </element>
+  </define>
+  <define name="iso-standard">
+    <element name="iso-standard">
+      <oneOrMore>
+        <ref name="title"/>
+      </oneOrMore>
+      <ref name="status"/>
+      <ref name="creator"/>
+      <ref name="language"/>
+      <ref name="script"/>
+      <ref name="type"/>
+      <ref name="id"/>
+      <optional>
+        <ref name="version"/>
+      </optional>
+      <ref name="copyright"/>
+      <ref name="sections"/>
+    </element>
+  </define>
+  <define name="owner-affiliation">
+    <element name="affiliation">
+      <value>ISO</value>
+    </element>
+  </define>
+  <define name="stage">
+    <element name="stage">
+      <choice>
+        <value>00</value>
+        <value>10</value>
+        <value>20</value>
+        <value>30</value>
+        <value>40</value>
+        <value>50</value>
+        <value>60</value>
+        <value>90</value>
+        <value>95</value>
+      </choice>
+    </element>
+  </define>
+  <define name="substage">
+    <element name="substage">
+      <choice>
+        <value>00</value>
+        <value>20</value>
+        <value>60</value>
+        <value>90</value>
+        <value>92</value>
+        <value>93</value>
+        <value>98</value>
+        <value>99</value>
+      </choice>
+    </element>
+  </define>
+  <define name="documentnumber">
+    <element name="projectnumber">
+      <optional>
+        <attribute name="part">
+          <data type="int"/>
+        </attribute>
+      </optional>
+      <data type="int"/>
+    </element>
+  </define>
+  <define name="tc-documentnumber">
+    <element name="tc-documentnumber">
+      <data type="int"/>
+    </element>
+  </define>
+  <define name="technical-committee">
+    <element name="technical-committee">
+      <optional>
+        <attribute name="number">
+          <data type="int"/>
+        </attribute>
+      </optional>
+      <text/>
+    </element>
+  </define>
+  <define name="subcommittee">
+    <element name="subcommittee">
+      <optional>
+        <attribute name="number">
+          <data type="int"/>
+        </attribute>
+      </optional>
+      <text/>
+    </element>
+  </define>
+  <define name="workgroup">
+    <element name="workgroup">
+      <optional>
+        <attribute name="number">
+          <data type="int"/>
+        </attribute>
+      </optional>
+      <text/>
+    </element>
+  </define>
+  <define name="secretariat">
+    <element name="secretariat">
+      <text/>
+    </element>
+  </define>
+  <define name="title-intro">
+    <element name="title-intro">
+      <text/>
+    </element>
+  </define>
+  <define name="title-main">
+    <element name="title-main">
+      <text/>
+    </element>
+  </define>
+  <define name="title-part">
+    <element name="title-part">
+      <text/>
+    </element>
+  </define>
+  <define name="clause-hanging-paragraph-with-footnote">
+    <element name="subsection">
+      <optional>
+        <attribute name="id">
+          <data type="ID"/>
+        </attribute>
+      </optional>
+      <optional>
+        <ref name="section-title"/>
+      </optional>
+      <zeroOrMore>
+        <ref name="BasicBlock"/>
+      </zeroOrMore>
+      <zeroOrMore>
+        <ref name="clause-hanging-paragraph-with-footnote"/>
+      </zeroOrMore>
+    </element>
+  </define>
+  <define name="csd">
+    <element name="csd">
+      <ref name="title"/>
+      <ref name="status"/>
+      <ref name="creator"/>
+      <ref name="language"/>
+      <ref name="script"/>
+      <ref name="type"/>
+      <ref name="id"/>
+      <optional>
+        <ref name="version"/>
+      </optional>
+      <ref name="copyright"/>
+      <ref name="sections"/>
     </element>
   </define>
 </grammar>

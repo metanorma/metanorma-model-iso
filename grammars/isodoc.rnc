@@ -40,7 +40,7 @@ script =
 
 type = element type { text }
 
-id = element id { string }
+id = element id { text }
 
 version =
   element version {
@@ -71,45 +71,30 @@ section-title =
   element title { text }
 
 content =
-  element content {
-    attribute id { xsd:ID }?,
-    section-title?,
-    (
-      BasicBlock* |
-      content-subsection+
-    )
-  }
+  element content { Content-Section }
 
 content-subsection =
-  element subsection {
+  element subsection { Content-Section }
+
+Content-Section =
     attribute id { xsd:ID }?,
     section-title?,
-    (
-      BasicBlock* |
-      content-subsection+
-    )
-  }
+    ( BasicBlock+ |
+      content-subsection+ )
 
 clause =
-  element clause {
+  element clause { Clause-Section }
+
+Clause-Section =
     attribute id { xsd:ID }?,
     section-title?,
     (
-      BasicBlock* |
-      clause-subsection+
+      BasicBlock+ |
+       clause-subsection+
     )
-  }
 
 clause-subsection =
-  element subsection {
-    attribute id { xsd:ID },
-    section-title?,
-    (
-      BasicBlock* |
-      clause-subsection+
-    )
-  }
-
+  element subsection { Clause-Section }
 
 annex =
   element annex {
@@ -153,14 +138,18 @@ termdomain =
 
 definition =
   element definition {
-    ( para-no-fn )
+    ( paragraph )
   }
 
 termnote =
-  element termnote { para-no-fn }
+  element termnote { 
+    attribute id { xsd:ID },
+paragraph }
 
 termexample =
-  element termexample { BasicBlock }
+  element termexample { 
+    attribute id { xsd:ID },
+BasicBlock }
 
 termsource =
   element termsource {
@@ -175,8 +164,8 @@ origin =
 modification =
   element modification { paragraph }
 
-BasicBlock = ( figure | admonition | example | table | sourcecode | 
-               quote | paragraph-with-footnote )
+BasicBlock =  paragraph-with-footnote | table | note | formula | admonition | ol | ul | dl | figure |
+  quote | sourcecode | example 
 
 paragraph =
   element p { ParagraphType }
@@ -195,11 +184,18 @@ paragraph-with-footnote =
    ( TextElement | fn  )*, review*
 }
 
+note =
+  element note {
+    attribute id { xsd:ID },
+    paragraph-with-footnote+
+  }
+
+
 review =
   element review {
   attribute id { xsd:ID },
   attribute reviewer { text }?,
-  attribute date { text }?,
+  attribute date { xsd:date }?,
   attribute from { xsd:ID },
   attribute to { xsd:ID },
   paragraph+
@@ -235,9 +231,10 @@ sourcecode =
 table =
   element table {
     attribute id { xsd:ID },
-    name?, thead?, tfoot?, tbody, table-note*, dl?
+    tname?, thead?, tfoot?, tbody, table-note*, dl?
   }
 
+tname = element tname { text }
 thead = element thead { tr }
 tfoot = element tfoot { tr }
 tbody = element tbody { tr+ }
@@ -361,8 +358,10 @@ callout =
 image =
   element image {
     attribute id { xsd:ID },
-    attribute source { xsd:anyURI }?,
-    attribute imageType { ("SVG" | "JPEG" | "GIF" | "PNG" | "PDF" ) }
+    attribute src { xsd:anyURI }?,
+    attribute imageType { ("SVG" | "JPEG" | "GIF" | "PNG" | "PDF" ) },
+    attribute width {xsd:int}?,
+    attribute height {xsd:int}? 
 }
 
 stem =
@@ -410,7 +409,8 @@ creator =
   element creator { CreatorInfo }
 
 CreatorInfo =
-    fullname?, affiliation?, role*, person-identifier*
+    attribute role { text },
+    fullname?, affiliation?, person-identifier*
 
 publisher = 
   element publisher { CreatorInfo }
@@ -444,7 +444,7 @@ orgname =
   element name { text }
 
 uri =
-  element uri { text }
+  element uri { xsd:anyURI }
 
 address =
   element address {
@@ -477,7 +477,7 @@ CitationType =
     attribute bibItemId { xsd:IDREF },
     locality*, date?
 
-date = element date { string }
+date = element date { ( xsd:gYear | xsd:date )  }
 
 bibLocality =
   element bibLocality {
