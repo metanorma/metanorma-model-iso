@@ -1274,7 +1274,7 @@
     </element>
   </define>
   <define name="publishdate">
-    <element name="publishsate">
+    <element name="publishdate">
       <text/>
     </element>
   </define>
@@ -1284,7 +1284,7 @@
     </element>
   </define>
   <define name="accesseddate">
-    <element name="accessedsate">
+    <element name="accesseddate">
       <text/>
     </element>
   </define>
