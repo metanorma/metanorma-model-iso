@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <grammar ns="http://riboseinc.com/csd" xmlns="http://relaxng.org/ns/structure/1.0" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
   <start>
-    <ref name="csd"/>
+    <ref name="csd-standard"/>
   </start>
   <define name="standard-document">
     <element name="standard-document">
@@ -279,9 +279,7 @@
       <optional>
         <ref name="termdomain"/>
       </optional>
-      <optional>
-        <ref name="definition"/>
-      </optional>
+      <ref name="definition"/>
       <zeroOrMore>
         <ref name="termnote"/>
       </zeroOrMore>
@@ -1437,8 +1435,8 @@
       </zeroOrMore>
     </element>
   </define>
-  <define name="csd">
-    <element name="csd">
+  <define name="csd-standard">
+    <element name="csd-standard">
       <ref name="title"/>
       <ref name="status"/>
       <ref name="creator"/>
