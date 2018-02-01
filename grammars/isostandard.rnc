@@ -34,7 +34,7 @@ grammar { start =   iso-standard                                                
   origin = element  origin  { attribute  citeas  { text  }  ,   CitationType  } 
   modification = element  modification  {   paragraph  } 
   BasicBlock =   paragraph-with-footnote  |   table  |   note  |   formula  |   admonition  |   ol  |   ul  |   dl  |   figure  |   quote  |   sourcecode  |   example   paragraph = element  p  {   ParagraphType  } 
-  Alignments = (  "left"  |  "right"  |  "center"  |  "justified"  )   ParagraphType = attribute  id  {   xsd:ID  }  , attribute  alignment  {   Alignments  } ? , (   TextElement  ) * ,   review *  paragraph-with-footnote = element  p  { attribute  id  {   xsd:ID  }  , attribute  alignment  {   Alignments  } ? , (   TextElement  |   fn  ) * ,   review * } 
+  Alignments = (  "left"  |  "right"  |  "center"  |  "justified"  )   ParagraphType = attribute  id  {   xsd:ID  }  , attribute  align  {   Alignments  } ? , (   TextElement  ) * ,   review *  paragraph-with-footnote = element  p  { attribute  id  {   xsd:ID  }  , attribute  align  {   Alignments  } ? , (   TextElement  |   fn  ) * ,   review * } 
   note = element  note  { attribute  id  {   xsd:ID  }  ,   paragraph-with-footnote + } 
   review = element  review  { attribute  id  {   xsd:ID  }  , attribute  reviewer  { text  } ? , attribute  date  {   xsd:date  } ? , attribute  from  {   xsd:ID  }  , attribute  to  {   xsd:ID  }  ,   paragraph + } 
   formula = element  formula  { attribute  id  {   xsd:ID  }  ,   stem  ,   dl ? } 
@@ -103,16 +103,16 @@ grammar { start =   iso-standard                                                
   CitationType = attribute  bibItemId  {   xsd:IDREF  }  ,   locality * ,   date ?  date = element  date  { (   xsd:gYear  |   xsd:date  )  } 
   locality = element  locality  { attribute  type  { (  "section"  |  "clause"  |  "part"  |  "paragraph"  |  "chapter"  |  "page"  |  "whole"  )  }  , text  } 
   bibitem = element  bibitem  {   BibliographicItem  } 
-  BibliographicItem = attribute  id  {   xsd:ID  }  , attribute  type  {  "article"  |  "book"  |  "booklet"  |  "conference"  |  "manual"  |  "proceedings"  |  "presentation"  |  "thesis"  |  "techreport"  |  "standard"  |  "unpublished"  } ? , (   bname  |   formatted  )  ,   source ? ,   publishDate  ,   docIdentifier * ,   accessedDate ? ,   creator * ,   publisher * ,   edition ? ,   biblioNote * ,   partOf * ,   creationDate ? ,   language * ,   script * ,   abstract ?  bname = element  name  { text  } 
+  BibliographicItem = attribute  id  {   xsd:ID  }  , attribute  type  {  "article"  |  "book"  |  "booklet"  |  "conference"  |  "manual"  |  "proceedings"  |  "presentation"  |  "thesis"  |  "techreport"  |  "standard"  |  "unpublished"  } ? , (   bname  |   formatted  )  ,   source ? ,   publishsate  ,   docidentifier * ,   accesseddate ? ,   creator * ,   publisher * ,   edition ? ,   biblionote * ,   partof * ,   creationsate ? ,   language * ,   script * ,   abstract ?  bname = element  name  { text  } 
   formatted = element  formatted  { text  } 
   source = element  source  {   xsd:anyURI  } 
-  publishDate = element  publishDate  { text  } 
-  docIdentifier = element  docIdentifier  { text  } 
-  accessedDate = element  accessedDate  { text  } 
-  creationDate = element  creationDate  { text  } 
-  biblioNote = element  note  { text  } 
+  publishdate = element  publishsate  { text  } 
+  docidentifier = element  docidentifier  { text  } 
+  accesseddate = element  accessedsate  { text  } 
+  creationdate = element  creationdate  { text  } 
+  biblionote = element  note  { text  } 
   abstract = element  abstract  { text  } 
-  partOf = element  partOf  {   BibliographicItem  } 
+  partof = element  partof  {   BibliographicItem  } 
   iso-standard = element  iso-standard  {   title + ,   status  ,   creator  ,   language  ,   script  ,   type  ,   id  ,   version ? ,   copyright  ,   sections  } 
   owner-affiliation = element  affiliation  {  "ISO"  } 
   stage = element  stage  { (  "00"  |  "10"  |  "20"  |  "30"  |  "40"  |  "50"  |  "60"  |  "90"  |  "95"  )  } 

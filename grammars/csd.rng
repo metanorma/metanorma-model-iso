@@ -407,7 +407,7 @@
       <data type="ID"/>
     </attribute>
     <optional>
-      <attribute name="alignment">
+      <attribute name="align">
         <ref name="Alignments"/>
       </attribute>
     </optional>
@@ -424,7 +424,7 @@
         <data type="ID"/>
       </attribute>
       <optional>
-        <attribute name="alignment">
+        <attribute name="align">
           <ref name="Alignments"/>
         </attribute>
       </optional>
@@ -1211,12 +1211,12 @@
     <optional>
       <ref name="source"/>
     </optional>
-    <ref name="publishDate"/>
+    <ref name="publishsate"/>
     <zeroOrMore>
-      <ref name="docIdentifier"/>
+      <ref name="docidentifier"/>
     </zeroOrMore>
     <optional>
-      <ref name="accessedDate"/>
+      <ref name="accesseddate"/>
     </optional>
     <zeroOrMore>
       <ref name="creator"/>
@@ -1228,13 +1228,13 @@
       <ref name="edition"/>
     </optional>
     <zeroOrMore>
-      <ref name="biblioNote"/>
+      <ref name="biblionote"/>
     </zeroOrMore>
     <zeroOrMore>
-      <ref name="partOf"/>
+      <ref name="partof"/>
     </zeroOrMore>
     <optional>
-      <ref name="creationDate"/>
+      <ref name="creationsate"/>
     </optional>
     <zeroOrMore>
       <ref name="language"/>
@@ -1261,27 +1261,27 @@
       <data type="anyURI"/>
     </element>
   </define>
-  <define name="publishDate">
-    <element name="publishDate">
+  <define name="publishdate">
+    <element name="publishsate">
       <text/>
     </element>
   </define>
-  <define name="docIdentifier">
-    <element name="docIdentifier">
+  <define name="docidentifier">
+    <element name="docidentifier">
       <text/>
     </element>
   </define>
-  <define name="accessedDate">
-    <element name="accessedDate">
+  <define name="accesseddate">
+    <element name="accessedsate">
       <text/>
     </element>
   </define>
-  <define name="creationDate">
-    <element name="creationDate">
+  <define name="creationdate">
+    <element name="creationdate">
       <text/>
     </element>
   </define>
-  <define name="biblioNote">
+  <define name="biblionote">
     <element name="note">
       <text/>
     </element>
@@ -1291,8 +1291,8 @@
       <text/>
     </element>
   </define>
-  <define name="partOf">
-    <element name="partOf">
+  <define name="partof">
+    <element name="partof">
       <ref name="BibliographicItem"/>
     </element>
   </define>

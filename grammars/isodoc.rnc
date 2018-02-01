@@ -174,13 +174,13 @@ Alignments = ( "left" | "right" | "center" | "justified" )
 
 ParagraphType =
     attribute id { xsd:ID },
-    attribute alignment { Alignments }?,
+    attribute align { Alignments }?,
    ( TextElement )*, review*
 
 paragraph-with-footnote =
   element p {
     attribute id { xsd:ID },
-    attribute alignment { Alignments }?,
+    attribute align { Alignments }?,
    ( TextElement | fn  )*, review*
 }
 
@@ -495,20 +495,20 @@ BibliographicItem =
      attribute type { "article" | "book" | "booklet" | "conference" | "manual" |
                       "proceedings" | "presentation" | "thesis" | "techreport" |
                       "standard" | "unpublished" }?,
-    (bname | formatted), source?, publishDate, docIdentifier*, accessedDate?, creator*, 
+    (bname | formatted), source?, publishsate, docidentifier*, accesseddate?, creator*, 
     publisher*, edition?,
-    biblioNote*, partOf*, creationDate?, language*, script*, abstract?
+    biblionote*, partof*, creationsate?, language*, script*, abstract?
 
 bname = element name { text }
 formatted = element formatted { text }
 source = element source { xsd:anyURI }
-publishDate = element publishDate { text }
-docIdentifier = element docIdentifier { text }
-accessedDate = element accessedDate { text }
-creationDate = element creationDate { text }
-biblioNote = element note { text }
+publishdate = element publishsate { text }
+docidentifier = element docidentifier { text }
+accesseddate = element accessedsate { text }
+creationdate = element creationdate { text }
+biblionote = element note { text }
 abstract = element abstract { text }
 
-partOf = element partOf { BibliographicItem }
+partof = element partof { BibliographicItem }
 
 }
