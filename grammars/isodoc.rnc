@@ -495,9 +495,9 @@ BibliographicItem =
      attribute type { "article" | "book" | "booklet" | "conference" | "manual" |
                       "proceedings" | "presentation" | "thesis" | "techreport" |
                       "standard" | "unpublished" }?,
-    (bname | formatted), source?, publishsate, docidentifier*, accesseddate?, creator*, 
+    (bname | formatted), source?, publishdate, docidentifier*, accesseddate?, creator*, 
     publisher*, edition?,
-    biblionote*, partof*, creationsate?, language*, script*, abstract?
+    biblionote*, partof*, creationdate?, language*, script*, abstract?
 
 bname = element name { text }
 formatted = element formatted { text }

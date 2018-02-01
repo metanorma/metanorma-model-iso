@@ -103,7 +103,7 @@ grammar { start =   iso-standard                                                
   CitationType = attribute  bibItemId  {   xsd:IDREF  }  ,   locality * ,   date ?  date = element  date  { (   xsd:gYear  |   xsd:date  )  } 
   locality = element  locality  { attribute  type  { (  "section"  |  "clause"  |  "part"  |  "paragraph"  |  "chapter"  |  "page"  |  "whole"  )  }  , text  } 
   bibitem = element  bibitem  {   BibliographicItem  } 
-  BibliographicItem = attribute  id  {   xsd:ID  }  , attribute  type  {  "article"  |  "book"  |  "booklet"  |  "conference"  |  "manual"  |  "proceedings"  |  "presentation"  |  "thesis"  |  "techreport"  |  "standard"  |  "unpublished"  } ? , (   bname  |   formatted  )  ,   source ? ,   publishsate  ,   docidentifier * ,   accesseddate ? ,   creator * ,   publisher * ,   edition ? ,   biblionote * ,   partof * ,   creationsate ? ,   language * ,   script * ,   abstract ?  bname = element  name  { text  } 
+  BibliographicItem = attribute  id  {   xsd:ID  }  , attribute  type  {  "article"  |  "book"  |  "booklet"  |  "conference"  |  "manual"  |  "proceedings"  |  "presentation"  |  "thesis"  |  "techreport"  |  "standard"  |  "unpublished"  } ? , (   bname  |   formatted  )  ,   source ? ,   publishdate  ,   docidentifier * ,   accesseddate ? ,   creator * ,   publisher * ,   edition ? ,   biblionote * ,   partof * ,   creationdate ? ,   language * ,   script * ,   abstract ?  bname = element  name  { text  } 
   formatted = element  formatted  { text  } 
   source = element  source  {   xsd:anyURI  } 
   publishdate = element  publishsate  { text  } 

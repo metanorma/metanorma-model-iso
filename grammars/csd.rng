@@ -1211,7 +1211,7 @@
     <optional>
       <ref name="source"/>
     </optional>
-    <ref name="publishsate"/>
+    <ref name="publishdate"/>
     <zeroOrMore>
       <ref name="docidentifier"/>
     </zeroOrMore>
@@ -1234,7 +1234,7 @@
       <ref name="partof"/>
     </zeroOrMore>
     <optional>
-      <ref name="creationsate"/>
+      <ref name="creationdate"/>
     </optional>
     <zeroOrMore>
       <ref name="language"/>
