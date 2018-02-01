@@ -545,10 +545,10 @@
       <optional>
         <ref name="thead"/>
       </optional>
+      <ref name="tbody"/>
       <optional>
         <ref name="tfoot"/>
       </optional>
-      <ref name="tbody"/>
       <zeroOrMore>
         <ref name="table-note"/>
       </zeroOrMore>
@@ -558,7 +558,7 @@
     </element>
   </define>
   <define name="tname">
-    <element name="tname">
+    <element name="name">
       <text/>
     </element>
   </define>
@@ -583,7 +583,7 @@
   </define>
   <define name="table-note">
     <element name="note">
-      <ref name="ParagraphType"/>
+      <ref name="paragraph"/>
     </element>
   </define>
   <define name="tr">
@@ -617,6 +617,7 @@
         <zeroOrMore>
           <choice>
             <ref name="TextElement"/>
+            <ref name="fn"/>
             <ref name="review"/>
           </choice>
         </zeroOrMore>
@@ -647,6 +648,7 @@
         <zeroOrMore>
           <choice>
             <ref name="TextElement"/>
+            <ref name="fn"/>
             <ref name="review"/>
           </choice>
         </zeroOrMore>
@@ -771,7 +773,7 @@
   </define>
   <define name="smallcap">
     <element name="smallcap">
-      <ref name="smallcap"/>
+      <text/>
     </element>
   </define>
   <define name="br">
@@ -862,7 +864,7 @@
           <data type="anyURI"/>
         </attribute>
       </optional>
-      <attribute name="imageType">
+      <attribute name="imagetype">
         <choice>
           <value>SVG</value>
           <value>JPEG</value>
@@ -1144,7 +1146,7 @@
     </element>
   </define>
   <define name="CitationType">
-    <attribute name="bibItemId">
+    <attribute name="bibitemid">
       <data type="IDREF"/>
     </attribute>
     <zeroOrMore>
@@ -1211,7 +1213,9 @@
     <optional>
       <ref name="source"/>
     </optional>
-    <ref name="publishdate"/>
+    <optional>
+      <ref name="publishdate"/>
+    </optional>
     <zeroOrMore>
       <ref name="docidentifier"/>
     </zeroOrMore>
@@ -1253,7 +1257,9 @@
   </define>
   <define name="formatted">
     <element name="formatted">
-      <text/>
+      <oneOrMore>
+        <ref name="TextElement"/>
+      </oneOrMore>
     </element>
   </define>
   <define name="source">

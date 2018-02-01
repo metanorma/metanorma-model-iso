@@ -231,10 +231,10 @@ sourcecode =
 table =
   element table {
     attribute id { xsd:ID },
-    tname?, thead?, tfoot?, tbody, table-note*, dl?
+    tname?, thead?, tbody, tfoot?, table-note*, dl?
   }
 
-tname = element tname { text }
+tname = element name { text }
 thead = element thead { tr }
 tfoot = element tfoot { tr }
 tbody = element tbody { tr+ }
@@ -297,7 +297,7 @@ tt = element tt { text }
 sub = element sub { text }
 sup = element sup { text }
 strike = element strike { text }
-smallcap = element smallcap { smallcap }
+smallcap = element smallcap { text }
 
 br = element br { empty }
 hr = element hr { empty }
@@ -360,7 +360,7 @@ image =
   element image {
     attribute id { xsd:ID },
     attribute src { xsd:anyURI }?,
-    attribute imageType { ("SVG" | "JPEG" | "GIF" | "PNG" | "PDF" ) },
+    attribute imagetype { ("SVG" | "JPEG" | "GIF" | "PNG" | "PDF" ) },
     attribute width {xsd:int}?,
     attribute height {xsd:int}? 
 }
@@ -475,7 +475,7 @@ citation =
   element citation { CitationType }
 
 CitationType = 
-    attribute bibItemId { xsd:IDREF },
+    attribute bibitemid { xsd:IDREF },
     locality*, date?
 
 date = element date { ( xsd:gYear | xsd:date )  }
@@ -500,7 +500,7 @@ BibliographicItem =
     biblionote*, partof*, creationdate?, language*, script*, abstract?
 
 bname = element name { text }
-formatted = element formatted { text }
+formatted = element formatted { TextElement+ }
 source = element source { xsd:anyURI }
 publishdate = element publishdate { text }
 docidentifier = element docidentifier { text }
