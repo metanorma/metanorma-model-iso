@@ -490,7 +490,7 @@
   </define>
   <define name="quote-source">
     <element name="source">
-      <ref name="CitationInfo"/>
+      <ref name="CitationType"/>
     </element>
   </define>
   <define name="quote-author">
@@ -731,6 +731,11 @@
   </define>
   <define name="strong">
     <element name="strong">
+      <text/>
+    </element>
+  </define>
+  <define name="tt">
+    <element name="tt">
       <text/>
     </element>
   </define>
@@ -1155,8 +1160,8 @@
       </choice>
     </element>
   </define>
-  <define name="bibLocality">
-    <element name="bibLocality">
+  <define name="locality">
+    <element name="locality">
       <attribute name="type">
         <choice>
           <value>section</value>
@@ -1171,8 +1176,8 @@
       <text/>
     </element>
   </define>
-  <define name="bibItem">
-    <element name="bibItem">
+  <define name="bibitem">
+    <element name="bibitem">
       <ref name="BibliographicItem"/>
     </element>
   </define>

@@ -1,5 +1,5 @@
 default namespace  = "http://riboseinc.com/isoxml"
-grammar { start =   iso-standard                                                                                                                                 standard-document = element  standard-document  {   title + ,   status  ,   creator * ,   language  ,   script  ,   type ? ,   id * ,   version ? ,   copyright  ,   sections + } 
+grammar { start =   iso-standard                                                                                                                                  standard-document = element  standard-document  {   title + ,   status  ,   creator * ,   language  ,   script  ,   type ? ,   id * ,   version ? ,   copyright  ,   sections + } 
   title = element  title  { attribute  language  { text  }  ,   title-intro ? ,   title-main  ,   title-part ? } 
   status = element  status  {   stage  ,   substage ? } 
   language = element  language  { (  "en"  |  "fr"  )  } 
@@ -39,7 +39,7 @@ grammar { start =   iso-standard                                                
   review = element  review  { attribute  id  {   xsd:ID  }  , attribute  reviewer  { text  } ? , attribute  date  {   xsd:date  } ? , attribute  from  {   xsd:ID  }  , attribute  to  {   xsd:ID  }  ,   paragraph + } 
   formula = element  formula  { attribute  id  {   xsd:ID  }  ,   stem  ,   dl ? } 
   quote = element  quote  { attribute  id  {   xsd:ID  }  , attribute  alignment  {   Alignments  } ? ,   quote-source ? ,   quote-author ? ,   paragraph-with-footnote + } 
-  quote-source = element  source  {   CitationInfo  } 
+  quote-source = element  source  {   CitationType  } 
   quote-author = element  author  {   CreatorInfo  } 
   sourcecode = element  sourcecode  { attribute  id  {   xsd:ID  }  ,   tname ? , ( text  |   callout  ) + ,   annotation * } 
   table = element  table  { attribute  id  {   xsd:ID  }  ,   tname ? ,   thead ? ,   tfoot ? ,   tbody  ,   table-note * ,   dl ? } 
@@ -56,6 +56,7 @@ grammar { start =   iso-standard                                                
   figure = element  figure  { attribute  id  {   xsd:ID  }  ,   tname ? , (   image  |   figure + )  ,   fn * ,   dl ? ,   note * } 
   TextElement = text  |   em  |   eref  |   strong  |   stem  |   sub  |   sup  |   tt  |   strike  |   smallcap  |   xref  |   br  |   hyperlink  |   hr  |   pagebreak  |   bookmark   em = element  em  { text  } 
   strong = element  strong  { text  } 
+  tt = element  tt  { text  } 
   sub = element  sub  { text  } 
   sup = element  sup  { text  } 
   strike = element  strike  { text  } 
@@ -100,8 +101,8 @@ grammar { start =   iso-standard                                                
   org-identifier = element  identifier  { attribute  type  { (  "orcid"  |  "uri"  )  }  , text  } 
   citation = element  citation  {   CitationType  } 
   CitationType = attribute  bibItemId  {   xsd:IDREF  }  ,   locality * ,   date ?  date = element  date  { (   xsd:gYear  |   xsd:date  )  } 
-  bibLocality = element  bibLocality  { attribute  type  { (  "section"  |  "clause"  |  "part"  |  "paragraph"  |  "chapter"  |  "page"  |  "whole"  )  }  , text  } 
-  bibItem = element  bibItem  {   BibliographicItem  } 
+  locality = element  locality  { attribute  type  { (  "section"  |  "clause"  |  "part"  |  "paragraph"  |  "chapter"  |  "page"  |  "whole"  )  }  , text  } 
+  bibitem = element  bibitem  {   BibliographicItem  } 
   BibliographicItem = attribute  id  {   xsd:ID  }  , attribute  type  {  "article"  |  "book"  |  "booklet"  |  "conference"  |  "manual"  |  "proceedings"  |  "presentation"  |  "thesis"  |  "techreport"  |  "standard"  |  "unpublished"  } ? , (   bname  |   formatted  )  ,   source ? ,   publishDate  ,   docIdentifier * ,   accessedDate ? ,   creator * ,   publisher * ,   edition ? ,   biblioNote * ,   partOf * ,   creationDate ? ,   language * ,   script * ,   abstract ?  bname = element  name  { text  } 
   formatted = element  formatted  { text  } 
   source = element  source  {   xsd:anyURI  } 

@@ -217,7 +217,7 @@ quote =
 }
 
 quote-source =
-  element source { CitationInfo }
+  element source { CitationType }
 
 quote-author =
   element author { CreatorInfo }
@@ -293,6 +293,7 @@ TextElement =
 
 em = element em { text }
 strong = element strong { text }
+tt = element tt { text }
 sub = element sub { text }
 sup = element sup { text }
 strike = element strike { text }
@@ -479,15 +480,15 @@ CitationType =
 
 date = element date { ( xsd:gYear | xsd:date )  }
 
-bibLocality =
-  element bibLocality {
+locality =
+  element locality {
     attribute type { ( "section" | "clause" | "part" | "paragraph" | 
                        "chapter" | "page" | "whole" ) },
     text
 }
 
-bibItem =
-  element bibItem { BibliographicItem }
+bibitem =
+  element bibitem { BibliographicItem }
 
 BibliographicItem =
      attribute id { xsd:ID },
