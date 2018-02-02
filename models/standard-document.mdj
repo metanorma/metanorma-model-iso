@@ -3613,7 +3613,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "AsciiML",
+											"text": "AsciiMath",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -26767,7 +26767,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFgoDMKSPZ4vSQ="
 							},
-							"name": "AsciiML",
+							"name": "AsciiMath",
 							"visibility": "public"
 						}
 					]

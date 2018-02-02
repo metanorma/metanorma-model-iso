@@ -367,7 +367,7 @@ image =
 
 stem =
   element stem {
-    attribute type { "MathML" | "AsciiML" },
+    attribute type { "MathML" | "AsciiMath" },
     text
 }
 
