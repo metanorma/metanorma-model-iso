@@ -3,6 +3,7 @@
 IsoDoc is a family of document models intended to represent ISO Standards and similarly structured standards. It is used to abstract the automated generation of standard documents in various formats from well-defined authoring tools; and to validate the structural conformance of authored standards to specifications.
 
 The standards currently modelled via IsoDoc are:
+
 * ISO Standards
 * https://github.com/riboseinc/csd[CSD Standards].
 
