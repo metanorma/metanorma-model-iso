@@ -19,7 +19,7 @@ grammar { start =   iso-standard                                                
   content-subsection = element  subsection  {   Content-Section  } 
   Content-Section = attribute  id  {   xsd:ID  } ? ,   section-title ? , (   BasicBlock + |   content-subsection + )   clause = element  clause  {   Clause-Section  } 
   Clause-Section = attribute  id  {   xsd:ID  } ? , attribute  inline-header  {   xsd:boolean  } ? ,   section-title ? , (   BasicBlock + |   clause-subsection + )   clause-subsection = element  subsection  {   Clause-Section  } 
-  annex = element  annex  { attribute  id  {   xsd:ID  } ? , attribute  inline-header  {   xsd:boolean  } ? , attribute  type  { (  "normative"  |  "informative"  )  }  ,   section-title ? , (   BasicBlock  |   clause-subsection + )  } 
+  annex = element  annex  { attribute  id  {   xsd:ID  } ? , attribute  inline-header  {   xsd:boolean  } ? , attribute  subtype  {  "normative"  |  "informative"  } ? ,   section-title ? ,   BasicBlock * ,   clause-hanging-paragraph-with-footnote * } 
   references = element  references  { attribute  id  {   xsd:ID  } ? ,   section-title ? ,   bibitem * ,   references * } 
   terms = element  terms  { attribute  id  {   xsd:ID  } ? ,   section-title ? ,   paragraph-with-footnote * ,   ul ? , (   term + |   terms ? )  } 
   term = element  term  { attribute  id  {   xsd:ID  } ? ,   preferred  ,   admitted * ,   deprecates * ,   termdomain ? ,   definition  ,   termnote * ,   termexample * ,   termsource * } 
@@ -131,7 +131,6 @@ grammar { start =   iso-standard                                                
 }
 
   
- 
  
  
  

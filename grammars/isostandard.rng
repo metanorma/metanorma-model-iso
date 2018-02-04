@@ -221,21 +221,23 @@
           <data type="boolean"/>
         </attribute>
       </optional>
-      <attribute name="type">
-        <choice>
-          <value>normative</value>
-          <value>informative</value>
-        </choice>
-      </attribute>
+      <optional>
+        <attribute name="subtype">
+          <choice>
+            <value>normative</value>
+            <value>informative</value>
+          </choice>
+        </attribute>
+      </optional>
       <optional>
         <ref name="section-title"/>
       </optional>
-      <choice>
+      <zeroOrMore>
         <ref name="BasicBlock"/>
-        <oneOrMore>
-          <ref name="clause-subsection"/>
-        </oneOrMore>
-      </choice>
+      </zeroOrMore>
+      <zeroOrMore>
+        <ref name="clause-hanging-paragraph-with-footnote"/>
+      </zeroOrMore>
     </element>
   </define>
   <define name="references">
