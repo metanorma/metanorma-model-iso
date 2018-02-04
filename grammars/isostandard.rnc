@@ -126,7 +126,7 @@ grammar { start =   iso-standard                                                
   title-intro = element  title-intro  { text  } 
   title-main = element  title-main  { text  } 
   title-part = element  title-part  { text  } 
-  clause-hanging-paragraph-with-footnote = element  subsection  { attribute  id  {   xsd:ID  } ? ,   section-title ? ,   BasicBlock * ,   clause-hanging-paragraph-with-footnote * } 
+  clause-hanging-paragraph-with-footnote = element  subsection  { attribute  id  {   xsd:ID  } ? , attribute  inline-header  {   xsd:boolean  } ? ,   section-title ? ,   BasicBlock * ,   clause-hanging-paragraph-with-footnote * } 
 
 }
 
