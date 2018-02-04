@@ -239,7 +239,7 @@ thead = element thead { tr }
 tfoot = element tfoot { tr }
 tbody = element tbody { tr+ }
 
-table-note = element note { ParagraphType }
+table-note = element note { paragraph }
 
 tr =
   element tr { ( td | th )+ }
