@@ -176,6 +176,11 @@
       </attribute>
     </optional>
     <optional>
+      <attribute name="inline-header">
+        <data type="boolean"/>
+      </attribute>
+    </optional>
+    <optional>
       <ref name="section-title"/>
     </optional>
     <choice>
@@ -200,22 +205,25 @@
         </attribute>
       </optional>
       <optional>
-        <attribute name="subtype">
-          <choice>
-            <value>normative</value>
-            <value>informative</value>
-          </choice>
+        <attribute name="inline-header">
+          <data type="boolean"/>
         </attribute>
       </optional>
+      <attribute name="type">
+        <choice>
+          <value>normative</value>
+          <value>informative</value>
+        </choice>
+      </attribute>
       <optional>
         <ref name="section-title"/>
       </optional>
-      <zeroOrMore>
+      <choice>
         <ref name="BasicBlock"/>
-      </zeroOrMore>
-      <zeroOrMore>
-        <ref name="clause-hanging-paragraph-with-footnote"/>
-      </zeroOrMore>
+        <oneOrMore>
+          <ref name="clause-subsection"/>
+        </oneOrMore>
+      </choice>
     </element>
   </define>
   <define name="references">
