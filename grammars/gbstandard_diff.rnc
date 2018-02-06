@@ -1,0 +1,42 @@
+default namespace = "http://riboseinc.com/gbstandard"
+  
+start = gb-standard
+
+language = element language { ( "zh" | "en" ) }
+
+script = element script { ( "Hans" | "Latn" ) }
+
+# identical structure to iso-standard
+gb-standard = 
+  element gb-standard {
+    title+,
+    status,
+    creator,
+    language,
+    script,
+    type,
+    id,
+    version?,
+    copyright,
+    sections
+  }     
+      
+type =
+  element type {
+     ( "GB" | "GBT" | "GBZ" | "DB" | "Guide" )
+  }     
+        
+preferred =
+  element preferred { localisedstring+ }
+
+admitted =
+  element admitted { localisedstring+ }
+
+deprecates =
+  element deprecates { localisedstring+ }
+
+localisedstring =
+  element string {
+    attribute language { ( "zh" | "en" ) },
+    TextElement+
+}
