@@ -106,10 +106,10 @@ grammar { start =   csd-standard                                                
   BibliographicItem = attribute  id  {   xsd:ID  }  , attribute  type  {  "article"  |  "book"  |  "booklet"  |  "conference"  |  "manual"  |  "proceedings"  |  "presentation"  |  "thesis"  |  "techreport"  |  "standard"  |  "unpublished"  } ? , (   bname  |   formatted  )  ,   source ? ,   publishdate ? ,   docidentifier * ,   accesseddate ? ,   creator * ,   publisher * ,   edition ? ,   biblionote * ,   partof * ,   creationdate ? ,   language * ,   script * ,   abstract ?  bname = element  name  { text  } 
   formatted = element  formatted  {   TextElement + } 
   source = element  source  {   xsd:anyURI  } 
-  publishdate = element  publishdate  { text  } 
+  publishdate = element  publishdate  { (   xsd:gYear  |   xsd:date  )  } 
   docidentifier = element  docidentifier  { text  } 
-  accesseddate = element  accesseddate  { text  } 
-  creationdate = element  creationdate  { text  } 
+  accesseddate = element  accesseddate  { (   xsd:gYear  |   xsd:date  )  } 
+  creationdate = element  creationdate  { (   xsd:gYear  |   xsd:date  )  } 
   biblionote = element  note  { text  } 
   abstract = element  abstract  { text  } 
   partof = element  partof  {   BibliographicItem  } 

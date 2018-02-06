@@ -40,3 +40,15 @@ localisedstring =
     attribute language { ( "zh" | "en" ) },
     TextElement+
 }
+
+activedate = element activedate { xsd:date }
+
+BibliographicItem =
+     attribute id { xsd:ID },
+     attribute type { "article" | "book" | "booklet" | "conference" | "manual" |
+                      "proceedings" | "presentation" | "thesis" | "techreport" |
+                      "standard" | "unpublished" }?,
+    (bname | formatted), source?, publishdate, docidentifier*, accesseddate?, activedate?, creator*,
+    publisher*, edition?,
+    biblionote*, partof*, creationdate?, language*, script*, abstract?
+

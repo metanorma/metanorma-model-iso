@@ -1285,7 +1285,10 @@
   </define>
   <define name="publishdate">
     <element name="publishdate">
-      <text/>
+      <choice>
+        <data type="gYear"/>
+        <data type="date"/>
+      </choice>
     </element>
   </define>
   <define name="docidentifier">
@@ -1295,12 +1298,18 @@
   </define>
   <define name="accesseddate">
     <element name="accesseddate">
-      <text/>
+      <choice>
+        <data type="gYear"/>
+        <data type="date"/>
+      </choice>
     </element>
   </define>
   <define name="creationdate">
     <element name="creationdate">
-      <text/>
+      <choice>
+        <data type="gYear"/>
+        <data type="date"/>
+      </choice>
     </element>
   </define>
   <define name="biblionote">

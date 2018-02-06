@@ -24,11 +24,15 @@ language =
 script =
   element script { "latn" }
 
+# draft into isodoc? To replace version/version?
 version =
   element version {
     edition?,
-    revision-date?
+    revision-date?,
+    draft?
   }
+
+draft = element draft {text}
 
 copyright = 
   element copyright {
@@ -81,13 +85,13 @@ substage =
   }
 
 documentnumber = 
-  element projectnumber { 
+  element project-number { 
     attribute part { xsd:int }?,
     xsd:int 
    }
 
 tc-documentnumber = 
-  element tc-documentnumber { 
+  element tc-document-number { 
     xsd:int 
    }
 
@@ -172,6 +176,7 @@ origin =
 clause-hanging-paragraph-with-footnote =
   element subsection {
     attribute id { xsd:ID }?,
+    attribute  inline-header  {   xsd:boolean  } ? ,
     section-title?,
     # allow hanging paragraphs in annexes: they introduce lists
     BasicBlock*,
@@ -181,6 +186,7 @@ clause-hanging-paragraph-with-footnote =
 annex =
   element annex { 
     attribute id { xsd:ID }?,
+    attribute inline-header { xsd:boolean }?,
     attribute subtype { "normative" | "informative" }?,
     section-title?,
     # allow hanging paragraps in annexes: they introduce lists
@@ -257,6 +263,22 @@ th =
       paragraph-with-footnote+
     )
 }
+
+table-note = element note {
+    attribute id { xsd:ID }?,
+ paragraph
+}
+
+
+Clause-Section =
+    attribute id { xsd:ID }?,
+    attribute inline-header { xsd:boolean }?,
+    section-title?,
+    (
+      BasicBlock+ |
+       clause-subsection+
+    )
+
 
 BibliographicItem =
      attribute id { xsd:ID },
