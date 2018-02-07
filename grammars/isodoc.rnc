@@ -9,6 +9,11 @@
 # and from mandatory to optional; optional elements may
 # be omitted; freely positioned alternatives may be replaced
 # with strict ordering
+#
+# DO NOT introduce a namespace here. We do not want a distinct namespace
+# for these elements, and a distinct namespace for any grammar inheriting
+# these elements; we just want one namespace for any child grammars
+# of this.
 
 grammar {
 
@@ -16,31 +21,24 @@ start = standard-document
 
 standard-document =
 element standard-document {
-  title+, status, creator*, language, script, type?,
-  id*, version?, copyright,
-  sections+
+  # title+, status, creator*, language, script, type?, id*, version?, copyright,
+  bibdata,
+  version?, sections+
 }
 
-title =
-  element title {
-    attribute language { text },
-    text
-}
+bibdata =
+  element bibdata { BibliographicItem }
 
 status =
-  element status { text }
+  element status { FormattedString }
 
 language =
   element language { text }
-# ISO-639
+## ISO-639
 
 script =
   element script { text }
-# ISO-15924: Latn
-
-type = element type { text }
-
-id = element id { text }
+## ISO-15924: Latn
 
 version =
   element version {
@@ -50,17 +48,6 @@ version =
 edition = element edition { xsd:int }
 revision-date = element revision-date { xsd:date }
 version = element version { text }
-
-copyright =
-  element copyright {
-    from, to?, owner
-}
-
-from = element from { xsd:gYear }
-to = element to { xsd:gYear }
-
-owner =
-  element owner { CreatorInfo }
 
 sections =
   element sections {
@@ -108,7 +95,7 @@ references =
   element references {
     attribute id { xsd:ID }?,
     section-title?,
-    bibItem*
+    bibitem*
   }
 
 terms =
@@ -220,7 +207,7 @@ quote-source =
   element source { CitationType }
 
 quote-author =
-  element author { CreatorInfo }
+  element author { ContributorInfo }
 
 sourcecode =
   element sourcecode {
@@ -406,46 +393,87 @@ dt =
 dd =
   element dd { paragraph-with-footnote* }
 
-creator =
-  element creator { CreatorInfo }
+LocalizedString =
+  # multiple languages and scripts possible: comma delimit them if so
+  attribute language { text }?,
+  attribute script { text }?,
+  text 
 
-CreatorInfo =
-    attribute role { text },
-    fullname?, affiliation?, person-identifier*
+# Unlike UML, change type to format: type is overloaded
+# Would be need if plain were default value and could omit the attribute
+# Added LocalizedStringOrXsAny
+FormattedString =
+  attribute format { ( "plain" | "html" | "docbook" | "tei" | "asciidoc" | "markdown" ) },
+  LocalizedStringOrXsAny
 
-publisher = 
-  element publisher { CreatorInfo }
-# a publisher has a subset of the roles of a creator
+LocalizedStringOrXsAny =
+  # multiple languages and scripts possible: comma delimit them if so
+  attribute language { text }?,
+  attribute script { text }?,
+  ( text | Any )+
+
+
+contributor = 
+  element contributor {
+    role*,
+    ContributorInfo
+}
 
 role =
   element role {
-    attribute type { ( "author" | "edition" | "publisher" | "custom" ) }?,
-    attribute name {text},
-    text
+    attribute type { ( "author" | "edition" | "publisher" | text ) }?,
+    roledescription*
+}
+
+ContributorInfo =
+  ( person | organization )
+
+roledescription = 
+  element description { FormattedString }
+
+person = 
+  element person {
+    fullname?, affiliation*, person-identifier*, contact*, uri?
 }
 
 fullname =
-  element fullname {
+  element name {
     prefix*, forename*, initial*, surname, addition*
 }
 
-prefix = element prefix { text }
-initial = element initial { text }
-addition = element addition { text }
-surname = element surname { text }
-forename = element forename { text }
+prefix = element prefix { LocalizedString }
+initial = element initial { LocalizedString }
+addition = element addition { LocalizedString }
+surname = element surname { LocalizedString }
+forename = element forename { LocalizedString }
 
+# Unlike UML, affiliationname is optional
 affiliation =
-  element affiliation { Organization }
+  element affiliation { 
+    affiliationname?, affiliationdescription*, organization
+}
 
-Organization = 
-    orgname, uri?, address?, org-identifier*
+affiliationname = element name { LocalizedString }
+
+affiliationdescription = element description { FormattedString }
+
+organization = 
+  element organization {
+    orgname, uri?, org-identifier*, contact*
+}
 
 orgname =
-  element name { text }
+  element name { LocalizedString }
 
 uri =
   element uri { xsd:anyURI }
+
+# TODO may change
+contact =
+  ( address | phone | email | uri )
+
+phone = element phone { text }
+email = element email { text }
 
 address =
   element address {
@@ -484,31 +512,65 @@ locality =
   element locality {
     attribute type { ( "section" | "clause" | "part" | "paragraph" | 
                        "chapter" | "page" | "whole" ) },
-    text
+    localityreference*
 }
 
-bibitem =
-  element bibitem { BibliographicItem }
+localityreference = element reference { text }
 
-BibliographicItem =
+# unlike UML, has id attribute; that results from including bibitem in a docmodel
+bibitem =
+  element bibitem { 
      attribute id { xsd:ID },
+     BibliographicItem 
+}
+
+# unlike UML, bname is optional, mutually exclusive with formattedRef
+# unlike UML, copyright is optional (it is mandatory in bibdata)
+BibliographicItem =
      attribute type { "article" | "book" | "booklet" | "conference" | "manual" |
                       "proceedings" | "presentation" | "thesis" | "techreport" |
                       "standard" | "unpublished" }?,
-    (bname | formatted), source?, publishdate, docidentifier*, accesseddate?, creator*, 
-    publisher*, edition?,
-    biblionote*, partof*, creationdate?, language*, script*, abstract?
+    (btitle+ | formattedref), source?, docidentifier*, bdate*, contributor*, 
+    edition?,
+    biblionote*, partof*, language*, script*, abstract?, status?, copyright?
 
-bname = element name { text }
-formatted = element formatted { TextElement+ }
+btitle = element title { FormattedString }
+formattedref = element formattedref { TextElement+ }
 source = element source { xsd:anyURI }
-publishdate = element publishdate { ( xsd:gYear | xsd:date ) }
+bdate = element date {
+  attribute type { ( "published" | "accessed" | "created" | "activated" | "obsoleted" ) },
+  ( xsd:gYear | xsd:date )
+}
+
+# add type to docidentifier in isodoc?
 docidentifier = element docidentifier { text }
-accesseddate = element accesseddate { ( xsd:gYear | xsd:date ) }
-creationdate = element creationdate { ( xsd:gYear | xsd:date ) }
-biblionote = element note { text }
-abstract = element abstract { text }
+biblionote = element note { FormattedString }
+abstract = element abstract { FormattedString }
 
 partof = element partof { BibliographicItem }
+
+copyright =
+  element copyright {
+    from, to?, owner
+}
+
+from = element from { xsd:gYear }
+to = element to { xsd:gYear }
+
+owner =
+  element owner { ContributorInfo }
+
+Anycontents = mixed {
+# https://github.com/relaxng/jing-trang/issues/211
+# https://lists.oasis-open.org/archives/office/200808/msg00024.html
+# https://lists.oasis-open.org/archives/office/200808/msg00099.html
+# For this to work, we will actually strip any attributes in the Anycontents before
+# passing it for validation. Horrible I know, but there are no good alternatives
+# that also allow us to do grammar inheritance
+	# (attribute * { text } | Any)*
+        Any*
+}
+Any = element * { Anycontents }
+
 
 }

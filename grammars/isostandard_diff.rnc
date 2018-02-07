@@ -1,28 +1,14 @@
-default namespace = "http://riboseinc.com/isoxml"
+default namespace isostandard = "http://riboseinc.com/isoxml"
 
-# grammar {
+include "isodoc.rnc" {
 
 start = iso-standard
-
-iso-standard = 
-  element iso-standard {
-    title+,
-    status,
-    creator,
-    language,
-    script,
-    type,
-    id,
-    version?,
-    copyright,
-    sections
-  }
 
 language =
   element language { ( "en" | "fr" ) }
 
 script =
-  element script { "latn" }
+  element script { "Latn" }
 
 # draft into isodoc? To replace version/version?
 version =
@@ -32,104 +18,55 @@ version =
     draft?
   }
 
-draft = element draft {text}
-
-copyright = 
-  element copyright {
-    from, owner
+# add type to docidentifier in isodoc?
+docidentifier =
+  element docidentifier {
+    text | (documentnumber, tc-documentnumber? )
 }
 
-owner = 
-  element owner {
-    owner-affiliation  
+organization = 
+  element organization {
+    orgname, uri?, org-identifier*, contact*,
+    technical-committee?, subcommittee?, workgroup?, secretariat?  
 }
 
-owner-affiliation = element affiliation { "ISO" }
+BibliographicItem =
+  attribute type { "article" | "book" | "booklet" | "conference" | "manual" |
+                      "proceedings" | "presentation" | "thesis" | "techreport" |
+                      "standard" | "unpublished"  |
+  # added
+     "international-standard" | "technical-specification" | 
+     "technical-report" | "publicly-available-specification" | 
+    "international-workshop-agreement" | "guide"
+     }?,
+   # remainder is identical
+  (btitle+ | formattedref), source?, docidentifier*, bdate*, contributor*,
+  edition?,
+  biblionote*, partof*, language*, script*, abstract?, status?, copyright?
 
-id =
-  element id {
-    documentnumber,
-    tc-documentnumber?
-  }
+bdate = element date {
+  attribute type { ( "published" | "accessed" | "created" | "activated" | "obsoleted" ) },
+  ( xsd:gYear | xsd:date | "--" )
+}
 
-creator =
-  element creator { 
-    attribute role { text },
-    technical-committee,
-    subcommittee?,
-    workgroup?,
-    secretariat?
-  }
-
-type =
-  element type {
-     ( "international-standard" | "technical-specification" | 
-       "technical-report" | "publicly-available-specification" | 
-        "international-workshop-agreement" | "guide" )
-  }
+biblionote = element note { 
+  # Biblio date notes can be footnoted
+  attribute reference { text }?,
+  FormattedString 
+}
 
 status =
   element status {
-     stage,
-     substage?
+    FormattedString |
+     ( stage, substage? )
   }
 
-stage = 
-  element stage {
-    ("00" | "10" | "20" | "30" | "40" | "50" | "60" | "90" | "95" )
-  }
-
-substage = 
-  element substage {
-    ("00" | "20" | "60" | "90" | "92" | "93" | "98" | "99" )
-  }
-
-documentnumber = 
-  element project-number { 
-    attribute part { xsd:int }?,
-    xsd:int 
-   }
-
-tc-documentnumber = 
-  element tc-document-number { 
-    xsd:int 
-   }
-
-technical-committee =
-  element technical-committee {
-    attribute number { xsd:int }?,
-    text
-  }
-
-subcommittee =
-  element subcommittee {
-    attribute number { xsd:int }?,
-    text
-  }
-
-workgroup =
-  element workgroup {
-    attribute number { xsd:int }?,
-    text
-  }
-
-secretariat =
-  element secretariat { text }
-
-title = 
-  element title { 
-    attribute language { text }, 
-    title-intro?, title-main, title-part? 
+btitle =
+  element title {
+     text |
+    ( title-intro?, title-main, title-part? )
 }
 
-title-intro =
-  element title-intro { text }
-
-title-main =
-  element title-main { text }
-
-title-part =
-  element title-part { text }
 
 sections =
   element sections {
@@ -173,15 +110,6 @@ origin =
     CitationType 
 }
 
-clause-hanging-paragraph-with-footnote =
-  element subsection {
-    attribute id { xsd:ID }?,
-    attribute  inline-header  {   xsd:boolean  } ? ,
-    section-title?,
-    # allow hanging paragraphs in annexes: they introduce lists
-    BasicBlock*,
-    clause-hanging-paragraph-with-footnote*
-  }
 
 annex =
   element annex { 
@@ -279,17 +207,84 @@ Clause-Section =
        clause-subsection+
     )
 
-
-BibliographicItem =
-     attribute id { xsd:ID },
-     attribute type { "article" | "book" | "booklet" | "conference" | "manual" |
-                      "proceedings" | "presentation" | "thesis" | "techreport" |
-                      "standard" | "unpublished" }?,
-    (bname | formatted), source?, publishdate?, docidentifier*, accesseddate?, creator*,
-    publisher*, edition?,
-    biblionote*, partof*, creationdate?, language*, script*, abstract?
+Any = element * - (isostandard:*) { Anycontents }
 
 
-# }
+}
+
+# end overrides
+
+iso-standard = 
+  element iso-standard {
+    #title+, status, creator, language, script, type, id, version?, copyright, sections
+    bibdata, version?, sections+
+  }
+
+draft = element draft {text}
+
+
+
+stage = 
+  element stage {
+    ("00" | "10" | "20" | "30" | "40" | "50" | "60" | "90" | "95" )
+  }
+
+substage = 
+  element substage {
+    ("00" | "20" | "60" | "90" | "92" | "93" | "98" | "99" )
+  }
+
+documentnumber = 
+  element project-number { 
+    attribute part { xsd:int }?,
+    xsd:int 
+   }
+
+tc-documentnumber = 
+  element tc-document-number { 
+    xsd:int 
+   }
+
+technical-committee =
+  element technical-committee {
+    attribute number { xsd:int }?,
+    text
+  }
+
+subcommittee =
+  element subcommittee {
+    attribute number { xsd:int }?,
+    text
+  }
+
+workgroup =
+  element workgroup {
+    attribute number { xsd:int }?,
+    text
+  }
+
+secretariat =
+  element secretariat { text }
+
+title-intro =
+  element title-intro { FormattedString }
+
+title-main =
+  element title-main { FormattedString }
+
+title-part =
+  element title-part { FormattedString }
+
+clause-hanging-paragraph-with-footnote =
+  element subsection {
+    attribute id { xsd:ID }?,
+    attribute  inline-header  {   xsd:boolean  } ? ,
+    section-title?,
+    # allow hanging paragraphs in annexes: they introduce lists
+    BasicBlock*,
+    clause-hanging-paragraph-with-footnote*
+  }
+
+
 
 

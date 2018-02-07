@@ -9,10 +9,10 @@ if [[ ! -d jing-trang ]]; then
   cd ..
 fi
 java -jar jing-trang/build/trang.jar -I rnc -O rng isodoc.rnc isodoc.rng
-ruby rnc.ebnf.rb isodoc.rnc isostandard_diff.rnc > isostandard.rnc
-java -jar jing-trang/build/trang.jar -I rnc -O rng isostandard.rnc isostandard.rng
-ruby rnc.ebnf.rb isostandard.rnc csd_diff.rnc > csd.rnc
-java -jar jing-trang/build/trang.jar -I rnc -O rng csd.rnc csd.rng
-ruby rnc.ebnf.rb isostandard.rnc gbstandard_diff.rnc > gbstandard.rnc
-java -jar jing-trang/build/trang.jar -I rnc -O rng gbstandard.rnc gbstandard.rng
+# ruby rnc.ebnf.rb isodoc.rnc isostandard_diff.rnc > isostandard.rnc
+java -jar jing-trang/build/trang.jar -I rnc -O rng isostandard_diff.rnc isostandard.rng
+# ruby rnc.ebnf.rb isostandard.rnc csd_diff.rnc > csd.rnc
+java -jar jing-trang/build/trang.jar -I rnc -O rng csd_diff.rnc csd.rng
+# ruby rnc.ebnf.rb isostandard.rnc gbstandard_diff.rnc > gbstandard.rnc
+java -jar jing-trang/build/trang.jar -I rnc -O rng gbstandard_diff.rnc gbstandard.rng
 

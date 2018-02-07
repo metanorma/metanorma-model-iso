@@ -11,46 +11,36 @@
   and from mandatory to optional; optional elements may
   be omitted; freely positioned alternatives may be replaced
   with strict ordering
+  
+  DO NOT introduce a namespace here. We do not want a distinct namespace
+  for these elements, and a distinct namespace for any grammar inheriting
+  these elements; we just want one namespace for any child grammars
+  of this.
 -->
-<grammar xmlns="http://relaxng.org/ns/structure/1.0" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+<grammar xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0" xmlns="http://relaxng.org/ns/structure/1.0" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
   <start>
     <ref name="standard-document"/>
   </start>
   <define name="standard-document">
     <element name="standard-document">
-      <oneOrMore>
-        <ref name="title"/>
-      </oneOrMore>
-      <ref name="status"/>
-      <zeroOrMore>
-        <ref name="creator"/>
-      </zeroOrMore>
-      <ref name="language"/>
-      <ref name="script"/>
-      <optional>
-        <ref name="type"/>
-      </optional>
-      <zeroOrMore>
-        <ref name="id"/>
-      </zeroOrMore>
+      <!-- title+, status, creator*, language, script, type?, id*, version?, copyright, -->
+      <ref name="bibdata"/>
       <optional>
         <ref name="version"/>
       </optional>
-      <ref name="copyright"/>
       <oneOrMore>
         <ref name="sections"/>
       </oneOrMore>
     </element>
   </define>
-  <define name="title">
-    <element name="title">
-      <attribute name="language"/>
-      <text/>
+  <define name="bibdata">
+    <element name="bibdata">
+      <ref name="BibliographicItem"/>
     </element>
   </define>
   <define name="status">
     <element name="status">
-      <text/>
+      <ref name="FormattedString"/>
     </element>
   </define>
   <define name="language">
@@ -58,24 +48,14 @@
       <text/>
     </element>
   </define>
-  <!-- ISO-639 -->
   <define name="script">
+    <a:documentation>ISO-639</a:documentation>
     <element name="script">
       <text/>
     </element>
   </define>
-  <!-- ISO-15924: Latn -->
-  <define name="type">
-    <element name="type">
-      <text/>
-    </element>
-  </define>
-  <define name="id">
-    <element name="id">
-      <text/>
-    </element>
-  </define>
   <define name="version">
+    <a:documentation>ISO-15924: Latn</a:documentation>
     <element name="version">
       <optional>
         <ref name="edition"/>
@@ -101,30 +81,6 @@
   <define name="version">
     <element name="version">
       <text/>
-    </element>
-  </define>
-  <define name="copyright">
-    <element name="copyright">
-      <ref name="from"/>
-      <optional>
-        <ref name="to"/>
-      </optional>
-      <ref name="owner"/>
-    </element>
-  </define>
-  <define name="from">
-    <element name="from">
-      <data type="gYear"/>
-    </element>
-  </define>
-  <define name="to">
-    <element name="to">
-      <data type="gYear"/>
-    </element>
-  </define>
-  <define name="owner">
-    <element name="owner">
-      <ref name="CreatorInfo"/>
     </element>
   </define>
   <define name="sections">
@@ -236,7 +192,7 @@
         <ref name="section-title"/>
       </optional>
       <zeroOrMore>
-        <ref name="bibItem"/>
+        <ref name="bibitem"/>
       </zeroOrMore>
     </element>
   </define>
@@ -495,7 +451,7 @@
   </define>
   <define name="quote-author">
     <element name="author">
-      <ref name="CreatorInfo"/>
+      <ref name="ContributorInfo"/>
     </element>
   </define>
   <define name="sourcecode">
@@ -965,29 +921,57 @@
       </zeroOrMore>
     </element>
   </define>
-  <define name="creator">
-    <element name="creator">
-      <ref name="CreatorInfo"/>
-    </element>
-  </define>
-  <define name="CreatorInfo">
-    <attribute name="role"/>
+  <define name="LocalizedString">
     <optional>
-      <ref name="fullname"/>
+      <!-- multiple languages and scripts possible: comma delimit them if so -->
+      <attribute name="language"/>
     </optional>
     <optional>
-      <ref name="affiliation"/>
+      <attribute name="script"/>
     </optional>
-    <zeroOrMore>
-      <ref name="person-identifier"/>
-    </zeroOrMore>
+    <text/>
   </define>
-  <define name="publisher">
-    <element name="publisher">
-      <ref name="CreatorInfo"/>
+  <!--
+    Unlike UML, change type to format: type is overloaded
+    Would be need if plain were default value and could omit the attribute
+    Added LocalizedStringOrXsAny
+  -->
+  <define name="FormattedString">
+    <attribute name="format">
+      <choice>
+        <value>plain</value>
+        <value>html</value>
+        <value>docbook</value>
+        <value>tei</value>
+        <value>asciidoc</value>
+        <value>markdown</value>
+      </choice>
+    </attribute>
+    <ref name="LocalizedStringOrXsAny"/>
+  </define>
+  <define name="LocalizedStringOrXsAny">
+    <optional>
+      <!-- multiple languages and scripts possible: comma delimit them if so -->
+      <attribute name="language"/>
+    </optional>
+    <optional>
+      <attribute name="script"/>
+    </optional>
+    <oneOrMore>
+      <choice>
+        <text/>
+        <ref name="Any"/>
+      </choice>
+    </oneOrMore>
+  </define>
+  <define name="contributor">
+    <element name="contributor">
+      <zeroOrMore>
+        <ref name="role"/>
+      </zeroOrMore>
+      <ref name="ContributorInfo"/>
     </element>
   </define>
-  <!-- a publisher has a subset of the roles of a creator -->
   <define name="role">
     <element name="role">
       <optional>
@@ -996,16 +980,47 @@
             <value>author</value>
             <value>edition</value>
             <value>publisher</value>
-            <value>custom</value>
+            <text/>
           </choice>
         </attribute>
       </optional>
-      <attribute name="name"/>
-      <text/>
+      <zeroOrMore>
+        <ref name="roledescription"/>
+      </zeroOrMore>
+    </element>
+  </define>
+  <define name="ContributorInfo">
+    <choice>
+      <ref name="person"/>
+      <ref name="organization"/>
+    </choice>
+  </define>
+  <define name="roledescription">
+    <element name="description">
+      <ref name="FormattedString"/>
+    </element>
+  </define>
+  <define name="person">
+    <element name="person">
+      <optional>
+        <ref name="fullname"/>
+      </optional>
+      <zeroOrMore>
+        <ref name="affiliation"/>
+      </zeroOrMore>
+      <zeroOrMore>
+        <ref name="person-identifier"/>
+      </zeroOrMore>
+      <zeroOrMore>
+        <ref name="contact"/>
+      </zeroOrMore>
+      <optional>
+        <ref name="uri"/>
+      </optional>
     </element>
   </define>
   <define name="fullname">
-    <element name="fullname">
+    <element name="name">
       <zeroOrMore>
         <ref name="prefix"/>
       </zeroOrMore>
@@ -1023,54 +1038,92 @@
   </define>
   <define name="prefix">
     <element name="prefix">
-      <text/>
+      <ref name="LocalizedString"/>
     </element>
   </define>
   <define name="initial">
     <element name="initial">
-      <text/>
+      <ref name="LocalizedString"/>
     </element>
   </define>
   <define name="addition">
     <element name="addition">
-      <text/>
+      <ref name="LocalizedString"/>
     </element>
   </define>
   <define name="surname">
     <element name="surname">
-      <text/>
+      <ref name="LocalizedString"/>
     </element>
   </define>
   <define name="forename">
     <element name="forename">
-      <text/>
+      <ref name="LocalizedString"/>
     </element>
   </define>
+  <!-- Unlike UML, affiliationname is optional -->
   <define name="affiliation">
     <element name="affiliation">
-      <ref name="Organization"/>
+      <optional>
+        <ref name="affiliationname"/>
+      </optional>
+      <zeroOrMore>
+        <ref name="affiliationdescription"/>
+      </zeroOrMore>
+      <ref name="organization"/>
     </element>
   </define>
-  <define name="Organization">
-    <ref name="orgname"/>
-    <optional>
-      <ref name="uri"/>
-    </optional>
-    <optional>
-      <ref name="address"/>
-    </optional>
-    <zeroOrMore>
-      <ref name="org-identifier"/>
-    </zeroOrMore>
+  <define name="affiliationname">
+    <element name="name">
+      <ref name="LocalizedString"/>
+    </element>
+  </define>
+  <define name="affiliationdescription">
+    <element name="description">
+      <ref name="FormattedString"/>
+    </element>
+  </define>
+  <define name="organization">
+    <element name="organization">
+      <ref name="orgname"/>
+      <optional>
+        <ref name="uri"/>
+      </optional>
+      <zeroOrMore>
+        <ref name="org-identifier"/>
+      </zeroOrMore>
+      <zeroOrMore>
+        <ref name="contact"/>
+      </zeroOrMore>
+    </element>
   </define>
   <define name="orgname">
     <element name="name">
-      <text/>
+      <ref name="LocalizedString"/>
     </element>
   </define>
   <define name="uri">
     <element name="uri">
       <data type="anyURI"/>
+    </element>
+  </define>
+  <!-- TODO may change -->
+  <define name="contact">
+    <choice>
+      <ref name="address"/>
+      <ref name="phone"/>
+      <ref name="email"/>
+      <ref name="uri"/>
+    </choice>
+  </define>
+  <define name="phone">
+    <element name="phone">
+      <text/>
+    </element>
+  </define>
+  <define name="email">
+    <element name="email">
+      <text/>
     </element>
   </define>
   <define name="address">
@@ -1173,18 +1226,30 @@
           <value>whole</value>
         </choice>
       </attribute>
+      <zeroOrMore>
+        <ref name="localityreference"/>
+      </zeroOrMore>
+    </element>
+  </define>
+  <define name="localityreference">
+    <element name="reference">
       <text/>
     </element>
   </define>
+  <!-- unlike UML, has id attribute; that results from including bibitem in a docmodel -->
   <define name="bibitem">
     <element name="bibitem">
+      <attribute name="id">
+        <data type="ID"/>
+      </attribute>
       <ref name="BibliographicItem"/>
     </element>
   </define>
+  <!--
+    unlike UML, bname is optional, mutually exclusive with formattedRef
+    unlike UML, copyright is optional (it is mandatory in bibdata)
+  -->
   <define name="BibliographicItem">
-    <attribute name="id">
-      <data type="ID"/>
-    </attribute>
     <optional>
       <attribute name="type">
         <choice>
@@ -1203,24 +1268,22 @@
       </attribute>
     </optional>
     <choice>
-      <ref name="bname"/>
-      <ref name="formatted"/>
+      <oneOrMore>
+        <ref name="btitle"/>
+      </oneOrMore>
+      <ref name="formattedref"/>
     </choice>
     <optional>
       <ref name="source"/>
     </optional>
-    <ref name="publishdate"/>
     <zeroOrMore>
       <ref name="docidentifier"/>
     </zeroOrMore>
-    <optional>
-      <ref name="accesseddate"/>
-    </optional>
     <zeroOrMore>
-      <ref name="creator"/>
+      <ref name="bdate"/>
     </zeroOrMore>
     <zeroOrMore>
-      <ref name="publisher"/>
+      <ref name="contributor"/>
     </zeroOrMore>
     <optional>
       <ref name="edition"/>
@@ -1231,9 +1294,6 @@
     <zeroOrMore>
       <ref name="partof"/>
     </zeroOrMore>
-    <optional>
-      <ref name="creationdate"/>
-    </optional>
     <zeroOrMore>
       <ref name="language"/>
     </zeroOrMore>
@@ -1243,14 +1303,20 @@
     <optional>
       <ref name="abstract"/>
     </optional>
+    <optional>
+      <ref name="status"/>
+    </optional>
+    <optional>
+      <ref name="copyright"/>
+    </optional>
   </define>
-  <define name="bname">
-    <element name="name">
-      <text/>
+  <define name="btitle">
+    <element name="title">
+      <ref name="FormattedString"/>
     </element>
   </define>
-  <define name="formatted">
-    <element name="formatted">
+  <define name="formattedref">
+    <element name="formattedref">
       <oneOrMore>
         <ref name="TextElement"/>
       </oneOrMore>
@@ -1261,48 +1327,88 @@
       <data type="anyURI"/>
     </element>
   </define>
-  <define name="publishdate">
-    <element name="publishdate">
+  <define name="bdate">
+    <element name="date">
+      <attribute name="type">
+        <choice>
+          <value>published</value>
+          <value>accessed</value>
+          <value>created</value>
+          <value>activated</value>
+          <value>obsoleted</value>
+        </choice>
+      </attribute>
       <choice>
         <data type="gYear"/>
         <data type="date"/>
       </choice>
     </element>
   </define>
+  <!-- add type to docidentifier in isodoc? -->
   <define name="docidentifier">
     <element name="docidentifier">
       <text/>
     </element>
   </define>
-  <define name="accesseddate">
-    <element name="accesseddate">
-      <choice>
-        <data type="gYear"/>
-        <data type="date"/>
-      </choice>
-    </element>
-  </define>
-  <define name="creationdate">
-    <element name="creationdate">
-      <choice>
-        <data type="gYear"/>
-        <data type="date"/>
-      </choice>
-    </element>
-  </define>
   <define name="biblionote">
     <element name="note">
-      <text/>
+      <ref name="FormattedString"/>
     </element>
   </define>
   <define name="abstract">
     <element name="abstract">
-      <text/>
+      <ref name="FormattedString"/>
     </element>
   </define>
   <define name="partof">
     <element name="partof">
       <ref name="BibliographicItem"/>
+    </element>
+  </define>
+  <define name="copyright">
+    <element name="copyright">
+      <ref name="from"/>
+      <optional>
+        <ref name="to"/>
+      </optional>
+      <ref name="owner"/>
+    </element>
+  </define>
+  <define name="from">
+    <element name="from">
+      <data type="gYear"/>
+    </element>
+  </define>
+  <define name="to">
+    <element name="to">
+      <data type="gYear"/>
+    </element>
+  </define>
+  <define name="owner">
+    <element name="owner">
+      <ref name="ContributorInfo"/>
+    </element>
+  </define>
+  <define name="Anycontents">
+    <mixed>
+      <zeroOrMore>
+        <!--
+          https://github.com/relaxng/jing-trang/issues/211
+          https://lists.oasis-open.org/archives/office/200808/msg00024.html
+          https://lists.oasis-open.org/archives/office/200808/msg00099.html
+          For this to work, we will actually strip any attributes in the Anycontents before
+          passing it for validation. Horrible I know, but there are no good alternatives
+          that also allow us to do grammar inheritance
+          (attribute * { text } | Any)*
+        -->
+        <ref name="Any"/>
+      </zeroOrMore>
+    </mixed>
+  </define>
+  <define name="Any">
+    <element>
+      <anyName/>
+      <ref name="Anycontents"/>
     </element>
   </define>
 </grammar>

@@ -1,4 +1,10 @@
-default namespace = "http://riboseinc.com/gbstandard"
+# default namespace = "http://riboseinc.com/gbstandard"
+
+# Currently we inherit from a namespaced grammar, isostandard. Unless we inherit from isodoc,
+# we cannot have a new default namespace: we will end up with a grammar with two different
+# namespaces, one for isostandard and one for csd additions. And we do not want that.
+
+include "isostandard_diff.rnc" {
   
 start = gb-standard
 
@@ -6,49 +12,35 @@ language = element language { ( "zh" | "en" ) }
 
 script = element script { ( "Hans" | "Latn" ) }
 
-# identical structure to iso-standard
-gb-standard = 
-  element gb-standard {
-    title+,
-    status,
-    creator,
-    language,
-    script,
-    type,
-    id,
-    version?,
-    copyright,
-    sections
-  }     
-      
-type =
-  element type {
-     ( "GB" | "GBT" | "GBZ" | "DB" | "Guide" )
-  }     
-        
 preferred =
-  element preferred { localisedstring+ }
+  element preferred { ZhEnLocalizedString }
 
 admitted =
-  element admitted { localisedstring+ }
+  element admitted { ZhEnLocalizedString }
 
 deprecates =
-  element deprecates { localisedstring+ }
+  element deprecates { ZhEnLocalizedString }
 
-localisedstring =
-  element string {
-    attribute language { ( "zh" | "en" ) },
-    TextElement+
+term =
+  element term {
+    attribute id { xsd:ID }?,
+    preferred+, admitted*, deprecates*,
+    termdomain?, definition, termnote*, termexample*, termsource*
+  }
+
 }
 
-activedate = element activedate { xsd:date }
+# identical structure to iso-standard
+gb-standard =
+  element gb-standard {
+    bibdata, version?, sections+
+  }     
+    
 
-BibliographicItem =
-     attribute id { xsd:ID },
-     attribute type { "article" | "book" | "booklet" | "conference" | "manual" |
-                      "proceedings" | "presentation" | "thesis" | "techreport" |
-                      "standard" | "unpublished" }?,
-    (bname | formatted), source?, publishdate, docidentifier*, accesseddate?, activedate?, creator*,
-    publisher*, edition?,
-    biblionote*, partof*, creationdate?, language*, script*, abstract?
+
+ZhEnLocalizedString =
+  # multiple languages and scripts possible: comma delimit them if so
+  attribute language { ( "zh" | "en" ) },
+  attribute script { ( "Hans" | "Latn" ) }?,
+  text
 
