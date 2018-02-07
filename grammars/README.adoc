@@ -7,10 +7,9 @@ This directory contains RelaxNG Compact and RelaxNG grammars for:
 * https://github.com/riboseinc/csd[CSD] (`csd*`)
 * https://github.com/riboseinc/gbdoc[China Standards] (`gbstandard*`)
 
-RelaxNG Compact is the source
-specification for grammars; RelaxNG is generated from the RelaxNG Compact
-source, and is used by the Ruby gems validating specifications against the
-models:
+RelaxNG Compact is the source specification for grammars; RelaxNG is generated
+from the RelaxNG Compact source, and is used by the Ruby gems validating
+specifications against the models:
 
 * https://github.com/riboseinc/asciidoctor-iso
 * https://github.com/riboseinc/asciidoctor-csd
