@@ -1,9 +1,26 @@
 = Grammars for IsoDoc documents
 
-This directory contains RelaxNG Compact and RelaxNG grammars for the base IsoDoc Standard Document model (`isodoc*`), ISO Standards (`isostandard*`), and https://github.com/riboseinc/csd[CSD] (`csd*`). RelaxNG Compact is the source specification for grammars; RelaxNG is generated from the RelaxNG Compact source, and is used by the Ruby gems validating specifications against the model (https://github.com/riboseinc/asciidoctor-iso, https://github.com/riboseinc/asciidoctor-csd).
+This directory contains RelaxNG Compact and RelaxNG grammars for:
 
-Instances of IsoDoc are derived from the base grammar by creating a diff grammar, containing the productions (assignments) and declarations where the instance overrides the base (e.g. `isostandard_diff.rnc`). 
+* the base IsoDoc Standard Document model (`isodoc*`),
+* https://github.com/riboseinc/isodoc[ISO Standards] (`isostandard*`)
+* https://github.com/riboseinc/csd[CSD] (`csd*`)
+* https://github.com/riboseinc/gbdoc[China Standards] (`gbstandard*`)
 
-The two grammars are merged using the script `rnc.ebnf.rb`, and then RelaxNG schemas are generated from the RelaxNG Compact schemas, using the `jing-trang` gem. (The RelaxNG schemas are how documents are actually validated in the gems generating IsoDoc XML.)
+RelaxNG Compact is the source specification for grammars; RelaxNG is generated
+from the RelaxNG Compact source, and is used by the Ruby gems validating
+specifications against the models:
 
+* https://github.com/riboseinc/asciidoctor-iso
+* https://github.com/riboseinc/asciidoctor-csd
+* https://github.com/riboseinc/asciidoctor-gb
+
+Instances of IsoDoc are derived from the base grammar by creating a diff
+grammar, containing the productions (assignments) and declarations where the
+instance overrides the base (e.g. `isostandard_diff.rnc`). 
+
+The two grammars are merged using the script `rnc.ebnf.rb`, and then RelaxNG
+schemas are generated from the RelaxNG Compact schemas, using the `jing-trang`
+gem. (The RelaxNG schemas are how documents are actually validated in the gems
+generating IsoDoc XML.)
 
