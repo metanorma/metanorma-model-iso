@@ -72,6 +72,67 @@
         </zeroOrMore>
       </element>
     </define>
+    <define name="BibliographicItem">
+      <optional>
+        <attribute name="type">
+          <ref name="BibItemType"/>
+        </attribute>
+      </optional>
+      <choice>
+        <oneOrMore>
+          <ref name="btitle"/>
+        </oneOrMore>
+        <ref name="formattedref"/>
+      </choice>
+      <optional>
+        <ref name="source"/>
+      </optional>
+      <zeroOrMore>
+        <ref name="docidentifier"/>
+      </zeroOrMore>
+      <zeroOrMore>
+        <ref name="bdate"/>
+      </zeroOrMore>
+      <zeroOrMore>
+        <ref name="contributor"/>
+      </zeroOrMore>
+      <optional>
+        <ref name="edition"/>
+      </optional>
+      <zeroOrMore>
+        <ref name="biblionote"/>
+      </zeroOrMore>
+      <zeroOrMore>
+        <ref name="partof"/>
+      </zeroOrMore>
+      <zeroOrMore>
+        <ref name="language"/>
+      </zeroOrMore>
+      <zeroOrMore>
+        <ref name="script"/>
+      </zeroOrMore>
+      <optional>
+        <ref name="abstract"/>
+      </optional>
+      <optional>
+        <ref name="status"/>
+      </optional>
+      <optional>
+        <ref name="copyright"/>
+      </optional>
+      <optional>
+        <ref name="isoworkgroup"/>
+      </optional>
+      <optional>
+        <ref name="gbcommittee"/>
+      </optional>
+      <optional>
+        <ref name="gbequivalence"/>
+      </optional>
+      <optional>
+        <ref name="gbtype"/>
+      </optional>
+    </define>
   </include>
   <!-- identical structure to iso-standard -->
   <define name="gb-standard">
@@ -80,9 +141,69 @@
       <optional>
         <ref name="version"/>
       </optional>
+      <ref name="foreword"/>
+      <ref name="introduction"/>
       <oneOrMore>
         <ref name="sections"/>
       </oneOrMore>
+      <zeroOrMore>
+        <ref name="annex"/>
+      </zeroOrMore>
+      <oneOrMore>
+        <ref name="references"/>
+      </oneOrMore>
+    </element>
+  </define>
+  <define name="gbequivalence">
+    <element name="gbequivalence">
+      <choice>
+        <value>equivalent</value>
+        <value>identical</value>
+        <value>nonequivalent</value>
+      </choice>
+    </element>
+  </define>
+  <define name="gbcommittee">
+    <element name="gbcommittee">
+      <attribute name="type">
+        <choice>
+          <value>technical</value>
+          <value>provisional</value>
+        </choice>
+      </attribute>
+      <text/>
+    </element>
+  </define>
+  <define name="gbtype">
+    <element name="gbtype">
+      <ref name="gbscope"/>
+      <ref name="gbprefix"/>
+      <ref name="gbmandate"/>
+    </element>
+  </define>
+  <define name="gbscope">
+    <element name="gbscope">
+      <choice>
+        <value>national</value>
+        <value>sector</value>
+        <value>professional</value>
+        <value>local</value>
+        <value>enterprise</value>
+      </choice>
+    </element>
+  </define>
+  <define name="gbmandate">
+    <element name="gbmandate">
+      <choice>
+        <value>mandatory</value>
+        <value>recommended</value>
+        <value>guidelines</value>
+      </choice>
+    </element>
+  </define>
+  <define name="gbprefix">
+    <element name="gbprefix">
+      <text/>
     </element>
   </define>
   <define name="ZhEnLocalizedString">

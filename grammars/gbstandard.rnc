@@ -28,15 +28,38 @@ term =
     termdomain?, definition, termnote*, termexample*, termsource*
   }
 
+BibliographicItem =
+  attribute type { BibItemType }?,
+  (btitle+ | formattedref), source?, docidentifier*, bdate*, contributor*,
+  edition?,
+  biblionote*, partof*, language*, script*, abstract?, status?, copyright?,
+  isoworkgroup?, gbcommittee?, gbequivalence?, gbtype?
+
 }
 
 # identical structure to iso-standard
 gb-standard =
   element gb-standard {
-    bibdata, version?, sections+
+    bibdata, version?, foreword, introduction, sections+, annex*, references+
   }     
     
+gbequivalence =
+  element gbequivalence { ( "equivalent" | "identical" | "nonequivalent" ) }
 
+gbcommittee =
+  element gbcommittee {
+    attribute type { ( "technical" | "provisional" ) },
+    text
+}
+
+gbtype =
+  element gbtype {
+    gbscope, gbprefix, gbmandate
+}
+
+gbscope = element gbscope { ( "national" | "sector" | "professional" | "local" | "enterprise" ) }
+gbmandate = element gbmandate { ( "mandatory" | "recommended" | "guidelines" ) }
+gbprefix = element gbprefix { text }
 
 ZhEnLocalizedString =
   # multiple languages and scripts possible: comma delimit them if so
