@@ -1,0 +1,293 @@
+default namespace isostandard = "http://riboseinc.com/isoxml"
+
+include "isodoc.rnc" {
+
+start = iso-standard
+
+language =
+  element language { ( "en" | "fr" ) }
+
+script =
+  element script { "Latn" }
+
+# draft into isodoc? To replace version/version?
+version =
+  element version {
+    edition?,
+    revision-date?,
+    draft?
+  }
+
+# add type to docidentifier in isodoc?
+docidentifier =
+  element docidentifier {
+    text | (documentnumber, tc-documentnumber? )
+}
+
+organization = 
+  element organization {
+    orgname, uri?, org-identifier*, contact*,
+    technical-committee?, subcommittee?, workgroup?, secretariat?  
+}
+
+BibliographicItem =
+  attribute type { BibItemType }?,
+  (btitle+ | formattedref), source?, docidentifier*, bdate*, contributor*,
+  edition?,
+  biblionote*, partof*, language*, script*, abstract?, status?, copyright?,
+  isoworkgroup?
+
+bdate = element date {
+  attribute type { ( "published" | "accessed" | "created" | "activated" | "obsoleted" ) },
+  ( xsd:gYear | xsd:date | "--" )
+}
+
+biblionote = element note { 
+  # Biblio date notes can be footnoted
+  attribute reference { text }?,
+  FormattedString 
+}
+
+status =
+  element status {
+    FormattedString |
+     ( stage, substage? )
+  }
+
+btitle =
+  element title {
+     FormattedString |
+    ( title-intro?, title-main, title-part? )
+}
+
+
+sections =
+  element sections {
+    clause, terms, clause+
+  }
+
+references =
+  element references {
+    attribute id { xsd:ID }?,
+    section-title?,
+    bibitem*,
+    references*
+}
+
+terms = 
+  element terms { 
+    attribute id { xsd:ID }?,
+    section-title?,
+    # boilerplate
+    paragraph-with-footnote*, ul?,
+    (term+ | terms? )
+  }
+
+term = 
+  element term { 
+    attribute id { xsd:ID }?,
+    preferred, admitted*, deprecates*,
+    termdomain?, definition, termnote*, termexample*, termsource* 
+  }
+
+definition =
+  element definition {
+    ( paragraph | figure | formula )+
+  }
+
+origin =
+  element origin { 
+    attribute citeas { text },
+    CitationType 
+}
+
+
+annex =
+  element annex { 
+    attribute id { xsd:ID }?,
+    attribute inline-header { xsd:boolean }?,
+    attribute subtype { "normative" | "informative" }?,
+    section-title?,
+    # allow hanging paragraps in annexes: they introduce lists
+    #( paragraph-with-footnote | table | note | formula | admonition | ol | ul | dl | figure | quote | sourcecode | review | example )*,
+    BasicBlock*, note*,
+    clause-hanging-paragraph-with-footnote*
+  }
+
+figure = 
+  element figure {
+    attribute id { xsd:ID },
+    tname?,
+    ( image | figure+ ),
+    fn*,
+    dl?,
+    note*
+  }
+
+li =
+  element li {
+    #( paragraph-with-footnote | table | note | formula | admonition | ol | ul | dl | quote | sourcecode | review | example )+
+    BasicBlock+
+    # exclude figures?
+  }
+
+dd =
+  element dd {
+    #( paragraph-with-footnote | table | note | formula | admonition | ol | ul | dl | quote | sourcecode | review | example )*
+    # exclude figures?
+    BasicBlock
+  }
+
+admonition =
+  element admonition { 
+    attribute id { xsd:ID },
+    attribute type { 
+     ( "danger" | "caution" | "warning" | "important" | "safety precautions" )},
+    paragraph-with-footnote+,
+    note*
+  }
+
+xref =
+  element xref { 
+    attribute target { xsd:IDREF },
+    text
+  }
+
+hyperlink =
+  element link {
+    attribute target {xsd:anyURI},
+    text
+}
+
+thead =
+  element thead { tr+ }
+
+td =
+  element td {
+    attribute colspan { text }?,
+    attribute rowspan { text }?,
+    attribute align { "left" | "right" | "center" }?,
+    (
+      (TextElement | fn )* |
+      paragraph-with-footnote+
+    )
+}
+
+th =
+  element th {
+    attribute colspan { text }?,
+    attribute rowspan { text }?,
+    attribute align { "left" | "right" | "center" }?,
+    (
+      (TextElement | fn )* |
+      paragraph-with-footnote+
+    )
+}
+
+table-note = element note {
+    attribute id { xsd:ID }?,
+ paragraph
+}
+
+
+Clause-Section =
+    attribute id { xsd:ID }?,
+    attribute inline-header { xsd:boolean }?,
+    section-title?,
+    (
+      ( BasicBlock+, note* ) |
+       clause-subsection+
+    )
+
+}
+
+# end overrides
+
+# We display the Normative References between scope and terms; but to keep the
+# grammar simple, we keep the references together
+iso-standard = 
+  element iso-standard {
+    bibdata, version?, foreword, introduction, sections+, annex*, references+
+  }
+
+BibItemType |=
+
+     "international-standard" | "technical-specification" |
+     "technical-report" | "publicly-available-specification" |
+    "international-workshop-agreement" | "guide"
+
+
+# Renamed from workgroup; would in fact prefer committee
+isoworkgroup = element isoworkgroup {
+  technical-committee, subcommittee?, workgroup?, secretariat?
+}
+
+foreword = element foreword { Content-Section }
+introduction = element introduction { Content-Section }
+
+draft = element draft {text}
+
+stage = 
+  element stage {
+    ("00" | "10" | "20" | "30" | "40" | "50" | "60" | "90" | "95" )
+  }
+
+substage = 
+  element substage {
+    ("00" | "20" | "60" | "90" | "92" | "93" | "98" | "99" )
+  }
+
+documentnumber = 
+  element project-number { 
+    attribute part { xsd:int }?,
+    xsd:int 
+   }
+
+tc-documentnumber = 
+  element tc-document-number { 
+    xsd:int 
+   }
+
+technical-committee =
+  element technical-committee {
+    attribute number { xsd:int }?,
+    text
+  }
+
+subcommittee =
+  element subcommittee {
+    attribute number { xsd:int }?,
+    text
+  }
+
+workgroup =
+  element workgroup {
+    attribute number { xsd:int }?,
+    text
+  }
+
+secretariat =
+  element secretariat { text }
+
+title-intro =
+  element title-intro { FormattedString }
+
+title-main =
+  element title-main { FormattedString }
+
+title-part =
+  element title-part { FormattedString }
+
+clause-hanging-paragraph-with-footnote =
+  element subsection {
+    attribute id { xsd:ID }?,
+    attribute  inline-header  {   xsd:boolean  } ? ,
+    section-title?,
+    # allow hanging paragraphs in annexes: they introduce lists
+    BasicBlock*, note*,
+    clause-hanging-paragraph-with-footnote*
+  }
+
+
+
+

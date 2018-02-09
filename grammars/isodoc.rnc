@@ -21,13 +21,19 @@ start = standard-document
 
 standard-document =
 element standard-document {
-  # title+, status, creator*, language, script, type?, id*, version?, copyright,
-  bibdata,
-  version?, sections+
+  bibdata, docrelation*,
+  version?, sections+, annex*, references*
 }
 
 bibdata =
   element bibdata { BibliographicItem }
+
+docrelation =
+  element docrelation {
+    attribute type { ( "obsoletes" | "updates" | "complements" ) },
+    # using instead of title: CitationType
+    eref
+}
 
 status =
   element status { FormattedString }
@@ -51,7 +57,7 @@ version = element version { text }
 
 sections =
   element sections {
-    ( content | clause | terms | annex | references )+
+    ( content | clause | terms )+
 }
 
 section-title =
@@ -66,7 +72,7 @@ content-subsection =
 Content-Section =
     attribute id { xsd:ID }?,
     section-title?,
-    ( BasicBlock+ |
+    ( (BasicBlock+, note*) |
       content-subsection+ )
 
 clause =
@@ -76,7 +82,7 @@ Clause-Section =
     attribute id { xsd:ID }?,
     section-title?,
     (
-      BasicBlock+ |
+      ( BasicBlock+, note* ) |
        clause-subsection+
     )
 
@@ -88,7 +94,7 @@ annex =
     attribute id { xsd:ID }?,
     attribute type { ( "normative" | "informative" ) },
     section-title?,
-    ( BasicBlock | clause-subsection+ )
+    ( ( BasicBlock+, note* ) | clause-subsection+ )
 }
 
 references =
@@ -144,15 +150,15 @@ termsource =
     origin, modification?
 }
 
+# should be eref
 origin =
   element origin { CitationType }
-
 
 modification =
   element modification { paragraph }
 
-BasicBlock =  paragraph-with-footnote | table | note | formula | admonition | ol | ul | dl | figure |
-  quote | sourcecode | example 
+BasicBlock =  paragraph-with-footnote | table | formula | admonition | ol | ul | dl | figure |
+  quote | sourcecode | example | review
 
 paragraph =
   element p { ParagraphType }
@@ -162,13 +168,13 @@ Alignments = ( "left" | "right" | "center" | "justified" )
 ParagraphType =
     attribute id { xsd:ID },
     attribute align { Alignments }?,
-   ( TextElement )*, review*
+   ( TextElement )*, note*
 
 paragraph-with-footnote =
   element p {
     attribute id { xsd:ID },
     attribute align { Alignments }?,
-   ( TextElement | fn  )*, review*
+   ( TextElement | fn  )*, note*
 }
 
 note =
@@ -181,17 +187,17 @@ note =
 review =
   element review {
   attribute id { xsd:ID },
-  attribute reviewer { text }?,
+  attribute reviewer { text },
   attribute date { xsd:date }?,
-  attribute from { xsd:ID },
-  attribute to { xsd:ID },
+  attribute from { xsd:IDREF },
+  attribute to { xsd:IDREF }?,
   paragraph+
 }
 
 formula =
   element formula {
     attribute id { xsd:ID },
-    stem, dl?
+    stem, dl?, note*
 }
 
 quote =
@@ -200,7 +206,8 @@ quote =
     attribute alignment { Alignments }?,
     quote-source?,
     quote-author?,
-    paragraph-with-footnote+
+    paragraph-with-footnote+,
+    note*
 }
 
 quote-source =
@@ -212,7 +219,7 @@ quote-author =
 sourcecode =
   element sourcecode {
     attribute id { xsd:ID },
-    tname?, ( text | callout )+, annotation*
+    tname?, ( text | callout )+, annotation*, note*
   }
 
 table =
@@ -237,7 +244,7 @@ td =
     attribute rowspan { text }?,
     attribute align { "left" | "right" | "center" }?,
     (
-      (TextElement | review )* |
+      (TextElement )* |
       paragraph-with-footnote+
     )
 }
@@ -248,7 +255,7 @@ th =
     attribute rowspan { text }?,
     attribute align { "left" | "right" | "center" }?,
     (
-      (TextElement | review )* |
+      (TextElement )* |
       paragraph-with-footnote+
     )
 }
@@ -256,15 +263,16 @@ th =
 example =
   element example {
     attribute id { xsd:ID },
-    ( formula | ul | ol | dl | quote | sourcecode | paragraph-with-footnote | 
-      review )+
+    ( formula | ul | ol | dl | quote | sourcecode | paragraph-with-footnote )+,
+    note*
 }
 
 admonition =
   element admonition {
     attribute type { ( "warning" | "note" | "tip" | "important" | "caution" ) },
     attribute id { xsd:ID },
-    paragraph-with-footnote*
+    paragraph-with-footnote*,
+    note*
   }
 
 figure =
@@ -331,7 +339,7 @@ fn =
 # @reference replaces ReferenceElement/text
 # so <fn reference="2"><p>This is a footnote</p></fn>
 # corresponds to 
-# <xref type="footnote" target="fn2">2</xref> <p id="fn2">This is a footnote</p>
+# <eref type="footnote" target="fn2">2</xref> <p id="fn2">This is a footnote</p>
 
 callout =
   element callout {
@@ -367,7 +375,7 @@ annotation =
 ul =
   element ul {
     attribute id { xsd:ID },
-    li+
+    li+, note*
 }
 
 li =
@@ -378,13 +386,13 @@ ol =
     attribute id { xsd:ID },
     attribute type { ( "roman" | "alphabet" | "arabic" | 
                        "roman_upper" | "alphabet_upper" ) },
-    li+
+    li+, note*
 }
 
 dl =
   element dl {
     attribute id { xsd:ID },
-    (dt, dd)+
+    (dt, dd)+, note*
 }
 
 dt =
@@ -410,7 +418,7 @@ LocalizedStringOrXsAny =
   # multiple languages and scripts possible: comma delimit them if so
   attribute language { text }?,
   attribute script { text }?,
-  ( text | Any )+
+  ( text | AnyElement )+
 
 
 contributor = 
@@ -524,18 +532,22 @@ bibitem =
      BibliographicItem 
 }
 
-# unlike UML, bname is optional, mutually exclusive with formattedRef
+BibItemType |=
+    (  "article" | "book" | "booklet" | "conference" | "manual" |
+                      "proceedings" | "presentation" | "thesis" | "techreport" |
+                      "standard" | "unpublished" )
+ 
+
+# unlike UML, btitle is optional, mutually exclusive with formattedRef
 # unlike UML, copyright is optional (it is mandatory in bibdata)
 BibliographicItem =
-     attribute type { "article" | "book" | "booklet" | "conference" | "manual" |
-                      "proceedings" | "presentation" | "thesis" | "techreport" |
-                      "standard" | "unpublished" }?,
+    attribute type { BibItemType }?,
     (btitle+ | formattedref), source?, docidentifier*, bdate*, contributor*, 
     edition?,
     biblionote*, partof*, language*, script*, abstract?, status?, copyright?
 
 btitle = element title { FormattedString }
-formattedref = element formattedref { TextElement+ }
+formattedref = element formattedref { FormattedString }
 source = element source { xsd:anyURI }
 bdate = element date {
   attribute type { ( "published" | "accessed" | "created" | "activated" | "obsoleted" ) },
@@ -560,7 +572,7 @@ to = element to { xsd:gYear }
 owner =
   element owner { ContributorInfo }
 
-Anycontents = mixed {
+#Anycontents = mixed {
 # https://github.com/relaxng/jing-trang/issues/211
 # https://lists.oasis-open.org/archives/office/200808/msg00024.html
 # https://lists.oasis-open.org/archives/office/200808/msg00099.html
@@ -568,9 +580,9 @@ Anycontents = mixed {
 # passing it for validation. Horrible I know, but there are no good alternatives
 # that also allow us to do grammar inheritance
 	# (attribute * { text } | Any)*
-        Any*
-}
-Any = element * { Anycontents }
+#        Any*
+#}
+AnyElement = element * { ( text | AnyElement) }
 
 
 }

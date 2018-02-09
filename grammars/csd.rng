@@ -6,7 +6,7 @@
     we cannot have a new default namespace: we will end up with a grammar with two different
     namespaces, one for isostandard and one for csd additions. And we do not want that.
   -->
-  <include href="isostandard_diff.rng">
+  <include href="isostandard.rng">
     <start>
       <ref name="csd-standard"/>
     </start>
@@ -25,15 +25,35 @@
         <ref name="FormattedString"/>
       </element>
     </define>
+    <define name="status">
+      <element name="status">
+        <ref name="FormattedString"/>
+      </element>
+    </define>
   </include>
+  <define name="BibItemType" combine="choice">
+    <choice>
+      <value>governance</value>
+      <value>standard</value>
+      <value>guide</value>
+    </choice>
+  </define>
   <define name="csd-standard">
     <element name="csd-standard">
       <ref name="bibdata"/>
       <optional>
         <ref name="version"/>
       </optional>
+      <ref name="foreword"/>
+      <ref name="introduction"/>
       <oneOrMore>
         <ref name="sections"/>
+      </oneOrMore>
+      <zeroOrMore>
+        <ref name="annex"/>
+      </zeroOrMore>
+      <oneOrMore>
+        <ref name="references"/>
       </oneOrMore>
     </element>
   </define>

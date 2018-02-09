@@ -74,29 +74,9 @@
     <define name="BibliographicItem">
       <optional>
         <attribute name="type">
-          <choice>
-            <value>article</value>
-            <value>book</value>
-            <value>booklet</value>
-            <value>conference</value>
-            <value>manual</value>
-            <value>proceedings</value>
-            <value>presentation</value>
-            <value>thesis</value>
-            <value>techreport</value>
-            <value>standard</value>
-            <value>unpublished</value>
-            <!-- added -->
-            <value>international-standard</value>
-            <value>technical-specification</value>
-            <value>technical-report</value>
-            <value>publicly-available-specification</value>
-            <value>international-workshop-agreement</value>
-            <value>guide</value>
-          </choice>
+          <ref name="BibItemType"/>
         </attribute>
       </optional>
-      <!-- remainder is identical -->
       <choice>
         <oneOrMore>
           <ref name="btitle"/>
@@ -138,6 +118,9 @@
       </optional>
       <optional>
         <ref name="copyright"/>
+      </optional>
+      <optional>
+        <ref name="isoworkgroup"/>
       </optional>
     </define>
     <define name="bdate">
@@ -183,7 +166,7 @@
     <define name="btitle">
       <element name="title">
         <choice>
-          <text/>
+          <ref name="FormattedString"/>
           <group>
             <optional>
               <ref name="title-intro"/>
@@ -198,22 +181,11 @@
     </define>
     <define name="sections">
       <element name="sections">
-        <ref name="content"/>
-        <optional>
-          <ref name="content"/>
-        </optional>
         <ref name="clause"/>
-        <ref name="references"/>
         <ref name="terms"/>
         <oneOrMore>
           <ref name="clause"/>
         </oneOrMore>
-        <zeroOrMore>
-          <ref name="annex"/>
-        </zeroOrMore>
-        <optional>
-          <ref name="references"/>
-        </optional>
       </element>
     </define>
     <define name="references">
@@ -338,6 +310,9 @@
           <ref name="BasicBlock"/>
         </zeroOrMore>
         <zeroOrMore>
+          <ref name="note"/>
+        </zeroOrMore>
+        <zeroOrMore>
           <ref name="clause-hanging-paragraph-with-footnote"/>
         </zeroOrMore>
       </element>
@@ -402,6 +377,9 @@
         <oneOrMore>
           <ref name="paragraph-with-footnote"/>
         </oneOrMore>
+        <zeroOrMore>
+          <ref name="note"/>
+        </zeroOrMore>
       </element>
     </define>
     <define name="xref">
@@ -449,7 +427,6 @@
             <choice>
               <ref name="TextElement"/>
               <ref name="fn"/>
-              <ref name="review"/>
             </choice>
           </zeroOrMore>
           <oneOrMore>
@@ -480,7 +457,6 @@
             <choice>
               <ref name="TextElement"/>
               <ref name="fn"/>
-              <ref name="review"/>
             </choice>
           </zeroOrMore>
           <oneOrMore>
@@ -514,36 +490,77 @@
         <ref name="section-title"/>
       </optional>
       <choice>
-        <oneOrMore>
-          <ref name="BasicBlock"/>
-        </oneOrMore>
+        <group>
+          <oneOrMore>
+            <ref name="BasicBlock"/>
+          </oneOrMore>
+          <zeroOrMore>
+            <ref name="note"/>
+          </zeroOrMore>
+        </group>
         <oneOrMore>
           <ref name="clause-subsection"/>
         </oneOrMore>
       </choice>
     </define>
-    <define name="Any">
-      <element>
-        <anyName>
-          <except>
-            <nsName/>
-          </except>
-        </anyName>
-        <ref name="Anycontents"/>
-      </element>
-    </define>
   </include>
   <!-- end overrides -->
+  <!--
+    We display the Normative References between scope and terms; but to keep the
+    grammar simple, we keep the references together
+  -->
   <define name="iso-standard">
     <element name="iso-standard">
-      <!-- title+, status, creator, language, script, type, id, version?, copyright, sections -->
       <ref name="bibdata"/>
       <optional>
         <ref name="version"/>
       </optional>
+      <ref name="foreword"/>
+      <ref name="introduction"/>
       <oneOrMore>
         <ref name="sections"/>
       </oneOrMore>
+      <zeroOrMore>
+        <ref name="annex"/>
+      </zeroOrMore>
+      <oneOrMore>
+        <ref name="references"/>
+      </oneOrMore>
+    </element>
+  </define>
+  <define name="BibItemType" combine="choice">
+    <choice>
+      <value>international-standard</value>
+      <value>technical-specification</value>
+      <value>technical-report</value>
+      <value>publicly-available-specification</value>
+      <value>international-workshop-agreement</value>
+      <value>guide</value>
+    </choice>
+  </define>
+  <!-- Renamed from workgroup; would in fact prefer committee -->
+  <define name="isoworkgroup">
+    <element name="isoworkgroup">
+      <ref name="technical-committee"/>
+      <optional>
+        <ref name="subcommittee"/>
+      </optional>
+      <optional>
+        <ref name="workgroup"/>
+      </optional>
+      <optional>
+        <ref name="secretariat"/>
+      </optional>
+    </element>
+  </define>
+  <define name="foreword">
+    <element name="foreword">
+      <ref name="Content-Section"/>
+    </element>
+  </define>
+  <define name="introduction">
+    <element name="introduction">
+      <ref name="Content-Section"/>
     </element>
   </define>
   <define name="draft">
@@ -663,6 +680,9 @@
       <zeroOrMore>
         <!-- allow hanging paragraphs in annexes: they introduce lists -->
         <ref name="BasicBlock"/>
+      </zeroOrMore>
+      <zeroOrMore>
+        <ref name="note"/>
       </zeroOrMore>
       <zeroOrMore>
         <ref name="clause-hanging-paragraph-with-footnote"/>
