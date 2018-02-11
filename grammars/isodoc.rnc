@@ -411,7 +411,7 @@ LocalizedString =
 # Would be need if plain were default value and could omit the attribute
 # Added LocalizedStringOrXsAny
 FormattedString =
-  attribute format { ( "plain" | "html" | "docbook" | "tei" | "asciidoc" | "markdown" ) },
+  attribute format { ( "plain" | "html" | "docbook" | "tei" | "asciidoc" | "markdown" ) }?,
   LocalizedStringOrXsAny
 
 LocalizedStringOrXsAny =
@@ -455,7 +455,6 @@ addition = element addition { LocalizedString }
 surname = element surname { LocalizedString }
 forename = element forename { LocalizedString }
 
-# Unlike UML, affiliationname is optional
 affiliation =
   element affiliation { 
     affiliationname?, affiliationdescription*, organization
@@ -554,8 +553,11 @@ bdate = element date {
   ( xsd:gYear | xsd:date )
 }
 
-# add type to docidentifier in isodoc?
-docidentifier = element docidentifier { text }
+docidentifier = element docidentifier { 
+  attribute type { text }?,
+  text 
+}
+
 biblionote = element note { FormattedString }
 abstract = element abstract { FormattedString }
 
