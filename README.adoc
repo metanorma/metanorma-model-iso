@@ -38,7 +38,7 @@ document models, into HTML and Microsoft Word:
 
 * https://github.com/riboseinc/isodoc
 * https://github.com/riboseinc/asciidoctor-csd (inheriting from isodoc)
-* https://github.com/riboseinc/gbdoc
+* https://github.com/riboseinc/gbdoc (inheriting from isodoc)
 
 == UML models
 
