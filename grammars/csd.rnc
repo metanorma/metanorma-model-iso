@@ -22,6 +22,6 @@ BibItemType |= "governance" | "standard" | "guide"
 
 csd-standard =
   element csd-standard {
-    bibdata, version?, foreword, introduction, sections+, annex*, references+
+    bibdata, version?, foreword, introduction?, sections+, annex*, references+
  }
 

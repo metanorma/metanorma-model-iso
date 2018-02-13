@@ -40,7 +40,7 @@ BibliographicItem =
 # identical structure to iso-standard
 gb-standard =
   element gb-standard {
-    bibdata, version?, foreword, introduction, sections+, annex*, references+
+    bibdata, version?, foreword, introduction?, sections+, annex*, references+
   }     
     
 gbequivalence =

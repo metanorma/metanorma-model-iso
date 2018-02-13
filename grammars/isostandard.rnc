@@ -207,7 +207,7 @@ Clause-Section =
 # grammar simple, we keep the references together
 iso-standard = 
   element iso-standard {
-    bibdata, version?, foreword, introduction, sections+, annex*, references+
+    bibdata, version?, foreword, introduction?, sections+, annex*, references+
   }
 
 BibItemType |=
