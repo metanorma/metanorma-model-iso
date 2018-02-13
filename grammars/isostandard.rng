@@ -634,7 +634,7 @@
       </attribute>
     </optional>
     <optional>
-      <attribute name="prefix">
+      <attribute name="type">
         <data type="int"/>
       </attribute>
     </optional>

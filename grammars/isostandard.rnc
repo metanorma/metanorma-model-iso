@@ -259,7 +259,7 @@ workgroup =
 
 IsoWorkgroup =
     attribute number { xsd:int }?,
-    attribute prefix { xsd:int }?,
+    attribute type { xsd:int }?,
     text
 
 
