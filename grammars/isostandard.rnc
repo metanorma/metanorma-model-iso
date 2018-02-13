@@ -249,22 +249,19 @@ tc-documentnumber =
    }
 
 technical-committee =
-  element technical-committee {
-    attribute number { xsd:int }?,
-    text
-  }
+  element technical-committee { IsoWorkgroup }
 
 subcommittee =
-  element subcommittee {
-    attribute number { xsd:int }?,
-    text
-  }
+  element subcommittee { IsoWorkgroup }
 
 workgroup =
-  element workgroup {
+  element workgroup { IsoWorkgroup }
+
+IsoWorkgroup =
     attribute number { xsd:int }?,
+    attribute prefix { xsd:int }?,
     text
-  }
+
 
 secretariat =
   element secretariat { text }
