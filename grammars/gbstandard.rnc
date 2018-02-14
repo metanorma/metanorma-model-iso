@@ -33,8 +33,7 @@ BibliographicItem =
   (btitle+ | formattedref), source?, docidentifier*, bdate*, contributor*,
   edition?,
   biblionote*, partof*, language*, script*, abstract?, status?, copyright?,
-  isoworkgroup?, gbcommittee?, gbequivalence?, gbtype?
-
+  isoworkgroup?, gbcommittee?, gbequivalence?, gbtype?, gblibraryids?
 }
 
 # identical structure to iso-standard
@@ -42,6 +41,14 @@ gb-standard =
   element gb-standard {
     bibdata, version?, foreword, introduction?, sections+, annex*, references+
   }     
+
+gblibraryids = 
+  element gblibraryids {
+    gblibraryidics, gblibraryidl
+  }
+
+gblibraryidics = element ics { text }
+gblibraryidl = element l { text }
     
 gbequivalence =
   element gbequivalence { ( "equivalent" | "identical" | "nonequivalent" ) }

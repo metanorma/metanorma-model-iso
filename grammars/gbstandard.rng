@@ -132,6 +132,9 @@
       <optional>
         <ref name="gbtype"/>
       </optional>
+      <optional>
+        <ref name="gblibraryids"/>
+      </optional>
     </define>
   </include>
   <!-- identical structure to iso-standard -->
@@ -154,6 +157,22 @@
       <oneOrMore>
         <ref name="references"/>
       </oneOrMore>
+    </element>
+  </define>
+  <define name="gblibraryids">
+    <element name="gblibraryids">
+      <ref name="gblibraryidics"/>
+      <ref name="gblibraryidl"/>
+    </element>
+  </define>
+  <define name="gblibraryidics">
+    <element name="ics">
+      <text/>
+    </element>
+  </define>
+  <define name="gblibraryidl">
+    <element name="l">
+      <text/>
     </element>
   </define>
   <define name="gbequivalence">
