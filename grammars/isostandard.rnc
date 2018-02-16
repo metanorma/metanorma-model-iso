@@ -95,13 +95,6 @@ definition =
     ( paragraph | figure | formula )+
   }
 
-origin =
-  element origin { 
-    attribute citeas { text },
-    CitationType 
-}
-
-
 annex =
   element annex { 
     attribute id { xsd:ID }?,
