@@ -31,7 +31,6 @@ bibdata =
 docrelation =
   element docrelation {
     attribute type { ( "obsoletes" | "updates" | "complements" ) },
-    # using instead of title: CitationType
     eref
 }
 
@@ -150,9 +149,8 @@ termsource =
     origin, modification?
 }
 
-# should be eref
 origin =
-  element origin { CitationType }
+  element origin { erefType }
 
 modification =
   element modification { paragraph }
@@ -204,17 +202,17 @@ quote =
   element quote {
     attribute id { xsd:ID },
     attribute alignment { Alignments }?,
-    quote-source?,
+    quote-source,
     quote-author?,
     paragraph-with-footnote+,
     note*
 }
 
 quote-source =
-  element source { CitationType }
+  element source { erefType }
 
 quote-author =
-  element author { ContributorInfo }
+  element author { text }
 
 sourcecode =
   element sourcecode {
@@ -308,13 +306,14 @@ bookmark =
 ReferenceFormat = ( "external" | "inline" | "footnote" | "callout" )
 
 eref =
-  element eref {
+  element eref { erefType }
+
+erefType = 
     attribute normative { xsd:boolean }?,
     attribute citeas { text },
     attribute type { ReferenceFormat },
     CitationType,
     text
-}
 
 hyperlink =
   element link {
