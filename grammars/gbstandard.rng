@@ -121,7 +121,7 @@
         <ref name="copyright"/>
       </optional>
       <optional>
-        <ref name="isoworkgroup"/>
+        <ref name="editorialgroup"/>
       </optional>
       <optional>
         <ref name="gbcommittee"/>
@@ -183,7 +183,7 @@
       </optional>
       <ref name="copyright"/>
       <optional>
-        <ref name="isoworkgroup"/>
+        <ref name="editorialgroup"/>
       </optional>
       <ref name="gbcommittee"/>
       <optional>
