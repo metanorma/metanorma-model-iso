@@ -9,7 +9,7 @@ The standards currently modelled via IsoDoc are:
 
 * ISO Standards
 * https://github.com/riboseinc/csd[CSD Standards]
-* https://github.com/riboseinc/gbdoc[China Standards (GB and family)]
+* https://github.com/riboseinc/gbdoc[Chinese Standards (GB and family)]
 
 The base Standard Document model includes information common to all standards
 in scope of IsoDoc. Models for individual standards are derived from the base
@@ -40,33 +40,70 @@ document models, into HTML and Microsoft Word:
 * https://github.com/riboseinc/asciidoctor-csd (inheriting from isodoc)
 * https://github.com/riboseinc/asciidoctor-gb (inheriting from isodoc)
 
-== UML models
+== Standard Document UML Models
 
-=== Standard Document Model
+=== BibData
 
-image::images/standard-document.png[]
+image::images/standard-document/bibdata.png[]
 
-=== ISO Standard Document Model
+=== Terms and References
 
-image::images/iso-standard-document.png[]
+image::images/standard-document/terms.png[]
 
-=== Bibliographic Models
+=== Sections
 
-image::images/bibliography.png[]
+image::images/standard-document/sections.png[]
 
-=== Terms and References Model
+=== Blocks
 
-image::images/terms.png[]
+image::images/standard-document/blocks.png[]
 
-=== Text Section Model
+=== Text
 
-image::images/sections.png[]
+image::images/standard-document/text.png[]
 
-=== Text Block Model
+=== Data Types
 
-image::images/blocks.png[]
+image::images/standard-document/datatypes.png[]
 
-=== Text Model
+=== Standard Document
 
-image::images/text.png[]
+image::images/standard-document/standard-document.png[]
+
+
+
+== ISO Standard Document UML Models
+
+=== ISO Bibliographic Item
+
+image::images/iso-standard-document/iso-bibliographic-item.png[]
+
+=== ISO Blocks
+
+image::images/iso-standard-document/iso-blocks.png[]
+
+=== ISO Standard Document
+
+image::images/iso-standard-document/iso-standard-document.png[]
+
+
+
+== Bibliography UML Models
+
+=== Bibliographic Item
+
+image::images/bibliography/bibliographic-item.png[]
+
+=== Citation
+
+image::images/bibliography/citation.png[]
+
+=== Contributor
+
+image::images/bibliography/contributor.png[]
+
+=== Data Types
+
+image::images/bibliography/datatypes.png[]
+
 
