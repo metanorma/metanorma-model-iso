@@ -128,7 +128,7 @@ figure =
   element figure {
     attribute id { xsd:ID },
     tname?,
-    ( image | figure+ ),
+    ( image | subfigure+ ),
     fn*,
     dl?,
     note*
@@ -295,6 +295,13 @@ clause-hanging-paragraph-with-footnote =
     BasicBlock*, note*,
     clause-hanging-paragraph-with-footnote*
   }
+
+subfigure =
+  element figure {
+    attribute id { xsd:ID },
+    tname?,
+    image
+ }
 
 
 
