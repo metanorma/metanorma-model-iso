@@ -91,7 +91,7 @@ clause-subsection =
 annex =
   element annex {
     attribute id { xsd:ID }?,
-    attribute type { ( "normative" | "informative" ) },
+    attribute obligation { ( "normative" | "informative" ) },
     section-title?,
     ( ( BasicBlock+, note* ) | clause-subsection+ )
 }

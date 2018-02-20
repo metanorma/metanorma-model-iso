@@ -74,9 +74,17 @@ sections =
     clause, terms, clause+
   }
 
+Content-Section =
+    attribute id { xsd:ID }?,
+    attribute obligation { "normative" | "informative" }?,
+    section-title?,
+    ( (BasicBlock+, note*) |
+      content-subsection+ )
+
 references =
   element references {
     attribute id { xsd:ID }?,
+    attribute obligation { "normative" | "informative" }?,
     section-title?,
     bibitem*,
     references*
@@ -85,6 +93,7 @@ references =
 terms = 
   element terms { 
     attribute id { xsd:ID }?,
+    attribute obligation { "normative" | "informative" }?,
     section-title?,
     # boilerplate
     paragraph-with-footnote*, ul?,
@@ -107,7 +116,7 @@ annex =
   element annex { 
     attribute id { xsd:ID }?,
     attribute inline-header { xsd:boolean }?,
-    attribute subtype { "normative" | "informative" }?,
+    attribute obligation { "normative" | "informative" }?,
     section-title?,
     # allow hanging paragraps in annexes: they introduce lists
     #( paragraph-with-footnote | table | note | formula | admonition | ol | ul | dl | figure | quote | sourcecode | review | example )*,
@@ -194,6 +203,7 @@ table-note = element note {
 Clause-Section =
     attribute id { xsd:ID }?,
     attribute inline-header { xsd:boolean }?,
+    attribute obligation { "normative" | "informative" }?,
     section-title?,
     (
       ( BasicBlock+, note* ) |
@@ -279,6 +289,7 @@ clause-hanging-paragraph-with-footnote =
   element subsection {
     attribute id { xsd:ID }?,
     attribute  inline-header  {   xsd:boolean  } ? ,
+    attribute obligation { "normative" | "informative" }?,
     section-title?,
     # allow hanging paragraphs in annexes: they introduce lists
     BasicBlock*, note*,
