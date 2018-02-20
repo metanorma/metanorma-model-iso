@@ -71,7 +71,7 @@ btitle =
 
 sections =
   element sections {
-    clause, terms, clause+
+    clause, terms, symbols-abbrevs?, clause+
   }
 
 Content-Section =
@@ -96,7 +96,7 @@ terms =
     attribute obligation { "normative" | "informative" }?,
     section-title?,
     termdocsource?,
-    (term+ | terms? )
+    (term+ | ( terms*, symbols-abbrevs?) )
   }
 
 term = 
@@ -249,6 +249,7 @@ substage =
 documentnumber = 
   element project-number { 
     attribute part { xsd:int }?,
+    attribute subpart { xsd:int }?,
     xsd:int 
    }
 
@@ -305,6 +306,11 @@ subfigure =
 termdocsource =
   element source { erefType }
 
-
+symbols-abbrevs =
+  element symbols-abbrevs {
+    attribute id { xsd:ID }?,
+    attribute obligation { "normative" | "informative" }?,
+    dl
+}
 
 
