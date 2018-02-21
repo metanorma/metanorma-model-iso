@@ -130,9 +130,6 @@
         <ref name="gbcommittee"/>
       </optional>
       <optional>
-        <ref name="gbequivalence"/>
-      </optional>
-      <optional>
         <ref name="gbtype"/>
       </optional>
       <optional>
@@ -192,9 +189,6 @@
         <ref name="editorialgroup"/>
       </optional>
       <ref name="gbcommittee"/>
-      <optional>
-        <ref name="gbequivalence"/>
-      </optional>
       <ref name="gbtype"/>
       <optional>
         <ref name="gblibraryids"/>
@@ -237,15 +231,6 @@
   <define name="gblibraryidl">
     <element name="l">
       <text/>
-    </element>
-  </define>
-  <define name="gbequivalence">
-    <element name="gbequivalence">
-      <choice>
-        <value>equivalent</value>
-        <value>identical</value>
-        <value>nonequivalent</value>
-      </choice>
     </element>
   </define>
   <define name="gbcommittee">
