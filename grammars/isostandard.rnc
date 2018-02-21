@@ -35,14 +35,14 @@ BibliographicItem =
     (btitle+ | formattedref), source?, docidentifier*, bdate*, contributor*,
     edition?,
     biblionote*, partof*, language*, script*, abstract?, status?, copyright?,
-  editorialgroup?
+  docrelation*, editorialgroup?
 
 BibData =
     attribute type { BibItemType }?,
     btitle+, formattedref?, source?, docidentifier*, bdate*, contributor*,
     edition?,
     biblionote*, partof*, language*, script*, abstract?, status?, copyright,
-  editorialgroup
+    docrelation*, editorialgroup
 
 
 bdate = element date {
@@ -95,7 +95,7 @@ terms =
     attribute id { xsd:ID }?,
     attribute obligation { "normative" | "informative" }?,
     section-title?,
-    termdocsource?,
+    termdocsource*,
     (term+ | ( terms*, symbols-abbrevs?) )
   }
 

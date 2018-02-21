@@ -21,17 +21,18 @@ start = standard-document
 
 standard-document =
 element standard-document {
-  bibdata, docrelation*,
-  version?, sections+, annex*, references*
+  bibdata, version?, sections+, annex*, references*
 }
 
 bibdata =
   element bibdata { BibData }
 
 docrelation =
-  element docrelation {
-    attribute type { ( "obsoletes" | "updates" | "complements" ) },
-    eref
+  element relation {
+    attribute type { 
+      ( "parent" | "child" | "obsoletes" | "updates" | "complements" | "derivedFrom" |
+        "adoptedFrom" | "equivalent" | "identical" | "nonequivalent" ) },
+    uri?, bibitem_no_id
 }
 
 status =
@@ -521,15 +522,21 @@ locality =
     attribute type { ( "section" | "clause" | "part" | "paragraph" | 
                        "chapter" | "page" | "whole" | "table" | "annex" |
                         "figure" | "note" | "example" ) },
-    localityreference*
+    referenceFrom, referenceTo?
 }
 
-localityreference = element reference { text }
+referenceFrom = element referenceFrom { text }
+referenceTo = element referenceTo { text }
 
 # unlike UML, has id attribute; that results from including bibitem in a docmodel
 bibitem =
   element bibitem { 
      attribute id { xsd:ID },
+     BibliographicItem 
+}
+
+bibitem_no_id =
+  element bibitem { 
      BibliographicItem 
 }
 
@@ -542,14 +549,13 @@ BibItemType |=
 BibliographicItem =
     attribute type { BibItemType }?,
     (btitle+ | formattedref), source?, docidentifier*, bdate*, contributor*, 
-    edition?,
-    biblionote*, partof*, language*, script*, abstract?, status?, copyright?
+    edition?, biblionote*, partof*, language*, script*, abstract?, status?, copyright?,
+    docrelation*
 
 BibData =
     attribute type { BibItemType }?,
-    btitle+, formattedref?, source?, docidentifier*, bdate*, contributor*, 
-    edition?,
-    biblionote*, partof*, language*, script*, abstract?, status?, copyright
+    btitle+, formattedref?, source?, docidentifier*, bdate*, contributor*, edition?,
+    biblionote*, partof*, language*, script*, abstract?, status?, copyright, docrelation*
 
 btitle = element title { FormattedString }
 formattedref = element formattedref { FormattedString }

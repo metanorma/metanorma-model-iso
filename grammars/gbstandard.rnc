@@ -31,18 +31,14 @@ term =
 BibliographicItem =
     attribute type { BibItemType }?,
     (btitle+ | formattedref), source?, docidentifier*, bdate*, contributor*,
-    edition?,
-    biblionote*, partof*, language*, script*, abstract?, status?, copyright?,
-  editorialgroup?, gbcommittee?, gbequivalence?, gbtype?, gblibraryids?
+    edition?, biblionote*, partof*, language*, script*, abstract?, status?, copyright?,
+    docrelation*, editorialgroup?, gbcommittee?, gbequivalence?, gbtype?, gblibraryids?
 
 BibData =
     attribute type { BibItemType }?,
-    btitle+, formattedref?, source?, docidentifier*, bdate*, contributor*,
-    edition?,
+    btitle+, formattedref?, source?, docidentifier*, bdate*, contributor*, edition?,
     biblionote*, partof*, language*, script*, abstract?, status?, copyright,
-  editorialgroup?, gbcommittee, gbequivalence?, gbtype, gblibraryids?
-
-
+    docrelation*, editorialgroup?, gbcommittee, gbequivalence?, gbtype, gblibraryids?
 }
 
 # identical structure to iso-standard
