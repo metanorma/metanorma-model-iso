@@ -90,6 +90,13 @@ references =
     references*
 }
 
+symbols-abbrevs =
+  element symbols-abbrevs {
+    attribute id { xsd:ID }?,
+    attribute obligation { "normative" | "informative" }?,
+    dl
+}
+
 terms = 
   element terms { 
     attribute id { xsd:ID }?,
@@ -305,12 +312,4 @@ subfigure =
 
 termdocsource =
   element source { erefType }
-
-symbols-abbrevs =
-  element symbols-abbrevs {
-    attribute id { xsd:ID }?,
-    attribute obligation { "normative" | "informative" }?,
-    dl
-}
-
 
