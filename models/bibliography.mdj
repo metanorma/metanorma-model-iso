@@ -78,7 +78,7 @@
 							"isStatic": false,
 							"isLeaf": false,
 							"type": {
-								"$ref": "AAAAAAFhRckxZp9DyFQ="
+								"$ref": "AAAAAAFhRclLr6DS+MQ="
 							},
 							"multiplicity": "0..*",
 							"isReadOnly": false,
@@ -223,7 +223,7 @@
 							"isStatic": false,
 							"isLeaf": false,
 							"type": {
-								"$ref": "AAAAAAFhRckxZp9DyFQ="
+								"$ref": "AAAAAAFhRclLr6DS+MQ="
 							},
 							"multiplicity": "0..*",
 							"isReadOnly": false,
@@ -307,7 +307,7 @@
 							"isStatic": false,
 							"isLeaf": false,
 							"type": {
-								"$ref": "AAAAAAFhRckxZp9DyFQ="
+								"$ref": "AAAAAAFhRclLr6DS+MQ="
 							},
 							"multiplicity": "0..*",
 							"isReadOnly": false,
@@ -580,7 +580,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+title: LocalizedString[0..*]",
+											"text": "+title: FormattedString[0..*]",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -783,7 +783,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+notes: LocalizedString[0..*]",
+											"text": "+notes: FormattedString[0..*]",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -899,7 +899,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+abstract: LocalizedString[0..*]",
+											"text": "+abstract: FormattedString[0..*]",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
