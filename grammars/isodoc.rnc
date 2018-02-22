@@ -32,7 +32,8 @@ docrelation =
     attribute type { 
       ( "parent" | "child" | "obsoletes" | "updates" | "complements" | "derivedFrom" |
         "adoptedFrom" | "equivalent" | "identical" | "nonequivalent" ) },
-    uri?, bibitem_no_id
+       element bibitem { BibliographicItem },
+       locality*      
 }
 
 status =
