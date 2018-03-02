@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<grammar xmlns="http://relaxng.org/ns/structure/1.0">
+<grammar xmlns="http://relaxng.org/ns/structure/1.0" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
   <!--
     default namespace = "http://riboseinc.com/csd"
     Currently we inherit from a namespaced grammar, isostandard. Until we inherit from isodoc,
@@ -30,6 +30,38 @@
         <ref name="FormattedString"/>
       </element>
     </define>
+    <define name="figure">
+      <element name="figure">
+        <attribute name="id">
+          <data type="ID"/>
+        </attribute>
+        <optional>
+          <ref name="source"/>
+        </optional>
+        <optional>
+          <ref name="tname"/>
+        </optional>
+        <choice>
+          <oneOrMore>
+            <ref name="figure"/>
+          </oneOrMore>
+          <group>
+            <choice>
+              <zeroOrMore>
+                <ref name="TextElement"/>
+              </zeroOrMore>
+              <ref name="pre"/>
+            </choice>
+            <zeroOrMore>
+              <ref name="note"/>
+            </zeroOrMore>
+            <optional>
+              <ref name="dl"/>
+            </optional>
+          </group>
+        </choice>
+      </element>
+    </define>
   </include>
   <define name="BibItemType" combine="choice">
     <choice>
@@ -37,6 +69,11 @@
       <value>standard</value>
       <value>guide</value>
     </choice>
+  </define>
+  <define name="pre">
+    <element name="pre">
+      <text/>
+    </element>
   </define>
   <define name="csd-standard">
     <element name="csd-standard">

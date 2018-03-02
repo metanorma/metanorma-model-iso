@@ -15,10 +15,17 @@ btitle = element title { FormattedString }
 
 status = element status { FormattedString }
 
+figure =
+  element figure {
+    attribute id { xsd:ID },
+     source?, tname?, ( figure+ |  ( (TextElement* | pre), note*, dl? ) )
+  }
+
 }
 
 BibItemType |= "governance" | "standard" | "guide"
 
+pre = element pre { text }
 
 csd-standard =
   element csd-standard {
