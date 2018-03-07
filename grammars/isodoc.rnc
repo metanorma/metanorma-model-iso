@@ -556,18 +556,21 @@ BibItemType |=
 
 BibliographicItem =
     attribute type { BibItemType }?,
-    (btitle+ | formattedref), source?, docidentifier*, bdate*, contributor*, 
+    (btitle+ | formattedref), source*, docidentifier*, bdate*, contributor*, 
     edition?, biblionote*, partof*, language*, script*, abstract?, status?, copyright?,
     docrelation*
 
 BibData =
     attribute type { BibItemType }?,
-    btitle+, formattedref?, source?, docidentifier*, bdate*, contributor*, edition?,
+    btitle+, formattedref?, source*, docidentifier*, bdate*, contributor*, edition?,
     biblionote*, partof*, language*, script*, abstract?, status?, copyright, docrelation*
 
 btitle = element title { FormattedString }
 formattedref = element formattedref { FormattedString }
-source = element source { xsd:anyURI }
+source = element source { 
+  attribute type { text }?,
+  xsd:anyURI 
+}
 bdate = element date {
   attribute type { ( "published" | "accessed" | "created" | "activated" | "obsoleted" ) },
   ( xsd:gYear | xsd:date )

@@ -151,7 +151,7 @@ dd =
   element dd {
     #( paragraph-with-footnote | table | note | formula | admonition | ol | ul | dl | quote | sourcecode | review | example )*
     # exclude figures?
-    BasicBlock
+    BasicBlock*
   }
 
 admonition =
