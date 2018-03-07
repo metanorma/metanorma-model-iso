@@ -10550,7 +10550,7 @@
 											"containerExtending": false,
 											"left": 1549,
 											"top": 447,
-											"width": 105,
+											"width": 106.3486328125,
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
@@ -10576,7 +10576,7 @@
 											"containerExtending": false,
 											"left": -64,
 											"top": -32,
-											"width": 109,
+											"width": 120.6943359375,
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
@@ -10622,7 +10622,7 @@
 									"containerExtending": false,
 									"left": 1544,
 									"top": 440,
-									"width": 115,
+									"width": 116.3486328125,
 									"height": 25,
 									"autoResize": false,
 									"stereotypeLabel": {
@@ -10668,7 +10668,7 @@
 											"containerExtending": false,
 											"left": 1549,
 											"top": 470,
-											"width": 105,
+											"width": 106.3486328125,
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
@@ -10697,7 +10697,7 @@
 											"containerExtending": false,
 											"left": 1549,
 											"top": 485,
-											"width": 105,
+											"width": 106.3486328125,
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
@@ -10718,7 +10718,7 @@
 									"containerExtending": false,
 									"left": 1544,
 									"top": 465,
-									"width": 115,
+									"width": 116.3486328125,
 									"height": 38,
 									"autoResize": false
 								},
@@ -10742,7 +10742,7 @@
 									"containerExtending": false,
 									"left": 1544,
 									"top": 503,
-									"width": 115,
+									"width": 116.3486328125,
 									"height": 10,
 									"autoResize": false
 								},
@@ -10806,7 +10806,7 @@
 							"containerExtending": false,
 							"left": 1544,
 							"top": 440,
-							"width": 115,
+							"width": 116.3486328125,
 							"height": 73,
 							"autoResize": false,
 							"stereotypeDisplay": "label",
@@ -11256,6 +11256,29 @@
 							"headQualifiersCompartment": {
 								"$ref": "AAAAAAFiAnMXeAf52Fw="
 							}
+						},
+						{
+							"_type": "UMLNoteView",
+							"_id": "AAAAAAFiAsqKNGLJsm0=",
+							"_parent": {
+								"$ref": "AAAAAAFgm30kOSMWneU="
+							},
+							"visible": true,
+							"enabled": true,
+							"lineColor": "#000000",
+							"fillColor": "#ffffff",
+							"fontColor": "#000000",
+							"font": "Arial;13;0",
+							"showShadow": true,
+							"containerChangeable": false,
+							"containerExtending": false,
+							"left": 1544,
+							"top": 536,
+							"width": 120,
+							"height": 136,
+							"autoResize": false,
+							"text": "\"type\" takes content that is a union of xs:token and IANA link relations (RFC 8288)",
+							"wordWrap": true
 						}
 					]
 				},
@@ -18098,7 +18121,7 @@
 									"containerExtending": false,
 									"left": 128,
 									"top": 105,
-									"width": 209,
+									"width": 215.2958984375,
 									"height": 53,
 									"autoResize": false
 								},
@@ -18475,7 +18498,7 @@
 									"containerExtending": false,
 									"left": 128,
 									"top": 241,
-									"width": 214,
+									"width": 223.73828125,
 									"height": 53,
 									"autoResize": false
 								},
@@ -18751,7 +18774,7 @@
 									"containerExtending": false,
 									"left": 128,
 									"top": 344,
-									"width": 139,
+									"width": 145.84619140625,
 									"height": 38,
 									"autoResize": false,
 									"stereotypeLabel": {
