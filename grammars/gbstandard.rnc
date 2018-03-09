@@ -49,10 +49,9 @@ gb-standard =
 
 gblibraryids = 
   element gblibraryids {
-    gblibraryidics, gblibraryidl
+    gblibraryidl
   }
 
-gblibraryidics = element ics { text }
 gblibraryidl = element l { text }
     
 gbcommittee =

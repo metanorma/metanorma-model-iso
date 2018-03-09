@@ -219,13 +219,7 @@
   </define>
   <define name="gblibraryids">
     <element name="gblibraryids">
-      <ref name="gblibraryidics"/>
       <ref name="gblibraryidl"/>
-    </element>
-  </define>
-  <define name="gblibraryidics">
-    <element name="ics">
-      <text/>
     </element>
   </define>
   <define name="gblibraryidl">
