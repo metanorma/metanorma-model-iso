@@ -292,6 +292,7 @@ TextElement =
   text | em | eref | strong | stem | sub | sup | tt |
   strike | smallcap | xref | br | hyperlink | hr | pagebreak | bookmark
 
+source = element source { xsd:anyURI }
 
 em = element em { text }
 strong = element strong { text }
@@ -567,10 +568,12 @@ BibData =
 
 btitle = element title { FormattedString }
 formattedref = element formattedref { FormattedString }
-source = element source { 
+link = element link { TypedUri }
+
+TypedUri =
   attribute type { text }?,
   xsd:anyURI 
-}
+
 bdate = element date {
   attribute type { ( "published" | "accessed" | "created" | "activated" | "obsoleted" ) },
   ( xsd:gYear | xsd:date )
