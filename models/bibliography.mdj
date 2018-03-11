@@ -11616,6 +11616,7 @@
 							"type": {
 								"$ref": "AAAAAAFhRckxZp9DyFQ="
 							},
+							"multiplicity": "0..1",
 							"isReadOnly": false,
 							"isOrdered": false,
 							"isUnique": false,
@@ -20617,7 +20618,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+abbreviation: LocalizedString",
+											"text": "+abbreviation: LocalizedString[0..1]",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false

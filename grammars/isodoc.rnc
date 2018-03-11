@@ -477,7 +477,7 @@ affiliationdescription = element description { FormattedString }
 
 organization = 
   element organization {
-    orgname, abbreviation, uri?, org-identifier*, contact*
+    orgname, abbreviation?, uri?, org-identifier*, contact*
 }
 
 orgname =

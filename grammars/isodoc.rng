@@ -1173,7 +1173,9 @@
   <define name="organization">
     <element name="organization">
       <ref name="orgname"/>
-      <ref name="abbreviation"/>
+      <optional>
+        <ref name="abbreviation"/>
+      </optional>
       <optional>
         <ref name="uri"/>
       </optional>
