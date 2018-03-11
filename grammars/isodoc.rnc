@@ -579,8 +579,12 @@ TypedUri =
 
 bdate = element date {
   attribute type { ( "published" | "accessed" | "created" | "activated" | "obsoleted" ) },
-  ( xsd:gYear | xsd:date )
+  bfrom, bto?
 }
+
+bfrom = element from { ( xsd:gYear | xsd:date ) }
+
+bto = element to { ( xsd:gYear | xsd:date ) }
 
 docidentifier = element docidentifier { 
   attribute type { text }?,
