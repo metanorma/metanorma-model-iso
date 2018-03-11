@@ -477,11 +477,14 @@ affiliationdescription = element description { FormattedString }
 
 organization = 
   element organization {
-    orgname, uri?, org-identifier*, contact*
+    orgname, abbreviation, uri?, org-identifier*, contact*
 }
 
 orgname =
   element name { LocalizedString }
+
+abbreviation =
+  element abbreviation { LocalizedString }
 
 uri =
   element uri { xsd:anyURI }
