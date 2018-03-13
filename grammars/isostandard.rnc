@@ -26,7 +26,7 @@ docidentifier =
 
 organization = 
   element organization {
-    orgname, uri?, org-identifier*, contact*,
+    orgname, abbreviation?, uri?, org-identifier*, contact*,
     technical-committee?, subcommittee?, workgroup?, secretariat?  
 }
 
@@ -45,8 +45,7 @@ BibData =
     docrelation*, editorialgroup, ics?
 
 
-bdate = element date {
-  attribute type { ( "published" | "accessed" | "created" | "activated" | "obsoleted" ) },
+bfrom = element from {
   ( xsd:gYear | xsd:date | "--" )
 }
 
