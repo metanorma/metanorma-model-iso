@@ -1410,7 +1410,10 @@
 							"visibility": "public",
 							"isStatic": false,
 							"isLeaf": false,
-							"type": "Ics",
+							"type": {
+								"$ref": "AAAAAAFhyrZ+j2tfET0="
+							},
+							"multiplicity": "1..*",
 							"isReadOnly": false,
 							"isOrdered": false,
 							"isUnique": false,
@@ -7266,7 +7269,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+ics: Ics",
+											"text": "+ics: Ics[1..*]",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
