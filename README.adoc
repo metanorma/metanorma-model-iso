@@ -7,17 +7,21 @@ to validate the structural conformance of authored standards to specifications.
 
 The standards currently modelled via IsoDoc are:
 
-* ISO Standards
+* https://github.com/riboseinc/isodoc[ISO Standards]
 * https://github.com/riboseinc/csd[CSD Standards]
 * https://github.com/riboseinc/gbdoc[Chinese Standards (GB and family)]
 
 The base Standard Document model includes information common to all standards
 in scope of IsoDoc. Models for individual standards are derived from the base
 model as subclasses, permitting changes in cardinality of attributes, and
-changes in their type. 
+changes in their type.
 
 Below, we show the UML diagrams for the base model and for ISO. The CSD, GB
 diagrams are shown on their own respective pages.
+
+Bibliography UML models are located here:
+https://github.com/riboseinc/bib-models[BibModels]
+
 
 The document models are expressed as UML and as RelaxNG Compact (RNC) grammars;
 see discussion under
@@ -86,24 +90,5 @@ image::images/iso-standard-document/iso-blocks.png[]
 
 image::images/iso-standard-document/iso-standard-document.png[]
 
-
-
-== Bibliography UML Models
-
-=== Bibliographic Item
-
-image::images/bibliography/bibliographic-item.png[]
-
-=== Citation
-
-image::images/bibliography/citation.png[]
-
-=== Contributor
-
-image::images/bibliography/contributor.png[]
-
-=== Data Types
-
-image::images/bibliography/datatypes.png[]
 
 
