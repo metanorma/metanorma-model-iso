@@ -1,20 +1,29 @@
 = IsoDoc Models
 
 IsoDoc is a family of document models intended to represent ISO Standards and
-similarly structured standards. It is used to abstract the automated generation
+similarly structured standards, based on the StandardDocument ("StanDoc") and
+BasicDocument ("BasicDoc") models.
+
+It is used to abstract the automated generation
 of standard documents in various formats from well-defined authoring tools; and
 to validate the structural conformance of authored standards to specifications.
 
 The standards currently modelled via IsoDoc are:
 
-* ISO Standards
+* https://github.com/riboseinc/isodoc[ISO Standards]
 * https://github.com/riboseinc/csd[CSD Standards]
 * https://github.com/riboseinc/gbdoc[Chinese Standards (GB and family)]
 
 The base Standard Document model includes information common to all standards
 in scope of IsoDoc. Models for individual standards are derived from the base
 model as subclasses, permitting changes in cardinality of attributes, and
-changes in their type. 
+changes in their type.
+
+Models it depends on include:
+
+* Bibliography models: https://github.com/riboseinc/bib-models[BibModels]
+* BasicDoc models: https://github.com/riboseinc/basicdoc-models[BasicDoc]
+* StandDoc models: https://github.com/riboseinc/standoc-models[StanDoc]
 
 Below, we show the UML diagrams for the base model and for ISO. The CSD, GB
 diagrams are shown on their own respective pages.
@@ -40,70 +49,18 @@ document models, into HTML and Microsoft Word:
 * https://github.com/riboseinc/asciidoctor-csd (inheriting from isodoc)
 * https://github.com/riboseinc/asciidoctor-gb (inheriting from isodoc)
 
-== Standard Document UML Models
-
-=== BibData
-
-image::images/standard-document/bibdata.png[]
-
-=== Terms and References
-
-image::images/standard-document/terms.png[]
-
-=== Sections
-
-image::images/standard-document/sections.png[]
-
-=== Blocks
-
-image::images/standard-document/blocks.png[]
-
-=== Text
-
-image::images/standard-document/text.png[]
-
-=== Data Types
-
-image::images/standard-document/datatypes.png[]
-
-=== Standard Document
-
-image::images/standard-document/standard-document.png[]
-
-
 
 == ISO Standard Document UML Models
 
 === ISO Bibliographic Item
 
-image::images/iso-standard-document/iso-bibliographic-item.png[]
+image::images/iso-bib-item.png[]
 
 === ISO Blocks
 
-image::images/iso-standard-document/iso-blocks.png[]
+image::images/iso-blocks.png[]
 
 === ISO Standard Document
 
-image::images/iso-standard-document/iso-standard-document.png[]
-
-
-
-== Bibliography UML Models
-
-=== Bibliographic Item
-
-image::images/bibliography/bibliographic-item.png[]
-
-=== Citation
-
-image::images/bibliography/citation.png[]
-
-=== Contributor
-
-image::images/bibliography/contributor.png[]
-
-=== Data Types
-
-image::images/bibliography/datatypes.png[]
-
+image::images/isodoc.png[]
 
