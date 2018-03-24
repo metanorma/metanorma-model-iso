@@ -70,7 +70,7 @@ btitle =
 
 sections =
   element sections {
-    clause, terms, symbols-abbrevs?, clause+
+    clause, (term-clause | terms), symbols-abbrevs?, clause+
   }
 
 Content-Section =
@@ -79,6 +79,38 @@ Content-Section =
     section-title?,
     ( (BasicBlock+, note*) |
       content-subsection+ )
+
+Clause-Section =
+    attribute id { xsd:ID }?,
+    attribute inline-header { xsd:boolean }?,
+    attribute obligation { "normative" | "informative" }?,
+    section-title?,
+    (
+      ( BasicBlock+, note* ) |
+       clause-subsection+
+    )
+
+term-clause = 
+  element clause {
+    attribute id { xsd:ID }?,
+    attribute inline-header { xsd:boolean }?,
+    attribute obligation { "normative" | "informative" }?,
+    section-title?,
+    (
+       term-clause+ | (terms | symbols-abbrevs)*
+    )
+}
+
+references-clause =
+  element clause {
+    attribute id { xsd:ID }?,
+    attribute inline-header { xsd:boolean }?,
+    attribute obligation { "normative" | "informative" }?,
+    section-title?,
+    (
+       references-clause+ | references*
+    )
+}
 
 references =
   element references {
@@ -205,16 +237,6 @@ table-note = element note {
 }
 
 
-Clause-Section =
-    attribute id { xsd:ID }?,
-    attribute inline-header { xsd:boolean }?,
-    attribute obligation { "normative" | "informative" }?,
-    section-title?,
-    (
-      ( BasicBlock+, note* ) |
-       clause-subsection+
-    )
-
 }
 
 # end overrides
@@ -223,7 +245,7 @@ Clause-Section =
 # grammar simple, we keep the references together
 iso-standard = 
   element iso-standard {
-    bibdata, version?, foreword, introduction?, sections+, annex*, references+
+    bibdata, version?, foreword, introduction?, sections+, annex*, (references | reference-clause)+
   }
 
 BibItemType |=
