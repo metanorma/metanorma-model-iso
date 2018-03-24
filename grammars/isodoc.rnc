@@ -17,6 +17,8 @@
 
 grammar {
 
+include "biblio.rnc"
+
 start = standard-document
 
 standard-document =
@@ -39,20 +41,12 @@ docrelation =
 status =
   element status { FormattedString }
 
-language =
-  element language { text }
-## ISO-639
-
-script =
-  element script { text }
-## ISO-15924: Latn
-
 version =
   element version {
-    edition?, revision-date?, version*
+    vedition?, revision-date?, version*
 }
 
-edition = element edition { xsd:int }
+vedition = element edition { xsd:int }
 revision-date = element revision-date { xsd:date }
 version = element version { text }
 
@@ -410,214 +404,9 @@ dt =
 dd =
   element dd { paragraph-with-footnote* }
 
-LocalizedString =
-  # multiple languages and scripts possible: comma delimit them if so
-  attribute language { text }?,
-  attribute script { text }?,
-  text 
-
-# Unlike UML, change type to format: type is overloaded
-# Would be need if plain were default value and could omit the attribute
-# Added LocalizedStringOrXsAny
-FormattedString =
-  # attribute format { ( "plain" | "html" | "docbook" | "tei" | "asciidoc" | "markdown" ) }?,
-  attribute format { ( "text/plain" | "text/html" | "application/docbook+xml" | 
-    "application/tei+xml" | "text/x-asciidoc" | "text/markdown" | "application/x-isodoc+xml" | text ) }?,
-  LocalizedStringOrXsAny
-
-LocalizedStringOrXsAny =
-  # multiple languages and scripts possible: comma delimit them if so
-  attribute language { text }?,
-  attribute script { text }?,
-  ( text | AnyElement )+
-
-
-contributor = 
-  element contributor {
-    role*,
-    ContributorInfo
-}
-
-role =
-  element role {
-    attribute type { ( "author" | "edition" | "publisher" | text ) }?,
-    roledescription*
-}
-
-ContributorInfo =
-  ( person | organization )
-
-roledescription = 
-  element description { FormattedString }
-
-person = 
-  element person {
-    fullname?, affiliation*, person-identifier*, contact*, uri?
-}
-
-fullname =
-  element name {
-    prefix*, forename*, initial*, surname, addition*
-}
-
-prefix = element prefix { LocalizedString }
-initial = element initial { LocalizedString }
-addition = element addition { LocalizedString }
-surname = element surname { LocalizedString }
-forename = element forename { LocalizedString }
-
-affiliation =
-  element affiliation { 
-    affiliationname?, affiliationdescription*, organization
-}
-
-affiliationname = element name { LocalizedString }
-
-affiliationdescription = element description { FormattedString }
-
-organization = 
-  element organization {
-    orgname, abbreviation?, uri?, org-identifier*, contact*
-}
-
-orgname =
-  element name { LocalizedString }
-
-abbreviation =
-  element abbreviation { LocalizedString }
-
-uri =
-  element uri { xsd:anyURI }
-
-# TODO may change
-contact =
-  ( address | phone | email | uri )
-
-phone = element phone { text }
-email = element email { text }
-
-address =
-  element address {
-    # iso191606 TODO
-    street+, city, state?, country, postcode?
-}
-
-street = element street { text }
-city = element city { text }
-state = element state { text }
-country = element country { text }
-postcode = element postcode { text }
-
-person-identifier =
-  element identifier {
-    attribute type { ("isni" | "uri") },
-    text
-  }
-
-org-identifier =
-  element identifier {
-    attribute type { ("orcid" | "uri") },
-    text
-  }
-
-citation =
-  element citation { CitationType }
-
-CitationType = 
-    attribute bibitemid { xsd:IDREF },
-    locality*, date?
-
-date = element date { ( xsd:gYear | xsd:date )  }
-
-locality =
-  element locality {
-    attribute type { ( "section" | "clause" | "part" | "paragraph" | 
-                       "chapter" | "page" | "whole" | "table" | "annex" |
-                        "figure" | "note" | "example" ) },
-    referenceFrom, referenceTo?
-}
-
-referenceFrom = element referenceFrom { text }
-referenceTo = element referenceTo { text }
-
-# unlike UML, has id attribute; that results from including bibitem in a docmodel
-bibitem =
-  element bibitem { 
-     attribute id { xsd:ID },
-     BibliographicItem 
-}
-
-bibitem_no_id =
-  element bibitem { 
-     BibliographicItem 
-}
-
-BibItemType |=
-    (  "article" | "book" | "booklet" | "conference" | "manual" |
-                      "proceedings" | "presentation" | "thesis" | "techreport" |
-                      "standard" | "unpublished" )
- 
-
-BibliographicItem =
-    attribute type { BibItemType }?,
-    (btitle+ | formattedref), source*, docidentifier*, bdate*, contributor*, 
-    edition?, biblionote*, partof*, language*, script*, abstract?, status?, copyright?,
-    docrelation*
-
 BibData =
     attribute type { BibItemType }?,
     btitle+, formattedref?, source*, docidentifier*, bdate*, contributor*, edition?,
     biblionote*, partof*, language*, script*, abstract?, status?, copyright, docrelation*
-
-btitle = element title { FormattedString }
-formattedref = element formattedref { FormattedString }
-link = element link { TypedUri }
-
-TypedUri =
-  attribute type { text }?,
-  xsd:anyURI 
-
-bdate = element date {
-  attribute type { ( "published" | "accessed" | "created" | "activated" | "obsoleted" ) },
-  bfrom, bto?
-}
-
-bfrom = element from { ( xsd:gYear | xsd:date ) }
-
-bto = element to { ( xsd:gYear | xsd:date ) }
-
-docidentifier = element docidentifier { 
-  attribute type { text }?,
-  text 
-}
-
-biblionote = element note { FormattedString }
-abstract = element abstract { FormattedString }
-
-partof = element partof { BibliographicItem }
-
-copyright =
-  element copyright {
-    from, to?, owner
-}
-
-from = element from { xsd:gYear }
-to = element to { xsd:gYear }
-
-owner =
-  element owner { ContributorInfo }
-
-#Anycontents = mixed {
-# https://github.com/relaxng/jing-trang/issues/211
-# https://lists.oasis-open.org/archives/office/200808/msg00024.html
-# https://lists.oasis-open.org/archives/office/200808/msg00099.html
-# For this to work, we will actually strip any attributes in the Anycontents before
-# passing it for validation. Horrible I know, but there are no good alternatives
-# that also allow us to do grammar inheritance
-	# (attribute * { text } | Any)*
-#        Any*
-#}
-AnyElement = element * { ( text | AnyElement) }
-
 
 }
