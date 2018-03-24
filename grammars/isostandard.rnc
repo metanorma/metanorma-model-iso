@@ -90,28 +90,6 @@ Clause-Section =
        clause-subsection+
     )
 
-term-clause = 
-  element clause {
-    attribute id { xsd:ID }?,
-    attribute inline-header { xsd:boolean }?,
-    attribute obligation { "normative" | "informative" }?,
-    section-title?,
-    (
-       term-clause+ | (terms | symbols-abbrevs)*
-    )
-}
-
-references-clause =
-  element clause {
-    attribute id { xsd:ID }?,
-    attribute inline-header { xsd:boolean }?,
-    attribute obligation { "normative" | "informative" }?,
-    section-title?,
-    (
-       references-clause+ | references*
-    )
-}
-
 references =
   element references {
     attribute id { xsd:ID }?,
@@ -335,3 +313,26 @@ termdocsource =
   element source { erefType }
 
 ics = element ics { text }
+
+term-clause =
+  element clause {
+    attribute id { xsd:ID }?,
+    attribute inline-header { xsd:boolean }?,
+    attribute obligation { "normative" | "informative" }?,
+    section-title?,
+    (
+       term-clause+ | (terms | symbols-abbrevs)*
+    )
+}
+
+references-clause =
+  element clause {
+    attribute id { xsd:ID }?,
+    attribute inline-header { xsd:boolean }?,
+    attribute obligation { "normative" | "informative" }?,
+    section-title?,
+    (
+       references-clause+ | references*
+    )
+}
+

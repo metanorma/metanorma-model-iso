@@ -315,75 +315,6 @@
         </oneOrMore>
       </choice>
     </define>
-    <define name="term-clause">
-      <element name="clause">
-        <optional>
-          <attribute name="id">
-            <data type="ID"/>
-          </attribute>
-        </optional>
-        <optional>
-          <attribute name="inline-header">
-            <data type="boolean"/>
-          </attribute>
-        </optional>
-        <optional>
-          <attribute name="obligation">
-            <choice>
-              <value>normative</value>
-              <value>informative</value>
-            </choice>
-          </attribute>
-        </optional>
-        <optional>
-          <ref name="section-title"/>
-        </optional>
-        <choice>
-          <oneOrMore>
-            <ref name="term-clause"/>
-          </oneOrMore>
-          <zeroOrMore>
-            <choice>
-              <ref name="terms"/>
-              <ref name="symbols-abbrevs"/>
-            </choice>
-          </zeroOrMore>
-        </choice>
-      </element>
-    </define>
-    <define name="references-clause">
-      <element name="clause">
-        <optional>
-          <attribute name="id">
-            <data type="ID"/>
-          </attribute>
-        </optional>
-        <optional>
-          <attribute name="inline-header">
-            <data type="boolean"/>
-          </attribute>
-        </optional>
-        <optional>
-          <attribute name="obligation">
-            <choice>
-              <value>normative</value>
-              <value>informative</value>
-            </choice>
-          </attribute>
-        </optional>
-        <optional>
-          <ref name="section-title"/>
-        </optional>
-        <choice>
-          <oneOrMore>
-            <ref name="references-clause"/>
-          </oneOrMore>
-          <zeroOrMore>
-            <ref name="references"/>
-          </zeroOrMore>
-        </choice>
-      </element>
-    </define>
     <define name="references">
       <element name="references">
         <optional>
@@ -920,6 +851,75 @@
   <define name="ics">
     <element name="ics">
       <text/>
+    </element>
+  </define>
+  <define name="term-clause">
+    <element name="clause">
+      <optional>
+        <attribute name="id">
+          <data type="ID"/>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="inline-header">
+          <data type="boolean"/>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="obligation">
+          <choice>
+            <value>normative</value>
+            <value>informative</value>
+          </choice>
+        </attribute>
+      </optional>
+      <optional>
+        <ref name="section-title"/>
+      </optional>
+      <choice>
+        <oneOrMore>
+          <ref name="term-clause"/>
+        </oneOrMore>
+        <zeroOrMore>
+          <choice>
+            <ref name="terms"/>
+            <ref name="symbols-abbrevs"/>
+          </choice>
+        </zeroOrMore>
+      </choice>
+    </element>
+  </define>
+  <define name="references-clause">
+    <element name="clause">
+      <optional>
+        <attribute name="id">
+          <data type="ID"/>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="inline-header">
+          <data type="boolean"/>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="obligation">
+          <choice>
+            <value>normative</value>
+            <value>informative</value>
+          </choice>
+        </attribute>
+      </optional>
+      <optional>
+        <ref name="section-title"/>
+      </optional>
+      <choice>
+        <oneOrMore>
+          <ref name="references-clause"/>
+        </oneOrMore>
+        <zeroOrMore>
+          <ref name="references"/>
+        </zeroOrMore>
+      </choice>
     </element>
   </define>
 </grammar>
