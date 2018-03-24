@@ -52,11 +52,11 @@ version = element version { text }
 
 sections =
   element sections {
-    ( content | clause | terms | symbols-abbrevs )+
+    ( content | clause | terms | definitions )+
 }
 
-symbols-abbrevs =
-  element symbols-abbrevs {
+definitions =
+  element definitions {
     attribute id { xsd:ID }?,
     section-title?,
     dl
