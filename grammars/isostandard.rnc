@@ -111,7 +111,6 @@ terms =
     attribute id { xsd:ID }?,
     attribute obligation { "normative" | "informative" }?,
     section-title?,
-    termdocsource*,
     (term+ | ( terms*, definitions?) )
   }
 
@@ -223,7 +222,7 @@ table-note = element note {
 # grammar simple, we keep the references together
 iso-standard = 
   element iso-standard {
-    bibdata, version?, foreword, introduction?, sections+, annex*, (references | reference-clause)+
+    bibdata, version?, termdocsource*, foreword, introduction?, sections+, annex*, (references | reference-clause)+
   }
 
 BibItemType |=
@@ -310,7 +309,7 @@ subfigure =
  }
 
 termdocsource =
-  element source { erefType }
+  element termdocsource { erefType }
 
 ics = element ics { text }
 
