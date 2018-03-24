@@ -325,14 +325,14 @@ term-clause =
     )
 }
 
-references-clause =
+reference-clause =
   element clause {
     attribute id { xsd:ID }?,
     attribute inline-header { xsd:boolean }?,
     attribute obligation { "normative" | "informative" }?,
     section-title?,
     (
-       references-clause+ | references*
+       reference-clause+ | references*
     )
 }
 
