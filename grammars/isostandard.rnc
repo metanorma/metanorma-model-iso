@@ -10,14 +10,6 @@ language =
 script =
   element script { "Latn" }
 
-# draft into isodoc? To replace version/version?
-version =
-  element version {
-    edition?,
-    revision-date?,
-    draft?
-  }
-
 # add type to docidentifier in isodoc?
 docidentifier =
   element docidentifier {
@@ -238,8 +230,6 @@ editorialgroup = element editorialgroup {
 
 foreword = element foreword { Content-Section }
 introduction = element introduction { Content-Section }
-
-draft = element draft {text}
 
 stage = 
   element stage {

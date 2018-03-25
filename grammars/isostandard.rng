@@ -17,20 +17,6 @@
         <value>Latn</value>
       </element>
     </define>
-    <!-- draft into isodoc? To replace version/version? -->
-    <define name="version">
-      <element name="version">
-        <optional>
-          <ref name="edition"/>
-        </optional>
-        <optional>
-          <ref name="revision-date"/>
-        </optional>
-        <optional>
-          <ref name="draft"/>
-        </optional>
-      </element>
-    </define>
     <!-- add type to docidentifier in isodoc? -->
     <define name="docidentifier">
       <element name="docidentifier">
@@ -695,11 +681,6 @@
   <define name="introduction">
     <element name="introduction">
       <ref name="Content-Section"/>
-    </element>
-  </define>
-  <define name="draft">
-    <element name="draft">
-      <text/>
     </element>
   </define>
   <define name="stage">
