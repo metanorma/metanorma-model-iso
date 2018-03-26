@@ -21,11 +21,17 @@ figure =
      source?, tname?, ( figure+ |  ( (TextElement* | pre), note*, dl? ) )
   }
 
+TextElement |=
+  keyword
+
+
 }
 
 BibItemType |= "governance" | "standard" | "guide"
 
 pre = element pre { text }
+
+keyword = element keyword { text }
 
 csd-standard =
   element csd-standard {

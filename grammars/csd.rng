@@ -62,6 +62,9 @@
         </choice>
       </element>
     </define>
+    <define name="TextElement" combine="choice">
+      <ref name="keyword"/>
+    </define>
   </include>
   <define name="BibItemType" combine="choice">
     <choice>
@@ -72,6 +75,11 @@
   </define>
   <define name="pre">
     <element name="pre">
+      <text/>
+    </element>
+  </define>
+  <define name="keyword">
+    <element name="keyword">
       <text/>
     </element>
   </define>
