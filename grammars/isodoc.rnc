@@ -29,15 +29,6 @@ element standard-document {
 bibdata =
   element bibdata { BibData }
 
-docrelation =
-  element relation {
-    attribute type { 
-      ( "parent" | "child" | "obsoletes" | "updates" | "complements" | "derivedFrom" |
-        "adoptedFrom" | "equivalent" | "identical" | "nonequivalent" ) },
-       element bibitem { BibliographicItem },
-       locality*      
-}
-
 status =
   element status { FormattedString }
 

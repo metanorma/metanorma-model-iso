@@ -32,13 +32,13 @@ BibliographicItem =
     attribute type { BibItemType }?,
     (btitle+ | formattedref), source?, docidentifier*, bdate*, contributor*,
     edition?, biblionote*, partof*, language*, script*, abstract?, status?, copyright?,
-    docrelation*, editorialgroup?, gbcommittee?, gbtype?, gblibraryids?
+    docrelation*, editorialgroup?, gbcommittee*, gbtype?, gblibraryids?
 
 BibData =
     attribute type { BibItemType }?,
     btitle+, formattedref?, source?, docidentifier*, bdate*, contributor*, edition?,
     biblionote*, partof*, language*, script*, abstract?, status?, copyright,
-    docrelation*, editorialgroup?, gbcommittee, gbtype, gblibraryids?
+    docrelation*, editorialgroup?, gbcommittee+, gbtype, gblibraryids?
 }
 
 # identical structure to iso-standard
@@ -49,14 +49,16 @@ gb-standard =
 
 gblibraryids = 
   element gblibraryids {
-    gblibraryidl
+    gblibraryccs?,
+    gblibraryplan?
   }
 
-gblibraryidl = element l { text }
+gblibraryccs = element ccs { text }
+gblibraryplan = element plan { text }
     
 gbcommittee =
   element gbcommittee {
-    attribute type { ( "technical" | "provisional" ) },
+    attribute type { ( "technical" | "provisional" | "drafting" ) },
     text
 }
 
