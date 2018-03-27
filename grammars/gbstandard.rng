@@ -126,9 +126,9 @@
       <optional>
         <ref name="editorialgroup"/>
       </optional>
-      <optional>
+      <zeroOrMore>
         <ref name="gbcommittee"/>
-      </optional>
+      </zeroOrMore>
       <optional>
         <ref name="gbtype"/>
       </optional>
@@ -188,7 +188,9 @@
       <optional>
         <ref name="editorialgroup"/>
       </optional>
-      <ref name="gbcommittee"/>
+      <oneOrMore>
+        <ref name="gbcommittee"/>
+      </oneOrMore>
       <ref name="gbtype"/>
       <optional>
         <ref name="gblibraryids"/>
@@ -219,11 +221,21 @@
   </define>
   <define name="gblibraryids">
     <element name="gblibraryids">
-      <ref name="gblibraryidl"/>
+      <optional>
+        <ref name="gblibraryccs"/>
+      </optional>
+      <optional>
+        <ref name="gblibraryplan"/>
+      </optional>
     </element>
   </define>
-  <define name="gblibraryidl">
-    <element name="l">
+  <define name="gblibraryccs">
+    <element name="ccs">
+      <text/>
+    </element>
+  </define>
+  <define name="gblibraryplan">
+    <element name="plan">
       <text/>
     </element>
   </define>
@@ -233,6 +245,7 @@
         <choice>
           <value>technical</value>
           <value>provisional</value>
+          <value>drafting</value>
         </choice>
       </attribute>
       <text/>

@@ -127,7 +127,8 @@ annex =
     # allow hanging paragraps in annexes: they introduce lists
     #( paragraph-with-footnote | table | note | formula | admonition | ol | ul | dl | figure | quote | sourcecode | review | example )*,
     BasicBlock*, note*,
-    clause-hanging-paragraph-with-footnote*
+    clause-hanging-paragraph-with-footnote*,
+    annex-appendix*
   }
 
 figure = 
@@ -328,3 +329,5 @@ reference-clause =
     )
 }
 
+annex-appendix =
+  element appendix { Clause-Section }
