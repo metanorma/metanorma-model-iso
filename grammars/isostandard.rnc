@@ -284,7 +284,7 @@ title-part =
   element title-part { FormattedString }
 
 clause-hanging-paragraph-with-footnote =
-  element subsection {
+  element subclause {
     attribute id { xsd:ID }?,
     attribute  inline-header  {   xsd:boolean  } ? ,
     attribute obligation { "normative" | "informative" }?,
