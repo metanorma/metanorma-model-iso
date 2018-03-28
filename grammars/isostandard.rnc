@@ -221,11 +221,15 @@ table-note = element note {
 # grammar simple, we keep the references together
 iso-standard = 
   element iso-standard {
-    bibdata, version?, termdocsource*, foreword, introduction?, sections+, annex*, (references | reference-clause)+
+    bibdata, version?, termdocsource*, foreword, introduction?, sections+, annex*, bibliography
   }
 
-BibItemType |=
+bibliography =
+  element bibliography {
+    (references | reference-clause)+
+}
 
+BibItemType |=
      "international-standard" | "technical-specification" |
      "technical-report" | "publicly-available-specification" |
     "international-workshop-agreement" | "guide"
@@ -291,7 +295,7 @@ title-part =
   element title-part { FormattedString }
 
 clause-hanging-paragraph-with-footnote =
-  element subclause {
+  element clause {
     attribute id { xsd:ID }?,
     attribute  inline-header  {   xsd:boolean  } ? ,
     attribute obligation { "normative" | "informative" }?,

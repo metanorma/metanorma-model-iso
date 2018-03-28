@@ -673,6 +673,11 @@
       <zeroOrMore>
         <ref name="annex"/>
       </zeroOrMore>
+      <ref name="bibliography"/>
+    </element>
+  </define>
+  <define name="bibliography">
+    <element name="bibliography">
       <oneOrMore>
         <choice>
           <ref name="references"/>
@@ -816,7 +821,7 @@
     </element>
   </define>
   <define name="clause-hanging-paragraph-with-footnote">
-    <element name="subclause">
+    <element name="clause">
       <optional>
         <attribute name="id">
           <data type="ID"/>

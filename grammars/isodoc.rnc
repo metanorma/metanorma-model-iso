@@ -60,7 +60,7 @@ content =
   element content { Content-Section }
 
 content-subsection =
-  element subclause { Content-Section }
+  element clause { Content-Section }
 
 Basic-Section =
     attribute id { xsd:ID }?,
@@ -85,7 +85,7 @@ Clause-Section =
     )
 
 clause-subsection =
-  element subclause { Clause-Section }
+  element clause { Clause-Section }
 
 annex =
   element annex {
