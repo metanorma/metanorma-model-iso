@@ -65,6 +65,12 @@ sections =
     clause, (term-clause | terms), definitions?, clause+
   }
 
+Basic-Section =
+    attribute id { xsd:ID }?,
+    attribute obligation { "normative" | "informative" }?,
+    section-title?,
+    (BasicBlock+, note*) 
+
 Content-Section =
     attribute id { xsd:ID }?,
     attribute obligation { "normative" | "informative" }?,
@@ -229,7 +235,7 @@ editorialgroup = element editorialgroup {
   technical-committee, subcommittee?, workgroup?, secretariat?
 }
 
-foreword = element foreword { Content-Section }
+foreword = element foreword { Basic-Section }
 introduction = element introduction { Content-Section }
 
 stage = 

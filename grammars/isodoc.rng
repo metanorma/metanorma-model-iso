@@ -117,6 +117,22 @@
       <ref name="Content-Section"/>
     </element>
   </define>
+  <define name="Basic-Section">
+    <optional>
+      <attribute name="id">
+        <data type="ID"/>
+      </attribute>
+    </optional>
+    <optional>
+      <ref name="section-title"/>
+    </optional>
+    <oneOrMore>
+      <ref name="BasicBlock"/>
+    </oneOrMore>
+    <zeroOrMore>
+      <ref name="note"/>
+    </zeroOrMore>
+  </define>
   <define name="Content-Section">
     <optional>
       <attribute name="id">

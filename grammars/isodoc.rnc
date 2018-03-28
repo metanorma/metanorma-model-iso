@@ -62,6 +62,11 @@ content =
 content-subsection =
   element subclause { Content-Section }
 
+Basic-Section =
+    attribute id { xsd:ID }?,
+    section-title?,
+    BasicBlock+, note*
+
 Content-Section =
     attribute id { xsd:ID }?,
     section-title?,
