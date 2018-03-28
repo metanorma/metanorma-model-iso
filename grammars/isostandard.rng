@@ -663,10 +663,7 @@
       <zeroOrMore>
         <ref name="termdocsource"/>
       </zeroOrMore>
-      <ref name="foreword"/>
-      <optional>
-        <ref name="introduction"/>
-      </optional>
+      <ref name="preface"/>
       <oneOrMore>
         <ref name="sections"/>
       </oneOrMore>
@@ -674,6 +671,14 @@
         <ref name="annex"/>
       </zeroOrMore>
       <ref name="bibliography"/>
+    </element>
+  </define>
+  <define name="preface">
+    <element name="preface">
+      <ref name="foreword"/>
+      <optional>
+        <ref name="introduction"/>
+      </optional>
     </element>
   </define>
   <define name="bibliography">
