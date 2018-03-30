@@ -89,19 +89,14 @@
       <optional>
         <ref name="version"/>
       </optional>
-      <ref name="foreword"/>
-      <optional>
-        <ref name="introduction"/>
-      </optional>
+      <ref name="preface"/>
       <oneOrMore>
         <ref name="sections"/>
       </oneOrMore>
       <zeroOrMore>
         <ref name="annex"/>
       </zeroOrMore>
-      <oneOrMore>
-        <ref name="references"/>
-      </oneOrMore>
+      <ref name="bibliography"/>
     </element>
   </define>
 </grammar>
