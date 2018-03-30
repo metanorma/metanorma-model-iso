@@ -35,6 +35,6 @@ keyword = element keyword { text }
 
 csd-standard =
   element csd-standard {
-    bibdata, version?, preface, sections+, annex*, bibliography
+    bibdata, version?, termdocsource*, preface, sections+, annex*, bibliography
  }
 

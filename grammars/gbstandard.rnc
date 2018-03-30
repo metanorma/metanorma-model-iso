@@ -45,7 +45,7 @@ BibData =
 # identical structure to iso-standard
 gb-standard =
   element gb-standard {
-    bibdata, version?, preface, sections+, annex*, bibliography
+    bibdata, version?, termdocsource*, preface, sections+, annex*, bibliography
   }     
 
 gbccs = element ccs { text }

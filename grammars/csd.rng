@@ -89,6 +89,9 @@
       <optional>
         <ref name="version"/>
       </optional>
+      <zeroOrMore>
+        <ref name="termdocsource"/>
+      </zeroOrMore>
       <ref name="preface"/>
       <oneOrMore>
         <ref name="sections"/>
