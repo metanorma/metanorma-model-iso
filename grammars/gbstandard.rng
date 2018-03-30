@@ -225,8 +225,8 @@
       <text/>
     </element>
   </define>
-  <define name="gbplan">
-    <element name="plan">
+  <define name="gbplannumber">
+    <element name="plannumber">
       <text/>
     </element>
   </define>
