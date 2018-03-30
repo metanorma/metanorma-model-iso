@@ -185,7 +185,7 @@ review =
   element review {
   attribute id { xsd:ID },
   attribute reviewer { text },
-  attribute date { xsd:date }?,
+  attribute date { xsd:dateTime }?,
   attribute from { xsd:IDREF },
   attribute to { xsd:IDREF }?,
   paragraph+
