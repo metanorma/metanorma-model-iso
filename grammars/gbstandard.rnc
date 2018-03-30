@@ -32,13 +32,14 @@ BibliographicItem =
     attribute type { BibItemType }?,
     (btitle+ | formattedref), source?, docidentifier*, bdate*, contributor*,
     edition?, biblionote*, partof*, language*, script*, abstract?, status?, copyright?,
-    docrelation*, editorialgroup?, gbcommittee*, gbtype?, gblibraryids?
+    docrelation*, editorialgroup?, gbcommittee*, gbtype?, gbccs+, gbplannumber?
 
 BibData =
     attribute type { BibItemType }?,
     btitle+, formattedref?, source?, docidentifier*, bdate*, contributor*, edition?,
     biblionote*, partof*, language*, script*, abstract?, status?, copyright,
-    docrelation*, editorialgroup?, gbcommittee+, gbtype, gblibraryids?
+    docrelation*, editorialgroup?, gbcommittee+, gbtype, gbccs*, gbplannumber?
+
 }
 
 # identical structure to iso-standard
@@ -47,14 +48,9 @@ gb-standard =
     bibdata, version?, preface, sections+, annex*, bibliography
   }     
 
-gblibraryids = 
-  element gblibraryids {
-    gblibraryccs?,
-    gblibraryplan?
-  }
+gbccs = element ccs { text }
 
-gblibraryccs = element ccs { text }
-gblibraryplan = element plan { text }
+gbplan = element plan { text }
     
 gbcommittee =
   element gbcommittee {
@@ -64,12 +60,13 @@ gbcommittee =
 
 gbtype =
   element gbtype {
-    gbscope, gbprefix, gbmandate
+    gbscope, gbprefix, gbmandate, gbtopic
 }
 
 gbscope = element gbscope { ( "national" | "sector" | "professional" | "local" | "enterprise" ) }
 gbmandate = element gbmandate { ( "mandatory" | "recommended" | "guidelines" ) }
 gbprefix = element gbprefix { text }
+gbtopic = element gbtopic { "basic" | "health-and-safety" | "environment-protection" | "engineering-and-construction" | "product" | "method" | "management-techniques" | "other" }
 
 ZhEnLocalizedString =
   # multiple languages and scripts possible: comma delimit them if so

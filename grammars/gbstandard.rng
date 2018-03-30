@@ -132,8 +132,11 @@
       <optional>
         <ref name="gbtype"/>
       </optional>
+      <oneOrMore>
+        <ref name="gbccs"/>
+      </oneOrMore>
       <optional>
-        <ref name="gblibraryids"/>
+        <ref name="gbplannumber"/>
       </optional>
     </define>
     <define name="BibData">
@@ -192,8 +195,11 @@
         <ref name="gbcommittee"/>
       </oneOrMore>
       <ref name="gbtype"/>
+      <zeroOrMore>
+        <ref name="gbccs"/>
+      </zeroOrMore>
       <optional>
-        <ref name="gblibraryids"/>
+        <ref name="gbplannumber"/>
       </optional>
     </define>
   </include>
@@ -214,22 +220,12 @@
       <ref name="bibliography"/>
     </element>
   </define>
-  <define name="gblibraryids">
-    <element name="gblibraryids">
-      <optional>
-        <ref name="gblibraryccs"/>
-      </optional>
-      <optional>
-        <ref name="gblibraryplan"/>
-      </optional>
-    </element>
-  </define>
-  <define name="gblibraryccs">
+  <define name="gbccs">
     <element name="ccs">
       <text/>
     </element>
   </define>
-  <define name="gblibraryplan">
+  <define name="gbplan">
     <element name="plan">
       <text/>
     </element>
@@ -251,6 +247,7 @@
       <ref name="gbscope"/>
       <ref name="gbprefix"/>
       <ref name="gbmandate"/>
+      <ref name="gbtopic"/>
     </element>
   </define>
   <define name="gbscope">
@@ -276,6 +273,20 @@
   <define name="gbprefix">
     <element name="gbprefix">
       <text/>
+    </element>
+  </define>
+  <define name="gbtopic">
+    <element name="gbtopic">
+      <choice>
+        <value>basic</value>
+        <value>health-and-safety</value>
+        <value>environment-protection</value>
+        <value>engineering-and-construction</value>
+        <value>product</value>
+        <value>method</value>
+        <value>management-techniques</value>
+        <value>other</value>
+      </choice>
     </element>
   </define>
   <define name="ZhEnLocalizedString">
