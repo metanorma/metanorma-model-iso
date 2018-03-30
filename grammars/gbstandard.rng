@@ -127,6 +127,9 @@
         <ref name="editorialgroup"/>
       </optional>
       <zeroOrMore>
+        <ref name="ics"/>
+      </zeroOrMore>
+      <zeroOrMore>
         <ref name="gbcommittee"/>
       </zeroOrMore>
       <optional>
@@ -191,6 +194,9 @@
       <optional>
         <ref name="editorialgroup"/>
       </optional>
+      <zeroOrMore>
+        <ref name="ics"/>
+      </zeroOrMore>
       <oneOrMore>
         <ref name="gbcommittee"/>
       </oneOrMore>
