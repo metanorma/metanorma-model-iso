@@ -132,9 +132,9 @@
       <optional>
         <ref name="gbtype"/>
       </optional>
-      <oneOrMore>
+      <zeroOrMore>
         <ref name="gbccs"/>
-      </oneOrMore>
+      </zeroOrMore>
       <optional>
         <ref name="gbplannumber"/>
       </optional>
@@ -195,9 +195,9 @@
         <ref name="gbcommittee"/>
       </oneOrMore>
       <ref name="gbtype"/>
-      <zeroOrMore>
+      <oneOrMore>
         <ref name="gbccs"/>
-      </zeroOrMore>
+      </oneOrMore>
       <optional>
         <ref name="gbplannumber"/>
       </optional>
