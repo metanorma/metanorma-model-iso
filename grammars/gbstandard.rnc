@@ -50,7 +50,7 @@ gb-standard =
 
 gbccs = element ccs { text }
 
-gbplan = element plan { text }
+gbplannumber = element plannumber { text }
     
 gbcommittee =
   element gbcommittee {
