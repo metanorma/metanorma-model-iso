@@ -21,8 +21,10 @@ figure =
      source?, tname?, ( figure+ |  ( (TextElement* | pre), note*, dl? ) )
   }
 
-TextElement |=
-  keyword
+# TextElement |= keyword
+TextElement =
+  text | em | eref | strong | stem | sub | sup | tt |
+  strike | smallcap | xref | br | hyperlink | hr | pagebreak | bookmark | keyword
 
 
 }

@@ -62,8 +62,27 @@
         </choice>
       </element>
     </define>
-    <define name="TextElement" combine="choice">
-      <ref name="keyword"/>
+    <!-- TextElement |= keyword -->
+    <define name="TextElement">
+      <choice>
+        <text/>
+        <ref name="em"/>
+        <ref name="eref"/>
+        <ref name="strong"/>
+        <ref name="stem"/>
+        <ref name="sub"/>
+        <ref name="sup"/>
+        <ref name="tt"/>
+        <ref name="strike"/>
+        <ref name="smallcap"/>
+        <ref name="xref"/>
+        <ref name="br"/>
+        <ref name="hyperlink"/>
+        <ref name="hr"/>
+        <ref name="pagebreak"/>
+        <ref name="bookmark"/>
+        <ref name="keyword"/>
+      </choice>
     </define>
   </include>
   <define name="BibItemType" combine="choice">
