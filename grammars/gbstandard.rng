@@ -103,9 +103,6 @@
         <ref name="biblionote"/>
       </zeroOrMore>
       <zeroOrMore>
-        <ref name="partof"/>
-      </zeroOrMore>
-      <zeroOrMore>
         <ref name="language"/>
       </zeroOrMore>
       <zeroOrMore>
@@ -171,9 +168,6 @@
       </optional>
       <zeroOrMore>
         <ref name="biblionote"/>
-      </zeroOrMore>
-      <zeroOrMore>
-        <ref name="partof"/>
       </zeroOrMore>
       <zeroOrMore>
         <ref name="language"/>

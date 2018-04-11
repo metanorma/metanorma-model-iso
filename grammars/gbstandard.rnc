@@ -31,13 +31,13 @@ term =
 BibliographicItem =
     attribute type { BibItemType }?,
     (btitle+ | formattedref), source?, docidentifier*, bdate*, contributor*,
-    edition?, biblionote*, partof*, language*, script*, abstract?, status?, copyright?,
+    edition?, biblionote*, language*, script*, abstract?, status?, copyright?,
     docrelation*, editorialgroup?, ics*, gbcommittee*, gbtype?, gbccs*, gbplannumber?
 
 BibData =
     attribute type { BibItemType }?,
     btitle+, formattedref?, source?, docidentifier*, bdate*, contributor*, edition?,
-    biblionote*, partof*, language*, script*, abstract?, status?, copyright,
+    biblionote*, language*, script*, abstract?, status?, copyright,
     docrelation*, editorialgroup?, ics*, gbcommittee+, gbtype, gbccs+, gbplannumber?
 
 }
