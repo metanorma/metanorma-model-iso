@@ -87,9 +87,14 @@
   </include>
   <define name="BibItemType" combine="choice">
     <choice>
-      <value>governance</value>
-      <value>standard</value>
-      <value>guide</value>
+      <value>ARTF</value>
+      <value>PRES</value>
+      <value>PROP</value>
+      <value>RCMD</value>
+      <value>REPT</value>
+      <value>REVW</value>
+      <value>IETF DRAFT</value>
+      <value>IETF RFC</value>
     </choice>
   </define>
   <define name="pre">
