@@ -27,7 +27,13 @@
     </define>
     <define name="status">
       <element name="status">
-        <ref name="FormattedString"/>
+        <choice>
+          <value>working-draft</value>
+          <value>committee-draft</value>
+          <value>draft-standard</value>
+          <value>published</value>
+          <value>obsolete</value>
+        </choice>
       </element>
     </define>
     <define name="figure">
