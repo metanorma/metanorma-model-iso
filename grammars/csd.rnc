@@ -29,7 +29,7 @@ TextElement =
 
 }
 
-BibItemType |= "ARTF" | "PRES" | "PROP" | "RCMD" | "REPT" | "REVW" | "IETF DRAFT" | "IETF RFC"
+BibItemType |= "code" | "presentation" | "proposal" | "standard" | "report"
 
 pre = element pre { text }
 

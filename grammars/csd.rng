@@ -93,14 +93,11 @@
   </include>
   <define name="BibItemType" combine="choice">
     <choice>
-      <value>ARTF</value>
-      <value>PRES</value>
-      <value>PROP</value>
-      <value>RCMD</value>
-      <value>REPT</value>
-      <value>REVW</value>
-      <value>IETF DRAFT</value>
-      <value>IETF RFC</value>
+      <value>code</value>
+      <value>presentation</value>
+      <value>proposal</value>
+      <value>standard</value>
+      <value>report</value>
     </choice>
   </define>
   <define name="pre">
