@@ -13,7 +13,7 @@ docidentifier = element docidentifier { text }
 
 btitle = element title { FormattedString }
 
-status = element status { "working-draft" | "committee-draft" | "draft-standard" | "published" | "obsolete" }
+status = element status { "proposal" | "working-draft" | "committee-draft" | "draft-standard" | "final-draft" | "published" | "withdrawn" }
 
 figure =
   element figure {
