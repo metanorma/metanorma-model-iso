@@ -85,7 +85,7 @@
         <ref name="formattedref"/>
       </choice>
       <optional>
-        <ref name="source"/>
+        <ref name="bsource"/>
       </optional>
       <zeroOrMore>
         <ref name="docidentifier"/>
@@ -152,7 +152,7 @@
         <ref name="formattedref"/>
       </optional>
       <optional>
-        <ref name="source"/>
+        <ref name="bsource"/>
       </optional>
       <zeroOrMore>
         <ref name="docidentifier"/>
