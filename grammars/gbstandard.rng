@@ -253,6 +253,9 @@
       <ref name="gbtopic"/>
     </element>
   </define>
+  <define name="BibItemType" combine="choice">
+    <value>recommendation</value>
+  </define>
   <define name="gbscope">
     <element name="gbscope">
       <choice>

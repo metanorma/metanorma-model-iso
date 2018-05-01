@@ -63,6 +63,8 @@ gbtype =
     gbscope, gbprefix, gbmandate, gbtopic
 }
 
+BibItemType |= "recommendation"
+
 gbscope = element gbscope { ( "national" | "sector" | "professional" | "local" | "enterprise" ) }
 gbmandate = element gbmandate { ( "mandatory" | "recommended" | "guidelines" ) }
 gbprefix = element gbprefix { text }
