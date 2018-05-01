@@ -98,5 +98,5 @@ ZhEnLocalizedString =
   # multiple languages and scripts possible: comma delimit them if so
   attribute language { ( "zh" | "en" ) },
   attribute script { ( "Hans" | "Latn" ) }?,
-  text
+  TextElement+
 

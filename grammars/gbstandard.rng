@@ -394,6 +394,8 @@
         </choice>
       </attribute>
     </optional>
-    <text/>
+    <oneOrMore>
+      <ref name="TextElement"/>
+    </oneOrMore>
   </define>
 </grammar>
