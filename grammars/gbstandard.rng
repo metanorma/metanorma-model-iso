@@ -202,6 +202,89 @@
         <ref name="gbplannumber"/>
       </optional>
     </define>
+    <define name="term-clause">
+      <element name="clause">
+        <optional>
+          <attribute name="id">
+            <data type="ID"/>
+          </attribute>
+        </optional>
+        <optional>
+          <attribute name="inline-header">
+            <data type="boolean"/>
+          </attribute>
+        </optional>
+        <optional>
+          <attribute name="obligation">
+            <choice>
+              <value>normative</value>
+              <value>informative</value>
+            </choice>
+          </attribute>
+        </optional>
+        <optional>
+          <ref name="section-title"/>
+        </optional>
+        <zeroOrMore>
+          <!-- boilerplate not stripped -->
+          <choice>
+            <ref name="paragraph"/>
+            <ref name="ul"/>
+          </choice>
+        </zeroOrMore>
+        <choice>
+          <oneOrMore>
+            <ref name="term-clause"/>
+          </oneOrMore>
+          <zeroOrMore>
+            <choice>
+              <ref name="terms"/>
+              <ref name="definitions"/>
+            </choice>
+          </zeroOrMore>
+        </choice>
+      </element>
+    </define>
+    <define name="terms">
+      <element name="terms">
+        <optional>
+          <attribute name="id">
+            <data type="ID"/>
+          </attribute>
+        </optional>
+        <optional>
+          <attribute name="obligation">
+            <choice>
+              <value>normative</value>
+              <value>informative</value>
+            </choice>
+          </attribute>
+        </optional>
+        <optional>
+          <ref name="section-title"/>
+        </optional>
+        <zeroOrMore>
+          <!-- boilerplate not stripped -->
+          <choice>
+            <ref name="paragraph"/>
+            <ref name="ul"/>
+          </choice>
+        </zeroOrMore>
+        <choice>
+          <oneOrMore>
+            <ref name="term"/>
+          </oneOrMore>
+          <group>
+            <zeroOrMore>
+              <ref name="terms"/>
+            </zeroOrMore>
+            <optional>
+              <ref name="definitions"/>
+            </optional>
+          </group>
+        </choice>
+      </element>
+    </define>
   </include>
   <!-- identical structure to iso-standard -->
   <define name="gb-standard">

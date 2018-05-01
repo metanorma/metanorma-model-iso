@@ -40,6 +40,30 @@ BibData =
     biblionote*, language*, script*, abstract?, status?, copyright,
     docrelation*, editorialgroup?, ics*, gbcommittee+, gbtype, gbccs+, gbplannumber?
 
+
+term-clause =
+  element clause {
+    attribute id { xsd:ID }?,
+    attribute inline-header { xsd:boolean }?,
+    attribute obligation { "normative" | "informative" }?,
+    section-title?,
+    # boilerplate not stripped
+    ( paragraph | ul )*,
+    (  
+       term-clause+ | (terms | definitions)*
+    )
+}
+
+terms =
+  element terms {
+    attribute id { xsd:ID }?,
+    attribute obligation { "normative" | "informative" }?,
+    section-title?,
+    # boilerplate not stripped
+    ( paragraph | ul )*,
+    (term+ | ( terms*, definitions?) )
+  }
+
 }
 
 # identical structure to iso-standard
