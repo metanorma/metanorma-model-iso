@@ -318,7 +318,7 @@ subfigure =
  }
 
 termdocsource =
-  element termdocsource { erefType }
+  element termdocsource { CitationType }
 
 ics = element ics { text }
 
