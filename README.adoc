@@ -54,13 +54,13 @@ document models, into HTML and Microsoft Word:
 
 === ISO Bibliographic Item
 
-image::images/iso-bib-item.png[]
+image::images/png/IsoDoc__IsoBibItem_1.png[]
 
 === ISO Blocks
 
-image::images/iso-blocks.png[]
+image::images/png/IsoDoc__IsoBlocks_2.png[]
 
 === ISO Standard Document
 
-image::images/isodoc.png[]
+image::images/png/IsoDoc__IsoDoc_0.png[]
 
