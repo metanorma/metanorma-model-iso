@@ -1,29 +1,29 @@
-= IsoDoc Models
+= Metaforma IsoDoc Models
 
-IsoDoc is a family of document models intended to represent ISO Standards and
-similarly structured standards, based on the StandardDocument ("StanDoc") and
+Metaforma IsoDoc is a family of document models intended to represent ISO Standards and
+similarly structured standards, based on the Metaforma StandardDocument ("StanDoc") and
 BasicDocument ("BasicDoc") models.
 
 It is used to abstract the automated generation
 of standard documents in various formats from well-defined authoring tools; and
 to validate the structural conformance of authored standards to specifications.
 
-The standards currently modelled via IsoDoc are:
+The standards currently modelled via Metaforma IsoDoc are:
 
 * https://github.com/riboseinc/isodoc[ISO Standards]
 * https://github.com/riboseinc/csd[CSD Standards]
 * https://github.com/riboseinc/gbdoc[Chinese Standards (GB and family)]
 
-The base Standard Document model includes information common to all standards
+The base Metaforma StandardDocument model includes information common to all standards
 in scope of IsoDoc. Models for individual standards are derived from the base
 model as subclasses, permitting changes in cardinality of attributes, and
 changes in their type.
 
 Models it depends on include:
 
-* Bibliography models: https://github.com/riboseinc/bib-models[BibModels]
+* Relaton Bibliography models: https://github.com/riboseinc/bib-models[BibModels]
 * BasicDoc models: https://github.com/riboseinc/basicdoc-models[BasicDoc]
-* StandDoc models: https://github.com/riboseinc/standoc-models[StanDoc]
+* Metaforma StandDoc models: https://github.com/riboseinc/standoc-models[StanDoc]
 
 Below, we show the UML diagrams for the base model and for ISO. The CSD, GB
 diagrams are shown on their own respective pages.
