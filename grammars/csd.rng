@@ -92,16 +92,16 @@
         <ref name="keyword"/>
       </choice>
     </define>
+    <define name="BibItemType">
+      <choice>
+        <value>code</value>
+        <value>presentation</value>
+        <value>proposal</value>
+        <value>standard</value>
+        <value>report</value>
+      </choice>
+    </define>
   </include>
-  <define name="BibItemType" combine="choice">
-    <choice>
-      <value>code</value>
-      <value>presentation</value>
-      <value>proposal</value>
-      <value>standard</value>
-      <value>report</value>
-    </choice>
-  </define>
   <define name="pre">
     <element name="pre">
       <text/>

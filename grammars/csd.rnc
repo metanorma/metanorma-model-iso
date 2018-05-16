@@ -26,14 +26,10 @@ TextElement =
   text | em | eref | strong | stem | sub | sup | tt |
   strike | smallcap | xref | br | hyperlink | hr | pagebreak | bookmark | keyword
 
-BibItemType |=
-     "standard" | "technical-specification" |
-     "technical-report" | "publicly-available-specification" |
-    "workshop-agreement" | "guide"
+BibItemType =
+        "code" | "presentation" | "proposal" | "standard" | "report"
 
 }
-
-BibItemType |= "code" | "presentation" | "proposal" | "standard" | "report"
 
 pre = element pre { text }
 
