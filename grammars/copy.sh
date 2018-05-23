@@ -9,3 +9,7 @@ cp biblio.rng ../../asciidoctor-csd/lib/asciidoctor/csd
 cp isodoc.rng ../../asciidoctor-csd/lib/asciidoctor/csd
 cat isostandard.rng | ruby -pe '$_.gsub!(/<grammar ns=\S+/, "<grammar") ' >  ../../asciidoctor-csd/lib/asciidoctor/csd/isostandard.rng
 cp csd.rng ../../asciidoctor-csd/lib/asciidoctor/csd
+cp biblio.rng ../../asciidoctor-csand/lib/asciidoctor/csand
+cp isodoc.rng ../../asciidoctor-csand/lib/asciidoctor/csand
+cat isostandard.rng | ruby -pe '$_.gsub!(/<grammar ns=\S+/, "<grammar") ' >  ../../asciidoctor-csand/lib/asciidoctor/csand/isostandard.rng
+cp csand.rng ../../asciidoctor-csand/lib/asciidoctor/csand
