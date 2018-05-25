@@ -37,7 +37,7 @@ BibData =
     docrelation*, editorialgroup, ics*
 
 
-bfrom = element from {
+date_on = element from {
   ( xsd:gYear | xsd:date | "--" )
 }
 
