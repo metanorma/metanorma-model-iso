@@ -1,0 +1,53 @@
+# Currently we inherit from a namespaced grammar, isostandard. Until we inherit from isodoc,
+# we cannot have a new default namespace: we will end up with a grammar with two different
+# namespaces, one for isostandard and one for csand additions. And we do not want that.
+
+include "isostandard.rnc" {
+
+start = m3d-standard
+
+language = element language { ( "en" ) }
+
+docidentifier = element docidentifier { text }
+
+btitle = element title { FormattedString }
+
+figure =
+  element figure {
+    attribute id { xsd:ID },
+     source?, tname?, ( figure+ |  ( (TextElement* | pre), note*, dl? ) )
+  }
+
+status = element status { "proposal" | "working-draft" | "committee-draft" | "draft-standard" | "final-draft" | "published" | "withdrawn" | LocalizedString }
+
+
+# TextElement |= keyword
+TextElement =
+  text | em | eref | strong | stem | sub | sup | tt |
+  strike | smallcap | xref | br | hyperlink | hr | pagebreak | bookmark | keyword
+
+BibItemType |=
+"guidance" | "proposal" | "standard" | "report" | "whitepaper" | "charter" | "policy" | 
+        "glossary" | "case-study"
+
+editorialgroup = element editorialgroup {
+  committee
+}
+
+
+}
+
+committee = element committee { 
+    attribute type { ( "technical" | "provisional" ) },
+    text
+}
+
+pre = element pre { text }
+
+keyword = element keyword { text }
+
+m3d-standard =
+  element m3d-standard {
+    bibdata, version?, termdocsource*, preface, sections+, annex*, bibliography
+ }
+
