@@ -347,6 +347,7 @@
         <value>professional</value>
         <value>local</value>
         <value>enterprise</value>
+        <value>social</value>
       </choice>
     </element>
   </define>

@@ -18,6 +18,9 @@ figure =
      source?, tname?, ( figure+ |  ( (TextElement* | pre), note*, dl? ) )
   }
 
+status = element status { "proposal" | "working-draft" | "committee-draft" | "draft-standard" | "final-draft" | "published" | "withdrawn" | LocalizedString }
+
+
 # TextElement |= keyword
 TextElement =
   text | em | eref | strong | stem | sub | sup | tt |

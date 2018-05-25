@@ -56,6 +56,20 @@
         </choice>
       </element>
     </define>
+    <define name="status">
+      <element name="status">
+        <choice>
+          <value>proposal</value>
+          <value>working-draft</value>
+          <value>committee-draft</value>
+          <value>draft-standard</value>
+          <value>final-draft</value>
+          <value>published</value>
+          <value>withdrawn</value>
+          <ref name="LocalizedString"/>
+        </choice>
+      </element>
+    </define>
     <!-- TextElement |= keyword -->
     <define name="TextElement">
       <choice>

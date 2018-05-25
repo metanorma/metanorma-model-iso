@@ -89,7 +89,7 @@ gbtype =
 
 BibItemType |= "recommendation"
 
-gbscope = element gbscope { ( "national" | "sector" | "professional" | "local" | "enterprise" ) }
+gbscope = element gbscope { ( "national" | "sector" | "professional" | "local" | "enterprise" | "social" ) }
 gbmandate = element gbmandate { ( "mandatory" | "recommended" | "guidelines" ) }
 gbprefix = element gbprefix { text }
 gbtopic = element gbtopic { "basic" | "health-and-safety" | "environment-protection" | "engineering-and-construction" | "product" | "method" | "management-techniques" | "other" }
