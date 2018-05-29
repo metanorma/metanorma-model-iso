@@ -729,7 +729,7 @@
   </define>
   <define name="source">
     <element name="source">
-      <data type="anyURI"/>
+      <ref name="TypedUri"/>
     </element>
   </define>
   <define name="em">

@@ -282,7 +282,7 @@ TextElement =
   text | em | eref | strong | stem | sub | sup | tt |
   strike | smallcap | xref | br | hyperlink | hr | pagebreak | bookmark
 
-source = element source { xsd:anyURI }
+source = element source { TypedUri }
 
 em = element em { text }
 strong = element strong { text }
