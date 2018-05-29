@@ -16,4 +16,4 @@ cp csand.rng ../../asciidoctor-m3d/lib/asciidoctor/csand
 cp biblio.rng ../../asciidoctor-m3d/lib/asciidoctor/m3d
 cp isodoc.rng ../../asciidoctor-m3d/lib/asciidoctor/m3d
 cat isostandard.rng | ruby -pe '$_.gsub!(/<grammar ns=\S+/, "<grammar") ' >  ../../asciidoctor-m3d/lib/asciidoctor/m3d/isostandard.rng
-cp csand.rng ../../asciidoctor-m3d/lib/asciidoctor/m3d
+cp m3d.rng ../../asciidoctor-m3d/lib/asciidoctor/m3d
