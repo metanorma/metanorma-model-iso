@@ -191,9 +191,9 @@
       <zeroOrMore>
         <ref name="ics"/>
       </zeroOrMore>
-      <oneOrMore>
+      <zeroOrMore>
         <ref name="gbcommittee"/>
-      </oneOrMore>
+      </zeroOrMore>
       <ref name="gbtype"/>
       <oneOrMore>
         <ref name="gbccs"/>
