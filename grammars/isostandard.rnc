@@ -328,7 +328,10 @@ subfigure =
 termdocsource =
   element termdocsource { CitationType }
 
-ics = element ics { text }
+ics = element ics { 
+  element code { text }, 
+  element text { text } 
+}
 
 term-clause =
   element clause {
