@@ -308,7 +308,14 @@
   </define>
   <define name="gbccs">
     <element name="ccs">
-      <text/>
+      <element name="code">
+        <text/>
+      </element>
+      <optional>
+        <element name="text">
+          <text/>
+        </element>
+      </optional>
     </element>
   </define>
   <define name="gbplannumber">

@@ -72,7 +72,10 @@ gb-standard =
     bibdata, version?, termdocsource*, preface, sections+, annex*, bibliography
   }     
 
-gbccs = element ccs { text }
+gbccs = element ccs { 
+  element code {text},
+  element text {text}?
+}
 
 gbplannumber = element plannumber { text }
     
