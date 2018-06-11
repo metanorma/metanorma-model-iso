@@ -36,8 +36,6 @@ BibData =
     biblionote*, language*, script*, abstract*, status?, copyright,
     docrelation*, editorialgroup, ics*, allParts?
 
-allParts = element allParts { xsd:boolean }
-
 bdate = element date {
   attribute type { ( "published" | "accessed" | "created" | "implemented" | "obsoleted" | "confirmed" | "updated" | "issued" ) },
   # ( ( bfrom, bto? ) | date_on )
@@ -308,6 +306,8 @@ title-main =
 
 title-part =
   element title-part { FormattedString }
+
+allParts = element allParts { xsd:boolean }
 
 clause-hanging-paragraph-with-footnote =
   element clause {

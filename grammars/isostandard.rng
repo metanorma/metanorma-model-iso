@@ -172,11 +172,6 @@
         <ref name="allParts"/>
       </optional>
     </define>
-    <define name="allParts">
-      <element name="allParts">
-        <data type="boolean"/>
-      </element>
-    </define>
     <define name="bdate">
       <element name="date">
         <attribute name="type">
@@ -861,6 +856,11 @@
   <define name="title-part">
     <element name="title-part">
       <ref name="FormattedString"/>
+    </element>
+  </define>
+  <define name="allParts">
+    <element name="allParts">
+      <data type="boolean"/>
     </element>
   </define>
   <define name="clause-hanging-paragraph-with-footnote">
