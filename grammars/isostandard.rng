@@ -114,6 +114,9 @@
       <zeroOrMore>
         <ref name="ics"/>
       </zeroOrMore>
+      <optional>
+        <ref name="allParts"/>
+      </optional>
     </define>
     <define name="BibData">
       <optional>
@@ -165,6 +168,14 @@
       <zeroOrMore>
         <ref name="ics"/>
       </zeroOrMore>
+      <optional>
+        <ref name="allParts"/>
+      </optional>
+    </define>
+    <define name="allParts">
+      <element name="allParts">
+        <data type="boolean"/>
+      </element>
     </define>
     <define name="bdate">
       <element name="date">
