@@ -27,8 +27,8 @@ TextElement =
   strike | smallcap | xref | br | hyperlink | hr | pagebreak | bookmark | keyword
 
 BibItemType |=
-"guidance" | "proposal" | "standard" | "report" | "whitepaper" | "charter" | "policy" | 
-        "glossary" | "case-study"
+"policy" | "best-practices" | "supporting-document" | "report" | "legal" | "directives" | "proposal" | 
+        "standard" 
 
 editorialgroup = element editorialgroup {
   committee

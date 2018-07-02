@@ -94,15 +94,14 @@
     </define>
     <define name="BibItemType" combine="choice">
       <choice>
-        <value>guidance</value>
+        <value>policy</value>
+        <value>best-practices</value>
+        <value>supporting-document</value>
+        <value>report</value>
+        <value>legal</value>
+        <value>directives</value>
         <value>proposal</value>
         <value>standard</value>
-        <value>report</value>
-        <value>whitepaper</value>
-        <value>charter</value>
-        <value>policy</value>
-        <value>glossary</value>
-        <value>case-study</value>
       </choice>
     </define>
     <define name="editorialgroup">
