@@ -27,7 +27,7 @@ TextElement =
   strike | smallcap | xref | br | hyperlink | hr | pagebreak | bookmark | keyword
 
 BibItemType |=
-"policy" | "best-practices" | "supporting-document" | "report" | "legal" | "directives" | "proposal" | 
+"policy-and-procedures" | "best-practices" | "supporting-document" | "report" | "legal" | "directives" | "proposal" | 
         "standard" 
 
 editorialgroup = element editorialgroup {

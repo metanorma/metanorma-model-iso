@@ -94,7 +94,7 @@
     </define>
     <define name="BibItemType" combine="choice">
       <choice>
-        <value>policy</value>
+        <value>policy-and-procedures</value>
         <value>best-practices</value>
         <value>supporting-document</value>
         <value>report</value>
