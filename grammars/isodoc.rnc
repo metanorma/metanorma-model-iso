@@ -402,7 +402,7 @@ dd =
 
 BibData =
     attribute type { BibItemType }?,
-    btitle+, formattedref?, source*, docidentifier*, bdate*, contributor*, edition?,
+    btitle+, formattedref?, bsource*, docidentifier*, bdate*, contributor*, edition?,
     biblionote*, language*, script*, abstract?, status?, copyright, docrelation*
 
 }
