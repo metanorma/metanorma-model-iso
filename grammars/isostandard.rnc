@@ -272,7 +272,7 @@ documentnumber =
   element project-number { 
     attribute part { xsd:int }?,
     attribute subpart { xsd:int }?,
-    xsd:int 
+    text
    }
 
 tc-documentnumber = 
