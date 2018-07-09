@@ -34,6 +34,13 @@ editorialgroup = element editorialgroup {
   committee
 }
 
+BibData =
+    attribute type { BibItemType }?,
+    btitle+, formattedref?, bsource*, docidentifier*, bdate*, contributor*,
+    edition?,
+    biblionote*, language*, script*, abstract*, status?, copyright,
+    docrelation*, editorialgroup, ics*, security?
+
 
 }
 
@@ -45,6 +52,8 @@ committee = element committee {
 pre = element pre { text }
 
 keyword = element keyword { text }
+
+security = element security { text }
 
 rsd-standard =
   element rsd-standard {

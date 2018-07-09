@@ -109,6 +109,60 @@
         <ref name="committee"/>
       </element>
     </define>
+    <define name="BibData">
+      <optional>
+        <attribute name="type">
+          <ref name="BibItemType"/>
+        </attribute>
+      </optional>
+      <oneOrMore>
+        <ref name="btitle"/>
+      </oneOrMore>
+      <optional>
+        <ref name="formattedref"/>
+      </optional>
+      <zeroOrMore>
+        <ref name="bsource"/>
+      </zeroOrMore>
+      <zeroOrMore>
+        <ref name="docidentifier"/>
+      </zeroOrMore>
+      <zeroOrMore>
+        <ref name="bdate"/>
+      </zeroOrMore>
+      <zeroOrMore>
+        <ref name="contributor"/>
+      </zeroOrMore>
+      <optional>
+        <ref name="edition"/>
+      </optional>
+      <zeroOrMore>
+        <ref name="biblionote"/>
+      </zeroOrMore>
+      <zeroOrMore>
+        <ref name="language"/>
+      </zeroOrMore>
+      <zeroOrMore>
+        <ref name="script"/>
+      </zeroOrMore>
+      <zeroOrMore>
+        <ref name="abstract"/>
+      </zeroOrMore>
+      <optional>
+        <ref name="status"/>
+      </optional>
+      <ref name="copyright"/>
+      <zeroOrMore>
+        <ref name="docrelation"/>
+      </zeroOrMore>
+      <ref name="editorialgroup"/>
+      <zeroOrMore>
+        <ref name="ics"/>
+      </zeroOrMore>
+      <optional>
+        <ref name="security"/>
+      </optional>
+    </define>
   </include>
   <define name="committee">
     <element name="committee">
@@ -128,6 +182,11 @@
   </define>
   <define name="keyword">
     <element name="keyword">
+      <text/>
+    </element>
+  </define>
+  <define name="security">
+    <element name="security">
       <text/>
     </element>
   </define>
