@@ -355,8 +355,8 @@ image =
     attribute id { xsd:ID },
     attribute src { xsd:anyURI }?,
     attribute imagetype { ("SVG" | "JPEG" | "GIF" | "PNG" | "PDF" ) },
-    attribute width {xsd:int}?,
-    attribute height {xsd:int}? 
+    attribute width { xsd:int | "auto" }?,
+    attribute height { xsd:int | "auto" }? 
 }
 
 stem =
