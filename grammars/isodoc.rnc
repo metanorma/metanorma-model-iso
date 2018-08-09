@@ -54,7 +54,7 @@ definitions =
 }
 
 section-title =
-  element title { text }
+  element title { TextElement* }
 
 content =
   element content { Content-Section }
@@ -177,7 +177,7 @@ paragraph-with-footnote =
 note =
   element note {
     attribute id { xsd:ID },
-    paragraph-with-footnote+
+    paragraph+
   }
 
 
@@ -275,7 +275,7 @@ admonition =
 figure =
   element figure {
     attribute id { xsd:ID },
-     source?, tname?, ( figure+ |  ( TextElement*, note*, dl? ) )
+     source?, tname?, (image | figure*), fn*, dl?, note*
   }
 
 TextElement =

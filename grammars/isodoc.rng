@@ -104,7 +104,9 @@
   </define>
   <define name="section-title">
     <element name="title">
-      <text/>
+      <zeroOrMore>
+        <ref name="TextElement"/>
+      </zeroOrMore>
     </element>
   </define>
   <define name="content">
@@ -423,7 +425,7 @@
         <data type="ID"/>
       </attribute>
       <oneOrMore>
-        <ref name="paragraph-with-footnote"/>
+        <ref name="paragraph"/>
       </oneOrMore>
     </element>
   </define>
@@ -690,21 +692,20 @@
         <ref name="tname"/>
       </optional>
       <choice>
-        <oneOrMore>
+        <ref name="image"/>
+        <zeroOrMore>
           <ref name="figure"/>
-        </oneOrMore>
-        <group>
-          <zeroOrMore>
-            <ref name="TextElement"/>
-          </zeroOrMore>
-          <zeroOrMore>
-            <ref name="note"/>
-          </zeroOrMore>
-          <optional>
-            <ref name="dl"/>
-          </optional>
-        </group>
+        </zeroOrMore>
       </choice>
+      <zeroOrMore>
+        <ref name="fn"/>
+      </zeroOrMore>
+      <optional>
+        <ref name="dl"/>
+      </optional>
+      <zeroOrMore>
+        <ref name="note"/>
+      </zeroOrMore>
     </element>
   </define>
   <define name="TextElement">
