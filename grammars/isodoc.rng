@@ -28,9 +28,10 @@
       <optional>
         <ref name="version"/>
       </optional>
-      <oneOrMore>
-        <ref name="sections"/>
-      </oneOrMore>
+      <optional>
+        <ref name="preface"/>
+      </optional>
+      <ref name="sections"/>
       <zeroOrMore>
         <ref name="annex"/>
       </zeroOrMore>
@@ -46,7 +47,15 @@
   </define>
   <define name="status">
     <element name="status">
-      <ref name="FormattedString"/>
+      <choice>
+        <value>proposal</value>
+        <value>working_draft</value>
+        <value>committee_draft</value>
+        <value>draft_standard</value>
+        <value>final_draft</value>
+        <value>published</value>
+        <value>withdrawn</value>
+      </choice>
     </element>
   </define>
   <define name="version">
@@ -75,6 +84,13 @@
   <define name="draft">
     <element name="draft">
       <text/>
+    </element>
+  </define>
+  <define name="preface">
+    <element name="preface">
+      <oneOrMore>
+        <ref name="content"/>
+      </oneOrMore>
     </element>
   </define>
   <define name="sections">
@@ -326,7 +342,7 @@
       <attribute name="id">
         <data type="ID"/>
       </attribute>
-      <ref name="BasicBlock"/>
+      <ref name="paragraph"/>
     </element>
   </define>
   <define name="termsource">

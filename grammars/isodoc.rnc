@@ -23,14 +23,15 @@ start = standard-document
 
 standard-document =
 element standard-document {
-  bibdata, version?, sections+, annex*, references*
+  bibdata, version?, preface?, sections, annex*, references*
 }
 
 bibdata =
   element bibdata { BibData }
 
 status =
-  element status { FormattedString }
+  element status { ( "proposal" | "working_draft" | "committee_draft" | "draft_standard" |
+                     "final_draft" | "published" | "withdrawn" ) }
 
 version =
   element version {
@@ -40,6 +41,9 @@ version =
 vedition = element edition { xsd:int }
 revision-date = element revision-date { xsd:date }
 draft = element draft { text }
+
+preface =
+  element preface { content+ }
 
 sections =
   element sections {
@@ -140,7 +144,7 @@ paragraph }
 termexample =
   element termexample { 
     attribute id { xsd:ID },
-BasicBlock }
+paragraph }
 
 termsource =
   element termsource {
