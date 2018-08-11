@@ -220,6 +220,10 @@ table-note = element note {
  paragraph
 }
 
+preface =
+  element preface {
+    foreword, introduction?
+}
 
 }
 
@@ -231,11 +235,6 @@ iso-standard =
   element iso-standard {
     bibdata, version?, termdocsource*, preface, sections+, annex*, bibliography
   }
-
-preface =
-  element preface {
-    foreword, introduction?
-}
 
 bibliography =
   element bibliography {

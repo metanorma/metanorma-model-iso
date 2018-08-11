@@ -1,3 +1,5 @@
+cp biblio.rng ../../metanorma-standoc/lib/asciidoctor/standoc
+cp isodoc.rng ../../metanorma-standoc/lib/asciidoctor/standoc
 cp biblio.rng ../../asciidoctor-iso/lib/asciidoctor/iso
 cp isodoc.rng ../../asciidoctor-iso/lib/asciidoctor/iso
 cp isostandard.rng ../../asciidoctor-iso/lib/asciidoctor/iso
