@@ -1,5 +1,5 @@
 cp biblio.rng ../../metanorma-standoc/lib/asciidoctor/standoc
-cp isodoc.rng ../../metanorma-standoc/lib/asciidoctor/standoc
+cat isodoc.rng | ruby -pe '$_.gsub!(/<grammar /, %{<grammar ns="http://riboseinc.com/isoxml" }) '> ../../metanorma-standoc/lib/asciidoctor/standoc/isodoc.rng
 cp biblio.rng ../../asciidoctor-iso/lib/asciidoctor/iso
 cp isodoc.rng ../../asciidoctor-iso/lib/asciidoctor/iso
 cp isostandard.rng ../../asciidoctor-iso/lib/asciidoctor/iso
