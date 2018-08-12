@@ -17,7 +17,13 @@
 
 grammar {
 
-include "biblio.rnc"
+include "biblio.rnc" {
+
+status =
+  element status { ( "proposal" | "working_draft" | "committee_draft" | "draft_standard" |
+                     "final_draft" | "published" | "withdrawn" ) }
+
+}
 
 start = standard-document
 
@@ -28,10 +34,6 @@ element standard-document {
 
 bibdata =
   element bibdata { BibData }
-
-status =
-  element status { ( "proposal" | "working_draft" | "committee_draft" | "draft_standard" |
-                     "final_draft" | "published" | "withdrawn" ) }
 
 version =
   element version {
