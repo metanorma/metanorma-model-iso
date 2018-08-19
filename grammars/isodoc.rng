@@ -956,9 +956,11 @@
   </define>
   <define name="li">
     <element name="li">
-      <attribute name="id">
-        <data type="ID"/>
-      </attribute>
+      <optional>
+        <attribute name="id">
+          <data type="ID"/>
+        </attribute>
+      </optional>
       <oneOrMore>
         <ref name="paragraph-with-footnote"/>
       </oneOrMore>
