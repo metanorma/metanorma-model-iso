@@ -158,6 +158,7 @@ figure =
 li =
   element li {
     #( paragraph-with-footnote | table | note | formula | admonition | ol | ul | dl | quote | sourcecode | review | example )+
+    attribute id { xsd:ID },
     BasicBlock+
     # exclude figures?
   }

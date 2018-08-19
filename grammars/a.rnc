@@ -1,0 +1,13 @@
+grammar {
+
+start = iso_standard
+
+iso_standard =
+  element iso_standard {
+    title+,
+    status
+
+  }
+
+
+}
