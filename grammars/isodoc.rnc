@@ -384,7 +384,10 @@ ul =
 }
 
 li =
-  element li { paragraph-with-footnote+ }
+  element li { 
+    attribute id { xsd:ID },
+    paragraph-with-footnote+ 
+}
 
 ol =
   element ol {
