@@ -23,3 +23,11 @@ cp biblio.rng ../../asciidoctor-rsd/lib/asciidoctor/rsd
 cp isodoc.rng ../../asciidoctor-rsd/lib/asciidoctor/rsd
 cat isostandard.rng | ruby -pe '$_.gsub!(/<grammar ns=\S+/, "<grammar") ' >  ../../asciidoctor-rsd/lib/asciidoctor/rsd/isostandard.rng
 cp rsd.rng ../../asciidoctor-rsd/lib/asciidoctor/rsd
+cp biblio.rng ../../asciidoctor-metanorma_sample/lib/asciidoctor/sample
+cp isodoc.rng ../../asciidoctor-metanorma_sample/lib/asciidoctor/sample
+cat isostandard.rng | ruby -pe '$_.gsub!(/<grammar ns=\S+/, "<grammar") ' >  ../../asciidoctor-metanorma_sample/lib/asciidoctor/sample/isostandard.rng
+cp rsd.rng ../../asciidoctor-metanorma_sample/lib/asciidoctor/sample
+cp biblio.rng ../../metanorma-acme/lib/asciidoctor/acme
+cp isodoc.rng ../../metanorma-acme/lib/asciidoctor/acme
+cat isostandard.rng | ruby -pe '$_.gsub!(/<grammar ns=\S+/, "<grammar") ' >  ../../metanorma-acme-metanorma_sample/lib/asciidoctor/acme/isostandard.rng
+cp rsd.rng ../../metanorma-acme/lib/asciidoctor/acme

@@ -401,7 +401,7 @@ dl =
 }
 
 dt =
-  element dt { TextElement }
+  element dt { TextElement* }
 
 dd =
   element dd { paragraph-with-footnote* }
