@@ -866,7 +866,7 @@
     </element>
   </define>
   <define name="allParts">
-    <element name="allParts">
+    <element name="allparts">
       <data type="boolean"/>
     </element>
   </define>

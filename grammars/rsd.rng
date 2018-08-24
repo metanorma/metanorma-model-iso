@@ -30,29 +30,37 @@
           <data type="ID"/>
         </attribute>
         <optional>
-          <ref name="source"/>
+          <ref name="tname"/>
         </optional>
+        <choice>
+          <ref name="image"/>
+          <ref name="pre"/>
+          <oneOrMore>
+            <ref name="subfigure"/>
+          </oneOrMore>
+        </choice>
+        <zeroOrMore>
+          <ref name="fn"/>
+        </zeroOrMore>
+        <optional>
+          <ref name="dl"/>
+        </optional>
+        <zeroOrMore>
+          <ref name="note"/>
+        </zeroOrMore>
+      </element>
+    </define>
+    <define name="subfigure">
+      <element name="figure">
+        <attribute name="id">
+          <data type="ID"/>
+        </attribute>
         <optional>
           <ref name="tname"/>
         </optional>
         <choice>
-          <oneOrMore>
-            <ref name="figure"/>
-          </oneOrMore>
-          <group>
-            <choice>
-              <zeroOrMore>
-                <ref name="TextElement"/>
-              </zeroOrMore>
-              <ref name="pre"/>
-            </choice>
-            <zeroOrMore>
-              <ref name="note"/>
-            </zeroOrMore>
-            <optional>
-              <ref name="dl"/>
-            </optional>
-          </group>
+          <ref name="image"/>
+          <ref name="pre"/>
         </choice>
       </element>
     </define>

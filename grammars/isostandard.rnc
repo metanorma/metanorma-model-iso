@@ -307,7 +307,7 @@ title-main =
 title-part =
   element title-part { FormattedString }
 
-allParts = element allParts { xsd:boolean }
+allParts = element allparts { xsd:boolean }
 
 clause-hanging-paragraph-with-footnote =
   element clause {

@@ -15,8 +15,17 @@ btitle = element title { FormattedString }
 figure =
   element figure {
     attribute id { xsd:ID },
-     source?, tname?, ( figure+ |  ( (TextElement* | pre), note*, dl? ) )
+    tname?,
+    ( image | pre| subfigure+ ),
+    fn*, dl?, note*
   }
+
+subfigure =
+  element figure {
+    attribute id { xsd:ID },
+    tname?,
+    (image | pre )
+ }
 
 status = element status { "proposal" | "working-draft" | "committee-draft" | "draft-standard" | "final-draft" | "published" | "withdrawn" | LocalizedString }
 
