@@ -954,17 +954,13 @@
       <optional>
         <ref name="section-title"/>
       </optional>
-      <choice>
-        <oneOrMore>
+      <zeroOrMore>
+        <choice>
           <ref name="term-clause"/>
-        </oneOrMore>
-        <zeroOrMore>
-          <choice>
-            <ref name="terms"/>
-            <ref name="definitions"/>
-          </choice>
-        </zeroOrMore>
-      </choice>
+          <ref name="terms"/>
+          <ref name="definitions"/>
+        </choice>
+      </zeroOrMore>
     </element>
   </define>
   <define name="reference-clause">
