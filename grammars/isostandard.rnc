@@ -13,7 +13,8 @@ script =
 # add type to docidentifier in isodoc?
 docidentifier =
   element docidentifier {
-    text | (documentnumber, tc-documentnumber? )
+    attribute type { text }?,
+    (text | (documentnumber, tc-documentnumber? ))
 }
 
 organization = 

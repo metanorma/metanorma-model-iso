@@ -8,7 +8,10 @@ start = rsd-standard
 
 language = element language { ( "en" ) }
 
-docidentifier = element docidentifier { text }
+docidentifier = element docidentifier {
+  attribute type { text }?,
+  text
+}
 
 btitle = element title { FormattedString }
 

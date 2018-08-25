@@ -16,6 +16,9 @@
     </define>
     <define name="docidentifier">
       <element name="docidentifier">
+        <optional>
+          <attribute name="type"/>
+        </optional>
         <text/>
       </element>
     </define>

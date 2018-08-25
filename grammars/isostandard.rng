@@ -20,6 +20,9 @@
     <!-- add type to docidentifier in isodoc? -->
     <define name="docidentifier">
       <element name="docidentifier">
+        <optional>
+          <attribute name="type"/>
+        </optional>
         <choice>
           <text/>
           <group>
