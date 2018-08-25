@@ -111,6 +111,27 @@
       <zeroOrMore>
         <ref name="docrelation"/>
       </zeroOrMore>
+      <zeroOrMore>
+        <ref name="series"/>
+      </zeroOrMore>
+      <optional>
+        <ref name="medium"/>
+      </optional>
+      <zeroOrMore>
+        <ref name="bplace"/>
+      </zeroOrMore>
+      <zeroOrMore>
+        <ref name="extent"/>
+      </zeroOrMore>
+      <zeroOrMore>
+        <ref name="accesslocation"/>
+      </zeroOrMore>
+      <optional>
+        <ref name="bclassification"/>
+      </optional>
+      <optional>
+        <ref name="validity"/>
+      </optional>
       <optional>
         <ref name="editorialgroup"/>
       </optional>
@@ -167,6 +188,27 @@
       <zeroOrMore>
         <ref name="docrelation"/>
       </zeroOrMore>
+      <zeroOrMore>
+        <ref name="series"/>
+      </zeroOrMore>
+      <optional>
+        <ref name="medium"/>
+      </optional>
+      <zeroOrMore>
+        <ref name="bplace"/>
+      </zeroOrMore>
+      <zeroOrMore>
+        <ref name="extent"/>
+      </zeroOrMore>
+      <zeroOrMore>
+        <ref name="accesslocation"/>
+      </zeroOrMore>
+      <optional>
+        <ref name="bclassification"/>
+      </optional>
+      <optional>
+        <ref name="validity"/>
+      </optional>
       <ref name="editorialgroup"/>
       <zeroOrMore>
         <ref name="ics"/>

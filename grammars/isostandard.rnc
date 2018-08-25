@@ -28,14 +28,19 @@ BibliographicItem =
     (btitle+ | formattedref), bsource*, docidentifier*, bdate*, contributor*,
     edition?,
     biblionote*, language*, script*, abstract*, status?, copyright?,
-  docrelation*, editorialgroup?, ics*, allParts?
+  docrelation*, series*, medium?, bplace*,
+    extent*, accesslocation*, bclassification?, validity?,
+   editorialgroup?, ics*, allParts?
+
 
 BibData =
     attribute type { BibItemType }?,
     btitle+, formattedref?, bsource*, docidentifier*, bdate*, contributor*,
     edition?,
     biblionote*, language*, script*, abstract*, status?, copyright,
-    docrelation*, editorialgroup, ics*, allParts?
+    docrelation*, series*, medium?, bplace*,
+    extent*, accesslocation*, bclassification?, validity?,
+        editorialgroup, ics*, allParts?
 
 bdate = element date {
   attribute type { ( "published" | "accessed" | "created" | "implemented" | "obsoleted" | "confirmed" | "updated" | "issued" ) },
