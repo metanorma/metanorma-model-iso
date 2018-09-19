@@ -1,4 +1,5 @@
 cd bib-models/grammars
+rm biblio.rng
 git pull
 sh make.sh
 cd ../..

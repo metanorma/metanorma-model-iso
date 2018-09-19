@@ -32,6 +32,34 @@ TextElement =
 BibItemType =
         "code" | "presentation" | "proposal" | "standard" | "report"
 
+BibliographicItem =
+    attribute type { BibItemType }?,
+    (btitle+ | formattedref), bsource*, docidentifier*, bdate*, contributor*,
+    edition?,
+    biblionote*, language*, script*, abstract*, status?, copyright?,
+  docrelation*, series*, medium?, bplace*,
+    extent*, accesslocation*, bclassification?, validity?,
+   editorialgroup?, ics*, allParts?
+
+
+BibData =
+    attribute type { BibItemType }?,
+    btitle+, formattedref?, bsource*, docidentifier*, bdate*, contributor*,
+    edition?,
+    biblionote*, language*, script*, abstract*, status?, copyright,
+    docrelation*, series*, medium?, bplace*,
+    extent*, accesslocation*, bclassification?, validity?,
+        editorialgroup, ics*, allParts?
+
+editorialgroup = element editorialgroup {
+        technical-committee+
+}
+
+technical-committee = element technical-committee {
+ attribute type { text }?,
+  text
+}
+
 }
 
 pre = element pre { text }
