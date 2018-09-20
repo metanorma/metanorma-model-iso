@@ -33,16 +33,34 @@ BibItemType |=
 "guidance" | "proposal" | "standard" | "report" | "whitepaper" | "charter" | "policy" | 
         "glossary" | "case-study"
 
+BibliographicItem =
+    attribute type { BibItemType }?,
+    (btitle+ | formattedref), bsource*, docidentifier*, bdate*, contributor*,
+    edition?,
+    biblionote*, language*, script*, abstract*, status?, copyright?,
+  docrelation*, series*, medium?, bplace*,
+    extent*, accesslocation*, bclassification?, validity?,
+   editorialgroup?, ics*, allParts?
+
+
+BibData =
+    attribute type { BibItemType }?,
+    btitle+, formattedref?, bsource*, docidentifier*, bdate*, contributor*,
+    edition?,
+    biblionote*, language*, script*, abstract*, status?, copyright,
+    docrelation*, series*, medium?, bplace*,
+    extent*, accesslocation*, bclassification?, validity?,
+        editorialgroup, ics*, allParts?
+
 editorialgroup = element editorialgroup {
-  committee
+        technical-committee+
 }
 
-
+technical-committee = element committee {
+ attribute type { text }?,
+  text
 }
 
-committee = element committee { 
-    attribute type { ( "technical" | "provisional" ) },
-    text
 }
 
 pre = element pre { text }

@@ -43,7 +43,7 @@ BibItemType |=
         "standard" 
 
 editorialgroup = element editorialgroup {
-  committee
+  committee+
 }
 
 BibData =

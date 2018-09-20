@@ -117,7 +117,9 @@
     </define>
     <define name="editorialgroup">
       <element name="editorialgroup">
-        <ref name="committee"/>
+        <oneOrMore>
+          <ref name="committee"/>
+        </oneOrMore>
       </element>
     </define>
     <define name="BibData">

@@ -255,7 +255,7 @@ BibItemType |=
 
 
 editorialgroup = element editorialgroup {
-  technical-committee, subcommittee?, workgroup?, secretariat?
+  technical-committee+, subcommittee*, workgroup*, secretariat?
 }
 
 foreword = element foreword { Basic-Section }

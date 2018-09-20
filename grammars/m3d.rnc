@@ -34,7 +34,7 @@ BibItemType |=
         "glossary" | "case-study"
 
 editorialgroup = element editorialgroup {
-  committee
+  committee+
 }
 
 
