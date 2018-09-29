@@ -98,11 +98,14 @@
     </define>
     <define name="BibItemType">
       <choice>
-        <value>code</value>
-        <value>presentation</value>
-        <value>proposal</value>
+        <value>directive</value>
+        <value>guide</value>
+        <value>specification</value>
         <value>standard</value>
         <value>report</value>
+        <value>administrative</value>
+        <value>amendment</value>
+        <value>technical corrigendum</value>
       </choice>
     </define>
     <define name="BibliographicItem">
