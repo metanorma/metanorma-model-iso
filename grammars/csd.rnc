@@ -34,6 +34,7 @@ BibItemType =
 
 BibliographicItem =
     attribute type { BibItemType }?,
+    fetched?,
     (btitle+ | formattedref), bsource*, docidentifier*, bdate*, contributor*,
     edition?,
     biblionote*, language*, script*, abstract*, status?, copyright?,
