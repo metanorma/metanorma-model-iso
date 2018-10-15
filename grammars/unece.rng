@@ -97,6 +97,43 @@
         <ref name="bookmark"/>
       </choice>
     </define>
+    <define name="admonition">
+      <element name="admonition">
+        <attribute name="id">
+          <data type="ID"/>
+        </attribute>
+        <attribute name="type">
+          <choice>
+            <value>danger</value>
+            <value>caution</value>
+            <value>warning</value>
+            <value>important</value>
+            <value>safety precautions</value>
+          </choice>
+        </attribute>
+        <optional>
+          <ref name="tname"/>
+        </optional>
+        <oneOrMore>
+          <choice>
+            <ref name="paragraph-with-footnote"/>
+            <ref name="table"/>
+            <ref name="formula"/>
+            <ref name="ol"/>
+            <ref name="ul"/>
+            <ref name="dl"/>
+            <ref name="figure"/>
+            <ref name="quote"/>
+            <ref name="sourcecode"/>
+            <ref name="example"/>
+            <ref name="review"/>
+          </choice>
+        </oneOrMore>
+        <zeroOrMore>
+          <ref name="note"/>
+        </zeroOrMore>
+      </element>
+    </define>
     <define name="BibItemType" combine="choice">
       <choice>
         <value>recommendation</value>
@@ -175,7 +212,7 @@
     </element>
   </define>
   <define name="unece-standard">
-    <element name="rsd-standard">
+    <element name="unece-standard">
       <ref name="bibdata"/>
       <optional>
         <ref name="version"/>

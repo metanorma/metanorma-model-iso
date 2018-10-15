@@ -13,7 +13,9 @@ docidentifier = element docidentifier {
   text
 }
 
-btitle = element title { FormattedString }
+btitle = element title { 
+  FormattedString 
+}
 
 figure =
   element figure {
@@ -36,6 +38,17 @@ status = element status { "proposal" | "working-draft" | "committee-draft" | "dr
 TextElement =
   text | em | eref | strong | stem | sub | sup | tt |
   strike | smallcap | xref | br | hyperlink | hr | pagebreak | bookmark 
+
+admonition =
+  element admonition {
+    attribute id { xsd:ID },
+    attribute type {
+     ( "danger" | "caution" | "warning" | "important" | "safety precautions" )},
+    tname?,
+    (  paragraph-with-footnote | table | formula | ol | ul | dl | figure | quote | sourcecode | example | review )+,
+    note*
+  }
+
 
 BibItemType |= "recommendation" | "plenary"
 
@@ -61,7 +74,7 @@ committee = element committee {
 }
 
 unece-standard =
-  element rsd-standard {
+  element unece-standard {
     bibdata, version?, preface, sections+, annex*
  }
 
