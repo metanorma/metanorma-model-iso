@@ -1,0 +1,67 @@
+# Currently we inherit from a namespaced grammar, isostandard. Until we inherit from isodoc,
+# we cannot have a new default namespace: we will end up with a grammar with two different
+# namespaces, one for isostandard and one for csand additions. And we do not want that.
+
+include "isostandard.rnc" {
+
+start = unece-standard
+
+language = element language { ( "en" ) }
+
+docidentifier = element docidentifier {
+  attribute type { text }?,
+  text
+}
+
+btitle = element title { FormattedString }
+
+figure =
+  element figure {
+    attribute id { xsd:ID },
+    tname?,
+    ( image | subfigure+ ),
+    fn*, dl?, note*
+  }
+
+subfigure =
+  element figure {
+    attribute id { xsd:ID },
+    tname?,
+    (image )
+ }
+
+status = element status { "proposal" | "working-draft" | "committee-draft" | "draft-standard" | "final-draft" | "published" | "withdrawn" | LocalizedString }
+
+
+TextElement =
+  text | em | eref | strong | stem | sub | sup | tt |
+  strike | smallcap | xref | br | hyperlink | hr | pagebreak | bookmark 
+
+BibItemType |= "recommendation" | "plenary"
+
+editorialgroup = element editorialgroup {
+  committee+
+}
+
+sections =
+  element sections { clause + }
+
+BibData =
+    attribute type { BibItemType }?,
+    btitle+, formattedref?, bsource*, docidentifier*, bdate*, contributor*,
+    edition?,
+    biblionote*, language*, script*, abstract*, status?, copyright,
+    docrelation*, editorialgroup, ics*
+
+
+}
+
+committee = element committee { 
+    text
+}
+
+unece-standard =
+  element rsd-standard {
+    bibdata, version?, preface, sections+, annex*
+ }
+
