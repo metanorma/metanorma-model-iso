@@ -205,7 +205,25 @@
         <ref name="ics"/>
       </zeroOrMore>
     </define>
+    <define name="preface">
+      <element name="preface">
+        <optional>
+          <ref name="abstract"/>
+        </optional>
+        <optional>
+          <ref name="foreword"/>
+        </optional>
+        <optional>
+          <ref name="introduction"/>
+        </optional>
+      </element>
+    </define>
   </include>
+  <define name="abstract">
+    <element name="abstract">
+      <ref name="Basic-Section"/>
+    </element>
+  </define>
   <define name="committee">
     <element name="committee">
       <text/>

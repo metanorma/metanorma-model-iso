@@ -66,8 +66,15 @@ BibData =
     biblionote*, language*, script*, abstract*, status?, copyright,
     docrelation*, editorialgroup, ics*
 
+preface =
+  element preface {
+    abstract?, foreword?, introduction?
+}
+
 
 }
+
+abstract = element abstract { Basic-Section }
 
 committee = element committee { 
     text
