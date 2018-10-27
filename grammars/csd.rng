@@ -106,6 +106,7 @@
         <value>administrative</value>
         <value>amendment</value>
         <value>technical corrigendum</value>
+        <value>advisory</value>
       </choice>
     </define>
     <define name="BibliographicItem">

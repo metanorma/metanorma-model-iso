@@ -30,7 +30,7 @@ TextElement =
   strike | smallcap | xref | br | hyperlink | hr | pagebreak | bookmark | keyword
 
 BibItemType =
-        "directive" | "guide" | "specification" | "standard" | "report" | "administrative" | "amendment" | "technical corrigendum"
+        "directive" | "guide" | "specification" | "standard" | "report" | "administrative" | "amendment" | "technical corrigendum" | "advisory"
 
 BibliographicItem =
     attribute type { BibItemType }?,
