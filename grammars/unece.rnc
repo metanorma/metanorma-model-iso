@@ -4,84 +4,83 @@
 
 include "isostandard.rnc" {
 
-start = unece-standard
+  start = unece-standard
 
-language = element language { ( "en" ) }
+    language = element language { ( "en" ) }
 
-docidentifier = element docidentifier {
-  attribute type { text }?,
-  text
-}
-
-btitle = element title { 
-  FormattedString 
-}
-
-figure =
-  element figure {
-    attribute id { xsd:ID },
-    tname?,
-    ( image | subfigure+ ),
-    fn*, dl?, note*
+  docidentifier = element docidentifier {
+    attribute type { text }?,
+              text
   }
 
-subfigure =
-  element figure {
-    attribute id { xsd:ID },
-    tname?,
-    (image )
- }
-
-status = element status { "proposal" | "working-draft" | "committee-draft" | "draft-standard" | "final-draft" | "published" | "withdrawn" | LocalizedString }
-
-
-TextElement =
-  text | em | eref | strong | stem | sub | sup | tt |
-  strike | smallcap | xref | br | hyperlink | hr | pagebreak | bookmark 
-
-admonition =
-  element admonition {
-    attribute id { xsd:ID },
-    attribute type {
-     ( "danger" | "caution" | "warning" | "important" | "safety precautions" )},
-    tname?,
-    (  paragraph-with-footnote | table | formula | ol | ul | dl | figure | quote | sourcecode | example | review )+,
-    note*
+  btitle = element title { 
+    FormattedString 
   }
 
+  figure =
+    element figure {
+      attribute id { xsd:ID },
+      tname?,
+      ( image | subfigure+ ),
+      fn*, dl?, note*
+    }
 
-BibItemType |= "recommendation" | "plenary"
+  subfigure =
+    element figure {
+      attribute id { xsd:ID },
+      tname?,
+      (image )
+    }
 
-editorialgroup = element editorialgroup {
-  committee+
-}
+  status = element status { "proposal" | "working-draft" | "committee-draft" | "draft-standard" | "final-draft" | "published" | "withdrawn" | LocalizedString }
 
-sections =
-  element sections { clause + }
 
-BibData =
+  TextElement =
+    text | em | eref | strong | stem | sub | sup | tt |
+    strike | smallcap | xref | br | hyperlink | hr | pagebreak | bookmark 
+
+    admonition =
+    element admonition {
+      attribute id { xsd:ID },
+      attribute type {
+        ( "danger" | "caution" | "warning" | "important" | "safety precautions" )},
+      tname?,
+      (  paragraph-with-footnote | table | formula | ol | ul | dl | figure | quote | sourcecode | example | review )+,
+      note*
+    }
+
+
+  BibItemType |= "recommendation" | "plenary"
+
+    editorialgroup = element editorialgroup {
+      committee+
+    }
+
+  sections =
+    element sections { clause + }
+
+  BibData =
     attribute type { BibItemType }?,
-    btitle+, formattedref?, bsource*, docidentifier*, bdate*, contributor*,
-    edition?,
-    biblionote*, language*, script*, abstract*, status?, copyright,
-    docrelation*, editorialgroup, ics*
+              btitle+, formattedref?, bsource*, docidentifier*, bdate*, contributor*,
+              edition?,
+              biblionote*, language*, script*, abstract*, status?, copyright,
+              docrelation*, editorialgroup, ics*
 
-preface =
-  element preface {
-    abstract?, foreword?, introduction?
-}
+                preface =
+                element preface {
+                  abstract?, foreword?, introduction?
+                }
 
+  abstract = element abstract { Basic-Section }
 
-}
-
-abstract = element abstract { Basic-Section }
-
-committee = element committee { 
+  committee = element committee { 
     text
+  }
+
 }
 
 unece-standard =
-  element unece-standard {
-    bibdata, version?, preface, sections+, annex*
- }
+element unece-standard {
+  bibdata, version?, preface, sections+, annex*
+}
 
