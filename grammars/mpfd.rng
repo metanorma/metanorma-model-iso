@@ -203,8 +203,8 @@
       <text/>
     </element>
   </define>
-  <define name="rsd-standard">
-    <element name="rsd-standard">
+  <define name="mpfd-standard">
+    <element name="mpfd-standard">
       <ref name="bibdata"/>
       <optional>
         <ref name="version"/>

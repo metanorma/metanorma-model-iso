@@ -67,8 +67,8 @@ keyword = element keyword { text }
 
 security = element security { text }
 
-rsd-standard =
-  element rsd-standard {
+mpfd-standard =
+  element mpfd-standard {
     bibdata, version?, termdocsource*, preface, sections+, annex*, bibliography
  }
 
