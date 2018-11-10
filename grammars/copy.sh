@@ -26,11 +26,11 @@ cp rsd.rng ../../metanorma-rsd/lib/asciidoctor/rsd
 cp biblio.rng ../../metanorma-sample/lib/asciidoctor/sample
 cp isodoc.rng ../../metanorma-sample/lib/asciidoctor/sample
 cat isostandard.rng | ruby -pe '$_.gsub!(/<grammar ns=\S+/, "<grammar") ' >  ../../metanorma-sample/lib/asciidoctor/sample/isostandard.rng
-cp rsd.rng ../../metanorma-sample/lib/asciidoctor/sample
+cat rsd.rng | ruby -pe '$_.gsub!(/rsd-standard/, "sample-standard") ' > ../../metanorma-sample/lib/asciidoctor/sample/sample.rng
 cp biblio.rng ../../metanorma-acme/lib/asciidoctor/acme
 cp isodoc.rng ../../metanorma-acme/lib/asciidoctor/acme
 cat isostandard.rng | ruby -pe '$_.gsub!(/<grammar ns=\S+/, "<grammar") ' >  ../../metanorma-acme/lib/asciidoctor/acme/isostandard.rng
-cp rsd.rng ../../metanorma-acme/lib/asciidoctor/acme/acme.rng
+cat rsd.rng | ruby -pe '$_.gsub!(/rsd-standard/, "acme-standard") ' > ../../metanorma-acme/lib/asciidoctor/acme/acme.rng
 cp biblio.rng ../../metanorma-mpfd/lib/asciidoctor/mpfd
 cp isodoc.rng ../../metanorma-mpfd/lib/asciidoctor/mpfd
 cat isostandard.rng | ruby -pe '$_.gsub!(/<grammar ns=\S+/, "<grammar") ' >  ../../metanorma-mpfd/lib/asciidoctor/mpfd/isostandard.rng
