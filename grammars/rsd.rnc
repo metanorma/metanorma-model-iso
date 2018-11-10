@@ -48,7 +48,7 @@ editorialgroup = element editorialgroup {
 
 BibData =
     attribute type { BibItemType }?,
-    btitle+, formattedref?, bsource*, docidentifier*, bdate*, contributor*,
+    btitle+, formattedref?, bsource*, docidentifier*, docnumber?, bdate*, contributor*,
     edition?,
     biblionote*, language*, script*, abstract*, status?, copyright,
     docrelation*, editorialgroup, ics*, security?

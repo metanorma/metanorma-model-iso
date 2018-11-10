@@ -36,7 +36,7 @@ BibItemType |=
 BibliographicItem =
     attribute type { BibItemType }?,
     fetched?,
-    (btitle+ | formattedref), bsource*, docidentifier*, bdate*, contributor*,
+    (btitle+ | formattedref), bsource*, docidentifier*, docnumber?, bdate*, contributor*,
     edition?,
     biblionote*, language*, script*, abstract*, status?, copyright?,
   docrelation*, series*, medium?, bplace*,
@@ -46,7 +46,7 @@ BibliographicItem =
 
 BibData =
     attribute type { BibItemType }?,
-    btitle+, formattedref?, bsource*, docidentifier*, bdate*, contributor*,
+    btitle+, formattedref?, bsource*, docidentifier*, docnumber?, bdate*, contributor*,
     edition?,
     biblionote*, language*, script*, abstract*, status?, copyright,
     docrelation*, series*, medium?, bplace*,
