@@ -73,11 +73,11 @@ include "isostandard.rnc" {
 
   abstract = element abstract { Basic-Section }
 
+}
+
   committee = element committee { 
     text
   }
-
-}
 
 unece-standard =
 element unece-standard {

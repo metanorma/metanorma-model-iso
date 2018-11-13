@@ -226,12 +226,12 @@
         <ref name="Basic-Section"/>
       </element>
     </define>
-    <define name="committee">
-      <element name="committee">
-        <text/>
-      </element>
-    </define>
   </include>
+  <define name="committee">
+    <element name="committee">
+      <text/>
+    </element>
+  </define>
   <define name="unece-standard">
     <element name="unece-standard">
       <ref name="bibdata"/>
