@@ -1,0 +1,72 @@
+# Currently we inherit from a namespaced grammar, isostandard. Until we inherit from isodoc,
+# we cannot have a new default namespace: we will end up with a grammar with two different
+# namespaces, one for isostandard and one for csand additions. And we do not want that.
+
+include "isostandard.rnc" {
+
+start = ogc-standard
+
+language = element language { ( "en" ) }
+
+docidentifier = element docidentifier {
+  attribute type { text }?,
+  text
+}
+
+btitle = element title { FormattedString }
+
+figure =
+  element figure {
+    attribute id { xsd:ID },
+    tname?,
+    ( image | pre| subfigure+ ),
+    fn*, dl?, note*
+  }
+
+subfigure =
+  element figure {
+    attribute id { xsd:ID },
+    tname?,
+    (image | pre )
+ }
+
+status = element status { "proposal" | "working-draft" | "committee-draft" | "draft-standard" | "final-draft" | "published" | "withdrawn" | LocalizedString }
+
+
+# TextElement |= keyword
+TextElement =
+  text | em | eref | strong | stem | sub | sup | tt |
+  strike | smallcap | xref | br | hyperlink | hr | pagebreak | bookmark | keyword
+
+BibItemType |=
+"policy-and-procedures" | "best-practices" | "supporting-document" | "report" | "legal" | "directives" | "proposal" | 
+        "standard" 
+
+editorialgroup = element editorialgroup {
+  committee+
+}
+
+BibData =
+    attribute type { BibItemType }?,
+    btitle+, formattedref?, bsource*, docidentifier*, docnumber?, bdate*, contributor*,
+    edition?,
+    biblionote*, language*, script*, abstract*, status?, copyright,
+    docrelation*, editorialgroup, ics*, security?
+
+
+}
+
+committee = element committee { 
+    attribute type { ( "technical" | "provisional" ) },
+    text
+}
+
+pre = element pre { text }
+
+keyword = element keyword { text }
+
+ogc-standard =
+  element ogc-standard {
+    bibdata, version?, termdocsource*, preface, sections+, annex*, bibliography
+ }
+

@@ -26,4 +26,5 @@ java -jar jing-trang/build/trang.jar -I rnc -O rng m3d.rnc m3d.rng
 java -jar jing-trang/build/trang.jar -I rnc -O rng rsd.rnc rsd.rng
 java -jar jing-trang/build/trang.jar -I rnc -O rng mpfd.rnc mpfd.rng
 java -jar jing-trang/build/trang.jar -I rnc -O rng unece.rnc unece.rng
+java -jar jing-trang/build/trang.jar -I rnc -O rng ogc.rnc ogc.rng
 sh copy.sh

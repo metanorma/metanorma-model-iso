@@ -39,3 +39,7 @@ cp biblio.rng ../../metanorma-unece/lib/asciidoctor/unece
 cp isodoc.rng ../../metanorma-unece/lib/asciidoctor/unece
 cat isostandard.rng | ruby -pe '$_.gsub!(/<grammar ns=\S+/, "<grammar") ' >  ../../metanorma-unece/lib/asciidoctor/unece/isostandard.rng
 cp unece.rng ../../metanorma-unece/lib/asciidoctor/unece
+cp biblio.rng ../../metanorma-ogc/lib/asciidoctor/ogc
+cp isodoc.rng ../../metanorma-ogc/lib/asciidoctor/ogc
+cat isostandard.rng | ruby -pe '$_.gsub!(/<grammar ns=\S+/, "<grammar") ' >  ../../metanorma-ogc/lib/asciidoctor/ogc/isostandard.rng
+cp ogc.rng ../../metanorma-ogc/lib/asciidoctor/ogc
