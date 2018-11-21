@@ -70,14 +70,11 @@
     <define name="status">
       <element name="status">
         <choice>
-          <value>proposal</value>
-          <value>working-draft</value>
-          <value>committee-draft</value>
-          <value>draft-standard</value>
-          <value>final-draft</value>
+          <value>rfc</value>
+          <value>candidate</value>
           <value>published</value>
-          <value>withdrawn</value>
-          <ref name="LocalizedString"/>
+          <value>deprecated</value>
+          <value>retired</value>
         </choice>
       </element>
     </define>
@@ -105,14 +102,21 @@
     </define>
     <define name="BibItemType" combine="choice">
       <choice>
-        <value>policy-and-procedures</value>
-        <value>best-practices</value>
-        <value>supporting-document</value>
-        <value>report</value>
-        <value>legal</value>
-        <value>directives</value>
-        <value>proposal</value>
         <value>standard</value>
+        <value>standard-with-suite</value>
+        <value>abstract-specification</value>
+        <value>community-standard</value>
+        <value>profile</value>
+        <value>best-practice</value>
+        <value>engineering-report</value>
+        <value>discussion-paper</value>
+        <value>reference-model</value>
+        <value>user-guide</value>
+        <value>policy</value>
+        <value>guide</value>
+        <value>amendment</value>
+        <value>technical-corrigendum</value>
+        <value>administrative</value>
       </choice>
     </define>
     <define name="editorialgroup">

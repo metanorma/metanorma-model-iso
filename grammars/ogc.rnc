@@ -30,7 +30,7 @@ subfigure =
     (image | pre )
  }
 
-status = element status { "proposal" | "working-draft" | "committee-draft" | "draft-standard" | "final-draft" | "published" | "withdrawn" | LocalizedString }
+status = element status { "rfc" | "candidate" | "published" | "deprecated" | "retired" }
 
 
 # TextElement |= keyword
@@ -39,8 +39,7 @@ TextElement =
   strike | smallcap | xref | br | hyperlink | hr | pagebreak | bookmark | keyword
 
 BibItemType |=
-"policy-and-procedures" | "best-practices" | "supporting-document" | "report" | "legal" | "directives" | "proposal" | 
-        "standard" 
+"standard" | "standard-with-suite" | "abstract-specification" | "community-standard" | "profile" | "best-practice" | "engineering-report" | "discussion-paper" | "reference-model" | "user-guide" | "policy" | "guide" | "amendment" | "technical-corrigendum" | "administrative"
 
 editorialgroup = element editorialgroup {
   committee+
