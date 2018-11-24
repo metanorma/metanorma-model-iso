@@ -50,7 +50,7 @@ BibData =
     btitle+, formattedref?, bsource*, docidentifier*, docnumber?, bdate*, contributor*,
     edition?,
     biblionote*, language*, script*, abstract*, status?, copyright,
-    docrelation*, editorialgroup, ics*, security?
+    docrelation*, editorialgroup, ics*
 
 
 }
