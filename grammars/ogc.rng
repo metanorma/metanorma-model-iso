@@ -121,9 +121,13 @@
     </define>
     <define name="editorialgroup">
       <element name="editorialgroup">
-        <oneOrMore>
-          <ref name="committee"/>
-        </oneOrMore>
+        <ref name="committee"/>
+        <optional>
+          <ref name="subcommittee"/>
+        </optional>
+        <optional>
+          <ref name="workgroup"/>
+        </optional>
       </element>
     </define>
     <define name="BibData">
@@ -183,13 +187,11 @@
   </include>
   <define name="committee">
     <element name="committee">
-      <attribute name="type">
-        <choice>
-          <value>technical</value>
-          <value>provisional</value>
-        </choice>
-      </attribute>
-      <text/>
+      <choice>
+        <value>technical</value>
+        <value>planning</value>
+        <value>strategic-member-advisory</value>
+      </choice>
     </element>
   </define>
   <define name="pre">

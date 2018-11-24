@@ -42,7 +42,7 @@ BibItemType |=
 "standard" | "standard-with-suite" | "abstract-specification" | "community-standard" | "profile" | "best-practice" | "engineering-report" | "discussion-paper" | "reference-model" | "user-guide" | "policy" | "guide" | "amendment" | "technical-corrigendum" | "administrative"
 
 editorialgroup = element editorialgroup {
-  committee+
+  committee, subcommittee?, workgroup?
 }
 
 BibData =
@@ -56,8 +56,7 @@ BibData =
 }
 
 committee = element committee { 
-    attribute type { ( "technical" | "provisional" ) },
-    text
+    "technical" | "planning" | "strategic-member-advisory"
 }
 
 pre = element pre { text }
