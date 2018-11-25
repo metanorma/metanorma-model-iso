@@ -52,8 +52,16 @@ BibData =
     biblionote*, language*, script*, abstract*, status?, copyright,
     docrelation*, editorialgroup, ics*
 
+preface =
+  element preface {
+    preface_abstract?, foreword, submitters?
+}
+
 
 }
+
+submitters = element submitters { Basic-Section }
+
 
 committee = element committee { 
     "technical" | "planning" | "strategic-member-advisory"

@@ -230,7 +230,7 @@ table-note = element note {
 
 preface =
   element preface {
-    foreword, introduction?
+    preface_abstract?, foreword, introduction?
 }
 
 }
@@ -259,6 +259,7 @@ editorialgroup = element editorialgroup {
   technical-committee+, subcommittee*, workgroup*, secretariat?
 }
 
+preface_abstract = element abstract { Basic-Section }
 foreword = element foreword { Basic-Section }
 introduction = element introduction { Content-Section }
 
