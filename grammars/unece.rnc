@@ -50,7 +50,8 @@ include "isostandard.rnc" {
     }
 
 
-  BibItemType |= "recommendation" | "plenary"
+  BibItemType |= "recommendation" | "plenary" | "addendum" | "communication" | "corrigendum" |
+        "reissue" | "agenda" | "budgetary" | "sec-gen-notes" | "expert-report" | "resolution"
 
     editorialgroup = element editorialgroup {
       committee+

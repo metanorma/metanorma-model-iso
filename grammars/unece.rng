@@ -138,6 +138,15 @@
       <choice>
         <value>recommendation</value>
         <value>plenary</value>
+        <value>addendum</value>
+        <value>communication</value>
+        <value>corrigendum</value>
+        <value>reissue</value>
+        <value>agenda</value>
+        <value>budgetary</value>
+        <value>sec-gen-notes</value>
+        <value>expert-report</value>
+        <value>resolution</value>
       </choice>
     </define>
     <define name="editorialgroup">
