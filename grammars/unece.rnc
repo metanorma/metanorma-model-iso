@@ -64,7 +64,7 @@ include "isostandard.rnc" {
     attribute type { BibItemType }?,
               btitle+, formattedref?, bsource*, docidentifier*, docnumber?, bdate*, contributor*,
               edition?,
-              biblionote*, language*, script*, abstract*, status?, copyright,
+              biblionote*, language*, submissionlanguage*, script*, abstract*, status?, copyright,
               docrelation*, editorialgroup, ics*
 
                 preface =
@@ -79,6 +79,8 @@ include "isostandard.rnc" {
   committee = element committee { 
     text
   }
+
+submissionlanguage = element submissionlanguage { text }
 
 unece-standard =
 element unece-standard {
