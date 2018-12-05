@@ -219,6 +219,9 @@
       <zeroOrMore>
         <ref name="ics"/>
       </zeroOrMore>
+      <optional>
+        <ref name="distribution"/>
+      </optional>
     </define>
     <define name="preface">
       <element name="preface">
@@ -247,6 +250,15 @@
   <define name="submissionlanguage">
     <element name="submissionlanguage">
       <text/>
+    </element>
+  </define>
+  <define name="distribution">
+    <element name="distribution">
+      <choice>
+        <value>general</value>
+        <value>limited</value>
+        <value>restricted</value>
+      </choice>
     </element>
   </define>
   <define name="unece-standard">

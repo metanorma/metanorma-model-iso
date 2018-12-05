@@ -51,7 +51,7 @@ include "isostandard.rnc" {
 
 
   BibItemType |= "recommendation" | "plenary" | "addendum" | "communication" | "corrigendum" |
-        "reissue" | "agenda" | "budgetary" | "sec-gen-notes" | "expert-report" | "resolution"
+    "reissue" | "agenda" | "budgetary" | "sec-gen-notes" | "expert-report" | "resolution"
 
     editorialgroup = element editorialgroup {
       committee+
@@ -62,10 +62,9 @@ include "isostandard.rnc" {
 
   BibData =
     attribute type { BibItemType }?,
-              btitle+, formattedref?, bsource*, docidentifier*, docnumber?, bdate*, contributor*,
-              edition?,
-              biblionote*, language*, submissionlanguage*, script*, abstract*, status?, copyright,
-              docrelation*, editorialgroup, ics*
+    btitle+, formattedref?, bsource*, docidentifier*, docnumber?, bdate*, contributor*, edition?,
+    biblionote*, language*, submissionlanguage*, script*, abstract*, status?, copyright,
+    docrelation*, editorialgroup, ics*, distribution?
 
                 preface =
                 element preface {
@@ -76,11 +75,13 @@ include "isostandard.rnc" {
 
 }
 
-  committee = element committee { 
-    text
-  }
+committee = element committee { 
+  text
+}
 
 submissionlanguage = element submissionlanguage { text }
+
+distribution = element distribution { "general" | "limited" | "restricted" }
 
 unece-standard =
 element unece-standard {
