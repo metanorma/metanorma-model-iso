@@ -81,28 +81,6 @@
         </choice>
       </element>
     </define>
-    <!-- TextElement |= keyword -->
-    <define name="TextElement">
-      <choice>
-        <text/>
-        <ref name="em"/>
-        <ref name="eref"/>
-        <ref name="strong"/>
-        <ref name="stem"/>
-        <ref name="sub"/>
-        <ref name="sup"/>
-        <ref name="tt"/>
-        <ref name="strike"/>
-        <ref name="smallcap"/>
-        <ref name="xref"/>
-        <ref name="br"/>
-        <ref name="hyperlink"/>
-        <ref name="hr"/>
-        <ref name="pagebreak"/>
-        <ref name="bookmark"/>
-        <ref name="keyword"/>
-      </choice>
-    </define>
     <define name="BibItemType" combine="choice">
       <choice>
         <value>policy-and-procedures</value>
@@ -188,16 +166,6 @@
           <value>provisional</value>
         </choice>
       </attribute>
-      <text/>
-    </element>
-  </define>
-  <define name="pre">
-    <element name="pre">
-      <text/>
-    </element>
-  </define>
-  <define name="keyword">
-    <element name="keyword">
       <text/>
     </element>
   </define>

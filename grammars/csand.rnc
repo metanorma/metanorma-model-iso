@@ -23,12 +23,6 @@ figure =
 
 status = element status { "proposal" | "working-draft" | "committee-draft" | "draft-standard" | "final-draft" | "published" | "withdrawn" | LocalizedString }
 
-
-# TextElement |= keyword
-TextElement =
-  text | em | eref | strong | stem | sub | sup | tt |
-  strike | smallcap | xref | br | hyperlink | hr | pagebreak | bookmark | keyword
-
 BibItemType |=
 "guidance" | "proposal" | "standard" | "report" | "whitepaper" | "charter" | "policy" | 
         "glossary" | "case-study"
@@ -63,10 +57,6 @@ technical-committee = element committee {
 }
 
 }
-
-pre = element pre { text }
-
-keyword = element keyword { text }
 
 csand-standard =
   element csand-standard {

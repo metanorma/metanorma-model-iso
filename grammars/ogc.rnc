@@ -33,11 +33,6 @@ subfigure =
 status = element status { "rfc" | "candidate" | "published" | "deprecated" | "retired" }
 
 
-# TextElement |= keyword
-TextElement =
-  text | em | eref | strong | stem | sub | sup | tt |
-  strike | smallcap | xref | br | hyperlink | hr | pagebreak | bookmark | keyword
-
 BibItemType |=
 "standard" | "standard-with-suite" | "abstract-specification" | "community-standard" | "profile" | "best-practice" | "engineering-report" | "discussion-paper" | "reference-model" | "user-guide" | "policy" | "guide" | "amendment" | "technical-corrigendum" | "administrative"
 
@@ -66,10 +61,6 @@ submitters = element submitters { Basic-Section }
 committee = element committee { 
     "technical" | "planning" | "strategic-member-advisory"
 }
-
-pre = element pre { text }
-
-keyword = element keyword { text }
 
 ogc-standard =
   element ogc-standard {

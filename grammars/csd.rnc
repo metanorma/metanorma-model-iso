@@ -24,11 +24,6 @@ figure =
      source?, tname?, ( figure+ |  ( (TextElement* | pre), note*, dl? ) )
   }
 
-# TextElement |= keyword
-TextElement =
-  text | em | eref | strong | stem | sub | sup | tt |
-  strike | smallcap | xref | br | hyperlink | hr | pagebreak | bookmark | keyword
-
 BibItemType =
         "directive" | "guide" | "specification" | "standard" | "report" | "administrative" | "amendment" | "technical corrigendum" | "advisory"
 
@@ -62,10 +57,6 @@ technical-committee = element technical-committee {
 }
 
 }
-
-pre = element pre { text }
-
-keyword = element keyword { text }
 
 csd-standard =
   element csd-standard {

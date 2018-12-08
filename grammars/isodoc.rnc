@@ -161,7 +161,7 @@ modification =
   element modification { paragraph }
 
 BasicBlock =  paragraph-with-footnote | table | formula | admonition | ol | ul | dl | figure |
-  quote | sourcecode | example | review
+  quote | sourcecode | example | review | pre
 
 paragraph =
   element p { ParagraphType }
@@ -225,6 +225,12 @@ sourcecode =
     tname?, ( text | callout )+, annotation*, note*
   }
 
+pre =
+  element pre {
+    attribute id { xsd:ID },
+    tname?, text, note*
+  }
+
 table =
   element table {
     attribute id { xsd:ID },
@@ -285,7 +291,7 @@ figure =
   }
 
 TextElement =
-  text | em | eref | strong | stem | sub | sup | tt |
+  text | em | eref | strong | stem | sub | sup | tt | keyword |
   strike | smallcap | xref | br | hyperlink | hr | pagebreak | bookmark
 
 source = element source { TypedUri }
@@ -293,6 +299,7 @@ source = element source { TypedUri }
 em = element em { text }
 strong = element strong { text }
 tt = element tt { text }
+keyword = element keyword { text }
 sub = element sub { text }
 sup = element sup { text }
 strike = element strike { text }
