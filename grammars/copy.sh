@@ -14,7 +14,7 @@ cp csd.rng ../../metanorma-csd/lib/asciidoctor/csd
 cp biblio.rng ../../metanorma-csand/lib/asciidoctor/csand
 cp isodoc.rng ../../metanorma-csand/lib/asciidoctor/csand
 cat isostandard.rng | ruby -pe '$_.gsub!(/<grammar ns=\S+/, "<grammar") ' >  ../../metanorma-csand/lib/asciidoctor/csand/isostandard.rng
-cp csand.rng ../../metanorma-m3d/lib/asciidoctor/csand
+cp csand.rng ../../metanorma-csand/lib/asciidoctor/csand
 cp biblio.rng ../../metanorma-m3d/lib/asciidoctor/m3d
 cp isodoc.rng ../../metanorma-m3d/lib/asciidoctor/m3d
 cat isostandard.rng | ruby -pe '$_.gsub!(/<grammar ns=\S+/, "<grammar") ' >  ../../metanorma-m3d/lib/asciidoctor/m3d/isostandard.rng
