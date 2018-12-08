@@ -64,7 +64,7 @@ include "isostandard.rnc" {
     attribute type { BibItemType }?,
     btitle+, formattedref?, bsource*, docidentifier*, docnumber?, bdate*, contributor*, edition?,
     biblionote*, language*, submissionlanguage*, script*, abstract*, status?, copyright,
-    docrelation*, editorialgroup, ics*, distribution?
+    docrelation*, editorialgroup, ics*, distribution?, session?
 
                 preface =
                 element preface {
@@ -75,9 +75,22 @@ include "isostandard.rnc" {
 
 }
 
+session = element session {
+  session-number?, session-date?, item-number*, item-name*, subitem-name*, collaborator?, agenda-id?, item-footnote?
+}
+
 committee = element committee { 
   text
 }
+
+session-number = element number { text }
+session-date = element session-date { xsd:date }
+item-number = element item-number { text }
+collaborator = element collaborator { text }
+agenda-id = element agenda-id { text }
+item-name = element item-name { text }
+subitem-name = element subitem-name { text }
+item-footnote = element item-footnote { text }
 
 submissionlanguage = element submissionlanguage { text }
 

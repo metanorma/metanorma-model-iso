@@ -222,6 +222,9 @@
       <optional>
         <ref name="distribution"/>
       </optional>
+      <optional>
+        <ref name="session"/>
+      </optional>
     </define>
     <define name="preface">
       <element name="preface">
@@ -242,8 +245,76 @@
       </element>
     </define>
   </include>
+  <define name="session">
+    <element name="session">
+      <optional>
+        <ref name="session-number"/>
+      </optional>
+      <optional>
+        <ref name="session-date"/>
+      </optional>
+      <zeroOrMore>
+        <ref name="item-number"/>
+      </zeroOrMore>
+      <zeroOrMore>
+        <ref name="item-name"/>
+      </zeroOrMore>
+      <zeroOrMore>
+        <ref name="subitem-name"/>
+      </zeroOrMore>
+      <optional>
+        <ref name="collaborator"/>
+      </optional>
+      <optional>
+        <ref name="agenda-id"/>
+      </optional>
+      <optional>
+        <ref name="item-footnote"/>
+      </optional>
+    </element>
+  </define>
   <define name="committee">
     <element name="committee">
+      <text/>
+    </element>
+  </define>
+  <define name="session-number">
+    <element name="number">
+      <text/>
+    </element>
+  </define>
+  <define name="session-date">
+    <element name="session-date">
+      <data type="date"/>
+    </element>
+  </define>
+  <define name="item-number">
+    <element name="item-number">
+      <text/>
+    </element>
+  </define>
+  <define name="collaborator">
+    <element name="collaborator">
+      <text/>
+    </element>
+  </define>
+  <define name="agenda-id">
+    <element name="agenda-id">
+      <text/>
+    </element>
+  </define>
+  <define name="item-name">
+    <element name="item-name">
+      <text/>
+    </element>
+  </define>
+  <define name="subitem-name">
+    <element name="subitem-name">
+      <text/>
+    </element>
+  </define>
+  <define name="item-footnote">
+    <element name="item-footnote">
       <text/>
     </element>
   </define>
