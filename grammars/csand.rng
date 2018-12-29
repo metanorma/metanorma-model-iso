@@ -119,6 +119,9 @@
       <optional>
         <ref name="edition"/>
       </optional>
+      <optional>
+        <ref name="version"/>
+      </optional>
       <zeroOrMore>
         <ref name="biblionote"/>
       </zeroOrMore>
@@ -201,6 +204,9 @@
       <optional>
         <ref name="edition"/>
       </optional>
+      <optional>
+        <ref name="version"/>
+      </optional>
       <zeroOrMore>
         <ref name="biblionote"/>
       </zeroOrMore>
@@ -268,9 +274,6 @@
   <define name="csand-standard">
     <element name="csand-standard">
       <ref name="bibdata"/>
-      <optional>
-        <ref name="version"/>
-      </optional>
       <zeroOrMore>
         <ref name="termdocsource"/>
       </zeroOrMore>

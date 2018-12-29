@@ -138,6 +138,9 @@
       <optional>
         <ref name="edition"/>
       </optional>
+      <optional>
+        <ref name="version"/>
+      </optional>
       <zeroOrMore>
         <ref name="biblionote"/>
       </zeroOrMore>
@@ -191,9 +194,6 @@
   <define name="ogc-standard">
     <element name="ogc-standard">
       <ref name="bibdata"/>
-      <optional>
-        <ref name="version"/>
-      </optional>
       <zeroOrMore>
         <ref name="termdocsource"/>
       </zeroOrMore>

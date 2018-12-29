@@ -44,7 +44,7 @@ editorialgroup = element editorialgroup {
 BibData =
     attribute type { BibItemType }?,
     btitle+, formattedref?, bsource*, docidentifier*, docnumber?, bdate*, contributor*,
-    edition?,
+    edition?, version?,
     biblionote*, language*, script*, abstract*, status?, copyright,
     docrelation*, editorialgroup, ics*, security?
 
@@ -60,6 +60,6 @@ security = element security { text }
 
 mpfd-standard =
   element mpfd-standard {
-    bibdata, version?, termdocsource*, preface, sections+, annex*, bibliography
+    bibdata, termdocsource*, preface, sections+, annex*, bibliography
  }
 

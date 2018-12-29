@@ -105,6 +105,9 @@
       <optional>
         <ref name="edition"/>
       </optional>
+      <optional>
+        <ref name="version"/>
+      </optional>
       <zeroOrMore>
         <ref name="biblionote"/>
       </zeroOrMore>
@@ -174,6 +177,9 @@
       </zeroOrMore>
       <optional>
         <ref name="edition"/>
+      </optional>
+      <optional>
+        <ref name="version"/>
       </optional>
       <zeroOrMore>
         <ref name="biblionote"/>
@@ -299,9 +305,6 @@
   <define name="gb-standard">
     <element name="gb-standard">
       <ref name="bibdata"/>
-      <optional>
-        <ref name="version"/>
-      </optional>
       <zeroOrMore>
         <ref name="termdocsource"/>
       </zeroOrMore>

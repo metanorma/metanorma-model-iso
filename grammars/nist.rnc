@@ -4,7 +4,7 @@
 
 include "isostandard.rnc" {
 
-start = ogc-standard
+start = nist-standard
 
 language = element language { ( "en" ) }
 
@@ -30,14 +30,15 @@ subfigure =
     (image | pre )
  }
 
-status = element status { "rfc" | "candidate" | "published" | "deprecated" | "retired" }
+status = element status { "proposal" | "working-draft" | "committee-draft" | "draft-standard" | "final-draft" | "published" | "withdrawn" | LocalizedString }
 
 
 BibItemType |=
-"standard" | "standard-with-suite" | "abstract-specification" | "community-standard" | "profile" | "best-practice" | "engineering-report" | "discussion-paper" | "reference-model" | "user-guide" | "policy" | "guide" | "amendment" | "technical-corrigendum" | "administrative"
+"policy-and-procedures" | "best-practices" | "supporting-document" | "report" | "legal" | "directives" | "proposal" | 
+        "standard" 
 
 editorialgroup = element editorialgroup {
-  committee, subcommittee?, workgroup?
+  committee+
 }
 
 BibData =
@@ -45,25 +46,20 @@ BibData =
     btitle+, formattedref?, bsource*, docidentifier*, docnumber?, bdate*, contributor*,
     edition?, version?,
     biblionote*, language*, script*, abstract*, status?, copyright,
-    docrelation*, editorialgroup, ics*
-
-preface =
-  element preface {
-    preface_abstract?, foreword, submitters?
-}
+    docrelation*, editorialgroup, ics*, security?
 
 
 }
-
-submitters = element submitters { Basic-Section }
-
 
 committee = element committee { 
-    "technical" | "planning" | "strategic-member-advisory"
+    attribute type { ( "technical" | "provisional" ) },
+    text
 }
 
-ogc-standard =
-  element ogc-standard {
+security = element security { text }
+
+nist-standard =
+  element nist-standard {
     bibdata, termdocsource*, preface, sections+, annex*, bibliography
  }
 

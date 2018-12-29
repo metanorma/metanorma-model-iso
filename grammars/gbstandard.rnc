@@ -32,12 +32,12 @@ BibliographicItem =
     attribute type { BibItemType }?,
     fetched?,
     (btitle+ | formattedref), bsource?, docidentifier*, docnumber?, bdate*, contributor*,
-    edition?, biblionote*, language*, script*, abstract?, status?, copyright?,
+    edition?, version?, biblionote*, language*, script*, abstract?, status?, copyright?,
     docrelation*, editorialgroup?, ics*, gbcommittee*, gbtype?, gbccs*, gbplannumber?
 
 BibData =
     attribute type { BibItemType }?,
-    btitle+, formattedref?, bsource?, docidentifier*, docnumber?, bdate*, contributor*, edition?,
+    btitle+, formattedref?, bsource?, docidentifier*, docnumber?, bdate*, contributor*, edition?, version?,
     biblionote*, language*, script*, abstract?, status?, copyright,
     docrelation*, editorialgroup?, ics*, gbcommittee*, gbtype, gbccs+, gbplannumber?
 
@@ -70,7 +70,7 @@ terms =
 # identical structure to iso-standard
 gb-standard =
   element gb-standard {
-    bibdata, version?, termdocsource*, preface, sections+, annex*, bibliography
+    bibdata, termdocsource*, preface, sections+, annex*, bibliography
   }     
 
 gbccs = element ccs { 

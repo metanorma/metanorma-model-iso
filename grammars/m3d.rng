@@ -108,9 +108,6 @@
   <define name="m3d-standard">
     <element name="m3d-standard">
       <ref name="bibdata"/>
-      <optional>
-        <ref name="version"/>
-      </optional>
       <zeroOrMore>
         <ref name="termdocsource"/>
       </zeroOrMore>

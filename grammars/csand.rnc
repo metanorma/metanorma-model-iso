@@ -21,6 +21,8 @@ figure =
      source?, tname?, ( figure+ |  ( (TextElement* | pre), note*, dl? ) )
   }
 
+
+
 status = element status { "proposal" | "working-draft" | "committee-draft" | "draft-standard" | "final-draft" | "published" | "withdrawn" | LocalizedString }
 
 BibItemType |=
@@ -31,7 +33,7 @@ BibliographicItem =
     attribute type { BibItemType }?,
     fetched?,
     (btitle+ | formattedref), bsource*, docidentifier*, docnumber?, bdate*, contributor*,
-    edition?,
+    edition?, version?,
     biblionote*, language*, script*, abstract*, status?, copyright?,
   docrelation*, series*, medium?, bplace*,
     extent*, accesslocation*, bclassification?, validity?,
@@ -41,7 +43,7 @@ BibliographicItem =
 BibData =
     attribute type { BibItemType }?,
     btitle+, formattedref?, bsource*, docidentifier*, docnumber?, bdate*, contributor*,
-    edition?,
+    edition?, version?,
     biblionote*, language*, script*, abstract*, status?, copyright,
     docrelation*, series*, medium?, bplace*,
     extent*, accesslocation*, bclassification?, validity?,
@@ -60,6 +62,6 @@ technical-committee = element committee {
 
 csand-standard =
   element csand-standard {
-    bibdata, version?, termdocsource*, preface, sections+, annex*, bibliography
+    bibdata, termdocsource*, preface, sections+, annex*, bibliography
  }
 

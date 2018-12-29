@@ -62,7 +62,7 @@ include "isostandard.rnc" {
 
   BibData =
     attribute type { BibItemType }?,
-    btitle+, formattedref?, bsource*, docidentifier*, docnumber?, bdate*, contributor*, edition?,
+    btitle+, formattedref?, bsource*, docidentifier*, docnumber?, bdate*, contributor*, edition?, version?,
     biblionote*, language*, submissionlanguage*, script*, abstract*, status?, copyright,
     docrelation*, editorialgroup, ics*, distribution?, session?
 
@@ -98,6 +98,6 @@ distribution = element distribution { "general" | "limited" | "restricted" }
 
 unece-standard =
 element unece-standard {
-  bibdata, version?, preface, sections+, annex*
+  bibdata, preface, sections+, annex*
 }
 

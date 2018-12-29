@@ -29,20 +29,11 @@ start = standard-document
 
 standard-document =
 element standard-document {
-  bibdata, version?, preface?, sections, annex*, references*
+  bibdata, preface?, sections, annex*, references*
 }
 
 bibdata =
   element bibdata { BibData }
-
-version =
-  element version {
-    vedition?, revision-date?, draft*
-}
-
-vedition = element edition { xsd:int }
-revision-date = element revision-date { xsd:date }
-draft = element draft { text }
 
 preface =
   element preface { content+ }
@@ -287,7 +278,7 @@ admonition =
 figure =
   element figure {
     attribute id { xsd:ID },
-     source?, tname?, (image | figure*), fn*, dl?, note*
+     source?, tname?, (image | pre | figure*), fn*, dl?, note*
   }
 
 TextElement =
@@ -418,7 +409,7 @@ dd =
 
 BibData =
     attribute type { BibItemType }?,
-    btitle+, formattedref?, bsource*, docidentifier*, docnumber?, bdate*, contributor*, edition?,
+    btitle+, formattedref?, bsource*, docidentifier*, docnumber?, bdate*, contributor*, edition?, version?,
     biblionote*, language*, script*, abstract?, status?, copyright, docrelation*
 
 }

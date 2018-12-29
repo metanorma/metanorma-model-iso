@@ -193,6 +193,9 @@
       <optional>
         <ref name="edition"/>
       </optional>
+      <optional>
+        <ref name="version"/>
+      </optional>
       <zeroOrMore>
         <ref name="biblionote"/>
       </zeroOrMore>
@@ -335,9 +338,6 @@
   <define name="unece-standard">
     <element name="unece-standard">
       <ref name="bibdata"/>
-      <optional>
-        <ref name="version"/>
-      </optional>
       <ref name="preface"/>
       <oneOrMore>
         <ref name="sections"/>

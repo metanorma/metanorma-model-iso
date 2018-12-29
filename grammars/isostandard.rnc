@@ -27,7 +27,7 @@ BibliographicItem =
     attribute type { BibItemType }?,
     fetched?,
     (btitle+ | formattedref), bsource*, docidentifier*, docnumber?, bdate*, contributor*,
-    edition?,
+    edition?, version?,
     biblionote*, language*, script*, abstract*, status?, copyright?,
   docrelation*, series*, medium?, bplace*,
     extent*, accesslocation*, bclassification?, validity?,
@@ -37,7 +37,7 @@ BibliographicItem =
 BibData =
     attribute type { BibItemType }?,
     btitle+, formattedref?, bsource*, docidentifier*, docnumber?, bdate*, contributor*,
-    edition?,
+    edition?, version?,
     biblionote*, language*, script*, abstract*, status?, copyright,
     docrelation*, series*, medium?, bplace*,
     extent*, accesslocation*, bclassification?, validity?,
@@ -241,7 +241,7 @@ preface =
 # grammar simple, we keep the references together
 iso-standard = 
   element iso-standard {
-    bibdata, version?, termdocsource*, preface, sections+, annex*, bibliography
+    bibdata, termdocsource*, preface, sections+, annex*, bibliography
   }
 
 bibliography =

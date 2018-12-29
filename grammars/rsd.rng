@@ -130,6 +130,9 @@
       <optional>
         <ref name="edition"/>
       </optional>
+      <optional>
+        <ref name="version"/>
+      </optional>
       <zeroOrMore>
         <ref name="biblionote"/>
       </zeroOrMore>
@@ -177,9 +180,6 @@
   <define name="rsd-standard">
     <element name="rsd-standard">
       <ref name="bibdata"/>
-      <optional>
-        <ref name="version"/>
-      </optional>
       <zeroOrMore>
         <ref name="termdocsource"/>
       </zeroOrMore>
