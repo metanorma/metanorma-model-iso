@@ -360,7 +360,8 @@ image =
     attribute src { xsd:anyURI }?,
     attribute imagetype { ("SVG" | "JPEG" | "GIF" | "PNG" | "PDF" ) },
     attribute width { xsd:int | "auto" }?,
-    attribute height { xsd:int | "auto" }? 
+    attribute height { xsd:int | "auto" }?,
+    attribute alt { text }?
 }
 
 stem =

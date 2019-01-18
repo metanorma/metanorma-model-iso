@@ -46,4 +46,4 @@ cp ogc.rng ../../metanorma-ogc/lib/asciidoctor/ogc
 cp biblio.rng ../../metanorma-nist/lib/asciidoctor/nist
 cp isodoc.rng ../../metanorma-nist/lib/asciidoctor/nist
 cat isostandard.rng | ruby -pe '$_.gsub!(/<grammar ns=\S+/, "<grammar") ' >  ../../metanorma-nist/lib/asciidoctor/nist/isostandard.rng
-cp nist.rng ../../metanorma-ogc/lib/asciidoctor/nist
+cp nist.rng ../../metanorma-nist/lib/asciidoctor/nist
