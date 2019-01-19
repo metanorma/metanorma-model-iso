@@ -1,6 +1,6 @@
 # Currently we inherit from a namespaced grammar, isostandard. Until we inherit from isodoc,
 # we cannot have a new default namespace: we will end up with a grammar with two different
-# namespaces, one for isostandard and one for csand additions. And we do not want that.
+# namespaces, one for isostandard and one for ietf additions. And we do not want that.
 
 include "isostandard.rnc" {
 
@@ -30,11 +30,10 @@ subfigure =
     (image | pre )
  }
 
-status = element status { "proposal" | "working-draft" | "committee-draft" | "draft-standard" | "final-draft" | "published" | "withdrawn" | LocalizedString }
+status = element status { "standard" | "informational" | "experimental" | "bcp" | "fyi" |
+"full-standard" | "historic" }
 
-
-BibItemType |=
-"policy-and-procedures" | "best-practices" | "supporting-document" | "report" | "legal" | "directives" | "proposal" | "standard"
+BibItemType |= "rfc" | "internet-draft"
 
 editorialgroup = element editorialgroup {
   committee+
@@ -42,11 +41,26 @@ editorialgroup = element editorialgroup {
 
 BibData =
     attribute type { BibItemType }?,
-    btitle+, formattedref?, bsource*, docidentifier*, docnumber?, bdate*, contributor*,
-    edition?, version?,
-    biblionote*, language*, script*, abstract*, status?, copyright,
-    docrelation*, editorialgroup, ics*, security?
+    (btitle+, formattedref), abbrevtitle?, 
+    bsource*, docidentifier*, docnumber?, bdate*, contributor*,
+    edition?, version?, biblionote*, language*, script*, 
+    abstract*, status?, copyright, docrelation*, series*, editorialgroup, ics*,
+    ipr?, iprExtract?, submissiontype?, area*, keyword*, consensus?
 
+abbrevtitle = element abbrevtitle { text }
+ipr = element ipr { text }
+iprExtract = element iprExtract { text }
+submissiontype = element submissiontype { text }
+area = element area { "art" | "gen" | "int" | "ops" | "rtg" | "sec" | "tsv" }
+keyword = element keyword { text }
+consensus = element consensus { xsd:boolean }
+
+contact =
+  ( address | phone | fax | email | uri )
+
+fax = element fax { text }
+
+TextElement |= iref | comment
 
 }
 
@@ -55,7 +69,13 @@ committee = element committee {
     text
 }
 
-security = element security { text }
+iref = element iref {
+  attribute item { text },
+  attribute subitem { text }?,
+  text?
+}
+
+comment = element comment { text }
 
 ietf-standard =
   element ietf-standard {
