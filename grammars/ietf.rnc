@@ -41,28 +41,36 @@ editorialgroup = element editorialgroup {
 
 BibData =
     attribute type { BibItemType }?,
-    (btitle+, formattedref), abbrevtitle?, 
+    (btitle+ | formattedref), abbrevtitle?, 
     bsource*, docidentifier*, docnumber?, bdate*, contributor*,
     edition?, version?, biblionote*, language*, script*, 
     abstract*, status?, copyright, docrelation*, series*, editorialgroup, ics*,
     ipr?, iprExtract?, submissiontype?, area*, keyword*, consensus?
 
-abbrevtitle = element abbrevtitle { text }
-ipr = element ipr { text }
-iprExtract = element iprExtract { text }
-submissiontype = element submissiontype { text }
-area = element area { "art" | "gen" | "int" | "ops" | "rtg" | "sec" | "tsv" }
 keyword = element keyword { text }
-consensus = element consensus { xsd:boolean }
 
 contact =
   ( address | phone | fax | email | uri )
 
-fax = element fax { text }
-
 TextElement |= iref | comment
 
+fullname =
+  element name {
+    (( prefix*, forename*, initial*, surname, addition* ) | completeName |
+    ( prefix*, forename*, initial*, surname, addition*, completeName )),
+    biblionote*
 }
+
+
+}
+
+fax = element fax { text }
+consensus = element consensus { xsd:boolean }
+area = element area { "art" | "gen" | "int" | "ops" | "rtg" | "sec" | "tsv" }
+abbrevtitle = element abbrevtitle { text }
+ipr = element ipr { text }
+iprExtract = element iprExtract { text }
+submissiontype = element submissiontype { text }
 
 committee = element committee {
     attribute type { ( "technical" | "provisional" ) },

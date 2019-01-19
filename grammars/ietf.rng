@@ -99,12 +99,12 @@
           <ref name="BibItemType"/>
         </attribute>
       </optional>
-      <group>
+      <choice>
         <oneOrMore>
           <ref name="btitle"/>
         </oneOrMore>
         <ref name="formattedref"/>
-      </group>
+      </choice>
       <optional>
         <ref name="abbrevtitle"/>
       </optional>
@@ -174,47 +174,9 @@
         <ref name="consensus"/>
       </optional>
     </define>
-    <define name="abbrevtitle">
-      <element name="abbrevtitle">
-        <text/>
-      </element>
-    </define>
-    <define name="ipr">
-      <element name="ipr">
-        <text/>
-      </element>
-    </define>
-    <define name="iprExtract">
-      <element name="iprExtract">
-        <text/>
-      </element>
-    </define>
-    <define name="submissiontype">
-      <element name="submissiontype">
-        <text/>
-      </element>
-    </define>
-    <define name="area">
-      <element name="area">
-        <choice>
-          <value>art</value>
-          <value>gen</value>
-          <value>int</value>
-          <value>ops</value>
-          <value>rtg</value>
-          <value>sec</value>
-          <value>tsv</value>
-        </choice>
-      </element>
-    </define>
     <define name="keyword">
       <element name="keyword">
         <text/>
-      </element>
-    </define>
-    <define name="consensus">
-      <element name="consensus">
-        <data type="boolean"/>
       </element>
     </define>
     <define name="contact">
@@ -226,18 +188,97 @@
         <ref name="uri"/>
       </choice>
     </define>
-    <define name="fax">
-      <element name="fax">
-        <text/>
-      </element>
-    </define>
     <define name="TextElement" combine="choice">
       <choice>
         <ref name="iref"/>
         <ref name="comment"/>
       </choice>
     </define>
+    <define name="fullname">
+      <element name="name">
+        <choice>
+          <group>
+            <zeroOrMore>
+              <ref name="prefix"/>
+            </zeroOrMore>
+            <zeroOrMore>
+              <ref name="forename"/>
+            </zeroOrMore>
+            <zeroOrMore>
+              <ref name="initial"/>
+            </zeroOrMore>
+            <ref name="surname"/>
+            <zeroOrMore>
+              <ref name="addition"/>
+            </zeroOrMore>
+          </group>
+          <ref name="completeName"/>
+          <group>
+            <zeroOrMore>
+              <ref name="prefix"/>
+            </zeroOrMore>
+            <zeroOrMore>
+              <ref name="forename"/>
+            </zeroOrMore>
+            <zeroOrMore>
+              <ref name="initial"/>
+            </zeroOrMore>
+            <ref name="surname"/>
+            <zeroOrMore>
+              <ref name="addition"/>
+            </zeroOrMore>
+            <ref name="completeName"/>
+          </group>
+        </choice>
+        <zeroOrMore>
+          <ref name="biblionote"/>
+        </zeroOrMore>
+      </element>
+    </define>
   </include>
+  <define name="fax">
+    <element name="fax">
+      <text/>
+    </element>
+  </define>
+  <define name="consensus">
+    <element name="consensus">
+      <data type="boolean"/>
+    </element>
+  </define>
+  <define name="area">
+    <element name="area">
+      <choice>
+        <value>art</value>
+        <value>gen</value>
+        <value>int</value>
+        <value>ops</value>
+        <value>rtg</value>
+        <value>sec</value>
+        <value>tsv</value>
+      </choice>
+    </element>
+  </define>
+  <define name="abbrevtitle">
+    <element name="abbrevtitle">
+      <text/>
+    </element>
+  </define>
+  <define name="ipr">
+    <element name="ipr">
+      <text/>
+    </element>
+  </define>
+  <define name="iprExtract">
+    <element name="iprExtract">
+      <text/>
+    </element>
+  </define>
+  <define name="submissiontype">
+    <element name="submissiontype">
+      <text/>
+    </element>
+  </define>
   <define name="committee">
     <element name="committee">
       <attribute name="type">
