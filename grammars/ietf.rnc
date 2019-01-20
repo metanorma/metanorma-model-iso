@@ -72,10 +72,7 @@ ipr = element ipr { text }
 iprExtract = element iprExtract { text }
 submissiontype = element submissiontype { text }
 
-committee = element committee {
-    attribute type { ( "technical" | "provisional" ) },
-    text
-}
+committee = element technical-committee { text }
 
 iref = element iref {
   attribute item { text },

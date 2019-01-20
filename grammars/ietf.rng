@@ -280,13 +280,7 @@
     </element>
   </define>
   <define name="committee">
-    <element name="committee">
-      <attribute name="type">
-        <choice>
-          <value>technical</value>
-          <value>provisional</value>
-        </choice>
-      </attribute>
+    <element name="technical-committee">
       <text/>
     </element>
   </define>
