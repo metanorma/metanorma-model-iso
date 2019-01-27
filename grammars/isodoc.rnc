@@ -213,6 +213,7 @@ quote-author =
 sourcecode =
   element sourcecode {
     attribute id { xsd:ID },
+    attribute lang { text }?,
     tname?, ( text | callout )+, annotation*, note*
   }
 
