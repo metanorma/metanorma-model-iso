@@ -48,10 +48,10 @@ bdate = element date {
   # ( ( bfrom, bto? ) | date_on )
   (
 (
-element from { ( xsd:gYear | xsd:date ) },
-element to { ( xsd:gYear | xsd:date ) }?
+element from { ISO8601Date },
+element to { ISO8601Date }?
 ) |
-element on { ( xsd:gYear | xsd:date | "--" ) }
+element on { ISO8601Date | "--" }
 )
 
 }
