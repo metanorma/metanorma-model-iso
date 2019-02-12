@@ -368,7 +368,7 @@ image =
 stem =
   element stem {
     attribute type { "MathML" | "AsciiMath" },
-    text
+     ( text | AnyElement )+
 }
 
 annotation =
