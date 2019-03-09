@@ -3,17 +3,19 @@
 This directory contains RelaxNG Compact and RelaxNG grammars for:
 
 * the base IsoDoc Standard Document model (`isodoc*`),
-* https://github.com/riboseinc/isodoc[ISO Standards] (`isostandard*`)
-* https://github.com/riboseinc/csd[CSD] (`csd*`)
-* https://github.com/riboseinc/gbdoc[China Standards] (`gbstandard*`)
+* https://github.com/metanorma/isodoc[ISO Standards] (`isostandard*`)
+* https://github.com/metanorma/metanorma-model-csd[CSD] (`csd*`)
+* https://github.com/metanorma/metanorma-model-gb[China Standards] (`gbstandard*`)
+* And so on
 
 RelaxNG Compact is the source specification for grammars; RelaxNG is generated
 from the RelaxNG Compact source, and is used by the Ruby gems validating
 specifications against the models:
 
-* https://github.com/riboseinc/asciidoctor-iso
-* https://github.com/riboseinc/asciidoctor-csd
-* https://github.com/riboseinc/asciidoctor-gb
+* https://github.com/metanorma/metanorma-iso
+* https://github.com/metanorma/metanorma-csd
+* https://github.com/metanorma/metanorma-gb
+* And so on
 
 Instances of IsoDoc are derived from the base grammar by creating a diff
 grammar, containing the productions (assignments) and declarations where the
