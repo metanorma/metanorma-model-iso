@@ -21,8 +21,8 @@ changes in their type.
 
 Models it depends on include:
 
-* Relaton Bibliography models: https://github.com/riboseinc/relaton-models[Relaton BibModels]
-* BasicDoc models: https://github.com/riboseinc/basicdoc-models[BasicDoc]
+* Relaton Bibliography models: https://github.com/metanorma/relaton-models[Relaton BibModels]
+* BasicDoc models: https://github.com/metanorma/basicdoc-models[BasicDoc]
 * Metanorma StandDoc models: https://github.com/metanorma/metanorma-model-standoc[StanDoc]
 
 Below, we show the UML diagrams for the base model and for ISO. The CSD, GB
