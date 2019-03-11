@@ -46,6 +46,8 @@ editorialgroup = element editorialgroup {
 
 workgroup = element workgroup { ItuGroup }
 
+TitleType |= "provisional"
+
 BibData =
     attribute type { BibItemType }?,
     btitle+, formattedref?, bsource, itudocidentifier*, itudocnumber?, bdate*, contributor*,
