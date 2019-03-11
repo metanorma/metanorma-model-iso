@@ -70,34 +70,43 @@
     <define name="status">
       <element name="status">
         <choice>
-          <value>proposal</value>
-          <value>working-draft</value>
-          <value>committee-draft</value>
-          <value>draft-standard</value>
-          <value>final-draft</value>
-          <value>published</value>
+          <value>in-force</value>
+          <value>superseded</value>
+          <value>in-force-prepublished</value>
           <value>withdrawn</value>
-          <ref name="LocalizedString"/>
         </choice>
       </element>
     </define>
     <define name="BibItemType" combine="choice">
       <choice>
-        <value>policy-and-procedures</value>
-        <value>best-practices</value>
-        <value>supporting-document</value>
-        <value>report</value>
-        <value>legal</value>
-        <value>directives</value>
-        <value>proposal</value>
-        <value>standard</value>
+        <value>recommendation</value>
+        <value>recommendation-supplement</value>
+        <value>recommendation-amendment</value>
+        <value>recommendation-corrigendum</value>
+        <value>recommendation-errata</value>
+        <value>recommendation-annex</value>
+        <value>focus-group</value>
+        <value>implementers-guide</value>
+        <value>technical-paper</value>
+        <value>technical-report</value>
+        <value>joint-itu-iso-iec</value>
       </choice>
     </define>
     <define name="editorialgroup">
       <element name="editorialgroup">
-        <oneOrMore>
-          <ref name="committee"/>
-        </oneOrMore>
+        <ref name="bureau"/>
+        <ref name="group"/>
+        <optional>
+          <ref name="subgroup"/>
+        </optional>
+        <optional>
+          <ref name="workgroup"/>
+        </optional>
+      </element>
+    </define>
+    <define name="workgroup">
+      <element name="workgroup">
+        <ref name="ItuGroup"/>
       </element>
     </define>
     <define name="BibData">
@@ -112,14 +121,12 @@
       <optional>
         <ref name="formattedref"/>
       </optional>
+      <ref name="bsource"/>
       <zeroOrMore>
-        <ref name="bsource"/>
-      </zeroOrMore>
-      <zeroOrMore>
-        <ref name="docidentifier"/>
+        <ref name="itudocidentifier"/>
       </zeroOrMore>
       <optional>
-        <ref name="docnumber"/>
+        <ref name="itudocnumber"/>
       </optional>
       <zeroOrMore>
         <ref name="bdate"/>
@@ -156,20 +163,146 @@
       <zeroOrMore>
         <ref name="ics"/>
       </zeroOrMore>
+      <zeroOrMore>
+        <ref name="series"/>
+      </zeroOrMore>
       <optional>
-        <ref name="security"/>
+        <ref name="provisionalName"/>
+      </optional>
+      <zeroOrMore>
+        <ref name="bkeyword"/>
+      </zeroOrMore>
+      <optional>
+        <ref name="recommendationstatus"/>
       </optional>
     </define>
   </include>
-  <define name="committee">
-    <element name="committee">
-      <attribute name="type">
+  <define name="recommendationstatus">
+    <element name="recommendationstatus">
+      <element name="from">
+        <ref name="ISO8601Date"/>
+      </element>
+      <element name="to">
+        <ref name="ISO8601Date"/>
+      </element>
+      <optional>
+        <ref name="approvalstage"/>
+      </optional>
+    </element>
+  </define>
+  <define name="approvalstage">
+    <element name="approvalstage">
+      <attribute name="process">
         <choice>
-          <value>technical</value>
-          <value>provisional</value>
+          <value>tap</value>
+          <value>aap</value>
         </choice>
       </attribute>
+      <choice>
+        <value>determined</value>
+        <value>in-force</value>
+        <value>a</value>
+        <value>lc</value>
+        <value>ac</value>
+        <value>lj</value>
+        <value>aj</value>
+        <value>na</value>
+        <value>ar</value>
+        <value>ri</value>
+        <value>at</value>
+        <value>sg</value>
+        <value>c</value>
+        <value>tap</value>
+      </choice>
+    </element>
+  </define>
+  <define name="provisionalName">
+    <element name="provisionalname">
       <text/>
+    </element>
+  </define>
+  <define name="bkeyword">
+    <element name="keyword">
+      <text/>
+    </element>
+  </define>
+  <define name="bureau">
+    <element name="bureau">
+      <choice>
+        <value>T</value>
+        <value>D</value>
+        <value>R</value>
+      </choice>
+    </element>
+  </define>
+  <define name="group">
+    <element name="group">
+      <ref name="ItuGroup"/>
+    </element>
+  </define>
+  <define name="subgroup">
+    <element name="subgroup">
+      <ref name="ItuGroup"/>
+    </element>
+  </define>
+  <define name="ItuGroup">
+    <optional>
+      <attribute name="type">
+        <choice>
+          <value>tsag</value>
+          <value>study-group</value>
+          <value>work-group</value>
+        </choice>
+      </attribute>
+    </optional>
+    <ref name="tname"/>
+    <optional>
+      <ref name="groupacronym"/>
+    </optional>
+    <optional>
+      <ref name="groupperiod"/>
+    </optional>
+  </define>
+  <define name="groupacronym">
+    <element name="acronym">
+      <text/>
+    </element>
+  </define>
+  <define name="groupperiod">
+    <element name="period">
+      <ref name="groupperiodstart"/>
+      <optional>
+        <ref name="groupperiodend"/>
+      </optional>
+    </element>
+  </define>
+  <define name="groupperiodstart">
+    <element name="start">
+      <data type="gYear"/>
+    </element>
+  </define>
+  <define name="groupperiodend">
+    <element name="end">
+      <data type="gYear"/>
+    </element>
+  </define>
+  <define name="itudocidentifier">
+    <element name="docidentifier">
+      <optional>
+        <attribute name="type">
+          <value>ITU</value>
+        </attribute>
+      </optional>
+      <data type="string">
+        <param name="pattern">ITU-[RTD] [AD-VX-Z]\.[0-9]+</param>
+      </data>
+    </element>
+  </define>
+  <define name="itudocnumber">
+    <element name="docnumber">
+      <data type="string">
+        <param name="pattern">[AD-VX-Z]\.[0-9]+</param>
+      </data>
     </element>
   </define>
   <define name="itu">

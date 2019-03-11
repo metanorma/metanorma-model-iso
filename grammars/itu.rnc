@@ -30,39 +30,76 @@ subfigure =
     (image | pre )
  }
 
-status = element status { "proposal" | "working-draft" | "committee-draft" | "draft-standard" | "final-draft" | "published" | "withdrawn" | LocalizedString }
+status = element status { "in-force" | "superseded" | "in-force-prepublished" | "withdrawn" }
 
 
 BibItemType |=
-"policy-and-procedures" | "best-practices" | "supporting-document" | "report" | "legal" | "directives" | "proposal" | 
-        "standard" 
+"recommendation" | "recommendation-supplement" | "recommendation-amendment" | "recommendation-corrigendum" | "recommendation-errata" |
+"recommendation-annex" | "focus-group" | "implementers-guide" | "technical-paper" | "technical-report" | "joint-itu-iso-iec" 
 
 editorialgroup = element editorialgroup {
-  committee+
+  bureau,
+  group,
+  subgroup?,
+  workgroup?
 }
+
+workgroup = element workgroup { ItuGroup }
 
 BibData =
     attribute type { BibItemType }?,
-    btitle+, formattedref?, bsource*, itudocidentifier*, itudocnumber?, bdate*, contributor*,
+    btitle+, formattedref?, bsource, itudocidentifier*, itudocnumber?, bdate*, contributor*,
     edition?, version?,
     biblionote*, language*, script*, abstract*, status?, copyright,
-    docrelation*, editorialgroup, ics*, security?
-
+    docrelation*, editorialgroup, ics*, series*, provisionalName?, bkeyword*,
+    recommendationstatus?
 
 }
+
+recommendationstatus = element recommendationstatus {
+element from { ISO8601Date },
+element to { ISO8601Date },
+approvalstage?
+}
+
+approvalstage = element approvalstage {
+  attribute process { "tap" | "aap" },
+  ( "determined" | "in-force" | "a" | "lc" | "ac" | "lj" | "aj" | "na" | "ar" | "ri" | "at" | "sg" | "c" | "tap" )
+}
+
+provisionalName = element provisionalname { text }
+
+bkeyword = element keyword { text }
+
+bureau = element bureau { "T" | "D" | "R" }
+
+group = element group { ItuGroup }
+
+subgroup = element subgroup { ItuGroup }
+
+ItuGroup =
+  attribute type { "tsag" | "study-group" | "work-group" }?,
+  tname,
+  groupacronym?,
+  groupperiod?
+
+groupacronym = element acronym { text }
+
+groupperiod = element period {
+  groupperiodstart,
+  groupperiodend?
+}
+
+groupperiodstart = element start { xsd:gYear }
+groupperiodend = element end { xsd:gYear }
 
 itudocidentifier = element docidentifier {
   attribute type { "ITU" }?,
-  xsd:string { pattern = "ITU-[RTD] [AD-VX-Z]\.[0-9]+" }]
+  xsd:string { pattern = "ITU-[RTD] [AD-VX-Z]\.[0-9]+" }
 }
 
 itudocnumber = element docnumber {
-  xsd:string { pattern = "[AD-VX-Z]\.[0-9]+" }]
-}
-
-committee = element committee { 
-    attribute type { ( "technical" | "provisional" ) },
-    text
+  xsd:string { pattern = "[AD-VX-Z]\.[0-9]+" }
 }
 
 itu =
