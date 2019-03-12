@@ -46,14 +46,12 @@ editorialgroup = element editorialgroup {
 
 workgroup = element workgroup { ItuGroup }
 
-TitleType |= "provisional"
-
 BibData =
     attribute type { BibItemType }?,
-    btitle+, formattedref?, bsource, itudocidentifier*, itudocnumber?, bdate*, contributor*,
+    btitle+, formattedref?, bsource, docidentifier*, itudocnumber?, bdate*, contributor*,
     edition?, version?,
     biblionote*, language*, script*, abstract*, status?, copyright,
-    docrelation*, editorialgroup, ics*, series*, provisionalName?, bkeyword*,
+    docrelation*, editorialgroup, ics*, series*, bkeyword*,
     recommendationstatus?
 
 }
@@ -68,8 +66,6 @@ approvalstage = element approvalstage {
   attribute process { "tap" | "aap" },
   ( "determined" | "in-force" | "a" | "lc" | "ac" | "lj" | "aj" | "na" | "ar" | "ri" | "at" | "sg" | "c" | "tap" )
 }
-
-provisionalName = element provisionalname { text }
 
 bkeyword = element keyword { text }
 
@@ -94,11 +90,6 @@ groupperiod = element period {
 
 groupperiodstart = element start { xsd:gYear }
 groupperiodend = element end { xsd:gYear }
-
-itudocidentifier = element docidentifier {
-  attribute type { "ITU" }?,
-  xsd:string { pattern = "ITU-[RTD] [AD-VX-Z]\.[0-9]+" }
-}
 
 itudocnumber = element docnumber {
   xsd:string { pattern = "[AD-VX-Z]\.[0-9]+" }
