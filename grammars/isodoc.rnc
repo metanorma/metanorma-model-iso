@@ -17,6 +17,8 @@
 
 grammar {
 
+include "reqt.rnc" { }
+
 include "biblio.rnc" {
 
 status =

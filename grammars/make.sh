@@ -6,6 +6,11 @@ cd ../..
 cp bib-models/grammars/biblio.rnc .
 cp bib-models/grammars/biblio.rng .
 
+cd metanorma-requirements-models/grammars
+git pull
+cd ../..
+cp metanorma-requirements-models/grammars/reqt.rnc .
+
 gem list | grep rsec
 if [[ $? -ne 0 ]]; then
   gem install rsec
@@ -17,6 +22,7 @@ if [[ ! -d jing-trang ]]; then
   cd ..
 fi
 
+java -jar jing-trang/build/trang.jar -I rnc -O rng reqt.rnc reqt.rng
 java -jar jing-trang/build/trang.jar -I rnc -O rng isodoc.rnc isodoc.rng
 java -jar jing-trang/build/trang.jar -I rnc -O rng isostandard.rnc isostandard.rng
 java -jar jing-trang/build/trang.jar -I rnc -O rng csd.rnc csd.rng
