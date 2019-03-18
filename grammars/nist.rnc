@@ -13,8 +13,6 @@ docidentifier = element docidentifier {
   text
 }
 
-btitle = element title { FormattedString }
-
 figure =
   element figure {
     attribute id { xsd:ID },
@@ -30,7 +28,10 @@ subfigure =
     (image | pre )
  }
 
-status = element status { "proposal" | "working-draft" | "committee-draft" | "draft-standard" | "final-draft" | "published" | "withdrawn" | LocalizedString }
+status =
+  element status {
+     stage, iteration? 
+  }
 
 
 BibItemType |=
@@ -41,9 +42,26 @@ editorialgroup = element editorialgroup {
   committee+
 }
 
+btitle =
+  element title {
+     FormattedString |
+    ( title-main, title-sub?, title-part? )
+}
+
+stage = element stage { "internal-draft" | "public-draft" | "final" | "retired-draft" | "withdrawn" }
+
+iteration = element iteration { text }
+
+title-main =
+  element title-main { FormattedString }
+
+title-part =
+  element title-part { FormattedString }
+
+
 BibData =
     attribute type { BibItemType }?,
-    btitle+, formattedref?, bsource*, docidentifier*, docnumber?, bdate*, contributor*,
+    btitle+, formattedref?, bsource*, nistdocidentifier*, docnumber?, bdate*, contributor*,
     edition?, version?,
     biblionote*, language*, script*, abstract*, status?, copyright,
     docrelation*, editorialgroup, ics*, security?
@@ -55,6 +73,16 @@ committee = element committee {
     attribute type { ( "technical" | "provisional" ) },
     text
 }
+
+title-sub =
+  element title-sub { FormattedString }
+
+nistdocidentifier =
+  element docidentifier {
+    attribute type { "nist" },
+    attribute part { xsd:int }?,
+    text
+   }
 
 security = element security { text }
 

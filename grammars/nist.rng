@@ -22,11 +22,6 @@
         <text/>
       </element>
     </define>
-    <define name="btitle">
-      <element name="title">
-        <ref name="FormattedString"/>
-      </element>
-    </define>
     <define name="figure">
       <element name="figure">
         <attribute name="id">
@@ -69,16 +64,10 @@
     </define>
     <define name="status">
       <element name="status">
-        <choice>
-          <value>proposal</value>
-          <value>working-draft</value>
-          <value>committee-draft</value>
-          <value>draft-standard</value>
-          <value>final-draft</value>
-          <value>published</value>
-          <value>withdrawn</value>
-          <ref name="LocalizedString"/>
-        </choice>
+        <ref name="stage"/>
+        <optional>
+          <ref name="iteration"/>
+        </optional>
       </element>
     </define>
     <define name="BibItemType" combine="choice">
@@ -100,6 +89,48 @@
         </oneOrMore>
       </element>
     </define>
+    <define name="btitle">
+      <element name="title">
+        <choice>
+          <ref name="FormattedString"/>
+          <group>
+            <ref name="title-main"/>
+            <optional>
+              <ref name="title-sub"/>
+            </optional>
+            <optional>
+              <ref name="title-part"/>
+            </optional>
+          </group>
+        </choice>
+      </element>
+    </define>
+    <define name="stage">
+      <element name="stage">
+        <choice>
+          <value>internal-draft</value>
+          <value>public-draft</value>
+          <value>final</value>
+          <value>retired-draft</value>
+          <value>withdrawn</value>
+        </choice>
+      </element>
+    </define>
+    <define name="iteration">
+      <element name="iteration">
+        <text/>
+      </element>
+    </define>
+    <define name="title-main">
+      <element name="title-main">
+        <ref name="FormattedString"/>
+      </element>
+    </define>
+    <define name="title-part">
+      <element name="title-part">
+        <ref name="FormattedString"/>
+      </element>
+    </define>
     <define name="BibData">
       <optional>
         <attribute name="type">
@@ -116,7 +147,7 @@
         <ref name="bsource"/>
       </zeroOrMore>
       <zeroOrMore>
-        <ref name="docidentifier"/>
+        <ref name="nistdocidentifier"/>
       </zeroOrMore>
       <optional>
         <ref name="docnumber"/>
@@ -169,6 +200,24 @@
           <value>provisional</value>
         </choice>
       </attribute>
+      <text/>
+    </element>
+  </define>
+  <define name="title-sub">
+    <element name="title-sub">
+      <ref name="FormattedString"/>
+    </element>
+  </define>
+  <define name="nistdocidentifier">
+    <element name="docidentifier">
+      <attribute name="type">
+        <value>nist</value>
+      </attribute>
+      <optional>
+        <attribute name="part">
+          <data type="int"/>
+        </attribute>
+      </optional>
       <text/>
     </element>
   </define>
