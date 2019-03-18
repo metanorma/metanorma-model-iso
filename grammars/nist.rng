@@ -196,9 +196,9 @@
       <optional>
         <ref name="security"/>
       </optional>
-      <zeroOrMore>
+      <oneOrMore>
         <ref name="keyword"/>
-      </zeroOrMore>
+      </oneOrMore>
       <ref name="commentperiod"/>
     </define>
   </include>
