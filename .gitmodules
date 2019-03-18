@@ -1,3 +1,6 @@
 [submodule "grammars/bib-models"]
 	path = grammars/bib-models
 	url = https://github.com/riboseinc/bib-models
+[submodule "grammars/metanorma-requirements-models"]
+	path = grammars/metanorma-requirements-models
+	url = https://github.com/metanorma/metanorma-requirements-models.git
