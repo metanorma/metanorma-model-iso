@@ -5,6 +5,7 @@ cp reqt.rng ../../metanorma-iso/lib/asciidoctor/iso
 cp biblio.rng ../../metanorma-iso/lib/asciidoctor/iso
 cp isodoc.rng ../../metanorma-iso/lib/asciidoctor/iso
 cp isostandard.rng ../../metanorma-iso/lib/asciidoctor/iso
+cp reqt.rng ../../metanorma-gb/lib/asciidoctor/gb
 cp biblio.rng ../../metanorma-gb/lib/asciidoctor/gb
 cp isodoc.rng ../../metanorma-gb/lib/asciidoctor/gb
 cat isostandard.rng | ruby -pe '$_.gsub!(/<grammar ns=\S+/, "<grammar") ' >  ../../metanorma-gb/lib/asciidoctor/gb/isostandard.rng
