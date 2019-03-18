@@ -64,9 +64,8 @@ BibData =
     btitle+, formattedref?, bsource*, nistdocidentifier*, docnumber?, bdate*, contributor*,
     edition?, version?,
     biblionote*, language*, script*, abstract*, status?, copyright,
-    docrelation*, editorialgroup, ics*, security?
-
-
+    docrelation*, nistseries?, nistsubseries?, editorialgroup, ics*, security?, keyword*,
+    commentperiod
 }
 
 committee = element committee { 
@@ -85,6 +84,34 @@ nistdocidentifier =
    }
 
 security = element security { text }
+
+nistseries = element series {
+   attribute type { "main" },
+   nistseriestitle,
+   abbreviation?
+}
+
+nistsubseries = element series {
+   attribute type { "secondary" },
+   nistsubseriestitle
+}
+
+nistseriestitle = element title {
+  "nist-ams" | "building-science" | "nist-fips" | "nist-gcr" | "nist-hb" |
+  "itl-bulletin" | "jpcrd" | "nist-jres" | "letter-circular" | "nist-monograph" |
+  "nist-ncstar" | "nist-nsrds" | "nistir" | "product-stadnards" | "nist-sp" |
+  "nist-tn" | "other" | "csrc-white-paper" | "csrc-book" | "csrc-use-case" |
+  "csrc-building-block"
+}
+
+nistsubseriestitle = element title {
+  "computer-security" | "information-security"
+}
+
+commentperiod = element commentperiod {
+element from { ISO8601Date },
+element to { ISO8601Date }?
+}
 
 nist-standard =
   element nist-standard {

@@ -183,6 +183,12 @@
       <zeroOrMore>
         <ref name="docrelation"/>
       </zeroOrMore>
+      <optional>
+        <ref name="nistseries"/>
+      </optional>
+      <optional>
+        <ref name="nistsubseries"/>
+      </optional>
       <ref name="editorialgroup"/>
       <zeroOrMore>
         <ref name="ics"/>
@@ -190,6 +196,10 @@
       <optional>
         <ref name="security"/>
       </optional>
+      <zeroOrMore>
+        <ref name="keyword"/>
+      </zeroOrMore>
+      <ref name="commentperiod"/>
     </define>
   </include>
   <define name="committee">
@@ -224,6 +234,72 @@
   <define name="security">
     <element name="security">
       <text/>
+    </element>
+  </define>
+  <define name="nistseries">
+    <element name="series">
+      <attribute name="type">
+        <value>main</value>
+      </attribute>
+      <ref name="nistseriestitle"/>
+      <optional>
+        <ref name="abbreviation"/>
+      </optional>
+    </element>
+  </define>
+  <define name="nistsubseries">
+    <element name="series">
+      <attribute name="type">
+        <value>secondary</value>
+      </attribute>
+      <ref name="nistsubseriestitle"/>
+    </element>
+  </define>
+  <define name="nistseriestitle">
+    <element name="title">
+      <choice>
+        <value>nist-ams</value>
+        <value>building-science</value>
+        <value>nist-fips</value>
+        <value>nist-gcr</value>
+        <value>nist-hb</value>
+        <value>itl-bulletin</value>
+        <value>jpcrd</value>
+        <value>nist-jres</value>
+        <value>letter-circular</value>
+        <value>nist-monograph</value>
+        <value>nist-ncstar</value>
+        <value>nist-nsrds</value>
+        <value>nistir</value>
+        <value>product-stadnards</value>
+        <value>nist-sp</value>
+        <value>nist-tn</value>
+        <value>other</value>
+        <value>csrc-white-paper</value>
+        <value>csrc-book</value>
+        <value>csrc-use-case</value>
+        <value>csrc-building-block</value>
+      </choice>
+    </element>
+  </define>
+  <define name="nistsubseriestitle">
+    <element name="title">
+      <choice>
+        <value>computer-security</value>
+        <value>information-security</value>
+      </choice>
+    </element>
+  </define>
+  <define name="commentperiod">
+    <element name="commentperiod">
+      <element name="from">
+        <ref name="ISO8601Date"/>
+      </element>
+      <optional>
+        <element name="to">
+          <ref name="ISO8601Date"/>
+        </element>
+      </optional>
     </element>
   </define>
   <define name="nist-standard">
