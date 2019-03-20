@@ -98,9 +98,6 @@
             <optional>
               <ref name="title-sub"/>
             </optional>
-            <optional>
-              <ref name="title-part"/>
-            </optional>
           </group>
         </choice>
       </element>
@@ -123,11 +120,6 @@
     </define>
     <define name="title-main">
       <element name="title-main">
-        <ref name="FormattedString"/>
-      </element>
-    </define>
-    <define name="title-part">
-      <element name="title-part">
         <ref name="FormattedString"/>
       </element>
     </define>
@@ -223,11 +215,6 @@
       <attribute name="type">
         <value>nist</value>
       </attribute>
-      <optional>
-        <attribute name="part">
-          <data type="int"/>
-        </attribute>
-      </optional>
       <text/>
     </element>
   </define>

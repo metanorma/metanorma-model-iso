@@ -45,7 +45,7 @@ editorialgroup = element editorialgroup {
 btitle =
   element title {
      FormattedString |
-    ( title-main, title-sub?, title-part? )
+    ( title-main, title-sub? )
 }
 
 stage = element stage { "internal-draft" | "public-draft" | "final" | "retired-draft" | "withdrawn" }
@@ -54,9 +54,6 @@ iteration = element iteration { text }
 
 title-main =
   element title-main { FormattedString }
-
-title-part =
-  element title-part { FormattedString }
 
 
 BibData =
@@ -79,7 +76,6 @@ title-sub =
 nistdocidentifier =
   element docidentifier {
     attribute type { "nist" },
-    attribute part { xsd:int }?,
     text
    }
 
