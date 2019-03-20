@@ -287,6 +287,11 @@
           <ref name="ISO8601Date"/>
         </element>
       </optional>
+      <optional>
+        <element name="extended">
+          <ref name="ISO8601Date"/>
+        </element>
+      </optional>
     </element>
   </define>
   <define name="nist-standard">

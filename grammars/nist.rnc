@@ -106,7 +106,8 @@ nistsubseriestitle = element title {
 
 commentperiod = element commentperiod {
 element from { ISO8601Date },
-element to { ISO8601Date }?
+element to { ISO8601Date }?,
+element extended { ISO8601Date }?
 }
 
 nist-standard =
