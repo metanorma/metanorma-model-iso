@@ -56,6 +56,12 @@ title-main =
   element title-main { FormattedString }
 
 
+preface =
+  element preface {
+    authority, preface_abstract?, foreword?, introduction?,
+    clause*, reviewernote?, executivesummary?
+}
+
 BibData =
     attribute type { BibItemType }?,
     btitle+, formattedref?, bsource*, nistdocidentifier*, docnumber?, bdate*, contributor*,
@@ -108,6 +114,17 @@ commentperiod = element commentperiod {
 element from { ISO8601Date },
 element to { ISO8601Date }?,
 element extended { ISO8601Date }?
+}
+
+reviewernote = element reviewernote { Basic-Section }
+executivesummary = element executivesummary { Basic-Section }
+
+authority = element authority {
+element authority1 { Basic-Section },
+element authority2 { Basic-Section },
+element authority3 { Basic-Section },
+element authority4 { Basic-Section },
+element authority5 { Basic-Section }
 }
 
 nist-standard =

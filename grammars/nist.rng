@@ -123,6 +123,29 @@
         <ref name="FormattedString"/>
       </element>
     </define>
+    <define name="preface">
+      <element name="preface">
+        <ref name="authority"/>
+        <optional>
+          <ref name="preface_abstract"/>
+        </optional>
+        <optional>
+          <ref name="foreword"/>
+        </optional>
+        <optional>
+          <ref name="introduction"/>
+        </optional>
+        <zeroOrMore>
+          <ref name="clause"/>
+        </zeroOrMore>
+        <optional>
+          <ref name="reviewernote"/>
+        </optional>
+        <optional>
+          <ref name="executivesummary"/>
+        </optional>
+      </element>
+    </define>
     <define name="BibData">
       <optional>
         <attribute name="type">
@@ -292,6 +315,35 @@
           <ref name="ISO8601Date"/>
         </element>
       </optional>
+    </element>
+  </define>
+  <define name="reviewernote">
+    <element name="reviewernote">
+      <ref name="Basic-Section"/>
+    </element>
+  </define>
+  <define name="executivesummary">
+    <element name="executivesummary">
+      <ref name="Basic-Section"/>
+    </element>
+  </define>
+  <define name="authority">
+    <element name="authority">
+      <element name="authority1">
+        <ref name="Basic-Section"/>
+      </element>
+      <element name="authority2">
+        <ref name="Basic-Section"/>
+      </element>
+      <element name="authority3">
+        <ref name="Basic-Section"/>
+      </element>
+      <element name="authority4">
+        <ref name="Basic-Section"/>
+      </element>
+      <element name="authority5">
+        <ref name="Basic-Section"/>
+      </element>
     </element>
   </define>
   <define name="nist-standard">
