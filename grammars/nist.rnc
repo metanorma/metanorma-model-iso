@@ -38,14 +38,10 @@ BibItemType |=
 "policy-and-procedures" | "best-practices" | "supporting-document" | "report" | "legal" | "directives" | "proposal" | 
         "standard" 
 
+TitleType |= "document-class"
+
 editorialgroup = element editorialgroup {
   committee+
-}
-
-btitle =
-  element title {
-     FormattedString |
-    ( title-main, title-sub? )
 }
 
 stage = element stage { "internal-draft" | "public-draft" | "final" | "retired-draft" | "withdrawn" }

@@ -82,24 +82,14 @@
         <value>standard</value>
       </choice>
     </define>
+    <define name="TitleType" combine="choice">
+      <value>document-class</value>
+    </define>
     <define name="editorialgroup">
       <element name="editorialgroup">
         <oneOrMore>
           <ref name="committee"/>
         </oneOrMore>
-      </element>
-    </define>
-    <define name="btitle">
-      <element name="title">
-        <choice>
-          <ref name="FormattedString"/>
-          <group>
-            <ref name="title-main"/>
-            <optional>
-              <ref name="title-sub"/>
-            </optional>
-          </group>
-        </choice>
       </element>
     </define>
     <define name="stage">
