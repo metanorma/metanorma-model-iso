@@ -35,8 +35,9 @@ status =
 
 
 BibItemType |=
-"policy-and-procedures" | "best-practices" | "supporting-document" | "report" | "legal" | "directives" | "proposal" | 
         "standard" 
+
+DocRelationType |= "obsoletedBy" | "supersedes" | "supersededBy"
 
 TitleType |= "document-class"
 

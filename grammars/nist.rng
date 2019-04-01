@@ -71,15 +71,13 @@
       </element>
     </define>
     <define name="BibItemType" combine="choice">
+      <value>standard</value>
+    </define>
+    <define name="DocRelationType" combine="choice">
       <choice>
-        <value>policy-and-procedures</value>
-        <value>best-practices</value>
-        <value>supporting-document</value>
-        <value>report</value>
-        <value>legal</value>
-        <value>directives</value>
-        <value>proposal</value>
-        <value>standard</value>
+        <value>obsoletedBy</value>
+        <value>supersedes</value>
+        <value>supersededBy</value>
       </choice>
     </define>
     <define name="TitleType" combine="choice">
