@@ -55,8 +55,7 @@ title-main =
 
 preface =
   element preface {
-    authority, preface_abstract?, foreword?, introduction?,
-    clause*, reviewernote?, executivesummary?
+    authority, preface_abstract?, foreword?, clause*, reviewernote?, executivesummary?
 }
 
 BibData =

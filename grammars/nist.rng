@@ -120,9 +120,6 @@
         <optional>
           <ref name="foreword"/>
         </optional>
-        <optional>
-          <ref name="introduction"/>
-        </optional>
         <zeroOrMore>
           <ref name="clause"/>
         </zeroOrMore>
