@@ -45,7 +45,8 @@ editorialgroup = element editorialgroup {
   committee+
 }
 
-stage = element stage { "internal-draft" | "public-draft" | "final" | "retired-draft" | "withdrawn" }
+stage = element stage { "draft-internal" | "draft-wip" | "draft-prelim" | "draft-public" | "draft-retire" | 
+    "draft-withdrawn" | "final" | "final-review" | "final-withdrawn" }
 
 iteration = element iteration { text }
 

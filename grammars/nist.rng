@@ -93,11 +93,15 @@
     <define name="stage">
       <element name="stage">
         <choice>
-          <value>internal-draft</value>
-          <value>public-draft</value>
+          <value>draft-internal</value>
+          <value>draft-wip</value>
+          <value>draft-prelim</value>
+          <value>draft-public</value>
+          <value>draft-retire</value>
+          <value>draft-withdrawn</value>
           <value>final</value>
-          <value>retired-draft</value>
-          <value>withdrawn</value>
+          <value>final-review</value>
+          <value>final-withdrawn</value>
         </choice>
       </element>
     </define>
