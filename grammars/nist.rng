@@ -327,9 +327,11 @@
       <element name="authority3">
         <ref name="Basic-Section"/>
       </element>
-      <element name="authority4">
-        <ref name="Basic-Section"/>
-      </element>
+      <optional>
+        <element name="authority4">
+          <ref name="Basic-Section"/>
+        </element>
+      </optional>
       <element name="authority5">
         <ref name="Basic-Section"/>
       </element>

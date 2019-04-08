@@ -120,7 +120,7 @@ authority = element authority {
 element authority1 { Basic-Section },
 element authority2 { Basic-Section },
 element authority3 { Basic-Section },
-element authority4 { Basic-Section },
+element authority4 { Basic-Section }?,
 element authority5 { Basic-Section }
 }
 
