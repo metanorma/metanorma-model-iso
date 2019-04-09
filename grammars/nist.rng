@@ -80,6 +80,9 @@
         <value>supersededBy</value>
       </choice>
     </define>
+    <define name="BibliographicDateType" combine="choice">
+      <value>abandoned</value>
+    </define>
     <define name="TitleType" combine="choice">
       <value>document-class</value>
     </define>

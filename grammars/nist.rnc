@@ -39,6 +39,8 @@ BibItemType |=
 
 DocRelationType |= "obsoletedBy" | "supersedes" | "supersededBy"
 
+BibliographicDateType |= "abandoned"
+
 TitleType |= "document-class"
 
 editorialgroup = element editorialgroup {
