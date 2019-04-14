@@ -81,7 +81,6 @@ title-sub =
 nistdocidentifier =
   element docidentifier {
     attribute type { "nist" },
-    attribute volume { text }?,
     text
    }
 
