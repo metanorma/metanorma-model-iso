@@ -64,7 +64,7 @@ preface =
 BibData =
     attribute type { BibItemType }?,
     btitle+, formattedref?, bsource*, nistdocidentifier*, docnumber?, bdate*, contributor*,
-    edition?, version?,
+    edition?, revision?, version?,
     biblionote*, language*, script*, abstract*, status?, copyright,
     docrelation*, nistseries?, nistsubseries?, editorialgroup, ics*, security?, keyword+,
     commentperiod
@@ -125,6 +125,8 @@ element authority3 { Basic-Section },
 element authority4 { Basic-Section }?,
 element authority5 { Basic-Section }
 }
+
+revision = element revision { text }
 
 nist-standard =
   element nist-standard {

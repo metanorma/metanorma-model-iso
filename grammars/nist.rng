@@ -169,6 +169,9 @@
         <ref name="edition"/>
       </optional>
       <optional>
+        <ref name="revision"/>
+      </optional>
+      <optional>
         <ref name="version"/>
       </optional>
       <zeroOrMore>
@@ -338,6 +341,11 @@
       <element name="authority5">
         <ref name="Basic-Section"/>
       </element>
+    </element>
+  </define>
+  <define name="revision">
+    <element name="revision">
+      <text/>
     </element>
   </define>
   <define name="nist-standard">
