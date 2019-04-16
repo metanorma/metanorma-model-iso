@@ -288,16 +288,19 @@ TextElement =
   text | em | eref | strong | stem | sub | sup | tt | keyword |
   strike | smallcap | xref | br | hyperlink | hr | pagebreak | bookmark
 
+PureTextElement =
+  text | em | strong | sub | sup | tt | keyword | strike | smallcap | br
+
 source = element source { TypedUri }
 
-em = element em { text }
-strong = element strong { text }
-tt = element tt { text }
-keyword = element keyword { text }
-sub = element sub { text }
-sup = element sup { text }
-strike = element strike { text }
-smallcap = element smallcap { text }
+em = element em { PureTextElement* }
+strong = element strong { PureTextElement* }
+tt = element tt { PureTextElement* }
+keyword = element keyword { PureTextElement* }
+sub = element sub { PureTextElement* }
+sup = element sup { PureTextElement* }
+strike = element strike { PureTextElement* }
+smallcap = element smallcap { PureTextElement* }
 
 br = element br { empty }
 hr = element hr { empty }
