@@ -6,6 +6,8 @@ include "isostandard.rnc" {
 
 start = nist-standard
 
+btitle = element title { TypedTitleString }
+
 language = element language { ( "en" ) }
 
 docidentifier = element docidentifier {
@@ -80,7 +82,7 @@ title-sub =
 
 nistdocidentifier =
   element docidentifier {
-    attribute type { "nist" },
+    attribute type { "nist" | "nist-long" }, 
     text
    }
 

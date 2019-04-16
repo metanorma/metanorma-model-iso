@@ -9,6 +9,11 @@
     <start>
       <ref name="nist-standard"/>
     </start>
+    <define name="btitle">
+      <element name="title">
+        <ref name="TypedTitleString"/>
+      </element>
+    </define>
     <define name="language">
       <element name="language">
         <value>en</value>
@@ -231,7 +236,10 @@
   <define name="nistdocidentifier">
     <element name="docidentifier">
       <attribute name="type">
-        <value>nist</value>
+        <choice>
+          <value>nist</value>
+          <value>nist-long</value>
+        </choice>
       </attribute>
       <text/>
     </element>
