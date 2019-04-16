@@ -124,6 +124,7 @@ reviewernote = element reviewernote { Basic-Section }
 executivesummary = element executivesummary { Basic-Section }
 
 authority = element authority {
+element title { text }?,
 element authority1 { Basic-Section },
 element authority2 { Basic-Section },
 element authority3 { Basic-Section },

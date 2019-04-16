@@ -359,6 +359,11 @@
   </define>
   <define name="authority">
     <element name="authority">
+      <optional>
+        <element name="title">
+          <text/>
+        </element>
+      </optional>
       <element name="authority1">
         <ref name="Basic-Section"/>
       </element>
