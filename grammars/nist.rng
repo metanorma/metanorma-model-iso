@@ -167,6 +167,47 @@
         </optional>
       </element>
     </define>
+    <define name="annex">
+      <element name="annex">
+        <optional>
+          <attribute name="id">
+            <data type="ID"/>
+          </attribute>
+        </optional>
+        <optional>
+          <attribute name="inline-header">
+            <data type="boolean"/>
+          </attribute>
+        </optional>
+        <optional>
+          <attribute name="obligation">
+            <choice>
+              <value>normative</value>
+              <value>informative</value>
+            </choice>
+          </attribute>
+        </optional>
+        <optional>
+          <ref name="section-title"/>
+        </optional>
+        <zeroOrMore>
+          <!--
+            allow hanging paragraps in annexes: they introduce lists
+            ( paragraph-with-footnote | table | note | formula | admonition | ol | ul | dl | figure | quote | sourcecode | review | example )*,
+          -->
+          <ref name="BasicBlock"/>
+        </zeroOrMore>
+        <zeroOrMore>
+          <ref name="note"/>
+        </zeroOrMore>
+        <choice>
+          <zeroOrMore>
+            <ref name="clause-hanging-paragraph-with-footnote"/>
+          </zeroOrMore>
+          <ref name="terms"/>
+        </choice>
+      </element>
+    </define>
     <define name="BibData">
       <optional>
         <attribute name="type">

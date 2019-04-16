@@ -35,7 +35,6 @@ status =
      stage, iteration? 
   }
 
-
 BibItemType |=
         "standard" 
 
@@ -69,6 +68,19 @@ preface =
   element preface {
     authority, preface_abstract?, foreword?, clause*, reviewernote?, executivesummary?
 }
+
+annex =
+  element annex {
+    attribute id { xsd:ID }?,
+    attribute inline-header { xsd:boolean }?,
+    attribute obligation { "normative" | "informative" }?,
+    section-title?,
+    # allow hanging paragraps in annexes: they introduce lists
+    #( paragraph-with-footnote | table | note | formula | admonition | ol | ul | dl | figure | quote | sourcecode | review | example )*,
+    BasicBlock*, note*,
+    (clause-hanging-paragraph-with-footnote* | terms)
+  }
+
 
 BibData =
     attribute type { BibItemType }?,
