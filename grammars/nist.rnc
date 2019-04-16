@@ -43,7 +43,8 @@ DocRelationType |= "obsoletedBy" | "supersedes" | "supersededBy"
 
 BibliographicDateType |= "abandoned"
 
-TitleType |= "document-class"
+#TitleType |= "document-class"
+TitleType = ( "alternative" | "original" | "unofficial" | "subtitle" | "main" | "document-class" )
 
 editorialgroup = element editorialgroup {
   committee+
@@ -82,7 +83,7 @@ title-sub =
 
 nistdocidentifier =
   element docidentifier {
-    attribute type { "nist" | "nist-long" }, 
+    attribute type { "nist" | "nist-long" | "nist-mr" }, 
     text
    }
 
@@ -102,7 +103,7 @@ nistsubseries = element series {
 nistseriestitle = element title {
   "nist-ams" | "building-science" | "nist-fips" | "nist-gcr" | "nist-hb" |
   "itl-bulletin" | "jpcrd" | "nist-jres" | "letter-circular" | "nist-monograph" |
-  "nist-ncstar" | "nist-nsrds" | "nistir" | "product-stadnards" | "nist-sp" |
+  "nist-ncstar" | "nist-nsrds" | "nistir" | "product-standards" | "nist-sp" |
   "nist-tn" | "other" | "csrc-white-paper" | "csrc-book" | "csrc-use-case" |
   "csrc-building-block"
 }

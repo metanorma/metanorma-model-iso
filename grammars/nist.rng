@@ -88,8 +88,16 @@
     <define name="BibliographicDateType" combine="choice">
       <value>abandoned</value>
     </define>
-    <define name="TitleType" combine="choice">
-      <value>document-class</value>
+    <!-- TitleType |= "document-class" -->
+    <define name="TitleType">
+      <choice>
+        <value>alternative</value>
+        <value>original</value>
+        <value>unofficial</value>
+        <value>subtitle</value>
+        <value>main</value>
+        <value>document-class</value>
+      </choice>
     </define>
     <define name="editorialgroup">
       <element name="editorialgroup">
@@ -239,6 +247,7 @@
         <choice>
           <value>nist</value>
           <value>nist-long</value>
+          <value>nist-mr</value>
         </choice>
       </attribute>
       <text/>
@@ -284,7 +293,7 @@
         <value>nist-ncstar</value>
         <value>nist-nsrds</value>
         <value>nistir</value>
-        <value>product-stadnards</value>
+        <value>product-standards</value>
         <value>nist-sp</value>
         <value>nist-tn</value>
         <value>other</value>
