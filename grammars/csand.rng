@@ -9,11 +9,6 @@
     <start>
       <ref name="csand-standard"/>
     </start>
-    <define name="language">
-      <element name="language">
-        <value>en</value>
-      </element>
-    </define>
     <define name="docidentifier">
       <element name="docidentifier">
         <optional>

@@ -6,8 +6,6 @@ include "isostandard.rnc" {
 
 start = itu
 
-language = element language { ( "en" ) }
-
 docidentifier = element docidentifier {
   attribute type { text }?,
   text

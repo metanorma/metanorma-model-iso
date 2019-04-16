@@ -4,9 +4,6 @@ include "isodoc.rnc" {
 
 start = iso-standard
 
-language =
-  element language { ( "en" | "fr" ) }
-
 script =
   element script { "Latn" }
 

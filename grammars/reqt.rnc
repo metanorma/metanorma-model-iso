@@ -1,0 +1,45 @@
+#Presupposes isodoc.rnc, is included in it
+#include "isodoc.rnc" { }
+
+requirement = element requirement { RequirementType }
+recommendation = element recommendation { RequirementType }
+permission = element permission { RequirementType }
+
+RequirementType = 
+  attribute obligation { ObligationType }?,
+  attribute id { xsd:ID },
+  attribute filename { text }?,
+  reqtitle?, label?, subject?, reqinherit?, classification*,
+  ( measurementtarget | specification | verification | import | description)*,
+  reqt_references?,
+  ( requirement | recommendation | permission )*
+
+
+reqtitle = element title { FormattedString }
+label = element label { text }
+subject = element subject { text }
+reqinherit = element subject { text }
+
+measurementtarget = element measurement-target { RequirementSubpart }
+specification = element specification { RequirementSubpart }
+verification = element verification { RequirementSubpart }
+import = element import { RequirementSubpart }
+description = element description { RequirementSubpart }
+
+reqt_references = element references { bibitem+ }
+
+RequirementSubpart = 
+  attribute type { text }?,
+  attribute exclude { xsd:boolean }?,
+  BasicBlock+
+
+
+ObligationType = ( "requirement" | "recommendation" | "permission" )
+
+classification = element classification {
+  classification_tag, classification_value
+}
+
+classification_tag = element tag { text }
+classification_value = element value { text }
+

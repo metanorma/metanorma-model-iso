@@ -10,14 +10,6 @@
     <start>
       <ref name="gb-standard"/>
     </start>
-    <define name="language">
-      <element name="language">
-        <choice>
-          <value>zh</value>
-          <value>en</value>
-        </choice>
-      </element>
-    </define>
     <define name="script">
       <element name="script">
         <choice>

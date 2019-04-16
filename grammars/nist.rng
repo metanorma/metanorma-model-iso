@@ -14,11 +14,6 @@
         <ref name="TypedTitleString"/>
       </element>
     </define>
-    <define name="language">
-      <element name="language">
-        <value>en</value>
-      </element>
-    </define>
     <define name="docidentifier">
       <element name="docidentifier">
         <optional>

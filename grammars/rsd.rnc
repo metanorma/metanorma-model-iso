@@ -6,8 +6,6 @@ include "isostandard.rnc" {
 
 start = rsd-standard
 
-language = element language { ( "en" ) }
-
 docidentifier = element docidentifier {
   attribute type { text }?,
   text

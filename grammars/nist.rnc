@@ -8,8 +8,6 @@ start = nist-standard
 
 btitle = element title { TypedTitleString }
 
-language = element language { ( "en" ) }
-
 docidentifier = element docidentifier {
   attribute type { text }?,
   text

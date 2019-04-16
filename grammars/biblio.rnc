@@ -1,0 +1,340 @@
+# instantiations of this grammar may replace leaf strings
+# with more elaborated types; e.g. title (text) replaced with
+# title-main, title-intro, title-part; type replaced with
+# enum.
+#
+# some renaming at leaf nodes is permissible
+#
+# obligations can change both from optional to mandatory,
+# and from mandatory to optional; optional elements may
+# be omitted; freely positioned alternatives may be replaced
+# with strict ordering
+#
+# DO NOT introduce a namespace here. We do not want a distinct namespace
+# for these elements, and a distinct namespace for any grammar inheriting
+# these elements; we just want one namespace for any child grammars
+# of this.
+
+grammar {
+
+# https://www.myintervals.com/blog/2009/05/20/iso-8601-date-validation-that-doesnt-suck/
+# iso8601date = xsd:string { pattern = "([\+-]?\d{4}(?!\d{2}\b))((-?)((0[1-9]|1[0-2])(\3([12]\d|0[1-9]|3[01]))?|W([0-4]\d|5[0-2])(-?[1-7])?|(00[1-9]|0[1-9]\d|[12]\d{2}|3([0-5]\d|6[1-6])))([T\s]((([01]\d|2[0-3])((:?)[0-5]\d)?|24\:?00)([\.,]\d+(?!:))?)?(\17[0-5]\d([\.,]\d+)?)?([zZ]|([\+-])([01]\d|2[0-3]):?([0-5]\d)?)?)?)?" }
+# Somewhat dumbed down for XSD regex:
+ISO8601DateTime = xsd:string { pattern = "([\+\-]?\d{4})((-?)((0[1-9]|1[0-2])((-?)([12]\d|0[1-9]|3[01]))?|W([0-4]\d|5[0-2])(-?[1-7])?|(00[1-9]|0[1-9]\d|[12]\d{2}|3([0-5]\d|6[1-6])))([T\s]((([01]\d|2[0-3])((:?)[0-5]\d)?|24:?00)([\.,]\d+)?)?((:?)[0-5]\d([.,]\d+)?)?([zZ]|([\+\-])([01]\d|2[0-3]):?([0-5]\d)?)?)?)?" }
+ISO8601Date = xsd:string { pattern = "([\+\-]?\d{4})((-?)((0[1-9]|1[0-2])((-?)([12]\d|0[1-9]|3[01]))?|W([0-4]\d|5[0-2])(-?[1-7])?|(00[1-9]|0[1-9]\d|[12]\d{2}|3([0-5]\d|6[1-6]))))?" }
+
+status =
+  element status { LocalizedString }
+
+language = element language { text }
+## ISO-639
+
+script = element script { text }
+## ISO-15924: Latn
+
+edition = element edition { text }
+
+LocalizedString =
+  # multiple languages and scripts possible: comma delimit them if so
+  attribute language { text }?,
+  attribute script { text }?,
+  text 
+
+# Unlike UML, change type to format: type is overloaded
+# Would be need if plain were default value and could omit the attribute
+# Added LocalizedStringOrXsAny
+FormattedString =
+  # attribute format { ( "plain" | "html" | "docbook" | "tei" | "asciidoc" | "markdown" ) }?,
+  attribute format { ( "text/plain" | "text/html" | "application/docbook+xml" | 
+    "application/tei+xml" | "text/x-asciidoc" | "text/markdown" | "application/x-isodoc+xml" | text ) }?,
+  LocalizedStringOrXsAny
+
+LocalizedStringOrXsAny =
+  # multiple languages and scripts possible: comma delimit them if so
+  attribute language { text }?,
+  attribute script { text }?,
+  ( text | AnyElement )+
+
+
+contributor = 
+  element contributor {
+    role*,
+    ContributorInfo
+}
+
+role =
+  element role {
+    attribute type { ( "author" | "performer" | "publisher" | "editor" | "adapter" | "translator" | "distributor" ) }?,
+    roledescription*
+}
+
+ContributorInfo =
+  ( person | organization )
+
+roledescription = 
+  element description { FormattedString }
+
+person = 
+  element person {
+    fullname?, affiliation*, person-identifier*, contact*, uri*
+}
+
+fullname =
+  element name {
+    (( prefix*, forename*, initial*, surname, addition* ) | completeName ),
+    biblionote*
+}
+
+prefix = element prefix { LocalizedString }
+initial = element initial { LocalizedString }
+addition = element addition { LocalizedString }
+surname = element surname { LocalizedString }
+forename = element forename { LocalizedString }
+completeName = element completename { LocalizedString }
+
+affiliation =
+  element affiliation { 
+    affiliationname?, affiliationdescription*, organization
+}
+
+affiliationname = element name { LocalizedString }
+
+affiliationdescription = element description { FormattedString }
+
+organization = 
+  element organization {
+    orgname, subdivision?, abbreviation?, uri*, org-identifier*, contact*
+}
+
+orgname = element name { LocalizedString }
+subdivision = element subdivision { LocalizedString }
+
+abbreviation =
+  element abbreviation { LocalizedString }
+
+uri =
+  element uri { 
+    attribute type { text }?,
+    xsd:anyURI 
+  }
+
+# TODO may change
+contact =
+  ( address | phone | email | uri )
+
+phone = element phone { text }
+email = element email { text }
+
+address =
+  element address {
+    # iso191606 TODO
+    (street+, city, state?, country, postcode? ) | formattedAddress
+}
+
+street = element street { text }
+city = element city { text }
+state = element state { text }
+country = element country { text }
+postcode = element postcode { text }
+formattedAddress = element formattedAddress { text }
+
+person-identifier =
+  element identifier {
+    attribute type { ("isni" | "uri") },
+    text
+  }
+
+org-identifier =
+  element identifier {
+    attribute type { ("orcid" | "uri") },
+    text
+  }
+
+citation =
+  element citation { CitationType }
+
+CitationType = 
+    attribute bibitemid { xsd:IDREF },
+    locality*, date?
+
+date = element date { ISO8601Date }
+
+locality =
+  element locality { BibItemLocality }
+
+BibItemLocality =
+    attribute type { LocalityType },
+    referenceFrom, referenceTo?
+
+LocalityType = xsd:string { pattern = "section|clause|part|paragraph|chapter|page|whole|table|annex|figure|note|list|example|volume|issue|locality:[a-zA-Z0-9_]+" } 
+
+referenceFrom = element referenceFrom { text }
+referenceTo = element referenceTo { text }
+
+# unlike UML, has id attribute; that results from including bibitem in a docmodel
+bibitem =
+  element bibitem { 
+     attribute id { xsd:ID },
+     BibliographicItem 
+}
+
+bibitem_no_id =
+  element bibitem { 
+     BibliographicItem 
+}
+
+relaton_collection = 
+  element relaton-collection {
+    attribute type { text }?,
+    btitle, contributor*,
+    docrelation*
+}
+
+BibItemType |=
+    (  "article" | "book" | "booklet" | "conference" | "manual" |
+       "proceedings" | "presentation" | "thesis" | "techreport" |
+       "standard" | "unpublished" | "map" | "electronic resource" | 
+       "audiovisual" | "film" | "video" | "broadcast" |
+       "graphic_work" | "music" | "patent" | "inbook" | "incollection" |
+        "inproceedings" | "journal" )
+ 
+BibliographicItem =
+    attribute type { BibItemType }?,
+    fetched?,
+    (btitle+ | formattedref), bsource*, docidentifier*, docnumber?, bdate*, contributor*,
+    edition?, version?, biblionote*, language*, script*,
+    abstract?, status?, copyright?, docrelation*, series*, medium?, bplace*,
+    extent*, accesslocation*, bclassification?, validity?
+
+btitle = element title { TypedTitleString }
+bsource = element uri { TypedUri }
+formattedref = element formattedref { FormattedString }
+
+fetched = element fetched { ISO8601DateTime }
+
+validity = element validity {
+  validityBegins?, validityEnds?, validityRevision?
+}
+validityBegins = element validityBegins { ISO8601DateTime }
+validityEnds = element validityEnds { ISO8601DateTime }
+validityRevision = element revision { ISO8601DateTime }
+
+
+TypedTitleString = 
+  attribute type { TitleType }?,
+  FormattedString  
+
+TitleType = ( "alternative" | "original" | "unofficial" | "subtitle" | "main" )
+
+TypedUri =
+  attribute type { text }?,
+  xsd:anyURI 
+
+DateType =
+  attribute text { text }?,
+  ( ISO8601Date )?
+
+BibliographicDateType =
+"published" | "accessed" | "created" | "implemented" | "obsoleted" | "confirmed" | "updated" | "issued" | "transmitted" | "copied" | "unchanged" | "circulated" 
+
+bdate = element date {
+  attribute type { ( BibliographicDateType | text ) },
+  (
+(
+element from { ISO8601Date },
+element to { ISO8601Date }?
+) |
+element on { ISO8601Date }
+)
+
+}
+
+docidentifier = element docidentifier { 
+  attribute type { text }?,
+  text 
+}
+docnumber = element docnumber { text }
+
+bclassification = element classification { 
+  attribute type { text }?,
+  text 
+}
+
+bplace = element place { text }
+medium = element medium { 
+  form?, size?, scale?
+}
+form = element form { text }
+size = element size { text }
+scale = element scale { text }
+accesslocation = element accesslocation { text }
+
+extent = element extent { BibItemLocality }
+
+series = element series {
+  attribute type { SeriesType }?,
+  (formattedref |
+  (btitle, bplace?, seriesorganization?,
+  abbreviation?,
+  seriesfrom?, seriesto?,
+  seriesnumber?, seriespartnumber?))
+}
+
+SeriesType = ( "main" | "alt" )
+
+seriesorganization = element organization { text }
+seriesfrom = element from { ISO8601Date }
+seriesto = element to { ISO8601Date }
+seriesnumber = element number { text }
+seriespartnumber = element partnumber { text }
+
+biblionote = element note { FormattedString }
+abstract = element abstract { FormattedString }
+
+copyright =
+  element copyright {
+    from, to?, owner
+}
+
+from = element from { xsd:gYear }
+to = element to { xsd:gYear }
+
+owner =
+  element owner { ContributorInfo }
+
+DocRelationType =
+  "obsoletes" | "updates" | "updatedBy" | "complements" | "derivedFrom" | "translatedFrom" |
+        "adoptedFrom" | "equivalent" | "identical" | "nonequivalent" | "includedIn" | "includes" |
+        "instance" | "partOf" | "hasDraft"
+
+docrelation =
+  element relation {
+    attribute type { DocRelationType },
+    element bibitem { BibliographicItem },
+    locality*
+}
+
+version =
+  element version {
+    revision-date?, draft*
+}
+
+vedition = element edition { xsd:int }
+revision-date = element revision-date { ISO8601Date }
+draft = element draft { text }
+
+
+#Anycontents = mixed {
+# https://github.com/relaxng/jing-trang/issues/211
+# https://lists.oasis-open.org/archives/office/200808/msg00024.html
+# https://lists.oasis-open.org/archives/office/200808/msg00099.html
+# For this to work, we will actually strip any attributes in the Anycontents before
+# passing it for validation. Horrible I know, but there are no good alternatives
+# that also allow us to do grammar inheritance
+	# (attribute * { text } | Any)*
+#        Any*
+#}
+AnyElement = element * { ( text | AnyElement)+ }
+
+
+}

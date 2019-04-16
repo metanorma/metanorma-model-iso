@@ -8,8 +8,6 @@ include "isostandard.rnc" {
   
 start = gb-standard
 
-language = element language { ( "zh" | "en" ) }
-
 script = element script { ( "Hans" | "Latn" ) }
 
 preferred =
