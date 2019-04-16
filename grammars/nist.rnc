@@ -39,7 +39,13 @@ status =
 BibItemType |=
         "standard" 
 
-DocRelationType |= "obsoletedBy" | "supersedes" | "supersededBy"
+#DocRelationType |= "obsoletedBy" | "supersedes" | "supersededBy"
+
+DocRelationType =
+"obsoletes" | "updates" | "updatedBy" | "complements" | "derivedFrom" | "translatedFrom" |
+        "adoptedFrom" | "equivalent" | "identical" | "nonequivalent" | "includedIn" | "includes" |
+        "instance" | "partOf" | "hasDraft" |
+"obsoletedBy" | "supersedes" | "supersededBy"
 
 BibliographicDateType |= "abandoned"
 
@@ -69,7 +75,7 @@ BibData =
     btitle+, formattedref?, bsource*, nistdocidentifier*, docnumber?, bdate*, contributor*,
     edition?, revision?, version?,
     biblionote*, language*, script*, abstract*, status?, copyright,
-    docrelation*, nistseries?, nistsubseries?, editorialgroup, ics*, security?, keyword+,
+    docrelation*, nistseries?, nistsubseries?, editorialgroup?, ics*, security?, keyword+,
     commentperiod
 }
 
@@ -101,11 +107,7 @@ nistsubseries = element series {
 }
 
 nistseriestitle = element title {
-  "nist-ams" | "building-science" | "nist-fips" | "nist-gcr" | "nist-hb" |
-  "itl-bulletin" | "jpcrd" | "nist-jres" | "letter-circular" | "nist-monograph" |
-  "nist-ncstar" | "nist-nsrds" | "nistir" | "product-standards" | "nist-sp" |
-  "nist-tn" | "other" | "csrc-white-paper" | "csrc-book" | "csrc-use-case" |
-  "csrc-building-block"
+"NIST Advanced Manufacturing Series" | "NIST Building Science Series" | "NIST Federal Information Processing Standards" | "NIST Grant/Contract Reports" | "NIST Handbook" | "ITL Bulletin" | "Journal of Physical and Chemical Reference Data" | "NIST Journal of Research" | "NIST Letter Circular" | "NIST Monograph" | "NIST National Construction Safety Team Act Reports" | "NIST National Standard Reference Data Series" | "NIST Interagency/Internal Report" | "NIST Product Standards" | "NIST Special Publication" | "NIST Technical Note" | "NIST Other" | "CSRC White Paper" | "CSRC Book" | "CSRC Use Case" | "CSRC Building Block" 
 }
 
 nistsubseriestitle = element title {

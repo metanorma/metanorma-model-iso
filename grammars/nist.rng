@@ -78,8 +78,24 @@
     <define name="BibItemType" combine="choice">
       <value>standard</value>
     </define>
-    <define name="DocRelationType" combine="choice">
+    <!-- DocRelationType |= "obsoletedBy" | "supersedes" | "supersededBy" -->
+    <define name="DocRelationType">
       <choice>
+        <value>obsoletes</value>
+        <value>updates</value>
+        <value>updatedBy</value>
+        <value>complements</value>
+        <value>derivedFrom</value>
+        <value>translatedFrom</value>
+        <value>adoptedFrom</value>
+        <value>equivalent</value>
+        <value>identical</value>
+        <value>nonequivalent</value>
+        <value>includedIn</value>
+        <value>includes</value>
+        <value>instance</value>
+        <value>partOf</value>
+        <value>hasDraft</value>
         <value>obsoletedBy</value>
         <value>supersedes</value>
         <value>supersededBy</value>
@@ -212,7 +228,9 @@
       <optional>
         <ref name="nistsubseries"/>
       </optional>
-      <ref name="editorialgroup"/>
+      <optional>
+        <ref name="editorialgroup"/>
+      </optional>
       <zeroOrMore>
         <ref name="ics"/>
       </zeroOrMore>
@@ -280,27 +298,27 @@
   <define name="nistseriestitle">
     <element name="title">
       <choice>
-        <value>nist-ams</value>
-        <value>building-science</value>
-        <value>nist-fips</value>
-        <value>nist-gcr</value>
-        <value>nist-hb</value>
-        <value>itl-bulletin</value>
-        <value>jpcrd</value>
-        <value>nist-jres</value>
-        <value>letter-circular</value>
-        <value>nist-monograph</value>
-        <value>nist-ncstar</value>
-        <value>nist-nsrds</value>
-        <value>nistir</value>
-        <value>product-standards</value>
-        <value>nist-sp</value>
-        <value>nist-tn</value>
-        <value>other</value>
-        <value>csrc-white-paper</value>
-        <value>csrc-book</value>
-        <value>csrc-use-case</value>
-        <value>csrc-building-block</value>
+        <value>NIST Advanced Manufacturing Series</value>
+        <value>NIST Building Science Series</value>
+        <value>NIST Federal Information Processing Standards</value>
+        <value>NIST Grant/Contract Reports</value>
+        <value>NIST Handbook</value>
+        <value>ITL Bulletin</value>
+        <value>Journal of Physical and Chemical Reference Data</value>
+        <value>NIST Journal of Research</value>
+        <value>NIST Letter Circular</value>
+        <value>NIST Monograph</value>
+        <value>NIST National Construction Safety Team Act Reports</value>
+        <value>NIST National Standard Reference Data Series</value>
+        <value>NIST Interagency/Internal Report</value>
+        <value>NIST Product Standards</value>
+        <value>NIST Special Publication</value>
+        <value>NIST Technical Note</value>
+        <value>NIST Other</value>
+        <value>CSRC White Paper</value>
+        <value>CSRC Book</value>
+        <value>CSRC Use Case</value>
+        <value>CSRC Building Block</value>
       </choice>
     </element>
   </define>
