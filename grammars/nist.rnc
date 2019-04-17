@@ -47,7 +47,8 @@ DocRelationType =
 BibliographicDateType |= "abandoned"
 
 #TitleType |= "document-class"
-TitleType = ( "alternative" | "original" | "unofficial" | "subtitle" | "main" | "document-class" )
+TitleType = ( "alternative" | "original" | "unofficial" | "subtitle" | "main" | "document-class" |
+  "short-title" | "short-subtitle" )
 
 editorialgroup = element editorialgroup {
   committee+

@@ -108,6 +108,8 @@
         <value>subtitle</value>
         <value>main</value>
         <value>document-class</value>
+        <value>short-title</value>
+        <value>short-subtitle</value>
       </choice>
     </define>
     <define name="editorialgroup">
