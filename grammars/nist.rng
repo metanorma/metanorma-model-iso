@@ -66,6 +66,9 @@
       <element name="status">
         <ref name="stage"/>
         <optional>
+          <ref name="substage"/>
+        </optional>
+        <optional>
           <ref name="iteration"/>
         </optional>
       </element>
@@ -126,11 +129,17 @@
           <value>draft-wip</value>
           <value>draft-prelim</value>
           <value>draft-public</value>
-          <value>draft-retire</value>
-          <value>draft-withdrawn</value>
           <value>final</value>
           <value>final-review</value>
-          <value>final-withdrawn</value>
+        </choice>
+      </element>
+    </define>
+    <define name="substage">
+      <element name="stage">
+        <choice>
+          <value>active</value>
+          <value>retired</value>
+          <value>withdrawn</value>
         </choice>
       </element>
     </define>

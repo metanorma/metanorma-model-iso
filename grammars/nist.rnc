@@ -30,7 +30,7 @@ subfigure =
 
 status =
   element status {
-     stage, iteration? 
+     stage, substage?, iteration? 
   }
 
 BibItemType |=
@@ -54,8 +54,8 @@ editorialgroup = element editorialgroup {
   committee+
 }
 
-stage = element stage { "draft-internal" | "draft-wip" | "draft-prelim" | "draft-public" | "draft-retire" | 
-    "draft-withdrawn" | "final" | "final-review" | "final-withdrawn" }
+stage = element stage { "draft-internal" | "draft-wip" | "draft-prelim" | "draft-public" | "final" | "final-review" }
+substage = element stage { "active" | "retired" | "withdrawn" }
 
 iteration = element iteration { text }
 
