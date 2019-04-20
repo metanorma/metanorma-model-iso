@@ -146,7 +146,9 @@
       <zeroOrMore>
         <ref name="series"/>
       </zeroOrMore>
-      <ref name="editorialgroup"/>
+      <optional>
+        <ref name="editorialgroup"/>
+      </optional>
       <zeroOrMore>
         <ref name="ics"/>
       </zeroOrMore>

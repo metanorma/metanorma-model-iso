@@ -42,7 +42,7 @@ BibData =
     (btitle+ | formattedref), abbrevtitle?, 
     bsource*, docidentifier*, docnumber?, bdate*, contributor*,
     edition?, version?, biblionote*, language*, script*, 
-    abstract*, status?, copyright, docrelation*, series*, editorialgroup, ics*,
+    abstract*, status?, copyright, docrelation*, series*, editorialgroup?, ics*,
     ipr?, iprExtract?, submissiontype?, area*, keyword*, consensus?
 
 keyword = element keyword { text }
