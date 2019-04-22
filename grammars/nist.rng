@@ -135,7 +135,7 @@
       </element>
     </define>
     <define name="substage">
-      <element name="stage">
+      <element name="substage">
         <choice>
           <value>active</value>
           <value>retired</value>

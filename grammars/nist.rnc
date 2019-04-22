@@ -55,7 +55,7 @@ editorialgroup = element editorialgroup {
 }
 
 stage = element stage { "draft-internal" | "draft-wip" | "draft-prelim" | "draft-public" | "final" | "final-review" }
-substage = element stage { "active" | "retired" | "withdrawn" }
+substage = element substage { "active" | "retired" | "withdrawn" }
 
 iteration = element iteration { text }
 
