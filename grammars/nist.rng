@@ -99,8 +99,24 @@
         <value>supersededBy</value>
       </choice>
     </define>
-    <define name="BibliographicDateType" combine="choice">
-      <value>abandoned</value>
+    <!-- BibliographicDateType |= "abandoned" | "superseded" -->
+    <define name="BibliographicDateType">
+      <choice>
+        <value>published</value>
+        <value>accessed</value>
+        <value>created</value>
+        <value>implemented</value>
+        <value>obsoleted</value>
+        <value>confirmed</value>
+        <value>updated</value>
+        <value>issued</value>
+        <value>transmitted</value>
+        <value>copied</value>
+        <value>unchanged</value>
+        <value>circulated</value>
+        <value>abandoned</value>
+        <value>superseded</value>
+      </choice>
     </define>
     <!-- TitleType |= "document-class" -->
     <define name="TitleType">

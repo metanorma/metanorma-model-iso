@@ -44,7 +44,8 @@ DocRelationType =
         "instance" | "partOf" | "hasDraft" |
 "obsoletedBy" | "supersedes" | "supersededBy"
 
-BibliographicDateType |= "abandoned"
+#BibliographicDateType |= "abandoned" | "superseded"
+BibliographicDateType = "published" | "accessed" | "created" | "implemented" | "obsoleted" | "confirmed" | "updated" | "issued" | "transmitted" | "copied" | "unchanged" | "circulated" | "abandoned" | "superseded"
 
 #TitleType |= "document-class"
 TitleType = ( "alternative" | "original" | "unofficial" | "subtitle" | "main" | "document-class" |
