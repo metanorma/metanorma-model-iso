@@ -58,6 +58,6 @@ technical-committee = element technical-committee {
 
 csd-standard =
   element csd-standard {
-    bibdata, termdocsource*, preface, sections+, annex*, bibliography
+    bibdata, termdocsource*, boilerplate?, preface, sections+, annex*, bibliography
  }
 

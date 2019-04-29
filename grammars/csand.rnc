@@ -60,6 +60,6 @@ technical-committee = element committee {
 
 csand-standard =
   element csand-standard {
-    bibdata, termdocsource*, preface, sections+, annex*, bibliography
+    bibdata, termdocsource*, boilerplate?, preface, sections+, annex*, bibliography
  }
 

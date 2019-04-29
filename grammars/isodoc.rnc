@@ -31,7 +31,7 @@ start = standard-document
 
 standard-document =
 element standard-document {
-  bibdata, preface?, sections, annex*, references*
+  bibdata, boilerplate?, preface?, sections, annex*, references*
 }
 
 bibdata =
@@ -39,6 +39,21 @@ bibdata =
 
 preface =
   element preface { content+ }
+
+boilerplate = 
+  element boilerplate { copyright-statement?, license-statement?, legal-statement?, feedback-statement? }
+
+copyright-statement =
+  element copyright-statement { Content-Section }
+
+license-statement =
+  element license-statement { Content-Section }
+
+legal-statement =
+  element legal-statement { Content-Section }
+
+feedback-statement =
+  element feedback-statement { Content-Section }
 
 sections =
   element sections {

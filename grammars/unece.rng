@@ -333,6 +333,9 @@
   <define name="unece-standard">
     <element name="unece-standard">
       <ref name="bibdata"/>
+      <optional>
+        <ref name="boilerplate"/>
+      </optional>
       <ref name="preface"/>
       <oneOrMore>
         <ref name="sections"/>

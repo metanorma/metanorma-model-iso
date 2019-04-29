@@ -62,6 +62,6 @@ committee = element committee {
 
 ogc-standard =
   element ogc-standard {
-    bibdata, termdocsource*, preface, sections+, annex*, bibliography
+    bibdata, termdocsource*, boilerplate?, preface, sections+, annex*, bibliography
  }
 

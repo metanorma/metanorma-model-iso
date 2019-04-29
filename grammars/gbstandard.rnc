@@ -68,7 +68,7 @@ terms =
 # identical structure to iso-standard
 gb-standard =
   element gb-standard {
-    bibdata, termdocsource*, preface, sections+, annex*, bibliography
+    bibdata, termdocsource*, boilerplate?, preface, sections+, annex*, bibliography
   }     
 
 gbccs = element ccs { 

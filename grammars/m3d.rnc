@@ -40,6 +40,6 @@ committee = element committee {
 
 m3d-standard =
   element m3d-standard {
-    bibdata, termdocsource*, preface, sections+, annex*, bibliography
+    bibdata, termdocsource*, boilerplate?, preface, sections+, annex*, bibliography
  }
 

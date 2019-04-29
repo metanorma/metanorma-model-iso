@@ -238,7 +238,7 @@ preface =
 # grammar simple, we keep the references together
 iso-standard = 
   element iso-standard {
-    bibdata, termdocsource*, preface, sections+, annex*, bibliography
+    bibdata, termdocsource*, boilerplate?, preface, sections+, annex*, bibliography
   }
 
 bibliography =

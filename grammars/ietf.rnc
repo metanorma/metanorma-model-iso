@@ -82,6 +82,6 @@ comment = element comment { text }
 
 ietf-standard =
   element ietf-standard {
-    bibdata, termdocsource*, preface, sections+, annex*, bibliography
+    bibdata, termdocsource*, boilerplate?, preface, sections+, annex*, bibliography
  }
 

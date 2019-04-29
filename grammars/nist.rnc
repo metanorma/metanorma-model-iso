@@ -148,6 +148,6 @@ revision = element revision { text }
 
 nist-standard =
   element nist-standard {
-    bibdata, termdocsource*, preface, sections+, annex*, bibliography
+    bibdata, termdocsource*, boilerplate?, preface, sections+, annex*, bibliography
  }
 

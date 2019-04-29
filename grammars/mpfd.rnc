@@ -58,6 +58,6 @@ security = element security { text }
 
 mpfd-standard =
   element mpfd-standard {
-    bibdata, termdocsource*, preface, sections+, annex*, bibliography
+    bibdata, termdocsource*, boilerplate?, preface, sections+, annex*, bibliography
  }
 

@@ -96,6 +96,6 @@ distribution = element distribution { "general" | "limited" | "restricted" }
 
 unece-standard =
 element unece-standard {
-  bibdata, preface, sections+, annex*
+  bibdata, boilerplate?, preface, sections+, annex*
 }
 
