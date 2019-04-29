@@ -66,7 +66,7 @@ title-main =
 
 preface =
   element preface {
-    authority, preface_abstract?, foreword?, clause*, reviewernote?, executivesummary?
+    preface_abstract?, foreword?, clause*, reviewernote?, executivesummary?
 }
 
 annex =
@@ -134,15 +134,6 @@ element extended { ISO8601Date }?
 
 reviewernote = element reviewernote { Basic-Section }
 executivesummary = element executivesummary { Basic-Section }
-
-authority = element authority {
-element title { text }?,
-element authority1 { Basic-Section },
-element authority2 { Basic-Section },
-element authority3 { Basic-Section },
-element authority4 { Basic-Section }?,
-element authority5 { Basic-Section }
-}
 
 revision = element revision { text }
 

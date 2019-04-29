@@ -171,7 +171,6 @@
     </define>
     <define name="preface">
       <element name="preface">
-        <ref name="authority"/>
         <optional>
           <ref name="preface_abstract"/>
         </optional>
@@ -418,32 +417,6 @@
   <define name="executivesummary">
     <element name="executivesummary">
       <ref name="Basic-Section"/>
-    </element>
-  </define>
-  <define name="authority">
-    <element name="authority">
-      <optional>
-        <element name="title">
-          <text/>
-        </element>
-      </optional>
-      <element name="authority1">
-        <ref name="Basic-Section"/>
-      </element>
-      <element name="authority2">
-        <ref name="Basic-Section"/>
-      </element>
-      <element name="authority3">
-        <ref name="Basic-Section"/>
-      </element>
-      <optional>
-        <element name="authority4">
-          <ref name="Basic-Section"/>
-        </element>
-      </optional>
-      <element name="authority5">
-        <ref name="Basic-Section"/>
-      </element>
     </element>
   </define>
   <define name="revision">
