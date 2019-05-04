@@ -344,6 +344,7 @@ hyperlink =
   element link {
     attribute target { xsd:anyURI },
     attribute type { ReferenceFormat },
+    attribute alt { text }?,
     text
 }
 

@@ -907,6 +907,9 @@
       <attribute name="type">
         <ref name="ReferenceFormat"/>
       </attribute>
+      <optional>
+        <attribute name="alt"/>
+      </optional>
       <text/>
     </element>
   </define>
