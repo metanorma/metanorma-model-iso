@@ -243,6 +243,7 @@ pre =
 table =
   element table {
     attribute id { xsd:ID },
+    attribute alt { text }?,
     tname?, thead?, tbody, tfoot?, table-note*, dl?
   }
 
