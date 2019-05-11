@@ -10,14 +10,6 @@
     <start>
       <ref name="gb-standard"/>
     </start>
-    <define name="script">
-      <element name="script">
-        <choice>
-          <value>Hans</value>
-          <value>Latn</value>
-        </choice>
-      </element>
-    </define>
     <define name="preferred">
       <element name="preferred">
         <ref name="ZhEnLocalizedString"/>
@@ -64,142 +56,15 @@
         </zeroOrMore>
       </element>
     </define>
-    <define name="BibliographicItem">
+    <define name="BibDataExtensionType">
       <optional>
-        <attribute name="type">
-          <ref name="BibItemType"/>
-        </attribute>
+        <ref name="doctype"/>
       </optional>
-      <optional>
-        <ref name="fetched"/>
-      </optional>
-      <choice>
-        <oneOrMore>
-          <ref name="btitle"/>
-        </oneOrMore>
-        <ref name="formattedref"/>
-      </choice>
-      <optional>
-        <ref name="bsource"/>
-      </optional>
-      <zeroOrMore>
-        <ref name="docidentifier"/>
-      </zeroOrMore>
-      <optional>
-        <ref name="docnumber"/>
-      </optional>
-      <zeroOrMore>
-        <ref name="bdate"/>
-      </zeroOrMore>
-      <zeroOrMore>
-        <ref name="contributor"/>
-      </zeroOrMore>
-      <optional>
-        <ref name="edition"/>
-      </optional>
-      <optional>
-        <ref name="version"/>
-      </optional>
-      <zeroOrMore>
-        <ref name="biblionote"/>
-      </zeroOrMore>
-      <zeroOrMore>
-        <ref name="language"/>
-      </zeroOrMore>
-      <zeroOrMore>
-        <ref name="script"/>
-      </zeroOrMore>
-      <optional>
-        <ref name="abstract"/>
-      </optional>
-      <optional>
-        <ref name="status"/>
-      </optional>
-      <optional>
-        <ref name="copyright"/>
-      </optional>
-      <zeroOrMore>
-        <ref name="docrelation"/>
-      </zeroOrMore>
-      <optional>
-        <ref name="editorialgroup"/>
-      </optional>
-      <zeroOrMore>
-        <ref name="ics"/>
-      </zeroOrMore>
       <zeroOrMore>
         <ref name="gbcommittee"/>
       </zeroOrMore>
-      <optional>
-        <ref name="gbtype"/>
-      </optional>
-      <zeroOrMore>
-        <ref name="gbccs"/>
-      </zeroOrMore>
-      <optional>
-        <ref name="gbplannumber"/>
-      </optional>
-    </define>
-    <define name="BibData">
-      <optional>
-        <attribute name="type">
-          <ref name="BibItemType"/>
-        </attribute>
-      </optional>
-      <oneOrMore>
-        <ref name="btitle"/>
-      </oneOrMore>
-      <optional>
-        <ref name="formattedref"/>
-      </optional>
-      <optional>
-        <ref name="bsource"/>
-      </optional>
-      <zeroOrMore>
-        <ref name="docidentifier"/>
-      </zeroOrMore>
-      <optional>
-        <ref name="docnumber"/>
-      </optional>
-      <zeroOrMore>
-        <ref name="bdate"/>
-      </zeroOrMore>
-      <zeroOrMore>
-        <ref name="contributor"/>
-      </zeroOrMore>
-      <optional>
-        <ref name="edition"/>
-      </optional>
-      <optional>
-        <ref name="version"/>
-      </optional>
-      <zeroOrMore>
-        <ref name="biblionote"/>
-      </zeroOrMore>
-      <zeroOrMore>
-        <ref name="language"/>
-      </zeroOrMore>
-      <zeroOrMore>
-        <ref name="script"/>
-      </zeroOrMore>
-      <optional>
-        <ref name="abstract"/>
-      </optional>
-      <optional>
-        <ref name="status"/>
-      </optional>
-      <ref name="copyright"/>
-      <zeroOrMore>
-        <ref name="docrelation"/>
-      </zeroOrMore>
-      <optional>
-        <ref name="editorialgroup"/>
-      </optional>
       <zeroOrMore>
         <ref name="ics"/>
-      </zeroOrMore>
-      <zeroOrMore>
-        <ref name="gbcommittee"/>
       </zeroOrMore>
       <ref name="gbtype"/>
       <oneOrMore>
@@ -350,8 +215,11 @@
       <ref name="gbtopic"/>
     </element>
   </define>
-  <define name="BibItemType" combine="choice">
-    <value>recommendation</value>
+  <define name="DocumentType">
+    <choice>
+      <value>standard</value>
+      <value>recommendation</value>
+    </choice>
   </define>
   <define name="gbscope">
     <element name="gbscope">

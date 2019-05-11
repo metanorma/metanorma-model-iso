@@ -6,13 +6,6 @@ include "isostandard.rnc" {
 
 start = itu
 
-docidentifier = element docidentifier {
-  attribute type { text }?,
-  text
-}
-
-btitle = element title { FormattedString }
-
 figure =
   element figure {
     attribute id { xsd:ID },
@@ -28,10 +21,7 @@ subfigure =
     (image | pre )
  }
 
-status = element status { "in-force" | "superseded" | "in-force-prepublished" | "withdrawn" }
-
-
-BibItemType |=
+DocumentType =
 "recommendation" | "recommendation-supplement" | "recommendation-amendment" | "recommendation-corrigendum" | "recommendation-errata" |
 "recommendation-annex" | "focus-group" | "implementers-guide" | "technical-paper" | "technical-report" | "joint-itu-iso-iec" 
 
@@ -44,13 +34,8 @@ editorialgroup = element editorialgroup {
 
 workgroup = element workgroup { ItuGroup }
 
-BibData =
-    attribute type { BibItemType }?,
-    btitle+, formattedref?, bsource, docidentifier*, itudocnumber?, bdate*, contributor*,
-    edition?, version?,
-    biblionote*, language*, script*, abstract*, status?, copyright,
-    docrelation*, editorialgroup, ics*, series*, bkeyword*,
-    recommendationstatus?
+BibDataExtensionType =
+    doctype?, editorialgroup, ics*, bkeyword*, recommendationstatus?
 
 }
 
@@ -88,10 +73,6 @@ groupperiod = element period {
 
 groupperiodstart = element start { xsd:gYear }
 groupperiodend = element end { xsd:gYear }
-
-itudocnumber = element docnumber {
-  xsd:string { pattern = "[AD-VX-Z]\.[0-9]+" }
-}
 
 itu =
   element itu-standard {

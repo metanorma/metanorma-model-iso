@@ -4,11 +4,6 @@
     <start>
       <ref name="iso-standard"/>
     </start>
-    <define name="script">
-      <element name="script">
-        <value>Latn</value>
-      </element>
-    </define>
     <!-- add type to docidentifier in isodoc? -->
     <define name="docidentifier">
       <element name="docidentifier">
@@ -55,166 +50,9 @@
         </optional>
       </element>
     </define>
-    <define name="BibliographicItem">
+    <define name="BibDataExtensionType">
       <optional>
-        <attribute name="type">
-          <ref name="BibItemType"/>
-        </attribute>
-      </optional>
-      <optional>
-        <ref name="fetched"/>
-      </optional>
-      <choice>
-        <oneOrMore>
-          <ref name="btitle"/>
-        </oneOrMore>
-        <ref name="formattedref"/>
-      </choice>
-      <zeroOrMore>
-        <ref name="bsource"/>
-      </zeroOrMore>
-      <zeroOrMore>
-        <ref name="docidentifier"/>
-      </zeroOrMore>
-      <optional>
-        <ref name="docnumber"/>
-      </optional>
-      <zeroOrMore>
-        <ref name="bdate"/>
-      </zeroOrMore>
-      <zeroOrMore>
-        <ref name="contributor"/>
-      </zeroOrMore>
-      <optional>
-        <ref name="edition"/>
-      </optional>
-      <optional>
-        <ref name="version"/>
-      </optional>
-      <zeroOrMore>
-        <ref name="biblionote"/>
-      </zeroOrMore>
-      <zeroOrMore>
-        <ref name="language"/>
-      </zeroOrMore>
-      <zeroOrMore>
-        <ref name="script"/>
-      </zeroOrMore>
-      <zeroOrMore>
-        <ref name="abstract"/>
-      </zeroOrMore>
-      <optional>
-        <ref name="status"/>
-      </optional>
-      <optional>
-        <ref name="copyright"/>
-      </optional>
-      <zeroOrMore>
-        <ref name="docrelation"/>
-      </zeroOrMore>
-      <zeroOrMore>
-        <ref name="series"/>
-      </zeroOrMore>
-      <optional>
-        <ref name="medium"/>
-      </optional>
-      <zeroOrMore>
-        <ref name="bplace"/>
-      </zeroOrMore>
-      <zeroOrMore>
-        <ref name="extent"/>
-      </zeroOrMore>
-      <zeroOrMore>
-        <ref name="accesslocation"/>
-      </zeroOrMore>
-      <optional>
-        <ref name="bclassification"/>
-      </optional>
-      <optional>
-        <ref name="validity"/>
-      </optional>
-      <optional>
-        <ref name="editorialgroup"/>
-      </optional>
-      <zeroOrMore>
-        <ref name="ics"/>
-      </zeroOrMore>
-      <optional>
-        <ref name="allParts"/>
-      </optional>
-    </define>
-    <define name="BibData">
-      <optional>
-        <attribute name="type">
-          <ref name="BibItemType"/>
-        </attribute>
-      </optional>
-      <oneOrMore>
-        <ref name="btitle"/>
-      </oneOrMore>
-      <optional>
-        <ref name="formattedref"/>
-      </optional>
-      <zeroOrMore>
-        <ref name="bsource"/>
-      </zeroOrMore>
-      <zeroOrMore>
-        <ref name="docidentifier"/>
-      </zeroOrMore>
-      <optional>
-        <ref name="docnumber"/>
-      </optional>
-      <zeroOrMore>
-        <ref name="bdate"/>
-      </zeroOrMore>
-      <zeroOrMore>
-        <ref name="contributor"/>
-      </zeroOrMore>
-      <optional>
-        <ref name="edition"/>
-      </optional>
-      <optional>
-        <ref name="version"/>
-      </optional>
-      <zeroOrMore>
-        <ref name="biblionote"/>
-      </zeroOrMore>
-      <zeroOrMore>
-        <ref name="language"/>
-      </zeroOrMore>
-      <zeroOrMore>
-        <ref name="script"/>
-      </zeroOrMore>
-      <zeroOrMore>
-        <ref name="abstract"/>
-      </zeroOrMore>
-      <optional>
-        <ref name="status"/>
-      </optional>
-      <ref name="copyright"/>
-      <zeroOrMore>
-        <ref name="docrelation"/>
-      </zeroOrMore>
-      <zeroOrMore>
-        <ref name="series"/>
-      </zeroOrMore>
-      <optional>
-        <ref name="medium"/>
-      </optional>
-      <zeroOrMore>
-        <ref name="bplace"/>
-      </zeroOrMore>
-      <zeroOrMore>
-        <ref name="extent"/>
-      </zeroOrMore>
-      <zeroOrMore>
-        <ref name="accesslocation"/>
-      </zeroOrMore>
-      <optional>
-        <ref name="bclassification"/>
-      </optional>
-      <optional>
-        <ref name="validity"/>
+        <ref name="doctype"/>
       </optional>
       <ref name="editorialgroup"/>
       <zeroOrMore>
@@ -228,17 +66,10 @@
       <element name="date">
         <attribute name="type">
           <choice>
-            <value>published</value>
-            <value>accessed</value>
-            <value>created</value>
-            <value>implemented</value>
-            <value>obsoleted</value>
-            <value>confirmed</value>
-            <value>updated</value>
-            <value>issued</value>
+            <ref name="BibliographicDateType"/>
+            <text/>
           </choice>
         </attribute>
-        <!-- ( ( bfrom, bto? ) | date_on ) -->
         <choice>
           <group>
             <element name="from">
@@ -263,41 +94,12 @@
       <element name="note">
         <optional>
           <!-- Biblio date notes can be footnoted -->
+          <attribute name="type"/>
+        </optional>
+        <optional>
           <attribute name="reference"/>
         </optional>
         <ref name="FormattedString"/>
-      </element>
-    </define>
-    <define name="status">
-      <element name="status">
-        <choice>
-          <ref name="FormattedString"/>
-          <group>
-            <ref name="stage"/>
-            <optional>
-              <ref name="substage"/>
-            </optional>
-            <optional>
-              <ref name="iteration"/>
-            </optional>
-          </group>
-        </choice>
-      </element>
-    </define>
-    <define name="btitle">
-      <element name="title">
-        <choice>
-          <ref name="FormattedString"/>
-          <group>
-            <optional>
-              <ref name="title-intro"/>
-            </optional>
-            <ref name="title-main"/>
-            <optional>
-              <ref name="title-part"/>
-            </optional>
-          </group>
-        </choice>
       </element>
     </define>
     <define name="sections">
@@ -744,6 +546,16 @@
         </optional>
       </element>
     </define>
+    <define name="DocumentType">
+      <choice>
+        <value>international-standard</value>
+        <value>technical-specification</value>
+        <value>technical-report</value>
+        <value>publicly-available-specification</value>
+        <value>international-workshop-agreement</value>
+        <value>guide</value>
+      </choice>
+    </define>
   </include>
   <!-- end overrides -->
   <!--
@@ -779,16 +591,6 @@
       </oneOrMore>
     </element>
   </define>
-  <define name="BibItemType" combine="choice">
-    <choice>
-      <value>international-standard</value>
-      <value>technical-specification</value>
-      <value>technical-report</value>
-      <value>publicly-available-specification</value>
-      <value>international-workshop-agreement</value>
-      <value>guide</value>
-    </choice>
-  </define>
   <define name="editorialgroup">
     <element name="editorialgroup">
       <oneOrMore>
@@ -818,40 +620,6 @@
   <define name="introduction">
     <element name="introduction">
       <ref name="Content-Section"/>
-    </element>
-  </define>
-  <define name="stage">
-    <element name="stage">
-      <choice>
-        <value>00</value>
-        <value>10</value>
-        <value>20</value>
-        <value>30</value>
-        <value>40</value>
-        <value>50</value>
-        <value>60</value>
-        <value>90</value>
-        <value>95</value>
-      </choice>
-    </element>
-  </define>
-  <define name="substage">
-    <element name="substage">
-      <choice>
-        <value>00</value>
-        <value>20</value>
-        <value>60</value>
-        <value>90</value>
-        <value>92</value>
-        <value>93</value>
-        <value>98</value>
-        <value>99</value>
-      </choice>
-    </element>
-  </define>
-  <define name="iteration">
-    <element name="iteration">
-      <data type="int"/>
     </element>
   </define>
   <define name="documentnumber">
@@ -903,21 +671,6 @@
   <define name="secretariat">
     <element name="secretariat">
       <text/>
-    </element>
-  </define>
-  <define name="title-intro">
-    <element name="title-intro">
-      <ref name="FormattedString"/>
-    </element>
-  </define>
-  <define name="title-main">
-    <element name="title-main">
-      <ref name="FormattedString"/>
-    </element>
-  </define>
-  <define name="title-part">
-    <element name="title-part">
-      <ref name="FormattedString"/>
     </element>
   </define>
   <define name="allParts">

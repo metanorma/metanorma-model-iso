@@ -9,19 +9,6 @@
     <start>
       <ref name="nist-standard"/>
     </start>
-    <define name="btitle">
-      <element name="title">
-        <ref name="TypedTitleString"/>
-      </element>
-    </define>
-    <define name="docidentifier">
-      <element name="docidentifier">
-        <optional>
-          <attribute name="type"/>
-        </optional>
-        <text/>
-      </element>
-    </define>
     <define name="figure">
       <element name="figure">
         <attribute name="id">
@@ -62,18 +49,7 @@
         </choice>
       </element>
     </define>
-    <define name="status">
-      <element name="status">
-        <ref name="stage"/>
-        <optional>
-          <ref name="substage"/>
-        </optional>
-        <optional>
-          <ref name="iteration"/>
-        </optional>
-      </element>
-    </define>
-    <define name="BibItemType" combine="choice">
+    <define name="DocumentType">
       <value>standard</value>
     </define>
     <!-- DocRelationType |= "obsoletedBy" | "supersedes" | "supersededBy" -->
@@ -118,55 +94,11 @@
         <value>superseded</value>
       </choice>
     </define>
-    <!-- TitleType |= "document-class" -->
-    <define name="TitleType">
-      <choice>
-        <value>alternative</value>
-        <value>original</value>
-        <value>unofficial</value>
-        <value>subtitle</value>
-        <value>main</value>
-        <value>document-class</value>
-        <value>short-title</value>
-        <value>short-subtitle</value>
-      </choice>
-    </define>
     <define name="editorialgroup">
       <element name="editorialgroup">
         <oneOrMore>
           <ref name="committee"/>
         </oneOrMore>
-      </element>
-    </define>
-    <define name="stage">
-      <element name="stage">
-        <choice>
-          <value>draft-internal</value>
-          <value>draft-wip</value>
-          <value>draft-prelim</value>
-          <value>draft-public</value>
-          <value>final</value>
-          <value>final-review</value>
-        </choice>
-      </element>
-    </define>
-    <define name="substage">
-      <element name="substage">
-        <choice>
-          <value>active</value>
-          <value>retired</value>
-          <value>withdrawn</value>
-        </choice>
-      </element>
-    </define>
-    <define name="iteration">
-      <element name="iteration">
-        <text/>
-      </element>
-    </define>
-    <define name="title-main">
-      <element name="title-main">
-        <ref name="FormattedString"/>
       </element>
     </define>
     <define name="preface">
@@ -229,167 +161,21 @@
         </choice>
       </element>
     </define>
-    <define name="BibData">
+    <define name="BibDataExtensionType">
       <optional>
-        <attribute name="type">
-          <ref name="BibItemType"/>
-        </attribute>
+        <ref name="doctype"/>
       </optional>
       <oneOrMore>
-        <ref name="btitle"/>
+        <ref name="bkeyword"/>
       </oneOrMore>
       <optional>
-        <ref name="formattedref"/>
+        <ref name="commentperiod"/>
       </optional>
-      <zeroOrMore>
-        <ref name="bsource"/>
-      </zeroOrMore>
-      <zeroOrMore>
-        <ref name="nistdocidentifier"/>
-      </zeroOrMore>
-      <optional>
-        <ref name="docnumber"/>
-      </optional>
-      <zeroOrMore>
-        <ref name="bdate"/>
-      </zeroOrMore>
-      <zeroOrMore>
-        <ref name="contributor"/>
-      </zeroOrMore>
-      <optional>
-        <ref name="edition"/>
-      </optional>
-      <optional>
-        <ref name="revision"/>
-      </optional>
-      <optional>
-        <ref name="version"/>
-      </optional>
-      <zeroOrMore>
-        <ref name="biblionote"/>
-      </zeroOrMore>
-      <zeroOrMore>
-        <ref name="language"/>
-      </zeroOrMore>
-      <zeroOrMore>
-        <ref name="script"/>
-      </zeroOrMore>
-      <zeroOrMore>
-        <ref name="abstract"/>
-      </zeroOrMore>
-      <optional>
-        <ref name="status"/>
-      </optional>
-      <ref name="copyright"/>
-      <zeroOrMore>
-        <ref name="docrelation"/>
-      </zeroOrMore>
-      <optional>
-        <ref name="nistseries"/>
-      </optional>
-      <optional>
-        <ref name="nistsubseries"/>
-      </optional>
-      <optional>
-        <ref name="editorialgroup"/>
-      </optional>
-      <zeroOrMore>
-        <ref name="ics"/>
-      </zeroOrMore>
-      <optional>
-        <ref name="security"/>
-      </optional>
-      <oneOrMore>
-        <ref name="keyword"/>
-      </oneOrMore>
-      <ref name="commentperiod"/>
     </define>
   </include>
-  <define name="committee">
-    <element name="committee">
-      <attribute name="type">
-        <choice>
-          <value>technical</value>
-          <value>provisional</value>
-        </choice>
-      </attribute>
+  <define name="bkeyword">
+    <element name="keyword">
       <text/>
-    </element>
-  </define>
-  <define name="title-sub">
-    <element name="title-sub">
-      <ref name="FormattedString"/>
-    </element>
-  </define>
-  <define name="nistdocidentifier">
-    <element name="docidentifier">
-      <attribute name="type">
-        <choice>
-          <value>nist</value>
-          <value>nist-long</value>
-          <value>nist-mr</value>
-        </choice>
-      </attribute>
-      <text/>
-    </element>
-  </define>
-  <define name="security">
-    <element name="security">
-      <text/>
-    </element>
-  </define>
-  <define name="nistseries">
-    <element name="series">
-      <attribute name="type">
-        <value>main</value>
-      </attribute>
-      <ref name="nistseriestitle"/>
-      <optional>
-        <ref name="abbreviation"/>
-      </optional>
-    </element>
-  </define>
-  <define name="nistsubseries">
-    <element name="series">
-      <attribute name="type">
-        <value>secondary</value>
-      </attribute>
-      <ref name="nistsubseriestitle"/>
-    </element>
-  </define>
-  <define name="nistseriestitle">
-    <element name="title">
-      <choice>
-        <value>NIST Advanced Manufacturing Series</value>
-        <value>NIST Building Science Series</value>
-        <value>NIST Federal Information Processing Standards</value>
-        <value>NIST Grant/Contract Reports</value>
-        <value>NIST Handbook</value>
-        <value>ITL Bulletin</value>
-        <value>Journal of Physical and Chemical Reference Data</value>
-        <value>NIST Journal of Research</value>
-        <value>NIST Letter Circular</value>
-        <value>NIST Monograph</value>
-        <value>NIST National Construction Safety Team Act Reports</value>
-        <value>NIST National Standard Reference Data Series</value>
-        <value>NIST Interagency/Internal Report</value>
-        <value>NIST Product Standards</value>
-        <value>NIST Special Publication</value>
-        <value>NIST Technical Note</value>
-        <value>NIST Other</value>
-        <value>CSRC White Paper</value>
-        <value>CSRC Book</value>
-        <value>CSRC Use Case</value>
-        <value>CSRC Building Block</value>
-      </choice>
-    </element>
-  </define>
-  <define name="nistsubseriestitle">
-    <element name="title">
-      <choice>
-        <value>computer-security</value>
-        <value>information-security</value>
-      </choice>
     </element>
   </define>
   <define name="commentperiod">
@@ -417,11 +203,6 @@
   <define name="executivesummary">
     <element name="executivesummary">
       <ref name="Basic-Section"/>
-    </element>
-  </define>
-  <define name="revision">
-    <element name="revision">
-      <text/>
     </element>
   </define>
   <define name="nist-standard">

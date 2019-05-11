@@ -6,13 +6,6 @@ include "isostandard.rnc" {
 
 start = ogc-standard
 
-docidentifier = element docidentifier {
-  attribute type { text }?,
-  text
-}
-
-btitle = element title { FormattedString }
-
 figure =
   element figure {
     attribute id { xsd:ID },
@@ -28,22 +21,15 @@ subfigure =
     (image | pre )
  }
 
-status = element status { "rfc" | "candidate" | "published" | "deprecated" | "retired" }
-
-
-BibItemType |=
+DocumentType =
 "standard" | "standard-with-suite" | "abstract-specification" | "community-standard" | "profile" | "best-practice" | "engineering-report" | "discussion-paper" | "reference-model" | "user-guide" | "policy" | "guide" | "amendment" | "technical-corrigendum" | "administrative"
 
 editorialgroup = element editorialgroup {
   committee, subcommittee?, workgroup?
 }
 
-BibData =
-    attribute type { BibItemType }?,
-    btitle+, formattedref?, bsource*, docidentifier*, docnumber?, bdate*, contributor*,
-    edition?, version?,
-    biblionote*, language*, script*, abstract*, status?, copyright,
-    docrelation*, editorialgroup, ics*
+BibDataExtensionType =
+    doctype?, editorialgroup, ics*
 
 preface =
   element preface {

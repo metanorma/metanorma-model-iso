@@ -6,13 +6,6 @@ include "isostandard.rnc" {
 
 start = csand-standard
 
-docidentifier = element docidentifier {
-  attribute type { text }?,
-  text
-}
-
-btitle = element title { FormattedString }
-
 figure =
   element figure {
     attribute id { xsd:ID },
@@ -21,31 +14,12 @@ figure =
 
 
 
-status = element status { "proposal" | "working-draft" | "committee-draft" | "draft-standard" | "final-draft" | "published" | "withdrawn" | LocalizedString }
-
-BibItemType |=
+DocumentType =
 "guidance" | "proposal" | "standard" | "report" | "whitepaper" | "charter" | "policy" | 
         "glossary" | "case-study"
 
-BibliographicItem =
-    attribute type { BibItemType }?,
-    fetched?,
-    (btitle+ | formattedref), bsource*, docidentifier*, docnumber?, bdate*, contributor*,
-    edition?, version?,
-    biblionote*, language*, script*, abstract*, status?, copyright?,
-  docrelation*, series*, medium?, bplace*,
-    extent*, accesslocation*, bclassification?, validity?,
-   editorialgroup?, ics*, allParts?
-
-
-BibData =
-    attribute type { BibItemType }?,
-    btitle+, formattedref?, bsource*, docidentifier*, docnumber?, bdate*, contributor*,
-    edition?, version?,
-    biblionote*, language*, script*, abstract*, status?, copyright,
-    docrelation*, series*, medium?, bplace*,
-    extent*, accesslocation*, bclassification?, validity?,
-        editorialgroup, ics*, allParts?
+BibDataExtensionType =
+    doctype?, editorialgroup, ics*
 
 editorialgroup = element editorialgroup {
         technical-committee+

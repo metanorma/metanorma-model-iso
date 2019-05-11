@@ -4,9 +4,6 @@ include "isodoc.rnc" {
 
 start = iso-standard
 
-script =
-  element script { "Latn" }
-
 # add type to docidentifier in isodoc?
 docidentifier =
   element docidentifier {
@@ -20,29 +17,11 @@ organization =
     technical-committee?, subcommittee?, workgroup?, secretariat?  
 }
 
-BibliographicItem =
-    attribute type { BibItemType }?,
-    fetched?,
-    (btitle+ | formattedref), bsource*, docidentifier*, docnumber?, bdate*, contributor*,
-    edition?, version?,
-    biblionote*, language*, script*, abstract*, status?, copyright?,
-  docrelation*, series*, medium?, bplace*,
-    extent*, accesslocation*, bclassification?, validity?,
-   editorialgroup?, ics*, allParts?
-
-
-BibData =
-    attribute type { BibItemType }?,
-    btitle+, formattedref?, bsource*, docidentifier*, docnumber?, bdate*, contributor*,
-    edition?, version?,
-    biblionote*, language*, script*, abstract*, status?, copyright,
-    docrelation*, series*, medium?, bplace*,
-    extent*, accesslocation*, bclassification?, validity?,
-        editorialgroup, ics*, allParts?
+BibDataExtensionType =
+        doctype?, editorialgroup, ics*, allParts?
 
 bdate = element date {
-  attribute type { ( "published" | "accessed" | "created" | "implemented" | "obsoleted" | "confirmed" | "updated" | "issued" ) },
-  # ( ( bfrom, bto? ) | date_on )
+  attribute type { ( BibliographicDateType | text ) },
   (
 (
 element from { ISO8601Date },
@@ -55,22 +34,10 @@ element on { ISO8601Date | "--" }
 
 biblionote = element note { 
   # Biblio date notes can be footnoted
+  attribute type { text }?,
   attribute reference { text }?,
   FormattedString 
 }
-
-status =
-  element status {
-    FormattedString |
-     ( stage, substage?, iteration? )
-  }
-
-btitle =
-  element title {
-     FormattedString |
-    ( title-intro?, title-main, title-part? )
-}
-
 
 sections =
   element sections {
@@ -230,6 +197,11 @@ preface =
     preface_abstract?, foreword, introduction?
 }
 
+DocumentType =
+     "international-standard" | "technical-specification" |
+     "technical-report" | "publicly-available-specification" |
+    "international-workshop-agreement" | "guide"
+
 }
 
 # end overrides
@@ -246,12 +218,6 @@ bibliography =
     (references | reference-clause)+
 }
 
-BibItemType |=
-     "international-standard" | "technical-specification" |
-     "technical-report" | "publicly-available-specification" |
-    "international-workshop-agreement" | "guide"
-
-
 editorialgroup = element editorialgroup {
   technical-committee+, subcommittee*, workgroup*, secretariat?
 }
@@ -259,19 +225,6 @@ editorialgroup = element editorialgroup {
 preface_abstract = element abstract { Basic-Section }
 foreword = element foreword { Basic-Section }
 introduction = element introduction { Content-Section }
-
-stage = 
-  element stage {
-    ("00" | "10" | "20" | "30" | "40" | "50" | "60" | "90" | "95" )
-  }
-
-substage = 
-  element substage {
-    ("00" | "20" | "60" | "90" | "92" | "93" | "98" | "99" )
-  }
-
-iteration =
-  element iteration { xsd:int }
 
 documentnumber = 
   element project-number { 
@@ -302,15 +255,6 @@ IsoWorkgroup =
 
 secretariat =
   element secretariat { text }
-
-title-intro =
-  element title-intro { FormattedString }
-
-title-main =
-  element title-main { FormattedString }
-
-title-part =
-  element title-part { FormattedString }
 
 allParts = element allparts { xsd:boolean }
 

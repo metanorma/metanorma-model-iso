@@ -9,19 +9,6 @@
     <start>
       <ref name="unece-standard"/>
     </start>
-    <define name="docidentifier">
-      <element name="docidentifier">
-        <optional>
-          <attribute name="type"/>
-        </optional>
-        <text/>
-      </element>
-    </define>
-    <define name="btitle">
-      <element name="title">
-        <ref name="FormattedString"/>
-      </element>
-    </define>
     <define name="figure">
       <element name="figure">
         <attribute name="id">
@@ -56,20 +43,6 @@
           <ref name="tname"/>
         </optional>
         <ref name="image"/>
-      </element>
-    </define>
-    <define name="status">
-      <element name="status">
-        <choice>
-          <value>proposal</value>
-          <value>working-draft</value>
-          <value>committee-draft</value>
-          <value>draft-standard</value>
-          <value>final-draft</value>
-          <value>published</value>
-          <value>withdrawn</value>
-          <ref name="LocalizedString"/>
-        </choice>
       </element>
     </define>
     <define name="TextElement">
@@ -129,7 +102,7 @@
         </zeroOrMore>
       </element>
     </define>
-    <define name="BibItemType" combine="choice">
+    <define name="DocumentType">
       <choice>
         <value>recommendation</value>
         <value>plenary</value>
@@ -158,60 +131,12 @@
         </oneOrMore>
       </element>
     </define>
-    <define name="BibData">
+    <define name="BibDataExtensionType">
       <optional>
-        <attribute name="type">
-          <ref name="BibItemType"/>
-        </attribute>
+        <ref name="doctype"/>
       </optional>
-      <oneOrMore>
-        <ref name="btitle"/>
-      </oneOrMore>
-      <optional>
-        <ref name="formattedref"/>
-      </optional>
-      <zeroOrMore>
-        <ref name="bsource"/>
-      </zeroOrMore>
-      <zeroOrMore>
-        <ref name="docidentifier"/>
-      </zeroOrMore>
-      <optional>
-        <ref name="docnumber"/>
-      </optional>
-      <zeroOrMore>
-        <ref name="bdate"/>
-      </zeroOrMore>
-      <zeroOrMore>
-        <ref name="contributor"/>
-      </zeroOrMore>
-      <optional>
-        <ref name="edition"/>
-      </optional>
-      <optional>
-        <ref name="version"/>
-      </optional>
-      <zeroOrMore>
-        <ref name="biblionote"/>
-      </zeroOrMore>
-      <zeroOrMore>
-        <ref name="language"/>
-      </zeroOrMore>
       <zeroOrMore>
         <ref name="submissionlanguage"/>
-      </zeroOrMore>
-      <zeroOrMore>
-        <ref name="script"/>
-      </zeroOrMore>
-      <zeroOrMore>
-        <ref name="abstract"/>
-      </zeroOrMore>
-      <optional>
-        <ref name="status"/>
-      </optional>
-      <ref name="copyright"/>
-      <zeroOrMore>
-        <ref name="docrelation"/>
       </zeroOrMore>
       <ref name="editorialgroup"/>
       <zeroOrMore>

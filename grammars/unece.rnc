@@ -6,15 +6,6 @@ include "isostandard.rnc" {
 
   start = unece-standard
 
-  docidentifier = element docidentifier {
-    attribute type { text }?,
-              text
-  }
-
-  btitle = element title { 
-    FormattedString 
-  }
-
   figure =
     element figure {
       attribute id { xsd:ID },
@@ -29,9 +20,6 @@ include "isostandard.rnc" {
       tname?,
       (image )
     }
-
-  status = element status { "proposal" | "working-draft" | "committee-draft" | "draft-standard" | "final-draft" | "published" | "withdrawn" | LocalizedString }
-
 
   TextElement =
     text | em | eref | strong | stem | sub | sup | tt |
@@ -48,7 +36,7 @@ include "isostandard.rnc" {
     }
 
 
-  BibItemType |= "recommendation" | "plenary" | "addendum" | "communication" | "corrigendum" |
+  DocumentType = "recommendation" | "plenary" | "addendum" | "communication" | "corrigendum" |
     "reissue" | "agenda" | "budgetary" | "sec-gen-notes" | "expert-report" | "resolution"
 
     editorialgroup = element editorialgroup {
@@ -58,11 +46,8 @@ include "isostandard.rnc" {
   sections =
     element sections { clause + }
 
-  BibData =
-    attribute type { BibItemType }?,
-    btitle+, formattedref?, bsource*, docidentifier*, docnumber?, bdate*, contributor*, edition?, version?,
-    biblionote*, language*, submissionlanguage*, script*, abstract*, status?, copyright,
-    docrelation*, editorialgroup, ics*, distribution?, session?
+  BibDataExtensionType =
+    doctype?, submissionlanguage*, editorialgroup, ics*, distribution?, session?
 
                 preface =
                 element preface {

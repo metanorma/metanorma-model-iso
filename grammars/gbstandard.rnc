@@ -8,8 +8,6 @@ include "isostandard.rnc" {
   
 start = gb-standard
 
-script = element script { ( "Hans" | "Latn" ) }
-
 preferred =
   element preferred { ZhEnLocalizedString }
 
@@ -26,18 +24,8 @@ term =
     termdomain?, definition, termnote*, termexample*, termsource*
   }
 
-BibliographicItem =
-    attribute type { BibItemType }?,
-    fetched?,
-    (btitle+ | formattedref), bsource?, docidentifier*, docnumber?, bdate*, contributor*,
-    edition?, version?, biblionote*, language*, script*, abstract?, status?, copyright?,
-    docrelation*, editorialgroup?, ics*, gbcommittee*, gbtype?, gbccs*, gbplannumber?
-
-BibData =
-    attribute type { BibItemType }?,
-    btitle+, formattedref?, bsource?, docidentifier*, docnumber?, bdate*, contributor*, edition?, version?,
-    biblionote*, language*, script*, abstract?, status?, copyright,
-    docrelation*, editorialgroup?, ics*, gbcommittee*, gbtype, gbccs+, gbplannumber?
+BibDataExtensionType =
+    doctype?, gbcommittee*, ics*, gbtype, gbccs+, gbplannumber?
 
 
 term-clause =
@@ -89,7 +77,7 @@ gbtype =
     gbscope, gbprefix, gbmandate, gbtopic
 }
 
-BibItemType |= "recommendation"
+DocumentType = "standard" | "recommendation"
 
 gbscope = element gbscope { ( "national" | "sector" | "professional" | "local" | "enterprise" | "social-group" ) }
 gbmandate = element gbmandate { ( "mandatory" | "recommended" | "guidelines" ) }

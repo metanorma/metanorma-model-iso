@@ -6,23 +6,13 @@ include "isostandard.rnc" {
 
 start = m3d-standard
 
-docidentifier = element docidentifier {
-  attribute type { text }?,
-  text
-}
-
-btitle = element title { FormattedString }
-
 figure =
   element figure {
     attribute id { xsd:ID },
      source?, tname?, ( figure+ |  ( (TextElement* | pre), note*, dl? ) )
   }
 
-status = element status { "proposal" | "working-draft" | "committee-draft" | "draft-standard" | "final-draft" | "published" | "withdrawn" | LocalizedString }
-
-
-BibItemType |=
+DocumentType =
 "guidance" | "proposal" | "standard" | "report" | "whitepaper" | "charter" | "policy" | 
         "glossary" | "case-study"
 

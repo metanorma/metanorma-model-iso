@@ -6,13 +6,6 @@ include "isostandard.rnc" {
 
 start = mpfd-standard
 
-docidentifier = element docidentifier {
-  attribute type { text }?,
-  text
-}
-
-btitle = element title { FormattedString }
-
 figure =
   element figure {
     attribute id { xsd:ID },
@@ -28,10 +21,7 @@ subfigure =
     (image | pre )
  }
 
-status = element status { "proposal" | "working-draft" | "committee-draft" | "draft-standard" | "final-draft" | "published" | "withdrawn" | LocalizedString }
-
-
-BibItemType |=
+DocumentType =
 "policy-and-procedures" | "best-practices" | "supporting-document" | "report" | "legal" | "directives" | "proposal" | 
         "standard" 
 
@@ -39,12 +29,8 @@ editorialgroup = element editorialgroup {
   committee+
 }
 
-BibData =
-    attribute type { BibItemType }?,
-    btitle+, formattedref?, bsource*, docidentifier*, docnumber?, bdate*, contributor*,
-    edition?, version?,
-    biblionote*, language*, script*, abstract*, status?, copyright,
-    docrelation*, editorialgroup, ics*, security?
+BibDataExtensionType =
+    doctype?, editorialgroup, ics*, security?
 
 
 }

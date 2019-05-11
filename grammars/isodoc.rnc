@@ -19,13 +19,7 @@ grammar {
 
 include "reqt.rnc" { }
 
-include "biblio.rnc" {
-
-status =
-  element status { ( "proposal" | "working_draft" | "committee_draft" | "draft_standard" |
-                     "final_draft" | "published" | "withdrawn" ) }
-
-}
+include "biblio.rnc" { }
 
 start = standard-document
 
@@ -431,9 +425,17 @@ dt =
 dd =
   element dd { paragraph-with-footnote* }
 
-BibData =
-    attribute type { BibItemType }?,
-    btitle+, formattedref?, bsource*, docidentifier*, docnumber?, bdate*, contributor*, edition?, version?,
-    biblionote*, language*, script*, abstract?, status?, copyright, docrelation*
+ext = 
+  element ext { BibDataExtensionType }
 
+BibDataExtensionType = 
+  doctype?
+
+doctype = element doctype { DocumentType }
+
+DocumentType = ( "document" )
+
+BibData =
+  BibliographicItem,
+  ext?
 }

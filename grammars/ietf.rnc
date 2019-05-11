@@ -6,13 +6,6 @@ include "isostandard.rnc" {
 
 start = ietf-standard
 
-docidentifier = element docidentifier {
-  attribute type { text }?,
-  text
-}
-
-btitle = element title { FormattedString }
-
 figure =
   element figure {
     attribute id { xsd:ID },
@@ -28,24 +21,17 @@ subfigure =
     (image | pre )
  }
 
-status = element status { "standard" | "informational" | "experimental" | "bcp" | "fyi" |
-"full-standard" | "historic" }
-
-BibItemType |= "rfc" | "internet-draft"
+DocumentType = "rfc" | "internet-draft"
 
 editorialgroup = element editorialgroup {
   committee+
 }
 
-BibData =
-    attribute type { BibItemType }?,
-    (btitle+ | formattedref), abbrevtitle?, 
-    bsource*, docidentifier*, docnumber?, bdate*, contributor*,
-    edition?, version?, biblionote*, language*, script*, 
-    abstract*, status?, copyright, docrelation*, series*, editorialgroup?, ics*,
-    ipr?, iprExtract?, submissiontype?, area*, keyword*, consensus?
+BibDataExtensionType =
+    doctype?, ics*,
+    ipr?, iprExtract?, submissiontype?, area*, bkeyword*, consensus?
 
-keyword = element keyword { text }
+bkeyword = element keyword { text }
 
 contact =
   ( address | phone | fax | email | uri )
