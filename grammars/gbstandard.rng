@@ -66,6 +66,7 @@
       <zeroOrMore>
         <ref name="ics"/>
       </zeroOrMore>
+      <ref name="structuredidentifier"/>
       <ref name="gbtype"/>
       <oneOrMore>
         <ref name="gbccs"/>

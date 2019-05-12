@@ -25,7 +25,7 @@ term =
   }
 
 BibDataExtensionType =
-    doctype?, gbcommittee*, ics*, gbtype, gbccs+, gbplannumber?
+    doctype?, gbcommittee*, ics*, structuredidentifier, gbtype, gbccs+, gbplannumber?
 
 
 term-clause =

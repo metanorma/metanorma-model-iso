@@ -4,13 +4,6 @@ include "isodoc.rnc" {
 
 start = iso-standard
 
-# add type to docidentifier in isodoc?
-docidentifier =
-  element docidentifier {
-    attribute type { text }?,
-    (text | (documentnumber, tc-documentnumber? ))
-}
-
 organization = 
   element organization {
     orgname, abbreviation?, uri?, org-identifier*, contact*,
@@ -18,7 +11,7 @@ organization =
 }
 
 BibDataExtensionType =
-        doctype?, editorialgroup, ics*, allParts?
+        doctype?, editorialgroup, ics*, structuredidentifier, allParts?
 
 bdate = element date {
   attribute type { ( BibliographicDateType | text ) },
@@ -226,6 +219,12 @@ preface_abstract = element abstract { Basic-Section }
 foreword = element foreword { Basic-Section }
 introduction = element introduction { Content-Section }
 
+structuredidentifier =
+  element structuredidentifier {
+    attribute type { text }?,
+    (documentnumber, tc-documentnumber? )
+}
+
 documentnumber = 
   element project-number { 
     attribute part { xsd:int }?,
@@ -255,8 +254,6 @@ IsoWorkgroup =
 
 secretariat =
   element secretariat { text }
-
-allParts = element allparts { xsd:boolean }
 
 clause-hanging-paragraph-with-footnote =
   element clause {
