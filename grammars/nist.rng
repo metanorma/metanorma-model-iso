@@ -205,6 +205,17 @@
       <ref name="Basic-Section"/>
     </element>
   </define>
+  <define name="committee">
+    <element name="committee">
+      <attribute name="type">
+        <choice>
+          <value>technical</value>
+          <value>provisional</value>
+        </choice>
+      </attribute>
+      <text/>
+    </element>
+  </define>
   <define name="nist-standard">
     <element name="nist-standard">
       <ref name="bibdata"/>

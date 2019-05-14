@@ -72,6 +72,12 @@ element extended { ISO8601Date }?
 reviewernote = element reviewernote { Basic-Section }
 executivesummary = element executivesummary { Basic-Section }
 
+committee = element committee {
+    attribute type { ( "technical" | "provisional" ) },
+    text
+}
+
+
 nist-standard =
   element nist-standard {
     bibdata, termdocsource*, boilerplate?, preface, sections+, annex*, bibliography
