@@ -35,10 +35,6 @@ DocRelationType =
 #BibliographicDateType |= "abandoned" | "superseded"
 BibliographicDateType = "published" | "accessed" | "created" | "implemented" | "obsoleted" | "confirmed" | "updated" | "issued" | "transmitted" | "copied" | "unchanged" | "circulated" | "abandoned" | "superseded"
 
-editorialgroup = element editorialgroup {
-  committee+
-}
-
 preface =
   element preface {
     preface_abstract?, foreword?, clause*, reviewernote?, executivesummary?
@@ -71,11 +67,6 @@ element extended { ISO8601Date }?
 
 reviewernote = element reviewernote { Basic-Section }
 executivesummary = element executivesummary { Basic-Section }
-
-committee = element committee {
-    attribute type { ( "technical" | "provisional" ) },
-    text
-}
 
 
 nist-standard =

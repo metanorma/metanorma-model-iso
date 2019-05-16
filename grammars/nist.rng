@@ -94,13 +94,6 @@
         <value>superseded</value>
       </choice>
     </define>
-    <define name="editorialgroup">
-      <element name="editorialgroup">
-        <oneOrMore>
-          <ref name="committee"/>
-        </oneOrMore>
-      </element>
-    </define>
     <define name="preface">
       <element name="preface">
         <optional>
@@ -203,17 +196,6 @@
   <define name="executivesummary">
     <element name="executivesummary">
       <ref name="Basic-Section"/>
-    </element>
-  </define>
-  <define name="committee">
-    <element name="committee">
-      <attribute name="type">
-        <choice>
-          <value>technical</value>
-          <value>provisional</value>
-        </choice>
-      </attribute>
-      <text/>
     </element>
   </define>
   <define name="nist-standard">
