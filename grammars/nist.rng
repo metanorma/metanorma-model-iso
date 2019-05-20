@@ -52,6 +52,15 @@
     <define name="DocumentType">
       <value>standard</value>
     </define>
+    <define name="TitleType">
+      <choice>
+        <value>alternative</value>
+        <value>original</value>
+        <value>unofficial</value>
+        <value>subtitle</value>
+        <value>main</value>
+      </choice>
+    </define>
     <!-- DocRelationType |= "obsoletedBy" | "supersedes" | "supersededBy" -->
     <define name="DocRelationType">
       <choice>

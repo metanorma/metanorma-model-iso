@@ -202,6 +202,7 @@ review =
 formula =
   element formula {
     attribute id { xsd:ID },
+    attribute unnumbered { xsd:boolean }?,
     stem, dl?, note*
 }
 
@@ -224,6 +225,7 @@ quote-author =
 sourcecode =
   element sourcecode {
     attribute id { xsd:ID },
+    attribute unnumbered { xsd:boolean }?,
     attribute lang { text }?,
     tname?, ( text | callout )+, annotation*, note*
   }
@@ -237,6 +239,7 @@ pre =
 table =
   element table {
     attribute id { xsd:ID },
+    attribute unnumbered { xsd:boolean }?,
     attribute alt { text }?,
     tname?, thead?, tbody, tfoot?, table-note*, dl?
   }
@@ -276,6 +279,7 @@ th =
 example =
   element example {
     attribute id { xsd:ID },
+    attribute unnumbered { xsd:boolean }?,
     ( formula | ul | ol | dl | quote | sourcecode | paragraph-with-footnote )+,
     note*
 }
@@ -291,6 +295,7 @@ admonition =
 figure =
   element figure {
     attribute id { xsd:ID },
+    attribute unnumbered { xsd:boolean }?,
      source?, tname?, (image | pre | figure*), fn*, dl?, note*
   }
 

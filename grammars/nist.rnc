@@ -24,6 +24,8 @@ subfigure =
 DocumentType =
         "standard" 
 
+TitleType = ( "alternative" | "original" | "unofficial" | "subtitle" | "main" )
+
 #DocRelationType |= "obsoletedBy" | "supersedes" | "supersededBy"
 
 DocRelationType =
