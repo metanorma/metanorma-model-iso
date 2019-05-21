@@ -25,13 +25,6 @@ element on { ISO8601Date | "--" }
 
 }
 
-biblionote = element note { 
-  # Biblio date notes can be footnoted
-  attribute type { text }?,
-  attribute reference { text }?,
-  FormattedString 
-}
-
 sections =
   element sections {
     clause, (term-clause | terms), definitions?, clause+

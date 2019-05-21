@@ -28,6 +28,7 @@ include "isostandard.rnc" {
     admonition =
     element admonition {
       attribute id { xsd:ID },
+      attribute unnumbered { xsd:boolean }?,
       attribute type {
         ( "danger" | "caution" | "warning" | "important" | "safety precautions" )},
       tname?,
