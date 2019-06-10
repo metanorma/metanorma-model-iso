@@ -32,7 +32,7 @@ bibdata =
   element bibdata { BibData }
 
 preface =
-  element preface { content+ }
+  element preface { ( content | abstract | foreword | introduction | acknowledgements)+ }
 
 boilerplate = 
   element boilerplate { copyright-statement?, license-statement?, legal-statement?, feedback-statement? }
@@ -51,24 +51,40 @@ feedback-statement =
 
 sections =
   element sections {
-    ( content | clause | terms | definitions )+
+    ( clause | terms | definitions )+
 }
 
 definitions =
   element definitions {
     attribute id { xsd:ID }?,
     section-title?,
-    dl
+    (BasicBlock*,
+    dl)+
 }
 
 section-title =
   element title { TextElement* }
 
 content =
-  element content { Content-Section }
+  element clause { Content-Section }
+
+foreword =
+  element foreword { Content-Section }
+
+introduction =
+  element introduction { Content-Section }
+
+abstract =
+  element abstract { Content-Section }
+
+acknowledgements =
+  element acknowledgements { Content-Section }
 
 content-subsection =
-  element clause { Content-Section }
+  element clause { 
+    attribute type { text }?,
+    Content-Section 
+  }
 
 Basic-Section =
     attribute id { xsd:ID }?,
@@ -82,7 +98,10 @@ Content-Section =
       content-subsection+ )
 
 clause =
-  element clause { Clause-Section }
+  element clause { 
+    attribute type { text }?,
+    Clause-Section 
+  }
 
 Clause-Section =
     attribute id { xsd:ID }?,
@@ -107,21 +126,22 @@ references =
   element references {
     attribute id { xsd:ID }?,
     section-title?,
-    BasicBlock?,
+    BasicBlock*,
     bibitem*
   }
 
 terms =
   element terms {
     attribute id { xsd:ID }?,
+    BasicBlock*,
     term+
   }
 
 term =
   element term {
     attribute id { xsd:ID }?,
-    preferred+, admitted*, deprecates*,
-    termdomain?, definition, termnote*, termexample*, termsource*
+    preferred+, admitted*, related*, deprecates*,
+    termdomain?, termgrammar*, definition, termnote*, termexample*, termsource*
   }
 
 preferred =
@@ -130,11 +150,20 @@ preferred =
 admitted =
   element admitted { TextElement+ }
 
+related = 
+  element related {
+    attribute type { "compare" | "contrast" | "see" }?,
+    TextElement+
+}
+
 deprecates =
   element deprecates { TextElement+ }
 
 termdomain =
   element domain { TextElement+ }
+
+termgrammar =
+  element grammar { TextElement+ }
 
 definition =
   element definition {
@@ -484,9 +513,24 @@ ext =
   element ext { BibDataExtensionType }
 
 BibDataExtensionType = 
-  doctype?
+  doctype,
+  structuredidentifier*
 
 doctype = element doctype { DocumentType }
+
+structuredidentifier = element structuredidentifier {
+  attribute type { text }?,
+  element agency { text }+,
+  element class { text }?,
+  element docnumber { text },
+  element partnumber { text }?,
+  element edition { text }?,
+  element version { text }?,
+  element supplementtype { text }?,
+  element supplementnumber { text }?,
+  element language { text }?,
+  element year { text }?
+}
 
 DocumentType = ( "document" )
 
