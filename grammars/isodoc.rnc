@@ -73,12 +73,12 @@ content-subsection =
 Basic-Section =
     attribute id { xsd:ID }?,
     section-title?,
-    BasicBlock+, note*
+    BasicBlock?, note*
 
 Content-Section =
     attribute id { xsd:ID }?,
     section-title?,
-    ( (BasicBlock+, note*) |
+    ( (BasicBlock?, note*) |
       content-subsection+ )
 
 clause =
@@ -88,7 +88,7 @@ Clause-Section =
     attribute id { xsd:ID }?,
     section-title?,
     (
-      ( BasicBlock+, note* ) |
+      ( BasicBlock?, note* ) |
        clause-subsection+
     )
 
@@ -100,13 +100,14 @@ annex =
     attribute id { xsd:ID }?,
     attribute obligation { ( "normative" | "informative" ) },
     section-title?,
-    ( ( BasicBlock+, note* ) | clause-subsection+ )
+    ( ( BasicBlock?, note* ) | clause-subsection+ )
 }
 
 references =
   element references {
     attribute id { xsd:ID }?,
     section-title?,
+    BasicBlock?,
     bibitem*
   }
 
@@ -241,6 +242,7 @@ table =
     attribute id { xsd:ID },
     attribute unnumbered { xsd:boolean }?,
     attribute alt { text }?,
+    attribute uri { xsd:anyURI }?,
     tname?, thead?, tbody, tfoot?, table-note*, dl?
   }
 
@@ -286,25 +288,31 @@ example =
 
 admonition =
   element admonition {
-    attribute type { ( "warning" | "note" | "tip" | "important" | "caution" ) },
+    attribute type { AdmonitionType },
+    attribute class { text }?,
     attribute id { xsd:ID },
+    attribute uri { xsd:anyURI }?,
+    tname?,
     paragraph-with-footnote*,
     note*
   }
+
+AdmonitionType = 
+  "warning" | "note" | "tip" | "important" | "caution" | "statement"
 
 figure =
   element figure {
     attribute id { xsd:ID },
     attribute unnumbered { xsd:boolean }?,
-     source?, tname?, (image | pre | figure*), fn*, dl?, note*
+     source?, tname?, tclass?, (image | pre | figure*), fn*, dl?, note*
   }
 
 TextElement =
-  text | em | eref | strong | stem | sub | sup | tt | keyword |
-  strike | smallcap | xref | br | hyperlink | hr | pagebreak | bookmark
+  text | em | eref | strong | stem | sub | sup | tt | underline | keyword | ruby |
+  strike | smallcap | xref | br | hyperlink | hr | pagebreak | bookmark | image
 
 PureTextElement =
-  text | em | strong | sub | sup | tt | keyword | strike | smallcap | br
+  text | em | strong | sub | sup | tt | underline | strike | smallcap | br 
 
 source = element source { TypedUri }
 
@@ -315,7 +323,13 @@ keyword = element keyword { PureTextElement* }
 sub = element sub { PureTextElement* }
 sup = element sup { PureTextElement* }
 strike = element strike { PureTextElement* }
+underline = element underline { PureTextElement* }
 smallcap = element smallcap { PureTextElement* }
+
+ruby = element ruby { ( PureTextElement | rp | rt )* }
+rp =   element rp { PureTextElement* }
+rt =   element rt { PureTextElement* }
+
 
 br = element br { empty }
 hr = element hr { empty }
@@ -337,6 +351,7 @@ erefType =
     attribute normative { xsd:boolean }?,
     attribute citeas { text },
     attribute type { ReferenceFormat },
+    attribute alt { text }?,
     CitationType,
     text
 
@@ -352,6 +367,7 @@ xref =
   element xref {
      attribute target { xsd:IDREF },
      attribute type { ReferenceFormat },
+     attribute alt { text }?,
      text
 }
 
@@ -379,12 +395,46 @@ callout =
 image =
   element image {
     attribute id { xsd:ID },
-    attribute src { xsd:anyURI }?,
-    attribute imagetype { ("SVG" | "JPEG" | "GIF" | "PNG" | "PDF" ) },
+    attribute src { xsd:anyURI },
+    attribute mimetype { text },
+    attribute filename { text }?,
     attribute width { xsd:int | "auto" }?,
     attribute height { xsd:int | "auto" }?,
-    attribute alt { text }?
+    attribute alt { text }?,
+    attribute longdesc { xsd:anyURI }?
 }
+
+video =
+  element image {
+    attribute id { xsd:ID },
+    attribute src { xsd:anyURI },
+    attribute mimetype { text },
+    attribute filename { text }?,
+    attribute width { xsd:int | "auto" }?,
+    attribute height { xsd:int | "auto" }?,
+    attribute alt { text }?,
+    attribute longdesc { xsd:anyURI }?,
+    altsource*
+}
+
+audio =
+  element image {
+    attribute id { xsd:ID },
+    attribute src { xsd:anyURI },
+    attribute mimetype { text },
+    attribute filename { text }?,
+    attribute alt { text }?,
+    attribute longdesc { xsd:anyURI }?,
+    altsource*
+}
+
+altsource =
+  element altsource {
+    attribute src { xsd:anyURI },
+    attribute mimetype { text },
+    attribute filename { text }?
+}
+
 
 stem =
   element stem {
