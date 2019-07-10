@@ -1,10 +1,10 @@
-cd bib-models/grammars
+cd relaton-models/grammars
 rm biblio.rng
 git pull
 sh make.sh
 cd ../..
-cp bib-models/grammars/biblio.rnc .
-cp bib-models/grammars/biblio.rng .
+cp relaton-models/grammars/biblio.rnc .
+cp relaton-models/grammars/biblio.rng .
 
 cd metanorma-requirements-models/grammars
 git pull

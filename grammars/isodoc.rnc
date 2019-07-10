@@ -32,7 +32,7 @@ bibdata =
   element bibdata { BibData }
 
 preface =
-  element preface { content+ }
+  element preface { ( content | abstract | foreword | introduction | acknowledgements)+ }
 
 boilerplate = 
   element boilerplate { copyright-statement?, license-statement?, legal-statement?, feedback-statement? }
@@ -51,44 +51,63 @@ feedback-statement =
 
 sections =
   element sections {
-    ( content | clause | terms | definitions )+
+    ( clause | terms | definitions )+
 }
 
 definitions =
   element definitions {
     attribute id { xsd:ID }?,
     section-title?,
-    dl
+    (BasicBlock*,
+    dl)+
 }
 
 section-title =
   element title { TextElement* }
 
 content =
-  element content { Content-Section }
+  element clause { Content-Section }
+
+foreword =
+  element foreword { Content-Section }
+
+introduction =
+  element introduction { Content-Section }
+
+abstract =
+  element abstract { Content-Section }
+
+acknowledgements =
+  element acknowledgements { Content-Section }
 
 content-subsection =
-  element clause { Content-Section }
+  element clause { 
+    attribute type { text }?,
+    Content-Section 
+  }
 
 Basic-Section =
     attribute id { xsd:ID }?,
     section-title?,
-    BasicBlock+, note*
+    BasicBlock?, note*
 
 Content-Section =
     attribute id { xsd:ID }?,
     section-title?,
-    ( (BasicBlock+, note*) |
+    ( (BasicBlock?, note*) |
       content-subsection+ )
 
 clause =
-  element clause { Clause-Section }
+  element clause { 
+    attribute type { text }?,
+    Clause-Section 
+  }
 
 Clause-Section =
     attribute id { xsd:ID }?,
     section-title?,
     (
-      ( BasicBlock+, note* ) |
+      ( BasicBlock?, note* ) |
        clause-subsection+
     )
 
@@ -100,27 +119,29 @@ annex =
     attribute id { xsd:ID }?,
     attribute obligation { ( "normative" | "informative" ) },
     section-title?,
-    ( ( BasicBlock+, note* ) | clause-subsection+ )
+    ( ( BasicBlock?, note* ) | clause-subsection+ )
 }
 
 references =
   element references {
     attribute id { xsd:ID }?,
     section-title?,
+    BasicBlock*,
     bibitem*
   }
 
 terms =
   element terms {
     attribute id { xsd:ID }?,
+    BasicBlock*,
     term+
   }
 
 term =
   element term {
     attribute id { xsd:ID }?,
-    preferred+, admitted*, deprecates*,
-    termdomain?, definition, termnote*, termexample*, termsource*
+    preferred+, admitted*, related*, deprecates*,
+    termdomain?, termgrammar*, definition, termnote*, termexample*, termsource*
   }
 
 preferred =
@@ -129,11 +150,20 @@ preferred =
 admitted =
   element admitted { TextElement+ }
 
+related = 
+  element related {
+    attribute type { "compare" | "contrast" | "see" }?,
+    TextElement+
+}
+
 deprecates =
   element deprecates { TextElement+ }
 
 termdomain =
   element domain { TextElement+ }
+
+termgrammar =
+  element grammar { TextElement+ }
 
 definition =
   element definition {
@@ -241,6 +271,7 @@ table =
     attribute id { xsd:ID },
     attribute unnumbered { xsd:boolean }?,
     attribute alt { text }?,
+    attribute uri { xsd:anyURI }?,
     tname?, thead?, tbody, tfoot?, table-note*, dl?
   }
 
@@ -286,25 +317,31 @@ example =
 
 admonition =
   element admonition {
-    attribute type { ( "warning" | "note" | "tip" | "important" | "caution" ) },
+    attribute type { AdmonitionType },
+    attribute class { text }?,
     attribute id { xsd:ID },
+    attribute uri { xsd:anyURI }?,
+    tname?,
     paragraph-with-footnote*,
     note*
   }
+
+AdmonitionType = 
+  "warning" | "note" | "tip" | "important" | "caution" | "statement"
 
 figure =
   element figure {
     attribute id { xsd:ID },
     attribute unnumbered { xsd:boolean }?,
-     source?, tname?, (image | pre | figure*), fn*, dl?, note*
+     source?, tname?, tclass?, (image | pre | figure*), fn*, dl?, note*
   }
 
 TextElement =
-  text | em | eref | strong | stem | sub | sup | tt | keyword |
-  strike | smallcap | xref | br | hyperlink | hr | pagebreak | bookmark
+  text | em | eref | strong | stem | sub | sup | tt | underline | keyword | ruby |
+  strike | smallcap | xref | br | hyperlink | hr | pagebreak | bookmark | image
 
 PureTextElement =
-  text | em | strong | sub | sup | tt | keyword | strike | smallcap | br
+  text | em | strong | sub | sup | tt | underline | strike | smallcap | br 
 
 source = element source { TypedUri }
 
@@ -315,7 +352,13 @@ keyword = element keyword { PureTextElement* }
 sub = element sub { PureTextElement* }
 sup = element sup { PureTextElement* }
 strike = element strike { PureTextElement* }
+underline = element underline { PureTextElement* }
 smallcap = element smallcap { PureTextElement* }
+
+ruby = element ruby { ( PureTextElement | rp | rt )* }
+rp =   element rp { PureTextElement* }
+rt =   element rt { PureTextElement* }
+
 
 br = element br { empty }
 hr = element hr { empty }
@@ -337,6 +380,7 @@ erefType =
     attribute normative { xsd:boolean }?,
     attribute citeas { text },
     attribute type { ReferenceFormat },
+    attribute alt { text }?,
     CitationType,
     text
 
@@ -352,6 +396,7 @@ xref =
   element xref {
      attribute target { xsd:IDREF },
      attribute type { ReferenceFormat },
+     attribute alt { text }?,
      text
 }
 
@@ -379,12 +424,46 @@ callout =
 image =
   element image {
     attribute id { xsd:ID },
-    attribute src { xsd:anyURI }?,
-    attribute imagetype { ("SVG" | "JPEG" | "GIF" | "PNG" | "PDF" ) },
+    attribute src { xsd:anyURI },
+    attribute mimetype { text },
+    attribute filename { text }?,
     attribute width { xsd:int | "auto" }?,
     attribute height { xsd:int | "auto" }?,
-    attribute alt { text }?
+    attribute alt { text }?,
+    attribute longdesc { xsd:anyURI }?
 }
+
+video =
+  element image {
+    attribute id { xsd:ID },
+    attribute src { xsd:anyURI },
+    attribute mimetype { text },
+    attribute filename { text }?,
+    attribute width { xsd:int | "auto" }?,
+    attribute height { xsd:int | "auto" }?,
+    attribute alt { text }?,
+    attribute longdesc { xsd:anyURI }?,
+    altsource*
+}
+
+audio =
+  element image {
+    attribute id { xsd:ID },
+    attribute src { xsd:anyURI },
+    attribute mimetype { text },
+    attribute filename { text }?,
+    attribute alt { text }?,
+    attribute longdesc { xsd:anyURI }?,
+    altsource*
+}
+
+altsource =
+  element altsource {
+    attribute src { xsd:anyURI },
+    attribute mimetype { text },
+    attribute filename { text }?
+}
+
 
 stem =
   element stem {
@@ -434,9 +513,24 @@ ext =
   element ext { BibDataExtensionType }
 
 BibDataExtensionType = 
-  doctype?
+  doctype,
+  structuredidentifier*
 
 doctype = element doctype { DocumentType }
+
+structuredidentifier = element structuredidentifier {
+  attribute type { text }?,
+  element agency { text }+,
+  element class { text }?,
+  element docnumber { text },
+  element partnumber { text }?,
+  element edition { text }?,
+  element version { text }?,
+  element supplementtype { text }?,
+  element supplementnumber { text }?,
+  element language { text }?,
+  element year { text }?
+}
 
 DocumentType = ( "document" )
 
