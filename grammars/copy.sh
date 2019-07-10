@@ -5,6 +5,10 @@ cp reqt.rng ../../metanorma-iso/lib/asciidoctor/iso
 cp biblio.rng ../../metanorma-iso/lib/asciidoctor/iso
 cp isodoc.rng ../../metanorma-iso/lib/asciidoctor/iso
 cp isostandard.rng ../../metanorma-iso/lib/asciidoctor/iso
+cp reqt.rng ../../metanorma-iec/lib/asciidoctor/iec
+cp biblio.rng ../../metanorma-iec/lib/asciidoctor/iec
+cp isodoc.rng ../../metanorma-iec/lib/asciidoctor/iec
+cp isostandard.rng ../../metanorma-iec/lib/asciidoctor/iec
 cp reqt.rng ../../metanorma-gb/lib/asciidoctor/gb
 cp biblio.rng ../../metanorma-gb/lib/asciidoctor/gb
 cp isodoc.rng ../../metanorma-gb/lib/asciidoctor/gb
