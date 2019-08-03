@@ -57,11 +57,9 @@ annex =
   }
 
 BibDataExtensionType =
-    doctype?, bkeyword+, commentperiod?
+    doctype?, commentperiod?
 
 }
-
-bkeyword = element keyword { text }
 
 commentperiod = element commentperiod {
 element from { ISO8601Date },

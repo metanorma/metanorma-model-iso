@@ -173,19 +173,11 @@
       <optional>
         <ref name="doctype"/>
       </optional>
-      <oneOrMore>
-        <ref name="bkeyword"/>
-      </oneOrMore>
       <optional>
         <ref name="commentperiod"/>
       </optional>
     </define>
   </include>
-  <define name="bkeyword">
-    <element name="keyword">
-      <text/>
-    </element>
-  </define>
   <define name="commentperiod">
     <element name="commentperiod">
       <element name="from">
