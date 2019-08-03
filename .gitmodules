@@ -4,3 +4,6 @@
 [submodule "grammars/relaton-models"]
 	path = grammars/relaton-models
 	url = https://github.com/metanorma/relaton-models.git
+[submodule "grammars/basicdoc-models"]
+	path = grammars/basicdoc-models
+	url = https://github.com/metanorma/basicdoc-models.git

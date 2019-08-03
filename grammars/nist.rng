@@ -130,6 +130,12 @@
           </attribute>
         </optional>
         <optional>
+          <attribute name="language"/>
+        </optional>
+        <optional>
+          <attribute name="script"/>
+        </optional>
+        <optional>
           <attribute name="inline-header">
             <data type="boolean"/>
           </attribute>

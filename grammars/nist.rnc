@@ -45,6 +45,8 @@ preface =
 annex =
   element annex {
     attribute id { xsd:ID }?,
+    attribute language { text }?,
+    attribute script { text }?,
     attribute inline-header { xsd:boolean }?,
     attribute obligation { "normative" | "informative" }?,
     section-title?,

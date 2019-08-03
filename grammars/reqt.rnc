@@ -5,8 +5,9 @@ requirement = element requirement { RequirementType }
 recommendation = element recommendation { RequirementType }
 permission = element permission { RequirementType }
 
-RequirementType = 
+RequirementType =  
   attribute obligation { ObligationType }?,
+  attribute unnumbered { xsd:boolean }?,
   attribute id { xsd:ID },
   attribute filename { text }?,
   reqtitle?, label?, subject?, reqinherit?, classification*,

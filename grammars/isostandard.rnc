@@ -32,12 +32,16 @@ sections =
 
 Basic-Section =
     attribute id { xsd:ID }?,
+    attribute language { text }?,
+    attribute script { text }?,
     attribute obligation { "normative" | "informative" }?,
     section-title?,
     (BasicBlock+, note*) 
 
 Content-Section =
     attribute id { xsd:ID }?,
+    attribute language { text }?,
+    attribute script { text }?,
     attribute obligation { "normative" | "informative" }?,
     section-title?,
     ( (BasicBlock+, note*) |
@@ -45,6 +49,8 @@ Content-Section =
 
 Clause-Section =
     attribute id { xsd:ID }?,
+    attribute language { text }?,
+    attribute script { text }?,
     attribute inline-header { xsd:boolean }?,
     attribute obligation { "normative" | "informative" }?,
     section-title?,
@@ -65,6 +71,8 @@ references =
 definitions =
   element definitions {
     attribute id { xsd:ID }?,
+    attribute language { text }?,
+    attribute script { text }?,
     attribute obligation { "normative" | "informative" }?,
     dl
 }
@@ -72,6 +80,8 @@ definitions =
 terms = 
   element terms { 
     attribute id { xsd:ID }?,
+    attribute language { text }?,
+    attribute script { text }?,
     attribute obligation { "normative" | "informative" }?,
     section-title?,
     (term+ | ( terms*, definitions?) )
@@ -92,6 +102,8 @@ definition =
 annex =
   element annex { 
     attribute id { xsd:ID }?,
+    attribute language { text }?,
+    attribute script { text }?,
     attribute inline-header { xsd:boolean }?,
     attribute obligation { "normative" | "informative" }?,
     section-title?,
@@ -188,6 +200,16 @@ DocumentType =
      "technical-report" | "publicly-available-specification" |
     "international-workshop-agreement" | "guide"
 
+structuredidentifier =
+  element structuredidentifier {
+    attribute type { text }?,
+    (documentnumber, tc-documentnumber? )
+}
+
+foreword = element foreword { Basic-Section }
+introduction = element introduction { Content-Section }
+
+
 }
 
 # end overrides
@@ -209,14 +231,7 @@ editorialgroup = element editorialgroup {
 }
 
 preface_abstract = element abstract { Basic-Section }
-foreword = element foreword { Basic-Section }
-introduction = element introduction { Content-Section }
 
-structuredidentifier =
-  element structuredidentifier {
-    attribute type { text }?,
-    (documentnumber, tc-documentnumber? )
-}
 
 documentnumber = 
   element project-number { 
@@ -251,6 +266,8 @@ secretariat =
 clause-hanging-paragraph-with-footnote =
   element clause {
     attribute id { xsd:ID }?,
+    attribute language { text }?,
+    attribute script { text }?,
     attribute  inline-header  {   xsd:boolean  } ? ,
     attribute obligation { "normative" | "informative" }?,
     section-title?,
@@ -277,6 +294,8 @@ ics = element ics {
 term-clause =
   element clause {
     attribute id { xsd:ID }?,
+    attribute language { text }?,
+    attribute script { text }?,
     attribute inline-header { xsd:boolean }?,
     attribute obligation { "normative" | "informative" }?,
     section-title?,
@@ -288,6 +307,8 @@ term-clause =
 reference-clause =
   element clause {
     attribute id { xsd:ID }?,
+    attribute language { text }?,
+    attribute script { text }?,
     attribute inline-header { xsd:boolean }?,
     attribute obligation { "normative" | "informative" }?,
     section-title?,

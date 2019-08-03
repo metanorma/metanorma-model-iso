@@ -31,6 +31,8 @@ BibDataExtensionType =
 term-clause =
   element clause {
     attribute id { xsd:ID }?,
+    attribute language { text }?,
+    attribute script { text }?,
     attribute inline-header { xsd:boolean }?,
     attribute obligation { "normative" | "informative" }?,
     section-title?,
@@ -44,6 +46,8 @@ term-clause =
 terms =
   element terms {
     attribute id { xsd:ID }?,
+    attribute language { text }?,
+    attribute script { text }?,
     attribute obligation { "normative" | "informative" }?,
     section-title?,
     # boilerplate not stripped

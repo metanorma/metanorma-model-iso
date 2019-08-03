@@ -1,13 +1,19 @@
+rm -f relaton-models/grammars/biblio.rng
+rm -f basicdoc-models/grammars/basicdoc.rng
+git submodule update
+
 cd relaton-models/grammars
-rm biblio.rng
-git pull
-sh make.sh
+git checkout master && git pull
 cd ../..
 cp relaton-models/grammars/biblio.rnc .
-cp relaton-models/grammars/biblio.rng .
+
+cd basicdoc-models/grammars
+git checkout master && git pull
+cd ../..
+cp basicdoc-models/grammars/basicdoc.rnc .
 
 cd metanorma-requirements-models/grammars
-git pull
+git checkout master && git pull
 cd ../..
 cp metanorma-requirements-models/grammars/reqt.rnc .
 
@@ -22,6 +28,8 @@ if [[ ! -d jing-trang ]]; then
   cd ..
 fi
 
+java -jar jing-trang/build/trang.jar -I rnc -O rng biblio.rnc biblio.rng
+java -jar jing-trang/build/trang.jar -I rnc -O rng basicdoc.rnc basicdoc.rng
 java -jar jing-trang/build/trang.jar -I rnc -O rng reqt.rnc reqt.rng
 java -jar jing-trang/build/trang.jar -I rnc -O rng isodoc.rnc isodoc.rng
 java -jar jing-trang/build/trang.jar -I rnc -O rng isostandard.rnc isostandard.rng

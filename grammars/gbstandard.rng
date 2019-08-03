@@ -83,6 +83,12 @@
           </attribute>
         </optional>
         <optional>
+          <attribute name="language"/>
+        </optional>
+        <optional>
+          <attribute name="script"/>
+        </optional>
+        <optional>
           <attribute name="inline-header">
             <data type="boolean"/>
           </attribute>
@@ -124,6 +130,12 @@
           <attribute name="id">
             <data type="ID"/>
           </attribute>
+        </optional>
+        <optional>
+          <attribute name="language"/>
+        </optional>
+        <optional>
+          <attribute name="script"/>
         </optional>
         <optional>
           <attribute name="obligation">
