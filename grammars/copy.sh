@@ -90,3 +90,9 @@ cp biblio.rng ../../metanorma-itu/lib/asciidoctor/itu
 cp isodoc.rng ../../metanorma-itu/lib/asciidoctor/itu
 cat isostandard.rng | ruby -pe '$_.gsub!(/<grammar ns=\S+/, "<grammar") ' >  ../../metanorma-itu/lib/asciidoctor/itu/isostandard.rng
 cp itu.rng ../../metanorma-itu/lib/asciidoctor/itu
+cp basicdoc.rng ../../metanorma-vsd/lib/asciidoctor/vsd
+cp reqt.rng ../../metanorma-vsd/lib/asciidoctor/vsd
+cp biblio.rng ../../metanorma-vsd/lib/asciidoctor/vsd
+cp isodoc.rng ../../metanorma-vsd/lib/asciidoctor/vsd
+cat isostandard.rng | ruby -pe '$_.gsub!(/<grammar ns=\S+/, "<grammar") ' >  ../../metanorma-vsd/lib/asciidoctor/vsd/isostandard.rng
+#cp vsd.rng ../../metanorma-vsd/lib/asciidoctor/vsd
