@@ -170,6 +170,12 @@
         </choice>
       </element>
     </define>
+    <define name="DocumentType">
+      <choice>
+        <value>standard</value>
+        <value>recommendation</value>
+      </choice>
+    </define>
   </include>
   <!-- identical structure to iso-standard -->
   <define name="gb-standard">
@@ -227,12 +233,6 @@
       <ref name="gbmandate"/>
       <ref name="gbtopic"/>
     </element>
-  </define>
-  <define name="DocumentType">
-    <choice>
-      <value>standard</value>
-      <value>recommendation</value>
-    </choice>
   </define>
   <define name="gbscope">
     <element name="gbscope">

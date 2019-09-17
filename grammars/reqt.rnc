@@ -19,7 +19,7 @@ RequirementType =
 reqtitle = element title { FormattedString }
 label = element label { text }
 subject = element subject { text }
-reqinherit = element subject { text }
+reqinherit = element inherit { text }
 
 measurementtarget = element measurement-target { RequirementSubpart }
 specification = element specification { RequirementSubpart }

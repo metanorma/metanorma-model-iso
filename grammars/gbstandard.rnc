@@ -55,6 +55,9 @@ terms =
     (term+ | ( terms*, definitions?) )
   }
 
+DocumentType = "standard" | "recommendation"
+
+
 }
 
 # identical structure to iso-standard
@@ -80,8 +83,6 @@ gbtype =
   element gbtype {
     gbscope, gbprefix, gbmandate, gbtopic
 }
-
-DocumentType = "standard" | "recommendation"
 
 gbscope = element gbscope { ( "national" | "sector" | "professional" | "local" | "enterprise" | "social-group" ) }
 gbmandate = element gbmandate { ( "mandatory" | "recommended" | "guidelines" ) }

@@ -6,6 +6,14 @@ include "isostandard.rnc" {
 
 start = itu
 
+formula =
+  element formula {
+    attribute id { xsd:ID },
+    attribute unnumbered { xsd:boolean }?,
+    attribute inequality { xsd:boolean }?,
+    stem, dl?, note*
+}
+
 figure =
   element figure {
     attribute id { xsd:ID },
@@ -34,9 +42,15 @@ editorialgroup = element editorialgroup {
 
 workgroup = element workgroup { ItuGroup }
 
-BibDataExtensionType =
-    doctype?, editorialgroup, ics*, recommendationstatus?
+structuredidentifier = element structuredidentifier {
+  bureau,
+  element docnumber { text },
+  element annexid { text }?
+}
 
+
+BibDataExtensionType =
+    doctype?, editorialgroup, ics*, recommendationstatus?, structuredidentifier?
 }
 
 recommendationstatus = element recommendationstatus {
