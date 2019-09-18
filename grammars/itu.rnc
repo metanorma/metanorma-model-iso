@@ -6,14 +6,6 @@ include "isostandard.rnc" {
 
 start = itu
 
-formula =
-  element formula {
-    attribute id { xsd:ID },
-    attribute unnumbered { xsd:boolean }?,
-    attribute inequality { xsd:boolean }?,
-    stem, dl?, note*
-}
-
 figure =
   element figure {
     attribute id { xsd:ID },
