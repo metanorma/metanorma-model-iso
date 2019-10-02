@@ -36,6 +36,14 @@ sections =
     ( clause | terms | definitions )+
 }
 
+references =
+  element references {
+    attribute id { xsd:ID }?,
+    section-title?,
+    BasicBlock*,
+    (bibitem, note*)*
+  }
+
 }
 
 
