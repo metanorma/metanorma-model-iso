@@ -64,7 +64,8 @@ references =
     attribute id { xsd:ID }?,
     attribute obligation { "normative" | "informative" }?,
     section-title?,
-    bibitem*,
+    BasicBlock*,
+    (bibitem, note*)*,
     references*
 }
 
@@ -74,6 +75,7 @@ definitions =
     attribute language { text }?,
     attribute script { text }?,
     attribute obligation { "normative" | "informative" }?,
+    BasicBlock*,
     dl
 }
 
@@ -84,6 +86,7 @@ terms =
     attribute script { text }?,
     attribute obligation { "normative" | "informative" }?,
     section-title?,
+    BasicBlock*,
     (term+ | ( terms*, definitions?) )
   }
 

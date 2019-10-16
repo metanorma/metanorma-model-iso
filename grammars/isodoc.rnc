@@ -122,7 +122,7 @@ Clause-Section =
     section-title?,
     (
       ( BasicBlock?, note* ) |
-       clause-subsection+
+       (clause-subsection | terms | definitions)+
     )
 
 clause-subsection =

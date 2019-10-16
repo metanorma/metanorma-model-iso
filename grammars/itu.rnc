@@ -27,7 +27,7 @@ DocumentType =
 
 editorialgroup = element editorialgroup {
   bureau,
-  group,
+  group?,
   subgroup?,
   workgroup?
 }
@@ -42,8 +42,13 @@ structuredidentifier = element structuredidentifier {
 
 
 BibDataExtensionType =
-    doctype?, editorialgroup, ics*, recommendationstatus?, structuredidentifier?
+    doctype?, editorialgroup, ics*, recommendationstatus?, ipnoticereceived?, structuredidentifier?
+
+preface = element preface { ( content | abstract | foreword | introduction | acknowledgements | clause)+ }
+
 }
+
+ipnoticereceived = element ip-notice-received { xsd:boolean }
 
 recommendationstatus = element recommendationstatus {
 element from { ISO8601Date },
