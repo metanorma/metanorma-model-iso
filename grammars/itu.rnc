@@ -21,6 +21,13 @@ subfigure =
     (image | pre )
  }
 
+ol =
+  element ol {
+    attribute id { xsd:ID },
+    attribute class { "steps" }?,
+    li+, note*
+}
+
 DocumentType =
 "recommendation" | "recommendation-supplement" | "recommendation-amendment" | "recommendation-corrigendum" | "recommendation-errata" |
 "recommendation-annex" | "focus-group" | "implementers-guide" | "technical-paper" | "technical-report" | "joint-itu-iso-iec" | "resolution"
