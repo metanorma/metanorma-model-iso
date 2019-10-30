@@ -44,6 +44,17 @@ references =
     (bibitem, note*)*
   }
 
+example =
+  element example {
+    attribute id { xsd:ID },
+    attribute unnumbered { xsd:boolean }?,
+    attribute subsequence { text }?,
+    attribute role { text }?,
+    tname?,
+    ( formula | ul | ol | dl | quote | sourcecode | paragraph-with-footnote )+,
+    note*
+}
+
 }
 
 
