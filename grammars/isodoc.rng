@@ -65,41 +65,6 @@
         </zeroOrMore>
       </element>
     </define>
-    <define name="example">
-      <element name="example">
-        <attribute name="id">
-          <data type="ID"/>
-        </attribute>
-        <optional>
-          <attribute name="unnumbered">
-            <data type="boolean"/>
-          </attribute>
-        </optional>
-        <optional>
-          <attribute name="subsequence"/>
-        </optional>
-        <optional>
-          <attribute name="role"/>
-        </optional>
-        <optional>
-          <ref name="tname"/>
-        </optional>
-        <oneOrMore>
-          <choice>
-            <ref name="formula"/>
-            <ref name="ul"/>
-            <ref name="ol"/>
-            <ref name="dl"/>
-            <ref name="quote"/>
-            <ref name="sourcecode"/>
-            <ref name="paragraph-with-footnote"/>
-          </choice>
-        </oneOrMore>
-        <zeroOrMore>
-          <ref name="note"/>
-        </zeroOrMore>
-      </element>
-    </define>
   </include>
   <define name="standard-document">
     <element name="standard-document">
