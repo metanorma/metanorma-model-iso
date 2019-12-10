@@ -56,6 +56,7 @@
         <value>candidate-standard</value>
         <value>conformance-class</value>
         <value>change-request</value>
+        <value>community-practice</value>
         <value>community-standard</value>
         <value>discussion-paper</value>
         <value>draft-discussion-paper</value>
@@ -70,7 +71,7 @@
         <value>policy</value>
         <value>policy-name-type=specification</value>
         <value>primer</value>
-        <value>profle</value>
+        <value>profile</value>
         <value>request-for-comment</value>
         <value>retired</value>
         <value>standard-application-profile</value>
