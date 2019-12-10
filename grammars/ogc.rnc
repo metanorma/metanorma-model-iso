@@ -22,7 +22,7 @@ subfigure =
  }
 
 DocumentType =
-"standard" | "standard-with-suite" | "abstract-specification" | "community-standard" | "profile" | "best-practice" | "engineering-report" | "discussion-paper" | "reference-model" | "user-guide" | "policy" | "guide" | "amendment" | "technical-corrigendum" | "administrative"
+"abstract-specification" | "best-practice" | "candidate-standard" | "conformance-class" | "change-request" | "community-standard" | "discussion-paper" | "draft-discussion-paper" | "interoperability-program-report" | "implementation-standard" | "implementation-standard-corrigendum" | "extension-package-standard" | "notes" | "ogc-reference-model" | "profile-corrigendum" | "public-engineering-report" | "policy" | "policy-name-type=specification" | "primer" | "profle" | "request-for-comment" | "retired" | "standard-application-profile" | "test-suite" | "whitepaper" | "approved-technical-baseline" | "recommendation-paper"
 
 editorialgroup = element editorialgroup {
   committee, subcommittee?, workgroup?
