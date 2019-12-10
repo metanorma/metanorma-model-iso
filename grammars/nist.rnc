@@ -26,17 +26,6 @@ DocumentType =
 
 TitleType = ( "alternative" | "original" | "unofficial" | "subtitle" | "main" )
 
-#DocRelationType |= "obsoletedBy" | "supersedes" | "supersededBy"
-
-DocRelationType =
-"obsoletes" | "updates" | "updatedBy" | "complements" | "derivedFrom" | "translatedFrom" |
-        "adoptedFrom" | "equivalent" | "identical" | "nonequivalent" | "includedIn" | "includes" |
-        "instance" | "partOf" | "hasDraft" |
-"obsoletedBy" | "supersedes" | "supersededBy"
-
-#BibliographicDateType |= "abandoned" | "superseded"
-BibliographicDateType = "published" | "accessed" | "created" | "implemented" | "obsoleted" | "confirmed" | "updated" | "issued" | "transmitted" | "copied" | "unchanged" | "circulated" | "abandoned" | "superseded"
-
 preface =
   element preface {
     preface_abstract?, foreword?, clause*, reviewernote?, executivesummary?
@@ -60,6 +49,10 @@ BibDataExtensionType =
     doctype?, commentperiod?
 
 }
+
+DocRelationType |= "obsoletedBy" | "supersedes" | "supersededBy"
+
+BibliographicDateType |= "abandoned" | "superseded"
 
 commentperiod = element commentperiod {
 element from { ISO8601Date },

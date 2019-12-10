@@ -36,8 +36,6 @@ bkeyword = element keyword { text }
 contact =
   ( address | phone | fax | email | uri )
 
-TextElement |= iref | comment
-
 fullname =
   element name {
     (( prefix*, forename*, initial*, surname, addition* ) | completeName |
@@ -47,6 +45,8 @@ fullname =
 
 
 }
+
+TextElement |= iref | comment
 
 fax = element fax { text }
 consensus = element consensus { xsd:boolean }

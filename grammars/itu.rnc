@@ -53,10 +53,10 @@ BibDataExtensionType =
 
 preface = element preface { ( content | abstract | foreword | introduction | acknowledgements | clause)+ }
 
-TextElement |= add | del
-
 
 }
+
+TextElement |= add | del
 
 add = element add { PureTextElement | eref | stem | keyword | xref | hyperlink }
 del = element del { PureTextElement | eref | stem | keyword | xref | hyperlink }

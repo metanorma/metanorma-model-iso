@@ -61,48 +61,6 @@
         <value>main</value>
       </choice>
     </define>
-    <!-- DocRelationType |= "obsoletedBy" | "supersedes" | "supersededBy" -->
-    <define name="DocRelationType">
-      <choice>
-        <value>obsoletes</value>
-        <value>updates</value>
-        <value>updatedBy</value>
-        <value>complements</value>
-        <value>derivedFrom</value>
-        <value>translatedFrom</value>
-        <value>adoptedFrom</value>
-        <value>equivalent</value>
-        <value>identical</value>
-        <value>nonequivalent</value>
-        <value>includedIn</value>
-        <value>includes</value>
-        <value>instance</value>
-        <value>partOf</value>
-        <value>hasDraft</value>
-        <value>obsoletedBy</value>
-        <value>supersedes</value>
-        <value>supersededBy</value>
-      </choice>
-    </define>
-    <!-- BibliographicDateType |= "abandoned" | "superseded" -->
-    <define name="BibliographicDateType">
-      <choice>
-        <value>published</value>
-        <value>accessed</value>
-        <value>created</value>
-        <value>implemented</value>
-        <value>obsoleted</value>
-        <value>confirmed</value>
-        <value>updated</value>
-        <value>issued</value>
-        <value>transmitted</value>
-        <value>copied</value>
-        <value>unchanged</value>
-        <value>circulated</value>
-        <value>abandoned</value>
-        <value>superseded</value>
-      </choice>
-    </define>
     <define name="preface">
       <element name="preface">
         <optional>
@@ -178,6 +136,19 @@
       </optional>
     </define>
   </include>
+  <define name="DocRelationType" combine="choice">
+    <choice>
+      <value>obsoletedBy</value>
+      <value>supersedes</value>
+      <value>supersededBy</value>
+    </choice>
+  </define>
+  <define name="BibliographicDateType" combine="choice">
+    <choice>
+      <value>abandoned</value>
+      <value>superseded</value>
+    </choice>
+  </define>
   <define name="commentperiod">
     <element name="commentperiod">
       <element name="from">
