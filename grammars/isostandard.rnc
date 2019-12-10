@@ -6,7 +6,7 @@ start = iso-standard
 
 organization = 
   element organization {
-    orgname, abbreviation?, uri?, org-identifier*, contact*,
+    orgname+, abbreviation?, uri?, org-identifier*, contact*,
     technical-committee?, subcommittee?, workgroup?, secretariat?  
 }
 
