@@ -246,7 +246,7 @@ processing-instructions = element pi {
 
 erefTypeURI =
     attribute normative { xsd:boolean }?,
-    attribute citeas { text },
+    attribute citeas { text }?,
     attribute type { ReferenceFormat },
     attribute alt { text }?,
     attribute displayFormat { text }?,
