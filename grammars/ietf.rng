@@ -364,6 +364,11 @@
       <ref name="CitationType"/>
       <text/>
     </define>
+    <define name="quote-source">
+      <element name="source">
+        <ref name="erefTypeURI"/>
+      </element>
+    </define>
     <define name="table">
       <element name="table">
         <attribute name="id">
@@ -444,7 +449,7 @@
       <optional>
         <ref name="section-title"/>
       </optional>
-      <choice>
+      <group>
         <group>
           <zeroOrMore>
             <ref name="BasicBlock"/>
@@ -453,14 +458,14 @@
             <ref name="note"/>
           </zeroOrMore>
         </group>
-        <oneOrMore>
+        <zeroOrMore>
           <choice>
             <ref name="clause-subsection"/>
             <ref name="terms"/>
             <ref name="definitions"/>
           </choice>
-        </oneOrMore>
-      </choice>
+        </zeroOrMore>
+      </group>
     </define>
     <define name="annex">
       <element name="annex">
@@ -493,7 +498,7 @@
         <optional>
           <ref name="section-title"/>
         </optional>
-        <choice>
+        <group>
           <group>
             <zeroOrMore>
               <ref name="BasicBlock"/>
@@ -502,11 +507,49 @@
               <ref name="note"/>
             </zeroOrMore>
           </group>
-          <oneOrMore>
+          <zeroOrMore>
             <ref name="clause-subsection"/>
-          </oneOrMore>
-        </choice>
+          </zeroOrMore>
+        </group>
       </element>
+    </define>
+    <define name="Content-Section">
+      <optional>
+        <attribute name="id">
+          <data type="ID"/>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="language"/>
+      </optional>
+      <optional>
+        <attribute name="script"/>
+      </optional>
+      <optional>
+        <attribute name="numbered"/>
+      </optional>
+      <optional>
+        <attribute name="removeInRFC"/>
+      </optional>
+      <optional>
+        <attribute name="toc"/>
+      </optional>
+      <optional>
+        <ref name="section-title"/>
+      </optional>
+      <group>
+        <group>
+          <zeroOrMore>
+            <ref name="BasicBlock"/>
+          </zeroOrMore>
+          <zeroOrMore>
+            <ref name="note"/>
+          </zeroOrMore>
+        </group>
+        <zeroOrMore>
+          <ref name="content-subsection"/>
+        </zeroOrMore>
+      </group>
     </define>
     <define name="editorialgroup">
       <element name="editorialgroup">
@@ -777,6 +820,43 @@
         </element>
       </optional>
     </element>
+  </define>
+  <define name="erefTypeURI">
+    <optional>
+      <attribute name="normative">
+        <data type="boolean"/>
+      </attribute>
+    </optional>
+    <attribute name="citeas"/>
+    <attribute name="type">
+      <ref name="ReferenceFormat"/>
+    </attribute>
+    <optional>
+      <attribute name="alt"/>
+    </optional>
+    <optional>
+      <attribute name="displayFormat"/>
+    </optional>
+    <optional>
+      <attribute name="relative"/>
+    </optional>
+    <optional>
+      <attribute name="bibitemid">
+        <data type="IDREF"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="uri">
+        <data type="anyURI"/>
+      </attribute>
+    </optional>
+    <zeroOrMore>
+      <ref name="locality"/>
+    </zeroOrMore>
+    <optional>
+      <ref name="date"/>
+    </optional>
+    <text/>
   </define>
   <define name="ietf-standard">
     <element name="ietf-standard">

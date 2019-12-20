@@ -122,6 +122,9 @@ erefType =
     CitationType,
     text
 
+quote-source =
+  element source { erefTypeURI }
+
 table =
   element table {
     attribute id { xsd:ID },
@@ -145,8 +148,8 @@ Clause-Section =
     attribute obligation { ( "normative" | "informative" ) },
     section-title?,
     (
-      ( BasicBlock*, note* ) |
-       (clause-subsection | terms | definitions)+
+      ( BasicBlock*, note* ),
+       (clause-subsection | terms | definitions)*
     )
 
 annex =
@@ -159,8 +162,20 @@ annex =
     attribute removeInRFC { text }?,
     attribute toc { text }?,
     section-title?,
-    ( ( BasicBlock*, note* ) | clause-subsection+ )
+    ( ( BasicBlock*, note* ), clause-subsection* )
 }
+
+Content-Section =
+    attribute id { xsd:ID }?,
+    attribute language { text }?,
+    attribute script { text }?,
+    attribute numbered { text }?,
+    attribute removeInRFC { text }?,
+    attribute toc { text }?,
+    section-title?,
+    ( (BasicBlock*, note*),
+      content-subsection* )
+
 
 editorialgroup = element editorialgroup {
   committee*
@@ -228,6 +243,19 @@ processing-instructions = element pi {
  element symrefs { text }?,
  element sortrefs { text }?
 }
+
+erefTypeURI =
+    attribute normative { xsd:boolean }?,
+    attribute citeas { text },
+    attribute type { ReferenceFormat },
+    attribute alt { text }?,
+    attribute displayFormat { text }?,
+    attribute relative { text }?,
+    attribute bibitemid { xsd:IDREF }?,
+    attribute uri { xsd:anyURI }?,
+    locality*, date?,
+    text
+
 
 ietf-standard =
   element ietf-standard {

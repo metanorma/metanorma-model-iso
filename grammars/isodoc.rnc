@@ -33,7 +33,7 @@ TitleType = text
 
 sections =
   element sections {
-    ( clause | terms | definitions )+
+    ( clause | terms | definitions)+
 }
 
 references =
