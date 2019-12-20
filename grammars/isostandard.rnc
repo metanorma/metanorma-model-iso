@@ -121,7 +121,7 @@ figure =
   element figure {
     attribute id { xsd:ID },
     tname?,
-    ( image | subfigure+ ),
+    ( image | pre | subfigure+ ),
     fn*,
     dl?,
     note*

@@ -106,7 +106,7 @@ Content-Section =
     attribute language { text }?,
     attribute script { text }?,
     section-title?,
-    ( (BasicBlock?, note*) |
+    ( (BasicBlock*, note*) |
       content-subsection+ )
 
 clause =
@@ -121,7 +121,7 @@ Clause-Section =
     attribute script { text }?,
     section-title?,
     (
-      ( BasicBlock?, note* ) |
+      ( BasicBlock*, note* ) |
        (clause-subsection | terms | definitions)+
     )
 
@@ -135,7 +135,7 @@ annex =
     attribute script { text }?,
     attribute obligation { ( "normative" | "informative" ) },
     section-title?,
-    ( ( BasicBlock?, note* ) | clause-subsection+ )
+    ( ( BasicBlock*, note* ) | clause-subsection+ )
 }
 
 terms =

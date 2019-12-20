@@ -6,65 +6,228 @@ include "isostandard.rnc" {
 
 start = ietf-standard
 
-figure =
-  element figure {
-    attribute id { xsd:ID },
-    tname?,
-    ( image | pre| subfigure+ ),
-    fn*, dl?, note*
-  }
-
-subfigure =
-  element figure {
-    attribute id { xsd:ID },
-    tname?,
-    (image | pre )
- }
-
 DocumentType = "rfc" | "internet-draft"
 
-editorialgroup = element editorialgroup {
-  committee+
-}
-
 BibDataExtensionType =
-    doctype?, ics*,
-    ipr?, iprExtract?, submissiontype?, area*, bkeyword*, consensus?
+        doctype?, editorialgroup*, ics*, area*, ipr?, consensus?, index-include?, ipr-extract?, sort-refs?, sym-refs?, toc-include?, toc-depth?, show-on-front-page?, processing-instructions?
 
-bkeyword = element keyword { text }
+ParagraphType =
+    attribute id { xsd:ID },
+    attribute align { Alignments }?,
+    attribute keepWithNext { xsd:boolean }?,
+    attribute keepWithPrevious { xsd:boolean }?,
+   ( TextElement )*, note*
 
-contact =
-  ( address | phone | fax | email | uri )
+paragraph-with-footnote =
+  element p {
+    attribute id { xsd:ID },
+    attribute align { Alignments }?,
+   ( TextElement | fn  )*, note*
+}
 
-fullname =
-  element name {
-    (( prefix*, forename*, initial*, surname, addition* ) | completeName |
-    ( prefix*, forename*, initial*, surname, addition*, completeName )),
-    biblionote*
+ul =
+  element ul {
+    attribute id { xsd:ID },
+    attribute nobullet { text }?,
+    attribute spacing { text }?,
+    li+, note*
+}
+
+ol =
+  element ol {
+    attribute id { xsd:ID },
+    attribute type { ( "roman" | "alphabet" | "arabic" |
+                       "roman_upper" | "alphabet_upper" | "text" ) },
+    attribute group { text }?,
+    attribute spacing { text }?,
+    attribute start { text }?,
+    li+, note*
+}
+
+dl =
+  element dl {
+    attribute id { xsd:ID },
+    attribute newline { text }?,
+    attribute indent { text }?,
+    attribute spacing { text }?,
+    (dt, dd)+, note*
+}
+
+review =
+  element review {
+  attribute id { xsd:ID },
+  attribute reviewer { text },
+  attribute date { xsd:dateTime }?,
+  attribute from { xsd:IDREF },
+  attribute to { xsd:IDREF }?,
+  attribute display { text }?,
+  paragraph+
+}
+
+note =
+  element note {
+    attribute id { xsd:ID },
+    attribute removeInRFC { text }?,
+    tname?, paragraph+
+  }
+
+pre =
+  element pre {
+    attribute id { xsd:ID },
+    attribute alt { text }?,
+    attribute align { text }?,
+    tname?, text, note*
+  }
+
+image =
+  element image {
+    attribute id { xsd:ID },
+    attribute src { xsd:anyURI },
+    attribute mimetype { text },
+    attribute filename { text }?,
+    attribute width { xsd:int | "auto" }?,
+    attribute height { xsd:int | "auto" }?,
+    attribute alt { text }?,
+    attribute title { text }?,
+    attribute longdesc { xsd:anyURI }?,
+    attribute align { text }?
+}
+
+sourcecode =
+  element sourcecode {
+    attribute id { xsd:ID },
+    attribute unnumbered { xsd:boolean }?,
+    attribute subsequence { text }?,
+    attribute lang { text }?,
+    attribute markers { text }?,
+    tname?, ( text | callout )+, annotation*, note*
+  }
+
+xref =
+  element xref {
+     attribute target { xsd:IDREF },
+     attribute type { ReferenceFormat }?,
+     attribute alt { text }?,
+     attribute format { text }?,
+     text
+}
+
+erefType =
+    attribute normative { xsd:boolean }?,
+    attribute citeas { text },
+    attribute type { ReferenceFormat },
+    attribute alt { text }?,
+    attribute displayFormat { text }?,
+    attribute relative { text }?,
+    CitationType,
+    text
+
+table =
+  element table {
+    attribute id { xsd:ID },
+    attribute unnumbered { xsd:boolean }?,
+    attribute subsequence { text }?,
+    attribute alt { text }?,
+    attribute summary { text }?,
+    attribute uri { xsd:anyURI }?,
+    attribute align { text }?,
+    tname?, thead?, tbody, tfoot?, table-note*, dl?
+  }
+
+Clause-Section =
+    attribute id { xsd:ID }?,
+    attribute language { text }?,
+    attribute script { text }?,
+    attribute numbered { text }?,
+    attribute removeInRFC { text }?,
+    attribute toc { text }?,
+    attribute inline-header { xsd:boolean }?,
+    attribute obligation { ( "normative" | "informative" ) },
+    section-title?,
+    (
+      ( BasicBlock*, note* ) |
+       (clause-subsection | terms | definitions)+
+    )
+
+annex =
+  element annex {
+    attribute id { xsd:ID }?,
+    attribute language { text }?,
+    attribute script { text }?,
+    attribute obligation { ( "normative" | "informative" ) },
+    attribute numbered { text }?,
+    attribute removeInRFC { text }?,
+    attribute toc { text }?,
+    section-title?,
+    ( ( BasicBlock*, note* ) | clause-subsection+ )
+}
+
+editorialgroup = element editorialgroup {
+  committee*
+}
+
 }
 
 
-}
+TextElement |= bcp14
 
-TextElement |= iref | comment
+bcp14 = element bcp14 { text }
 
-fax = element fax { text }
-consensus = element consensus { xsd:boolean }
-area = element area { "art" | "gen" | "int" | "ops" | "rtg" | "sec" | "tsv" }
-abbrevtitle = element abbrevtitle { text }
-ipr = element ipr { text }
-iprExtract = element iprExtract { text }
-submissiontype = element submissiontype { text }
+committee = element committee { IsoWorkgroup }
 
-committee = element technical-committee { text }
-
-iref = element iref {
-  attribute item { text },
-  attribute subitem { text }?,
-  text?
-}
+area = element area { "art" | "gen" | "int" | "ops" | "rtg" | "sec" | "tsv" | 
+"Applications and Real-Time" | "General" |  "Internet" | "Operations and Management" |
+"Routing" | "Security" | "Transport" }
 
 comment = element comment { text }
+
+ipr = element ipr { text }
+consensus = element consensus { text }
+index-include = element indexInclude { text }
+ipr-extract = element iprExtract { text }
+sort-refs = element sortRefs { text }
+sym-refs = element symRefs { text }
+toc-include = element tocInclude { text }
+toc-depth = element tocDepth { text }
+show-on-front-page = element showOnFrontPage { text }
+
+processing-instructions = element pi {
+ element artworkdelimiter { text }?,
+ element artworklines { text }?,
+ element authorship { text }?,
+ element autobreaks { text }?,
+ element background { text }?,
+ element colonspace { text }?,
+ element comments { text }?,
+ element docmapping { text }?,
+ element editing { text }?,
+ element emoticonic { text }?,
+ element footer { text }?,
+ element header { text }?,
+ element inline { text }?,
+ element iprnotified { text }?,
+ element linkmailto { text }?,
+ element linefile { text }?,
+ element notedraftinprogress { text }?,
+ element private { text }?,
+ element refparent { text }?,
+ element rfcedstyle { text }?,
+ element slides { text }?,
+ element text-list-symbols { text }?,
+ element tocappendix { text }?,
+ element tocindent { text }?,
+ element tocnarrow { text }?,
+ element tocompact { text }?,
+ element topblock { text }?,
+ element useobject { text }?,
+ element strict { text }?,
+ element compact { text }?,
+ element subcompact { text }?,
+ element toc { text }?,
+ element tocdepth { text }?,
+ element symrefs { text }?,
+ element sortrefs { text }?
+}
 
 ietf-standard =
   element ietf-standard {
