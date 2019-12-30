@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<grammar ns="http://riboseinc.com/isoxml" xmlns="http://relaxng.org/ns/structure/1.0">
+  <include href="isostandard.rng">
+    <start>
+      <ref name="iec-standard"/>
+    </start>
+    <define name="DocumentType">
+      <choice>
+        <value>international-standard</value>
+        <value>technical-specification</value>
+        <value>technical-report</value>
+        <value>publicly-available-specification</value>
+        <value>international-workshop-agreement</value>
+        <value>guide</value>
+      </choice>
+    </define>
+  </include>
+  <!-- end overrides -->
+  <!--
+    We display the Normative References between scope and terms; but to keep the
+    grammar simple, we keep the references together
+  -->
+  <define name="iec-standard">
+    <element name="iec-standard">
+      <ref name="bibdata"/>
+      <zeroOrMore>
+        <ref name="termdocsource"/>
+      </zeroOrMore>
+      <optional>
+        <ref name="boilerplate"/>
+      </optional>
+      <ref name="preface"/>
+      <oneOrMore>
+        <ref name="sections"/>
+      </oneOrMore>
+      <zeroOrMore>
+        <ref name="annex"/>
+      </zeroOrMore>
+      <ref name="bibliography"/>
+    </element>
+  </define>
+</grammar>
