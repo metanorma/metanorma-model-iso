@@ -79,6 +79,6 @@ executivesummary = element executivesummary { Basic-Section }
 
 nist-standard =
   element nist-standard {
-    bibdata, termdocsource*, boilerplate?, preface, sections+, annex*, bibliography
+    bibdata, termdocsource*, boilerplate?, preface, sections+, annex*, bibliography?
  }
 
