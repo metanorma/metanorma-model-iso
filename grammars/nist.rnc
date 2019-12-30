@@ -42,7 +42,20 @@ annex =
     # allow hanging paragraps in annexes: they introduce lists
     #( paragraph-with-footnote | table | note | formula | admonition | ol | ul | dl | figure | quote | sourcecode | review | example )*,
     BasicBlock*, note*,
-    (clause-hanging-paragraph-with-footnote* | terms)
+    (clause-hanging-paragraph-with-footnote | terms | definitions | references)*
+  }
+
+clause-hanging-paragraph-with-footnote =
+  element clause {
+    attribute id { xsd:ID }?,
+    attribute language { text }?,
+    attribute script { text }?,
+    attribute  inline-header  {   xsd:boolean  } ? ,
+    attribute obligation { "normative" | "informative" }?,
+    section-title?,
+    # allow hanging paragraphs in annexes: they introduce lists
+    BasicBlock*, note*,
+    (clause-hanging-paragraph-with-footnote | terms | definitions | references)*
   }
 
 BibDataExtensionType =
