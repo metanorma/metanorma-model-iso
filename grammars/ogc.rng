@@ -51,34 +51,20 @@
     </define>
     <define name="DocumentType">
       <choice>
-        <value>abstract-specification</value>
+        <value>abstract-specification-topic</value>
         <value>best-practice</value>
-        <value>candidate-standard</value>
-        <value>conformance-class</value>
-        <value>change-request</value>
+        <value>change-request-supporting-document</value>
         <value>community-practice</value>
         <value>community-standard</value>
         <value>discussion-paper</value>
-        <value>draft-discussion-paper</value>
-        <value>interoperability-program-report</value>
-        <value>implementation-standard</value>
-        <value>implementation-standard-corrigendum</value>
-        <value>extension-package-standard</value>
-        <value>notes</value>
-        <value>ogc-reference-model</value>
-        <value>profile-corrigendum</value>
-        <value>public-engineering-report</value>
+        <value>engineering-report</value>
+        <value>other</value>
         <value>policy</value>
-        <value>policy-name-type-specification</value>
-        <value>primer</value>
-        <value>profile</value>
-        <value>request-for-comment</value>
-        <value>retired</value>
-        <value>standard-application-profile</value>
-        <value>test-suite</value>
-        <value>whitepaper</value>
-        <value>approved-technical-baseline</value>
-        <value>recommendation-paper</value>
+        <value>reference-model</value>
+        <value>release-notes</value>
+        <value>standard</value>
+        <value>user-guide</value>
+        <value>white-paper</value>
       </choice>
     </define>
     <define name="editorialgroup">
@@ -95,6 +81,9 @@
     <define name="BibDataExtensionType">
       <optional>
         <ref name="doctype"/>
+      </optional>
+      <optional>
+        <ref name="docsubtype"/>
       </optional>
       <ref name="editorialgroup"/>
       <zeroOrMore>
@@ -113,6 +102,25 @@
       </element>
     </define>
   </include>
+  <define name="docsubtype">
+    <element name="docsubtype">
+      <choice>
+        <value>conceptual-model</value>
+        <value>conceptual-model-and-encoding</value>
+        <value>conceptual-model-and-implementation</value>
+        <value>encoding</value>
+        <value>extension</value>
+        <value>implementation</value>
+        <value>profile</value>
+        <value>profile-with-extension</value>
+        <value>general</value>
+        <value>encoding</value>
+        <value>extension</value>
+        <value>profile</value>
+        <value>profile-with-extension</value>
+      </choice>
+    </element>
+  </define>
   <define name="submitters">
     <element name="submitters">
       <ref name="Basic-Section"/>
