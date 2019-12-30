@@ -1,0 +1,22 @@
+default namespace isostandard = "http://riboseinc.com/isoxml"
+
+include "isostandard.rnc" {
+
+start = iec-standard
+
+DocumentType =
+     "international-standard" | "technical-specification" |
+     "technical-report" | "publicly-available-specification" |
+    "international-workshop-agreement" | "guide"
+
+}
+
+# end overrides
+
+# We display the Normative References between scope and terms; but to keep the
+# grammar simple, we keep the references together
+iec-standard = 
+  element iec-standard {
+    bibdata, termdocsource*, boilerplate?, preface, sections+, annex*, bibliography
+  }
+

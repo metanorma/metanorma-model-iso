@@ -12,6 +12,7 @@ cp reqt.rng ../../metanorma-iec/lib/asciidoctor/iec
 cp biblio.rng ../../metanorma-iec/lib/asciidoctor/iec
 cp isodoc.rng ../../metanorma-iec/lib/asciidoctor/iec
 cp isostandard.rng ../../metanorma-iec/lib/asciidoctor/iec
+cp iec.rng ../../metanorma-iec/lib/asciidoctor/iec
 cp basicdoc.rng ../../metanorma-gb/lib/asciidoctor/gb
 cp reqt.rng ../../metanorma-gb/lib/asciidoctor/gb
 cp biblio.rng ../../metanorma-gb/lib/asciidoctor/gb
