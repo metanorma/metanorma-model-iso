@@ -11,7 +11,7 @@ cp basicdoc.rng ../../metanorma-iec/lib/asciidoctor/iec
 cp reqt.rng ../../metanorma-iec/lib/asciidoctor/iec
 cp biblio.rng ../../metanorma-iec/lib/asciidoctor/iec
 cp isodoc.rng ../../metanorma-iec/lib/asciidoctor/iec
-cp isostandard.rng ../../metanorma-iec/lib/asciidoctor/iec
+cat isostandard.rng | ruby -pe '$_.gsub!(/<grammar ns=\S+/, "<grammar") ' >  ../../metanorma-iec/lib/asciidoctor/iec/isostandard.rng
 cp iec.rng ../../metanorma-iec/lib/asciidoctor/iec
 cp basicdoc.rng ../../metanorma-gb/lib/asciidoctor/gb
 cp reqt.rng ../../metanorma-gb/lib/asciidoctor/gb
