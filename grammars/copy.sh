@@ -96,4 +96,4 @@ cp reqt.rng ../../metanorma-vsd/lib/asciidoctor/vsd
 cp biblio.rng ../../metanorma-vsd/lib/asciidoctor/vsd
 cp isodoc.rng ../../metanorma-vsd/lib/asciidoctor/vsd
 cat isostandard.rng | ruby -pe '$_.gsub!(/<grammar ns=\S+/, "<grammar") ' >  ../../metanorma-vsd/lib/asciidoctor/vsd/isostandard.rng
-cp rsd.rng ../../metanorma-vsd/lib/asciidoctor/vsd
+cp rsd.rng ../../metanorma-vsd/lib/asciidoctor/vsd/vsd.rng
