@@ -44,6 +44,11 @@ references =
     (bibitem, note*)*
   }
 
+note = element note {
+    attribute id { xsd:ID },
+    (paragraph | ul | ol | dl)+
+}
+
 }
 
 

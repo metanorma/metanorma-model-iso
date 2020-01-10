@@ -25,12 +25,12 @@ cp biblio.rng ../../metanorma-csd/lib/asciidoctor/csd
 cp isodoc.rng ../../metanorma-csd/lib/asciidoctor/csd
 cat isostandard.rng | ruby -pe '$_.gsub!(/<grammar ns=\S+/, "<grammar") ' >  ../../metanorma-csd/lib/asciidoctor/csd/isostandard.rng
 cp csd.rng ../../metanorma-csd/lib/asciidoctor/csd
-cp basicdoc.rng ../../metanorma-csand/lib/asciidoctor/csand
-cp reqt.rng ../../metanorma-csand/lib/asciidoctor/csand
-cp biblio.rng ../../metanorma-csand/lib/asciidoctor/csand
-cp isodoc.rng ../../metanorma-csand/lib/asciidoctor/csand
-cat isostandard.rng | ruby -pe '$_.gsub!(/<grammar ns=\S+/, "<grammar") ' >  ../../metanorma-csand/lib/asciidoctor/csand/isostandard.rng
-cp csand.rng ../../metanorma-csand/lib/asciidoctor/csand
+cp basicdoc.rng ../../metanorma-csand/lib/asciidoctor/csa
+cp reqt.rng ../../metanorma-csand/lib/asciidoctor/csa
+cp biblio.rng ../../metanorma-csand/lib/asciidoctor/csa
+cp isodoc.rng ../../metanorma-csand/lib/asciidoctor/csa
+cat isostandard.rng | ruby -pe '$_.gsub!(/<grammar ns=\S+/, "<grammar") ' >  ../../metanorma-csand/lib/asciidoctor/csa/isostandard.rng
+cp csand.rng ../../metanorma-csand/lib/asciidoctor/csa
 cp basicdoc.rng ../../metanorma-m3d/lib/asciidoctor/m3d
 cp reqt.rng ../../metanorma-m3d/lib/asciidoctor/m3d
 cp biblio.rng ../../metanorma-m3d/lib/asciidoctor/m3d
