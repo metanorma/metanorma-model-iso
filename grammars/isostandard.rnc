@@ -44,7 +44,7 @@ Content-Section =
     attribute script { text }?,
     attribute obligation { "normative" | "informative" }?,
     section-title?,
-    ( (BasicBlock+, note*),
+    ( (BasicBlock*, note*),
       content-subsection* )
 
 Clause-Section =
