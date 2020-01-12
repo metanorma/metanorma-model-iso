@@ -223,6 +223,9 @@
           <ref name="BasicBlock"/>
         </zeroOrMore>
         <zeroOrMore>
+          <ref name="note"/>
+        </zeroOrMore>
+        <zeroOrMore>
           <ref name="bibitem"/>
           <zeroOrMore>
             <ref name="note"/>
@@ -260,6 +263,9 @@
         <zeroOrMore>
           <ref name="BasicBlock"/>
         </zeroOrMore>
+        <zeroOrMore>
+          <ref name="note"/>
+        </zeroOrMore>
         <ref name="dl"/>
       </element>
     </define>
@@ -289,6 +295,9 @@
         </optional>
         <zeroOrMore>
           <ref name="BasicBlock"/>
+        </zeroOrMore>
+        <zeroOrMore>
+          <ref name="note"/>
         </zeroOrMore>
         <choice>
           <oneOrMore>
@@ -808,6 +817,12 @@
         <ref name="section-title"/>
       </optional>
       <zeroOrMore>
+        <ref name="BasicBlock"/>
+      </zeroOrMore>
+      <zeroOrMore>
+        <ref name="note"/>
+      </zeroOrMore>
+      <zeroOrMore>
         <choice>
           <ref name="term-clause"/>
           <ref name="terms"/>
@@ -845,6 +860,12 @@
       <optional>
         <ref name="section-title"/>
       </optional>
+      <zeroOrMore>
+        <ref name="BasicBlock"/>
+      </zeroOrMore>
+      <zeroOrMore>
+        <ref name="note"/>
+      </zeroOrMore>
       <choice>
         <oneOrMore>
           <ref name="reference-clause"/>

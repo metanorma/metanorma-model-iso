@@ -64,7 +64,7 @@ references =
     attribute id { xsd:ID }?,
     attribute obligation { "normative" | "informative" }?,
     section-title?,
-    BasicBlock*,
+    BasicBlock*, note*,
     (bibitem, note*)*,
     references*
 }
@@ -76,7 +76,7 @@ definitions =
     attribute script { text }?,
     attribute obligation { "normative" | "informative" }?,
     section-title?,
-    BasicBlock*,
+    BasicBlock*, note*,
     dl
 }
 
@@ -87,7 +87,7 @@ terms =
     attribute script { text }?,
     attribute obligation { "normative" | "informative" }?,
     section-title?,
-    BasicBlock*,
+    BasicBlock*, note*,
     (term+ | ( terms*, definitions?) )
   }
 
@@ -303,6 +303,7 @@ term-clause =
     attribute inline-header { xsd:boolean }?,
     attribute obligation { "normative" | "informative" }?,
     section-title?,
+    BasicBlock*, note*,
     (
        (term-clause | terms | definitions)*
     )
@@ -316,6 +317,7 @@ reference-clause =
     attribute inline-header { xsd:boolean }?,
     attribute obligation { "normative" | "informative" }?,
     section-title?,
+    BasicBlock*, note*,
     (
        reference-clause+ | references*
     )
