@@ -111,7 +111,7 @@ Content-Section =
     attribute language { text }?,
     attribute script { text }?,
     section-title?,
-    ( (BasicBlock*, note*) |
+    ( (BasicBlock*, note*),
       content-subsection+ )
 
 clause =

@@ -220,7 +220,7 @@
     <optional>
       <ref name="section-title"/>
     </optional>
-    <choice>
+    <group>
       <group>
         <zeroOrMore>
           <ref name="BasicBlock"/>
@@ -232,7 +232,7 @@
       <oneOrMore>
         <ref name="content-subsection"/>
       </oneOrMore>
-    </choice>
+    </group>
   </define>
   <define name="clause">
     <element name="clause">

@@ -145,7 +145,7 @@
       <optional>
         <ref name="section-title"/>
       </optional>
-      <choice>
+      <group>
         <group>
           <oneOrMore>
             <ref name="BasicBlock"/>
@@ -157,7 +157,7 @@
         <oneOrMore>
           <ref name="content-subsection"/>
         </oneOrMore>
-      </choice>
+      </group>
     </define>
     <define name="Clause-Section">
       <optional>
