@@ -147,9 +147,9 @@
       </optional>
       <group>
         <group>
-          <oneOrMore>
+          <zeroOrMore>
             <ref name="BasicBlock"/>
-          </oneOrMore>
+          </zeroOrMore>
           <zeroOrMore>
             <ref name="note"/>
           </zeroOrMore>
@@ -253,6 +253,9 @@
               <value>informative</value>
             </choice>
           </attribute>
+        </optional>
+        <optional>
+          <ref name="section-title"/>
         </optional>
         <zeroOrMore>
           <ref name="BasicBlock"/>
