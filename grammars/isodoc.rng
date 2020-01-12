@@ -76,6 +76,7 @@
             <ref name="ul"/>
             <ref name="ol"/>
             <ref name="dl"/>
+            <ref name="formula"/>
           </choice>
         </oneOrMore>
       </element>

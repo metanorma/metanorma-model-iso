@@ -46,7 +46,7 @@ references =
 
 note = element note {
     attribute id { xsd:ID },
-    (paragraph | ul | ol | dl)+
+    (paragraph | ul | ol | dl | formula)+
 }
 
 }
