@@ -45,7 +45,7 @@ Content-Section =
     attribute obligation { "normative" | "informative" }?,
     section-title?,
     ( (BasicBlock+, note*),
-      content-subsection+ )
+      content-subsection* )
 
 Clause-Section =
     attribute id { xsd:ID }?,

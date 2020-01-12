@@ -154,9 +154,9 @@
             <ref name="note"/>
           </zeroOrMore>
         </group>
-        <oneOrMore>
+        <zeroOrMore>
           <ref name="content-subsection"/>
-        </oneOrMore>
+        </zeroOrMore>
       </group>
     </define>
     <define name="Clause-Section">

@@ -112,7 +112,7 @@ Content-Section =
     attribute script { text }?,
     section-title?,
     ( (BasicBlock*, note*),
-      content-subsection+ )
+      content-subsection* )
 
 clause =
   element clause { 
