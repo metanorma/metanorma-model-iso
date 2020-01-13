@@ -28,7 +28,7 @@ cp basicdoc.rng ../../metanorma-csand/lib/asciidoctor/csa
 cp reqt.rng ../../metanorma-csand/lib/asciidoctor/csa
 cp biblio.rng ../../metanorma-csand/lib/asciidoctor/csa
 cp isodoc.rng ../../metanorma-csand/lib/asciidoctor/csa
-cp csand.rng ../../metanorma-csand/lib/asciidoctor/csa
+cp csa.rng ../../metanorma-csand/lib/asciidoctor/csa
 cp basicdoc.rng ../../metanorma-m3d/lib/asciidoctor/m3d
 cp reqt.rng ../../metanorma-m3d/lib/asciidoctor/m3d
 cp biblio.rng ../../metanorma-m3d/lib/asciidoctor/m3d

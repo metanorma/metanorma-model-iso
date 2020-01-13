@@ -35,7 +35,7 @@ java -jar jing-trang/build/trang.jar -I rnc -O rng isodoc.rnc isodoc.rng
 java -jar jing-trang/build/trang.jar -I rnc -O rng isostandard.rnc isostandard.rng
 java -jar jing-trang/build/trang.jar -I rnc -O rng iec.rnc iec.rng
 java -jar jing-trang/build/trang.jar -I rnc -O rng csd.rnc csd.rng
-java -jar jing-trang/build/trang.jar -I rnc -O rng csand.rnc csand.rng
+java -jar jing-trang/build/trang.jar -I rnc -O rng csa.rnc csa.rng
 java -jar jing-trang/build/trang.jar -I rnc -O rng gbstandard.rnc gbstandard.rng
 java -jar jing-trang/build/trang.jar -I rnc -O rng m3d.rnc m3d.rng
 java -jar jing-trang/build/trang.jar -I rnc -O rng rsd.rnc rsd.rng
