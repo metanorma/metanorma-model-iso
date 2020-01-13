@@ -133,6 +133,8 @@ table-note = element note {
 
 # end overrides
 
+BasicBlock |= requirement | recommendation | permission
+
 bibliography =
   element bibliography {
     (references | reference-clause)+
@@ -275,7 +277,8 @@ annex =
     attribute inline-header { xsd:boolean }?,
     attribute obligation { ( "normative" | "informative" ) },
     section-title?,
-    ( ( BasicBlock*, note* ), annex-subsection* )
+    ( ( BasicBlock*, note* ), 
+      (annex-subsection | terms | definitions | references)* )
 }
 
 terms =

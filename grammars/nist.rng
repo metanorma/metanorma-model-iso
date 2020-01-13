@@ -30,7 +30,10 @@
           <ref name="foreword"/>
         </optional>
         <zeroOrMore>
-          <ref name="clause"/>
+          <choice>
+            <ref name="clause"/>
+            <ref name="errata_clause"/>
+          </choice>
         </zeroOrMore>
         <optional>
           <ref name="reviewernote"/>
@@ -40,105 +43,23 @@
         </optional>
       </element>
     </define>
-    <define name="annex">
-      <element name="annex">
-        <optional>
-          <attribute name="id">
-            <data type="ID"/>
-          </attribute>
-        </optional>
-        <optional>
-          <attribute name="language"/>
-        </optional>
-        <optional>
-          <attribute name="script"/>
-        </optional>
-        <optional>
-          <attribute name="inline-header">
-            <data type="boolean"/>
-          </attribute>
-        </optional>
-        <optional>
-          <attribute name="obligation">
-            <choice>
-              <value>normative</value>
-              <value>informative</value>
-            </choice>
-          </attribute>
-        </optional>
-        <optional>
-          <ref name="section-title"/>
-        </optional>
-        <zeroOrMore>
-          <!--
-            allow hanging paragraps in annexes: they introduce lists
-            ( paragraph-with-footnote | table | note | formula | admonition | ol | ul | dl | figure | quote | sourcecode | review | example )*,
-          -->
-          <ref name="BasicBlock"/>
-        </zeroOrMore>
-        <zeroOrMore>
-          <ref name="note"/>
-        </zeroOrMore>
-        <zeroOrMore>
-          <choice>
-            <ref name="clause-hanging-paragraph-with-footnote"/>
-            <ref name="terms"/>
-            <ref name="definitions"/>
-            <ref name="references"/>
-          </choice>
-        </zeroOrMore>
-      </element>
-    </define>
-    <define name="clause-hanging-paragraph-with-footnote">
-      <element name="clause">
-        <optional>
-          <attribute name="id">
-            <data type="ID"/>
-          </attribute>
-        </optional>
-        <optional>
-          <attribute name="language"/>
-        </optional>
-        <optional>
-          <attribute name="script"/>
-        </optional>
-        <optional>
-          <attribute name="inline-header">
-            <data type="boolean"/>
-          </attribute>
-        </optional>
-        <optional>
-          <attribute name="obligation">
-            <choice>
-              <value>normative</value>
-              <value>informative</value>
-            </choice>
-          </attribute>
-        </optional>
-        <optional>
-          <ref name="section-title"/>
-        </optional>
-        <zeroOrMore>
-          <!-- allow hanging paragraphs in annexes: they introduce lists -->
-          <ref name="BasicBlock"/>
-        </zeroOrMore>
-        <zeroOrMore>
-          <ref name="note"/>
-        </zeroOrMore>
-        <zeroOrMore>
-          <choice>
-            <ref name="clause-hanging-paragraph-with-footnote"/>
-            <ref name="terms"/>
-            <ref name="definitions"/>
-            <ref name="references"/>
-          </choice>
-        </zeroOrMore>
+    <define name="editorialgroup">
+      <element name="editorialgroup">
+        <oneOrMore>
+          <ref name="committee"/>
+        </oneOrMore>
       </element>
     </define>
     <define name="BibDataExtensionType">
       <optional>
         <ref name="doctype"/>
       </optional>
+      <optional>
+        <ref name="editorialgroup"/>
+      </optional>
+      <zeroOrMore>
+        <ref name="ics"/>
+      </zeroOrMore>
       <optional>
         <ref name="commentperiod"/>
       </optional>
@@ -182,6 +103,71 @@
   <define name="executivesummary">
     <element name="executivesummary">
       <ref name="Basic-Section"/>
+    </element>
+  </define>
+  <define name="committee">
+    <element name="committee">
+      <text/>
+    </element>
+  </define>
+  <define name="errata">
+    <element name="errata">
+      <oneOrMore>
+        <ref name="erratarow"/>
+      </oneOrMore>
+    </element>
+  </define>
+  <define name="erratarow">
+    <element name="row">
+      <element name="date">
+        <ref name="ISO8601Date"/>
+      </element>
+      <element name="type">
+        <text/>
+      </element>
+      <element name="change">
+        <oneOrMore>
+          <ref name="TextElement"/>
+        </oneOrMore>
+      </element>
+      <element name="pages">
+        <text/>
+      </element>
+    </element>
+  </define>
+  <define name="errata_clause">
+    <element name="clause">
+      <optional>
+        <attribute name="id">
+          <data type="ID"/>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="language"/>
+      </optional>
+      <optional>
+        <attribute name="script"/>
+      </optional>
+      <optional>
+        <attribute name="obligation">
+          <choice>
+            <value>normative</value>
+            <value>informative</value>
+          </choice>
+        </attribute>
+      </optional>
+      <optional>
+        <ref name="section-title"/>
+      </optional>
+      <group>
+        <zeroOrMore>
+          <ref name="BasicBlock"/>
+        </zeroOrMore>
+        <zeroOrMore>
+          <ref name="note"/>
+        </zeroOrMore>
+      </group>
+      <ref name="errata"/>
     </element>
   </define>
   <define name="nist-standard">

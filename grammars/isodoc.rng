@@ -307,6 +307,13 @@
     </define>
   </include>
   <!-- end overrides -->
+  <define name="BasicBlock" combine="choice">
+    <choice>
+      <ref name="requirement"/>
+      <ref name="recommendation"/>
+      <ref name="permission"/>
+    </choice>
+  </define>
   <define name="bibliography">
     <element name="bibliography">
       <oneOrMore>
@@ -705,7 +712,12 @@
           </zeroOrMore>
         </group>
         <zeroOrMore>
-          <ref name="annex-subsection"/>
+          <choice>
+            <ref name="annex-subsection"/>
+            <ref name="terms"/>
+            <ref name="definitions"/>
+            <ref name="references"/>
+          </choice>
         </zeroOrMore>
       </group>
     </element>

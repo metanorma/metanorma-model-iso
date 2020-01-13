@@ -13,38 +13,15 @@ TitleType = ( "alternative" | "original" | "unofficial" | "subtitle" | "main" )
 
 preface =
   element preface {
-    preface_abstract?, foreword?, clause*, reviewernote?, executivesummary?
+    preface_abstract?, foreword?, (clause | errata_clause)*, reviewernote?, executivesummary?
 }
 
-annex =
-  element annex {
-    attribute id { xsd:ID }?,
-    attribute language { text }?,
-    attribute script { text }?,
-    attribute inline-header { xsd:boolean }?,
-    attribute obligation { "normative" | "informative" }?,
-    section-title?,
-    # allow hanging paragraps in annexes: they introduce lists
-    #( paragraph-with-footnote | table | note | formula | admonition | ol | ul | dl | figure | quote | sourcecode | review | example )*,
-    BasicBlock*, note*,
-    (clause-hanging-paragraph-with-footnote | terms | definitions | references)*
-  }
-
-clause-hanging-paragraph-with-footnote =
-  element clause {
-    attribute id { xsd:ID }?,
-    attribute language { text }?,
-    attribute script { text }?,
-    attribute  inline-header  {   xsd:boolean  } ? ,
-    attribute obligation { "normative" | "informative" }?,
-    section-title?,
-    # allow hanging paragraphs in annexes: they introduce lists
-    BasicBlock*, note*,
-    (clause-hanging-paragraph-with-footnote | terms | definitions | references)*
-  }
+editorialgroup = element editorialgroup {
+      committee+
+    }
 
 BibDataExtensionType =
-    doctype?, commentperiod?
+    doctype?, editorialgroup?, ics*, commentperiod?
 
 }
 
@@ -61,6 +38,28 @@ element extended { ISO8601Date }?
 reviewernote = element reviewernote { Basic-Section }
 executivesummary = element executivesummary { Basic-Section }
 
+committee = element committee {
+  text
+}
+
+errata = element errata { erratarow+ }
+
+erratarow = element row {
+  element date { ISO8601Date },
+  element type { text },
+  element change { TextElement+ },
+  element pages { text }
+}
+
+errata_clause = element clause {
+ attribute id { xsd:ID }?,
+    attribute language { text }?,
+    attribute script { text }?,
+    attribute obligation { "normative" | "informative" }?,
+    section-title?,
+    (BasicBlock*, note*),
+    errata 
+}
 
 nist-standard =
   element nist-standard {
