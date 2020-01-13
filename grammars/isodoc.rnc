@@ -41,6 +41,15 @@ xref =
      text
 }
 
+example =
+  element example {
+    attribute id { xsd:ID },
+    attribute unnumbered { xsd:boolean }?,
+    attribute subsequence { text }?,
+    tname?,
+    ( formula | ul | ol | dl | quote | sourcecode | paragraph-with-footnote | figure )+,
+    note*
+}
 
 BibDataExtensionType = 
   doctype,
@@ -100,7 +109,7 @@ td =
     attribute align { "left" | "right" | "center" }?,
     (
       (TextElement | fn )* |
-      paragraph-with-footnote+
+      (paragraph-with-footnote | dl | ul | ol | figure)+
     )
 }
 
@@ -241,8 +250,22 @@ Clause-Section =
        (clause-subsection | terms | definitions)*
     )
 
+Annex-Section =
+    attribute id { xsd:ID }?,
+    attribute language { text }?,
+    attribute script { text }?,
+    attribute obligation { "normative" | "informative" }?,
+    section-title?,
+    (
+      ( BasicBlock*, note* ),
+       (annex-subsection | terms | definitions | references )*
+    )
+
 clause-subsection =
   element clause { Clause-Section }
+
+annex-subsection =
+  element clause { Annex-Section }
 
 annex =
   element annex {
@@ -252,7 +275,7 @@ annex =
     attribute inline-header { xsd:boolean }?,
     attribute obligation { ( "normative" | "informative" ) },
     section-title?,
-    ( ( BasicBlock*, note* ), clause-subsection* )
+    ( ( BasicBlock*, note* ), annex-subsection* )
 }
 
 terms =
