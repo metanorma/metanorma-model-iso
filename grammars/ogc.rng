@@ -95,6 +95,16 @@
       </choice>
     </element>
   </define>
+  <define name="subcommittee">
+    <element name="subcommittee">
+      <ref name="IsoWorkgroup"/>
+    </element>
+  </define>
+  <define name="workgroup">
+    <element name="workgroup">
+      <ref name="IsoWorkgroup"/>
+    </element>
+  </define>
   <define name="ogc-standard">
     <element name="ogc-standard">
       <ref name="bibdata"/>

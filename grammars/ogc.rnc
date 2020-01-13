@@ -33,6 +33,12 @@ committee = element committee {
     "technical" | "planning" | "strategic-member-advisory"
 }
 
+subcommittee =
+  element subcommittee { IsoWorkgroup }
+
+workgroup =
+  element workgroup { IsoWorkgroup }
+
 ogc-standard =
   element ogc-standard {
     bibdata, termdocsource*, boilerplate?, preface, sections+, annex*, bibliography
