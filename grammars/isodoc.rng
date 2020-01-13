@@ -504,6 +504,14 @@
       <attribute name="script"/>
     </optional>
     <optional>
+      <attribute name="obligation">
+        <choice>
+          <value>normative</value>
+          <value>informative</value>
+        </choice>
+      </attribute>
+    </optional>
+    <optional>
       <ref name="section-title"/>
     </optional>
     <group>
@@ -541,9 +549,17 @@
       <attribute name="script"/>
     </optional>
     <optional>
+      <attribute name="obligation">
+        <choice>
+          <value>normative</value>
+          <value>informative</value>
+        </choice>
+      </attribute>
+    </optional>
+    <optional>
       <ref name="section-title"/>
     </optional>
-    <choice>
+    <group>
       <group>
         <zeroOrMore>
           <ref name="BasicBlock"/>
@@ -552,14 +568,14 @@
           <ref name="note"/>
         </zeroOrMore>
       </group>
-      <oneOrMore>
+      <zeroOrMore>
         <choice>
           <ref name="clause-subsection"/>
           <ref name="terms"/>
           <ref name="definitions"/>
         </choice>
-      </oneOrMore>
-    </choice>
+      </zeroOrMore>
+    </group>
   </define>
   <define name="clause-subsection">
     <element name="clause">

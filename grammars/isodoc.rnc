@@ -219,6 +219,7 @@ Content-Section =
     attribute id { xsd:ID }?,
     attribute language { text }?,
     attribute script { text }?,
+    attribute obligation { "normative" | "informative" }?,
     section-title?,
     ( (BasicBlock*, note*),
       content-subsection* )
@@ -233,10 +234,11 @@ Clause-Section =
     attribute id { xsd:ID }?,
     attribute language { text }?,
     attribute script { text }?,
+    attribute obligation { "normative" | "informative" }?,
     section-title?,
     (
-      ( BasicBlock*, note* ) |
-       (clause-subsection | terms | definitions)+
+      ( BasicBlock*, note* ),
+       (clause-subsection | terms | definitions)*
     )
 
 clause-subsection =
