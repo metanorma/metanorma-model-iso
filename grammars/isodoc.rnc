@@ -25,6 +25,23 @@ include "basicdoc.rnc" {
 
 start = standard-document
 
+hyperlink =
+  element link {
+    attribute target { xsd:anyURI },
+    attribute type { ReferenceFormat }?,
+    attribute alt { text }?,
+    text
+}
+
+xref =
+  element xref {
+     attribute target { xsd:IDREF },
+     attribute type { ReferenceFormat }?,
+     attribute alt { text }?,
+     text
+}
+
+
 BibDataExtensionType = 
   doctype,
   editorialgroup?,
@@ -37,15 +54,6 @@ sections =
   element sections {
     ( clause | terms | term-clause | definitions)+
 }
-
-Content-Section =
-    attribute id { xsd:ID }?,
-    attribute language { text }?,
-    attribute script { text }?,
-    attribute obligation { "normative" | "informative" }?,
-    section-title?,
-    ( (BasicBlock*, note*),
-      content-subsection* )
 
 references =
   element references {
@@ -341,5 +349,7 @@ term-clause =
     )
 }
 
+termdocsource =
+  element termdocsource { CitationType }
 
 }

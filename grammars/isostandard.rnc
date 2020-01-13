@@ -30,15 +30,6 @@ sections =
     clause, (term-clause | terms)?, definitions?, clause+
   }
 
-Content-Section =
-    attribute id { xsd:ID }?,
-    attribute language { text }?,
-    attribute script { text }?,
-    attribute obligation { "normative" | "informative" }?,
-    section-title?,
-    ( (BasicBlock*, note*) |
-      content-subsection+ )
-
 Clause-Section =
     attribute id { xsd:ID }?,
     attribute language { text }?,
@@ -104,6 +95,15 @@ editorialgroup = element editorialgroup {
   technical-committee+, subcommittee*, workgroup*, secretariat?
 }
 
+Content-Section =
+    attribute id { xsd:ID }?,
+    attribute language { text }?,
+    attribute script { text }?,
+    attribute obligation { "normative" | "informative" }?,
+    section-title?,
+    ( (BasicBlock*, note*) |
+      content-subsection+ )
+
 }
 
 # end overrides
@@ -149,8 +149,6 @@ clause-hanging-paragraph-with-footnote =
     clause-hanging-paragraph-with-footnote*
   }
 
-termdocsource =
-  element termdocsource { CitationType }
-
 annex-appendix =
   element appendix { Clause-Section }
+

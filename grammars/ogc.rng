@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<grammar xmlns="http://relaxng.org/ns/structure/1.0" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+<grammar xmlns="http://relaxng.org/ns/structure/1.0">
   <!--
     Currently we inherit from a namespaced grammar, isostandard. Until we inherit from isodoc,
     we cannot have a new default namespace: we will end up with a grammar with two different
@@ -9,46 +9,6 @@
     <start>
       <ref name="ogc-standard"/>
     </start>
-    <define name="figure">
-      <element name="figure">
-        <attribute name="id">
-          <data type="ID"/>
-        </attribute>
-        <optional>
-          <ref name="tname"/>
-        </optional>
-        <choice>
-          <ref name="image"/>
-          <ref name="pre"/>
-          <oneOrMore>
-            <ref name="subfigure"/>
-          </oneOrMore>
-        </choice>
-        <zeroOrMore>
-          <ref name="fn"/>
-        </zeroOrMore>
-        <optional>
-          <ref name="dl"/>
-        </optional>
-        <zeroOrMore>
-          <ref name="note"/>
-        </zeroOrMore>
-      </element>
-    </define>
-    <define name="subfigure">
-      <element name="figure">
-        <attribute name="id">
-          <data type="ID"/>
-        </attribute>
-        <optional>
-          <ref name="tname"/>
-        </optional>
-        <choice>
-          <ref name="image"/>
-          <ref name="pre"/>
-        </choice>
-      </element>
-    </define>
     <define name="DocumentType">
       <choice>
         <value>abstract-specification-topic</value>

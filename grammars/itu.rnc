@@ -6,21 +6,6 @@ include "isodoc.rnc" {
 
 start = itu
 
-figure =
-  element figure {
-    attribute id { xsd:ID },
-    tname?,
-    ( image | pre | subfigure+ ),
-    fn*, dl?, note*
-  }
-
-subfigure =
-  element figure {
-    attribute id { xsd:ID },
-    tname?,
-    (image | pre )
- }
-
 ol =
   element ol {
     attribute id { xsd:ID },
@@ -38,8 +23,6 @@ editorialgroup = element editorialgroup {
   subgroup?,
   workgroup?
 }
-
-workgroup = element workgroup { ItuGroup }
 
 structuredidentifier = element structuredidentifier {
   bureau,
@@ -95,6 +78,8 @@ groupperiod = element period {
 
 groupperiodstart = element start { xsd:gYear }
 groupperiodend = element end { xsd:gYear }
+
+workgroup = element workgroup { ItuGroup }
 
 itu =
   element itu-standard {

@@ -6,21 +6,6 @@ include "isodoc.rnc" {
 
 start = rsd-standard
 
-figure =
-  element figure {
-    attribute id { xsd:ID },
-    tname?,
-    ( image | pre| subfigure+ ),
-    fn*, dl?, note*
-  }
-
-subfigure =
-  element figure {
-    attribute id { xsd:ID },
-    tname?,
-    (image | pre )
- }
-
 DocumentType =
 "policy-and-procedures" | "best-practices" | "supporting-document" | "report" | "legal" | "directives" | "proposal" | 
         "standard" 

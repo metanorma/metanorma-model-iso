@@ -88,43 +88,6 @@
         </oneOrMore>
       </element>
     </define>
-    <define name="Content-Section">
-      <optional>
-        <attribute name="id">
-          <data type="ID"/>
-        </attribute>
-      </optional>
-      <optional>
-        <attribute name="language"/>
-      </optional>
-      <optional>
-        <attribute name="script"/>
-      </optional>
-      <optional>
-        <attribute name="obligation">
-          <choice>
-            <value>normative</value>
-            <value>informative</value>
-          </choice>
-        </attribute>
-      </optional>
-      <optional>
-        <ref name="section-title"/>
-      </optional>
-      <choice>
-        <group>
-          <zeroOrMore>
-            <ref name="BasicBlock"/>
-          </zeroOrMore>
-          <zeroOrMore>
-            <ref name="note"/>
-          </zeroOrMore>
-        </group>
-        <oneOrMore>
-          <ref name="content-subsection"/>
-        </oneOrMore>
-      </choice>
-    </define>
     <define name="Clause-Section">
       <optional>
         <attribute name="id">
@@ -323,6 +286,43 @@
         </optional>
       </element>
     </define>
+    <define name="Content-Section">
+      <optional>
+        <attribute name="id">
+          <data type="ID"/>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="language"/>
+      </optional>
+      <optional>
+        <attribute name="script"/>
+      </optional>
+      <optional>
+        <attribute name="obligation">
+          <choice>
+            <value>normative</value>
+            <value>informative</value>
+          </choice>
+        </attribute>
+      </optional>
+      <optional>
+        <ref name="section-title"/>
+      </optional>
+      <choice>
+        <group>
+          <zeroOrMore>
+            <ref name="BasicBlock"/>
+          </zeroOrMore>
+          <zeroOrMore>
+            <ref name="note"/>
+          </zeroOrMore>
+        </group>
+        <oneOrMore>
+          <ref name="content-subsection"/>
+        </oneOrMore>
+      </choice>
+    </define>
   </include>
   <!-- end overrides -->
   <!--
@@ -422,11 +422,6 @@
       <zeroOrMore>
         <ref name="clause-hanging-paragraph-with-footnote"/>
       </zeroOrMore>
-    </element>
-  </define>
-  <define name="termdocsource">
-    <element name="termdocsource">
-      <ref name="CitationType"/>
     </element>
   </define>
   <define name="annex-appendix">

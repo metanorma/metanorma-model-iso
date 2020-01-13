@@ -9,46 +9,6 @@
     <start>
       <ref name="nist-standard"/>
     </start>
-    <define name="figure">
-      <element name="figure">
-        <attribute name="id">
-          <data type="ID"/>
-        </attribute>
-        <optional>
-          <ref name="tname"/>
-        </optional>
-        <choice>
-          <ref name="image"/>
-          <ref name="pre"/>
-          <oneOrMore>
-            <ref name="subfigure"/>
-          </oneOrMore>
-        </choice>
-        <zeroOrMore>
-          <ref name="fn"/>
-        </zeroOrMore>
-        <optional>
-          <ref name="dl"/>
-        </optional>
-        <zeroOrMore>
-          <ref name="note"/>
-        </zeroOrMore>
-      </element>
-    </define>
-    <define name="subfigure">
-      <element name="figure">
-        <attribute name="id">
-          <data type="ID"/>
-        </attribute>
-        <optional>
-          <ref name="tname"/>
-        </optional>
-        <choice>
-          <ref name="image"/>
-          <ref name="pre"/>
-        </choice>
-      </element>
-    </define>
     <define name="DocumentType">
       <value>standard</value>
     </define>

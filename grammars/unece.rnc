@@ -6,21 +6,6 @@ include "isodoc.rnc" {
 
   start = unece-standard
 
-  figure =
-    element figure {
-      attribute id { xsd:ID },
-      tname?,
-      ( image | subfigure+ ),
-      fn*, dl?, note*
-    }
-
-  subfigure =
-    element figure {
-      attribute id { xsd:ID },
-      tname?,
-      (image )
-    }
-
   TextElement =
     text | em | eref | strong | stem | sub | sup | tt |
     strike | smallcap | xref | br | hyperlink | hr | pagebreak | bookmark 
