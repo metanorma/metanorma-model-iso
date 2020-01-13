@@ -2,7 +2,7 @@
 # we cannot have a new default namespace: we will end up with a grammar with two different
 # namespaces, one for isostandard and one for csand additions. And we do not want that.
 
-include "isostandard.rnc" {
+include "isodoc.rnc" {
 
 start = ogc-standard
 

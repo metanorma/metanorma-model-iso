@@ -11,7 +11,7 @@ organization =
 }
 
 BibDataExtensionType =
-        doctype?, editorialgroup, ics*, structuredidentifier
+        doctype, editorialgroup, ics*, structuredidentifier
 
 bdate = element date {
   attribute type { ( BibliographicDateType | text ) },
@@ -30,22 +30,14 @@ sections =
     clause, (term-clause | terms)?, definitions?, clause+
   }
 
-Basic-Section =
-    attribute id { xsd:ID }?,
-    attribute language { text }?,
-    attribute script { text }?,
-    attribute obligation { "normative" | "informative" }?,
-    section-title?,
-    (BasicBlock+, note*) 
-
 Content-Section =
     attribute id { xsd:ID }?,
     attribute language { text }?,
     attribute script { text }?,
     attribute obligation { "normative" | "informative" }?,
     section-title?,
-    ( (BasicBlock*, note*),
-      content-subsection* )
+    ( (BasicBlock*, note*) |
+      content-subsection+ )
 
 Clause-Section =
     attribute id { xsd:ID }?,
@@ -58,38 +50,6 @@ Clause-Section =
       ( BasicBlock+, note* ) |
        clause-subsection+
     )
-
-references =
-  element references {
-    attribute id { xsd:ID }?,
-    attribute obligation { "normative" | "informative" }?,
-    section-title?,
-    BasicBlock*, note*,
-    (bibitem, note*)*,
-    references*
-}
-
-definitions =
-  element definitions {
-    attribute id { xsd:ID }?,
-    attribute language { text }?,
-    attribute script { text }?,
-    attribute obligation { "normative" | "informative" }?,
-    section-title?,
-    BasicBlock*, note*,
-    dl
-}
-
-terms = 
-  element terms { 
-    attribute id { xsd:ID }?,
-    attribute language { text }?,
-    attribute script { text }?,
-    attribute obligation { "normative" | "informative" }?,
-    section-title?,
-    BasicBlock*, note*,
-    (term+ | ( terms*, definitions?) )
-  }
 
 term = 
   element term { 
@@ -118,81 +78,8 @@ annex =
     annex-appendix*
   }
 
-figure = 
-  element figure {
-    attribute id { xsd:ID },
-    tname?,
-    ( image | pre | subfigure+ ),
-    fn*,
-    dl?,
-    note*
-  }
-
-li =
-  element li {
-    #( paragraph-with-footnote | table | note | formula | admonition | ol | ul | dl | quote | sourcecode | review | example )+
-    attribute id { xsd:ID }?,
-    BasicBlock+
-    # exclude figures?
-  }
-
-dd =
-  element dd {
-    #( paragraph-with-footnote | table | note | formula | admonition | ol | ul | dl | quote | sourcecode | review | example )*
-    # exclude figures?
-    BasicBlock*
-  }
-
-admonition =
-  element admonition { 
-    attribute id { xsd:ID },
-    attribute type { 
-     ( "danger" | "caution" | "warning" | "important" | "safety precautions" )},
-    paragraph-with-footnote+,
-    note*
-  }
-
-xref =
-  element xref { 
-    attribute target { xsd:IDREF },
-    text
-  }
-
-hyperlink =
-  element link {
-    attribute target {xsd:anyURI},
-    text
-}
-
-thead =
-  element thead { tr+ }
-
-td =
-  element td {
-    attribute colspan { text }?,
-    attribute rowspan { text }?,
-    attribute align { "left" | "right" | "center" }?,
-    (
-      (TextElement | fn )* |
-      paragraph-with-footnote+
-    )
-}
-
-th =
-  element th {
-    attribute colspan { text }?,
-    attribute rowspan { text }?,
-    attribute align { "left" | "right" | "center" }?,
-    (
-      (TextElement | fn )* |
-      paragraph-with-footnote+
-    )
-}
-
-table-note = element note {
-    attribute id { xsd:ID }?,
- paragraph
-}
+AdmonitionType =
+ ( "danger" | "caution" | "warning" | "important" | "safety precautions" )
 
 preface =
   element preface {
@@ -213,6 +100,9 @@ structuredidentifier =
 foreword = element foreword { Basic-Section }
 introduction = element introduction { Content-Section }
 
+editorialgroup = element editorialgroup {
+  technical-committee+, subcommittee*, workgroup*, secretariat?
+}
 
 }
 
@@ -224,18 +114,6 @@ iso-standard =
   element iso-standard {
     bibdata, termdocsource*, boilerplate?, preface, sections+, annex*, bibliography
   }
-
-bibliography =
-  element bibliography {
-    (references | reference-clause)+
-}
-
-editorialgroup = element editorialgroup {
-  technical-committee+, subcommittee*, workgroup*, secretariat?
-}
-
-preface_abstract = element abstract { Basic-Section }
-
 
 documentnumber = 
   element project-number { 
@@ -249,20 +127,11 @@ tc-documentnumber =
     xsd:int 
    }
 
-technical-committee =
-  element technical-committee { IsoWorkgroup }
-
 subcommittee =
   element subcommittee { IsoWorkgroup }
 
 workgroup =
   element workgroup { IsoWorkgroup }
-
-IsoWorkgroup =
-    attribute number { xsd:int }?,
-    attribute type { text }?,
-    text
-
 
 secretariat =
   element secretariat { text }
@@ -280,48 +149,8 @@ clause-hanging-paragraph-with-footnote =
     clause-hanging-paragraph-with-footnote*
   }
 
-subfigure =
-  element figure {
-    attribute id { xsd:ID },
-    tname?,
-    image
- }
-
 termdocsource =
   element termdocsource { CitationType }
-
-ics = element ics { 
-  element code { text }, 
-  element text { text } 
-}
-
-term-clause =
-  element clause {
-    attribute id { xsd:ID }?,
-    attribute language { text }?,
-    attribute script { text }?,
-    attribute inline-header { xsd:boolean }?,
-    attribute obligation { "normative" | "informative" }?,
-    section-title?,
-    BasicBlock*, note*,
-    (
-       (term-clause | terms | definitions)*
-    )
-}
-
-reference-clause =
-  element clause {
-    attribute id { xsd:ID }?,
-    attribute language { text }?,
-    attribute script { text }?,
-    attribute inline-header { xsd:boolean }?,
-    attribute obligation { "normative" | "informative" }?,
-    section-title?,
-    BasicBlock*, note*,
-    (
-       reference-clause+ | references*
-    )
-}
 
 annex-appendix =
   element appendix { Clause-Section }

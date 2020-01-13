@@ -27,30 +27,130 @@ start = standard-document
 
 BibDataExtensionType = 
   doctype,
+  editorialgroup?,
+  ics*,
   structuredidentifier*
 
 TitleType = text
 
 sections =
   element sections {
-    ( clause | terms | definitions)+
+    ( clause | terms | term-clause | definitions)+
 }
+
+Content-Section =
+    attribute id { xsd:ID }?,
+    attribute language { text }?,
+    attribute script { text }?,
+    attribute obligation { "normative" | "informative" }?,
+    section-title?,
+    ( (BasicBlock*, note*),
+      content-subsection* )
 
 references =
   element references {
     attribute id { xsd:ID }?,
+    attribute obligation { "normative" | "informative" }?,
     section-title?,
-    BasicBlock*,
-    (bibitem, note*)*
-  }
+    BasicBlock*, note*,
+    (bibitem, note*)*,
+    references*
+}
 
 note = element note {
     attribute id { xsd:ID },
     (paragraph | ul | ol | dl | formula)+
 }
 
+Basic-Section =
+    attribute id { xsd:ID }?,
+    attribute language { text }?,
+    attribute script { text }?,
+    attribute obligation { "normative" | "informative" }?,
+    section-title?,
+    (BasicBlock+, note*)
+
+li =
+  element li {
+    attribute id { xsd:ID }?,
+    BasicBlock+
+    # exclude figures?
+  }
+
+dd =
+  element dd {
+    # exclude figures?
+    BasicBlock*
+  }
+
+thead = element thead { tr+ }
+
+td =
+  element td {
+    attribute colspan { text }?,
+    attribute rowspan { text }?,
+    attribute align { "left" | "right" | "center" }?,
+    (
+      (TextElement | fn )* |
+      paragraph-with-footnote+
+    )
 }
 
+th =
+  element th {
+    attribute colspan { text }?,
+    attribute rowspan { text }?,
+    attribute align { "left" | "right" | "center" }?,
+    (
+      (TextElement | fn )* |
+      paragraph-with-footnote+
+    )
+}
+
+table-note = element note {
+    attribute id { xsd:ID }?,
+ paragraph
+}
+
+}
+
+# end overrides
+
+bibliography =
+  element bibliography {
+    (references | reference-clause)+
+}
+
+reference-clause =
+  element clause {
+    attribute id { xsd:ID }?,
+    attribute language { text }?,
+    attribute script { text }?,
+    attribute inline-header { xsd:boolean }?,
+    attribute obligation { "normative" | "informative" }?,
+    section-title?,
+    BasicBlock*, note*,
+    (
+       reference-clause+ | references*
+    )
+}
+
+editorialgroup = element editorialgroup {
+  technical-committee+
+}
+
+technical-committee =
+  element technical-committee { IsoWorkgroup }
+
+IsoWorkgroup =
+    attribute number { xsd:int }?,
+    attribute type { text }?,
+    text
+
+ics = element ics {
+  element code { text },
+  element text { text }
+}
 
 standard-document =
 element standard-document {
@@ -58,7 +158,7 @@ element standard-document {
 }
 
 preface =
-  element preface { ( content | abstract | foreword | introduction | acknowledgements)+ }
+  element preface { ( content | preface_abstract | foreword | introduction | acknowledgements)+ }
 
 foreword =
   element foreword { Content-Section }
@@ -86,8 +186,9 @@ definitions =
     attribute id { xsd:ID }?,
     attribute language { text }?,
     attribute script { text }?,
+    attribute obligation { "normative" | "informative" }?,
     section-title?,
-    (BasicBlock*,
+    (BasicBlock*, note*,
     dl)+
 }
 
@@ -138,9 +239,10 @@ annex =
     attribute id { xsd:ID }?,
     attribute language { text }?,
     attribute script { text }?,
+    attribute inline-header { xsd:boolean }?,
     attribute obligation { ( "normative" | "informative" ) },
     section-title?,
-    ( ( BasicBlock*, note* ) | clause-subsection+ )
+    ( ( BasicBlock*, note* ), clause-subsection* )
 }
 
 terms =
@@ -148,8 +250,10 @@ terms =
     attribute id { xsd:ID }?,
     attribute language { text }?,
     attribute script { text }?,
-    BasicBlock*,
-    term+
+    attribute obligation { "normative" | "informative" }?,
+    section-title?,
+    BasicBlock*, note*,
+    (term+ | ( terms*, definitions?) )
   }
 
 term =
@@ -182,7 +286,7 @@ termgrammar =
 
 definition =
   element definition {
-    ( paragraph )
+    ( paragraph | figure | formula )+
   }
 
 termnote =
@@ -220,5 +324,22 @@ structuredidentifier = element structuredidentifier {
   element language { text }?,
   element year { text }?
 }
+
+preface_abstract = element abstract { Basic-Section }
+
+term-clause =
+  element clause {
+    attribute id { xsd:ID }?,
+    attribute language { text }?,
+    attribute script { text }?,
+    attribute inline-header { xsd:boolean }?,
+    attribute obligation { "normative" | "informative" }?,
+    section-title?,
+    BasicBlock*, note*,
+    (
+       (term-clause | terms | definitions)*
+    )
+}
+
 
 }
