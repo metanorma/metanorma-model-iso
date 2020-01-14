@@ -20,7 +20,7 @@ bdate = element date {
 element from { ISO8601Date },
 element to { ISO8601Date }?
 ) |
-element on { ISO8601Date | "--" }
+element on { ISO8601Date | "--" | "–" }
 )
 
 }
