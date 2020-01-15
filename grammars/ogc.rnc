@@ -7,7 +7,7 @@ include "isodoc.rnc" {
 start = ogc-standard
 
 DocumentType =
-"abstract-specification-topic" | "best-practice" | "change-request-supporting-document" | "community-practice" | "community-standard" | "discussion-paper" | "engineering-report" | "other" | "policy" | "reference-model" | "release-notes" | "standard" | "user-guide" | "white-paper"
+"abstract-specification-topic" | "best-practice" | "change-request-supporting-document" | "community-practice" | "community-standard" | "discussion-paper" | "engineering-report" | "other" | "policy" | "reference-model" | "release-notes" | "standard" | "user-guide" | "white-paper" | "test-suite"
 
 editorialgroup = element editorialgroup {
   committee, subcommittee?, workgroup?

@@ -25,6 +25,7 @@
         <value>standard</value>
         <value>user-guide</value>
         <value>white-paper</value>
+        <value>test-suite</value>
       </choice>
     </define>
     <define name="editorialgroup">
