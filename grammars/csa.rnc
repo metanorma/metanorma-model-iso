@@ -33,7 +33,7 @@ technical-committee = element committee {
 }
 
 csand-standard =
-  element csand-standard {
+  element csa-standard {
     bibdata, termdocsource*, boilerplate?, preface, sections+, annex*, bibliography
  }
 

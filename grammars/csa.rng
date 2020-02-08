@@ -80,7 +80,7 @@
     </define>
   </include>
   <define name="csand-standard">
-    <element name="csand-standard">
+    <element name="csa-standard">
       <ref name="bibdata"/>
       <zeroOrMore>
         <ref name="termdocsource"/>
