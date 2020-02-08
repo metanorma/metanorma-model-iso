@@ -23,6 +23,8 @@ grammar {
 ISO8601DateTime = xsd:string { pattern = "([\+\-]?\d{4})((-?)((0[1-9]|1[0-2])((-?)([12]\d|0[1-9]|3[01]))?|W([0-4]\d|5[0-2])(-?[1-7])?|(00[1-9]|0[1-9]\d|[12]\d{2}|3([0-5]\d|6[1-6])))([T\s]((([01]\d|2[0-3])((:?)[0-5]\d)?|24:?00)([\.,]\d+)?)?((:?)[0-5]\d([.,]\d+)?)?([zZ]|([\+\-])([01]\d|2[0-3]):?([0-5]\d)?)?)?)?" }
 ISO8601Date = xsd:string { pattern = "([\+\-]?\d{4})((-?)((0[1-9]|1[0-2])((-?)([12]\d|0[1-9]|3[01]))?|W([0-4]\d|5[0-2])(-?[1-7])?|(00[1-9]|0[1-9]\d|[12]\d{2}|3([0-5]\d|6[1-6]))))?" }
 
+start = bibitem
+
 status =
   element status {
      ( stage, substage?, iteration? )
@@ -118,7 +120,7 @@ affiliationdescription = element description { FormattedString }
 
 organization = 
   element organization {
-    orgname, subdivision?, abbreviation?, uri*, org-identifier*, contact*
+    orgname+, subdivision*, abbreviation?, uri*, org-identifier*, contact*
 }
 
 orgname = element name { LocalizedString | NameWithVariants }
@@ -146,7 +148,10 @@ uri =
 contact =
   ( address | phone | email | uri )
 
-phone = element phone { text }
+phone = element phone { 
+  attribute type { text }?,
+  text }
+
 email = element email { text }
 
 address =
@@ -229,7 +234,7 @@ BibliographicItem =
     (btitle+ | formattedref), bsource*, docidentifier*, docnumber?, bdate*, contributor*,
     edition?, version?, biblionote*, language*, script*,
     bibabstract*, status?, copyright?, docrelation*, series*, medium?, bplace*, bprice*,
-    extent*, accesslocation*, license*, bclassification?, bkeyword*, validity?
+    extent*, accesslocation*, license*, bclassification*, bkeyword*, validity?
 
 btitle = element title { TypedTitleString }
 bsource = element uri { TypedUri }
@@ -377,7 +382,9 @@ DocRelationType =
     "corrects" |
     "correctedBy" |
     "revises" |
-    "revisedBy"
+    "revisedBy" |
+    "describes" |
+    "describedBy"
 
 docrelation =
   element relation {
