@@ -4,7 +4,7 @@
 
 include "isodoc.rnc" {
 
-  start = unece-standard
+  start = un-standard
 
   TextElement =
     text | em | eref | strong | stem | sub | sup | tt |
@@ -65,8 +65,8 @@ submissionlanguage = element submissionlanguage { text }
 
 distribution = element distribution { "general" | "limited" | "restricted" }
 
-unece-standard =
-element unece-standard {
+un-standard =
+element un-standard {
   bibdata, boilerplate?, preface, sections+, annex*
 }
 

@@ -7,7 +7,7 @@
   -->
   <include href="isodoc.rng">
     <start>
-      <ref name="unece-standard"/>
+      <ref name="un-standard"/>
     </start>
     <define name="TextElement">
       <choice>
@@ -224,8 +224,8 @@
       </choice>
     </element>
   </define>
-  <define name="unece-standard">
-    <element name="unece-standard">
+  <define name="un-standard">
+    <element name="un-standard">
       <ref name="bibdata"/>
       <optional>
         <ref name="boilerplate"/>
