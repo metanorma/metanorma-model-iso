@@ -25,6 +25,21 @@ element on { ISO8601Date | "--" | "–" }
 
 }
 
+ul =
+  element ul {
+    attribute id { xsd:ID },
+    ul_li+, note*
+}
+
+ul_li =
+  element li {
+    attribute id { xsd:ID }?,
+    attribute uncheckedcheckbox { xsd:boolean }?,
+    attribute checkedcheckbox { xsd:boolean }?,
+    paragraph-with-footnote+
+}
+
+
 sections =
   element sections {
     clause, (term-clause | terms)?, definitions?, clause+

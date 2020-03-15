@@ -73,6 +73,41 @@
         </choice>
       </element>
     </define>
+    <define name="ul">
+      <element name="ul">
+        <attribute name="id">
+          <data type="ID"/>
+        </attribute>
+        <oneOrMore>
+          <ref name="ul_li"/>
+        </oneOrMore>
+        <zeroOrMore>
+          <ref name="note"/>
+        </zeroOrMore>
+      </element>
+    </define>
+    <define name="ul_li">
+      <element name="li">
+        <optional>
+          <attribute name="id">
+            <data type="ID"/>
+          </attribute>
+        </optional>
+        <optional>
+          <attribute name="uncheckedcheckbox">
+            <data type="boolean"/>
+          </attribute>
+        </optional>
+        <optional>
+          <attribute name="checkedcheckbox">
+            <data type="boolean"/>
+          </attribute>
+        </optional>
+        <oneOrMore>
+          <ref name="paragraph-with-footnote"/>
+        </oneOrMore>
+      </element>
+    </define>
     <define name="sections">
       <element name="sections">
         <ref name="clause"/>
