@@ -86,28 +86,6 @@
         </zeroOrMore>
       </element>
     </define>
-    <define name="ul_li">
-      <element name="li">
-        <optional>
-          <attribute name="id">
-            <data type="ID"/>
-          </attribute>
-        </optional>
-        <optional>
-          <attribute name="uncheckedcheckbox">
-            <data type="boolean"/>
-          </attribute>
-        </optional>
-        <optional>
-          <attribute name="checkedcheckbox">
-            <data type="boolean"/>
-          </attribute>
-        </optional>
-        <oneOrMore>
-          <ref name="paragraph-with-footnote"/>
-        </oneOrMore>
-      </element>
-    </define>
     <define name="sections">
       <element name="sections">
         <ref name="clause"/>
@@ -464,6 +442,28 @@
   <define name="annex-appendix">
     <element name="appendix">
       <ref name="Clause-Section"/>
+    </element>
+  </define>
+  <define name="ul_li">
+    <element name="li">
+      <optional>
+        <attribute name="id">
+          <data type="ID"/>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="uncheckedcheckbox">
+          <data type="boolean"/>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="checkedcheckbox">
+          <data type="boolean"/>
+        </attribute>
+      </optional>
+      <oneOrMore>
+        <ref name="paragraph-with-footnote"/>
+      </oneOrMore>
     </element>
   </define>
 </grammar>
