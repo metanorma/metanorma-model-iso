@@ -110,6 +110,19 @@ Content-Section =
     ( (BasicBlock*, note*) |
       content-subsection+ )
 
+table =
+  element table {
+    attribute id { xsd:ID },
+    attribute width { text }?,
+    attribute unnumbered { xsd:boolean }?,
+    attribute subsequence { text }?,
+    attribute alt { text }?,
+    attribute summary { text }?,
+    attribute uri { xsd:anyURI }?,
+    tname?, thead?, tbody, tfoot?, table-note*, dl?
+  }
+
+
 }
 
 # end overrides
