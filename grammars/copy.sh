@@ -44,11 +44,11 @@ cp reqt.rng ../../metanorma-sample/lib/asciidoctor/sample
 cp biblio.rng ../../metanorma-sample/lib/asciidoctor/sample
 cp isodoc.rng ../../metanorma-sample/lib/asciidoctor/sample
 cat rsd.rng | ruby -pe '$_.gsub!(/rsd-standard/, "sample-standard") ' | ruby -pe '$_.gsub!(/<grammar /, %{<grammar ns="https://www.metanorma.org/ns/sample" }) '  > ../../metanorma-sample/lib/asciidoctor/sample/sample.rng
-cp basicdoc.rng ../../metanorma-acme/lib/asciidoctor/acme
-cp reqt.rng ../../metanorma-acme/lib/asciidoctor/acme
-cp biblio.rng ../../metanorma-acme/lib/asciidoctor/acme
-cp isodoc.rng ../../metanorma-acme/lib/asciidoctor/acme
-cat rsd.rng | ruby -pe '$_.gsub!(/rsd-standard/, "acme-standard") ' | ruby -pe '$_.gsub!(/<grammar /, %{<grammar ns="https://www.metanorma.org/ns/acme" }) ' > ../../metanorma-acme/lib/asciidoctor/acme/acme.rng
+cp basicdoc.rng ../../metanorma-acme/lib/asciidoctor/generic
+cp reqt.rng ../../metanorma-acme/lib/asciidoctor/generic
+cp biblio.rng ../../metanorma-acme/lib/asciidoctor/generic
+cp isodoc.rng ../../metanorma-acme/lib/asciidoctor/generic
+cat rsd.rng | ruby -pe '$_.gsub!(/rsd-standard/, "generic-standard") ' | ruby -pe '$_.gsub!(/<grammar /, %{<grammar ns="https://www.metanorma.org/ns/generic" }) ' > ../../metanorma-acme/lib/asciidoctor/generic/generic.rng
 cp basicdoc.rng ../../metanorma-mpfd/lib/asciidoctor/mpfd
 cp reqt.rng ../../metanorma-mpfd/lib/asciidoctor/mpfd
 cp biblio.rng ../../metanorma-mpfd/lib/asciidoctor/mpfd
