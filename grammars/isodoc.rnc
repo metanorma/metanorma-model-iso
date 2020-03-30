@@ -57,7 +57,7 @@ BibDataExtensionType =
   ics*,
   structuredidentifier*
 
-TitleType = text
+# TitleType = text
 
 sections =
   element sections {
