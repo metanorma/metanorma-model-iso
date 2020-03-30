@@ -9,7 +9,7 @@ start = nist-standard
 DocumentType =
         "standard" 
 
-TitleType = ( "alternative" | "original" | "unofficial" | "subtitle" | "main" )
+# TitleType = ( "alternative" | "original" | "unofficial" | "subtitle" | "main" )
 
 preface =
   element preface {
