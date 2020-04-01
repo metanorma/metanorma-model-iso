@@ -24,7 +24,7 @@ preface =
 
 }
 
-docsubtype = element docsubtype { "conceptual-model" | "conceptual-model-and-encoding" | "conceptual-model-and-implementation" | "encoding" | "extension" | "implementation" | "profile" | "profile-with-extension" | "general" | "encoding" | "extension" | "profile" | "profile-with-extension" }
+docsubtype = element docsubtype { "conceptual-model" | "conceptual-model-and-encoding" | "conceptual-model-and-implementation" | "encoding" | "extension" | "implementation" | "profile" | "profile-with-extension" | "general" 
 
 submitters = element submitters { Basic-Section }
 
