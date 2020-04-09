@@ -75,10 +75,6 @@
         <value>profile</value>
         <value>profile-with-extension</value>
         <value>general</value>
-        <value>encoding</value>
-        <value>extension</value>
-        <value>profile</value>
-        <value>profile-with-extension</value>
       </choice>
     </element>
   </define>
