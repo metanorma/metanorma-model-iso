@@ -11,7 +11,7 @@ organization =
 }
 
 BibDataExtensionType =
-        doctype, editorialgroup, ics*, structuredidentifier
+        doctype, editorialgroup, ics*, structuredidentifier, stagename?
 
 bdate = element date {
   attribute type { ( BibliographicDateType | text ) },
@@ -178,4 +178,6 @@ ul_li =
     attribute checkedcheckbox { xsd:boolean }?,
     paragraph-with-footnote+
 }
+
+stagename = element stagename { text }
 
