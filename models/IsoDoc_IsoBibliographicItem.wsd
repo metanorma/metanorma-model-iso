@@ -43,7 +43,7 @@ Description:    Metanorma IsoDoc is a family of document models intended to repr
 
 Hystory of changes:
 > DD/MM/YYYY
-    -
+    - 11/04/2020 - Add stagename
     -
 '/
 
@@ -66,6 +66,7 @@ class IsoBibliographicItem{
     +source: TypeUri[0..*]
     +abstract: FormattedString[0..*]
     +allParts: boolean[0..1]
+    +stagename: String[0..1]
 }
 
 class IsoDocumentId{
@@ -81,8 +82,10 @@ class IsoLocalizedTitle{
 }
 
 class IsoDocumentStatus{
-    +stage:IsoDocumentStageCodes
-    +substage: IsoDocumentSubstageCodes
+    +stage: IsoDocumentStageCodes
+    +stage_abbreviation: String[0..1]
+    +substage: IsoDocumentSubstageCodes[0..1]
+    +substage_abbreviation: String[0..1]
     +iteration: Integer[0..1]
 }
 
