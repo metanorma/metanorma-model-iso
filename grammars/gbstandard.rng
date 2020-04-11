@@ -67,6 +67,9 @@
         <ref name="ics"/>
       </zeroOrMore>
       <ref name="structuredidentifier"/>
+      <optional>
+        <ref name="stagename"/>
+      </optional>
       <ref name="gbtype"/>
       <oneOrMore>
         <ref name="gbccs"/>
