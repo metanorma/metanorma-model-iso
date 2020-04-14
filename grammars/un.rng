@@ -107,7 +107,9 @@
       <zeroOrMore>
         <ref name="submissionlanguage"/>
       </zeroOrMore>
-      <ref name="editorialgroup"/>
+      <optional>
+        <ref name="editorialgroup"/>
+      </optional>
       <zeroOrMore>
         <ref name="ics"/>
       </zeroOrMore>
