@@ -129,9 +129,16 @@ table-note = element note {
  paragraph
 }
 
+TextElement |= concept
+
 }
 
 # end overrides
+
+concept = element concept {
+  attribute term { text }?,
+  ( eref | xref | termref )
+}
 
 BasicBlock |= requirement | recommendation | permission
 
@@ -345,10 +352,16 @@ termsource =
 }
 
 origin =
-  element origin { erefType }
+  element origin { erefType | termref }
 
 modification =
   element modification { paragraph }
+
+termref = element termref {
+  attribute base { text },
+  attribute target { text },
+  text?
+}
 
 structuredidentifier = element structuredidentifier {
   attribute type { text }?,
