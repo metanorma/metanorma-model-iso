@@ -63,7 +63,7 @@ item-footnote = element item-footnote { text }
 
 submissionlanguage = element submissionlanguage { text }
 
-distribution = element distribution { "general" | "limited" | "restricted" }
+distribution = element distribution { "general" | "limited" | "restricted" | "provisional" }
 
 un-standard =
 element un-standard {
