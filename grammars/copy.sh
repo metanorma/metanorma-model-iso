@@ -84,3 +84,8 @@ cp reqt.rng ../../metanorma-vsd/lib/asciidoctor/vsd
 cp biblio.rng ../../metanorma-vsd/lib/asciidoctor/vsd
 cp isodoc.rng ../../metanorma-vsd/lib/asciidoctor/vsd
 cat rsd.rng | ruby -pe '$_.gsub!(/<grammar /, %{<grammar ns="https://www.metanorma.org/ns/vsd" }) '>  ../../metanorma-vsd/lib/asciidoctor/vsd/vsd.rng
+cp basicdoc.rng ../../metanorma-iho/lib/asciidoctor/iho
+cp reqt.rng ../../metanorma-iho/lib/asciidoctor/iho
+cp biblio.rng ../../metanorma-iho/lib/asciidoctor/iho
+cp isodoc.rng ../../metanorma-iho/lib/asciidoctor/iho
+cat rsd.rng | ruby -pe '$_.gsub!(/<grammar /, %{<grammar ns="https://www.metanorma.org/ns/iho" }) '>  ../../metanorma-iho/lib/asciidoctor/iho/iho.rng
