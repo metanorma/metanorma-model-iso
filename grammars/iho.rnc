@@ -11,24 +11,51 @@ DocumentType =
         "standard" 
 
 editorialgroup = element editorialgroup {
-  committee+
+  committee, workgroup
 }
 
-BibDataExtensionType =
-    doctype?, editorialgroup, ics*, security?
+editorialgroup = element editorialgroup {
+  technical-committee+
+}
 
+technical-committee =
+  element technical-committee { IsoWorkgroup }
+
+
+BibDataExtensionType =
+    doctype?, editorialgroup+, ics*, commentperiod?
+
+annex =
+  element annex {
+    attribute id { xsd:ID }?,
+    attribute language { text }?,
+    attribute script { text }?,
+    attribute inline-header { xsd:boolean }?,
+    attribute obligation { ( "normative" | "informative" ) },
+    section-title?,
+    ( ( BasicBlock*, note* ),
+      (annex-subsection | terms | definitions | references)* ),
+      annex-appendix*
+}
 
 }
 
 committee = element committee { 
-    attribute type { ( "technical" | "provisional" ) },
-    text
+    ( "hssc" | "ircc" )
 }
 
-security = element security { text }
+workgroup = element workgroup { text }
 
-rsd-standard =
-  element rsd-standard {
+annex-appendix =
+  element appendix { Clause-Section }
+
+commentperiod = element commentperiod {
+element from { ISO8601Date },
+element to { ISO8601Date }?
+}
+
+iho-standard =
+  element iho-standard {
     bibdata, termdocsource*, boilerplate?, preface, sections+, annex*, bibliography
  }
 
