@@ -7,7 +7,7 @@
   -->
   <include href="isodoc.rng">
     <start>
-      <ref name="rsd-standard"/>
+      <ref name="iho-standard"/>
     </start>
     <define name="DocumentType">
       <choice>
@@ -25,18 +25,6 @@
       <element name="editorialgroup">
         <ref name="committee"/>
         <ref name="workgroup"/>
-      </element>
-    </define>
-    <define name="editorialgroup">
-      <element name="editorialgroup">
-        <oneOrMore>
-          <ref name="technical-committee"/>
-        </oneOrMore>
-      </element>
-    </define>
-    <define name="technical-committee">
-      <element name="technical-committee">
-        <ref name="IsoWorkgroup"/>
       </element>
     </define>
     <define name="BibDataExtensionType">

@@ -4,7 +4,7 @@
 
 include "isodoc.rnc" {
 
-start = rsd-standard
+start = iho-standard
 
 DocumentType =
 "policy-and-procedures" | "best-practices" | "supporting-document" | "report" | "legal" | "directives" | "proposal" | 
@@ -13,14 +13,6 @@ DocumentType =
 editorialgroup = element editorialgroup {
   committee, workgroup
 }
-
-editorialgroup = element editorialgroup {
-  technical-committee+
-}
-
-technical-committee =
-  element technical-committee { IsoWorkgroup }
-
 
 BibDataExtensionType =
     doctype?, editorialgroup+, ics*, commentperiod?
