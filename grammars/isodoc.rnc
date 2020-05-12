@@ -68,6 +68,7 @@ references =
   element references {
     attribute id { xsd:ID }?,
     attribute obligation { "normative" | "informative" }?,
+    attribute normative { xsd:boolean },
     section-title?,
     BasicBlock*, note*,
     (bibitem, note*)*,
