@@ -130,11 +130,11 @@ table-note = element note {
  paragraph
 }
 
-TextElement |= concept
-
 }
 
 # end overrides
+
+TextElement |= concept
 
 concept = element concept {
   attribute term { text }?,
