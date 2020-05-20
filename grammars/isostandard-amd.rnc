@@ -32,7 +32,11 @@ documentnumber =
     text
    }     
 
+BibDataExtensionType =
+        doctype, editorialgroup, ics*, structuredidentifier, stagename?, updates_document_type?
 }
 
 # end overrides
+
+updates_document_type = element updates-document-type { DocumentType }
 

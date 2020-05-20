@@ -74,6 +74,25 @@
         <text/>
       </element>
     </define>
+    <define name="BibDataExtensionType">
+      <ref name="doctype"/>
+      <ref name="editorialgroup"/>
+      <zeroOrMore>
+        <ref name="ics"/>
+      </zeroOrMore>
+      <ref name="structuredidentifier"/>
+      <optional>
+        <ref name="stagename"/>
+      </optional>
+      <optional>
+        <ref name="updates_document_type"/>
+      </optional>
+    </define>
   </include>
+  <!-- end overrides -->
+  <define name="updates_document_type">
+    <element name="updates-document-type">
+      <ref name="DocumentType"/>
+    </element>
+  </define>
 </grammar>
-<!-- end overrides -->
