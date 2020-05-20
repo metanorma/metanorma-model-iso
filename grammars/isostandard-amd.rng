@@ -32,22 +32,18 @@
         <ref name="Clause-Section"/>
       </element>
     </define>
+    <define name="iso-standard">
+      <element name="iso-standard">
+        <ref name="bibdata"/>
+        <optional>
+          <ref name="boilerplate"/>
+        </optional>
+        <ref name="preface"/>
+        <oneOrMore>
+          <ref name="sections"/>
+        </oneOrMore>
+      </element>
+    </define>
   </include>
-  <!-- end overrides -->
-  <!--
-    We display the Normative References between scope and terms; but to keep the
-    grammar simple, we keep the references together
-  -->
-  <define name="iso-standard">
-    <element name="iso-standard">
-      <ref name="bibdata"/>
-      <optional>
-        <ref name="boilerplate"/>
-      </optional>
-      <ref name="preface"/>
-      <oneOrMore>
-        <ref name="sections"/>
-      </oneOrMore>
-    </element>
-  </define>
 </grammar>
+<!-- end overrides -->

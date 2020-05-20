@@ -17,14 +17,12 @@ clause =
     Clause-Section
   }
 
-}
-
-# end overrides
-
-# We display the Normative References between scope and terms; but to keep the
-# grammar simple, we keep the references together
-iso-standard = 
+iso-standard =
   element iso-standard {
     bibdata, boilerplate?, preface, sections+
   }
+
+}
+
+# end overrides
 
