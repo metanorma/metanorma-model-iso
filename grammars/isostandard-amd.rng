@@ -12,6 +12,26 @@
         </oneOrMore>
       </element>
     </define>
+    <define name="clause">
+      <element name="clause">
+        <optional>
+          <attribute name="type"/>
+        </optional>
+        <optional>
+          <attribute name="change">
+            <choice>
+              <value>add</value>
+              <value>delete</value>
+              <value>modify</value>
+            </choice>
+          </attribute>
+        </optional>
+        <optional>
+          <attribute name="locality"/>
+        </optional>
+        <ref name="Clause-Section"/>
+      </element>
+    </define>
   </include>
   <!-- end overrides -->
   <!--
