@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<grammar xmlns="http://relaxng.org/ns/structure/1.0">
+  <!-- default namespace isostandard = "https://www.metanorma.com/ns/iso" -->
+  <include href="isostandard.rng">
+    <start>
+      <ref name="iso-standard"/>
+    </start>
+    <define name="sections">
+      <element name="sections">
+        <oneOrMore>
+          <ref name="clause"/>
+        </oneOrMore>
+      </element>
+    </define>
+  </include>
+  <!-- end overrides -->
+  <!--
+    We display the Normative References between scope and terms; but to keep the
+    grammar simple, we keep the references together
+  -->
+  <define name="iso-standard">
+    <element name="iso-standard">
+      <ref name="bibdata"/>
+      <optional>
+        <ref name="boilerplate"/>
+      </optional>
+      <ref name="preface"/>
+      <oneOrMore>
+        <ref name="sections"/>
+      </oneOrMore>
+    </element>
+  </define>
+</grammar>

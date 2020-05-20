@@ -7,6 +7,7 @@ cp reqt.rng ../../metanorma-iso/lib/asciidoctor/iso
 cp biblio.rng ../../metanorma-iso/lib/asciidoctor/iso
 cp isodoc.rng ../../metanorma-iso/lib/asciidoctor/iso
 cat isostandard.rng | ruby -pe '$_.gsub!(/<grammar /, %{<grammar ns="https://www.metanorma.org/ns/iso" }) '>  ../../metanorma-iso/lib/asciidoctor/iso/isostandard.rng
+cat isostandard-amd.rng | ruby -pe '$_.gsub!(/<grammar /, %{<grammar ns="https://www.metanorma.org/ns/iso" }) '>  ../../metanorma-iso/lib/asciidoctor/iso/isostandard-amd.rng
 cp basicdoc.rng ../../metanorma-iec/lib/asciidoctor/iec
 cp reqt.rng ../../metanorma-iec/lib/asciidoctor/iec
 cp biblio.rng ../../metanorma-iec/lib/asciidoctor/iec
