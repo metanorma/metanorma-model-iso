@@ -57,7 +57,7 @@
           </attribute>
         </optional>
         <optional>
-          <attribute name="addendum">
+          <attribute name="amendment">
             <data type="int"/>
           </attribute>
         </optional>

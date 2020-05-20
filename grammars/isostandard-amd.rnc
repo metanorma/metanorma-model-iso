@@ -26,7 +26,7 @@ documentnumber =
   element project-number {
     attribute part { xsd:int }?,
     attribute subpart { xsd:int }?,
-    attribute addendum { xsd:int }?,
+    attribute amendment { xsd:int }?,
     attribute corrigendum { xsd:int }?,
     attribute origyr { xsd:int }?,
     text
