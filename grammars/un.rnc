@@ -42,6 +42,33 @@ include "isodoc.rnc" {
 
   abstract = element abstract { Basic-Section }
 
+Clause-Section =
+    attribute id { xsd:ID }?,
+    attribute language { text }?,
+    attribute script { text }?,
+    attribute inline-header { xsd:boolean }?,
+    attribute obligation { "normative" | "informative" }?,
+    attribute unnumbered { xsd:boolean }?,
+    section-title?,
+    (
+      ( BasicBlock*, note* ),
+       (clause-subsection | terms | definitions)*
+    )
+
+Annex-Section =
+    attribute id { xsd:ID }?,
+    attribute language { text }?,
+    attribute script { text }?,
+    attribute inline-header { xsd:boolean }?,
+    attribute obligation { "normative" | "informative" }?,
+    attribute unnumbered { xsd:boolean }?,
+    section-title?,
+    (
+      ( BasicBlock*, note* ),
+       (annex-subsection | terms | definitions | references )*
+    )
+
+
 }
 
 session = element session {
