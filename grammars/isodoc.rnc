@@ -339,7 +339,8 @@ definition =
 termnote =
   element termnote { 
     attribute id { xsd:ID },
-paragraph }
+    (paragraph | ul | ol | dl | formula)+
+}
 
 termexample =
   element termexample { 

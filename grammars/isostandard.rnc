@@ -177,7 +177,7 @@ ul_li =
     attribute id { xsd:ID }?,
     attribute uncheckedcheckbox { xsd:boolean }?,
     attribute checkedcheckbox { xsd:boolean }?,
-    paragraph-with-footnote+
+    BasicBlock+
 }
 
 stagename = element stagename { text }
