@@ -38,6 +38,7 @@ xref =
      attribute target { xsd:IDREF },
      attribute type { ReferenceFormat }?,
      attribute alt { text }?,
+     attribute case { "capital" | "lowercase" }?,
      text
 }
 
