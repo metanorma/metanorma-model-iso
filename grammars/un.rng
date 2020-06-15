@@ -119,6 +119,9 @@
       <optional>
         <ref name="session"/>
       </optional>
+      <optional>
+        <ref name="job_number"/>
+      </optional>
     </define>
     <define name="preface">
       <element name="preface">
@@ -328,6 +331,11 @@
         <value>restricted</value>
         <value>provisional</value>
       </choice>
+    </element>
+  </define>
+  <define name="job_number">
+    <element name="job_number">
+      <text/>
     </element>
   </define>
   <define name="un-standard">

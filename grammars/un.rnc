@@ -33,7 +33,7 @@ include "isodoc.rnc" {
     element sections { clause + }
 
   BibDataExtensionType =
-    doctype?, submissionlanguage*, editorialgroup?, ics*, distribution?, session?
+    doctype?, submissionlanguage*, editorialgroup?, ics*, distribution?, session?, job_number?
 
                 preface =
                 element preface {
@@ -91,6 +91,8 @@ item-footnote = element item-footnote { text }
 submissionlanguage = element submissionlanguage { text }
 
 distribution = element distribution { "general" | "limited" | "restricted" | "provisional" }
+
+job_number = element job_number { text }
 
 un-standard =
 element un-standard {
