@@ -47,9 +47,52 @@ example =
     attribute id { xsd:ID },
     attribute unnumbered { xsd:boolean }?,
     attribute subsequence { text }?,
+    attribute number { text }?,
     tname?,
     ( formula | ul | ol | dl | quote | sourcecode | paragraph-with-footnote | figure )+,
     note*
+}
+
+table =
+  element table {
+    attribute id { xsd:ID },
+    attribute unnumbered { xsd:boolean }?,
+    attribute number { text }?,
+    attribute subsequence { text }?,
+    attribute alt { text }?,
+    attribute summary { text }?,
+    attribute uri { xsd:anyURI }?,
+    tname?, thead?, tbody, tfoot?, table-note*, dl?
+  }
+
+figure =
+  element figure {
+    attribute id { xsd:ID },
+    attribute unnumbered { xsd:boolean }?,
+    attribute number { text }?,
+    attribute subsequence { text }?,
+    attribute class { text }?,
+     source?, tname?, (image | video | audio | pre | paragraph-with-footnote+ | figure*), fn*, dl?, note*
+  }
+
+sourcecode =
+  element sourcecode {
+    attribute id { xsd:ID },
+    attribute unnumbered { xsd:boolean }?,
+    attribute number { text }?,
+    attribute subsequence { text }?,
+    attribute lang { text }?,
+    tname?, ( text | callout )+, annotation*, note*
+  }
+
+formula =
+  element formula {
+    attribute id { xsd:ID },
+    attribute unnumbered { xsd:boolean }?,
+    attribute number { text }?,
+    attribute subsequence { text }?,
+    attribute inequality { xsd:boolean }?,
+    stem, dl?, note*
 }
 
 BibDataExtensionType = 

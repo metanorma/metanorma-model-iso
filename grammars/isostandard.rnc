@@ -116,6 +116,7 @@ table =
     attribute id { xsd:ID },
     attribute width { text }?,
     attribute unnumbered { xsd:boolean }?,
+    attribute number { text }?,
     attribute subsequence { text }?,
     attribute alt { text }?,
     attribute summary { text }?,

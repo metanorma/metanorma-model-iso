@@ -10,6 +10,10 @@ start = csd-standard
 figure =
   element figure {
     attribute id { xsd:ID },
+    attribute unnumbered { xsd:boolean }?,
+    attribute number { text }?,
+    attribute subsequence { text }?,
+    attribute class { text }?,
      source?, tname?, ( figure+ |  ( (TextElement* | pre), note*, dl? ) )
   }
 

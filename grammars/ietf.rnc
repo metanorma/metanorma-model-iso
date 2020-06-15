@@ -97,6 +97,7 @@ sourcecode =
   element sourcecode {
     attribute id { xsd:ID },
     attribute unnumbered { xsd:boolean }?,
+    attribute number { text }?,
     attribute subsequence { text }?,
     attribute lang { text }?,
     attribute markers { text }?,
@@ -129,6 +130,7 @@ table =
   element table {
     attribute id { xsd:ID },
     attribute unnumbered { xsd:boolean }?,
+    attribute number { text }?,
     attribute subsequence { text }?,
     attribute alt { text }?,
     attribute summary { text }?,
