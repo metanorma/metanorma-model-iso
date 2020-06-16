@@ -42,6 +42,33 @@ xref =
      text
 }
 
+ul =
+  element ul {
+    attribute id { xsd:ID },
+    attribute keep-with-next { xsd:boolean }?,
+    attribute keep-lines-together { xsd:boolean }?,
+    li+, note*
+}
+
+ol =
+  element ol {
+    attribute id { xsd:ID },
+    attribute keep-with-next { xsd:boolean }?,
+    attribute keep-lines-together { xsd:boolean }?,
+    attribute type { ( "roman" | "alphabet" | "arabic" |
+                       "roman_upper" | "alphabet_upper" ) },
+    li+, note*
+}
+
+dl =
+  element dl {
+    attribute id { xsd:ID },
+    attribute keep-with-next { xsd:boolean }?,
+    attribute keep-lines-together { xsd:boolean }?,
+    (dt, dd)+, note*
+}
+
+
 example =
   element example {
     attribute id { xsd:ID },
@@ -64,6 +91,8 @@ table =
     attribute alt { text }?,
     attribute summary { text }?,
     attribute uri { xsd:anyURI }?,
+    attribute keep-with-next { xsd:boolean }?,
+    attribute keep-lines-together { xsd:boolean }?,
     tname?, thead?, tbody, tfoot?, table-note*, dl?
   }
 
