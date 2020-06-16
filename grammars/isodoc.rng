@@ -81,6 +81,16 @@
           <attribute name="number"/>
         </optional>
         <optional>
+          <attribute name="keep-with-next">
+            <data type="boolean"/>
+          </attribute>
+        </optional>
+        <optional>
+          <attribute name="keep-lines-together">
+            <data type="boolean"/>
+          </attribute>
+        </optional>
+        <optional>
           <ref name="tname"/>
         </optional>
         <oneOrMore>
@@ -162,6 +172,16 @@
           <attribute name="subsequence"/>
         </optional>
         <optional>
+          <attribute name="keep-with-next">
+            <data type="boolean"/>
+          </attribute>
+        </optional>
+        <optional>
+          <attribute name="keep-lines-together">
+            <data type="boolean"/>
+          </attribute>
+        </optional>
+        <optional>
           <attribute name="class"/>
         </optional>
         <optional>
@@ -210,6 +230,16 @@
           <attribute name="subsequence"/>
         </optional>
         <optional>
+          <attribute name="keep-with-next">
+            <data type="boolean"/>
+          </attribute>
+        </optional>
+        <optional>
+          <attribute name="keep-lines-together">
+            <data type="boolean"/>
+          </attribute>
+        </optional>
+        <optional>
           <attribute name="lang"/>
         </optional>
         <optional>
@@ -246,6 +276,16 @@
           <attribute name="subsequence"/>
         </optional>
         <optional>
+          <attribute name="keep-with-next">
+            <data type="boolean"/>
+          </attribute>
+        </optional>
+        <optional>
+          <attribute name="keep-lines-together">
+            <data type="boolean"/>
+          </attribute>
+        </optional>
+        <optional>
           <attribute name="inequality">
             <data type="boolean"/>
           </attribute>
@@ -254,6 +294,97 @@
         <optional>
           <ref name="dl"/>
         </optional>
+        <zeroOrMore>
+          <ref name="note"/>
+        </zeroOrMore>
+      </element>
+    </define>
+    <define name="ParagraphType">
+      <attribute name="id">
+        <data type="ID"/>
+      </attribute>
+      <optional>
+        <attribute name="align">
+          <ref name="Alignments"/>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="keep-with-next">
+          <data type="boolean"/>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="keep-lines-together">
+          <data type="boolean"/>
+        </attribute>
+      </optional>
+      <zeroOrMore>
+        <ref name="TextElement"/>
+      </zeroOrMore>
+      <zeroOrMore>
+        <ref name="note"/>
+      </zeroOrMore>
+    </define>
+    <define name="paragraph-with-footnote">
+      <element name="p">
+        <attribute name="id">
+          <data type="ID"/>
+        </attribute>
+        <optional>
+          <attribute name="align">
+            <ref name="Alignments"/>
+          </attribute>
+        </optional>
+        <optional>
+          <attribute name="keep-with-next">
+            <data type="boolean"/>
+          </attribute>
+        </optional>
+        <optional>
+          <attribute name="keep-lines-together">
+            <data type="boolean"/>
+          </attribute>
+        </optional>
+        <zeroOrMore>
+          <choice>
+            <ref name="TextElement"/>
+            <ref name="fn"/>
+          </choice>
+        </zeroOrMore>
+        <zeroOrMore>
+          <ref name="note"/>
+        </zeroOrMore>
+      </element>
+    </define>
+    <define name="quote">
+      <element name="quote">
+        <attribute name="id">
+          <data type="ID"/>
+        </attribute>
+        <optional>
+          <attribute name="alignment">
+            <ref name="Alignments"/>
+          </attribute>
+        </optional>
+        <optional>
+          <attribute name="keep-with-next">
+            <data type="boolean"/>
+          </attribute>
+        </optional>
+        <optional>
+          <attribute name="keep-lines-together">
+            <data type="boolean"/>
+          </attribute>
+        </optional>
+        <optional>
+          <ref name="quote-source"/>
+        </optional>
+        <optional>
+          <ref name="quote-author"/>
+        </optional>
+        <oneOrMore>
+          <ref name="paragraph-with-footnote"/>
+        </oneOrMore>
         <zeroOrMore>
           <ref name="note"/>
         </zeroOrMore>
@@ -327,6 +458,27 @@
         <attribute name="id">
           <data type="ID"/>
         </attribute>
+        <optional>
+          <attribute name="unnumbered">
+            <data type="boolean"/>
+          </attribute>
+        </optional>
+        <optional>
+          <attribute name="number"/>
+        </optional>
+        <optional>
+          <attribute name="subsequence"/>
+        </optional>
+        <optional>
+          <attribute name="keep-with-next">
+            <data type="boolean"/>
+          </attribute>
+        </optional>
+        <optional>
+          <attribute name="keep-lines-together">
+            <data type="boolean"/>
+          </attribute>
+        </optional>
         <oneOrMore>
           <choice>
             <ref name="paragraph"/>
@@ -1072,6 +1224,27 @@
       <attribute name="id">
         <data type="ID"/>
       </attribute>
+      <optional>
+        <attribute name="unnumbered">
+          <data type="boolean"/>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="number"/>
+      </optional>
+      <optional>
+        <attribute name="subsequence"/>
+      </optional>
+      <optional>
+        <attribute name="keep-with-next">
+          <data type="boolean"/>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="keep-lines-together">
+          <data type="boolean"/>
+        </attribute>
+      </optional>
       <oneOrMore>
         <choice>
           <ref name="paragraph"/>

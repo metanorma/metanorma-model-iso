@@ -48,6 +48,8 @@ example =
     attribute unnumbered { xsd:boolean }?,
     attribute subsequence { text }?,
     attribute number { text }?,
+    attribute keep-with-next { xsd:boolean }?,
+    attribute keep-lines-together { xsd:boolean }?,
     tname?,
     ( formula | ul | ol | dl | quote | sourcecode | paragraph-with-footnote | figure )+,
     note*
@@ -71,6 +73,8 @@ figure =
     attribute unnumbered { xsd:boolean }?,
     attribute number { text }?,
     attribute subsequence { text }?,
+    attribute keep-with-next { xsd:boolean }?,
+    attribute keep-lines-together { xsd:boolean }?,
     attribute class { text }?,
      source?, tname?, (image | video | audio | pre | paragraph-with-footnote+ | figure*), fn*, dl?, note*
   }
@@ -81,6 +85,8 @@ sourcecode =
     attribute unnumbered { xsd:boolean }?,
     attribute number { text }?,
     attribute subsequence { text }?,
+    attribute keep-with-next { xsd:boolean }?,
+    attribute keep-lines-together { xsd:boolean }?,
     attribute lang { text }?,
     tname?, ( text | callout )+, annotation*, note*
   }
@@ -91,8 +97,38 @@ formula =
     attribute unnumbered { xsd:boolean }?,
     attribute number { text }?,
     attribute subsequence { text }?,
+    attribute keep-with-next { xsd:boolean }?,
+    attribute keep-lines-together { xsd:boolean }?,
     attribute inequality { xsd:boolean }?,
     stem, dl?, note*
+}
+
+ParagraphType =
+    attribute id { xsd:ID },
+    attribute align { Alignments }?,
+    attribute keep-with-next { xsd:boolean }?,
+    attribute keep-lines-together { xsd:boolean }?,
+   ( TextElement )*, note*
+
+paragraph-with-footnote =
+  element p {
+    attribute id { xsd:ID },
+    attribute align { Alignments }?,
+    attribute keep-with-next { xsd:boolean }?,
+    attribute keep-lines-together { xsd:boolean }?,
+   ( TextElement | fn  )*, note*
+}
+
+quote =
+  element quote {
+    attribute id { xsd:ID },
+    attribute alignment { Alignments }?,
+    attribute keep-with-next { xsd:boolean }?,
+    attribute keep-lines-together { xsd:boolean }?,
+    quote-source?,
+    quote-author?,
+    paragraph-with-footnote+,
+    note*
 }
 
 BibDataExtensionType = 
@@ -121,6 +157,11 @@ references =
 
 note = element note {
     attribute id { xsd:ID },
+    attribute unnumbered { xsd:boolean }?,
+    attribute number { text }?,
+    attribute subsequence { text }?,
+    attribute keep-with-next { xsd:boolean }?,
+    attribute keep-lines-together { xsd:boolean }?,
     (paragraph | ul | ol | dl | formula)+
 }
 
@@ -383,6 +424,11 @@ definition =
 termnote =
   element termnote { 
     attribute id { xsd:ID },
+    attribute unnumbered { xsd:boolean }?,
+    attribute number { text }?,
+    attribute subsequence { text }?,
+    attribute keep-with-next { xsd:boolean }?,
+    attribute keep-lines-together { xsd:boolean }?,
     (paragraph | ul | ol | dl | formula)+
 }
 
