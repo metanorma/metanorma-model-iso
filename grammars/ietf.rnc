@@ -14,8 +14,8 @@ BibDataExtensionType =
 ParagraphType =
     attribute id { xsd:ID },
     attribute align { Alignments }?,
-    attribute keepWithNext { xsd:boolean }?,
-    attribute keepWithPrevious { xsd:boolean }?,
+    attribute keep-with-next { xsd:boolean }?,
+    attribute keep-with-previous { xsd:boolean }?,
    ( TextElement )*, note*
 
 paragraph-with-footnote =
@@ -24,7 +24,6 @@ paragraph-with-footnote =
     attribute align { Alignments }?,
    ( TextElement | fn  )*, note*
 }
-
 ul =
   element ul {
     attribute id { xsd:ID },
