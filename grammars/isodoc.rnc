@@ -191,6 +191,7 @@ note = element note {
     attribute subsequence { text }?,
     attribute keep-with-next { xsd:boolean }?,
     attribute keep-lines-together { xsd:boolean }?,
+    attribute type { text }?,
     (paragraph | ul | ol | dl | formula)+
 }
 
