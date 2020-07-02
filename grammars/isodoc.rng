@@ -961,9 +961,6 @@
   </define>
   <define name="content-subsection">
     <element name="clause">
-      <optional>
-        <attribute name="type"/>
-      </optional>
       <ref name="Content-Section"/>
     </element>
   </define>
@@ -1014,9 +1011,6 @@
   </define>
   <define name="clause">
     <element name="clause">
-      <optional>
-        <attribute name="type"/>
-      </optional>
       <ref name="Clause-Section"/>
     </element>
   </define>

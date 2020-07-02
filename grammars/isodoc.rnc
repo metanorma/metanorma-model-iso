@@ -344,10 +344,7 @@ acknowledgements =
   element acknowledgements { Content-Section }
 
 content-subsection =
-  element clause { 
-    attribute type { text }?,
-    Content-Section 
-  }
+  element clause { Content-Section }
 
 Content-Section =
     attribute id { xsd:ID }?,
@@ -361,10 +358,7 @@ Content-Section =
       content-subsection* )
 
 clause =
-  element clause { 
-    attribute type { text }?,
-    Clause-Section 
-  }
+  element clause { Clause-Section }
 
 Clause-Section =
     attribute id { xsd:ID }?,
