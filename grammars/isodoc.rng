@@ -993,6 +993,9 @@
       </attribute>
     </optional>
     <optional>
+      <attribute name="type"/>
+    </optional>
+    <optional>
       <ref name="section-title"/>
     </optional>
     <group>
@@ -1041,6 +1044,9 @@
           <value>informative</value>
         </choice>
       </attribute>
+    </optional>
+    <optional>
+      <attribute name="type"/>
     </optional>
     <optional>
       <ref name="section-title"/>
