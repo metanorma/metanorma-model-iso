@@ -409,6 +409,7 @@ terms =
     attribute id { xsd:ID }?,
     attribute language { text }?,
     attribute script { text }?,
+    attribute type { text }?,
     attribute obligation { "normative" | "informative" }?,
     section-title?,
     BasicBlock*, note*,
