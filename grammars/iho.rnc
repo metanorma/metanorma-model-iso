@@ -11,7 +11,7 @@ DocumentType =
         "standard" 
 
 editorialgroup = element editorialgroup {
-  committee, workgroup, commission
+  (committee | workgroup | commission)+
 }
 
 BibDataExtensionType =
