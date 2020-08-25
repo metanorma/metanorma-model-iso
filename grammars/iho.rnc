@@ -33,8 +33,8 @@ annex =
 }
 
 committee = element committee { IHO_Group }
-workgroup = element committee { IHO_Group }
-commission = element committee { IHO_Group }
+workgroup = element workgroup { IHO_Group }
+commission = element commission { IHO_Group }
 
 IHO_Group =
   element name { text }?,
