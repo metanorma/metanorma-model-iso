@@ -6,6 +6,13 @@ include "isodoc.rnc" {
 
 start = nist-standard
 
+ol =
+  element ol {
+    attribute id { xsd:ID },
+    attribute class { "steps" }?,
+    li+, note*
+}
+
 DocumentType =
         "standard" 
 
