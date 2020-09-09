@@ -527,7 +527,7 @@ amend =
     attribute path_end { text }?,
     attribute title { text }?,
     element location { locality* }?,
-    element autonumber { Autonumber }*,
+    autonumber*,
     element description { BasicBlock*, note }?,
     element replacement { BasicBlock* }?
 }

@@ -1566,9 +1566,7 @@
         </element>
       </optional>
       <zeroOrMore>
-        <element name="autonumber">
-          <ref name="Autonumber"/>
-        </element>
+        <ref name="autonumber"/>
       </zeroOrMore>
       <optional>
         <element name="description">
