@@ -373,7 +373,7 @@ Clause-Section =
     attribute type { text }?,
     section-title?,
     (
-      ( BasicBlock*, note* ),
+      ( (  BasicBlock*, note* ) | amend ),
        (clause-subsection | terms | definitions)*
     )
 
@@ -518,5 +518,24 @@ term-clause =
 
 termdocsource =
   element termdocsource { CitationType }
+
+amend = 
+  element amend {
+    attribute id { xsd:ID }?,
+    attribute change { "add" | "modify" | "delete" },
+    attribute path { text }?,
+    attribute path_end { text }?,
+    attribute title { text }?,
+    element location { BibItemLocality }?,
+    element autonumber { Autonumber }*,
+    element description { BasicBlock*, note }?,
+    element replacement { BasicBlock* }?
+}
+
+autonumber =
+  element autonumber {
+    attribute type { "requirement" | "recommendation" | "permission" | "table" | "figure" | "admonition" | "formula" | "sourcecode" | "example" | "note" },
+    text
+}
 
 }
