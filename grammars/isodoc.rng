@@ -1560,7 +1560,9 @@
       </optional>
       <optional>
         <element name="location">
-          <ref name="BibItemLocality"/>
+          <zeroOrMore>
+            <ref name="locality"/>
+          </zeroOrMore>
         </element>
       </optional>
       <zeroOrMore>

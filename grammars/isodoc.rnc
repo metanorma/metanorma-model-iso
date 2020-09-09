@@ -526,7 +526,7 @@ amend =
     attribute path { text }?,
     attribute path_end { text }?,
     attribute title { text }?,
-    element location { BibItemLocality }?,
+    element location { locality* }?,
     element autonumber { Autonumber }*,
     element description { BasicBlock*, note }?,
     element replacement { BasicBlock* }?
