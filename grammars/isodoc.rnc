@@ -528,8 +528,9 @@ amend =
     attribute title { text }?,
     element location { locality* }?,
     autonumber*,
-    element description { BasicBlock*, note }?,
-    element replacement { BasicBlock* }?
+    element description { BasicBlock* }?,
+    element replacement { BasicBlock* }?,
+    element description { BasicBlock* }?
 }
 
 autonumber =
