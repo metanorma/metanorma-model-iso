@@ -80,7 +80,7 @@ AdmonitionType =
 
 preface =
   element preface {
-    preface_abstract?, foreword, introduction?
+    abstract?, foreword, introduction?
 }
 
 DocumentType =

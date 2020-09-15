@@ -34,7 +34,7 @@
     <define name="preface">
       <element name="preface">
         <optional>
-          <ref name="preface_abstract"/>
+          <ref name="abstract"/>
         </optional>
         <optional>
           <ref name="foreword"/>

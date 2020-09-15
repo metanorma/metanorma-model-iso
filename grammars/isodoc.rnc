@@ -304,7 +304,7 @@ element standard-document {
 }
 
 preface =
-  element preface { ( content | preface_abstract | foreword | introduction | acknowledgements)+ }
+  element preface { ( content | abstract | foreword | introduction | acknowledgements)+ }
 
 foreword =
   element foreword { Content-Section }
@@ -342,7 +342,7 @@ definitions =
 content =
   element clause { Content-Section }
 
-preface_abstract =
+abstract =
   element abstract { Content-Section }
 
 acknowledgements =

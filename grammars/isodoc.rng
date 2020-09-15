@@ -885,7 +885,7 @@
       <oneOrMore>
         <choice>
           <ref name="content"/>
-          <ref name="preface_abstract"/>
+          <ref name="abstract"/>
           <ref name="foreword"/>
           <ref name="introduction"/>
           <ref name="acknowledgements"/>
@@ -982,7 +982,7 @@
       <ref name="Content-Section"/>
     </element>
   </define>
-  <define name="preface_abstract">
+  <define name="abstract">
     <element name="abstract">
       <ref name="Content-Section"/>
     </element>
