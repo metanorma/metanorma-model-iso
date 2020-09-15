@@ -64,6 +64,11 @@
             </choice>
           </attribute>
         </optional>
+        <optional>
+          <attribute name="droploc">
+            <data type="boolean"/>
+          </attribute>
+        </optional>
         <text/>
       </element>
     </define>
