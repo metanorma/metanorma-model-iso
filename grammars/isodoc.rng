@@ -977,7 +977,7 @@
       <ref name="Content-Section"/>
     </element>
   </define>
-  <define name="abstract">
+  <define name="preface_abstract">
     <element name="abstract">
       <ref name="Content-Section"/>
     </element>
@@ -1481,11 +1481,6 @@
       </optional>
     </element>
   </define>
-  <define name="preface_abstract">
-    <element name="abstract">
-      <ref name="Basic-Section"/>
-    </element>
-  </define>
   <define name="term-clause">
     <element name="clause">
       <optional>
@@ -1576,7 +1571,7 @@
         </element>
       </optional>
       <optional>
-        <element name="replacement">
+        <element name="newcontent">
           <zeroOrMore>
             <ref name="BasicBlock"/>
           </zeroOrMore>

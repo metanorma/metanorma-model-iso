@@ -341,7 +341,7 @@ definitions =
 content =
   element clause { Content-Section }
 
-abstract =
+preface_abstract =
   element abstract { Content-Section }
 
 acknowledgements =
@@ -500,8 +500,6 @@ structuredidentifier = element structuredidentifier {
   element year { text }?
 }
 
-preface_abstract = element abstract { Basic-Section }
-
 term-clause =
   element clause {
     attribute id { xsd:ID }?,
@@ -529,7 +527,7 @@ amend =
     element location { locality* }?,
     autonumber*,
     element description { BasicBlock* }?,
-    element replacement { BasicBlock* }?,
+    element newcontent { BasicBlock* }?,
     element description { BasicBlock* }?
 }
 
