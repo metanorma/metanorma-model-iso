@@ -63,6 +63,8 @@ DocumentType = "standard" | "recommendation"
 # identical structure to iso-standard
 gb-standard =
   element gb-standard {
+attribute version { text },
+  attribute type { "semantic" | "presentation" },
     bibdata, termdocsource*, boilerplate?, preface, sections+, annex*, bibliography
   }     
 

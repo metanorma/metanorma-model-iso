@@ -89,6 +89,13 @@
   </define>
   <define name="m3d-standard">
     <element name="m3d-standard">
+      <attribute name="version"/>
+      <attribute name="type">
+        <choice>
+          <value>semantic</value>
+          <value>presentation</value>
+        </choice>
+      </attribute>
       <ref name="bibdata"/>
       <zeroOrMore>
         <ref name="termdocsource"/>

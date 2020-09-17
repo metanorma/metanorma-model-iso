@@ -38,6 +38,8 @@ technical-committee = element committee {
 
 csand-standard =
   element csa-standard {
+attribute version { text },
+  attribute type { "semantic" | "presentation" },
     bibdata, termdocsource*, boilerplate?, preface, sections+, annex*, bibliography
  }
 

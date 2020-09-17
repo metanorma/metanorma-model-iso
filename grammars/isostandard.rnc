@@ -133,6 +133,8 @@ table =
 # grammar simple, we keep the references together
 iso-standard = 
   element iso-standard {
+attribute version { text },
+  attribute type { "semantic" | "presentation" },
     bibdata, termdocsource*, boilerplate?, preface, sections+, annex*, bibliography
   }
 

@@ -340,6 +340,13 @@
   </define>
   <define name="un-standard">
     <element name="un-standard">
+      <attribute name="version"/>
+      <attribute name="type">
+        <choice>
+          <value>semantic</value>
+          <value>presentation</value>
+        </choice>
+      </attribute>
       <ref name="bibdata"/>
       <optional>
         <ref name="boilerplate"/>

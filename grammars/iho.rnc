@@ -51,6 +51,8 @@ element to { ISO8601Date }?
 
 iho-standard =
   element iho-standard {
+attribute version { text },
+  attribute type { "semantic" | "presentation" },
     bibdata, termdocsource*, boilerplate?, preface, sections+, annex*, bibliography
  }
 

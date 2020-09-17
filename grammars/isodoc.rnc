@@ -300,6 +300,8 @@ ics = element ics {
 
 standard-document =
 element standard-document {
+  attribute version { text },
+  attribute type { "semantic" | "presentation" },
   bibdata, boilerplate?, preface?, sections, annex*, references*
 }
 

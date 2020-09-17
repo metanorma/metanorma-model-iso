@@ -17,6 +17,8 @@ DocumentType =
 # grammar simple, we keep the references together
 iec-standard = 
   element iec-standard {
+attribute version { text },
+  attribute type { "semantic" | "presentation" },
     bibdata, termdocsource*, boilerplate?, preface, sections+, annex*, bibliography
   }
 

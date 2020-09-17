@@ -96,6 +96,8 @@ job_number = element job_number { text }
 
 un-standard =
 element un-standard {
+attribute version { text },
+  attribute type { "semantic" | "presentation" },
   bibdata, boilerplate?, preface, sections+, annex*
 }
 

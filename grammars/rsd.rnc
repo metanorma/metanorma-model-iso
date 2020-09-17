@@ -29,6 +29,8 @@ security = element security { text }
 
 rsd-standard =
   element rsd-standard {
+attribute version { text },
+  attribute type { "semantic" | "presentation" },
     bibdata, termdocsource*, boilerplate?, preface, sections+, annex*, bibliography
  }
 

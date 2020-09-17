@@ -40,6 +40,8 @@ workgroup =
 
 ogc-standard =
   element ogc-standard {
+attribute version { text },
+  attribute type { "semantic" | "presentation" },
     bibdata, termdocsource*, boilerplate?, preface, sections+, annex*, bibliography
  }
 

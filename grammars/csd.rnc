@@ -36,6 +36,8 @@ technical-committee = element technical-committee {
 
 csd-standard =
   element csd-standard {
+attribute version { text },
+  attribute type { "semantic" | "presentation" },
     bibdata, termdocsource*, boilerplate?, preface, sections+, annex*, bibliography
  }
 
