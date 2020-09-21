@@ -39,8 +39,22 @@
         <ref name="doctype"/>
       </optional>
       <ref name="editorialgroup"/>
+      <ref name="comment-period-from"/>
+      <optional>
+        <ref name="comment-period-to"/>
+      </optional>
     </define>
   </include>
+  <define name="comment-period-from">
+    <element name="comment-period-from">
+      <ref name="ISO8601Date"/>
+    </element>
+  </define>
+  <define name="comment-period-to">
+    <element name="comment-period-to">
+      <ref name="ISO8601Date"/>
+    </element>
+  </define>
   <define name="committee">
     <element name="committee">
       <choice>
