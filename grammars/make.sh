@@ -47,4 +47,5 @@ java -jar jing-trang/build/trang.jar -I rnc -O rng nist.rnc nist.rng
 java -jar jing-trang/build/trang.jar -I rnc -O rng itu.rnc itu.rng
 java -jar jing-trang/build/trang.jar -I rnc -O rng ietf.rnc ietf.rng
 java -jar jing-trang/build/trang.jar -I rnc -O rng iho.rnc iho.rng
+java -jar jing-trang/build/trang.jar -I rnc -O rng bipm.rnc bipm.rng
 sh copy.sh

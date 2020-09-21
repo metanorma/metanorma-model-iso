@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<grammar xmlns="http://relaxng.org/ns/structure/1.0">
+  <!--
+    Currently we inherit from a namespaced grammar, isostandard. Until we inherit from isodoc,
+    we cannot have a new default namespace: we will end up with a grammar with two different
+    namespaces, one for isostandard and one for csand additions. And we do not want that.
+  -->
+  <include href="isodoc.rng">
+    <start>
+      <ref name="bipm-standard"/>
+    </start>
+    <define name="DocumentType">
+      <choice>
+        <value>brochure</value>
+        <value>mise-en-pratique</value>
+        <value>rapport</value>
+        <value>monographie</value>
+        <value>guide</value>
+        <value>meeting-report</value>
+        <value>technical-report</value>
+        <value>working-part-note</value>
+        <value>strategy</value>
+        <value>cipm-mra</value>
+        <value>resolution</value>
+      </choice>
+    </define>
+    <define name="editorialgroup">
+      <element name="editorialgroup">
+        <oneOrMore>
+          <ref name="committee"/>
+        </oneOrMore>
+        <oneOrMore>
+          <ref name="workgroup"/>
+        </oneOrMore>
+      </element>
+    </define>
+    <define name="BibDataExtensionType">
+      <optional>
+        <ref name="doctype"/>
+      </optional>
+      <ref name="editorialgroup"/>
+    </define>
+  </include>
+  <define name="committee">
+    <element name="committee">
+      <choice>
+        <value>CGPM</value>
+        <value>CIPM</value>
+        <value>BIPM</value>
+        <value>CCAUV</value>
+        <value>CCEM</value>
+        <value>CCL</value>
+        <value>CCM</value>
+        <value>CCPR</value>
+        <value>CCQM</value>
+        <value>CCRI</value>
+        <value>CCT</value>
+        <value>CCTF</value>
+        <value>CCU</value>
+        <value>CCL-CCTF</value>
+        <value>JCGM</value>
+        <value>JCRB</value>
+        <value>JCTLM</value>
+        <value>INetQI</value>
+      </choice>
+    </element>
+  </define>
+  <define name="workgroup">
+    <element name="workgroup">
+      <text/>
+    </element>
+  </define>
+  <define name="bipm-standard">
+    <element name="bipm-standard">
+      <attribute name="version"/>
+      <attribute name="type">
+        <choice>
+          <value>semantic</value>
+          <value>presentation</value>
+        </choice>
+      </attribute>
+      <ref name="bibdata"/>
+      <zeroOrMore>
+        <ref name="termdocsource"/>
+      </zeroOrMore>
+      <optional>
+        <ref name="boilerplate"/>
+      </optional>
+      <ref name="preface"/>
+      <oneOrMore>
+        <ref name="sections"/>
+      </oneOrMore>
+      <zeroOrMore>
+        <ref name="annex"/>
+      </zeroOrMore>
+      <ref name="bibliography"/>
+    </element>
+  </define>
+</grammar>

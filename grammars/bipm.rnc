@@ -1,0 +1,60 @@
+# Currently we inherit from a namespaced grammar, isostandard. Until we inherit from isodoc,
+# we cannot have a new default namespace: we will end up with a grammar with two different
+# namespaces, one for isostandard and one for csand additions. And we do not want that.
+
+include "isodoc.rnc" {
+
+start = bipm-standard
+
+DocumentType =
+"brochure" |
+"mise-en-pratique" |
+"rapport" |
+"monographie" |
+"guide" |
+"meeting-report" |
+"technical-report" |
+"working-part-note" |
+"strategy" |
+"cipm-mra" |
+"resolution" 
+
+editorialgroup = element editorialgroup {
+  committee+,
+  workgroup+
+}
+
+BibDataExtensionType =
+    doctype?, editorialgroup
+}
+
+committee = element committee { 
+"CGPM" |
+"CIPM" |
+"BIPM" |
+"CCAUV" |
+"CCEM" |
+"CCL" |
+"CCM" |
+"CCPR" |
+"CCQM" |
+"CCRI" |
+"CCT" |
+"CCTF" |
+"CCU" |
+"CCL-CCTF" |
+"JCGM" |
+"JCRB" |
+"JCTLM" |
+"INetQI"
+}
+
+workgroup = element workgroup { text }
+
+bipm-standard =
+  element bipm-standard {
+attribute version { text },
+  attribute type { "semantic" | "presentation" },
+    bibdata, termdocsource*, boilerplate?, preface, sections+, annex*, bibliography
+ }
+

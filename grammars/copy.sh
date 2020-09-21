@@ -85,3 +85,8 @@ cp reqt.rng ../../metanorma-iho/lib/asciidoctor/iho
 cp biblio.rng ../../metanorma-iho/lib/asciidoctor/iho
 cp isodoc.rng ../../metanorma-iho/lib/asciidoctor/iho
 cat iho.rng | ruby -pe '$_.gsub!(/<grammar /, %{<grammar ns="https://www.metanorma.org/ns/iho" }) '>  ../../metanorma-iho/lib/asciidoctor/iho/iho.rng
+cp basicdoc.rng ../../metanorma-bipm/lib/asciidoctor/bipm
+cp reqt.rng ../../metanorma-bipm/lib/asciidoctor/bipm
+cp biblio.rng ../../metanorma-bipm/lib/asciidoctor/bipm
+cp isodoc.rng ../../metanorma-bipm/lib/asciidoctor/bipm
+cat bipm.rng | ruby -pe '$_.gsub!(/<grammar /, %{<grammar ns="https://www.metanorma.org/ns/bipm" }) '>  ../../metanorma-bipm/lib/asciidoctor/bipm/bipm.rng
