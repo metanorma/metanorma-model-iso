@@ -25,7 +25,7 @@ editorialgroup = element editorialgroup {
 }
 
 BibDataExtensionType =
-    doctype?, editorialgroup, comment-period-from, comment-period-to?
+    doctype?, editorialgroup, comment-period-from?, comment-period-to?
 }
 
 comment-period-from = element comment-period-from { ISO8601Date }

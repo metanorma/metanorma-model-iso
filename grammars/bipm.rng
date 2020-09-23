@@ -39,7 +39,9 @@
         <ref name="doctype"/>
       </optional>
       <ref name="editorialgroup"/>
-      <ref name="comment-period-from"/>
+      <optional>
+        <ref name="comment-period-from"/>
+      </optional>
       <optional>
         <ref name="comment-period-to"/>
       </optional>
