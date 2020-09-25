@@ -25,11 +25,17 @@ editorialgroup = element editorialgroup {
 }
 
 BibDataExtensionType =
-    doctype?, editorialgroup, comment-period-from?, comment-period-to?
+    doctype?, editorialgroup, comment-period-from?, comment-period-to?, structuredidentifier
 }
 
 comment-period-from = element comment-period-from { ISO8601Date }
 comment-period-to = element comment-period-to { ISO8601Date }
+
+structuredidentifier = element structuredidentifier {
+  element docnumber { text },
+  element part { text }?,
+  element appendix { text }?
+}
 
 committee = element committee { 
 "CGPM" |

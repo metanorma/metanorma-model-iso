@@ -45,6 +45,7 @@
       <optional>
         <ref name="comment-period-to"/>
       </optional>
+      <ref name="structuredidentifier"/>
     </define>
   </include>
   <define name="comment-period-from">
@@ -55,6 +56,23 @@
   <define name="comment-period-to">
     <element name="comment-period-to">
       <ref name="ISO8601Date"/>
+    </element>
+  </define>
+  <define name="structuredidentifier">
+    <element name="structuredidentifier">
+      <element name="docnumber">
+        <text/>
+      </element>
+      <optional>
+        <element name="part">
+          <text/>
+        </element>
+      </optional>
+      <optional>
+        <element name="appendix">
+          <text/>
+        </element>
+      </optional>
     </element>
   </define>
   <define name="committee">
