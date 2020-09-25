@@ -34,6 +34,23 @@
         </oneOrMore>
       </element>
     </define>
+    <define name="structuredidentifier">
+      <element name="structuredidentifier">
+        <element name="docnumber">
+          <text/>
+        </element>
+        <optional>
+          <element name="part">
+            <text/>
+          </element>
+        </optional>
+        <optional>
+          <element name="appendix">
+            <text/>
+          </element>
+        </optional>
+      </element>
+    </define>
     <define name="BibDataExtensionType">
       <optional>
         <ref name="doctype"/>
@@ -56,23 +73,6 @@
   <define name="comment-period-to">
     <element name="comment-period-to">
       <ref name="ISO8601Date"/>
-    </element>
-  </define>
-  <define name="structuredidentifier">
-    <element name="structuredidentifier">
-      <element name="docnumber">
-        <text/>
-      </element>
-      <optional>
-        <element name="part">
-          <text/>
-        </element>
-      </optional>
-      <optional>
-        <element name="appendix">
-          <text/>
-        </element>
-      </optional>
     </element>
   </define>
   <define name="committee">
