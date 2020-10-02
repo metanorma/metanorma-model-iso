@@ -31,11 +31,29 @@ structuredidentifier = element structuredidentifier {
 }
 
 BibDataExtensionType =
-    doctype?, editorialgroup, comment-period-from?, comment-period-to?, structuredidentifier
+    doctype?, editorialgroup, comment-period?, si-aspect?, structuredidentifier
 }
 
-comment-period-from = element comment-period-from { ISO8601Date }
-comment-period-to = element comment-period-to { ISO8601Date }
+comment-period = element comment-period {
+element from { ISO8601Date },
+element to { ISO8601Date }
+}
+
+si-aspect = element si-aspect {
+"A_e_deltanu" |
+"A_e" |
+"cd_Kcd_h_deltanu" |
+"cd_Kcd" |
+"full" |
+"K_k_deltanu" |
+"K_k" |
+"kg_h_c_deltanu" |
+"kg_h" |
+"m_c_deltanu" |
+"m_c" |
+"mol_NA" |
+"s_deltanu" 
+}
 
 committee = element committee { 
 "CGPM" |
