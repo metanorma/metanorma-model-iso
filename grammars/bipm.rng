@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<grammar xmlns="http://relaxng.org/ns/structure/1.0">
+<grammar xmlns="http://relaxng.org/ns/structure/1.0" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
   <!--
     Currently we inherit from a namespaced grammar, isostandard. Until we inherit from isodoc,
     we cannot have a new default namespace: we will end up with a grammar with two different
@@ -9,6 +9,42 @@
     <start>
       <ref name="bipm-standard"/>
     </start>
+    <define name="xref">
+      <element name="xref">
+        <attribute name="target">
+          <data type="string">
+            <param name="pattern">\i\c*|\c+#\c+</param>
+          </data>
+        </attribute>
+        <optional>
+          <attribute name="type">
+            <ref name="ReferenceFormat"/>
+          </attribute>
+        </optional>
+        <optional>
+          <attribute name="alt"/>
+        </optional>
+        <optional>
+          <attribute name="case">
+            <choice>
+              <value>capital</value>
+              <value>lowercase</value>
+            </choice>
+          </attribute>
+        </optional>
+        <optional>
+          <attribute name="droploc">
+            <data type="boolean"/>
+          </attribute>
+        </optional>
+        <optional>
+          <attribute name="pagenumber">
+            <data type="boolean"/>
+          </attribute>
+        </optional>
+        <text/>
+      </element>
+    </define>
     <define name="DocumentType">
       <choice>
         <value>brochure</value>

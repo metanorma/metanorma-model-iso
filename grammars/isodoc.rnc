@@ -35,7 +35,6 @@ hyperlink =
 
 xref =
   element xref {
-     #attribute target { xsd:IDREF },
      attribute target { xsd:string { pattern = "\i\c*|\c+#\c+" }},
      attribute type { ReferenceFormat }?,
      attribute alt { text }?,
