@@ -27,7 +27,9 @@ editorialgroup = element editorialgroup {
 structuredidentifier = element structuredidentifier {
   bureau,
   element docnumber { text },
-  element annexid { text }?
+  element annexid { text }?,
+  element amendment { xsd:int }?,
+  element corrigendum { xsd:int }?
 }
 
 
