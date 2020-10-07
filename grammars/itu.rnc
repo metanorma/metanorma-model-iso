@@ -34,12 +34,28 @@ structuredidentifier = element structuredidentifier {
 
 
 BibDataExtensionType =
-    doctype?, editorialgroup, ics*, recommendationstatus?, ipnoticereceived?, structuredidentifier?
+    doctype?, editorialgroup, ics*, recommendationstatus?, ipnoticereceived?, 
+    meeting?, meeting-date?, intended-type?, ext_source?,
+    structuredidentifier?
 
 preface = element preface { ( content | abstract | foreword | introduction | acknowledgements | clause)+ }
 
 
 }
+
+meeting = element meeting { text }
+
+meeting-date = element meeting-date {
+(
+element from { ISO8601Date },
+element to { ISO8601Date }?
+) |
+element on { ISO8601Date }
+}
+
+intended-type = element intended-type { "R" | "C" | "TD" }
+
+ext_source = element source { text }
 
 TextElement |= add | del
 
