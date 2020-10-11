@@ -94,6 +94,6 @@ bipm-standard =
   element bipm-standard {
 attribute version { text },
   attribute type { "semantic" | "presentation" },
-    bibdata, termdocsource*, boilerplate?, preface, sections+, annex*, bibliography
+    bibdata, termdocsource*, boilerplate?, preface, sections+, annex*, bibliography?
  }
 

@@ -182,7 +182,9 @@
       <zeroOrMore>
         <ref name="annex"/>
       </zeroOrMore>
-      <ref name="bibliography"/>
+      <optional>
+        <ref name="bibliography"/>
+      </optional>
     </element>
   </define>
 </grammar>
