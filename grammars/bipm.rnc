@@ -68,6 +68,7 @@ si-aspect = element si-aspect {
 }
 
 committee = element committee { 
+  attribute acronym { 
 "CGPM" |
 "CIPM" |
 "BIPM" |
@@ -85,10 +86,14 @@ committee = element committee {
 "JCGM" |
 "JCRB" |
 "JCTLM" |
-"INetQI"
+"INetQI" },
+  text 
 }
 
-workgroup = element workgroup { text }
+workgroup = element workgroup { 
+  attribute acronym { text }?,
+  text
+}
 
 bipm-standard =
   element bipm-standard {

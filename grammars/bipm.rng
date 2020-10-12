@@ -132,30 +132,36 @@
   </define>
   <define name="committee">
     <element name="committee">
-      <choice>
-        <value>CGPM</value>
-        <value>CIPM</value>
-        <value>BIPM</value>
-        <value>CCAUV</value>
-        <value>CCEM</value>
-        <value>CCL</value>
-        <value>CCM</value>
-        <value>CCPR</value>
-        <value>CCQM</value>
-        <value>CCRI</value>
-        <value>CCT</value>
-        <value>CCTF</value>
-        <value>CCU</value>
-        <value>CCL-CCTF</value>
-        <value>JCGM</value>
-        <value>JCRB</value>
-        <value>JCTLM</value>
-        <value>INetQI</value>
-      </choice>
+      <attribute name="acronym">
+        <choice>
+          <value>CGPM</value>
+          <value>CIPM</value>
+          <value>BIPM</value>
+          <value>CCAUV</value>
+          <value>CCEM</value>
+          <value>CCL</value>
+          <value>CCM</value>
+          <value>CCPR</value>
+          <value>CCQM</value>
+          <value>CCRI</value>
+          <value>CCT</value>
+          <value>CCTF</value>
+          <value>CCU</value>
+          <value>CCL-CCTF</value>
+          <value>JCGM</value>
+          <value>JCRB</value>
+          <value>JCTLM</value>
+          <value>INetQI</value>
+        </choice>
+      </attribute>
+      <text/>
     </element>
   </define>
   <define name="workgroup">
     <element name="workgroup">
+      <optional>
+        <attribute name="acronym"/>
+      </optional>
       <text/>
     </element>
   </define>
