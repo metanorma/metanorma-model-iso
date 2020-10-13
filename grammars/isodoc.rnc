@@ -398,16 +398,7 @@ annex-subsection =
   element clause { Annex-Section }
 
 annex =
-  element annex {
-    attribute id { xsd:ID }?,
-    attribute language { text }?,
-    attribute script { text }?,
-    attribute inline-header { xsd:boolean }?,
-    attribute obligation { ( "normative" | "informative" ) },
-    section-title?,
-    ( ( BasicBlock*, note* ), 
-      (annex-subsection | terms | definitions | references)* )
-}
+  element annex { Annex-Section }       
 
 terms =
   element terms {
