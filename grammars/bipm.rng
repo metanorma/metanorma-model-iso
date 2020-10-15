@@ -263,7 +263,7 @@
           <value>INetQI</value>
         </choice>
       </attribute>
-      <text/>
+      <ref name="LocalizedString"/>
     </element>
   </define>
   <define name="workgroup">

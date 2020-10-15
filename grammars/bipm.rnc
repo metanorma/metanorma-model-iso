@@ -115,7 +115,7 @@ committee = element committee {
 "JCRB" |
 "JCTLM" |
 "INetQI" },
-  text 
+  LocalizedString
 }
 
 workgroup = element workgroup { 
