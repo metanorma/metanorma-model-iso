@@ -80,7 +80,7 @@ structuredidentifier = element structuredidentifier {
 }
 
 BibDataExtensionType =
-    doctype?, editorialgroup, comment-period?, si-aspect?, structuredidentifier
+    doctype?, editorialgroup, comment-period?, si-aspect?, meeting-note?, structuredidentifier
 }
 
 comment-period = element comment-period {
@@ -131,6 +131,8 @@ workgroup = element workgroup {
   attribute acronym { text }?,
   text
 }
+
+meeting-note = element meeting-note { text }
 
 bipm-standard =
   element bipm-standard {

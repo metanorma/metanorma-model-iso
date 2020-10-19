@@ -242,6 +242,9 @@
       <optional>
         <ref name="si-aspect"/>
       </optional>
+      <optional>
+        <ref name="meeting-note"/>
+      </optional>
       <ref name="structuredidentifier"/>
     </define>
   </include>
@@ -306,6 +309,11 @@
       <optional>
         <attribute name="acronym"/>
       </optional>
+      <text/>
+    </element>
+  </define>
+  <define name="meeting-note">
+    <element name="meeting-note">
       <text/>
     </element>
   </define>
