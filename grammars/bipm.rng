@@ -154,6 +154,41 @@
         </zeroOrMore>
       </group>
     </define>
+    <define name="ol">
+      <element name="ol">
+        <attribute name="id">
+          <data type="ID"/>
+        </attribute>
+        <optional>
+          <attribute name="keep-with-next">
+            <data type="boolean"/>
+          </attribute>
+        </optional>
+        <optional>
+          <attribute name="keep-lines-together">
+            <data type="boolean"/>
+          </attribute>
+        </optional>
+        <attribute name="type">
+          <choice>
+            <value>roman</value>
+            <value>alphabet</value>
+            <value>arabic</value>
+            <value>roman_upper</value>
+            <value>alphabet_upper</value>
+          </choice>
+        </attribute>
+        <optional>
+          <attribute name="start"/>
+        </optional>
+        <oneOrMore>
+          <ref name="li"/>
+        </oneOrMore>
+        <zeroOrMore>
+          <ref name="note"/>
+        </zeroOrMore>
+      </element>
+    </define>
     <define name="DocumentType">
       <choice>
         <value>brochure</value>
