@@ -66,6 +66,7 @@ dl =
     attribute id { xsd:ID },
     attribute keep-with-next { xsd:boolean }?,
     attribute keep-lines-together { xsd:boolean }?,
+    attribute key { xsd:boolean }?,
     (dt, dd)+, note*
 }
 
