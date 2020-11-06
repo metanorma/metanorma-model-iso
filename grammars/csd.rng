@@ -86,7 +86,7 @@
       </element>
     </define>
     <define name="technical-committee">
-      <element name="technical-committee">
+      <element name="committee">
         <optional>
           <attribute name="type"/>
         </optional>
