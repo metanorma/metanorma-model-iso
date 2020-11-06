@@ -25,6 +25,11 @@ include "basicdoc.rnc" {
 
 start = standard-document
 
+doctype = element doctype { 
+    attribute abbreviation { text }?,
+    DocumentType 
+}
+
 hyperlink =
   element link {
     attribute target { xsd:anyURI },
