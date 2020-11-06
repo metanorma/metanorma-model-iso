@@ -1,5 +1,7 @@
 = Metanorma IsoDoc Models
 
+image:https://github.com/metanorma/metanorma-model-iso/workflows/make/badge.svg["Build Status", link="https://github.com/metanorma/metanorma-model-iso/actions?query=workflow%3Amake"]
+
 Metanorma IsoDoc is a family of document models intended to represent ISO Standards and
 similarly structured standards, based on the Metanorma StandardDocument ("StanDoc") and
 BasicDocument ("BasicDoc") models.
