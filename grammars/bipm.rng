@@ -209,9 +209,9 @@
         <oneOrMore>
           <ref name="committee"/>
         </oneOrMore>
-        <oneOrMore>
+        <zeroOrMore>
           <ref name="workgroup"/>
-        </oneOrMore>
+        </zeroOrMore>
       </element>
     </define>
     <define name="structuredidentifier">

@@ -70,7 +70,7 @@ DocumentType =
 
 editorialgroup = element editorialgroup {
   committee+,
-  workgroup+
+  workgroup*
 }
 
 structuredidentifier = element structuredidentifier {
