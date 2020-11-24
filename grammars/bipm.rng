@@ -42,6 +42,11 @@
             <data type="boolean"/>
           </attribute>
         </optional>
+        <optional>
+          <attribute name="nosee">
+            <data type="boolean"/>
+          </attribute>
+        </optional>
         <text/>
       </element>
     </define>
