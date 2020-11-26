@@ -43,7 +43,7 @@
           <choice>
             <ref name="clause"/>
             <ref name="errata_clause"/>
-            <ref name="acknowledgement"/>
+            <ref name="acknowledgements"/>
           </choice>
         </zeroOrMore>
         <optional>

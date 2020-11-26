@@ -20,7 +20,7 @@ DocumentType =
 
 preface =
   element preface {
-    abstract?, foreword?, (clause | errata_clause | acknowledgement)*, reviewernote?, executivesummary?
+    abstract?, foreword?, (clause | errata_clause | acknowledgements)*, reviewernote?, executivesummary?
 }
 
 editorialgroup = element editorialgroup {
