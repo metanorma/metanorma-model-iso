@@ -11,7 +11,7 @@ organization =
 }
 
 BibDataExtensionType =
-        doctype, editorialgroup, ics*, structuredidentifier, stagename?
+        doctype, horizontal?, editorialgroup, ics*, structuredidentifier, stagename?
 
 bdate = element date {
   attribute type { ( BibliographicDateType | text ) },
@@ -137,6 +137,8 @@ attribute version { text },
   attribute type { "semantic" | "presentation" },
     bibdata, termdocsource*, boilerplate?, preface, sections+, annex*, bibliography
   }
+
+horizontal = element horizontal { xsd:boolean }
 
 documentnumber = 
   element project-number { 
