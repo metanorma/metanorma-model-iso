@@ -9,9 +9,14 @@ DocumentType =
      "technical-report" | "publicly-available-specification" |
     "international-workshop-agreement" | "guide"
 
+BibDataExtensionType =
+        doctype, docsubtype?, editorialgroup, ics*, structuredidentifier, stagename?, updates_document_type?
+
 }
 
 # end overrides
+
+docsubtype = element docsubtype { "emc" | "safety" | "environment" | "quality-assurance" | "horizontal" }
 
 # We display the Normative References between scope and terms; but to keep the
 # grammar simple, we keep the references together

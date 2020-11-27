@@ -44,7 +44,7 @@ Description:    Metanorma IsoDoc is a family of document models intended to repr
 Hystory of changes:
 > DD/MM/YYYY
     - 11/04/2020 - Add stagename
-    -
+    - 27/11/2020 - Add subtype
 '/
 
 '******* CONFIGURATION ************************************************
@@ -60,6 +60,7 @@ class IsoBibliographicItem{
     +docIdentifier: IsoDocumentId
     +title: IsoLocalizedTitle
     +type: IsoDocumentType
+    +subtype: IecDocumentSubtype [0..1]
     +status: IsoDocumentStatus
     +workgroup: IsoProjectGroup
     +ics: Ics[1..*]
@@ -122,6 +123,15 @@ enum IsoDocumentType <<enumeration>>{
     publiclyAvailableSpecification
     internationalWorkshopAgreement
     guide
+    interpretationSheet
+}
+
+enum IecDocumentSubtype <<enumeration>>{
+    emc
+    safety
+    environment
+    quality-assurance
+    horizontal
 }
 
 enum IsoDocumentStageCodes <<enumeration>>{
