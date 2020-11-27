@@ -10,7 +10,7 @@ DocumentType =
     "international-workshop-agreement" | "guide"
 
 BibDataExtensionType =
-        doctype, function?, horizontal?, editorialgroup, ics*, structuredidentifier, stagename?, updates_document_type?
+        doctype, horizontal?, function?, editorialgroup, ics*, structuredidentifier, stagename?, updates_document_type?
 
 }
 

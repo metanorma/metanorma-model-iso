@@ -18,10 +18,10 @@
     <define name="BibDataExtensionType">
       <ref name="doctype"/>
       <optional>
-        <ref name="function"/>
+        <ref name="horizontal"/>
       </optional>
       <optional>
-        <ref name="horizontal"/>
+        <ref name="function"/>
       </optional>
       <ref name="editorialgroup"/>
       <zeroOrMore>
