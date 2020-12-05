@@ -100,8 +100,14 @@ table =
     attribute uri { xsd:anyURI }?,
     attribute keep-with-next { xsd:boolean }?,
     attribute keep-lines-together { xsd:boolean }?,
-    tname?, thead?, tbody, tfoot?, table-note*, dl?
+    colgroup?, tname?, thead?, tbody, tfoot?, table-note*, dl?
   }
+
+colgroup = element colgroup { col+ } 
+
+col = element col {
+    attribute width { text }
+}
 
 figure =
   element figure {
