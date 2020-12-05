@@ -267,18 +267,6 @@
         </optional>
       </element>
     </define>
-    <define name="colgroup">
-      <element name="colgroup">
-        <oneOrMore>
-          <ref name="col"/>
-        </oneOrMore>
-      </element>
-    </define>
-    <define name="col">
-      <element name="col">
-        <attribute name="width"/>
-      </element>
-    </define>
     <define name="figure">
       <element name="figure">
         <attribute name="id">
@@ -779,6 +767,18 @@
     </define>
   </include>
   <!-- end overrides -->
+  <define name="colgroup">
+    <element name="colgroup">
+      <oneOrMore>
+        <ref name="col"/>
+      </oneOrMore>
+    </element>
+  </define>
+  <define name="col">
+    <element name="col">
+      <attribute name="width"/>
+    </element>
+  </define>
   <define name="TextElement" combine="choice">
     <ref name="concept"/>
   </define>

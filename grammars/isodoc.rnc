@@ -103,12 +103,6 @@ table =
     colgroup?, tname?, thead?, tbody, tfoot?, table-note*, dl?
   }
 
-colgroup = element colgroup { col+ } 
-
-col = element col {
-    attribute width { text }
-}
-
 figure =
   element figure {
     attribute id { xsd:ID },
@@ -263,6 +257,14 @@ table-note = element note {
 }
 
 # end overrides
+
+colgroup = element colgroup { col+ }
+
+col = element col {
+    attribute width { text }
+}
+
+
 
 TextElement |= concept
 
