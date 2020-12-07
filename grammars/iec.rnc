@@ -11,7 +11,7 @@ DocumentType =
 
 BibDataExtensionType =
         doctype, horizontal?, function?, editorialgroup, ics*, structuredidentifier, 
-        stagename?, updates_document_type?, accessibility-color-inside?
+        stagename?, updates_document_type?, accessibility-color-inside?, price-code?
 
 }
 
@@ -20,6 +20,7 @@ BibDataExtensionType =
 function = element function { "emc" | "safety" | "environment" | "quality-assurance" }
 horizontal = element horizontal { xsd:boolean }
 accessibility-color-inside = element accessibility-color-inside { xsd:boolean }
+price-code = element price-code { text }
 
 # We display the Normative References between scope and terms; but to keep the
 # grammar simple, we keep the references together

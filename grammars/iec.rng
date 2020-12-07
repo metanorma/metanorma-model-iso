@@ -37,6 +37,9 @@
       <optional>
         <ref name="accessibility-color-inside"/>
       </optional>
+      <optional>
+        <ref name="price-code"/>
+      </optional>
     </define>
   </include>
   <!-- end overrides -->
@@ -58,6 +61,11 @@
   <define name="accessibility-color-inside">
     <element name="accessibility-color-inside">
       <data type="boolean"/>
+    </element>
+  </define>
+  <define name="price-code">
+    <element name="price-code">
+      <text/>
     </element>
   </define>
   <!--
