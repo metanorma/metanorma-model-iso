@@ -10,7 +10,8 @@ DocumentType =
     "international-workshop-agreement" | "guide"
 
 BibDataExtensionType =
-        doctype, horizontal?, function?, editorialgroup, ics*, structuredidentifier, stagename?, updates_document_type?
+        doctype, horizontal?, function?, editorialgroup, ics*, structuredidentifier, 
+        stagename?, updates_document_type?, accessibility-color-inside?
 
 }
 
@@ -18,6 +19,7 @@ BibDataExtensionType =
 
 function = element function { "emc" | "safety" | "environment" | "quality-assurance" }
 horizontal = element horizontal { xsd:boolean }
+accessibility-color-inside = element accessibility-color-inside { xsd:boolean }
 
 # We display the Normative References between scope and terms; but to keep the
 # grammar simple, we keep the references together
