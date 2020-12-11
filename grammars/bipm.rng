@@ -338,7 +338,9 @@
       <optional>
         <ref name="boilerplate"/>
       </optional>
-      <ref name="preface"/>
+      <optional>
+        <ref name="preface"/>
+      </optional>
       <oneOrMore>
         <ref name="sections"/>
       </oneOrMore>
