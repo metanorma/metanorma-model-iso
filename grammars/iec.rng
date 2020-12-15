@@ -53,11 +53,6 @@
       </choice>
     </element>
   </define>
-  <define name="horizontal">
-    <element name="horizontal">
-      <data type="boolean"/>
-    </element>
-  </define>
   <define name="accessibility-color-inside">
     <element name="accessibility-color-inside">
       <data type="boolean"/>

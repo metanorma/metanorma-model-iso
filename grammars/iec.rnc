@@ -18,7 +18,6 @@ BibDataExtensionType =
 # end overrides
 
 function = element function { "emc" | "safety" | "environment" | "quality-assurance" }
-horizontal = element horizontal { xsd:boolean }
 accessibility-color-inside = element accessibility-color-inside { xsd:boolean }
 price-code = element price-code { text }
 
