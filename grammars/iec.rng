@@ -40,6 +40,9 @@
       <optional>
         <ref name="price-code"/>
       </optional>
+      <optional>
+        <ref name="cen-processing"/>
+      </optional>
     </define>
   </include>
   <!-- end overrides -->
@@ -61,6 +64,11 @@
   <define name="price-code">
     <element name="price-code">
       <text/>
+    </element>
+  </define>
+  <define name="cen-processing">
+    <element name="cen-processing">
+      <data type="boolean"/>
     </element>
   </define>
   <!--
