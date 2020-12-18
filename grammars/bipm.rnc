@@ -15,6 +15,7 @@ xref =
      attribute droploc { xsd:boolean }?,
      attribute pagenumber { xsd:boolean }?,
      attribute nosee { xsd:boolean }?,
+     attribute nopage { xsd:boolean }?,
      text
 }
 
