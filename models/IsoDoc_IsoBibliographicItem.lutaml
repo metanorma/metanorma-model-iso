@@ -1,0 +1,182 @@
+diagram IsoDoc_IsoBibliographicItem {
+  
+  
+  
+  class BibliographicItem <<Bibliography>> {
+  
+  }
+  
+  class IsoBibliographicItem{
+      +docIdentifier: IsoDocumentId
+      +title: IsoLocalizedTitle
+      +type: IsoDocumentType
+      +category: IecDocumentCategory [0..1]
+      +horizontal: boolean[0..1]
+      +status: IsoDocumentStatus
+      +workgroup: IsoProjectGroup
+      +ics: Ics[1..*]
+      +source: TypeUri[0..*]
+      +abstract: FormattedString[0..*]
+      +allParts: boolean[0..1]
+      +stagename: String[0..1]
+  }
+  
+  class IsoDocumentId{
+      +tcDocumentNumber: Integer[0..1]
+      +projectNumber: Integer[0..1]
+      +partNumber: Integer[0..1]
+  }
+  
+  class IsoLocalizedTitle{
+      +titleIntro: FormattedString[1..*]
+      +titleMain: FormattedString[1..*]
+      +titlePart: FormattedString[0..*]
+  }
+  
+  class IsoDocumentStatus{
+      +stage: IsoDocumentStageCodes
+      +stage_abbreviation: String[0..1]
+      +substage: IsoDocumentSubstageCodes[0..1]
+      +substage_abbreviation: String[0..1]
+      +iteration: Integer[0..1]
+  }
+  
+  class DocumentStatus <<Bibliography>>{
+  
+  }
+  
+  class IsoProjectGroup{
+      +technicalCommittee: IsoSubGroup
+      +subcommittee: IsoSubGroup[0..1]
+      +workgroup: IsoSubGroup[0..1]
+      +secretariat: String[0..1]
+  }
+  
+  class Organization <<Bibliography>>{
+  
+  }
+  
+  class IsoSubGroup{
+      +type: String[0..1]
+      +number: Integer[0..1]
+      +name: String
+  }
+  
+  class Ics{
+      +code: String
+      +text: String[0..1]
+  }
+  
+  enum IsoDocumentType <<enumeration>>{
+      internationalStandard
+      technicalSpecification
+      technicalReport
+      publiclyAvailableSpecification
+      internationalWorkshopAgreement
+      guide
+      interpretationSheet
+  }
+  
+  enum IecDocumentCategory <<enumeration>>{
+      emc
+      safety
+      environment
+      quality-assurance
+  }
+  
+  enum IsoDocumentStageCodes <<enumeration>>{
+      00
+      10
+      20
+      30
+      40
+      50
+      60
+      90
+      95
+  }
+  
+  enum IsoDocumentSubstageCodes <<enumeration>>{
+      00
+      20
+      60
+      90
+      92
+      93
+      98
+      99
+  }
+  
+  
+  association {
+    owner BibliographicItem
+    member IsoBibliographicItem
+    owner_type inheritance
+  }
+  
+  association {
+    owner IsoBibliographicItem
+    member IsoDocumentId
+    owner_type direct
+  }
+  association {
+    owner IsoBibliographicItem
+    member IsoLocalizedTitle
+    owner_type direct
+  }
+  association {
+    owner IsoBibliographicItem
+    member IsoDocumentType
+    owner_type direct
+  }
+  association {
+    owner IsoBibliographicItem
+    member IsoDocumentStatus
+    owner_type direct
+  }
+  association {
+    owner IsoBibliographicItem
+    member IsoProjectGroup
+    owner_type direct
+  }
+  association {
+    owner IsoBibliographicItem
+    member Ics
+    owner_type direct
+  }
+  
+  association {
+    owner DocumentStatus
+    member IsoDocumentStatus
+    owner_type inheritance
+  }
+  
+  association {
+    owner IsoDocumentStatus
+    member IsoDocumentStageCodes
+    owner_type direct
+  }
+  association {
+    owner IsoDocumentStatus
+    member IsoDocumentSubstageCodes
+    owner_type direct
+  }
+  association {
+    owner IsoDocumentStatus
+    member IecDocumentCategory
+    owner_type direct
+  }
+  
+  association {
+    owner Organization
+    member IsoProjectGroup
+    owner_type inheritance
+  }
+  
+  association {
+    owner IsoProjectGroup
+    member IsoSubGroup
+    owner_type direct
+  }
+  
+}
