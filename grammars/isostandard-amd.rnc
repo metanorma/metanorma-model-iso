@@ -11,7 +11,6 @@ sections =
 
 clause =
   element clause {
-    attribute type { text }?,
     attribute change { "add" | "delete" | "modify" }?,
     attribute locality { text }?,
     Clause-Section

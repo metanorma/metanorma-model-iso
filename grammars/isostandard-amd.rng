@@ -15,9 +15,6 @@
     <define name="clause">
       <element name="clause">
         <optional>
-          <attribute name="type"/>
-        </optional>
-        <optional>
           <attribute name="change">
             <choice>
               <value>add</value>
