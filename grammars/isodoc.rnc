@@ -309,7 +309,7 @@ IsoWorkgroup =
 
 ics = element ics {
   element code { text },
-  element text { text }
+  element text { text }?
 }
 
 standard-document =
@@ -528,14 +528,16 @@ termdocsource =
 amend = 
   element amend {
     attribute id { xsd:ID }?,
-    attribute change { "add" | "modify" | "delete" },
+    attribute change { "add" | "modify" | "delete" | "replace" },
     attribute path { text }?,
     attribute path_end { text }?,
     attribute title { text }?,
     element location { locality* }?,
     autonumber*,
     element description { BasicBlock* }?,
-    element newcontent { BasicBlock* }?,
+    element newcontent { 
+        attribute id { xsd:ID }?,
+        BasicBlock* }?,
     element description { BasicBlock* }?
 }
 

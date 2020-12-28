@@ -19,6 +19,8 @@ clause =
 
 iso-standard =
   element iso-standard {
+attribute version { text },
+  attribute type { "semantic" | "presentation" },
     bibdata, boilerplate?, preface, sections+
   }
 
@@ -28,7 +30,7 @@ documentnumber =
     attribute subpart { xsd:int }?,
     attribute amendment { xsd:int }?,
     attribute corrigendum { xsd:int }?,
-    attribute origyr { xsd:int }?,
+    attribute origyr { ISO8601Date }?,
     text
    }     
 
