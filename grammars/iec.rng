@@ -49,6 +49,9 @@
       <optional>
         <ref name="interest-to-committees"/>
       </optional>
+      <optional>
+        <ref name="tc-sc-officers-note"/>
+      </optional>
     </define>
   </include>
   <!-- end overrides -->
@@ -85,6 +88,13 @@
   <define name="interest-to-committees">
     <element name="interest-to-committees">
       <text/>
+    </element>
+  </define>
+  <define name="tc-sc-officers-note">
+    <element name="tc-sc-officers-note">
+      <zeroOrMore>
+        <ref name="BasicBlock"/>
+      </zeroOrMore>
     </element>
   </define>
   <!--
