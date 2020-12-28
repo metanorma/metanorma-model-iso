@@ -254,6 +254,9 @@
           </attribute>
         </optional>
         <optional>
+          <attribute name="width"/>
+        </optional>
+        <optional>
           <ref name="colgroup"/>
         </optional>
         <optional>

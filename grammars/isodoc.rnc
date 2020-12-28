@@ -101,6 +101,7 @@ table =
     attribute uri { xsd:anyURI }?,
     attribute keep-with-next { xsd:boolean }?,
     attribute keep-lines-together { xsd:boolean }?,
+    attribute width { text }?,
     colgroup?, tname?, thead?, tbody, tfoot?, table-note*, dl?
   }
 
