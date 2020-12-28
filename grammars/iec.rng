@@ -43,6 +43,12 @@
       <optional>
         <ref name="cen-processing"/>
       </optional>
+      <optional>
+        <ref name="secretary"/>
+      </optional>
+      <optional>
+        <ref name="interest-to-committees"/>
+      </optional>
     </define>
   </include>
   <!-- end overrides -->
@@ -69,6 +75,16 @@
   <define name="cen-processing">
     <element name="cen-processing">
       <data type="boolean"/>
+    </element>
+  </define>
+  <define name="secretary">
+    <element name="secretary">
+      <text/>
+    </element>
+  </define>
+  <define name="interest-to-committees">
+    <element name="interest-to-committees">
+      <text/>
     </element>
   </define>
   <!--
