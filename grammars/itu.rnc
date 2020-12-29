@@ -35,7 +35,7 @@ structuredidentifier = element structuredidentifier {
 
 BibDataExtensionType =
     doctype?, editorialgroup, ics*, recommendationstatus?, ipnoticereceived?, 
-    meeting?, meeting-date?, intended-type?, ext_source?,
+    meeting?, meeting-place?, meeting-date?, intended-type?, ext_source?,
     structuredidentifier?
 
 preface = element preface { ( content | abstract | foreword | introduction | acknowledgements | clause)+ }
@@ -43,7 +43,12 @@ preface = element preface { ( content | abstract | foreword | introduction | ack
 
 }
 
-meeting = element meeting { text }
+meeting = element meeting { 
+   attribute acronym { text }?,
+   text 
+}
+
+meeting-place = element meeting-place { text }
 
 meeting-date = element meeting-date {
 (

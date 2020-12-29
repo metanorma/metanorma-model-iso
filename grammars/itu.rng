@@ -101,6 +101,9 @@
         <ref name="meeting"/>
       </optional>
       <optional>
+        <ref name="meeting-place"/>
+      </optional>
+      <optional>
         <ref name="meeting-date"/>
       </optional>
       <optional>
@@ -130,6 +133,14 @@
   </include>
   <define name="meeting">
     <element name="meeting">
+      <optional>
+        <attribute name="acronym"/>
+      </optional>
+      <text/>
+    </element>
+  </define>
+  <define name="meeting-place">
+    <element name="meeting-place">
       <text/>
     </element>
   </define>
