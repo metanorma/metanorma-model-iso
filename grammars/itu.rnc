@@ -40,6 +40,20 @@ BibDataExtensionType =
 
 preface = element preface { ( content | abstract | foreword | introduction | acknowledgements | clause)+ }
 
+Clause-Section =
+    attribute id { xsd:ID }?,
+    attribute language { text }?,
+    attribute script { text }?,
+    attribute inline-header { xsd:boolean }?,
+    attribute obligation { "normative" | "informative" }?,
+    attribute type { text }?,
+    attribute unnumbered { xsd:boolean }?,
+    section-title?,
+    (
+      ( (  BasicBlock*, note* ) | amend ),
+       (clause-subsection | terms | definitions)*
+    )
+
 
 }
 
