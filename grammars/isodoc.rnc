@@ -266,7 +266,7 @@ col = element col {
     attribute width { text }
 }
 
-
+BibItemType |= "internal"
 
 TextElement |= concept
 
