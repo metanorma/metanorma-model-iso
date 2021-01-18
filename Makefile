@@ -11,7 +11,7 @@ OUT_FILES  := $(foreach F,$(_OUT_FILES),$($F))
 all: $(OUT_FILES)
 
 images/%.png: models/%.lutaml
-	lutaml-uml -tpng -o ../images/ $<
+	lutaml -t png -o images/ $<
 
 define FORMAT_TASKS
 OUT_FILES-$(FORMAT) := $($(shell echo $(FORMAT) | tr '[:lower:]' '[:upper:]'))
