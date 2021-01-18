@@ -35,8 +35,22 @@ jobs:
         with:
           ruby-version: 2.7
 
-      - name: Install Grpahviz
+      - name: Install Grpahviz osx
+        if: matrix.os == 'ubuntu-latest'
+        run: brew install graphviz
+
+      - name: Install Grpahviz ubuntu
+        if: matrix.os == 'macos-latest'
         run: sudo apt-get install graphviz
+
+      - name: Install graphviz windows
+        uses: nick-invision/retry@v1
+        if: matrix.os == 'windows-latest'
+        with:
+          polling_interval_seconds: 5
+          timeout_minutes: 5
+          max_attempts: 3
+          command: choco install --no-progress graphviz --version 2.38.0.20190211
 
       - name: Install LutaML
         run: |
