@@ -64,7 +64,7 @@ diagram IsoDoc_IsoBibliographicItem {
       +text: String[0..1]
   }
 
-  enum IsoDocumentType <<enumeration>>{
+  enum IsoDocumentType {
       internationalStandard
       technicalSpecification
       technicalReport
@@ -74,14 +74,14 @@ diagram IsoDoc_IsoBibliographicItem {
       interpretationSheet
   }
 
-  enum IecDocumentCategory <<enumeration>>{
+  enum IecDocumentCategory {
       emc
       safety
       environment
       quality-assurance
   }
 
-  enum IsoDocumentStageCodes <<enumeration>>{
+  enum IsoDocumentStageCodes {
       00
       10
       20
@@ -93,7 +93,7 @@ diagram IsoDoc_IsoBibliographicItem {
       95
   }
 
-  enum IsoDocumentSubstageCodes <<enumeration>>{
+  enum IsoDocumentSubstageCodes {
       00
       20
       60

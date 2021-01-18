@@ -8,7 +8,7 @@ diagram IsoDoc_IsoBlocks {
       +type: IsoAdmonitionType
   }
 
-  enum IsoAdmonitionType <<enumeration>>{
+  enum IsoAdmonitionType {
       danger
       caution
       warning
