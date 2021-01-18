@@ -1,0 +1,45 @@
+diagram IsoDoc_IsoStandardDocument {
+
+  class StandardDocument <<StandardDocument>> {
+  }
+
+  class IsoStandardDocument {
+      +bibdata: IsoBibliographicItem
+      +prefix: IsoPreface
+      +sections: ClauseSection[1..*]
+      +annex: AnnexSection[0..*]
+      +termSources: <<Bibliography>> Citation[0..*]
+  }
+
+  class IsoPreface{
+      +foreword: BasicSection
+      +introduction: ClauseSection[0..1]
+  }
+
+  class AnnexSection <<StandardDocument>>{
+  }
+
+  class IsoAnnexSection{
+      +appendix: ClauseSection[0..*]
+  }
+
+
+  association {
+    owner StandardDocument
+    member IsoStandardDocument
+    owner_type inheritance
+  }
+
+  association {
+    owner IsoStandardDocument
+    member IsoPreface
+    owner_type direct
+  }
+
+  association {
+    owner AnnexSection
+    member IsoAnnexSection
+    owner_type inheritance
+  }
+
+}
