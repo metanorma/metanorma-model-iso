@@ -1,5 +1,5 @@
-SRC := $(wildcard models/*.wsd)
-PNG := $(patsubst models/%.wsd,images/%.png,$(SRC))
+SRC := $(wildcard models/*.lutaml)
+PNG := $(patsubst models/%.lutaml,images/%.png,$(SRC))
 
 FORMATS := png
 
@@ -10,8 +10,8 @@ OUT_FILES  := $(foreach F,$(_OUT_FILES),$($F))
 
 all: $(OUT_FILES)
 
-images/%.png: models/%.wsd
-	plantuml -tpng -o ../images/ $<
+images/%.png: models/%.lutaml
+	lutaml -t png -o images/ $<
 
 define FORMAT_TASKS
 OUT_FILES-$(FORMAT) := $($(shell echo $(FORMAT) | tr '[:lower:]' '[:upper:]'))

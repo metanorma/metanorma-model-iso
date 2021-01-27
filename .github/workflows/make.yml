@@ -4,54 +4,74 @@ name: make
 
 on:
   push:
-    branches: [ master, main  ]
+    branches: [ master, main ]
     tags: [ v* ]
   pull_request:
 
 jobs:
   make:
-    name: Test on PlantUML ${{ matrix.os }}
+    name: Test on LutaML ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
       matrix:
-        os: [ ubuntu-latest, windows-latest, macos-latest ]
+        os: [ ubuntu-latest, macos-latest, windows-latest ]
 
     steps:
       - uses: actions/checkout@master
 
-      - name: install plantuml ubuntu
+      # - name: Update Ubuntu
+      #   if: matrix.os == 'ubuntu-latest'
+      #   uses: nick-invision/retry@v1
+      #   with:
+      #     polling_interval_seconds: 5
+      #     timeout_minutes: 5
+      #     max_attempts: 3
+      #     command: >
+      #       sudo apt-get update -y
+
+      - name: Use Ruby
+        uses: actions/setup-ruby@v1
+        with:
+          ruby-version: 2.7
+
+      - name: Install GraphViz (Ubuntu)
         if: matrix.os == 'ubuntu-latest'
+        run: sudo apt-get install graphviz
+
+      - name: Install GraphViz (macOS)
+        if: matrix.os == 'macos-latest'
+        run: brew install graphviz
+
+      - name: Install GraphViz (Windows)
         uses: nick-invision/retry@v1
+        if: matrix.os == 'windows-latest'
         with:
           polling_interval_seconds: 5
           timeout_minutes: 5
           max_attempts: 3
-          command: >
-            sudo apt-get update -y && sudo bash -c
-            "curl -L https://github.com/metanorma/plantuml-install/raw/master/ubuntu.sh | bash"
+          command: choco install --no-progress graphviz --version 2.38.0.20190211
 
-      - if: matrix.os == 'macos-latest'
-        run: brew install plantuml
-
-      - if: matrix.os == 'windows-latest'
-        run: cinst -y plantuml
+      - name: Install LutaML
+        run: |
+          gem install lutaml
 
       - if: matrix.os != 'windows-latest'
-        run:  make clean all
+        run: make clean all
 
       - if: matrix.os == 'windows-latest'
-        run: make clean all SHELL=cmd
+        shell: cmd
+        run: make clean all
 
-  tests-passed:
-    needs: make
-    runs-on: ubuntu-latest
-    steps:
-      - name: Trigger tests passed event
-        uses: Sibz/github-status-action@v1
-        with:
-          authToken: ${{ secrets.GITHUB_TOKEN }}
-          context: 'tests-passed-successfully'
-          description: 'Tests passed successfully'
-          state: 'success'
-          sha: ${{ github.event.pull_request.head.sha || github.sha }}
+  # tests-passed:
+  #   needs: make
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Trigger tests passed event
+  #       uses: Sibz/github-status-action@v1
+  #       with:
+  #         authToken: ${{ secrets.GITHUB_TOKEN }}
+  #         context: 'tests-passed-successfully'
+  #         description: 'Tests passed successfully'
+  #         state: 'success'
+  #         sha: ${{ github.event.pull_request.head.sha || github.sha }}
