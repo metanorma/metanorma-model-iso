@@ -275,7 +275,7 @@ concept = element concept {
   ( eref | xref | termref )
 }
 
-BasicBlock |= requirement | recommendation | permission
+BasicBlock |= requirement | recommendation | permission | imagemap | svgmap
 
 bibliography =
   element bibliography {
@@ -550,6 +550,32 @@ autonumber =
   element autonumber {
     attribute type { "requirement" | "recommendation" | "permission" | "table" | "figure" | "admonition" | "formula" | "sourcecode" | "example" | "note" },
     text
+}
+
+imagemap = element imagemap {
+  attribute src { xsd:anyURI },
+  attribute alt { text }?,
+  element area {
+    attribute type { "rect" | "circle" | "ellipse" | "poly" },
+    ( xref | link | eref ),
+    element coords {
+      attribute x { xsd:float },
+      attribute y { xsd:float }
+    }+,
+    element radius {
+      attribute x { xsd:float },
+      attribute y { xsd:float }?
+    }?
+  }*
+}
+
+svgmap = element svgmap {
+  attribute src { xsd:anyURI },
+  attribute alt { text }?,
+  element target {
+     attribute href { xsd:anyURI },
+    ( xref | link | eref )
+  }*
 }
 
 }
