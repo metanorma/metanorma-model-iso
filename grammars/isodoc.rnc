@@ -553,11 +553,10 @@ autonumber =
 }
 
 imagemap = element imagemap {
-  attribute src { xsd:anyURI },
-  attribute alt { text }?,
+  figure, 
   element area {
     attribute type { "rect" | "circle" | "ellipse" | "poly" },
-    ( xref | link | eref ),
+    ( xref | hyperlink | eref ),
     element coords {
       attribute x { xsd:float },
       attribute y { xsd:float }
@@ -570,11 +569,10 @@ imagemap = element imagemap {
 }
 
 svgmap = element svgmap {
-  attribute src { xsd:anyURI },
-  attribute alt { text }?,
+  figure,
   element target {
      attribute href { xsd:anyURI },
-    ( xref | link | eref )
+    ( xref | hyperlink | eref )
   }*
 }
 
