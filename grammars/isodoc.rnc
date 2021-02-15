@@ -318,8 +318,10 @@ standard-document =
 element standard-document {
   attribute version { text },
   attribute type { "semantic" | "presentation" },
-  bibdata, boilerplate?, preface?, sections, annex*, references*
+  bibdata, misccontainer?, boilerplate?, preface?, sections, annex*, references*
 }
+
+misccontainer = element misc-container { AnyElement+ }
 
 preface =
   element preface { ( content | abstract | foreword | introduction | acknowledgements)+ }

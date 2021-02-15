@@ -65,7 +65,7 @@ gb-standard =
   element gb-standard {
 attribute version { text },
   attribute type { "semantic" | "presentation" },
-    bibdata, termdocsource*, boilerplate?, preface, sections+, annex*, bibliography
+    bibdata, termdocsource*, misccontainer?, boilerplate?, preface, sections+, annex*, bibliography
   }     
 
 gbccs = element ccs { 

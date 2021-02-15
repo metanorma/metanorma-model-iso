@@ -20,7 +20,7 @@ iso-standard =
   element iso-standard {
 attribute version { text },
   attribute type { "semantic" | "presentation" },
-    bibdata, boilerplate?, preface, sections+
+    bibdata, misccontainer?, boilerplate?, preface, sections+
   }
 
 documentnumber =        
