@@ -136,7 +136,7 @@ iso-standard =
   element iso-standard {
 attribute version { text },
   attribute type { "semantic" | "presentation" },
-    bibdata, termdocsource*, misccontainer?, boilerplate?, preface, sections+, annex*, bibliography, index*
+    bibdata, termdocsource*, misccontainer?, boilerplate?, preface, sections+, annex*, bibliography, indexsect*
   }
 
 horizontal = element horizontal { xsd:boolean }

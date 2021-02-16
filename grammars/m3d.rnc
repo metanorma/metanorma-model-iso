@@ -36,6 +36,6 @@ m3d-standard =
   element m3d-standard {
 attribute version { text },
   attribute type { "semantic" | "presentation" },
-    bibdata, termdocsource*, misccontainer?, boilerplate?, preface, sections+, annex*, bibliography, index*
+    bibdata, termdocsource*, misccontainer?, boilerplate?, preface, sections+, annex*, bibliography, indexsect*
  }
 

@@ -936,7 +936,7 @@
         <ref name="bibliography"/>
       </optional>
       <zeroOrMore>
-        <ref name="index"/>
+        <ref name="indexsect"/>
       </zeroOrMore>
     </element>
   </define>
@@ -970,8 +970,8 @@
       <ref name="Content-Section"/>
     </element>
   </define>
-  <define name="index">
-    <element name="index">
+  <define name="indexsect">
+    <element name="indexsect">
       <ref name="Content-Section"/>
     </element>
   </define>

@@ -359,7 +359,7 @@
         <ref name="bibliography"/>
       </optional>
       <zeroOrMore>
-        <ref name="index"/>
+        <ref name="indexsect"/>
       </zeroOrMore>
     </element>
   </define>

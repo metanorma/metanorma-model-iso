@@ -98,6 +98,6 @@ un-standard =
 element un-standard {
 attribute version { text },
   attribute type { "semantic" | "presentation" },
-  bibdata, misccontainer?, boilerplate?, preface, sections+, annex*, index*
+  bibdata, misccontainer?, boilerplate?, preface, sections+, annex*, indexsect*
 }
 

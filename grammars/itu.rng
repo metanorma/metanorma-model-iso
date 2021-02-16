@@ -401,7 +401,7 @@
       </zeroOrMore>
       <ref name="bibliography"/>
       <zeroOrMore>
-        <ref name="index"/>
+        <ref name="indexsect"/>
       </zeroOrMore>
     </element>
   </define>

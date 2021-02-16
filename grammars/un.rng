@@ -362,7 +362,7 @@
         <ref name="annex"/>
       </zeroOrMore>
       <zeroOrMore>
-        <ref name="index"/>
+        <ref name="indexsect"/>
       </zeroOrMore>
     </element>
   </define>

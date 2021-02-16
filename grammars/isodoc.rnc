@@ -318,7 +318,7 @@ standard-document =
 element standard-document {
   attribute version { text },
   attribute type { "semantic" | "presentation" },
-  bibdata, misccontainer?, boilerplate?, preface?, sections, annex*, bibliography?, index*
+  bibdata, misccontainer?, boilerplate?, preface?, sections, annex*, bibliography?, indexsect*
 }
 
 misccontainer = element misc-container { AnyElement+ }
@@ -332,7 +332,7 @@ foreword =
 introduction =
   element introduction { Content-Section }
 
-index = element index { Content-Section }
+indexsect = element indexsect { Content-Section }
 
 boilerplate = 
   element boilerplate { copyright-statement?, license-statement?, legal-statement?, feedback-statement? }
