@@ -210,6 +210,9 @@
       <optional>
         <ref name="bibliography"/>
       </optional>
+      <zeroOrMore>
+        <ref name="index"/>
+      </zeroOrMore>
     </element>
   </define>
 </grammar>

@@ -72,6 +72,6 @@ nist-standard =
   element nist-standard {
 attribute version { text },
   attribute type { "semantic" | "presentation" },
-    bibdata, termdocsource*, misccontainer?, boilerplate?, preface, sections+, annex*, bibliography?
+    bibdata, termdocsource*, misccontainer?, boilerplate?, preface, sections+, annex*, bibliography?, index*
  }
 

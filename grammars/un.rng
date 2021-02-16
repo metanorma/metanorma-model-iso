@@ -361,6 +361,9 @@
       <zeroOrMore>
         <ref name="annex"/>
       </zeroOrMore>
+      <zeroOrMore>
+        <ref name="index"/>
+      </zeroOrMore>
     </element>
   </define>
 </grammar>

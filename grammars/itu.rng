@@ -400,6 +400,9 @@
         <ref name="annex"/>
       </zeroOrMore>
       <ref name="bibliography"/>
+      <zeroOrMore>
+        <ref name="index"/>
+      </zeroOrMore>
     </element>
   </define>
 </grammar>
