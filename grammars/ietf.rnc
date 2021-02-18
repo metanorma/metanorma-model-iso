@@ -182,6 +182,14 @@ editorialgroup = element editorialgroup {
   committee*
 }
 
+index = element index {
+  attribute to { xsd:IDREF }?,
+  attribute primary { xsd:boolean }?,
+  element primary { PureTextElement+ },
+  element secondary { PureTextElement+ }?,
+  element tertiary { PureTextElement+ }?
+}
+
 }
 
 
