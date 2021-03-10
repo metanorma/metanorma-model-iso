@@ -2,24 +2,42 @@ diagram IsoDoc_IsoStandardDocument {
 
   class StandardDocument <<StandardDocument>> {
   }
+ 
+  *|
+   do not model misccontainer
+  |*
 
   class IsoStandardDocument {
+      +version: String
+      +type: StandardDocumentType
       +bibdata: IsoBibliographicItem
-      +prefix: IsoPreface
-      +sections: ClauseSection[1..*]
-      +annex: AnnexSection[0..*]
       +termSources: <<Bibliography>> Citation[0..*]
+      +boilerplate: BoilerplateType[0..1]
+      +preface: IsoPreface
+      +sections: IsoSections
+      +annex: AnnexSection[0..*]
+      +bibliography: StandardReferencesSection[0..2]
+      +indexsect: BasicSection[0..1]
   }
 
-  class IsoPreface{
+  class IsoSections {
+      +note: NoteBlock[0..*]
+      +admonition: AdmonitionBlock[0..*]
+      +terms: TermsSection[0..1]
+      +definitions: DefinitionsSection[0..1]
+      +clause: ClauseSection[1..*]
+  }
+ 
+  class IsoPreface {
+      +abstract: BasicSection[0..1]
       +foreword: BasicSection
       +introduction: ClauseSection[0..1]
   }
 
-  class AnnexSection <<StandardDocument>>{
+  class AnnexSection <<StandardDocument>> {
   }
 
-  class IsoAnnexSection{
+  class IsoAnnexSection {
       +appendix: ClauseSection[0..*]
   }
 
@@ -33,6 +51,12 @@ diagram IsoDoc_IsoStandardDocument {
   association {
     owner IsoStandardDocument
     member IsoPreface
+    owner_type direct
+  }
+
+  association {
+    owner IsoStandardDocument
+    member IsoSections
     owner_type direct
   }
 
