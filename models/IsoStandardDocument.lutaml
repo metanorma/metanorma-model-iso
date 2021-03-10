@@ -20,6 +20,15 @@ diagram IsoDoc_IsoStandardDocument {
       +indexsect: BasicSection[0..1]
   }
 
+  class IsoAmendmentDocument {
+      +version: String
+      +type: StandardDocumentType
+      +bibdata: IsoBibliographicItem
+      +boilerplate: BoilerplateType[0..1]
+      +preface: IsoPreface
+      +sections: IsoAmendmentClause[1..*]
+  }
+
   class IsoSections {
       +note: NoteBlock[0..*]
       +admonition: AdmonitionBlock[0..*]
@@ -41,16 +50,44 @@ diagram IsoDoc_IsoStandardDocument {
       +appendix: ClauseSection[0..*]
   }
 
+  class ClauseSection <<StandardDocument>> {
+  }
+  
+  class IsoAmendmentClause {
+    +change: AmendmentClauseType[0..1]
+    +locality: String[0..1]
+  }
+
+  enum AmendmentClauseType {
+    add
+    delete
+    modify
+  }
 
   association {
     owner StandardDocument
     member IsoStandardDocument
     owner_type inheritance
   }
+  association {
+    owner ClauseSection
+    member IsoAmendmentClause
+    owner_type inheritance
+  }
+  association {
+    owner StandardDocument
+    member IsoAmendmentDocument
+    owner_type inheritance
+  }
 
   association {
     owner IsoStandardDocument
     member IsoPreface
+    owner_type direct
+  }
+  association {
+    owner IsoAmendmentClause
+    member AmendmentClauseType
     owner_type direct
   }
 
