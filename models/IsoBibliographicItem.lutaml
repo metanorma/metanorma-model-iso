@@ -18,6 +18,9 @@ diagram IsoDoc_IsoBibliographicItem {
       +projectNumber: Integer[0..1]
       +partNumber: Integer[0..1]
       +subpartNumber: Integer[0..1]
+      +amendmentNumber: Integer[0..1]
+      +corrigendumNumber: Integer[0..1]
+      +originalyear: Integer[0..1]
   }
 
   class IsoLocalizedTitle{
@@ -109,7 +112,8 @@ diagram IsoDoc_IsoBibliographicItem {
       +horizontal: Boolean[0..1]
       +workgroup: IsoProjectGroup
       +stagename: String[0..1]
-      +category: IecDocumentCategory [0..1]
+      +category: IecDocumentCategory[0..1]
+      +updates_document_type: DocumentType[0..1]
   }
 
  association {
