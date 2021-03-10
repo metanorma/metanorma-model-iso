@@ -28,6 +28,8 @@ element on { ISO8601Date | "--" | "–" }
 ul =
   element ul {
     attribute id { xsd:ID },
+    attribute keep-with-next { xsd:boolean }?,
+    attribute keep-lines-together { xsd:boolean }?,
     ul_li+, note*
 }
 
@@ -54,11 +56,6 @@ term =
     attribute id { xsd:ID }?,
     preferred, admitted*, deprecates*,
     termdomain?, definition, termnote*, termexample*, termsource* 
-  }
-
-definition =
-  element definition {
-    ( paragraph | figure | formula )+
   }
 
 annex =
@@ -107,24 +104,13 @@ Content-Section =
     attribute id { xsd:ID }?,
     attribute language { text }?,
     attribute script { text }?,
+    attribute inline-header { xsd:boolean }?,
     attribute obligation { "normative" | "informative" }?,
+    attribute number { text }?,
+    attribute type { text }?,
     section-title?,
     ( (BasicBlock*, note*) |
       content-subsection+ )
-
-table =
-  element table {
-    attribute id { xsd:ID },
-    attribute width { text }?,
-    attribute unnumbered { xsd:boolean }?,
-    attribute number { text }?,
-    attribute subsequence { text }?,
-    attribute alt { text }?,
-    attribute summary { text }?,
-    attribute uri { xsd:anyURI }?,
-    colgroup?, tname?, thead?, tbody, tfoot?, table-note*, dl?
-  }
-
 
 }
 
