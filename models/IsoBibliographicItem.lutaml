@@ -7,21 +7,17 @@ diagram IsoDoc_IsoBibliographicItem {
       +docIdentifier: IsoDocumentId
       +title: IsoLocalizedTitle
       +type: IsoDocumentType
-      +category: IecDocumentCategory [0..1]
-      +horizontal: boolean[0..1]
       +status: IsoDocumentStatus
-      +workgroup: IsoProjectGroup
-      +ics: Ics[1..*]
       +source: TypeUri[0..*]
       +abstract: FormattedString[0..*]
-      +allParts: boolean[0..1]
-      +stagename: String[0..1]
+      +ext: IsoBibDataExtensionType
   }
 
   class IsoDocumentId{
       +tcDocumentNumber: Integer[0..1]
       +projectNumber: Integer[0..1]
       +partNumber: Integer[0..1]
+      +subpartNumber: Integer[0..1]
   }
 
   class IsoLocalizedTitle{
@@ -43,9 +39,9 @@ diagram IsoDoc_IsoBibliographicItem {
   }
 
   class IsoProjectGroup{
-      +technicalCommittee: IsoSubGroup
-      +subcommittee: IsoSubGroup[0..1]
-      +workgroup: IsoSubGroup[0..1]
+      +technicalCommittee: IsoSubGroup[1..*]
+      +subcommittee: IsoSubGroup[0..*]
+      +workgroup: IsoSubGroup[0..*]
       +secretariat: String[0..1]
   }
 
@@ -72,6 +68,8 @@ diagram IsoDoc_IsoBibliographicItem {
       internationalWorkshopAgreement
       guide
       interpretationSheet
+      amendment
+      technical-corrigendum
   }
 
   enum IecDocumentCategory {
@@ -104,6 +102,21 @@ diagram IsoDoc_IsoBibliographicItem {
       99
   }
 
+  class StandardBibDataExtensionType <<StandardDocument>> {
+  }
+
+  class IsoBibDataExtensionType {
+      +horizontal: Boolean[0..1]
+      +workgroup: IsoProjectGroup
+      +stagename: String[0..1]
+      +category: IecDocumentCategory [0..1]
+  }
+
+ association {
+    owner StandardBibDataExtensionType
+    member IsoBibDataExtensionType
+    owner_type inheritance
+  }
 
   association {
     owner BibliographicItem
@@ -132,7 +145,7 @@ diagram IsoDoc_IsoBibliographicItem {
     owner_type direct
   }
   association {
-    owner IsoBibliographicItem
+    owner IsoBibDataExtensionType
     member IsoProjectGroup
     owner_type direct
   }
@@ -159,7 +172,7 @@ diagram IsoDoc_IsoBibliographicItem {
     owner_type direct
   }
   association {
-    owner IsoDocumentStatus
+    owner IsoBibDataExtensionType
     member IecDocumentCategory
     owner_type direct
   }
