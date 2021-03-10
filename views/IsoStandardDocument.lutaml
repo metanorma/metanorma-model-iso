@@ -1,0 +1,54 @@
+diagram IsoDoc_IsoStandardDocument {
+
+  include ../models/standard_document/StandardDocument.lutaml
+  include ../models/standard_document/AnnexSection.lutaml
+  include ../models/standard_document/ClauseSection.lutaml
+
+  include ../models/iso_document/IsoStandardDocument.lutaml
+  include ../models/iso_document/IsoAmendmentDocument.lutaml
+  include ../models/iso_document/sections/IsoSections.lutaml
+  include ../models/iso_document/sections/IsoPreface.lutaml
+  include ../models/iso_document/sections/IsoAnnexSection.lutaml
+  include ../models/iso_document/sections/IsoAmendmentClause.lutaml
+  include ../models/iso_document/sections/AmendmentClauseType.lutaml
+
+  association {
+    owner StandardDocument
+    member IsoStandardDocument
+    owner_type inheritance
+  }
+  association {
+    owner ClauseSection
+    member IsoAmendmentClause
+    owner_type inheritance
+  }
+  association {
+    owner StandardDocument
+    member IsoAmendmentDocument
+    owner_type inheritance
+  }
+
+  association {
+    owner IsoStandardDocument
+    member IsoPreface
+    owner_type direct
+  }
+  association {
+    owner IsoAmendmentClause
+    member AmendmentClauseType
+    owner_type direct
+  }
+
+  association {
+    owner IsoStandardDocument
+    member IsoSections
+    owner_type direct
+  }
+
+  association {
+    owner AnnexSection
+    member IsoAnnexSection
+    owner_type inheritance
+  }
+
+}

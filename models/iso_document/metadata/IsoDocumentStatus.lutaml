@@ -1,0 +1,7 @@
+class IsoDocumentStatus{
+    +stage: IsoDocumentStageCodes
+    +stage_abbreviation: String[0..1]
+    +substage: IsoDocumentSubstageCodes[0..1]
+    +substage_abbreviation: String[0..1]
+    +iteration: Integer[0..1]
+}

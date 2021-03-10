@@ -1,0 +1,7 @@
+class IsoBibDataExtensionType {
+    +horizontal: Boolean[0..1]
+    +workgroup: IsoProjectGroup
+    +stagename: String[0..1]
+    +category: IecDocumentCategory[0..1]
+    +updates_document_type: DocumentType[0..1]
+}

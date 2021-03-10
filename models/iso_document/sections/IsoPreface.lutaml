@@ -1,0 +1,5 @@
+class IsoPreface {
+    +abstract: BasicSection[0..1]
+    +foreword: BasicSection
+    +introduction: ClauseSection[0..1]
+}

@@ -1,0 +1,10 @@
+enum IsoDocumentSubstageCodes {
+    00
+    20
+    60
+    90
+    92
+    93
+    98
+    99
+}

@@ -1,0 +1,97 @@
+diagram IsoDoc_IsoBibliographicItem {
+
+  include ../models/relaton/BibliographicItem.lutaml
+  include ../models/relaton/DocumentStatus.lutaml
+  include ../models/relaton/Organization.lutaml
+  include ../models/standard_document/StandardBibDataExtensionType.lutaml
+  include ../models/iso_document/metadata/IsoBibliographicItem.lutaml
+  include ../models/iso_document/metadata/IsoDocumentId.lutaml
+  include ../models/iso_document/metadata/IsoLocalizedTitle.lutaml
+  include ../models/iso_document/metadata/IsoDocumentStatus.lutaml
+  include ../models/iso_document/metadata/IsoProjectGroup.lutaml
+  include ../models/iso_document/metadata/IsoSubGroup.lutaml
+  include ../models/iso_document/metadata/Ics.lutaml
+  include ../models/iso_document/metadata/IsoDocumentType.lutaml
+  include ../models/iso_document/metadata/IecDocumentCategory.lutaml
+  include ../models/iso_document/metadata/IsoDocumentStageCodes.lutaml
+  include ../models/iso_document/metadata/IsoDocumentSubstageCodes.lutaml
+  include ../models/iso_document/metadata/IsoBibDataExtensionType.lutaml
+
+ association {
+    owner StandardBibDataExtensionType
+    member IsoBibDataExtensionType
+    owner_type inheritance
+  }
+
+  association {
+    owner BibliographicItem
+    member IsoBibliographicItem
+    owner_type inheritance
+  }
+
+  association {
+    owner IsoBibliographicItem
+    member IsoDocumentId
+    owner_type direct
+  }
+  association {
+    owner IsoBibliographicItem
+    member IsoLocalizedTitle
+    owner_type direct
+  }
+  association {
+    owner IsoBibliographicItem
+    member IsoDocumentType
+    owner_type direct
+  }
+  association {
+    owner IsoBibliographicItem
+    member IsoDocumentStatus
+    owner_type direct
+  }
+  association {
+    owner IsoBibDataExtensionType
+    member IsoProjectGroup
+    owner_type direct
+  }
+  association {
+    owner IsoBibliographicItem
+    member Ics
+    owner_type direct
+  }
+
+  association {
+    owner DocumentStatus
+    member IsoDocumentStatus
+    owner_type inheritance
+  }
+
+  association {
+    owner IsoDocumentStatus
+    member IsoDocumentStageCodes
+    owner_type direct
+  }
+  association {
+    owner IsoDocumentStatus
+    member IsoDocumentSubstageCodes
+    owner_type direct
+  }
+  association {
+    owner IsoBibDataExtensionType
+    member IecDocumentCategory
+    owner_type direct
+  }
+
+  association {
+    owner Organization
+    member IsoProjectGroup
+    owner_type inheritance
+  }
+
+  association {
+    owner IsoProjectGroup
+    member IsoSubGroup
+    owner_type direct
+  }
+
+}

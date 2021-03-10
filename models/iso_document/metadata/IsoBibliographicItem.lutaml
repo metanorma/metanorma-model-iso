@@ -1,0 +1,9 @@
+class IsoBibliographicItem{
+  +docIdentifier: IsoDocumentId
+  +title: IsoLocalizedTitle
+  +type: IsoDocumentType
+  +status: IsoDocumentStatus
+  +source: TypeUri[0..*]
+  +abstract: FormattedString[0..*]
+  +ext: IsoBibDataExtensionType
+}

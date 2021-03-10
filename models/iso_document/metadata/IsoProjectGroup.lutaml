@@ -1,0 +1,6 @@
+class IsoProjectGroup{
+    +technicalCommittee: IsoSubGroup[1..*]
+    +subcommittee: IsoSubGroup[0..*]
+    +workgroup: IsoSubGroup[0..*]
+    +secretariat: String[0..1]
+}

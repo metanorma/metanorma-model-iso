@@ -1,0 +1,6 @@
+enum IecDocumentCategory {
+    emc
+    safety
+    environment
+    quality-assurance
+}

@@ -1,0 +1,8 @@
+class IsoAmendmentDocument {
+    +version: String
+    +type: StandardDocumentType
+    +bibdata: IsoBibliographicItem
+    +boilerplate: BoilerplateType[0..1]
+    +preface: IsoPreface
+    +sections: IsoAmendmentClause[1..*]
+}

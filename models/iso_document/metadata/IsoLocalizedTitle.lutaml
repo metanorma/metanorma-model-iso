@@ -1,0 +1,5 @@
+class IsoLocalizedTitle{
+    +titleIntro: FormattedString[1..*]
+    +titleMain: FormattedString[1..*]
+    +titlePart: FormattedString[0..*]
+}

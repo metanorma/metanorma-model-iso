@@ -1,0 +1,4 @@
+class IsoAmendmentClause {
+  +change: AmendmentClauseType[0..1]
+  +locality: String[0..1]
+}

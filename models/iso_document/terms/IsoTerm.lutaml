@@ -1,0 +1,4 @@
+class IsoTerm {
+     +preferred: <<BasicDocument>> LocalizedString
+     +related: RelatedTerm[0]
+ }

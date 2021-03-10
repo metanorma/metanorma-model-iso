@@ -1,0 +1,7 @@
+enum IsoAdmonitionType {
+    danger
+    caution
+    warning
+    important
+    safety_precautions
+}

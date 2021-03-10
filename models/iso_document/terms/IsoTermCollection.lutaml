@@ -1,0 +1,3 @@
+class IsoTermCollection {
+     +terms: IsoTerm[0..*]
+ }

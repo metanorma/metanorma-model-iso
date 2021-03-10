@@ -1,0 +1,12 @@
+class IsoStandardDocument {
+    +version: String
+    +type: StandardDocumentType
+    +bibdata: IsoBibliographicItem
+    +termSources: <<Relaton>> Citation[0..*]
+    +boilerplate: BoilerplateType[0..1]
+    +preface: IsoPreface
+    +sections: IsoSections
+    +annex: AnnexSection[0..*]
+    +bibliography: StandardReferencesSection[0..2]
+    +indexsect: BasicSection[0..1]
+}

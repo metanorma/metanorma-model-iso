@@ -1,0 +1,11 @@
+enum IsoDocumentType {
+    internationalStandard
+    technicalSpecification
+    technicalReport
+    publiclyAvailableSpecification
+    internationalWorkshopAgreement
+    guide
+    interpretationSheet
+    amendment
+    technical-corrigendum
+}

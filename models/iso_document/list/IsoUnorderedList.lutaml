@@ -1,0 +1,3 @@
+class IsoUnorderedList {
+  +listitem: IsoUnorderedListItem[0..*]
+}

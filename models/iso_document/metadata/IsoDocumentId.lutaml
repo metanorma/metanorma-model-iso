@@ -1,0 +1,9 @@
+class IsoDocumentId{
+    +tcDocumentNumber: Integer[0..1]
+    +projectNumber: Integer[0..1]
+    +partNumber: Integer[0..1]
+    +subpartNumber: Integer[0..1]
+    +amendmentNumber: Integer[0..1]
+    +corrigendumNumber: Integer[0..1]
+    +originalyear: Integer[0..1]
+}

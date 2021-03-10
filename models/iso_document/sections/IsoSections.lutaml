@@ -1,0 +1,7 @@
+class IsoSections {
+    +note: NoteBlock[0..*]
+    +admonition: AdmonitionBlock[0..*]
+    +terms: TermsSection[0..1]
+    +definitions: DefinitionsSection[0..1]
+    +clause: ClauseSection[1..*]
+}

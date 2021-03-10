@@ -1,0 +1,3 @@
+class IsoAnnexSection {
+    +appendix: ClauseSection[0..*]
+}
