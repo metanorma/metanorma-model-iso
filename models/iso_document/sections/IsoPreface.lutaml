@@ -1,5 +1,20 @@
 class IsoPreface {
-    +abstract: BasicSection[0..1]
-    +foreword: BasicSection
-    +introduction: ClauseSection[0..1]
+    definition {
+      Prefatory clauses appearing in an ISO/IEC document.
+    }
+    +abstract: BasicSection[0..1] {
+      definition {
+        Abstract.
+      }
+    }
+    +foreword: BasicSection {
+      definition {
+        Foreword.
+      }
+    }
+    +introduction: ClauseSection[0..1] {
+      definition {
+        Introduction.
+      }
+    }
 }

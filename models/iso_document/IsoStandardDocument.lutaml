@@ -1,12 +1,59 @@
 class IsoStandardDocument {
-    +version: String
-    +type: StandardDocumentType
-    +bibdata: IsoBibliographicItem
-    +termSources: <<Relaton>> Citation[0..*]
-    +boilerplate: BoilerplateType[0..1]
-    +preface: IsoPreface
-    +sections: IsoSections
-    +annex: AnnexSection[0..*]
-    +bibliography: StandardReferencesSection[0..2]
-    +indexsect: BasicSection[0..1]
+    definition {
+      ISO Standards document.
+    }
+    +version: String {
+      definition {
+        Version number of the schema used for this standards document.
+      }
+    }
+    +type: StandardDocumentType {
+      definition {
+      Type of standards document representation given in this class instance.
+      Set to "standard" for all standards documents.
+      }
+    }
+    +bibdata: IsoBibliographicItem {
+      definition {
+      Bibliographic description of the document itself, expressed in the Relaton
+      model.
+      }
+    }
+    +termSources: <<Relaton>> Citation[0..*] {
+      definition {
+        Citations for sources of term definitions.
+      }
+    }
+    +boilerplate: BoilerplateType[0..1] {
+      definition {
+      An optional _boilerplate_ section, intended to appear at the
+      front of the document. It consists of content addressing
+      _copyright_, _license_, _legal_, and _feedback_ concerns.
+      }
+    }
+    +preface: IsoPreface {
+      definition {
+      Zero or more optional _preface_ sections.
+      }
+    }
+    +sections: IsoSections {
+      definition {
+      One or more _sections_.
+      }
+    }
+    +annex: AnnexSection[0..*] {
+      definition {
+      Zero or more _annexes_.
+      }
+    }
+    +bibliography: StandardReferencesSection[0..2] {
+      definition {
+      Zero to two _bibliographies_.
+      }
+    }
+    +indexsect: BasicSection[0..1] {
+      definition {
+      Index of a standards document.
+      }
+    }
 }

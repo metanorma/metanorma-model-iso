@@ -4,11 +4,6 @@ diagram IsoDoc_IsoBlocks {
   include ../models/iso_document/blocks/IsoAdmonitionBlock.lutaml
   include ../models/iso_document/blocks/IsoAdmonitionType.lutaml
 
-  include ../models/basic_document/UnorderedList.lutaml
-  include ../models/basic_document/ListItem.lutaml
-  include ../models/iso_document/list/IsoUnorderedList.lutaml
-  include ../models/iso_document/list/IsoUnorderedListItem.lutaml
-
   include ../models/standard_document/TermCollection.lutaml
   include ../models/standard_document/Term.lutaml
   include ../models/iso_document/terms/IsoTermCollection.lutaml
@@ -27,16 +22,6 @@ diagram IsoDoc_IsoBlocks {
   association {
     owner Term
     member IsoTerm
-    owner_type inheritance
-  }
-  association {
-    owner ListItem
-    member IsoUnorderedListItem
-    owner_type inheritance
-  }
-  association {
-    owner UnorderedList
-    member IsoUnorderedList
     owner_type inheritance
   }
   association {

@@ -10,7 +10,6 @@ diagram IsoDoc_IsoStandardDocument {
   include ../models/iso_document/sections/IsoPreface.lutaml
   include ../models/iso_document/sections/IsoAnnexSection.lutaml
   include ../models/iso_document/sections/IsoAmendmentClause.lutaml
-  include ../models/iso_document/sections/AmendmentClauseType.lutaml
 
   association {
     owner StandardDocument
@@ -31,11 +30,6 @@ diagram IsoDoc_IsoStandardDocument {
   association {
     owner IsoStandardDocument
     member IsoPreface
-    owner_type direct
-  }
-  association {
-    owner IsoAmendmentClause
-    member AmendmentClauseType
     owner_type direct
   }
 

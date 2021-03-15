@@ -1,4 +1,10 @@
 class IsoAmendmentClause {
-  +change: AmendmentClauseType[0..1]
-  +locality: String[0..1]
+  definition {
+    Clause appearing in an ISO/IEC Amendment or Technical Corrigendum document.
+  }
+  +amend: AmendBlock {
+    definition {
+      Block expressing a machine-readable change in a document.
+    }
+  }
 }

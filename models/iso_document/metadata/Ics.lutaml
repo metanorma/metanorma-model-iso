@@ -1,4 +1,0 @@
-class Ics{
-    +code: String
-    +text: String[0..1]
-}

@@ -1,4 +1,15 @@
 class IsoTerm {
-     +preferred: <<BasicDocument>> LocalizedString
-     +related: RelatedTerm[0]
+     definition {
+       Term subclause specific to ISO/IEC documents.
+     }
+     +preferred: <<BasicDocument>> LocalizedString {
+       definition {
+         ISO/IEC documents have only a single preferred term name per term subclause.
+       }
+     }
+     +related: RelatedTerm[0] {
+       definition {
+         ISO/IEC documents do not use related terms.
+       }
+     }
  }

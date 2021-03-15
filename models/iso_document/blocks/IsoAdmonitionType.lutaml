@@ -1,7 +1,32 @@
 enum IsoAdmonitionType {
-    danger
-    caution
-    warning
-    important
-    safety_precautions
+    unstructured {
+      definition {
+        Types of admonition specific to ISO/IEC.
+      }
+    }
+    danger {
+      definition {
+        Danger.
+      }
+    }
+    caution {
+      definition {
+        Caution.
+      }
+    }
+    warning {
+      definition {
+        Warning.
+      }
+    }
+    important {
+      definition {
+        Important.
+      }
+    }
+    safety_precautions {
+      definition {
+        Safety Precautions.
+      }
+    }
 }

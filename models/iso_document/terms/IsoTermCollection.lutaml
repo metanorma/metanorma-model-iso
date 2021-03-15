@@ -1,3 +1,10 @@
 class IsoTermCollection {
-     +terms: IsoTerm[0..*]
+     definition {
+       Term collection specific to ISO/IEC documents.
+     }
+     +terms: IsoTerm[0..*] {
+       definition {
+         Term subclauses specific to ISO/IEC documents.
+       }
+     }
  }

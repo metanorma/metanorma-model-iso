@@ -1,5 +1,20 @@
 class IsoSubGroup{
-    +type: String[0..1]
-    +number: Integer[0..1]
-    +name: String
+    definition {
+      Editorial group set up in ISO or IEC to work on producing documents.
+    }
+    +type: String[0..1] {
+      definition {
+        Type of editorial group.
+      }
+    }
+    +number: Integer[0..1] {
+      definition {
+        Number used to identify editorial group.
+      }
+    }
+    +name: String {
+      definition {
+        Name of editorial group.
+      }
+    }
 }

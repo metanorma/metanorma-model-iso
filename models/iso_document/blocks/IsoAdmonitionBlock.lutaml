@@ -1,3 +1,7 @@
 class IsoAdmonitionBlock {
-    +type: IsoAdmonitionType
+    +type: IsoAdmonitionType {
+       definition {
+         Types of admonition specific to ISO/IEC.
+       }
+    }
 }

@@ -1,5 +1,20 @@
 class IsoLocalizedTitle{
-    +titleIntro: FormattedString[1..*]
-    +titleMain: FormattedString[1..*]
-    +titlePart: FormattedString[0..*]
+    definition {
+      Title of ISO/IEC document.
+    }
+    +titleIntro: FormattedString[0..1] {
+      definition {
+        Introductory component of title.
+      }
+    }
+    +titleMain: FormattedString {
+      definition {
+        Main component of title.
+      }
+    }
+    +titlePart: FormattedString[0..1] {
+      definition {
+        Title of document part, if applicable.
+      }
+    }
 }

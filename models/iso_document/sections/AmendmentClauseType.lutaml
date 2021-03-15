@@ -1,5 +1,0 @@
-enum AmendmentClauseType {
-  add
-  delete
-  modify
-}

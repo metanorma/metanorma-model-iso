@@ -1,3 +1,10 @@
 class IsoAnnexSection {
-    +appendix: ClauseSection[0..*]
+    definition {
+      Annex appearing in ISO/IEC document.
+    }
+    +appendix: ClauseSection[0..*] {
+      definition {
+        Appendixes to annex.
+      }
+    }
 }

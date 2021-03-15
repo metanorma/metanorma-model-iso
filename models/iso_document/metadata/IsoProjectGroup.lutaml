@@ -1,6 +1,25 @@
 class IsoProjectGroup{
-    +technicalCommittee: IsoSubGroup[1..*]
-    +subcommittee: IsoSubGroup[0..*]
-    +workgroup: IsoSubGroup[0..*]
-    +secretariat: String[0..1]
+    definition {
+       Editorial groups associated with the production of an ISO/IEC document.
+    }
+    +technicalCommittee: IsoSubGroup[1..*] {
+       definition {
+         Technical committees.
+       }
+    }
+    +subcommittee: IsoSubGroup[0..*] {
+       definition {
+         Subcommittees.
+       }
+    }
+    +workgroup: IsoSubGroup[0..*] {
+       definition {
+         Workgroups.
+       }
+    }
+    +secretariat: String[0..1] {
+       definition {
+         Secretariat.
+       }
+    }
 }
