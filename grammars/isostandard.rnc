@@ -25,14 +25,6 @@ element on { ISO8601Date | "--" | "–" }
 
 }
 
-ul =
-  element ul {
-    attribute id { xsd:ID },
-    attribute keep-with-next { xsd:boolean }?,
-    attribute keep-lines-together { xsd:boolean }?,
-    ul_li+, note*
-}
-
 sections =
   element sections {
     (note | admonition)*, clause, (term-clause | terms)?, definitions?, clause+

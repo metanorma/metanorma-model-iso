@@ -79,29 +79,6 @@
         </choice>
       </element>
     </define>
-    <define name="ul">
-      <element name="ul">
-        <attribute name="id">
-          <data type="ID"/>
-        </attribute>
-        <optional>
-          <attribute name="keep-with-next">
-            <data type="boolean"/>
-          </attribute>
-        </optional>
-        <optional>
-          <attribute name="keep-lines-together">
-            <data type="boolean"/>
-          </attribute>
-        </optional>
-        <oneOrMore>
-          <ref name="ul_li"/>
-        </oneOrMore>
-        <zeroOrMore>
-          <ref name="note"/>
-        </zeroOrMore>
-      </element>
-    </define>
     <define name="sections">
       <element name="sections">
         <zeroOrMore>
