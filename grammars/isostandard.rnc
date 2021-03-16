@@ -156,13 +156,5 @@ clause-hanging-paragraph-with-footnote =
 annex-appendix =
   element appendix { Clause-Section }
 
-ul_li =
-  element li {
-    attribute id { xsd:ID }?,
-    attribute uncheckedcheckbox { xsd:boolean }?,
-    attribute checkedcheckbox { xsd:boolean }?,
-    BasicBlock+
-}
-
 stagename = element stagename { text }
 
