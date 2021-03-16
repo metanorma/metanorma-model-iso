@@ -22,8 +22,11 @@ all: $(PNG)
 images/%.png: views/%.lutaml
 	lutaml -t png -o $@ $<
 
-views/%.lutaml: models/%.wsd
+views/%.lutaml: models/%.wsd | views
 	lutaml-wsd2uml $< > $@
+
+views:
+	mkdir views
 
 clean:
 	$(RM) images/*.png
