@@ -133,4 +133,9 @@
       </zeroOrMore>
     </element>
   </define>
+  <define name="updates_document_type">
+    <element name="updates-document-type">
+      <ref name="DocumentType"/>
+    </element>
+  </define>
 </grammar>

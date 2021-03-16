@@ -34,3 +34,4 @@ attribute version { text },
     bibdata, termdocsource*, misccontainer?, boilerplate?, preface, sections+, annex*, bibliography, indexsect*
   }
 
+updates_document_type = element updates-document-type { DocumentType }
