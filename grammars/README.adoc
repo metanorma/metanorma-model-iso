@@ -4,7 +4,7 @@ This directory contains RelaxNG Compact and RelaxNG grammars for:
 
 * the base IsoDoc Standard Document model (`isodoc*`),
 * https://github.com/metanorma/isodoc[ISO Standards] (`isostandard*`)
-* https://github.com/metanorma/metanorma-model-csd[CSD] (`csd*`)
+* https://github.com/metanorma/metanorma-model-cc[CalConnect] (`csd*`)
 * https://github.com/metanorma/metanorma-model-gb[China Standards] (`gbstandard*`)
 * And so on
 
@@ -13,7 +13,7 @@ from the RelaxNG Compact source, and is used by the Ruby gems validating
 specifications against the models:
 
 * https://github.com/metanorma/metanorma-iso
-* https://github.com/metanorma/metanorma-csd
+* https://github.com/metanorma/metanorma-cc
 * https://github.com/metanorma/metanorma-gb
 * And so on
 

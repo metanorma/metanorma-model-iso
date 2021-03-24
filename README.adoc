@@ -13,7 +13,7 @@ to validate the structural conformance of authored standards to specifications.
 The standards currently modelled via Metanorma IsoDoc are:
 
 * https://github.com/metanorma/metanorma-model-iso[ISO Standards]
-* https://github.com/metanorma/metanorma-model-csd[CSD Standards]
+* https://github.com/metanorma/metanorma-model-cc[CalConnect Standards]
 * https://github.com/metanorma/metanorma-model-gb[Chinese Standards (GB and family)]
 
 The base Metanorma StandardDocument model includes information common to all standards
@@ -27,20 +27,20 @@ Models it depends on include:
 * BasicDoc models: https://github.com/metanorma/basicdoc-models[BasicDoc]
 * Metanorma StandDoc models: https://github.com/metanorma/metanorma-model-standoc[StanDoc]
 
-Below, we show the UML diagrams for the base model and for ISO. The CSD, GB
+Below, we show the UML diagrams for the base model and for ISO. The CalConnect, GB
 diagrams are shown on their own respective pages.
 
 The document models are expressed as UML and as RelaxNG Compact (RNC) grammars;
 see discussion under
 https://github.com/metanorma/metanorma-model-iso/tree/master/grammars[Grammars]. This
 repository contains the RNC grammars for the base Standard Document model, ISO
-Standards, CSD and China Standards.
+Standards, CalConnect and China Standards.
 
 The document models are currently used by Metanorma authoring tools for
 standards:
 
 * https://github.com/metanorma/metanorma-iso
-* https://github.com/metanorma/metanorma-csd
+* https://github.com/metanorma/metanorma-cc
 * https://github.com/metanorma/metanorma-gb
 
 They are also used by tools that render those XML representations of the

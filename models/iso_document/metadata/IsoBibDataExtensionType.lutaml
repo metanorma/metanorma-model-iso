@@ -7,12 +7,12 @@ class IsoBibDataExtensionType {
          The document is a horizontal standard.
        }
     }
-    +editorialgroup: IsoProjectGroup {
+    +editorialGroup: IsoProjectGroup {
        definition {
          Editorial groups associated with the production of the document.
        }
     }
-    +stagename: String[0..1] {
+    +stageName: String[0..1] {
        definition {
          Name of the publication stage of the document.
        }
@@ -22,7 +22,7 @@ class IsoBibDataExtensionType {
          Category of IEC Standard applicable.
        }
     }
-    +updates_document_type: DocumentType[0..1] {
+    +updatesDocumentType: DocumentType[0..1] {
        definition {
          Type of document being updated by this document, if it is an amendment or technical corrigendum.
        }
