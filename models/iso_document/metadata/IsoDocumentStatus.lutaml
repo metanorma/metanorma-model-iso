@@ -7,7 +7,7 @@ class IsoDocumentStatus{
         Publication stage of the ISO/IEC document, expressed as an International Harmonized Stage Code.
       }
     }
-    +stage_abbreviation: String[0..1] {
+    +stageAbbreviation: String[0..1] {
       definition {
         Standard abbreviation of the publication stage.
       }
@@ -17,7 +17,7 @@ class IsoDocumentStatus{
         Substage code for the ISO/IEC document.
       }
     }
-    +substage_abbreviation: String[0..1] {
+    +substageAbbreviation: String[0..1] {
       definition {
         Standard abbreviation of the publication substage.
       }

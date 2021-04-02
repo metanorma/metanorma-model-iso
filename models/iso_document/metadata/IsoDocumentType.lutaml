@@ -1,52 +1,51 @@
 enum IsoDocumentType {
-    unstructured {
-      definition {
-        Type of ISO/IEC document.
-      }
+  definition {
+    Type of ISO/IEC document.
+  }
+
+  internationalStandard {
+    definition {
+      International Standard.
     }
-    internationalStandard {
-      definition {
-        International Standard.
-      }
+  }
+  technicalSpecification {
+    definition {
+      Technical Specification.
     }
-    technicalSpecification {
-      definition {
-        Technical Specification.
-      }
+  }
+  technicalReport {
+    definition {
+      Technical Report.
     }
-    technicalReport {
-      definition {
-        Technical Report.
-      }
+  }
+  publiclyAvailableSpecification {
+    definition {
+      Publicly Available Specification.
     }
-    publiclyAvailableSpecification {
-      definition {
-        Publicly Available Specification.
-      }
+  }
+  internationalWorkshopAgreement {
+    definition {
+      International Workshop Agreement.
     }
-    internationalWorkshopAgreement {
-      definition {
-        International Workshop Agreement.
-      }
+  }
+  guide {
+    definition {
+      Guide.
     }
-    guide {
-      definition {
-        Guide.
-      }
+  }
+  interpretationSheet {
+    definition {
+      Interpretation Sheet.
     }
-    interpretationSheet {
-      definition {
-        Interpretation Sheet.
-      }
+  }
+  amendment {
+    definition {
+      Amendment.
     }
-    amendment {
-      definition {
-        Amendment.
-      }
+  }
+  technical-corrigendum {
+    definition {
+      Technical Corrigendum.
     }
-    technical-corrigendum {
-      definition {
-        Technical Corrigendum.
-      }
-    }
+  }
 }
