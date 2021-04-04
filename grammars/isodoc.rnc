@@ -266,6 +266,14 @@ table-note = element note {
  paragraph
 }
 
+em = element em { (PureTextElement|stem|index)* }
+strong = element strong { (PureTextElement|stem|index)* }
+tt = element tt { (PureTextElement|index)* }
+keyword = element keyword { (PureTextElement|index)* }
+strike = element strike { (PureTextElement|index)* }
+underline = element underline { (PureTextElement|index)* }
+smallcap = element smallcap { (PureTextElement|index)* }
+
 }
 
 # end overrides
