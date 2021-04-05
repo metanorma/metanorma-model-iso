@@ -894,7 +894,35 @@
     <value>internal</value>
   </define>
   <define name="TextElement" combine="choice">
-    <ref name="concept"/>
+    <choice>
+      <ref name="concept"/>
+      <ref name="add"/>
+      <ref name="del"/>
+    </choice>
+  </define>
+  <define name="add">
+    <element name="add">
+      <choice>
+        <ref name="PureTextElement"/>
+        <ref name="eref"/>
+        <ref name="stem"/>
+        <ref name="keyword"/>
+        <ref name="xref"/>
+        <ref name="hyperlink"/>
+      </choice>
+    </element>
+  </define>
+  <define name="del">
+    <element name="del">
+      <choice>
+        <ref name="PureTextElement"/>
+        <ref name="eref"/>
+        <ref name="stem"/>
+        <ref name="keyword"/>
+        <ref name="xref"/>
+        <ref name="hyperlink"/>
+      </choice>
+    </element>
   </define>
   <define name="concept">
     <element name="concept">

@@ -76,11 +76,6 @@ intended-type = element intended-type { "R" | "C" | "TD" }
 
 ext_source = element source { text }
 
-TextElement |= add | del
-
-add = element add { PureTextElement | eref | stem | keyword | xref | hyperlink }
-del = element del { PureTextElement | eref | stem | keyword | xref | hyperlink }
-
 ipnoticereceived = element ip-notice-received { xsd:boolean }
 
 recommendationstatus = element recommendationstatus {

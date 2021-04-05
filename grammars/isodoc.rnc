@@ -286,7 +286,10 @@ col = element col {
 
 BibItemType |= "internal"
 
-TextElement |= concept
+TextElement |= concept | add | del
+
+add = element add { PureTextElement | eref | stem | keyword | xref | hyperlink }
+del = element del { PureTextElement | eref | stem | keyword | xref | hyperlink }
 
 concept = element concept {
   attribute term { text }?,
