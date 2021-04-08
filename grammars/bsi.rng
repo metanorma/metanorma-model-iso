@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<grammar xmlns="http://relaxng.org/ns/structure/1.0" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+  <!-- default namespace = "https://www.metanorma.com/ns/bsi" -->
+  <include href="isostandard.rng">
+    <start>
+      <ref name="bsi"/>
+    </start>
+    <define name="DocumentType">
+      <choice>
+        <value>international-standard</value>
+        <value>technical-specification</value>
+        <value>technical-report</value>
+        <value>publicly-available-specification</value>
+        <value>international-workshop-agreement</value>
+        <value>guide</value>
+      </choice>
+    </define>
+    <define name="BibDataExtensionType">
+      <ref name="doctype"/>
+      <optional>
+        <ref name="horizontal"/>
+      </optional>
+      <optional>
+        <ref name="function"/>
+      </optional>
+      <ref name="editorialgroup"/>
+      <zeroOrMore>
+        <ref name="ics"/>
+      </zeroOrMore>
+      <ref name="structuredidentifier"/>
+      <optional>
+        <ref name="stagename"/>
+      </optional>
+      <optional>
+        <ref name="updates_document_type"/>
+      </optional>
+      <optional>
+        <ref name="accessibility-color-inside"/>
+      </optional>
+      <optional>
+        <ref name="price-code"/>
+      </optional>
+      <optional>
+        <ref name="cen-processing"/>
+      </optional>
+      <optional>
+        <ref name="secretary"/>
+      </optional>
+      <optional>
+        <ref name="interest-to-committees"/>
+      </optional>
+      <optional>
+        <ref name="tc-sc-officers-note"/>
+      </optional>
+    </define>
+  </include>
+  <!-- end overrides -->
+  <define name="function">
+    <element name="function">
+      <choice>
+        <value>emc</value>
+        <value>safety</value>
+        <value>environment</value>
+        <value>quality-assurance</value>
+      </choice>
+    </element>
+  </define>
+  <define name="accessibility-color-inside">
+    <element name="accessibility-color-inside">
+      <data type="boolean"/>
+    </element>
+  </define>
+  <define name="price-code">
+    <element name="price-code">
+      <text/>
+    </element>
+  </define>
+  <define name="cen-processing">
+    <element name="cen-processing">
+      <data type="boolean"/>
+    </element>
+  </define>
+  <define name="secretary">
+    <element name="secretary">
+      <text/>
+    </element>
+  </define>
+  <define name="interest-to-committees">
+    <element name="interest-to-committees">
+      <text/>
+    </element>
+  </define>
+  <define name="tc-sc-officers-note">
+    <element name="tc-sc-officers-note">
+      <zeroOrMore>
+        <ref name="BasicBlock"/>
+      </zeroOrMore>
+    </element>
+  </define>
+  <!--
+    We display the Normative References between scope and terms; but to keep the
+    grammar simple, we keep the references together
+  -->
+  <define name="bsi">
+    <element name="ibsi">
+      <attribute name="version"/>
+      <attribute name="type">
+        <choice>
+          <value>semantic</value>
+          <value>presentation</value>
+        </choice>
+      </attribute>
+      <ref name="bibdata"/>
+      <zeroOrMore>
+        <ref name="termdocsource"/>
+      </zeroOrMore>
+      <optional>
+        <ref name="misccontainer"/>
+      </optional>
+      <optional>
+        <ref name="boilerplate"/>
+      </optional>
+      <ref name="preface"/>
+      <oneOrMore>
+        <ref name="sections"/>
+      </oneOrMore>
+      <zeroOrMore>
+        <ref name="annex"/>
+      </zeroOrMore>
+      <ref name="bibliography"/>
+      <zeroOrMore>
+        <ref name="indexsect"/>
+      </zeroOrMore>
+    </element>
+  </define>
+  <define name="updates_document_type">
+    <element name="updates-document-type">
+      <ref name="DocumentType"/>
+    </element>
+  </define>
+</grammar>

@@ -1,0 +1,37 @@
+#default namespace = "https://www.metanorma.com/ns/bsi"
+
+include "isostandard.rnc" {
+
+start = bsi
+
+DocumentType =
+     "international-standard" | "technical-specification" |
+     "technical-report" | "publicly-available-specification" |
+    "international-workshop-agreement" | "guide"
+
+BibDataExtensionType =
+        doctype, horizontal?, function?, editorialgroup, ics*, structuredidentifier, 
+        stagename?, updates_document_type?, accessibility-color-inside?, price-code?,
+        cen-processing?, secretary?, interest-to-committees?, tc-sc-officers-note?
+}
+
+# end overrides
+
+function = element function { "emc" | "safety" | "environment" | "quality-assurance" }
+accessibility-color-inside = element accessibility-color-inside { xsd:boolean }
+price-code = element price-code { text }
+cen-processing = element cen-processing { xsd:boolean }
+secretary = element secretary { text }
+interest-to-committees = element interest-to-committees { text }
+tc-sc-officers-note = element tc-sc-officers-note { BasicBlock* }
+
+# We display the Normative References between scope and terms; but to keep the
+# grammar simple, we keep the references together
+bsi = 
+  element ibsi {
+attribute version { text },
+  attribute type { "semantic" | "presentation" },
+    bibdata, termdocsource*, misccontainer?, boilerplate?, preface, sections+, annex*, bibliography, indexsect*
+  }
+
+updates_document_type = element updates-document-type { DocumentType }

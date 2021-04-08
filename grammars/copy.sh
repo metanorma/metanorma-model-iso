@@ -14,6 +14,12 @@ cp biblio.rng ../../metanorma-iec/lib/asciidoctor/iec
 cp isodoc.rng ../../metanorma-iec/lib/asciidoctor/iec
 cp isostandard.rng ../../metanorma-iec/lib/asciidoctor/iec/isostandard.rng
 cat iec.rng | ruby -pe '$_.gsub!(/<grammar /, %{<grammar ns="https://www.metanorma.org/ns/iec" }) '>  ../../metanorma-iec/lib/asciidoctor/iec/iec.rng
+cp basicdoc.rng ../../metanorma-bsi/lib/asciidoctor/bsi
+cp reqt.rng ../../metanorma-bsi/lib/asciidoctor/bsi
+cp biblio.rng ../../metanorma-bsi/lib/asciidoctor/bsi
+cp isodoc.rng ../../metanorma-bsi/lib/asciidoctor/bsi
+cp isostandard.rng ../../metanorma-bsi/lib/asciidoctor/bsi/isostandard.rng
+cat bsi.rng | ruby -pe '$_.gsub!(/<grammar /, %{<grammar ns="https://www.metanorma.org/ns/bsi" }) '>  ../../metanorma-bsi/lib/asciidoctor/bsi/bsi.rng
 cp basicdoc.rng ../../metanorma-gb/lib/asciidoctor/gb
 cp reqt.rng ../../metanorma-gb/lib/asciidoctor/gb
 cp biblio.rng ../../metanorma-gb/lib/asciidoctor/gb

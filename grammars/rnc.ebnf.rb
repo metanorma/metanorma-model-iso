@@ -1,5 +1,4 @@
 require "rsec"
-require "pp"
 include Rsec::Helpers
 
 # can't cope with more than one start in a grammar
