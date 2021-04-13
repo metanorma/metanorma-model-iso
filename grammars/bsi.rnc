@@ -5,25 +5,19 @@ include "isostandard.rnc" {
 start = bsi
 
 DocumentType =
-     "international-standard" | "technical-specification" |
-     "technical-report" | "publicly-available-specification" |
-    "international-workshop-agreement" | "guide"
+     "specification" |  "management-systems-standard" | "code-of-practice" |
+           "guide" | "method-of-test" | "method-of-specifying" | "vocabulary" |
+           "classification"
 
 BibDataExtensionType =
-        doctype, horizontal?, function?, editorialgroup, ics*, structuredidentifier, 
-        stagename?, updates_document_type?, accessibility-color-inside?, price-code?,
-        cen-processing?, secretary?, interest-to-committees?, tc-sc-officers-note?
+        doctype, editorialgroup, ics*, structuredidentifier, 
+        stagename?, price-code?, cen-processing?
 }
 
 # end overrides
 
-function = element function { "emc" | "safety" | "environment" | "quality-assurance" }
-accessibility-color-inside = element accessibility-color-inside { xsd:boolean }
 price-code = element price-code { text }
 cen-processing = element cen-processing { xsd:boolean }
-secretary = element secretary { text }
-interest-to-committees = element interest-to-committees { text }
-tc-sc-officers-note = element tc-sc-officers-note { BasicBlock* }
 
 # We display the Normative References between scope and terms; but to keep the
 # grammar simple, we keep the references together
@@ -34,4 +28,3 @@ attribute version { text },
     bibdata, termdocsource*, misccontainer?, boilerplate?, preface, sections+, annex*, bibliography, indexsect*
   }
 
-updates_document_type = element updates-document-type { DocumentType }
