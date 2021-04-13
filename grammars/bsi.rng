@@ -51,7 +51,7 @@
     grammar simple, we keep the references together
   -->
   <define name="bsi">
-    <element name="ibsi">
+    <element name="bsi">
       <attribute name="version"/>
       <attribute name="type">
         <choice>

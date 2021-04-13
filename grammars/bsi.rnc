@@ -22,7 +22,7 @@ cen-processing = element cen-processing { xsd:boolean }
 # We display the Normative References between scope and terms; but to keep the
 # grammar simple, we keep the references together
 bsi = 
-  element ibsi {
+  element bsi {
 attribute version { text },
   attribute type { "semantic" | "presentation" },
     bibdata, termdocsource*, misccontainer?, boilerplate?, preface, sections+, annex*, bibliography, indexsect*
