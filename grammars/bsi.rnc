@@ -2,7 +2,7 @@
 
 include "isostandard.rnc" {
 
-start = bsi
+start = bsi-standard
 
 DocumentType =
      "specification" |  "management-systems-standard" | "code-of-practice" |
@@ -21,8 +21,8 @@ cen-processing = element cen-processing { xsd:boolean }
 
 # We display the Normative References between scope and terms; but to keep the
 # grammar simple, we keep the references together
-bsi = 
-  element bsi {
+bsi-standard = 
+  element bsi-standard {
 attribute version { text },
   attribute type { "semantic" | "presentation" },
     bibdata, termdocsource*, misccontainer?, boilerplate?, preface, sections+, annex*, bibliography, indexsect*

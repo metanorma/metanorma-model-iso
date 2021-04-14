@@ -3,7 +3,7 @@
   <!-- default namespace = "https://www.metanorma.com/ns/bsi" -->
   <include href="isostandard.rng">
     <start>
-      <ref name="bsi"/>
+      <ref name="bsi-standard"/>
     </start>
     <define name="DocumentType">
       <choice>
@@ -50,8 +50,8 @@
     We display the Normative References between scope and terms; but to keep the
     grammar simple, we keep the references together
   -->
-  <define name="bsi">
-    <element name="bsi">
+  <define name="bsi-standard">
+    <element name="bsi-standard">
       <attribute name="version"/>
       <attribute name="type">
         <choice>
