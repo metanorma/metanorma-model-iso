@@ -35,7 +35,42 @@
       </optional>
     </define>
   </include>
+  <define name="admonition">
+    <element name="admonition">
+      <attribute name="type">
+        <ref name="AdmonitionType"/>
+      </attribute>
+      <optional>
+        <attribute name="class"/>
+      </optional>
+      <attribute name="id">
+        <data type="ID"/>
+      </attribute>
+      <optional>
+        <attribute name="target">
+          <data type="IDREF"/>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="uri">
+          <data type="anyURI"/>
+        </attribute>
+      </optional>
+      <optional>
+        <ref name="tname"/>
+      </optional>
+      <zeroOrMore>
+        <ref name="paragraph-with-footnote"/>
+      </zeroOrMore>
+      <zeroOrMore>
+        <ref name="note"/>
+      </zeroOrMore>
+    </element>
+  </define>
   <!-- end overrides -->
+  <define name="AdmonitionType" combine="choice">
+    <value>commentary</value>
+  </define>
   <define name="price-code">
     <element name="price-code">
       <text/>

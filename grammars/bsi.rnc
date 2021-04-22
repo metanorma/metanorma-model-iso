@@ -14,7 +14,22 @@ BibDataExtensionType =
         stagename?, price-code?, cen-processing?
 }
 
+admonition =
+  element admonition {
+    attribute type { AdmonitionType },
+    attribute class { text }?,
+    attribute id { xsd:ID },
+    attribute target { xsd:IDREF }?,
+    attribute uri { xsd:anyURI }?,
+    tname?,
+    paragraph-with-footnote*,
+    note*
+  }
+
+
 # end overrides
+
+AdmonitionType |= "commentary"
 
 price-code = element price-code { text }
 cen-processing = element cen-processing { xsd:boolean }
