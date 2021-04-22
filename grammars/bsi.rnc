@@ -12,7 +12,6 @@ DocumentType =
 BibDataExtensionType =
         doctype, editorialgroup, ics*, structuredidentifier, 
         stagename?, price-code?, cen-processing?
-}
 
 admonition =
   element admonition {
@@ -26,6 +25,7 @@ admonition =
     note*
   }
 
+}
 
 # end overrides
 
