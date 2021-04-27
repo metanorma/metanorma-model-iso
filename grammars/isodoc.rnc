@@ -296,7 +296,59 @@ concept = element concept {
   ( eref | xref | termref )
 }
 
-BasicBlock |= requirement | recommendation | permission | imagemap | svgmap
+BasicBlock |= requirement | recommendation | permission | imagemap | svgmap | form
+
+form = element form {
+    attribute id { xsd:ID },
+    attribute name { text },
+    attribute action { text },
+    ( TextElement | FormInput )*
+}
+
+FormInput = input | label | select | textarea
+
+InputType = "button" | "checkbox" | "date" | "file" | "password" | "radio" | "submit" | "text"
+
+input = element input {
+    attribute type { InputType },
+    attribute checked { xsd:boolean }?,
+    attribute disabled { xsd:boolean }?,
+    attribute readonly { xsd:boolean }?,
+    attribute maxlength { xsd:int }?,
+    attribute minlength { xsd:int }?,
+    attribute name { text }?,
+    attribute value { text }?,
+    attribute id { xsd:ID }?
+}
+
+label = element label {
+    attribute for { xsd:IDREF },
+    PureTextElement*
+}
+
+select = element select {
+    attribute name { text }?,
+    attribute value { text }?,
+    attribute id { xsd:ID }?,
+    attribute disabled { xsd:boolean }?,
+    attribute multiple { xsd:boolean }?,
+    attribute size { xsd:int }?,
+    option+
+}
+
+option = element option {
+    attribute disabled { xsd:boolean }?,
+    attribute value { text }?,
+    PureTextElement*
+}
+
+textarea = element textarea {
+    attribute name { text }?,
+    attribute value { text }?,
+    attribute id { xsd:ID }?,
+    attribute rows { xsd:int }?,
+    attribute cols { xsd:int }?
+}
 
 bibliography =
   element bibliography {
