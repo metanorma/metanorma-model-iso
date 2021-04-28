@@ -943,10 +943,10 @@
       <ref name="permission"/>
       <ref name="imagemap"/>
       <ref name="svgmap"/>
-      <ref name="form"/>
+      <ref name="inputform"/>
     </choice>
   </define>
-  <define name="form">
+  <define name="inputform">
     <element name="form">
       <attribute name="id">
         <data type="ID"/>
@@ -964,7 +964,7 @@
   <define name="FormInput">
     <choice>
       <ref name="input"/>
-      <ref name="label"/>
+      <ref name="formlabel"/>
       <ref name="select"/>
       <ref name="textarea"/>
     </choice>
@@ -1024,7 +1024,7 @@
       </optional>
     </element>
   </define>
-  <define name="label">
+  <define name="formlabel">
     <element name="label">
       <attribute name="for">
         <data type="IDREF"/>

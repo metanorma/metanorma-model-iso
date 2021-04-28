@@ -296,16 +296,16 @@ concept = element concept {
   ( eref | xref | termref )
 }
 
-BasicBlock |= requirement | recommendation | permission | imagemap | svgmap | form
+BasicBlock |= requirement | recommendation | permission | imagemap | svgmap | inputform
 
-form = element form {
+inputform = element form {
     attribute id { xsd:ID },
     attribute name { text },
     attribute action { text },
     ( TextElement | FormInput )*
 }
 
-FormInput = input | label | select | textarea
+FormInput = input | formlabel | select | textarea
 
 InputType = "button" | "checkbox" | "date" | "file" | "password" | "radio" | "submit" | "text"
 
@@ -321,7 +321,7 @@ input = element input {
     attribute id { xsd:ID }?
 }
 
-label = element label {
+formlabel = element label {
     attribute for { xsd:IDREF },
     PureTextElement*
 }
