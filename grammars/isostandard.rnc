@@ -77,7 +77,7 @@ DocumentType =
      "international-standard" | "technical-specification" |
      "technical-report" | "publicly-available-specification" |
     "international-workshop-agreement" | "guide" |
-    "amendment" | "technical-corrigendum"
+    "amendment" | "technical-corrigendum" | "directive"
 
 structuredidentifier =
   element structuredidentifier {
