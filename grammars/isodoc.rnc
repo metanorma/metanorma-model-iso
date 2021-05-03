@@ -274,6 +274,10 @@ strike = element strike { (PureTextElement|index)* }
 underline = element underline { (PureTextElement|index)* }
 smallcap = element smallcap { (PureTextElement|index)* }
 
+pagebreak = element pagebreak { 
+  attribute orientation { "landscape" | "portrait" }?
+}
+
 }
 
 # end overrides
