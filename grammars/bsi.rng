@@ -15,6 +15,7 @@
         <value>method-of-specifying</value>
         <value>vocabulary</value>
         <value>classification</value>
+        <value>publicly-available-specification</value>
       </choice>
     </define>
     <define name="BibDataExtensionType">

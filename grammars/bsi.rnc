@@ -7,7 +7,7 @@ start = bsi-standard
 DocumentType =
      "specification" |  "management-systems-standard" | "code-of-practice" |
            "guide" | "method-of-test" | "method-of-specifying" | "vocabulary" |
-           "classification"
+           "classification" | "publicly-available-specification"
 
 BibDataExtensionType =
         doctype, editorialgroup, ics*, structuredidentifier, 
