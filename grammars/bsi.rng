@@ -34,6 +34,9 @@
       <optional>
         <ref name="cen-processing"/>
       </optional>
+      <optional>
+        <ref name="coverimages"/>
+      </optional>
     </define>
     <define name="admonition">
       <element name="admonition">
@@ -80,6 +83,13 @@
   <define name="cen-processing">
     <element name="cen-processing">
       <data type="boolean"/>
+    </element>
+  </define>
+  <define name="coverimages">
+    <element name="coverimages">
+      <oneOrMore>
+        <ref name="image"/>
+      </oneOrMore>
     </element>
   </define>
   <!--

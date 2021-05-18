@@ -11,7 +11,7 @@ DocumentType =
 
 BibDataExtensionType =
         doctype, editorialgroup, ics*, structuredidentifier, 
-        stagename?, price-code?, cen-processing?
+        stagename?, price-code?, cen-processing?, coverimages?
 
 admonition =
   element admonition {
@@ -33,6 +33,8 @@ AdmonitionType |= "commentary"
 
 price-code = element price-code { text }
 cen-processing = element cen-processing { xsd:boolean }
+
+coverimages = element coverimages { image+ }
 
 # We display the Normative References between scope and terms; but to keep the
 # grammar simple, we keep the references together
