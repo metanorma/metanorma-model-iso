@@ -20,12 +20,6 @@ cp biblio.rng ../../metanorma-bsi/lib/asciidoctor/bsi
 cp isodoc.rng ../../metanorma-bsi/lib/asciidoctor/bsi
 cp isostandard.rng ../../metanorma-bsi/lib/asciidoctor/bsi/isostandard.rng
 cat bsi.rng | ruby -pe '$_.gsub!(/<grammar /, %{<grammar ns="https://www.metanorma.org/ns/bsi" }) '>  ../../metanorma-bsi/lib/asciidoctor/bsi/bsi.rng
-cp basicdoc.rng ../../metanorma-gb/lib/asciidoctor/gb
-cp reqt.rng ../../metanorma-gb/lib/asciidoctor/gb
-cp biblio.rng ../../metanorma-gb/lib/asciidoctor/gb
-cp isodoc.rng ../../metanorma-gb/lib/asciidoctor/gb
-cp isostandard.rng ../../metanorma-gb/lib/asciidoctor/gb/isostandard.rng
-cat gbstandard.rng | ruby -pe '$_.gsub!(/<grammar /, %{<grammar ns="https://www.metanorma.org/ns/gb" }) '>  ../../metanorma-gb/lib/asciidoctor/gb/gbstandard.rng
 cp basicdoc.rng ../../metanorma-csd/lib/asciidoctor/cc
 cp reqt.rng ../../metanorma-csd/lib/asciidoctor/cc
 cp biblio.rng ../../metanorma-csd/lib/asciidoctor/cc
@@ -81,11 +75,6 @@ cp reqt.rng ../../metanorma-itu/lib/asciidoctor/itu
 cp biblio.rng ../../metanorma-itu/lib/asciidoctor/itu
 cp isodoc.rng ../../metanorma-itu/lib/asciidoctor/itu
 cat itu.rng | ruby -pe '$_.gsub!(/<grammar /, %{<grammar ns="https://www.metanorma.org/ns/itu" }) '>  ../../metanorma-itu/lib/asciidoctor/itu/itu.rng
-cp basicdoc.rng ../../metanorma-vsd/lib/asciidoctor/vg
-cp reqt.rng ../../metanorma-vsd/lib/asciidoctor/vg
-cp biblio.rng ../../metanorma-vsd/lib/asciidoctor/vg
-cp isodoc.rng ../../metanorma-vsd/lib/asciidoctor/vg
-cat rsd.rng | ruby -pe '$_.gsub!(/<grammar /, %{<grammar ns="https://www.metanorma.org/ns/vsd" }) '>  ../../metanorma-vsd/lib/asciidoctor/vg/vsd.rng
 cp basicdoc.rng ../../metanorma-iho/lib/asciidoctor/iho
 cp reqt.rng ../../metanorma-iho/lib/asciidoctor/iho
 cp biblio.rng ../../metanorma-iho/lib/asciidoctor/iho

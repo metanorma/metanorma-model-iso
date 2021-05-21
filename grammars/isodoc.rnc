@@ -382,7 +382,7 @@ technical-committee =
   element technical-committee { IsoWorkgroup }
 
 IsoWorkgroup =
-    attribute number { xsd:int }?,
+    attribute number { text }?,
     attribute type { text }?,
     text
 
