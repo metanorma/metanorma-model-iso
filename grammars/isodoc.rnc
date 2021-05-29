@@ -30,10 +30,6 @@ doctype = element doctype {
     DocumentType 
 }
 
-docsubtype = element docsubtype { DocumentSubtype }
-
-DocumentSubtype = text
-
 hyperlink =
   element link {
     attribute target { xsd:anyURI },
@@ -287,6 +283,10 @@ pagebreak = element pagebreak {
 }
 
 # end overrides
+
+docsubtype = element docsubtype { DocumentSubtype }
+
+DocumentSubtype = text
 
 colgroup = element colgroup { col+ }
 

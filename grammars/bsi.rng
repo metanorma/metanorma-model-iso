@@ -7,19 +7,36 @@
     </start>
     <define name="DocumentType">
       <choice>
-        <value>specification</value>
-        <value>management-systems-standard</value>
-        <value>code-of-practice</value>
+        <value>british-standard</value>
+        <value>draft-for-development</value>
+        <value>published-document</value>
+        <value>privately-subscribed-standard</value>
+        <value>publicly-available-specification</value>
+        <value>flex-standard</value>
+        <value>international-standard</value>
+        <value>technical-specification</value>
+        <value>technical-report</value>
         <value>guide</value>
+        <value>international-workshop-agreement</value>
+        <value>industry-technical-agreement</value>
+        <value>standard</value>
+        <value>european-workshop-agreement</value>
+      </choice>
+    </define>
+    <define name="DocumentSubtype">
+      <choice>
+        <value>specification</value>
         <value>method-of-test</value>
         <value>method-of-specifying</value>
         <value>vocabulary</value>
-        <value>classification</value>
-        <value>publicly-available-specification</value>
+        <value>code-of-practice</value>
       </choice>
     </define>
     <define name="BibDataExtensionType">
       <ref name="doctype"/>
+      <optional>
+        <ref name="doctype"/>
+      </optional>
       <ref name="editorialgroup"/>
       <zeroOrMore>
         <ref name="ics"/>
