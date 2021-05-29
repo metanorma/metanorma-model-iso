@@ -186,7 +186,7 @@ quote =
 
 BibDataExtensionType = 
   doctype,
-  docubtype?,
+  docsubtype?,
   editorialgroup?,
   ics*,
   structuredidentifier*

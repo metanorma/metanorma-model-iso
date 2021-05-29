@@ -557,7 +557,7 @@
     <define name="BibDataExtensionType">
       <ref name="doctype"/>
       <optional>
-        <ref name="docubtype"/>
+        <ref name="docsubtype"/>
       </optional>
       <optional>
         <ref name="editorialgroup"/>
