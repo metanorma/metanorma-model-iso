@@ -15,7 +15,7 @@ editorialgroup = element editorialgroup {
 }
 
 BibDataExtensionType =
-    doctype?, editorialgroup, ics*, security?
+    doctype?, docsubtype?, editorialgroup, ics*, security?
 
 
 }

@@ -13,10 +13,14 @@
         <value>publicly-available-specification</value>
         <value>international-workshop-agreement</value>
         <value>guide</value>
+        <value>industry-technical-agreement</value>
       </choice>
     </define>
     <define name="BibDataExtensionType">
       <ref name="doctype"/>
+      <optional>
+        <ref name="docsubtype"/>
+      </optional>
       <optional>
         <ref name="horizontal"/>
       </optional>

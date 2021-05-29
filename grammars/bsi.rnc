@@ -5,12 +5,17 @@ include "isostandard.rnc" {
 start = bsi-standard
 
 DocumentType =
-     "specification" |  "management-systems-standard" | "code-of-practice" |
-           "guide" | "method-of-test" | "method-of-specifying" | "vocabulary" |
-           "classification" | "publicly-available-specification"
+     "british-standard" | "draft-for-development" | "published-document" |
+     "privately-subscribed-standard" | "publicly-available-specification" |
+     "flex-standard" | "international-standard" | "technical-specification" }
+     "technical-report" | "guide" | "international-workshop-agreement" |
+     "industry-technical-agreement" | "standard" | "european-workshop-agreement"
+
+DocumentSubtype = "specification" | "method-of-test" | "method-of-specifying" |
+                  "vocabulary" | "code-of-practice"
 
 BibDataExtensionType =
-        doctype, editorialgroup, ics*, structuredidentifier, 
+        doctype, doctype?, editorialgroup, ics*, structuredidentifier, 
         stagename?, price-code?, cen-processing?, coverimages?
 
 admonition =

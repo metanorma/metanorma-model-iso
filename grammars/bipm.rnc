@@ -82,7 +82,7 @@ structuredidentifier = element structuredidentifier {
 }
 
 BibDataExtensionType =
-    doctype?, editorialgroup, comment-period?, si-aspect?, meeting-note?, structuredidentifier
+    doctype?, docsubtype?, editorialgroup, comment-period?, si-aspect?, meeting-note?, structuredidentifier
 }
 
 comment-period = element comment-period {

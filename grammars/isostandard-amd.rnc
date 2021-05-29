@@ -34,7 +34,7 @@ documentnumber =
    }     
 
 BibDataExtensionType =
-        doctype, editorialgroup, ics*, structuredidentifier, stagename?, updates_document_type?
+        doctype, docsubtype?, editorialgroup, ics*, structuredidentifier, stagename?, updates_document_type?
 }
 
 # end overrides

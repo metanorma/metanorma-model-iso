@@ -34,7 +34,7 @@ structuredidentifier = element structuredidentifier {
 
 
 BibDataExtensionType =
-    doctype?, editorialgroup, ics*, recommendationstatus?, ipnoticereceived?, 
+    doctype?, docsubtype?, editorialgroup, ics*, recommendationstatus?, ipnoticereceived?, 
     meeting?, meeting-place?, meeting-date?, intended-type?, ext_source?,
     structuredidentifier?
 

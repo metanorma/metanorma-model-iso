@@ -29,7 +29,7 @@ PureTextElement |= hi
 
 hi = element hi { (PureTextElement|stem)* }
 
-docsubtype = element docsubtype { "conceptual-model" | "conceptual-model-and-encoding" | "conceptual-model-and-implementation" | "encoding" | "extension" | "implementation" | "profile" | "profile-with-extension" | "general"  }
+DocumentSubtype = "conceptual-model" | "conceptual-model-and-encoding" | "conceptual-model-and-implementation" | "encoding" | "extension" | "implementation" | "profile" | "profile-with-extension" | "general"
 
 submitters = element submitters { Basic-Section }
 

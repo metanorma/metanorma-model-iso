@@ -30,6 +30,10 @@ doctype = element doctype {
     DocumentType 
 }
 
+docsubtype = element docsubtype { DocumentSubtype }
+
+DocumentSubtype = text
+
 hyperlink =
   element link {
     attribute target { xsd:anyURI },
@@ -182,6 +186,7 @@ quote =
 
 BibDataExtensionType = 
   doctype,
+  docubtype?,
   editorialgroup?,
   ics*,
   structuredidentifier*

@@ -60,6 +60,9 @@
       <optional>
         <ref name="doctype"/>
       </optional>
+      <optional>
+        <ref name="docsubtype"/>
+      </optional>
       <zeroOrMore>
         <ref name="gbcommittee"/>
       </zeroOrMore>

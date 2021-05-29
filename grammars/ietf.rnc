@@ -9,7 +9,7 @@ start = ietf-standard
 DocumentType = "rfc" | "internet-draft"
 
 BibDataExtensionType =
-        doctype?, editorialgroup*, ics*, area*, ipr?, consensus?, index-include?, ipr-extract?, sort-refs?, sym-refs?, toc-include?, toc-depth?, show-on-front-page?, processing-instructions?
+        doctype?, docsubtype?, editorialgroup*, ics*, area*, ipr?, consensus?, index-include?, ipr-extract?, sort-refs?, sym-refs?, toc-include?, toc-depth?, show-on-front-page?, processing-instructions?
 
 ParagraphType =
     attribute id { xsd:ID },

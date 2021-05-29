@@ -11,7 +11,7 @@ organization =
 }
 
 BibDataExtensionType =
-        doctype, horizontal?, editorialgroup, ics*, structuredidentifier, stagename?
+        doctype, docsubtype?, horizontal?, editorialgroup, ics*, structuredidentifier, stagename?
 
 bdate = element date {
   attribute type { ( BibliographicDateType | text ) },
@@ -78,6 +78,8 @@ DocumentType =
      "technical-report" | "publicly-available-specification" |
     "international-workshop-agreement" | "guide" |
     "amendment" | "technical-corrigendum" | "directive"
+
+DocumentSubtype = "specification" | "method-of-test" | "vocabulary" | "code-of-practice"
 
 structuredidentifier =
   element structuredidentifier {

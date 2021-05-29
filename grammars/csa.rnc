@@ -23,7 +23,7 @@ DocumentType =
         "glossary" | "case-study"
 
 BibDataExtensionType =
-    doctype?, editorialgroup, ics*
+    doctype?, docsubtype?, editorialgroup, ics*
 
 editorialgroup = element editorialgroup {
         technical-committee+

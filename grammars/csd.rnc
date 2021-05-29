@@ -21,7 +21,7 @@ DocumentType =
         "directive" | "guide" | "specification" | "standard" | "report" | "administrative" | "amendment" | "technical corrigendum" | "advisory"
 
 BibDataExtensionType =
-        doctype?, editorialgroup, ics*
+        doctype?, docsubtype?, editorialgroup, ics*
 
 editorialgroup = element editorialgroup {
         technical-committee+

@@ -79,20 +79,18 @@
       </zeroOrMore>
     </element>
   </define>
-  <define name="docsubtype">
-    <element name="docsubtype">
-      <choice>
-        <value>conceptual-model</value>
-        <value>conceptual-model-and-encoding</value>
-        <value>conceptual-model-and-implementation</value>
-        <value>encoding</value>
-        <value>extension</value>
-        <value>implementation</value>
-        <value>profile</value>
-        <value>profile-with-extension</value>
-        <value>general</value>
-      </choice>
-    </element>
+  <define name="DocumentSubtype">
+    <choice>
+      <value>conceptual-model</value>
+      <value>conceptual-model-and-encoding</value>
+      <value>conceptual-model-and-implementation</value>
+      <value>encoding</value>
+      <value>extension</value>
+      <value>implementation</value>
+      <value>profile</value>
+      <value>profile-with-extension</value>
+      <value>general</value>
+    </choice>
   </define>
   <define name="submitters">
     <element name="submitters">

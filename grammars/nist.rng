@@ -66,6 +66,9 @@
         <ref name="doctype"/>
       </optional>
       <optional>
+        <ref name="docsubtype"/>
+      </optional>
+      <optional>
         <ref name="editorialgroup"/>
       </optional>
       <zeroOrMore>

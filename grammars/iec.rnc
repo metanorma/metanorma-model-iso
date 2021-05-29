@@ -7,10 +7,10 @@ start = iec-standard
 DocumentType =
      "international-standard" | "technical-specification" |
      "technical-report" | "publicly-available-specification" |
-    "international-workshop-agreement" | "guide"
+    "international-workshop-agreement" | "guide" | "industry-technical-agreement"
 
 BibDataExtensionType =
-        doctype, horizontal?, function?, editorialgroup, ics*, structuredidentifier, 
+        doctype, docsubtype?, horizontal?, function?, editorialgroup, ics*, structuredidentifier, 
         stagename?, updates_document_type?, accessibility-color-inside?, price-code?,
         cen-processing?, secretary?, interest-to-committees?, tc-sc-officers-note?
 }

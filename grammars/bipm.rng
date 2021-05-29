@@ -245,6 +245,9 @@
       <optional>
         <ref name="doctype"/>
       </optional>
+      <optional>
+        <ref name="docsubtype"/>
+      </optional>
       <ref name="editorialgroup"/>
       <optional>
         <ref name="comment-period"/>
