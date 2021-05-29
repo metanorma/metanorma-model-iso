@@ -35,6 +35,7 @@ hyperlink =
     attribute target { xsd:anyURI },
     attribute type { ReferenceFormat }?,
     attribute alt { text }?,
+    attribute updatetype { xsd:boolean }?,
     text
 }
 
