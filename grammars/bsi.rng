@@ -35,7 +35,7 @@
     <define name="BibDataExtensionType">
       <ref name="doctype"/>
       <optional>
-        <ref name="doctype"/>
+        <ref name="docsubtype"/>
       </optional>
       <ref name="editorialgroup"/>
       <zeroOrMore>
@@ -45,15 +45,9 @@
       <optional>
         <ref name="stagename"/>
       </optional>
-      <optional>
-        <ref name="price-code"/>
-      </optional>
-      <optional>
-        <ref name="cen-processing"/>
-      </optional>
-      <optional>
+      <zeroOrMore>
         <ref name="coverimages"/>
-      </optional>
+      </zeroOrMore>
     </define>
     <define name="admonition">
       <element name="admonition">
@@ -91,16 +85,6 @@
   <!-- end overrides -->
   <define name="AdmonitionType" combine="choice">
     <value>commentary</value>
-  </define>
-  <define name="price-code">
-    <element name="price-code">
-      <text/>
-    </element>
-  </define>
-  <define name="cen-processing">
-    <element name="cen-processing">
-      <data type="boolean"/>
-    </element>
   </define>
   <define name="coverimages">
     <element name="coverimages">

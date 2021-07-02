@@ -15,8 +15,8 @@ DocumentSubtype = "specification" | "method-of-test" | "method-of-specifying" |
                   "vocabulary" | "code-of-practice"
 
 BibDataExtensionType =
-        doctype, doctype?, editorialgroup, ics*, structuredidentifier, 
-        stagename?, price-code?, cen-processing?, coverimages?
+        doctype, docsubtype?, editorialgroup, ics*, structuredidentifier, 
+        stagename?, coverimages*
 
 admonition =
   element admonition {
@@ -35,9 +35,6 @@ admonition =
 # end overrides
 
 AdmonitionType |= "commentary"
-
-price-code = element price-code { text }
-cen-processing = element cen-processing { xsd:boolean }
 
 coverimages = element coverimages { image+ }
 
