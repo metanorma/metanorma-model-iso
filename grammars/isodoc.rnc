@@ -302,7 +302,7 @@ add = element add { PureTextElement | eref | stem | keyword | xref | hyperlink }
 del = element del { PureTextElement | eref | stem | keyword | xref | hyperlink }
 
 concept = element concept {
-  element term { (PureTextElement|stem)* }?,
+  element refterm { (PureTextElement|stem)* }?,
   ( eref | xref | termref )
 }
 
