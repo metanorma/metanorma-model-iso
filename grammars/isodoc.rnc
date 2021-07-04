@@ -303,6 +303,7 @@ del = element del { PureTextElement | eref | stem | keyword | xref | hyperlink }
 
 concept = element concept {
   element refterm { (PureTextElement|stem)* }?,
+  element renderterm { (PureTextElement|stem)* }?,
   ( eref | xref | termref )
 }
 
