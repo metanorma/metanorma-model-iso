@@ -313,6 +313,7 @@ inputform = element form {
     attribute id { xsd:ID },
     attribute name { text },
     attribute action { text },
+    attribute class { text }?,
     ( TextElement | FormInput )*
 }
 
