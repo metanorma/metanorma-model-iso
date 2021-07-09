@@ -302,6 +302,8 @@ add = element add { PureTextElement | eref | stem | keyword | xref | hyperlink }
 del = element del { PureTextElement | eref | stem | keyword | xref | hyperlink }
 
 concept = element concept {
+  attribute noital { xsd:boolean }?,
+  attribute noref { xsd:boolean }?,
   element refterm { (PureTextElement|stem)* }?,
   element renderterm { (PureTextElement|stem)* }?,
   ( eref | xref | termref )
