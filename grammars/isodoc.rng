@@ -899,7 +899,7 @@
   </include>
   <!-- end overrides -->
   <define name="docsubtype">
-    <element name="docsubtype">
+    <element name="subdoctype">
       <ref name="DocumentSubtype"/>
     </element>
   </define>

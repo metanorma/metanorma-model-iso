@@ -27,7 +27,7 @@ element on { ISO8601Date | "--" | "–" }
 
 sections =
   element sections {
-    (note | admonition)*, clause, (term-clause | terms)?, definitions?, clause+
+    (note | admonition)*, clause, (term-clause | terms)?, definitions?, (clause | term-clause | terms)+
   }
 
 Clause-Section =
