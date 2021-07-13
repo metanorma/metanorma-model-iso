@@ -1516,17 +1516,19 @@
       <ref name="section-title"/>
     </optional>
     <group>
-      <choice>
-        <group>
-          <zeroOrMore>
-            <ref name="BasicBlock"/>
-          </zeroOrMore>
-          <zeroOrMore>
-            <ref name="note"/>
-          </zeroOrMore>
-        </group>
-        <ref name="amend"/>
-      </choice>
+      <optional>
+        <choice>
+          <group>
+            <oneOrMore>
+              <ref name="BasicBlock"/>
+            </oneOrMore>
+            <zeroOrMore>
+              <ref name="note"/>
+            </zeroOrMore>
+          </group>
+          <ref name="amend"/>
+        </choice>
+      </optional>
       <zeroOrMore>
         <choice>
           <ref name="clause-subsection"/>
