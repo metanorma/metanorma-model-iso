@@ -39,7 +39,7 @@ Clause-Section =
     attribute type { text }?,
     section-title?,
     (
-      ( ( BasicBlock+, note* ) | amend),
+      ( ( BasicBlock+, note* ) | amend)?,
        clause-subsection+
     )
 
