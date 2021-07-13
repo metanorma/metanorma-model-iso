@@ -87,6 +87,10 @@ dl =
     (dt, dd)+, note*
 }
 
+dt =
+  attribute id { xsd:ID }?,
+  element dt { TextElement* }
+
 
 example =
   element example {
