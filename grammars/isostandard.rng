@@ -140,24 +140,22 @@
       <optional>
         <ref name="section-title"/>
       </optional>
-      <group>
-        <optional>
-          <choice>
-            <group>
-              <oneOrMore>
-                <ref name="BasicBlock"/>
-              </oneOrMore>
-              <zeroOrMore>
-                <ref name="note"/>
-              </zeroOrMore>
-            </group>
-            <ref name="amend"/>
-          </choice>
-        </optional>
+      <choice>
+        <choice>
+          <group>
+            <oneOrMore>
+              <ref name="BasicBlock"/>
+            </oneOrMore>
+            <zeroOrMore>
+              <ref name="note"/>
+            </zeroOrMore>
+          </group>
+          <ref name="amend"/>
+        </choice>
         <oneOrMore>
           <ref name="clause-subsection"/>
         </oneOrMore>
-      </group>
+      </choice>
     </define>
     <define name="term">
       <element name="term">

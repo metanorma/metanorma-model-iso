@@ -491,8 +491,8 @@ Clause-Section =
     attribute number { text }?,
     section-title?,
     (
-      ( (  BasicBlock+, note* ) | amend )?,
-       (clause-subsection | terms | definitions)*
+      ( (  BasicBlock+, note* ) | amend ) |
+       (clause-subsection | terms | definitions)+
     )
 
 Annex-Section =

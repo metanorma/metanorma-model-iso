@@ -1515,28 +1515,26 @@
     <optional>
       <ref name="section-title"/>
     </optional>
-    <group>
-      <optional>
-        <choice>
-          <group>
-            <oneOrMore>
-              <ref name="BasicBlock"/>
-            </oneOrMore>
-            <zeroOrMore>
-              <ref name="note"/>
-            </zeroOrMore>
-          </group>
-          <ref name="amend"/>
-        </choice>
-      </optional>
-      <zeroOrMore>
+    <choice>
+      <choice>
+        <group>
+          <oneOrMore>
+            <ref name="BasicBlock"/>
+          </oneOrMore>
+          <zeroOrMore>
+            <ref name="note"/>
+          </zeroOrMore>
+        </group>
+        <ref name="amend"/>
+      </choice>
+      <oneOrMore>
         <choice>
           <ref name="clause-subsection"/>
           <ref name="terms"/>
           <ref name="definitions"/>
         </choice>
-      </zeroOrMore>
-    </group>
+      </oneOrMore>
+    </choice>
   </define>
   <define name="Annex-Section">
     <optional>
