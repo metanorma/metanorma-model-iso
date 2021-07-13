@@ -88,8 +88,10 @@ dl =
 }
 
 dt =
-  attribute id { xsd:ID }?,
-  element dt { TextElement* }
+  element dt { 
+    attribute id { xsd:ID }?,
+    TextElement*
+  }
 
 
 example =

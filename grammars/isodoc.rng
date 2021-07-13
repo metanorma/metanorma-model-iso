@@ -205,12 +205,12 @@
       </element>
     </define>
     <define name="dt">
-      <optional>
-        <attribute name="id">
-          <data type="ID"/>
-        </attribute>
-      </optional>
       <element name="dt">
+        <optional>
+          <attribute name="id">
+            <data type="ID"/>
+          </attribute>
+        </optional>
         <zeroOrMore>
           <ref name="TextElement"/>
         </zeroOrMore>
