@@ -1,0 +1,48 @@
+diagram IsoDoc_IsoStandardDocument {
+
+  include models/metanorma-model-iso/models/standard_document/StandardDocument.lutaml
+  include models/metanorma-model-iso/models/standard_document/AnnexSection.lutaml
+  include models/metanorma-model-iso/models/standard_document/ClauseSection.lutaml
+
+  include models/metanorma-model-iso/models/iso_document/IsoStandardDocument.lutaml
+  include models/metanorma-model-iso/models/iso_document/IsoAmendmentDocument.lutaml
+  include models/metanorma-model-iso/models/iso_document/sections/IsoSections.lutaml
+  include models/metanorma-model-iso/models/iso_document/sections/IsoPreface.lutaml
+  include models/metanorma-model-iso/models/iso_document/sections/IsoAnnexSection.lutaml
+  include models/metanorma-model-iso/models/iso_document/sections/IsoAmendmentClause.lutaml
+
+  association {
+    owner StandardDocument
+    member IsoStandardDocument
+    owner_type inheritance
+  }
+  association {
+    owner ClauseSection
+    member IsoAmendmentClause
+    owner_type inheritance
+  }
+  association {
+    owner StandardDocument
+    member IsoAmendmentDocument
+    owner_type inheritance
+  }
+
+  association {
+    owner IsoStandardDocument
+    member IsoPreface
+    owner_type direct
+  }
+
+  association {
+    owner IsoStandardDocument
+    member IsoSections
+    owner_type direct
+  }
+
+  association {
+    owner AnnexSection
+    member IsoAnnexSection
+    owner_type inheritance
+  }
+
+}

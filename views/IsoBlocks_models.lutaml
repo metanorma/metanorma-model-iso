@@ -1,0 +1,38 @@
+diagram IsoDoc_IsoBlocks {
+
+  include models/metanorma-model-iso/models/basic_document/AdmonitionBlock.lutaml
+  include models/metanorma-model-iso/models/iso_document/blocks/IsoAdmonitionBlock.lutaml
+  include models/metanorma-model-iso/models/iso_document/blocks/IsoAdmonitionType.lutaml
+
+  include models/metanorma-model-iso/models/standard_document/TermCollection.lutaml
+  include models/metanorma-model-iso/models/standard_document/Term.lutaml
+  include models/metanorma-model-iso/models/iso_document/terms/IsoTermCollection.lutaml
+  include models/metanorma-model-iso/models/iso_document/terms/IsoTerm.lutaml
+
+  association {
+    owner TermCollection
+    member IsoTermCollection
+    owner_type inheritance
+  }
+  association {
+    owner Term
+    member IsoTerm
+    owner_type inheritance
+  }
+  association {
+    owner Term
+    member IsoTerm
+    owner_type inheritance
+  }
+  association {
+    owner AdmonitionBlock
+    member IsoAdmonitionBlock
+    owner_type inheritance
+  }
+  association {
+    owner IsoAdmonitionBlock
+    member IsoAdmonitionType
+    owner_type direct
+  }
+
+}
