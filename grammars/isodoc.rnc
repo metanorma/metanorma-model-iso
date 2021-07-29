@@ -400,6 +400,8 @@ technical-committee =
 IsoWorkgroup =
     attribute number { text }?,
     attribute type { text }?,
+    attribute identifier { text }?,
+    attribute prefix { text }?,
     text
 
 ics = element ics {
