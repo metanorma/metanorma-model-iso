@@ -315,7 +315,11 @@ concept = element concept {
   ( eref | xref | termref )
 }
 
-BasicBlock |= requirement | recommendation | permission | imagemap | svgmap | inputform
+BasicBlock |= requirement | recommendation | permission | imagemap | svgmap | inputform | toc
+
+toc = element toc {
+   ( ul )
+}
 
 inputform = element form {
     attribute id { xsd:ID },
