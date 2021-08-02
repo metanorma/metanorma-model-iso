@@ -247,7 +247,7 @@ processing-instructions = element pi {
  element strict { text }?,
  element compact { text }?,
  element subcompact { text }?,
- element toc { text }?,
+ element tocinclude { text }?,
  element tocdepth { text }?,
  element symrefs { text }?,
  element sortrefs { text }?
