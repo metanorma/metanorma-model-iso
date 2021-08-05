@@ -21,6 +21,7 @@ preface =
     abstract?, foreword, submitters?
 }
 
+DocumentSubtype = "conceptual-model" | "conceptual-model-and-encoding" | "conceptual-model-and-implementation" | "encoding" | "extension" | "implementation" | "profile" | "profile-with-extension" | "general"
 
 }
 
@@ -28,8 +29,6 @@ TextElement |= hi
 PureTextElement |= hi
 
 hi = element hi { (PureTextElement|stem)* }
-
-DocumentSubtype = "conceptual-model" | "conceptual-model-and-encoding" | "conceptual-model-and-implementation" | "encoding" | "extension" | "implementation" | "profile" | "profile-with-extension" | "general"
 
 submitters = element submitters { Basic-Section }
 
