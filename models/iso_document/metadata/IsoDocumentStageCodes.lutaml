@@ -3,8 +3,7 @@ enum IsoDocumentStageCodes {
     Stage-level code in the International Harmonized Stage Codes
     used by ISO/IEC for their documents.
     
-    NOTE: The I -- see
-    https://www.iso.org/stage-codes.html
+    NOTE: See https://www.iso.org/stage-codes.html
   }
 
   00 {
