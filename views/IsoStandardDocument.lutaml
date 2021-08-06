@@ -53,5 +53,10 @@ diagram IsoDoc_IsoStandardDocument {
     member IsoAnnexSection
     owner_type inheritance
   }
+  association {
+    owner IsoAmendmentDocument
+    member IsoAmendmentClause
+    owner_type direct
+  }
 
 }

@@ -23,11 +23,6 @@ diagram IsoDoc_IsoBlocks {
     owner_type inheritance
   }
   association {
-    owner Term
-    member IsoTerm
-    owner_type inheritance
-  }
-  association {
     owner AdmonitionBlock
     member IsoAdmonitionBlock
     owner_type inheritance
