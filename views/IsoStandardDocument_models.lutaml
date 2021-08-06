@@ -1,4 +1,7 @@
 diagram IsoDoc_IsoStandardDocument {
+  title 'ISO model'
+  caption 'Elements of the ISO model'
+
 
   include ../models/standard_document/StandardDocument.lutaml
   include ../models/standard_document/AnnexSection.lutaml

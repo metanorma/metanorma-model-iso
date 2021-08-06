@@ -1,4 +1,7 @@
 diagram IsoDoc_IsoBlocks {
+  title 'ISO Blocks'
+  caption 'Block elements of ISO'
+
 
   include ../models/basic_document/AdmonitionBlock.lutaml
   include ../models/iso_document/blocks/IsoAdmonitionBlock.lutaml
