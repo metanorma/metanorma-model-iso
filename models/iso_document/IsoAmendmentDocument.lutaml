@@ -7,23 +7,10 @@ class IsoAmendmentDocument {
       Version number of the schema used for this document.
       }
     }
-    +type: StandardDocumentType {
-      definition {
-      Type of standards document representation given in this class instance.
-      Set to "standard" for all standards documents.
-      }
-    }
     +bibdata: IsoBibliographicItem {
       definition {
         Bibliographic description of the document itself, expressed in the Relaton
       model.
-      }
-    }
-    +boilerplate: BoilerplateType[0..1] {
-      definition {
-An optional _boilerplate_ section, intended to appear at the
-      front of the document. It consists of content addressing
-      _copyright_, _license_, _legal_, and _feedback_ concerns.
       }
     }
     +preface: IsoPreface {

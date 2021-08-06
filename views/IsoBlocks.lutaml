@@ -1,6 +1,6 @@
 diagram IsoDoc_IsoBlocks {
   title 'ISO Blocks'
-  caption 'Block elements of ISO'
+  caption 'Block elements of ISO Standard Model'
 
 
   include ../models/basic_document/AdmonitionBlock.lutaml

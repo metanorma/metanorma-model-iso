@@ -1,6 +1,6 @@
 diagram IsoDoc_IsoBibliographicItem {
   title 'ISO Bibliographic Items'
-  caption 'Bibliographic items of ISO'
+  caption 'Bibliographic items of ISO Standard Model'
 
 
   include ../models/relaton/BibliographicItem.lutaml

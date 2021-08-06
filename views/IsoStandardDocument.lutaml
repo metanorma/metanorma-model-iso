@@ -1,6 +1,6 @@
 diagram IsoDoc_IsoStandardDocument {
   title 'ISO model'
-  caption 'Elements of the ISO model'
+  caption 'Elements of the ISO model Standard Model'
 
 
   include ../models/standard_document/StandardDocument.lutaml
@@ -39,6 +39,12 @@ diagram IsoDoc_IsoStandardDocument {
   association {
     owner IsoStandardDocument
     member IsoSections
+    owner_type direct
+  }
+
+  association {
+    owner IsoStandardDocument
+    member IsoAnnexSection
     owner_type direct
   }
 
