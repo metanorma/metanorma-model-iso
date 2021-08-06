@@ -1,6 +1,6 @@
 diagram IsoDoc_IsoStandardDocument {
   title 'ISO model'
-  caption 'Elements of the ISO model Standard Model'
+  caption 'Elements of the ISO Standard Model'
 
 
   include ../models/standard_document/StandardDocument.lutaml
