@@ -30,6 +30,10 @@ doctype = element doctype {
     DocumentType 
 }
 
+section-title =
+  element title { TextElement* },
+  element variant-title { TypedTitleString }*
+
 hyperlink =
   element link {
     attribute target { xsd:anyURI },
