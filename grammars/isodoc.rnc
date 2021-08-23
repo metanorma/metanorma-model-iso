@@ -78,7 +78,7 @@ ol =
     attribute keep-with-next { xsd:boolean }?,
     attribute keep-lines-together { xsd:boolean }?,
     attribute type { ( "roman" | "alphabet" | "arabic" |
-                       "roman_upper" | "alphabet_upper" ) },
+                       "roman_upper" | "alphabet_upper" ) }?,
     li+, note*
 }
 
