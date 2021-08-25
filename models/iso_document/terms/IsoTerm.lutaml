@@ -12,4 +12,9 @@ class IsoTerm {
          ISO/IEC documents do not use related terms.
        }
      }
+     +term: IsoTerm[0..*] {
+        definition {
+          Terms nested within terms, under systematic term ordering.
+        }
+     }
  }
