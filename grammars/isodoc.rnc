@@ -543,7 +543,7 @@ term =
   element term {
     attribute id { xsd:ID }?,
     preferred+, admitted*, related*, deprecates*,
-    termdomain?, termgrammar*, definition, termnote*, termexample*, termsource*
+    termdomain?, termgrammar*, termdefinition+, termnote*, termexample*, termsource*
   }
 
 preferred =
@@ -567,9 +567,9 @@ termdomain =
 termgrammar =
   element grammar { TextElement+ }
 
-definition =
+termdefinition =
   element definition {
-    ( paragraph | figure | formula )+
+    ( paragraph | figure | formula )+, termsource*
   }
 
 termnote =
