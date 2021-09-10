@@ -314,6 +314,8 @@ del = element del { PureTextElement | eref | stem | keyword | xref | hyperlink }
 concept = element concept {
   attribute ital { xsd:boolean }?,
   attribute ref { xsd:boolean }?,
+  attribute linkmention { xsd:boolean }?,
+  attribute linkref { xsd:boolean }?,
   element refterm { (PureTextElement|stem)* }?,
   element renderterm { (PureTextElement|stem)* }?,
   ( eref | xref | termref )
