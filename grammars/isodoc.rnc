@@ -327,7 +327,10 @@ toc = element toc {
    ( ul )
 }
 
-passthrough = element passthrough { text }
+passthrough = element passthrough {
+    attribute formats { text }?,
+    text
+}
 
 inputform = element form {
     attribute id { xsd:ID },

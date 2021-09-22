@@ -1046,6 +1046,9 @@
   </define>
   <define name="passthrough">
     <element name="passthrough">
+      <optional>
+        <attribute name="formats"/>
+      </optional>
       <text/>
     </element>
   </define>
