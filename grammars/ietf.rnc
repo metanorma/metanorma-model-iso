@@ -193,7 +193,7 @@ index = element index {
 }
 
 
-TextElement |= bcp14
+TextElement |= bcp14 | review
 
 bcp14 = element bcp14 { text }
 
