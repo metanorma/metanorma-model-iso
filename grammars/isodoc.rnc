@@ -69,6 +69,8 @@ ul =
     attribute id { xsd:ID },
     attribute keep-with-next { xsd:boolean }?,
     attribute keep-lines-together { xsd:boolean }?,
+    attribute tag { text }?,
+    attribute multilingual-rendering { MultilingualRenderingType }?,
     ul_li+, note*
 }
 
@@ -77,6 +79,8 @@ ol =
     attribute id { xsd:ID },
     attribute keep-with-next { xsd:boolean }?,
     attribute keep-lines-together { xsd:boolean }?,
+    attribute tag { text }?,
+    attribute multilingual-rendering { MultilingualRenderingType }?,
     attribute type { ( "roman" | "alphabet" | "arabic" |
                        "roman_upper" | "alphabet_upper" ) }?,
     li+, note*
@@ -88,6 +92,8 @@ dl =
     attribute keep-with-next { xsd:boolean }?,
     attribute keep-lines-together { xsd:boolean }?,
     attribute key { xsd:boolean }?,
+    attribute tag { text }?,
+    attribute multilingual-rendering { MultilingualRenderingType }?,
     (dt, dd)+, note*
 }
 
@@ -106,6 +112,8 @@ example =
     attribute number { text }?,
     attribute keep-with-next { xsd:boolean }?,
     attribute keep-lines-together { xsd:boolean }?,
+    attribute tag { text }?,
+    attribute multilingual-rendering { MultilingualRenderingType }?,
     tname?,
     ( formula | ul | ol | dl | quote | sourcecode | paragraph-with-footnote | figure )+,
     note*
@@ -123,6 +131,8 @@ table =
     attribute keep-with-next { xsd:boolean }?,
     attribute keep-lines-together { xsd:boolean }?,
     attribute width { text }?,
+    attribute tag { text }?,
+    attribute multilingual-rendering { MultilingualRenderingType }?,
     colgroup?, tname?, thead?, tbody, tfoot?, table-note*, dl?
   }
 
@@ -135,6 +145,8 @@ figure =
     attribute keep-with-next { xsd:boolean }?,
     attribute keep-lines-together { xsd:boolean }?,
     attribute class { text }?,
+    attribute tag { text }?,
+    attribute multilingual-rendering { MultilingualRenderingType }?,
      source?, tname?, (image | video | audio | pre | paragraph-with-footnote+ | figure*), fn*, dl?, note*
   }
 
@@ -147,6 +159,8 @@ sourcecode =
     attribute keep-with-next { xsd:boolean }?,
     attribute keep-lines-together { xsd:boolean }?,
     attribute lang { text }?,
+    attribute tag { text }?,
+    attribute multilingual-rendering { MultilingualRenderingType }?,
     tname?, ( text | callout )+, annotation*, note*
   }
 
@@ -159,6 +173,8 @@ formula =
     attribute keep-with-next { xsd:boolean }?,
     attribute keep-lines-together { xsd:boolean }?,
     attribute inequality { xsd:boolean }?,
+    attribute tag { text }?,
+    attribute multilingual-rendering { MultilingualRenderingType }?,
     stem, dl?, note*
 }
 
@@ -167,6 +183,8 @@ ParagraphType =
     attribute align { Alignments }?,
     attribute keep-with-next { xsd:boolean }?,
     attribute keep-lines-together { xsd:boolean }?,
+    attribute tag { text }?,
+    attribute multilingual-rendering { MultilingualRenderingType }?,
    ( TextElement )*, note*
 
 paragraph-with-footnote =
@@ -175,6 +193,8 @@ paragraph-with-footnote =
     attribute align { Alignments }?,
     attribute keep-with-next { xsd:boolean }?,
     attribute keep-lines-together { xsd:boolean }?,
+    attribute tag { text }?,
+    attribute multilingual-rendering { MultilingualRenderingType }?,
    ( TextElement | fn  )*, note*
 }
 
@@ -184,6 +204,8 @@ quote =
     attribute alignment { Alignments }?,
     attribute keep-with-next { xsd:boolean }?,
     attribute keep-lines-together { xsd:boolean }?,
+    attribute tag { text }?,
+    attribute multilingual-rendering { MultilingualRenderingType }?,
     quote-source?,
     quote-author?,
     paragraph-with-footnote+,
@@ -223,6 +245,8 @@ note = element note {
     attribute keep-with-next { xsd:boolean }?,
     attribute keep-lines-together { xsd:boolean }?,
     attribute type { text }?,
+    attribute tag { text }?,
+    attribute multilingual-rendering { MultilingualRenderingType }?,
     (paragraph | ul | ol | dl | formula | quote | sourcecode)+
 }
 
@@ -294,6 +318,8 @@ pagebreak = element pagebreak {
 
 # end overrides
 
+MultilingualRenderingType = "common" | "all-columns" | "parallel" | "tag"
+
 docsubtype = element subdoctype { DocumentSubtype }
 
 DocumentSubtype = text
@@ -337,6 +363,8 @@ inputform = element form {
     attribute name { text },
     attribute action { text },
     attribute class { text }?,
+    attribute tag { text }?,
+    attribute multilingual-rendering { MultilingualRenderingType }?,
     ( TextElement | FormInput )*
 }
 
@@ -587,12 +615,18 @@ termnote =
     attribute subsequence { text }?,
     attribute keep-with-next { xsd:boolean }?,
     attribute keep-lines-together { xsd:boolean }?,
+    attribute tag { text }?,
+    attribute multilingual-rendering { MultilingualRenderingType }?,
     (paragraph | ul | ol | dl | formula)+
 }
 
 termexample =
   element termexample { 
     attribute id { xsd:ID },
+    attribute keep-with-next { xsd:boolean }?,
+    attribute keep-lines-together { xsd:boolean }?,
+    attribute tag { text }?,
+    attribute multilingual-rendering { MultilingualRenderingType }?,
 paragraph }
 
 termsource =
@@ -651,6 +685,8 @@ amend =
     attribute path { text }?,
     attribute path_end { text }?,
     attribute title { text }?,
+    attribute tag { text }?,
+    attribute multilingual-rendering { MultilingualRenderingType }?,
     element location { locality* }?,
     autonumber*,
     element description { BasicBlock* }?,
@@ -667,6 +703,8 @@ autonumber =
 }
 
 imagemap = element imagemap {
+    attribute tag { text }?,
+    attribute multilingual-rendering { MultilingualRenderingType }?,
   figure, 
   element area {
     attribute type { "rect" | "circle" | "ellipse" | "poly" },
@@ -683,6 +721,8 @@ imagemap = element imagemap {
 }
 
 svgmap = element svgmap {
+    attribute tag { text }?,
+    attribute multilingual-rendering { MultilingualRenderingType }?,
   figure,
   element target {
      attribute href { xsd:anyURI },

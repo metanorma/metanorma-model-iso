@@ -179,6 +179,14 @@
             <data type="boolean"/>
           </attribute>
         </optional>
+        <optional>
+          <attribute name="tag"/>
+        </optional>
+        <optional>
+          <attribute name="multilingual-rendering">
+            <ref name="MultilingualRenderingType"/>
+          </attribute>
+        </optional>
         <attribute name="type">
           <choice>
             <value>roman</value>
