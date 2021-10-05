@@ -50,7 +50,7 @@ Clause-Section =
     attribute unnumbered { xsd:boolean }?,
     section-title?,
     (
-      ( (  BasicBlock*, note* ) | amend ),
+      ( (  BasicBlock* ) | amend ),
        (clause-subsection | terms | definitions)*
     )
 

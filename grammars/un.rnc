@@ -51,7 +51,7 @@ Clause-Section =
     attribute unnumbered { xsd:boolean }?,
     section-title?,
     (
-      ( BasicBlock*, note* ),
+      ( BasicBlock* ),
        (clause-subsection | terms | definitions)*
     )
 
@@ -64,7 +64,7 @@ Annex-Section =
     attribute unnumbered { xsd:boolean }?,
     section-title?,
     (
-      ( BasicBlock*, note* ),
+      ( BasicBlock* ),
        (annex-subsection | terms | definitions | references )*
     )
 

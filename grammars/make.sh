@@ -13,7 +13,7 @@ cd ../..
 cp basicdoc-models/grammars/basicdoc.rnc .
 
 cd metanorma-requirements-models/grammars
-git checkout master && git pull
+git checkout main && git pull
 cd ../..
 cp metanorma-requirements-models/grammars/reqt.rnc .
 

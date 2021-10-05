@@ -39,7 +39,7 @@ Clause-Section =
     attribute type { text }?,
     section-title?,
     (
-      ( ( BasicBlock+, note* ) | amend) | clause-subsection+
+      ( ( BasicBlock+ ) | amend) | clause-subsection+
     )
 
 term = 
@@ -60,7 +60,7 @@ annex =
     section-title?,
     # allow hanging paragraps in annexes: they introduce lists
     #( paragraph-with-footnote | table | note | formula | admonition | ol | ul | dl | figure | quote | sourcecode | review | example )*,
-    BasicBlock*, note*,
+    BasicBlock*, 
     clause-hanging-paragraph-with-footnote*,
     annex-appendix*
   }
@@ -103,7 +103,7 @@ Content-Section =
     attribute number { text }?,
     attribute type { text }?,
     section-title?,
-    ( (BasicBlock*, note*) |
+    ( (BasicBlock*) |
       content-subsection+ )
 
 }
@@ -151,7 +151,7 @@ clause-hanging-paragraph-with-footnote =
     attribute obligation { "normative" | "informative" }?,
     section-title?,
     # allow hanging paragraphs in annexes: they introduce lists
-    BasicBlock*, note*,
+    BasicBlock*,
     clause-hanging-paragraph-with-footnote*
   }
 

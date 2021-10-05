@@ -232,7 +232,7 @@ references =
     attribute obligation { "normative" | "informative" }?,
     attribute normative { xsd:boolean },
     section-title?,
-    BasicBlock*, note*,
+    BasicBlock*,
     (bibitem, note*)*,
     references*
 }
@@ -256,7 +256,7 @@ Basic-Section =
     attribute script { text }?,
     attribute obligation { "normative" | "informative" }?,
     section-title?,
-    (BasicBlock+, note*)
+    (BasicBlock+)
 
 li =
   element li {
@@ -427,7 +427,7 @@ reference-clause =
     attribute number { text }?,
     attribute obligation { "normative" | "informative" }?,
     section-title?,
-    BasicBlock*, note*,
+    BasicBlock*,
     (
        reference-clause+ | references*
     )
@@ -495,7 +495,7 @@ definitions =
     attribute type { text }?,
     attribute obligation { "normative" | "informative" }?,
     section-title?,
-    (BasicBlock*, note*,
+    (BasicBlock*,
     dl)+
 }
 
@@ -520,7 +520,7 @@ Content-Section =
     attribute number { text }?,
     attribute type { text }?,
     section-title?,
-    ( (BasicBlock*, note*),
+    ( (BasicBlock*),
       content-subsection* )
 
 clause =
@@ -536,7 +536,7 @@ Clause-Section =
     attribute number { text }?,
     section-title?,
     (
-      ( (  BasicBlock+, note* ) | amend ) |
+      ( (  BasicBlock+ ) | amend ) |
        (clause-subsection | terms | definitions)+
     )
 
@@ -548,7 +548,7 @@ Annex-Section =
     attribute obligation { "normative" | "informative" }?,
     section-title?,
     (
-      ( BasicBlock*, note* ),
+      ( BasicBlock* ),
        (annex-subsection | terms | definitions | references )*
     )
 
@@ -570,7 +570,7 @@ terms =
     attribute number { text }?,
     attribute obligation { "normative" | "informative" }?,
     section-title?,
-    BasicBlock*, note*,
+    BasicBlock*,
     (term+ | ( terms*, definitions?) )
   }
 
@@ -669,7 +669,7 @@ term-clause =
     attribute inline-header { xsd:boolean }?,
     attribute obligation { "normative" | "informative" }?,
     section-title?,
-    BasicBlock*, note*,
+    BasicBlock*,
     (
        (term-clause | terms | definitions)*
     )
