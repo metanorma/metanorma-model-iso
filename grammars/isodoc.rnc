@@ -40,7 +40,7 @@ hyperlink =
     attribute type { ReferenceFormat }?,
     attribute alt { text }?,
     attribute updatetype { xsd:boolean }?,
-    text
+    PureTextElement+
 }
 
 xref =
@@ -51,7 +51,7 @@ xref =
      attribute alt { text }?,
      attribute case { "capital" | "lowercase" }?,
      attribute droploc { xsd:boolean }?,
-     text
+     PureTextElement+
 }
 
 erefType =
@@ -62,7 +62,7 @@ erefType =
     attribute case { "capital" | "lowercase" }?,
     attribute droploc { xsd:boolean }?,
     CitationType,
-    text
+    PureTextElement+
 
 ul =
   element ul {
@@ -302,9 +302,9 @@ table-note = element note {
  paragraph
 }
 
-em = element em { (PureTextElement|stem|index)* }
-strong = element strong { (PureTextElement|stem|index)* }
-tt = element tt { (PureTextElement|index)* }
+em = element em { (PureTextElement|stem|index|eref|xref|hyperlink)* }
+strong = element strong { (PureTextElement|stem|index|eref|xref|hyperlink)* }
+tt = element tt { (PureTextElement|index|eref|xref|hyperlink)* }
 keyword = element keyword { (PureTextElement|index)* }
 strike = element strike { (PureTextElement|index)* }
 underline = element underline { (PureTextElement|index)* }

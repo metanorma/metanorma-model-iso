@@ -62,7 +62,9 @@
             <data type="boolean"/>
           </attribute>
         </optional>
-        <text/>
+        <oneOrMore>
+          <ref name="PureTextElement"/>
+        </oneOrMore>
       </element>
     </define>
     <define name="xref">
@@ -100,7 +102,9 @@
             <data type="boolean"/>
           </attribute>
         </optional>
-        <text/>
+        <oneOrMore>
+          <ref name="PureTextElement"/>
+        </oneOrMore>
       </element>
     </define>
     <define name="erefType">
@@ -130,7 +134,9 @@
         </attribute>
       </optional>
       <ref name="CitationType"/>
-      <text/>
+      <oneOrMore>
+        <ref name="PureTextElement"/>
+      </oneOrMore>
     </define>
     <define name="ul">
       <element name="ul">
@@ -941,6 +947,9 @@
             <ref name="PureTextElement"/>
             <ref name="stem"/>
             <ref name="index"/>
+            <ref name="eref"/>
+            <ref name="xref"/>
+            <ref name="hyperlink"/>
           </choice>
         </zeroOrMore>
       </element>
@@ -952,6 +961,9 @@
             <ref name="PureTextElement"/>
             <ref name="stem"/>
             <ref name="index"/>
+            <ref name="eref"/>
+            <ref name="xref"/>
+            <ref name="hyperlink"/>
           </choice>
         </zeroOrMore>
       </element>
@@ -962,6 +974,9 @@
           <choice>
             <ref name="PureTextElement"/>
             <ref name="index"/>
+            <ref name="eref"/>
+            <ref name="xref"/>
+            <ref name="hyperlink"/>
           </choice>
         </zeroOrMore>
       </element>
