@@ -582,10 +582,10 @@ term =
   }
 
 preferred =
-  element preferred { TextElement+ }
+  element preferred { Designation }
 
 admitted =
-  element admitted { TextElement+ }
+  element admitted { Designation }
 
 related = 
   element related {
@@ -594,7 +594,14 @@ related =
 }
 
 deprecates =
-  element deprecates { TextElement+ }
+  element deprecates { Designation }
+
+Designation =
+  expression_designation
+
+expression_designation = element expression {
+  element name { PureTextElement+ }
+}
 
 termdomain =
   element domain { TextElement+ }
