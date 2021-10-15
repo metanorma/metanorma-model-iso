@@ -582,10 +582,10 @@ term =
   }
 
 preferred =
-  element preferred { TextElement+ }
+  element preferred { Designation }
 
 admitted =
-  element admitted { TextElement+ }
+  element admitted { Designation }
 
 related = 
   element related {
@@ -594,8 +594,23 @@ related =
 }
 
 deprecates =
-  element deprecates { TextElement+ }
+  element deprecates { Designation }
 
+Designation = 
+  expression_designation
+
+expression_designation =
+  element expression {
+    ## ISO-639
+    attribute language { text }?,
+    ## ISO-15924
+    attribute script { text }?,
+    attribute type { ExpressionDesignationType }?,
+    element name { (PureTextElement | stem)+ }
+  }
+
+ExpressionDesignationType = "prefix" | "suffix" | "abbreviation" | "full"
+  
 termdomain =
   element domain { TextElement+ }
 

@@ -17,7 +17,7 @@
   these elements; we just want one namespace for any child grammars
   of this.
 -->
-<grammar xmlns="http://relaxng.org/ns/structure/1.0" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+<grammar xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0" xmlns="http://relaxng.org/ns/structure/1.0" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
   <include href="reqt.rng"/>
   <!-- include "biblio.rnc" { } -->
   <include href="basicdoc.rng">
@@ -1830,16 +1830,12 @@
   </define>
   <define name="preferred">
     <element name="preferred">
-      <oneOrMore>
-        <ref name="TextElement"/>
-      </oneOrMore>
+      <ref name="Designation"/>
     </element>
   </define>
   <define name="admitted">
     <element name="admitted">
-      <oneOrMore>
-        <ref name="TextElement"/>
-      </oneOrMore>
+      <ref name="Designation"/>
     </element>
   </define>
   <define name="related">
@@ -1860,10 +1856,46 @@
   </define>
   <define name="deprecates">
     <element name="deprecates">
-      <oneOrMore>
-        <ref name="TextElement"/>
-      </oneOrMore>
+      <ref name="Designation"/>
     </element>
+  </define>
+  <define name="Designation">
+    <ref name="expression_designation"/>
+  </define>
+  <define name="expression_designation">
+    <element name="expression">
+      <optional>
+        <attribute name="language">
+          <a:documentation>ISO-639</a:documentation>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="script">
+          <a:documentation>ISO-15924</a:documentation>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="type">
+          <ref name="ExpressionDesignationType"/>
+        </attribute>
+      </optional>
+      <element name="name">
+        <oneOrMore>
+          <choice>
+            <ref name="PureTextElement"/>
+            <ref name="stem"/>
+          </choice>
+        </oneOrMore>
+      </element>
+    </element>
+  </define>
+  <define name="ExpressionDesignationType">
+    <choice>
+      <value>prefix</value>
+      <value>suffix</value>
+      <value>abbreviation</value>
+      <value>full</value>
+    </choice>
   </define>
   <define name="termdomain">
     <element name="domain">
