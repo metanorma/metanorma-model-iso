@@ -606,10 +606,15 @@ expression_designation =
     ## ISO-15924
     attribute script { text }?,
     attribute type { ExpressionDesignationType }?,
-    element name { (PureTextElement | stem)+ }
+    element name { (PureTextElement | stem)+ },
+    element isInternational { xsd:boolean }?,
+    element abbreviationType { AbbreviationType }?,
+    element pronunciation { LocalizedString }?
   }
 
 ExpressionDesignationType = "prefix" | "suffix" | "abbreviation" | "full"
+
+AbbreviationType = "truncation" | "acronym" | "initialism"
   
 termdomain =
   element domain { TextElement+ }
