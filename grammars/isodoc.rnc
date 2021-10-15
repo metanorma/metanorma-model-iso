@@ -578,7 +578,8 @@ term =
   element term {
     attribute id { xsd:ID }?,
     preferred+, admitted*, related*, deprecates*,
-    termdomain?, termgrammar*, termdefinition+, termnote*, termexample*, termsource*
+    termdomain?, termsubject?, termusage?,
+    termdefinition+, termnote*, termexample*, termsource*
   }
 
 preferred =
@@ -618,6 +619,12 @@ AbbreviationType = "truncation" | "acronym" | "initialism"
   
 termdomain =
   element domain { TextElement+ }
+
+termsubject =
+  element subject { TextElement+ }
+
+termusage =
+  element usageinfo { TextElement+ }
 
 termgrammar =
   element grammar { TextElement+ }
