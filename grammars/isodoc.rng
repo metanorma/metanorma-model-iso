@@ -1939,7 +1939,7 @@
   <define name="termusage">
     <element name="usageinfo">
       <oneOrMore>
-        <ref name="TextElement"/>
+        <ref name="BasicBlock"/>
       </oneOrMore>
     </element>
   </define>

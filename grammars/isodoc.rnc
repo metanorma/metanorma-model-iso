@@ -624,7 +624,7 @@ termsubject =
   element subject { TextElement+ }
 
 termusage =
-  element usageinfo { TextElement+ }
+  element usageinfo { BasicBlock+ }
 
 termgrammar =
   element grammar { TextElement+ }
