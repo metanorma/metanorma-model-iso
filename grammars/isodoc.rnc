@@ -610,12 +610,25 @@ expression_designation =
     element name { (PureTextElement | stem)+ },
     element isInternational { xsd:boolean }?,
     element abbreviationType { AbbreviationType }?,
-    element pronunciation { LocalizedString }?
+    element pronunciation { LocalizedString }?,
+    element grammarInfo { Grammar }?
   }
 
 ExpressionDesignationType = "prefix" | "suffix" | "abbreviation" | "full"
 
 AbbreviationType = "truncation" | "acronym" | "initialism"
+
+Grammar =
+  element gender { GrammarGender }*,
+  element isPreposition { xsd:boolean }?,
+  element isParticiple { xsd:boolean }?,
+  element isAdjective { xsd:boolean }?,
+  element isVerb { xsd:boolean }?,
+  element isAdverb { xsd:boolean }?,
+  element isNoun { xsd:boolean }?,
+  element grammarvalue { text }*
+
+GrammarGender = "masculine" | "feminine" | "neuter" | "common"
   
 termdomain =
   element domain { TextElement+ }
@@ -625,9 +638,6 @@ termsubject =
 
 termusage =
   element usageinfo { BasicBlock+ }
-
-termgrammar =
-  element grammar { TextElement+ }
 
 termdefinition =
   element definition {
