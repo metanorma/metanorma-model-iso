@@ -577,7 +577,7 @@ terms =
 term =
   element term {
     attribute id { xsd:ID }?,
-    preferred+, admitted*, related*, deprecates*,
+    preferred+, admitted*, deprecates*, related*,
     termdomain?, termsubject?, termusage?,
     termdefinition+, termnote*, termexample*, termsource*
   }
@@ -590,9 +590,13 @@ admitted =
 
 related = 
   element related {
-    attribute type { "compare" | "contrast" | "see" }?,
-    TextElement+
+    attribute type { RelatedTermType },
+    element preferred { Designation },
+    ( eref | xref | termref )
 }
+
+RelatedTermType = 
+  "deprecates" | "supersedes" | "narrower" | "broader" | "equivalent" | "compare" | "contrast" | "see"
 
 deprecates =
   element deprecates { Designation }
