@@ -602,7 +602,10 @@ deprecates =
   element deprecates { Designation }
 
 Designation = 
-  expression_designation
+  attribute absent { xsd:boolean }?,
+  attribute geographicArea { text }?,
+  expression_designation,
+  termsource*
 
 expression_designation =
   element expression {
