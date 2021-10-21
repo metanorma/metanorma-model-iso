@@ -604,8 +604,14 @@ deprecates =
 Designation = 
   attribute absent { xsd:boolean }?,
   attribute geographicArea { text }?,
-  expression_designation,
+  (expression_designation | letter_symbol_designation ),
   termsource*
+
+letter_symbol_designation =
+  element letter-symbol {
+    attribute isInternational { xsd:boolean }?,
+    element name { (PureTextElement | stem)+ }
+  }
 
 expression_designation =
   element expression {
@@ -614,8 +620,8 @@ expression_designation =
     ## ISO-15924
     attribute script { text }?,
     attribute type { ExpressionDesignationType }?,
+    attribute isInternational { xsd:boolean }?,
     element name { (PureTextElement | stem)+ },
-    element isInternational { xsd:boolean }?,
     element abbreviationType { AbbreviationType }?,
     element pronunciation { LocalizedString }?,
     element grammarInfo { Grammar }?
