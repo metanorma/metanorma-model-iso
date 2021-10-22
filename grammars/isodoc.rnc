@@ -627,7 +627,7 @@ expression_designation =
     attribute script { text }?,
     attribute type { ExpressionDesignationType }?,
     attribute isInternational { xsd:boolean }?,
-    element name { (PureTextElement | stem)+ },
+    element name { (PureTextElement)* },
     element abbreviationType { AbbreviationType }?,
     element pronunciation { LocalizedString }?,
     element grammarInfo { Grammar }?

@@ -1941,12 +1941,9 @@
         </attribute>
       </optional>
       <element name="name">
-        <oneOrMore>
-          <choice>
-            <ref name="PureTextElement"/>
-            <ref name="stem"/>
-          </choice>
-        </oneOrMore>
+        <zeroOrMore>
+          <ref name="PureTextElement"/>
+        </zeroOrMore>
       </element>
       <optional>
         <element name="abbreviationType">
