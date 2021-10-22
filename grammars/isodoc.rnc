@@ -604,13 +604,19 @@ deprecates =
 Designation = 
   attribute absent { xsd:boolean }?,
   attribute geographicArea { text }?,
-  (expression_designation | letter_symbol_designation ),
+  (expression_designation | letter_symbol_designation | graphical_symbol_designation ),
   termsource*
 
 letter_symbol_designation =
   element letter-symbol {
     attribute isInternational { xsd:boolean }?,
     element name { (PureTextElement | stem)+ }
+  }
+
+graphical_symbol_designation =
+  element graphical-symbol {
+    attribute isInternational { xsd:boolean }?,
+    figure
   }
 
 expression_designation =
