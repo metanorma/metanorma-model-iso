@@ -660,8 +660,19 @@ termusage =
 
 termdefinition =
   element definition {
-    ( paragraph | figure | formula )+, termsource*
+    verbaldefinition | nonverbalrep | (verbaldefinition, nonverbalrep)
   }
+
+verbaldefinition = element verbaldefinition {
+    paragraph+,
+    termsource*
+}
+
+nonverbalrep =
+  element nonverbalrepresentation {
+    ( table | figure | formula )+,
+    termsource*
+}
 
 termnote =
   element termnote { 
