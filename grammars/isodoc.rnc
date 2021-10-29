@@ -664,7 +664,7 @@ termdefinition =
   }
 
 verbaldefinition = element verbaldefinition {
-    paragraph+,
+    (paragraph | dl | ol | ul)+,
     termsource*
 }
 
