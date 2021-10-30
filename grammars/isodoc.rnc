@@ -699,6 +699,7 @@ paragraph }
 termsource =
   element termsource {
     attribute status { ( "identical" | "modified" ) },
+    attribute type { ( "authoritative" | "lineage" ) },
     origin, modification?
 }
 
