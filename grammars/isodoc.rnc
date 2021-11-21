@@ -578,7 +578,7 @@ term =
   element term {
     attribute id { xsd:ID }?,
     preferred+, admitted*, deprecates*, related*,
-    termdomain?, termsubject?, termusage?,
+    termdomain?, termsubject?, 
     termdefinition+, termnote*, termexample*, termsource*
   }
 
@@ -605,7 +605,14 @@ Designation =
   attribute absent { xsd:boolean }?,
   attribute geographicArea { text }?,
   (expression_designation | letter_symbol_designation | graphical_symbol_designation ),
+  fieldofapplication?, usageinfo?,
   termsource*
+
+fieldofapplication =
+  element fieldofapplication { PureTextElement+ }
+
+usageinfo =
+  element usageinfo { PureTextElement+ }
 
 letter_symbol_designation =
   element letter-symbol {
@@ -654,9 +661,6 @@ termdomain =
 
 termsubject =
   element subject { TextElement+ }
-
-termusage =
-  element usageinfo { BasicBlock+ }
 
 termdefinition =
   element definition {
