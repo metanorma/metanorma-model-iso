@@ -39,7 +39,7 @@ hyperlink =
     attribute target { xsd:anyURI },
     attribute type { ReferenceFormat }?,
     attribute alt { text }?,
-    attribute updatetype { xsd:boolean }?,
+    attribute update-type { xsd:boolean }?,
     PureTextElement+
 }
 
@@ -603,16 +603,16 @@ deprecates =
 
 Designation = 
   attribute absent { xsd:boolean }?,
-  attribute geographicArea { text }?,
+  attribute geographic-area { text }?,
   (expression_designation | letter_symbol_designation | graphical_symbol_designation ),
   fieldofapplication?, usageinfo?,
   termsource*
 
 fieldofapplication =
-  element fieldofapplication { PureTextElement+ }
+  element field-of-application { PureTextElement+ }
 
 usageinfo =
-  element usageinfo { PureTextElement+ }
+  element usage-info { PureTextElement+ }
 
 letter_symbol_designation =
   element letter-symbol {
@@ -635,9 +635,9 @@ expression_designation =
     attribute type { ExpressionDesignationType }?,
     attribute isInternational { xsd:boolean }?,
     element name { (PureTextElement)* },
-    element abbreviationType { AbbreviationType }?,
+    element abbreviation-type { AbbreviationType }?,
     element pronunciation { LocalizedString }?,
-    element grammarInfo { Grammar }?
+    element grammar-info { Grammar }?
   }
 
 ExpressionDesignationType = "prefix" | "suffix" | "abbreviation" | "full"
@@ -652,7 +652,7 @@ Grammar =
   element isVerb { xsd:boolean }?,
   element isAdverb { xsd:boolean }?,
   element isNoun { xsd:boolean }?,
-  element grammarvalue { text }*
+  element grammar-value { text }*
 
 GrammarGender = "masculine" | "feminine" | "neuter" | "common"
   
@@ -667,13 +667,13 @@ termdefinition =
     verbaldefinition | nonverbalrep | (verbaldefinition, nonverbalrep)
   }
 
-verbaldefinition = element verbaldefinition {
+verbaldefinition = element verbal-definition {
     (paragraph | dl | ol | ul)+,
     termsource*
 }
 
 nonverbalrep =
-  element nonverbalrepresentation {
+  element non-verbal-representation {
     ( table | figure | formula )+,
     termsource*
 }
