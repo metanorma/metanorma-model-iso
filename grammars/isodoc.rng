@@ -2078,6 +2078,9 @@
           <ref name="dl"/>
           <ref name="ol"/>
           <ref name="ul"/>
+          <ref name="table"/>
+          <ref name="figure"/>
+          <ref name="formula"/>
         </choice>
       </oneOrMore>
       <zeroOrMore>
