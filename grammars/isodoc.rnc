@@ -646,6 +646,7 @@ AbbreviationType = "truncation" | "acronym" | "initialism"
 
 Grammar =
   element gender { GrammarGender }*,
+  element number { GrammarNumber }*,
   element isPreposition { xsd:boolean }?,
   element isParticiple { xsd:boolean }?,
   element isAdjective { xsd:boolean }?,
@@ -655,6 +656,8 @@ Grammar =
   element grammar-value { text }*
 
 GrammarGender = "masculine" | "feminine" | "neuter" | "common"
+
+GrammarNumber = "singular" | "dual" | "plural"
   
 termdomain =
   element domain { TextElement+ }
