@@ -23,7 +23,7 @@ release = element release {
   element version2G { text },
   element version3G { text },
   element defunct { xsd:boolean },
-  element wpm-code-3G { text },
+  element wpm-code-2G { text },
   element wpm-code-3G { text },
   element freeze-meeting { text },
   element freeze-stage1-meeting { text },

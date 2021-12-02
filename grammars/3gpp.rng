@@ -73,7 +73,7 @@
       <element name="defunct">
         <data type="boolean"/>
       </element>
-      <element name="wpm-code-3G">
+      <element name="wpm-code-2G">
         <text/>
       </element>
       <element name="wpm-code-3G">
