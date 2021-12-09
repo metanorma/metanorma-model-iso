@@ -577,6 +577,8 @@ terms =
 term =
   element term {
     attribute id { xsd:ID }?,
+    attribute language { text }?,
+    attribute script { text }?,
     preferred+, admitted*, deprecates*, related*,
     termdomain?, termsubject?, 
     termdefinition+, termnote*, termexample*, termsource*

@@ -1796,6 +1796,12 @@
           <data type="ID"/>
         </attribute>
       </optional>
+      <optional>
+        <attribute name="language"/>
+      </optional>
+      <optional>
+        <attribute name="script"/>
+      </optional>
       <oneOrMore>
         <ref name="preferred"/>
       </oneOrMore>
