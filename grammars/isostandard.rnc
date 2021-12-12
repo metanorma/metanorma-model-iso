@@ -45,6 +45,10 @@ Clause-Section =
 term = 
   element term { 
     attribute id { xsd:ID }?,
+    attribute language { text }?,
+    attribute script { text }?,
+    attribute tag { text }?,
+    attribute multilingual-rendering { MultilingualRenderingType }?,
     preferred, admitted*, deprecates*,
     termdomain?, termdefinition, termnote*, termexample*, termsource*,
     term*
