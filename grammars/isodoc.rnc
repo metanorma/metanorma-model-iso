@@ -641,7 +641,7 @@ expression_designation =
     element name { (PureTextElement)* },
     element abbreviation-type { AbbreviationType }?,
     element pronunciation { LocalizedString }?,
-    element grammar-info { Grammar }?
+    element grammar { Grammar }?
   }
 
 ExpressionDesignationType = "prefix" | "suffix" | "abbreviation" | "full"
