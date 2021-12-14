@@ -57,6 +57,54 @@
         <ref name="tc-sc-officers-note"/>
       </optional>
     </define>
+    <define name="term">
+      <element name="term">
+        <optional>
+          <attribute name="id">
+            <data type="ID"/>
+          </attribute>
+        </optional>
+        <optional>
+          <attribute name="language"/>
+        </optional>
+        <optional>
+          <attribute name="script"/>
+        </optional>
+        <optional>
+          <attribute name="tag"/>
+        </optional>
+        <optional>
+          <attribute name="multilingual-rendering">
+            <ref name="MultilingualRenderingType"/>
+          </attribute>
+        </optional>
+        <oneOrMore>
+          <ref name="preferred"/>
+        </oneOrMore>
+        <zeroOrMore>
+          <ref name="admitted"/>
+        </zeroOrMore>
+        <zeroOrMore>
+          <ref name="deprecates"/>
+        </zeroOrMore>
+        <optional>
+          <ref name="termdomain"/>
+        </optional>
+        <ref name="termdefinition"/>
+        <zeroOrMore>
+          <ref name="termnote"/>
+        </zeroOrMore>
+        <zeroOrMore>
+          <ref name="termexample"/>
+        </zeroOrMore>
+        <zeroOrMore>
+          <ref name="termsource"/>
+        </zeroOrMore>
+        <zeroOrMore>
+          <ref name="term"/>
+        </zeroOrMore>
+      </element>
+    </define>
   </include>
   <!-- end overrides -->
   <define name="function">
