@@ -1973,7 +1973,10 @@
       </optional>
       <element name="name">
         <zeroOrMore>
-          <ref name="PureTextElement"/>
+          <choice>
+            <ref name="PureTextElement"/>
+            <ref name="stem"/>
+          </choice>
         </zeroOrMore>
       </element>
       <optional>
