@@ -31,7 +31,7 @@ Clause-Section =
     section-title?,
     (
       ( (  BasicBlock* ) | amend ),
-       (clause-subsection | terms | definitions)*
+       (clause-subsection | terms | definitions | floating-title )*
     )
 
 Annex-Section =
@@ -44,7 +44,7 @@ Annex-Section =
     section-title?,
     (
       ( BasicBlock* ),
-       (annex-subsection | terms | definitions | references )*
+       (annex-subsection | terms | definitions | references | floating-title )*
     )
 
 ol =

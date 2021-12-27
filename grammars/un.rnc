@@ -30,7 +30,7 @@ include "isodoc.rnc" {
     }
 
   sections =
-    element sections { clause + }
+    element sections { (clause | floating-title)+  }
 
   BibDataExtensionType =
     doctype?, docsubtype?, submissionlanguage*, editorialgroup?, ics*, distribution?, session?, job_number?
@@ -52,7 +52,7 @@ Clause-Section =
     section-title?,
     (
       ( BasicBlock* ),
-       (clause-subsection | terms | definitions)*
+       (clause-subsection | terms | definitions | floating-title )*
     )
 
 Annex-Section =
@@ -65,7 +65,7 @@ Annex-Section =
     section-title?,
     (
       ( BasicBlock* ),
-       (annex-subsection | terms | definitions | references )*
+       (annex-subsection | terms | definitions | references | floating-title )*
     )
 
 

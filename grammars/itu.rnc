@@ -51,7 +51,7 @@ Clause-Section =
     section-title?,
     (
       ( (  BasicBlock* ) | amend ),
-       (clause-subsection | terms | definitions)*
+       (clause-subsection | terms | definitions | floating-title )*
     )
 
 

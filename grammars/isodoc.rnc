@@ -223,7 +223,14 @@ BibDataExtensionType =
 
 sections =
   element sections {
-    ( clause | terms | term-clause | definitions)+
+    ( clause | terms | term-clause | definitions | floating-title )+
+}
+
+floating-tile = 
+  element floating-title {
+    attribute id { xsd:ID },
+    attribute depth { xsd:int },
+    TextElement*
 }
 
 references =
@@ -537,7 +544,7 @@ Clause-Section =
     section-title?,
     (
       ( (  BasicBlock+ ) | amend ) |
-       (clause-subsection | terms | definitions)+
+       (clause-subsection | terms | definitions | floating-title )+
     )
 
 Annex-Section =
@@ -549,7 +556,7 @@ Annex-Section =
     section-title?,
     (
       ( BasicBlock* ),
-       (annex-subsection | terms | definitions | references )*
+       (annex-subsection | terms | definitions | references | floating-title )*
     )
 
 clause-subsection =

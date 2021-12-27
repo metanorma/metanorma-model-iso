@@ -30,6 +30,54 @@ admonition =
     note*
   }
 
+Clause-Section =
+    attribute id { xsd:ID }?,
+    attribute language { text }?,
+    attribute script { text }?,
+    attribute inline-header { xsd:boolean }?,
+    attribute obligation { "normative" | "informative" }?,
+    attribute type { text }?,
+    section-title?,
+    (
+      ( ( BasicBlock+ ) | amend) | (clause-subsection | floating-title)+
+    )
+
+annex =
+  element annex {
+    attribute id { xsd:ID }?,
+    attribute language { text }?,
+    attribute script { text }?,
+    attribute inline-header { xsd:boolean }?,
+    attribute obligation { "normative" | "informative" }?,
+    section-title?,
+    # allow hanging paragraps in annexes: they introduce lists
+    #( paragraph-with-footnote | table | note | formula | admonition | ol | ul | dl | figure | quote | sourcecode | review | example )*,
+    BasicBlock*,
+    (clause-hanging-paragraph-with-footnote | floating-title)*,
+    annex-appendix*
+  }
+
+clause-hanging-paragraph-with-footnote =
+  element clause {
+    attribute id { xsd:ID }?,
+    attribute language { text }?,
+    attribute script { text }?,
+    attribute  inline-header  {   xsd:boolean  } ? ,
+    attribute obligation { "normative" | "informative" }?,
+    section-title?,
+    # allow hanging paragraphs in annexes: they introduce lists
+    BasicBlock*,
+    (clause-hanging-paragraph-with-footnote | floating-title)*
+  }
+
+sections =
+  element sections {
+    (note | admonition)*, floating-title?, clause, floating-title?, 
+    (term-clause | terms)?, floating-title?, definitions?, floating-title?,
+    (clause | term-clause | terms | floating-title)+
+  } 
+    
+
 }
 
 # end overrides

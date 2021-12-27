@@ -96,7 +96,10 @@
     <define name="sections">
       <element name="sections">
         <oneOrMore>
-          <ref name="clause"/>
+          <choice>
+            <ref name="clause"/>
+            <ref name="floating-title"/>
+          </choice>
         </oneOrMore>
       </element>
     </define>
@@ -186,6 +189,7 @@
             <ref name="clause-subsection"/>
             <ref name="terms"/>
             <ref name="definitions"/>
+            <ref name="floating-title"/>
           </choice>
         </zeroOrMore>
       </group>
@@ -233,6 +237,7 @@
             <ref name="terms"/>
             <ref name="definitions"/>
             <ref name="references"/>
+            <ref name="floating-title"/>
           </choice>
         </zeroOrMore>
       </group>

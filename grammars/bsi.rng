@@ -81,6 +81,180 @@
         </zeroOrMore>
       </element>
     </define>
+    <define name="Clause-Section">
+      <optional>
+        <attribute name="id">
+          <data type="ID"/>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="language"/>
+      </optional>
+      <optional>
+        <attribute name="script"/>
+      </optional>
+      <optional>
+        <attribute name="inline-header">
+          <data type="boolean"/>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="obligation">
+          <choice>
+            <value>normative</value>
+            <value>informative</value>
+          </choice>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="type"/>
+      </optional>
+      <optional>
+        <ref name="section-title"/>
+      </optional>
+      <choice>
+        <choice>
+          <oneOrMore>
+            <ref name="BasicBlock"/>
+          </oneOrMore>
+          <ref name="amend"/>
+        </choice>
+        <oneOrMore>
+          <choice>
+            <ref name="clause-subsection"/>
+            <ref name="floating-title"/>
+          </choice>
+        </oneOrMore>
+      </choice>
+    </define>
+    <define name="annex">
+      <element name="annex">
+        <optional>
+          <attribute name="id">
+            <data type="ID"/>
+          </attribute>
+        </optional>
+        <optional>
+          <attribute name="language"/>
+        </optional>
+        <optional>
+          <attribute name="script"/>
+        </optional>
+        <optional>
+          <attribute name="inline-header">
+            <data type="boolean"/>
+          </attribute>
+        </optional>
+        <optional>
+          <attribute name="obligation">
+            <choice>
+              <value>normative</value>
+              <value>informative</value>
+            </choice>
+          </attribute>
+        </optional>
+        <optional>
+          <ref name="section-title"/>
+        </optional>
+        <zeroOrMore>
+          <!--
+            allow hanging paragraps in annexes: they introduce lists
+            ( paragraph-with-footnote | table | note | formula | admonition | ol | ul | dl | figure | quote | sourcecode | review | example )*,
+          -->
+          <ref name="BasicBlock"/>
+        </zeroOrMore>
+        <zeroOrMore>
+          <choice>
+            <ref name="clause-hanging-paragraph-with-footnote"/>
+            <ref name="floating-title"/>
+          </choice>
+        </zeroOrMore>
+        <zeroOrMore>
+          <ref name="annex-appendix"/>
+        </zeroOrMore>
+      </element>
+    </define>
+    <define name="clause-hanging-paragraph-with-footnote">
+      <element name="clause">
+        <optional>
+          <attribute name="id">
+            <data type="ID"/>
+          </attribute>
+        </optional>
+        <optional>
+          <attribute name="language"/>
+        </optional>
+        <optional>
+          <attribute name="script"/>
+        </optional>
+        <optional>
+          <attribute name="inline-header">
+            <data type="boolean"/>
+          </attribute>
+        </optional>
+        <optional>
+          <attribute name="obligation">
+            <choice>
+              <value>normative</value>
+              <value>informative</value>
+            </choice>
+          </attribute>
+        </optional>
+        <optional>
+          <ref name="section-title"/>
+        </optional>
+        <zeroOrMore>
+          <!-- allow hanging paragraphs in annexes: they introduce lists -->
+          <ref name="BasicBlock"/>
+        </zeroOrMore>
+        <zeroOrMore>
+          <choice>
+            <ref name="clause-hanging-paragraph-with-footnote"/>
+            <ref name="floating-title"/>
+          </choice>
+        </zeroOrMore>
+      </element>
+    </define>
+    <define name="sections">
+      <element name="sections">
+        <zeroOrMore>
+          <choice>
+            <ref name="note"/>
+            <ref name="admonition"/>
+          </choice>
+        </zeroOrMore>
+        <optional>
+          <ref name="floating-title"/>
+        </optional>
+        <ref name="clause"/>
+        <optional>
+          <ref name="floating-title"/>
+        </optional>
+        <optional>
+          <choice>
+            <ref name="term-clause"/>
+            <ref name="terms"/>
+          </choice>
+        </optional>
+        <optional>
+          <ref name="floating-title"/>
+        </optional>
+        <optional>
+          <ref name="definitions"/>
+        </optional>
+        <optional>
+          <ref name="floating-title"/>
+        </optional>
+        <oneOrMore>
+          <choice>
+            <ref name="clause"/>
+            <ref name="term-clause"/>
+            <ref name="terms"/>
+            <ref name="floating-title"/>
+          </choice>
+        </oneOrMore>
+      </element>
+    </define>
   </include>
   <!-- end overrides -->
   <define name="AdmonitionType" combine="choice">
