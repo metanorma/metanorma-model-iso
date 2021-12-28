@@ -226,13 +226,6 @@ sections =
     ( clause | terms | term-clause | definitions | floating-title )+
 }
 
-floating-tile = 
-  element floating-title {
-    attribute id { xsd:ID },
-    attribute depth { xsd:int },
-    TextElement*
-}
-
 references =
   element references {
     attribute id { xsd:ID }?,
@@ -824,5 +817,11 @@ ul_li =
     BasicBlock+
 }
 
+floating-title =
+  element floating-title {
+    attribute id { xsd:ID },
+    attribute depth { xsd:int },
+    TextElement*
+}
 
 }
