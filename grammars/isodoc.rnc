@@ -30,6 +30,13 @@ doctype = element doctype {
     DocumentType 
 }
 
+bibitem =
+  element bibitem {
+     attribute id { xsd:ID },
+     attribute hidden { xsd:boolean }?,
+     BibliographicItem
+}
+
 section-title =
   element title { TextElement* },
   element variant-title { TypedTitleString }*
