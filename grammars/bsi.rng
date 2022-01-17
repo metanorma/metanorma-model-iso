@@ -224,11 +224,17 @@
           </choice>
         </zeroOrMore>
         <optional>
-          <ref name="floating-title"/>
+          <choice>
+            <ref name="floating-title"/>
+            <ref name="section-title"/>
+          </choice>
         </optional>
         <ref name="clause"/>
         <optional>
-          <ref name="floating-title"/>
+          <choice>
+            <ref name="floating-title"/>
+            <ref name="section-title"/>
+          </choice>
         </optional>
         <optional>
           <choice>
@@ -237,13 +243,19 @@
           </choice>
         </optional>
         <optional>
-          <ref name="floating-title"/>
+          <choice>
+            <ref name="floating-title"/>
+            <ref name="section-title"/>
+          </choice>
         </optional>
         <optional>
           <ref name="definitions"/>
         </optional>
         <optional>
-          <ref name="floating-title"/>
+          <choice>
+            <ref name="floating-title"/>
+            <ref name="section-title"/>
+          </choice>
         </optional>
         <oneOrMore>
           <choice>
@@ -251,6 +263,7 @@
             <ref name="term-clause"/>
             <ref name="terms"/>
             <ref name="floating-title"/>
+            <ref name="section-title"/>
           </choice>
         </oneOrMore>
       </element>
@@ -300,6 +313,19 @@
       <ref name="bibliography"/>
       <zeroOrMore>
         <ref name="indexsect"/>
+      </zeroOrMore>
+    </element>
+  </define>
+  <define name="section-title">
+    <element name="section-title">
+      <attribute name="id">
+        <data type="ID"/>
+      </attribute>
+      <attribute name="depth">
+        <data type="int"/>
+      </attribute>
+      <zeroOrMore>
+        <ref name="TextElement"/>
       </zeroOrMore>
     </element>
   </define>

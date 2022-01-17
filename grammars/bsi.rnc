@@ -72,9 +72,9 @@ clause-hanging-paragraph-with-footnote =
 
 sections =
   element sections {
-    (note | admonition)*, floating-title?, clause, floating-title?, 
-    (term-clause | terms)?, floating-title?, definitions?, floating-title?,
-    (clause | term-clause | terms | floating-title)+
+    (note | admonition)*, (floating-title | section-title)?, clause, (floating-title | section-title)?, 
+    (term-clause | terms)?, (floating-title | section-title)?, definitions?, (floating-title | section-title)?,
+    (clause | term-clause | terms | floating-title | section-title)+
   } 
     
 
@@ -95,3 +95,9 @@ attribute version { text },
     bibdata, termdocsource*, misccontainer?, boilerplate?, preface, sections+, annex*, bibliography, indexsect*
   }
 
+section-title =
+  element section-title {
+    attribute id { xsd:ID },
+    attribute depth { xsd:int },
+    TextElement*
+}
