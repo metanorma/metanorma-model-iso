@@ -323,6 +323,8 @@ keyword = element keyword { (PureTextElement|index)* }
 strike = element strike { (PureTextElement|index)* }
 underline = element underline { (PureTextElement|index)* }
 smallcap = element smallcap { (PureTextElement|index)* }
+sub = element sub { (PureTextElement|stem)* }
+sup = element sup { (PureTextElement|stem)* }
 
 pagebreak = element pagebreak { 
   attribute orientation { "landscape" | "portrait" }?
