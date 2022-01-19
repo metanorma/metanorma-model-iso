@@ -30,6 +30,13 @@ doctype = element doctype {
     DocumentType 
 }
 
+index = element index {
+  attribute to { xsd:IDREF }?,
+  element primary { (PureTextElement|stem)+ },
+  element secondary { (PureTextElement|stem)+ }?,
+  element tertiary { (PureTextElement|stem)+ }?
+}
+
 bibitem =
   element bibitem {
      attribute id { xsd:ID },
@@ -712,7 +719,8 @@ termexample =
     attribute keep-lines-together { xsd:boolean }?,
     attribute tag { text }?,
     attribute multilingual-rendering { MultilingualRenderingType }?,
-paragraph }
+    ( formula | ul | ol | dl | quote | sourcecode | paragraph | figure )+
+}
 
 termsource =
   element termsource {
