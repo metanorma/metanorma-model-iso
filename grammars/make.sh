@@ -3,7 +3,7 @@ rm -f basicdoc-models/grammars/basicdoc.rng
 git submodule update
 
 cd relaton-models/grammars
-git checkout master && git pull
+git checkout main && git pull
 cd ../..
 cp relaton-models/grammars/biblio.rnc .
 

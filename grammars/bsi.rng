@@ -268,6 +268,19 @@
         </oneOrMore>
       </element>
     </define>
+    <define name="section-title">
+      <element name="section-title">
+        <attribute name="id">
+          <data type="ID"/>
+        </attribute>
+        <attribute name="depth">
+          <data type="int"/>
+        </attribute>
+        <zeroOrMore>
+          <ref name="TextElement"/>
+        </zeroOrMore>
+      </element>
+    </define>
   </include>
   <!-- end overrides -->
   <define name="AdmonitionType" combine="choice">
@@ -313,19 +326,6 @@
       <ref name="bibliography"/>
       <zeroOrMore>
         <ref name="indexsect"/>
-      </zeroOrMore>
-    </element>
-  </define>
-  <define name="section-title">
-    <element name="section-title">
-      <attribute name="id">
-        <data type="ID"/>
-      </attribute>
-      <attribute name="depth">
-        <data type="int"/>
-      </attribute>
-      <zeroOrMore>
-        <ref name="TextElement"/>
       </zeroOrMore>
     </element>
   </define>

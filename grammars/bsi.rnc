@@ -76,7 +76,14 @@ sections =
     (term-clause | terms)?, (floating-title | section-title)?, definitions?, (floating-title | section-title)?,
     (clause | term-clause | terms | floating-title | section-title)+
   } 
-    
+
+section-title =
+  element section-title {
+    attribute id { xsd:ID },
+    attribute depth { xsd:int },
+    TextElement*
+}
+   
 
 }
 
@@ -95,9 +102,3 @@ attribute version { text },
     bibdata, termdocsource*, misccontainer?, boilerplate?, preface, sections+, annex*, bibliography, indexsect*
   }
 
-section-title =
-  element section-title {
-    attribute id { xsd:ID },
-    attribute depth { xsd:int },
-    TextElement*
-}
