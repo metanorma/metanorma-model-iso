@@ -21,7 +21,7 @@ term =
   element term {
     attribute id { xsd:ID }?,
     preferred+, admitted*, deprecates*,
-    termdomain?, definition, termnote*, termexample*, termsource*
+    termdomain?, termdefinition, termnote*, termexample*, termsource*
   }
 
 BibDataExtensionType =
