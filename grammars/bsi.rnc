@@ -72,22 +72,22 @@ clause-hanging-paragraph-with-footnote =
 
 sections =
   element sections {
-    (note | admonition)*, (floating-title | section-title)?, clause, (floating-title | section-title)?, 
-    (term-clause | terms)?, (floating-title | section-title)?, definitions?, (floating-title | section-title)?,
-    (clause | term-clause | terms | floating-title | section-title)+
+    (note | admonition)*, (floating-title | floating-section-title)?, clause, (floating-title | floating-section-title)?, 
+    (term-clause | terms)?, (floating-title | floating-section-title)?, definitions?, (floating-title | floating-section-title)?,
+    (clause | term-clause | terms | floating-title | floating-section-title)+
   } 
 
-section-title =
+}
+
+# end overrides
+
+floating-section-title =
   element section-title {
     attribute id { xsd:ID },
     attribute depth { xsd:int },
     TextElement*
 }
-   
 
-}
-
-# end overrides
 
 AdmonitionType |= "commentary"
 
