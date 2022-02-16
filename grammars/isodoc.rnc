@@ -334,6 +334,12 @@ pagebreak = element pagebreak {
 
 # end overrides
 
+image |=
+  element svg {
+     ( text | AnyElement )+
+}
+
+
 MultilingualRenderingType = "common" | "all-columns" | "parallel" | "tag"
 
 docsubtype = element subdoctype { DocumentSubtype }
