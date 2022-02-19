@@ -68,16 +68,6 @@ xref =
      XrefBody
 }
 
-XrefBody = 
-     XrefTarget*,
-     PureTextElement+
-
-XrefTarget = 
-  element location {
-    attribute target { xsd:string { pattern = "\i\c*|\c+#\c+" }},
-    attribute connective { "and" | "or" | "from" | "to" | "" }
-}
-
 erefType =
     attribute normative { xsd:boolean }?,
     attribute citeas { text },
@@ -868,6 +858,16 @@ floating-title =
     attribute id { xsd:ID },
     attribute depth { xsd:int },
     TextElement*
+}
+
+XrefBody =
+     XrefTarget*,
+     PureTextElement+
+
+XrefTarget =
+  element location {
+    attribute target { xsd:string { pattern = "\i\c*|\c+#\c+" }},
+    attribute connective { "and" | "or" | "from" | "to" | "" }
 }
 
 }
