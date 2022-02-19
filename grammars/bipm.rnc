@@ -17,7 +17,7 @@ xref =
      attribute pagenumber { xsd:boolean }?,
      attribute nosee { xsd:boolean }?,
      attribute nopage { xsd:boolean }?,
-     text
+     XrefBody
 }
 
 Clause-Section =

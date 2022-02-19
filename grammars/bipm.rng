@@ -59,7 +59,7 @@
             <data type="boolean"/>
           </attribute>
         </optional>
-        <text/>
+        <ref name="XrefBody"/>
       </element>
     </define>
     <define name="Clause-Section">

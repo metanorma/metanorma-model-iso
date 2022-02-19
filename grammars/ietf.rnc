@@ -109,7 +109,7 @@ xref =
      attribute type { ReferenceFormat }?,
      attribute alt { text }?,
      attribute format { text }?,
-     text
+     XrefBody
 }
 
 erefType =

@@ -65,7 +65,17 @@ xref =
      attribute alt { text }?,
      attribute case { "capital" | "lowercase" }?,
      attribute droploc { xsd:boolean }?,
+     XrefBody
+}
+
+XrefBody = 
+     XrefTarget*,
      PureTextElement+
+
+XrefTarget = 
+  element location {
+    attribute target { xsd:string { pattern = "\i\c*|\c+#\c+" }},
+    attribute connective { "and" | "or" | "from" | "to" | "" }
 }
 
 erefType =
@@ -77,6 +87,19 @@ erefType =
     attribute droploc { xsd:boolean }?,
     CitationType,
     PureTextElement+
+
+
+localityStack =
+  element localityStack { 
+    attribute connective { "and" | "or" | "from" | "to" | "" }?,
+    locality* 
+}
+
+sourceLocalityStack =
+  element sourceLocalityStack { 
+    attribute connective { "and" | "or" | "from" | "to" | "" }?,
+    sourceLocality* 
+}
 
 ul =
   element ul {
