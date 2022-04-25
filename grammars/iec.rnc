@@ -7,7 +7,8 @@ start = iec-standard
 DocumentType =
      "international-standard" | "technical-specification" |
      "technical-report" | "publicly-available-specification" |
-    "international-workshop-agreement" | "guide" | "industry-technical-agreement"
+    "international-workshop-agreement" | "guide" | "industry-technical-agreement" |
+    "system-reference-delivrabble"
 
 BibDataExtensionType =
         doctype, docsubtype?, horizontal?, function?, editorialgroup, ics*, structuredidentifier, 
