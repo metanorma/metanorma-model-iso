@@ -25,6 +25,8 @@ admonition =
     attribute id { xsd:ID },
     attribute target { xsd:IDREF }?,
     attribute uri { xsd:anyURI }?,
+    attribute coverpage { xsd:boolean }?,
+    attribute notag { xsd:boolean }?,
     tname?,
     paragraph-with-footnote*,
     note*

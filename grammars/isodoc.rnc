@@ -287,6 +287,8 @@ note = element note {
     attribute type { text }?,
     attribute tag { text }?,
     attribute multilingual-rendering { MultilingualRenderingType }?,
+    attribute coverpage { xsd:boolean }?,
+    attribute notag { xsd:boolean }?,
     (paragraph | ul | ol | dl | formula | quote | sourcecode)+
 }
 

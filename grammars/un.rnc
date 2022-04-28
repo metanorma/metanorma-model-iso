@@ -16,6 +16,8 @@ include "isodoc.rnc" {
       attribute unnumbered { xsd:boolean }?,
       attribute type {
         ( "danger" | "caution" | "warning" | "important" | "safety precautions" )},
+    attribute coverpage { xsd:boolean }?,
+    attribute notag { xsd:boolean }?,
       tname?,
       (  paragraph-with-footnote | table | formula | ol | ul | dl | figure | quote | sourcecode | example | review )+,
       note*

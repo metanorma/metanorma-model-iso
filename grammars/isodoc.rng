@@ -888,6 +888,16 @@
             <ref name="MultilingualRenderingType"/>
           </attribute>
         </optional>
+        <optional>
+          <attribute name="coverpage">
+            <data type="boolean"/>
+          </attribute>
+        </optional>
+        <optional>
+          <attribute name="notag">
+            <data type="boolean"/>
+          </attribute>
+        </optional>
         <oneOrMore>
           <choice>
             <ref name="paragraph"/>

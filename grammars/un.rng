@@ -49,6 +49,16 @@
           </choice>
         </attribute>
         <optional>
+          <attribute name="coverpage">
+            <data type="boolean"/>
+          </attribute>
+        </optional>
+        <optional>
+          <attribute name="notag">
+            <data type="boolean"/>
+          </attribute>
+        </optional>
+        <optional>
           <ref name="tname"/>
         </optional>
         <oneOrMore>
