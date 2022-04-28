@@ -30,6 +30,19 @@ doctype = element doctype {
     DocumentType 
 }
 
+admonition =
+  element admonition {
+    attribute type { AdmonitionType },
+    attribute class { text }?,
+    attribute id { xsd:ID },
+    attribute uri { xsd:anyURI }?,
+    attribute coverpage { xsd:boolean }?,
+    attribute notag { xsd:boolean }?,
+    tname?,
+    paragraph-with-footnote*,
+    note*
+  }
+
 index = element index {
   attribute to { xsd:IDREF }?,
   element primary { (PureTextElement|stem)+ },
