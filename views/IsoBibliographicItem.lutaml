@@ -6,7 +6,7 @@ diagram IsoDoc_IsoBibliographicItem {
   include ../models/relaton/BibliographicItem.lutaml
   include ../models/relaton/DocumentStatus.lutaml
   include ../models/relaton/Organization.lutaml
-  include ../models/standard_document/StandardBibDataExtensionType.lutaml
+  include ../models/standard_document/metadata/StandardBibDataExtensionType.lutaml
   include ../models/iso_document/metadata/IsoBibliographicItem.lutaml
   include ../models/iso_document/metadata/IsoDocumentId.lutaml
   include ../models/iso_document/metadata/IsoLocalizedTitle.lutaml

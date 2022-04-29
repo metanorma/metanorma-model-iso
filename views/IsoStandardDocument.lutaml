@@ -4,8 +4,8 @@ diagram IsoDoc_IsoStandardDocument {
 
 
   include ../models/standard_document/StandardDocument.lutaml
-  include ../models/standard_document/AnnexSection.lutaml
-  include ../models/standard_document/ClauseSection.lutaml
+  include ../models/standard_document/sections/AnnexSection.lutaml
+  include ../models/standard_document/sections/ClauseSection.lutaml
 
   include ../models/iso_document/IsoStandardDocument.lutaml
   include ../models/iso_document/IsoAmendmentDocument.lutaml
