@@ -1256,7 +1256,7 @@
     <element name="span">
       <attribute name="class"/>
       <oneOrMore>
-        <ref name="Textelement"/>
+        <ref name="TextElement"/>
       </oneOrMore>
     </element>
   </define>
