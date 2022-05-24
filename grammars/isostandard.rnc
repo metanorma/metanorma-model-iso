@@ -70,7 +70,7 @@ annex =
   }
 
 AdmonitionType =
- ( "danger" | "caution" | "warning" | "important" | "safety precautions" )
+ ( "danger" | "caution" | "warning" | "important" | "safety precautions" | "editorial" )
 
 preface =
   element preface {
