@@ -3,12 +3,12 @@ diagram IsoDoc_IsoBlocks {
   caption 'Block elements of ISO Standard Model'
 
 
-  include ../models/basic_document/AdmonitionBlock.lutaml
+  include ../models/basic_document/multiparagraphs/AdmonitionBlock.lutaml
   include ../models/iso_document/blocks/IsoAdmonitionBlock.lutaml
   include ../models/iso_document/blocks/IsoAdmonitionType.lutaml
 
-  include ../models/standard_document/TermCollection.lutaml
-  include ../models/standard_document/Term.lutaml
+  include ../models/standard_document/terms/TermCollection.lutaml
+  include ../models/standard_document/terms/Term.lutaml
   include ../models/iso_document/terms/IsoTermCollection.lutaml
   include ../models/iso_document/terms/IsoTerm.lutaml
 
