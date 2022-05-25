@@ -95,7 +95,7 @@ foreword = element foreword { Basic-Section }
 introduction = element introduction { Content-Section }
 
 editorialgroup = element editorialgroup {
-  technical-committee+, subcommittee*, workgroup*, secretariat?
+  technical-committee+, subcommittee*, workgroup*, approvalgroup*, secretariat?
 }
 
 Content-Section =
@@ -136,6 +136,9 @@ tc-documentnumber =
   element tc-document-number { 
     xsd:int 
    }
+
+approvalgroup =
+  element approvalgroup { IsoWorkgroup }
 
 subcommittee =
   element subcommittee { IsoWorkgroup }
