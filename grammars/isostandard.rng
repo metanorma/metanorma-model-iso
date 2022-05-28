@@ -318,20 +318,6 @@
         <ref name="ISOProjectGroup"/>
       </element>
     </define>
-    <define name="ISOProjectGroup">
-      <oneOrMore>
-        <ref name="technical-committee"/>
-      </oneOrMore>
-      <zeroOrMore>
-        <ref name="subcommittee"/>
-      </zeroOrMore>
-      <zeroOrMore>
-        <ref name="workgroup"/>
-      </zeroOrMore>
-      <optional>
-        <ref name="secretariat"/>
-      </optional>
-    </define>
     <define name="Content-Section">
       <optional>
         <attribute name="id">
@@ -377,6 +363,25 @@
     </define>
   </include>
   <!-- end overrides -->
+  <define name="ISOProjectGroup">
+    <oneOrMore>
+      <ref name="technical-committee"/>
+    </oneOrMore>
+    <zeroOrMore>
+      <ref name="subcommittee"/>
+    </zeroOrMore>
+    <zeroOrMore>
+      <ref name="workgroup"/>
+    </zeroOrMore>
+    <optional>
+      <ref name="secretariat"/>
+    </optional>
+  </define>
+  <define name="approvalgroup">
+    <element name="approvalgroup">
+      <ref name="ISOProjectGroup"/>
+    </element>
+  </define>
   <!--
     We display the Normative References between scope and terms; but to keep the
     grammar simple, we keep the references together

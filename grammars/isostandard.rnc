@@ -97,9 +97,6 @@ introduction = element introduction { Content-Section }
 editorialgroup = element editorialgroup { ISOProjectGroup }
 approvalgroup = element approvalgroup { ISOProjectGroup }
 
-ISOProjectGroup =
-  technical-committee+, subcommittee*, workgroup*, secretariat?
-
 Content-Section =
     attribute id { xsd:ID }?,
     attribute language { text }?,
@@ -115,6 +112,10 @@ Content-Section =
 }
 
 # end overrides
+
+ISOProjectGroup =
+  technical-committee+, subcommittee*, workgroup*, secretariat?
+approvalgroup = element approvalgroup { ISOProjectGroup }
 
 # We display the Normative References between scope and terms; but to keep the
 # grammar simple, we keep the references together
