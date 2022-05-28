@@ -313,11 +313,6 @@
         <ref name="ISOProjectGroup"/>
       </element>
     </define>
-    <define name="approvalgroup">
-      <element name="approvalgroup">
-        <ref name="ISOProjectGroup"/>
-      </element>
-    </define>
     <define name="Content-Section">
       <optional>
         <attribute name="id">

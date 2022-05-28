@@ -95,7 +95,6 @@ foreword = element foreword { Basic-Section }
 introduction = element introduction { Content-Section }
 
 editorialgroup = element editorialgroup { ISOProjectGroup }
-approvalgroup = element approvalgroup { ISOProjectGroup }
 
 Content-Section =
     attribute id { xsd:ID }?,
