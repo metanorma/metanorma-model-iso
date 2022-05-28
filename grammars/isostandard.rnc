@@ -11,7 +11,7 @@ organization =
 }
 
 BibDataExtensionType =
-        doctype, docsubtype?, horizontal?, editorialgroup, ics*, structuredidentifier, stagename?
+        doctype, docsubtype?, horizontal?, editorialgroup, approvalgroup, ics*, structuredidentifier, stagename?
 
 bdate = element date {
   attribute type { ( BibliographicDateType | text ) },
@@ -94,9 +94,11 @@ structuredidentifier =
 foreword = element foreword { Basic-Section }
 introduction = element introduction { Content-Section }
 
-editorialgroup = element editorialgroup {
-  technical-committee+, subcommittee*, workgroup*, approvalgroup*, secretariat?
-}
+editorialgroup = element editorialgroup { ISOProjectGroup }
+approvalgroup = element approvalgroup { ISOProjectGroup }
+
+ISOProjectGroup =
+  technical-committee+, subcommittee*, workgroup*, secretariat?
 
 Content-Section =
     attribute id { xsd:ID }?,
@@ -136,9 +138,6 @@ tc-documentnumber =
   element tc-document-number { 
     xsd:int 
    }
-
-approvalgroup =
-  element approvalgroup { IsoWorkgroup }
 
 subcommittee =
   element subcommittee { IsoWorkgroup }

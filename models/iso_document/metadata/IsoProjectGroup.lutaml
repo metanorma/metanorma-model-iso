@@ -1,6 +1,6 @@
 class IsoProjectGroup{
     definition {
-       Editorial groups associated with the production of an ISO/IEC document.
+       Editorial and Aproval groups associated with the production of an ISO/IEC document.
     }
     +technicalCommittee: IsoSubGroup[1..*] {
        definition {
@@ -15,12 +15,6 @@ class IsoProjectGroup{
     +workgroup: IsoSubGroup[0..*] {
        definition {
          Workgroups.
-       }
-    }
-    +approvalgroup: IsoSubGroup[0..*] {
-       definition {
-         Approval group, group designated with approving a draft. Is typically
-         the technical committee or subcomittee responsible for drafting the document.
        }
     }
     +secretariat: String[0..1] {

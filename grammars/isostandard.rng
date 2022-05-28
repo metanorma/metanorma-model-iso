@@ -45,6 +45,7 @@
         <ref name="horizontal"/>
       </optional>
       <ref name="editorialgroup"/>
+      <ref name="approvalgroup"/>
       <zeroOrMore>
         <ref name="ics"/>
       </zeroOrMore>
@@ -309,22 +310,27 @@
     </define>
     <define name="editorialgroup">
       <element name="editorialgroup">
-        <oneOrMore>
-          <ref name="technical-committee"/>
-        </oneOrMore>
-        <zeroOrMore>
-          <ref name="subcommittee"/>
-        </zeroOrMore>
-        <zeroOrMore>
-          <ref name="workgroup"/>
-        </zeroOrMore>
-        <zeroOrMore>
-          <ref name="approvalgroup"/>
-        </zeroOrMore>
-        <optional>
-          <ref name="secretariat"/>
-        </optional>
+        <ref name="ISOProjectGroup"/>
       </element>
+    </define>
+    <define name="approvalgroup">
+      <element name="approvalgroup">
+        <ref name="ISOProjectGroup"/>
+      </element>
+    </define>
+    <define name="ISOProjectGroup">
+      <oneOrMore>
+        <ref name="technical-committee"/>
+      </oneOrMore>
+      <zeroOrMore>
+        <ref name="subcommittee"/>
+      </zeroOrMore>
+      <zeroOrMore>
+        <ref name="workgroup"/>
+      </zeroOrMore>
+      <optional>
+        <ref name="secretariat"/>
+      </optional>
     </define>
     <define name="Content-Section">
       <optional>
@@ -430,11 +436,6 @@
   <define name="tc-documentnumber">
     <element name="tc-document-number">
       <data type="int"/>
-    </element>
-  </define>
-  <define name="approvalgroup">
-    <element name="approvalgroup">
-      <ref name="IsoWorkgroup"/>
     </element>
   </define>
   <define name="subcommittee">

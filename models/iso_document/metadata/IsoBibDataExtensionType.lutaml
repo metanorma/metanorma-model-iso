@@ -12,6 +12,11 @@ class IsoBibDataExtensionType {
          Editorial groups associated with the production of the document.
        }
     }
+    +approval: IsoProjectGroup {
+       definition {
+         Editorial groups associated with the production of the document.
+       }
+    }
     +stageName: String[0..1] {
        definition {
          Name of the publication stage of the document.
