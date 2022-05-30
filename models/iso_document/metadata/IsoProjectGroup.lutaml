@@ -2,6 +2,12 @@ class IsoProjectGroup{
     definition {
        Editorial and Aproval groups associated with the production of an ISO/IEC document.
     }
+    +agency: String[0..*] {
+      definition {
+        The agency responsible for the group. If not supplied,
+        assumed to be the publishing SDO.
+      }
+    }
     +technicalCommittee: IsoSubGroup[1..*] {
        definition {
          Technical committees.
