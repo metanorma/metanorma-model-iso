@@ -10,7 +10,7 @@ ol =
   element ol {
     attribute id { xsd:ID },
     attribute class { "steps" }?,
-    li+, note*
+    tname?, li+, note*
 }
 
 DocumentType =

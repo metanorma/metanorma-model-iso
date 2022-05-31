@@ -111,7 +111,7 @@ ul =
     attribute keep-lines-together { xsd:boolean }?,
     attribute tag { text }?,
     attribute multilingual-rendering { MultilingualRenderingType }?,
-    ul_li+, note*
+    tname?, ul_li+, note*
 }
 
 ol =
@@ -123,7 +123,7 @@ ol =
     attribute multilingual-rendering { MultilingualRenderingType }?,
     attribute type { ( "roman" | "alphabet" | "arabic" |
                        "roman_upper" | "alphabet_upper" ) }?,
-    li+, note*
+    tname?, li+, note*
 }
 
 dl =
@@ -134,7 +134,7 @@ dl =
     attribute key { xsd:boolean }?,
     attribute tag { text }?,
     attribute multilingual-rendering { MultilingualRenderingType }?,
-    (dt, dd)+, note*
+    tname?, (dt, dd)+, note*
 }
 
 dt =
