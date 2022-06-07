@@ -4,7 +4,7 @@
 
 include "isodoc.rnc" {
 
-start = mpfd-standard
+start = ieee-standard
 
 DocumentType =
 "policy-and-procedures" | "best-practices" | "supporting-document" | "report" | "legal" | "directives" | "proposal" | 
@@ -15,20 +15,15 @@ editorialgroup = element editorialgroup {
 }
 
 BibDataExtensionType =
-    doctype?, docsubtype?, editorialgroup, ics*, security?
-
-
+    doctype?, docsubtype?, editorialgroup, ics*
 }
 
 committee = element committee { 
-    attribute type { ( "technical" | "provisional" ) },
     text
 }
 
-security = element security { text }
-
-mpfd-standard =
-  element mpfd-standard {
+ieee-standard =
+  element ieee-standard {
 attribute version { text },
   attribute type { "semantic" | "presentation" },
     bibdata, termdocsource*, misccontainer?, boilerplate?, preface, sections+, annex*, bibliography, indexsect*

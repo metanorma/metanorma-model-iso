@@ -45,11 +45,11 @@ cp reqt.rng ../../metanorma-acme/lib/metanorma/generic
 cp biblio.rng ../../metanorma-acme/lib/metanorma/generic
 cp isodoc.rng ../../metanorma-acme/lib/metanorma/generic
 cat rsd.rng | ruby -pe '$_.gsub!(/rsd-standard/, "generic-standard") ' | ruby -pe '$_.gsub!(/<grammar /, %{<grammar ns="https://www.metanorma.org/ns/generic" }) ' > ../../metanorma-acme/lib/metanorma/generic/generic.rng
-cp basicdoc.rng ../../metanorma-mpfd/lib/metanorma/mpfa
-cp reqt.rng ../../metanorma-mpfd/lib/metanorma/mpfa
-cp biblio.rng ../../metanorma-mpfd/lib/metanorma/mpfa
-cp isodoc.rng ../../metanorma-mpfd/lib/metanorma/mpfa
-cat mpfd.rng | ruby -pe '$_.gsub!(/<grammar /, %{<grammar ns="https://www.metanorma.org/ns/mpfd" }) '>  ../../metanorma-mpfd/lib/metanorma/mpfa/mpfd.rng
+cp basicdoc.rng ../../metanorma-ieee/lib/metanorma/ieee
+cp reqt.rng ../../metanorma-ieee/lib/metanorma/ieee
+cp biblio.rng ../../metanorma-ieee/lib/metanorma/ieee
+cp isodoc.rng ../../metanorma-ieee/lib/metanorma/ieee
+cat ieee.rng | ruby -pe '$_.gsub!(/<grammar /, %{<grammar ns="https://www.metanorma.org/ns/ieee" }) '>  ../../metanorma-ieee/lib/metanorma/ieee/ieee.rng
 cp basicdoc.rng ../../metanorma-unece/lib/metanorma/un
 cp reqt.rng ../../metanorma-unece/lib/metanorma/un
 cp biblio.rng ../../metanorma-unece/lib/metanorma/un

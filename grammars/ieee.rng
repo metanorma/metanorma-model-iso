@@ -7,7 +7,7 @@
   -->
   <include href="isodoc.rng">
     <start>
-      <ref name="mpfd-standard"/>
+      <ref name="ieee-standard"/>
     </start>
     <define name="DocumentType">
       <choice>
@@ -39,29 +39,15 @@
       <zeroOrMore>
         <ref name="ics"/>
       </zeroOrMore>
-      <optional>
-        <ref name="security"/>
-      </optional>
     </define>
   </include>
   <define name="committee">
     <element name="committee">
-      <attribute name="type">
-        <choice>
-          <value>technical</value>
-          <value>provisional</value>
-        </choice>
-      </attribute>
       <text/>
     </element>
   </define>
-  <define name="security">
-    <element name="security">
-      <text/>
-    </element>
-  </define>
-  <define name="mpfd-standard">
-    <element name="mpfd-standard">
+  <define name="ieee-standard">
+    <element name="ieee-standard">
       <attribute name="version"/>
       <attribute name="type">
         <choice>
