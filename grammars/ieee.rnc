@@ -6,21 +6,20 @@ include "isodoc.rnc" {
 
 start = ieee-standard
 
-DocumentType =
-"policy-and-procedures" | "best-practices" | "supporting-document" | "report" | "legal" | "directives" | "proposal" | 
-        "standard" 
+DocumentType = "guide" | "recommended-practice" | "standard"
 
 editorialgroup = element editorialgroup {
-  committee+
+  society, committee+
 }
 
 BibDataExtensionType =
     doctype?, docsubtype?, editorialgroup, ics*
 }
 
-committee = element committee { 
-    text
-}
+DocumentSubtype = "trial-use"
+
+committee = element committee { text }
+society = element society { text }
 
 ieee-standard =
   element ieee-standard {

@@ -11,18 +11,14 @@
     </start>
     <define name="DocumentType">
       <choice>
-        <value>policy-and-procedures</value>
-        <value>best-practices</value>
-        <value>supporting-document</value>
-        <value>report</value>
-        <value>legal</value>
-        <value>directives</value>
-        <value>proposal</value>
+        <value>guide</value>
+        <value>recommended-practice</value>
         <value>standard</value>
       </choice>
     </define>
     <define name="editorialgroup">
       <element name="editorialgroup">
+        <ref name="society"/>
         <oneOrMore>
           <ref name="committee"/>
         </oneOrMore>
@@ -41,8 +37,16 @@
       </zeroOrMore>
     </define>
   </include>
+  <define name="DocumentSubtype">
+    <value>trial-use</value>
+  </define>
   <define name="committee">
     <element name="committee">
+      <text/>
+    </element>
+  </define>
+  <define name="society">
+    <element name="society">
       <text/>
     </element>
   </define>
