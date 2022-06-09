@@ -19,10 +19,15 @@
     <define name="editorialgroup">
       <element name="editorialgroup">
         <ref name="society"/>
+        <ref name="balloting-group"/>
+        <ref name="working-group"/>
         <oneOrMore>
           <ref name="committee"/>
         </oneOrMore>
       </element>
+    </define>
+    <define name="DocumentSubtype">
+      <value>trial-use</value>
     </define>
     <define name="BibDataExtensionType">
       <optional>
@@ -37,8 +42,15 @@
       </zeroOrMore>
     </define>
   </include>
-  <define name="DocumentSubtype">
-    <value>trial-use</value>
+  <define name="balloting-group">
+    <element name="balloting-group">
+      <text/>
+    </element>
+  </define>
+  <define name="working-group">
+    <element name="working-group">
+      <text/>
+    </element>
   </define>
   <define name="committee">
     <element name="committee">

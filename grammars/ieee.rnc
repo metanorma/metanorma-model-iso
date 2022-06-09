@@ -9,15 +9,17 @@ start = ieee-standard
 DocumentType = "guide" | "recommended-practice" | "standard"
 
 editorialgroup = element editorialgroup {
-  society, committee+
+  society, balloting-group, working-group, committee+
 }
+
+DocumentSubtype = "trial-use"
 
 BibDataExtensionType =
     doctype?, docsubtype?, editorialgroup, ics*
 }
 
-DocumentSubtype = "trial-use"
-
+balloting-group = element balloting-group { text }
+working-group = element working-group { text }
 committee = element committee { text }
 society = element society { text }
 
