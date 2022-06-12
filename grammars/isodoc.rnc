@@ -653,7 +653,7 @@ related =
 }
 
 RelatedTermType = 
-  "deprecates" | "supersedes" | "narrower" | "broader" | "equivalent" | "compare" | "contrast" | "see"
+  "deprecates" | "supersedes" | "narrower" | "broader" | "equivalent" | "compare" | "contrast" | "see" | "seealso"
 
 deprecates =
   element deprecates { Designation }
