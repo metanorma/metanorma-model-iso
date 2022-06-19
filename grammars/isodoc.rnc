@@ -223,6 +223,7 @@ ParagraphType =
     attribute keep-with-next { xsd:boolean }?,
     attribute keep-lines-together { xsd:boolean }?,
     attribute tag { text }?,
+    attribute type { text }?,
     attribute multilingual-rendering { MultilingualRenderingType }?,
    ( TextElement )*, note*
 
@@ -233,6 +234,7 @@ paragraph-with-footnote =
     attribute keep-with-next { xsd:boolean }?,
     attribute keep-lines-together { xsd:boolean }?,
     attribute tag { text }?,
+    attribute type { text }?,
     attribute multilingual-rendering { MultilingualRenderingType }?,
    ( TextElement | fn  )*, note*
 }
