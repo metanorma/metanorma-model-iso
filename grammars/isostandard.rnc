@@ -11,7 +11,7 @@ organization =
 }
 
 BibDataExtensionType =
-        doctype, docsubtype?, horizontal?, editorialgroup, approvalgroup, ics*, structuredidentifier, stagename?
+        doctype, docsubtype?, horizontal?, editorialgroup, approvalgroup?, ics*, structuredidentifier, stagename?
 
 bdate = element date {
   attribute type { ( BibliographicDateType | text ) },
