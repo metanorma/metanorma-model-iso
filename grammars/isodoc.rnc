@@ -43,6 +43,9 @@ admonition =
     note*
   }
 
+AdmonitionType = 
+  "warning" | "note" | "tip" | "important" | "caution" | "statement" | "editorial"
+
 index = element index {
   attribute to { xsd:IDREF }?,
   element primary { (PureTextElement|stem)+ },
