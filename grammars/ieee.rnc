@@ -8,15 +8,24 @@ start = ieee-standard
 
 DocumentType = "guide" | "recommended-practice" | "standard"
 
+stage = element stage {
+  "developing" | "active" | "inactive"
+}
+
 editorialgroup = element editorialgroup {
   society, balloting-group, working-group, committee+
 }
 
-DocumentSubtype = "trial-use"
+DocumentSubtype = "amendment" | "corrigendum" | "erratum"
 
 BibDataExtensionType =
-    doctype?, docsubtype?, editorialgroup, ics*
+    doctype?, docsubtype?, trialuse?, editorialgroup, ics*
 }
+
+BibliographicDateType |= "feecback-ended"
+
+
+trialuse = element trial-use { xsd:boolean }
 
 balloting-group = element balloting-group { text }
 working-group = element working-group { text }

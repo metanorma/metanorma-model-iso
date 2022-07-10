@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<grammar xmlns="http://relaxng.org/ns/structure/1.0">
+<grammar xmlns="http://relaxng.org/ns/structure/1.0" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
   <!--
     Currently we inherit from a namespaced grammar, isostandard. Until we inherit from isodoc,
     we cannot have a new default namespace: we will end up with a grammar with two different
@@ -16,6 +16,15 @@
         <value>standard</value>
       </choice>
     </define>
+    <define name="stage">
+      <element name="stage">
+        <choice>
+          <value>developing</value>
+          <value>active</value>
+          <value>inactive</value>
+        </choice>
+      </element>
+    </define>
     <define name="editorialgroup">
       <element name="editorialgroup">
         <ref name="society"/>
@@ -27,7 +36,11 @@
       </element>
     </define>
     <define name="DocumentSubtype">
-      <value>trial-use</value>
+      <choice>
+        <value>amendment</value>
+        <value>corrigendum</value>
+        <value>erratum</value>
+      </choice>
     </define>
     <define name="BibDataExtensionType">
       <optional>
@@ -36,12 +49,23 @@
       <optional>
         <ref name="docsubtype"/>
       </optional>
+      <optional>
+        <ref name="trialuse"/>
+      </optional>
       <ref name="editorialgroup"/>
       <zeroOrMore>
         <ref name="ics"/>
       </zeroOrMore>
     </define>
   </include>
+  <define name="BibliographicDateType" combine="choice">
+    <value>feecback-ended</value>
+  </define>
+  <define name="trialuse">
+    <element name="trial-use">
+      <data type="boolean"/>
+    </element>
+  </define>
   <define name="balloting-group">
     <element name="balloting-group">
       <text/>
