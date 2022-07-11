@@ -27,7 +27,10 @@ BibliographicDateType |= "feecback-ended"
 
 trialuse = element trial-use { xsd:boolean }
 
-balloting-group = element balloting-group { text }
+balloting-group = element balloting-group {
+  attribute type { "individual" | "entity" },
+  text
+}
 working-group = element working-group { text }
 committee = element committee { text }
 society = element society { text }

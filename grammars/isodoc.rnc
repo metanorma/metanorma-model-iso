@@ -796,6 +796,8 @@ structuredidentifier = element structuredidentifier {
   element version { text }?,
   element supplementtype { text }?,
   element supplementnumber { text }?,
+  element amendment { text }?,
+  element corrigendum { text }?,
   element language { text }?,
   element year { text }?
 }

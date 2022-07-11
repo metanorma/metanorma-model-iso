@@ -68,6 +68,12 @@
   </define>
   <define name="balloting-group">
     <element name="balloting-group">
+      <attribute name="type">
+        <choice>
+          <value>individual</value>
+          <value>entity</value>
+        </choice>
+      </attribute>
       <text/>
     </element>
   </define>
