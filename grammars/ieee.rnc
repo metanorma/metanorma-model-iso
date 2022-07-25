@@ -13,13 +13,13 @@ stage = element stage {
 }
 
 editorialgroup = element editorialgroup {
-  society, balloting-group, working-group, committee+
+  society?, balloting-group?, working-group?, committee+
 }
 
 DocumentSubtype = "amendment" | "corrigendum" | "erratum"
 
 BibDataExtensionType =
-    doctype?, docsubtype?, trialuse?, editorialgroup, ics*
+    doctype?, docsubtype?, trialuse?, editorialgroup?, ics*
 }
 
 BibliographicDateType |= "feecback-ended"

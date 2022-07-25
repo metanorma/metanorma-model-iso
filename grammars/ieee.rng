@@ -27,9 +27,15 @@
     </define>
     <define name="editorialgroup">
       <element name="editorialgroup">
-        <ref name="society"/>
-        <ref name="balloting-group"/>
-        <ref name="working-group"/>
+        <optional>
+          <ref name="society"/>
+        </optional>
+        <optional>
+          <ref name="balloting-group"/>
+        </optional>
+        <optional>
+          <ref name="working-group"/>
+        </optional>
         <oneOrMore>
           <ref name="committee"/>
         </oneOrMore>
@@ -52,7 +58,9 @@
       <optional>
         <ref name="trialuse"/>
       </optional>
-      <ref name="editorialgroup"/>
+      <optional>
+        <ref name="editorialgroup"/>
+      </optional>
       <zeroOrMore>
         <ref name="ics"/>
       </zeroOrMore>
