@@ -392,7 +392,8 @@ TextElement |= concept | add | del | span
 add = element add { PureTextElement | eref | stem | keyword | xref | hyperlink }
 del = element del { PureTextElement | eref | stem | keyword | xref | hyperlink }
 span = element span {
-  attribute class { text },
+  attribute class { text }?,
+  attribute style { text }?,
   TextElement+
 }
 
