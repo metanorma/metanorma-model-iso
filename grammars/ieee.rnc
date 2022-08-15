@@ -6,10 +6,10 @@ include "isodoc.rnc" {
 
 start = ieee-standard
 
-DocumentType = "guide" | "recommended-practice" | "standard"
+DocumentType = "guide" | "recommended-practice" | "standard" | "whitepaper" | "redline" | "other"
 
 stage = element stage {
-  "developing" | "active" | "inactive"
+  "draft" | "approved" | "superseded" | "withdrawn"
 }
 
 editorialgroup = element editorialgroup {
@@ -19,10 +19,19 @@ editorialgroup = element editorialgroup {
 DocumentSubtype = "amendment" | "corrigendum" | "erratum"
 
 BibDataExtensionType =
-    doctype?, docsubtype?, trialuse?, editorialgroup?, ics*
+    doctype?, docsubtype?, trialuse?, editorialgroup?, ics*, 
+    standard_status?, standard_modified?, pubstatus?, holdstatus?
 }
 
-BibliographicDateType |= "feecback-ended"
+standard_status = element standard_status { "Inactive" | "Active" | "Superseded" }
+
+standard_modified = element standard_modified { "Draft" | "Withdrawn" | "Superseded" | "Approved" | "Reserved" | "Redline" }
+
+pubstatus = element pubstatus { "Active" | "Inactive"} 
+
+holdstatus = element holdstatus { "Hold" | "Publish" }
+
+BibliographicDateType |= "feedback-ended"
 
 
 trialuse = element trial-use { xsd:boolean }

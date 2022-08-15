@@ -14,14 +14,18 @@
         <value>guide</value>
         <value>recommended-practice</value>
         <value>standard</value>
+        <value>whitepaper</value>
+        <value>redline</value>
+        <value>other</value>
       </choice>
     </define>
     <define name="stage">
       <element name="stage">
         <choice>
-          <value>developing</value>
-          <value>active</value>
-          <value>inactive</value>
+          <value>draft</value>
+          <value>approved</value>
+          <value>superseded</value>
+          <value>withdrawn</value>
         </choice>
       </element>
     </define>
@@ -64,10 +68,59 @@
       <zeroOrMore>
         <ref name="ics"/>
       </zeroOrMore>
+      <optional>
+        <ref name="standard_status"/>
+      </optional>
+      <optional>
+        <ref name="standard_modified"/>
+      </optional>
+      <optional>
+        <ref name="pubstatus"/>
+      </optional>
+      <optional>
+        <ref name="holdstatus"/>
+      </optional>
     </define>
   </include>
+  <define name="standard_status">
+    <element name="standard_status">
+      <choice>
+        <value>Inactive</value>
+        <value>Active</value>
+        <value>Superseded</value>
+      </choice>
+    </element>
+  </define>
+  <define name="standard_modified">
+    <element name="standard_modified">
+      <choice>
+        <value>Draft</value>
+        <value>Withdrawn</value>
+        <value>Superseded</value>
+        <value>Approved</value>
+        <value>Reserved</value>
+        <value>Redline</value>
+      </choice>
+    </element>
+  </define>
+  <define name="pubstatus">
+    <element name="pubstatus">
+      <choice>
+        <value>Active</value>
+        <value>Inactive</value>
+      </choice>
+    </element>
+  </define>
+  <define name="holdstatus">
+    <element name="holdstatus">
+      <choice>
+        <value>Hold</value>
+        <value>Publish</value>
+      </choice>
+    </element>
+  </define>
   <define name="BibliographicDateType" combine="choice">
-    <value>feecback-ended</value>
+    <value>feedback-ended</value>
   </define>
   <define name="trialuse">
     <element name="trial-use">
