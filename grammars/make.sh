@@ -50,4 +50,5 @@ java -jar jing-trang/build/trang.jar -I rnc -O rng iho.rnc iho.rng
 java -jar jing-trang/build/trang.jar -I rnc -O rng bipm.rnc bipm.rng
 java -jar jing-trang/build/trang.jar -I rnc -O rng bsi.rnc bsi.rng
 java -jar jing-trang/build/trang.jar -I rnc -O rng 3gpp.rnc 3gpp.rng
+java -jar jing-trang/build/trang.jar -I rnc -O rng w3c.rnc w3c.rng
 sh copy.sh

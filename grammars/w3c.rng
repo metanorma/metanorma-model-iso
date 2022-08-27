@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<grammar xmlns="http://relaxng.org/ns/structure/1.0">
+  <!--
+    Currently we inherit from a namespaced grammar, isostandard. Until we inherit from isodoc,
+    we cannot have a new default namespace: we will end up with a grammar with two different
+    namespaces, one for isostandard and one for csand additions. And we do not want that.
+  -->
+  <include href="isodoc.rng">
+    <define name="DocumentType">
+      <choice>
+        <value>groupNote</value>
+        <value>technicalReport</value>
+      </choice>
+    </define>
+  </include>
+</grammar>
