@@ -166,5 +166,8 @@ clause-hanging-paragraph-with-footnote =
 annex-appendix =
   element appendix { Clause-Section }
 
-stagename = element stagename { text }
+stagename = element stagename { 
+  attribute abbreviation { text }?,
+  text
+}
 
