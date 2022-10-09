@@ -82,6 +82,7 @@ xref =
      attribute alt { text }?,
      attribute case { "capital" | "lowercase" }?,
      attribute droploc { xsd:boolean }?,
+     attribute style { "basic" | "full" | "short" }?,
      XrefBody
 }
 
