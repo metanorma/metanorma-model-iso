@@ -17,6 +17,7 @@ diagram IsoDoc_IsoBibliographicItem {
   include ../models/iso_document/metadata/IecDocumentCategory.lutaml
   include ../models/iso_document/metadata/IsoDocumentStageCodes.lutaml
   include ../models/iso_document/metadata/IsoDocumentSubstageCodes.lutaml
+  include ../models/iso_document/metadata/StageName.lutaml
   include ../models/iso_document/metadata/IsoBibDataExtensionType.lutaml
 
  association {
@@ -71,6 +72,11 @@ diagram IsoDoc_IsoBibliographicItem {
   association {
     owner IsoDocumentStatus
     member IsoDocumentSubstageCodes
+    owner_type direct
+  }
+  association {
+    owner IsoDocumentStatus
+    member StageName
     owner_type direct
   }
   association {
