@@ -11,6 +11,7 @@ DocumentType =
     "system-reference-delivrabble"
 
 BibDataExtensionType =
+  attribute schema-version { text }?,
         doctype, docsubtype?, horizontal?, function?, editorialgroup, ics*, structuredidentifier, 
         stagename?, updates_document_type?, accessibility-color-inside?, price-code?,
         cen-processing?, secretary?, interest-to-committees?, tc-sc-officers-note?

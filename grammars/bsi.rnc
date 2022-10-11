@@ -16,6 +16,7 @@ DocumentSubtype = "specification" | "method-of-test" | "method-of-specifying" |
                   "vocabulary" | "code-of-practice"
 
 BibDataExtensionType =
+  attribute schema-version { text }?,
         doctype, docsubtype?, editorialgroup, ics*, structuredidentifier, 
         stagename?, coverimages*
 

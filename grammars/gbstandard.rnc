@@ -25,6 +25,7 @@ term =
   }
 
 BibDataExtensionType =
+  attribute schema-version { text }?,
     doctype?, docsubtype?, gbcommittee*, ics*, structuredidentifier, stagename?, gbtype, gbccs+, gbplannumber?
 
 

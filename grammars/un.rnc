@@ -35,6 +35,7 @@ include "isodoc.rnc" {
     element sections { (clause | floating-title)+  }
 
   BibDataExtensionType =
+  attribute schema-version { text }?,
     doctype?, docsubtype?, submissionlanguage*, editorialgroup?, ics*, distribution?, session?, job_number?
 
                 preface =

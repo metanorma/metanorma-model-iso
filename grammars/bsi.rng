@@ -34,6 +34,9 @@
       </choice>
     </define>
     <define name="BibDataExtensionType">
+      <optional>
+        <attribute name="schema-version"/>
+      </optional>
       <ref name="doctype"/>
       <optional>
         <ref name="docsubtype"/>

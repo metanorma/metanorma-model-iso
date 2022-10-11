@@ -14,6 +14,7 @@ editorialgroup = element editorialgroup {
 }
 
 BibDataExtensionType =
+  attribute schema-version { text }?,
     doctype?, docsubtype?, editorialgroup, ics*
 
 preface =

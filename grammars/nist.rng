@@ -66,6 +66,9 @@
     </define>
     <define name="BibDataExtensionType">
       <optional>
+        <attribute name="schema-version"/>
+      </optional>
+      <optional>
         <ref name="doctype"/>
       </optional>
       <optional>

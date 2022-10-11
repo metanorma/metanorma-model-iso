@@ -34,6 +34,7 @@ documentnumber =
    }     
 
 BibDataExtensionType =
+  attribute schema-version { text }?,
         doctype, docsubtype?, editorialgroup, ics*, structuredidentifier, stagename?, updates_document_type?
 }
 

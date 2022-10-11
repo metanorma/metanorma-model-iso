@@ -259,6 +259,7 @@ quote =
 }
 
 BibDataExtensionType = 
+  attribute schema-version { text }?,
   doctype,
   docsubtype?,
   editorialgroup?,

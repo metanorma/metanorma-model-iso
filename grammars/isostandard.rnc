@@ -11,6 +11,7 @@ organization =
 }
 
 BibDataExtensionType =
+  attribute schema-version { text }?,
         doctype, docsubtype?, horizontal?, editorialgroup, approvalgroup?, ics*, structuredidentifier, stagename?
 
 bdate = element date {

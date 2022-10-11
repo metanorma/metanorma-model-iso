@@ -19,6 +19,7 @@ editorialgroup = element editorialgroup {
 DocumentSubtype = "amendment" | "corrigendum" | "erratum"
 
 BibDataExtensionType =
+  attribute schema-version { text }?,
     doctype?, docsubtype?, trialuse?, editorialgroup?, ics*, 
     standard_status?, standard_modified?, pubstatus?, holdstatus?
 }

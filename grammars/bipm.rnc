@@ -85,6 +85,7 @@ structuredidentifier = element structuredidentifier {
 }
 
 BibDataExtensionType =
+  attribute schema-version { text }?,
     doctype?, docsubtype?, editorialgroup, comment-period?, si-aspect?, meeting-note?, structuredidentifier
 }
 
