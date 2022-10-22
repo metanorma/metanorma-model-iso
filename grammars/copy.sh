@@ -20,9 +20,11 @@ cp isostandard.rng ../../metanorma-bsi/lib/metanorma/bsi/isostandard.rng
 cat bsi.rng | ruby -pe '$_.gsub!(/<grammar /, %{<grammar ns="https://www.metanorma.org/ns/bsi" }) '>  ../../metanorma-bsi/lib/metanorma/bsi/bsi.rng
 
 cp basicdoc.rng reqt.rng biblio.rng biblio-standoc.rng isodoc.rng ../../metanorma-csd/lib/metanorma/cc
+cp relaton-cc.rng ../../metanorma-csd/lib/metanorma/cc
 cat csd.rng | ruby -pe '$_.gsub!(/<grammar /, %{<grammar ns="https://www.metanorma.org/ns/csd" }) '>  ../../metanorma-csd/lib/metanorma/cc/cc.rng
 
 cp basicdoc.rng reqt.rng biblio.rng biblio-standoc.rng isodoc.rng ../../metanorma-csand/lib/metanorma/csa
+cp relaton-csa.rng ../../metanorma-csand/lib/metanorma/csa
 cat csa.rng | ruby -pe '$_.gsub!(/<grammar /, %{<grammar ns="https://www.metanorma.org/ns/csa" }) '>  ../../metanorma-csand/lib/metanorma/csa/csa.rng
 
 cp basicdoc.rng reqt.rng biblio.rng biblio-standoc.rng isodoc.rng ../../metanorma-m3d/lib/metanorma/m3aawg
@@ -48,6 +50,7 @@ cp basicdoc.rng reqt.rng biblio.rng biblio-standoc.rng isodoc.rng ../../metanorm
 cat nist.rng | ruby -pe '$_.gsub!(/<grammar /, %{<grammar ns="https://www.metanorma.org/ns/nist" }) '>  ../../metanorma-nist/lib/metanorma/nist/nist.rng
 
 cp basicdoc.rng reqt.rng biblio.rng biblio-standoc.rng isodoc.rng ../../metanorma-ietf/lib/metanorma/ietf
+cp relaton-ietf.rng ../../metanorma-ietf/lib/metanorma/ietf
 cat ietf.rng | ruby -pe '$_.gsub!(/<grammar /, %{<grammar ns="https://www.metanorma.org/ns/ietf" }) '>  ../../metanorma-ietf/lib/metanorma/ietf/ietf.rng
 
 cp basicdoc.rng reqt.rng biblio.rng biblio-standoc.rng isodoc.rng ../../metanorma-itu/lib/metanorma/itu

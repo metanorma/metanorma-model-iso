@@ -5,6 +5,7 @@
     we cannot have a new default namespace: we will end up with a grammar with two different
     namespaces, one for isostandard and one for csand additions. And we do not want that.
   -->
+  <include href="relaton-csa.rng"/>
   <include href="isodoc.rng">
     <start>
       <ref name="csand-standard"/>
@@ -53,49 +54,6 @@
             </optional>
           </group>
         </choice>
-      </element>
-    </define>
-    <define name="DocumentType">
-      <choice>
-        <value>guidance</value>
-        <value>proposal</value>
-        <value>standard</value>
-        <value>report</value>
-        <value>whitepaper</value>
-        <value>charter</value>
-        <value>policy</value>
-        <value>glossary</value>
-        <value>case-study</value>
-      </choice>
-    </define>
-    <define name="BibDataExtensionType">
-      <optional>
-        <attribute name="schema-version"/>
-      </optional>
-      <optional>
-        <ref name="doctype"/>
-      </optional>
-      <optional>
-        <ref name="docsubtype"/>
-      </optional>
-      <ref name="editorialgroup"/>
-      <zeroOrMore>
-        <ref name="ics"/>
-      </zeroOrMore>
-    </define>
-    <define name="editorialgroup">
-      <element name="editorialgroup">
-        <oneOrMore>
-          <ref name="technical-committee"/>
-        </oneOrMore>
-      </element>
-    </define>
-    <define name="technical-committee">
-      <element name="committee">
-        <optional>
-          <attribute name="type"/>
-        </optional>
-        <text/>
       </element>
     </define>
   </include>

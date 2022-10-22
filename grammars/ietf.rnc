@@ -2,15 +2,10 @@
 # we cannot have a new default namespace: we will end up with a grammar with two different
 # namespaces, one for isostandard and one for ietf additions. And we do not want that.
 
+include "relaton-ietf.rnc" { }
 include "isodoc.rnc" {
 
 start = ietf-standard
-
-DocumentType = "rfc" | "internet-draft"
-
-BibDataExtensionType =
-  attribute schema-version { text }?,
-        doctype?, docsubtype?, editorialgroup*, ics*, area*, ipr?, consensus?, index-include?, ipr-extract?, sort-refs?, sym-refs?, toc-include?, toc-depth?, show-on-front-page?, processing-instructions?
 
 ParagraphType =
     attribute id { xsd:ID },
@@ -179,10 +174,6 @@ Content-Section =
       content-subsection* )
 
 
-editorialgroup = element editorialgroup {
-  committee*
-}
-
 index = element index {
   attribute to { xsd:IDREF }?,
   attribute primary { xsd:boolean }?,
@@ -198,61 +189,7 @@ TextElement |= bcp14 | review
 
 bcp14 = element bcp14 { text }
 
-committee = element committee { IsoWorkgroup }
-
-area = element area { "art" | "gen" | "int" | "ops" | "rtg" | "sec" | "tsv" | 
-"Applications and Real-Time" | "General" |  "Internet" | "Operations and Management" |
-"Routing" | "Security" | "Transport" }
-
 comment = element comment { text }
-
-ipr = element ipr { text }
-consensus = element consensus { text }
-index-include = element indexInclude { text }
-ipr-extract = element iprExtract { text }
-sort-refs = element sortRefs { text }
-sym-refs = element symRefs { text }
-toc-include = element tocInclude { text }
-toc-depth = element tocDepth { text }
-show-on-front-page = element showOnFrontPage { text }
-
-processing-instructions = element pi {
- element artworkdelimiter { text }?,
- element artworklines { text }?,
- element authorship { text }?,
- element autobreaks { text }?,
- element background { text }?,
- element colonspace { text }?,
- element comments { text }?,
- element docmapping { text }?,
- element editing { text }?,
- element emoticonic { text }?,
- element footer { text }?,
- element header { text }?,
- element inline { text }?,
- element iprnotified { text }?,
- element linkmailto { text }?,
- element linefile { text }?,
- element notedraftinprogress { text }?,
- element private { text }?,
- element refparent { text }?,
- element rfcedstyle { text }?,
- element slides { text }?,
- element text-list-symbols { text }?,
- element tocappendix { text }?,
- element tocindent { text }?,
- element tocnarrow { text }?,
- element tocompact { text }?,
- element topblock { text }?,
- element useobject { text }?,
- element strict { text }?,
- element compact { text }?,
- element subcompact { text }?,
- element tocinclude { text }?,
- element tocdepth { text }?,
- element symrefs { text }?,
- element sortrefs { text }?
-}
 
 erefTypeURI =
     attribute normative { xsd:boolean }?,

@@ -3,6 +3,7 @@
 # we cannot have a new default namespace: we will end up with a grammar with two different
 # namespaces, one for isostandard and one for csd additions. And we do not want that.
 
+include "relaton-cc.rnc" {}
 include "isodoc.rnc" {
 
 start = csd-standard
@@ -16,22 +17,6 @@ figure =
     attribute class { text }?,
      source?, tname?, ( figure+ |  ( (TextElement* | pre), note*, dl? ) )
   }
-
-DocumentType =
-        "directive" | "guide" | "specification" | "standard" | "report" | "administrative" | "amendment" | "technical corrigendum" | "advisory"
-
-BibDataExtensionType =
-  attribute schema-version { text }?,
-        doctype?, docsubtype?, editorialgroup, ics*
-
-editorialgroup = element editorialgroup {
-        technical-committee+
-}
-
-technical-committee = element committee {
- attribute type { text }?,
-  text
-}
 
 }
 

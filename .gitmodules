@@ -25,3 +25,18 @@
 [submodule "grammars/relaton-model-bipm"]
 	path = grammars/relaton-model-bipm
 	url = https://github.com/relaton/relaton-model-bipm
+[submodule "grammars/relaton-model-w3c"]
+	path = grammars/relaton-model-w3c
+	url = https://github.com/relaton/relaton-model-w3c
+[submodule "grammars/relaton-model-3gpp"]
+	path = grammars/relaton-model-3gpp
+	url = https://github.com/relaton/relaton-model-3gpp
+[submodule "grammars/relaton-model-csa"]
+	path = grammars/relaton-model-csa
+	url = https://github.com/relaton/relaton-model-csa
+[submodule "grammars/relaton-model-cc"]
+	path = grammars/relaton-model-cc
+	url = https://github.com/relaton/relaton-model-cc
+[submodule "grammars/relaton-model-ietf"]
+	path = grammars/relaton-model-ietf
+	url = https://github.com/relaton/relaton-model-ietf
