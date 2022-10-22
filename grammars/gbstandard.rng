@@ -6,6 +6,7 @@
     we cannot have a new default namespace: we will end up with a grammar with two different
     namespaces, one for isostandard and one for csd additions. And we do not want that.
   -->
+  <include href="relaton-gb.rng"/>
   <include href="isostandard.rng">
     <start>
       <ref name="gb-standard"/>
@@ -55,34 +56,6 @@
           <ref name="termsource"/>
         </zeroOrMore>
       </element>
-    </define>
-    <define name="BibDataExtensionType">
-      <optional>
-        <attribute name="schema-version"/>
-      </optional>
-      <optional>
-        <ref name="doctype"/>
-      </optional>
-      <optional>
-        <ref name="docsubtype"/>
-      </optional>
-      <zeroOrMore>
-        <ref name="gbcommittee"/>
-      </zeroOrMore>
-      <zeroOrMore>
-        <ref name="ics"/>
-      </zeroOrMore>
-      <ref name="structuredidentifier"/>
-      <optional>
-        <ref name="stagename"/>
-      </optional>
-      <ref name="gbtype"/>
-      <oneOrMore>
-        <ref name="gbccs"/>
-      </oneOrMore>
-      <optional>
-        <ref name="gbplannumber"/>
-      </optional>
     </define>
     <define name="term-clause">
       <element name="clause">
@@ -179,12 +152,6 @@
         </choice>
       </element>
     </define>
-    <define name="DocumentType">
-      <choice>
-        <value>standard</value>
-        <value>recommendation</value>
-      </choice>
-    </define>
   </include>
   <!-- identical structure to iso-standard -->
   <define name="gb-standard">
@@ -217,83 +184,6 @@
       <zeroOrMore>
         <ref name="indexsect"/>
       </zeroOrMore>
-    </element>
-  </define>
-  <define name="gbccs">
-    <element name="ccs">
-      <element name="code">
-        <text/>
-      </element>
-      <optional>
-        <element name="text">
-          <text/>
-        </element>
-      </optional>
-    </element>
-  </define>
-  <define name="gbplannumber">
-    <element name="plannumber">
-      <text/>
-    </element>
-  </define>
-  <define name="gbcommittee">
-    <element name="gbcommittee">
-      <attribute name="type">
-        <choice>
-          <value>technical</value>
-          <value>provisional</value>
-          <value>drafting</value>
-        </choice>
-      </attribute>
-      <text/>
-    </element>
-  </define>
-  <define name="gbtype">
-    <element name="gbtype">
-      <ref name="gbscope"/>
-      <ref name="gbprefix"/>
-      <ref name="gbmandate"/>
-      <ref name="gbtopic"/>
-    </element>
-  </define>
-  <define name="gbscope">
-    <element name="gbscope">
-      <choice>
-        <value>national</value>
-        <value>sector</value>
-        <value>professional</value>
-        <value>local</value>
-        <value>enterprise</value>
-        <value>social-group</value>
-      </choice>
-    </element>
-  </define>
-  <define name="gbmandate">
-    <element name="gbmandate">
-      <choice>
-        <value>mandatory</value>
-        <value>recommended</value>
-        <value>guidelines</value>
-      </choice>
-    </element>
-  </define>
-  <define name="gbprefix">
-    <element name="gbprefix">
-      <text/>
-    </element>
-  </define>
-  <define name="gbtopic">
-    <element name="gbtopic">
-      <choice>
-        <value>basic</value>
-        <value>health-and-safety</value>
-        <value>environment-protection</value>
-        <value>engineering-and-construction</value>
-        <value>product</value>
-        <value>method</value>
-        <value>management-techniques</value>
-        <value>other</value>
-      </choice>
     </element>
   </define>
   <define name="ZhEnLocalizedString">

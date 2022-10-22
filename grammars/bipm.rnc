@@ -2,6 +2,7 @@
 # we cannot have a new default namespace: we will end up with a grammar with two different
 # namespaces, one for isostandard and one for csand additions. And we do not want that.
 
+include "relaton-bipm.rnc" {}
 include "isodoc.rnc" {
 
 start = bipm-standard
@@ -60,85 +61,7 @@ ol =
     tname?, li+, note*
 }
 
-DocumentType =
-"brochure" |
-"mise-en-pratique" |
-"rapport" |
-"monographie" |
-"guide" |
-"meeting-report" |
-"technical-report" |
-"working-party-note" |
-"strategy" |
-"cipm-mra" |
-"resolution" 
-
-editorialgroup = element editorialgroup {
-  committee+,
-  workgroup*
 }
-
-structuredidentifier = element structuredidentifier {
-  element docnumber { text },
-  element part { text }?,
-  element appendix { text }?
-}
-
-BibDataExtensionType =
-  attribute schema-version { text }?,
-    doctype?, docsubtype?, editorialgroup, comment-period?, si-aspect?, meeting-note?, structuredidentifier
-}
-
-comment-period = element comment-period {
-element from { ISO8601Date },
-element to { ISO8601Date }
-}
-
-si-aspect = element si-aspect {
-"A_e_deltanu" |
-"A_e" |
-"cd_Kcd_h_deltanu" |
-"cd_Kcd" |
-"full" |
-"K_k_deltanu" |
-"K_k" |
-"kg_h_c_deltanu" |
-"kg_h" |
-"m_c_deltanu" |
-"m_c" |
-"mol_NA" |
-"s_deltanu" 
-}
-
-committee = element committee { 
-  attribute acronym { 
-"CGPM" |
-"CIPM" |
-"BIPM" |
-"CCAUV" |
-"CCEM" |
-"CCL" |
-"CCM" |
-"CCPR" |
-"CCQM" |
-"CCRI" |
-"CCT" |
-"CCTF" |
-"CCU" |
-"CCL-CCTF-WGFS" |
-"JCGM" |
-"JCRB" |
-"JCTLM" |
-"INetQI" },
-  LocalizedString
-}
-
-workgroup = element workgroup { 
-  attribute acronym { text }?,
-  text
-}
-
-meeting-note = element meeting-note { text }
 
 bipm-standard =
   element bipm-standard {

@@ -16,3 +16,12 @@
 [submodule "grammars/relaton-model-iec"]
 	path = grammars/relaton-model-iec
 	url = https://github.com/relaton/relaton-model-iec
+[submodule "grammars/relaton-model-gb"]
+	path = grammars/relaton-model-gb
+	url = https://github.com/relaton/relaton-model-gb
+[submodule "grammars/relaton-model-mpfa"]
+	path = grammars/relaton-model-mpfa
+	url = https://github.com/relaton/relaton-model-mpfa
+[submodule "grammars/relaton-model-bipm"]
+	path = grammars/relaton-model-bipm
+	url = https://github.com/relaton/relaton-model-bipm

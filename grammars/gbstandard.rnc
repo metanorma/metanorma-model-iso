@@ -4,6 +4,7 @@
 # we cannot have a new default namespace: we will end up with a grammar with two different
 # namespaces, one for isostandard and one for csd additions. And we do not want that.
 
+include "relaton-gb.rnc" {}
 include "isostandard.rnc" {
   
 start = gb-standard
@@ -23,11 +24,6 @@ term =
     preferred+, admitted*, deprecates*,
     termdomain?, termdefinition, termnote*, termexample*, termsource*
   }
-
-BibDataExtensionType =
-  attribute schema-version { text }?,
-    doctype?, docsubtype?, gbcommittee*, ics*, structuredidentifier, stagename?, gbtype, gbccs+, gbplannumber?
-
 
 term-clause =
   element clause {
@@ -56,9 +52,6 @@ terms =
     (term+ | ( terms*, definitions?) )
   }
 
-DocumentType = "standard" | "recommendation"
-
-
 }
 
 # identical structure to iso-standard
@@ -68,29 +61,6 @@ attribute version { text },
   attribute type { "semantic" | "presentation" },
     bibdata, termdocsource*, misccontainer?, boilerplate?, preface, sections+, annex*, bibliography, indexsect*
   }     
-
-gbccs = element ccs { 
-  element code {text},
-  element text {text}?
-}
-
-gbplannumber = element plannumber { text }
-    
-gbcommittee =
-  element gbcommittee {
-    attribute type { ( "technical" | "provisional" | "drafting" ) },
-    text
-}
-
-gbtype =
-  element gbtype {
-    gbscope, gbprefix, gbmandate, gbtopic
-}
-
-gbscope = element gbscope { ( "national" | "sector" | "professional" | "local" | "enterprise" | "social-group" ) }
-gbmandate = element gbmandate { ( "mandatory" | "recommended" | "guidelines" ) }
-gbprefix = element gbprefix { text }
-gbtopic = element gbtopic { "basic" | "health-and-safety" | "environment-protection" | "engineering-and-construction" | "product" | "method" | "management-techniques" | "other" }
 
 ZhEnLocalizedString =
   # multiple languages and scripts possible: comma delimit them if so

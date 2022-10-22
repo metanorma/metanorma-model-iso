@@ -5,6 +5,7 @@
     we cannot have a new default namespace: we will end up with a grammar with two different
     namespaces, one for isostandard and one for csand additions. And we do not want that.
   -->
+  <include href="relaton-bipm.rng"/>
   <include href="isodoc.rng">
     <start>
       <ref name="bipm-standard"/>
@@ -209,140 +210,7 @@
         </zeroOrMore>
       </element>
     </define>
-    <define name="DocumentType">
-      <choice>
-        <value>brochure</value>
-        <value>mise-en-pratique</value>
-        <value>rapport</value>
-        <value>monographie</value>
-        <value>guide</value>
-        <value>meeting-report</value>
-        <value>technical-report</value>
-        <value>working-party-note</value>
-        <value>strategy</value>
-        <value>cipm-mra</value>
-        <value>resolution</value>
-      </choice>
-    </define>
-    <define name="editorialgroup">
-      <element name="editorialgroup">
-        <oneOrMore>
-          <ref name="committee"/>
-        </oneOrMore>
-        <zeroOrMore>
-          <ref name="workgroup"/>
-        </zeroOrMore>
-      </element>
-    </define>
-    <define name="structuredidentifier">
-      <element name="structuredidentifier">
-        <element name="docnumber">
-          <text/>
-        </element>
-        <optional>
-          <element name="part">
-            <text/>
-          </element>
-        </optional>
-        <optional>
-          <element name="appendix">
-            <text/>
-          </element>
-        </optional>
-      </element>
-    </define>
-    <define name="BibDataExtensionType">
-      <optional>
-        <attribute name="schema-version"/>
-      </optional>
-      <optional>
-        <ref name="doctype"/>
-      </optional>
-      <optional>
-        <ref name="docsubtype"/>
-      </optional>
-      <ref name="editorialgroup"/>
-      <optional>
-        <ref name="comment-period"/>
-      </optional>
-      <optional>
-        <ref name="si-aspect"/>
-      </optional>
-      <optional>
-        <ref name="meeting-note"/>
-      </optional>
-      <ref name="structuredidentifier"/>
-    </define>
   </include>
-  <define name="comment-period">
-    <element name="comment-period">
-      <element name="from">
-        <ref name="ISO8601Date"/>
-      </element>
-      <element name="to">
-        <ref name="ISO8601Date"/>
-      </element>
-    </element>
-  </define>
-  <define name="si-aspect">
-    <element name="si-aspect">
-      <choice>
-        <value>A_e_deltanu</value>
-        <value>A_e</value>
-        <value>cd_Kcd_h_deltanu</value>
-        <value>cd_Kcd</value>
-        <value>full</value>
-        <value>K_k_deltanu</value>
-        <value>K_k</value>
-        <value>kg_h_c_deltanu</value>
-        <value>kg_h</value>
-        <value>m_c_deltanu</value>
-        <value>m_c</value>
-        <value>mol_NA</value>
-        <value>s_deltanu</value>
-      </choice>
-    </element>
-  </define>
-  <define name="committee">
-    <element name="committee">
-      <attribute name="acronym">
-        <choice>
-          <value>CGPM</value>
-          <value>CIPM</value>
-          <value>BIPM</value>
-          <value>CCAUV</value>
-          <value>CCEM</value>
-          <value>CCL</value>
-          <value>CCM</value>
-          <value>CCPR</value>
-          <value>CCQM</value>
-          <value>CCRI</value>
-          <value>CCT</value>
-          <value>CCTF</value>
-          <value>CCU</value>
-          <value>CCL-CCTF-WGFS</value>
-          <value>JCGM</value>
-          <value>JCRB</value>
-          <value>JCTLM</value>
-          <value>INetQI</value>
-        </choice>
-      </attribute>
-      <ref name="LocalizedString"/>
-    </element>
-  </define>
-  <define name="workgroup">
-    <element name="workgroup">
-      <optional>
-        <attribute name="acronym"/>
-      </optional>
-      <text/>
-    </element>
-  </define>
-  <define name="meeting-note">
-    <element name="meeting-note">
-      <text/>
-    </element>
-  </define>
   <define name="bipm-standard">
     <element name="bipm-standard">
       <attribute name="version"/>
