@@ -40,3 +40,9 @@
 [submodule "grammars/relaton-model-ietf"]
 	path = grammars/relaton-model-ietf
 	url = https://github.com/relaton/relaton-model-ietf
+[submodule "grammars/relaton-model-iho"]
+	path = grammars/relaton-model-iho
+	url = https://github.com/relaton/relaton-model-iho
+[submodule "grammars/relaton-model-itu"]
+	path = grammars/relaton-model-itu
+	url = https://github.com/relaton/relaton-model-itu

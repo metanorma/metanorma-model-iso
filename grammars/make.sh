@@ -20,7 +20,7 @@ git checkout main && git pull
 cd ../..
 cp metanorma-requirements-models/grammars/reqt.rnc .
 
-for i in ieee iso iec bsi gb mpfa bipm w3c 3gpp csa cc ietf
+for i in ieee iso iec bsi gb mpfa bipm w3c 3gpp csa cc ietf iho itu m3aawg
 do
   cd relaton-model-$i/grammars
   git checkout main && git pull
@@ -41,7 +41,7 @@ fi
 
 echo "Compiling..."
 
-for i in biblio biblio-standoc basicdoc reqt relaton-ieee relaton-iso relaton-iec relaton-bsi relaton-gb relaton-mpfa relaton-bipm relaton-w3c relaton-3gpp relaton-csa relaton-cc relaton-ietf isodoc isodoc-compile isostandard isostandard-compile isostandard-amd iec csd csa gbstandard m3d rsd ieee un ogc nist itu ietf iho bipm bsi
+for i in biblio biblio-standoc basicdoc reqt relaton-ieee relaton-iso relaton-iec relaton-bsi relaton-gb relaton-mpfa relaton-bipm relaton-w3c relaton-3gpp relaton-csa relaton-cc relaton-ietf relaton-iho relaton-itu relaton-m3aawg isodoc isodoc-compile isostandard isostandard-compile isostandard-amd iec csd csa gbstandard m3d rsd ieee un ogc nist itu ietf iho bipm bsi
 do
   echo $i
   java -jar jing-trang/build/trang.jar -I rnc -O rng $i.rnc $i.rng

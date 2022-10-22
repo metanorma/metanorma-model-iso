@@ -28,6 +28,7 @@ cp relaton-csa.rng ../../metanorma-csand/lib/metanorma/csa
 cat csa.rng | ruby -pe '$_.gsub!(/<grammar /, %{<grammar ns="https://www.metanorma.org/ns/csa" }) '>  ../../metanorma-csand/lib/metanorma/csa/csa.rng
 
 cp basicdoc.rng reqt.rng biblio.rng biblio-standoc.rng isodoc.rng ../../metanorma-m3d/lib/metanorma/m3aawg
+cp relaton-m3aawg.rng ../../metanorma-m3d/lib/metanorma/m3aawg
 cat m3d.rng | ruby -pe '$_.gsub!(/<grammar /, %{<grammar ns="https://www.metanorma.org/ns/m3d" }) '>  ../../metanorma-m3d/lib/metanorma/m3aawg/m3d.rng
 
 cp basicdoc.rng reqt.rng biblio.rng biblio-standoc.rng isodoc.rng ../../metanorma-rsd/lib/metanorma/ribose
@@ -54,9 +55,11 @@ cp relaton-ietf.rng ../../metanorma-ietf/lib/metanorma/ietf
 cat ietf.rng | ruby -pe '$_.gsub!(/<grammar /, %{<grammar ns="https://www.metanorma.org/ns/ietf" }) '>  ../../metanorma-ietf/lib/metanorma/ietf/ietf.rng
 
 cp basicdoc.rng reqt.rng biblio.rng biblio-standoc.rng isodoc.rng ../../metanorma-itu/lib/metanorma/itu
+cp relaton-itu.rng ../../metanorma-itu/lib/metanorma/itu
 cat itu.rng | ruby -pe '$_.gsub!(/<grammar /, %{<grammar ns="https://www.metanorma.org/ns/itu" }) '>  ../../metanorma-itu/lib/metanorma/itu/itu.rng
 
 cp basicdoc.rng reqt.rng biblio.rng biblio-standoc.rng isodoc.rng ../../metanorma-iho/lib/metanorma/iho
+cp relaton-iho.rng ../../metanorma-iho/lib/metanorma/iho
 cat iho.rng | ruby -pe '$_.gsub!(/<grammar /, %{<grammar ns="https://www.metanorma.org/ns/iho" }) '>  ../../metanorma-iho/lib/metanorma/iho/iho.rng
 
 cp basicdoc.rng reqt.rng biblio.rng biblio-standoc.rng isodoc.rng ../../metanorma-bipm/lib/metanorma/bipm

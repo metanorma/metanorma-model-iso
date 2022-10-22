@@ -2,6 +2,7 @@
 # we cannot have a new default namespace: we will end up with a grammar with two different
 # namespaces, one for isostandard and one for csand additions. And we do not want that.
 
+include "relaton-m3aawg.rnc" { }
 include "isodoc.rnc" {
 
 start = m3d-standard
@@ -16,20 +17,6 @@ figure =
      source?, tname?, ( figure+ |  ( (TextElement* | pre), note*, dl? ) )
   }
 
-DocumentType =
-"guidance" | "proposal" | "standard" | "report" | "whitepaper" | "charter" | "policy" | 
-        "glossary" | "case-study"
-
-editorialgroup = element editorialgroup {
-  committee+
-}
-
-
-}
-
-committee = element committee { 
-    attribute type { ( "technical" | "provisional" ) },
-    text
 }
 
 m3d-standard =

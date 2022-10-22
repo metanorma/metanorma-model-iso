@@ -2,6 +2,7 @@
 # we cannot have a new default namespace: we will end up with a grammar with two different
 # namespaces, one for isostandard and one for csand additions. And we do not want that.
 
+include "relaton-itu.rnc" { }
 include "isodoc.rnc" {
 
 start = itu
@@ -12,32 +13,6 @@ ol =
     attribute class { "steps" }?,
     tname?, li+, note*
 }
-
-DocumentType =
-"recommendation" | "recommendation-supplement" | "recommendation-amendment" | "recommendation-corrigendum" | "recommendation-errata" |
-"recommendation-annex" | "focus-group" | "implementers-guide" | "technical-paper" | "technical-report" | "joint-itu-iso-iec" | "resolution" | "service-publication" | "handbook" | "question"
-
-editorialgroup = element editorialgroup {
-  bureau,
-  group?,
-  subgroup?,
-  workgroup?
-}
-
-structuredidentifier = element structuredidentifier {
-  bureau,
-  element docnumber { text },
-  element annexid { text }?,
-  element amendment { xsd:int }?,
-  element corrigendum { xsd:int }?
-}
-
-
-BibDataExtensionType =
-  attribute schema-version { text }?,
-    doctype?, docsubtype?, editorialgroup, ics*, recommendationstatus?, ipnoticereceived?, 
-    meeting?, meeting-place?, meeting-date?, intended-type?, ext_source?,
-    structuredidentifier?
 
 preface = element preface { ( content | abstract | foreword | introduction | acknowledgements | clause)+ }
 
@@ -57,62 +32,6 @@ Clause-Section =
 
 
 }
-
-meeting = element meeting { 
-   attribute acronym { text }?,
-   text 
-}
-
-meeting-place = element meeting-place { text }
-
-meeting-date = element meeting-date {
-(
-element from { ISO8601Date },
-element to { ISO8601Date }?
-) |
-element on { ISO8601Date }
-}
-
-intended-type = element intended-type { "R" | "C" | "TD" }
-
-ext_source = element source { text }
-
-ipnoticereceived = element ip-notice-received { xsd:boolean }
-
-recommendationstatus = element recommendationstatus {
-element from { ISO8601Date },
-element to { ISO8601Date },
-approvalstage?
-}
-
-approvalstage = element approvalstage {
-  attribute process { "tap" | "aap" },
-  ( "determined" | "in-force" | "a" | "lc" | "ac" | "lj" | "aj" | "na" | "ar" | "ri" | "at" | "sg" | "c" | "tap" )
-}
-
-bureau = element bureau { "T" | "D" | "R" }
-
-group = element group { ItuGroup }
-
-subgroup = element subgroup { ItuGroup }
-
-ItuGroup =
-  attribute type { "tsag" | "study-group" | "work-group" }?,
-  tname,
-  groupacronym?,
-  groupperiod?
-
-groupacronym = element acronym { text }
-
-groupperiod = element period {
-  groupperiodstart,
-  groupperiodend?
-}
-
-groupperiodstart = element start { xsd:gYear }
-groupperiodend = element end { xsd:gYear }
-
-workgroup = element workgroup { ItuGroup }
 
 itu =
   element itu-standard {

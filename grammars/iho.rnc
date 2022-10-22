@@ -2,21 +2,10 @@
 # we cannot have a new default namespace: we will end up with a grammar with two different
 # namespaces, one for isostandard and one for csand additions. And we do not want that.
 
+include "relaton-iho.rnc" {}
 include "isodoc.rnc" {
 
 start = iho-standard
-
-DocumentType =
-"policy-and-procedures" | "best-practices" | "supporting-document" | "report" | "legal" | "directives" | "proposal" | 
-        "standard" 
-
-editorialgroup = element editorialgroup {
-  (committee | workgroup | commission)+
-}
-
-BibDataExtensionType =
-  attribute schema-version { text }?,
-    doctype?, docsubtype?, editorialgroup*, ics*, commentperiod?
 
 annex =
   element annex {
@@ -33,22 +22,8 @@ annex =
 
 }
 
-committee = element committee { IHO_Group }
-workgroup = element workgroup { IHO_Group }
-commission = element commission { IHO_Group }
-
-IHO_Group =
-  element name { text }?,
-  element abbreviation { text },
-  (committee | workgroup | commission)?
-
 annex-appendix =
   element appendix { Clause-Section }
-
-commentperiod = element commentperiod {
-element from { ISO8601Date },
-element to { ISO8601Date }?
-}
 
 iho-standard =
   element iho-standard {
