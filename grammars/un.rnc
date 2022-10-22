@@ -2,6 +2,7 @@
 # we cannot have a new default namespace: we will end up with a grammar with two different
 # namespaces, one for isostandard and one for csand additions. And we do not want that.
 
+include "relaton-un.rnc" { }
 include "isodoc.rnc" {
 
   start = un-standard
@@ -24,19 +25,8 @@ include "isodoc.rnc" {
     }
 
 
-  DocumentType = "recommendation" | "plenary" | "addendum" | "communication" | "corrigendum" |
-    "reissue" | "agenda" | "budgetary" | "sec-gen-notes" | "expert-report" | "resolution"
-
-    editorialgroup = element editorialgroup {
-      committee+
-    }
-
   sections =
     element sections { (clause | floating-title)+  }
-
-  BibDataExtensionType =
-  attribute schema-version { text }?,
-    doctype?, docsubtype?, submissionlanguage*, editorialgroup?, ics*, distribution?, session?, job_number?
 
                 preface =
                 element preface {
@@ -73,29 +63,6 @@ Annex-Section =
 
 
 }
-
-session = element session {
-  session-number?, session-date?, item-number*, item-name*, subitem-name*, collaborator?, agenda-id?, item-footnote?
-}
-
-committee = element committee { 
-  text
-}
-
-session-number = element number { text }
-session-date = element session-date { xsd:date }
-item-number = element item-number { text }
-collaborator = element collaborator { text }
-agenda-id = element agenda-id { text }
-item-name = element item-name { text }
-subitem-name = element subitem-name { text }
-item-footnote = element item-footnote { text }
-
-submissionlanguage = element submissionlanguage { text }
-
-distribution = element distribution { "general" | "limited" | "restricted" | "provisional" }
-
-job_number = element job_number { text }
 
 un-standard =
 element un-standard {

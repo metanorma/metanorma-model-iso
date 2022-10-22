@@ -5,6 +5,7 @@
     we cannot have a new default namespace: we will end up with a grammar with two different
     namespaces, one for isostandard and one for csand additions. And we do not want that.
   -->
+  <include href="relaton-un.rng"/>
   <include href="isodoc.rng">
     <start>
       <ref name="un-standard"/>
@@ -81,28 +82,6 @@
         </zeroOrMore>
       </element>
     </define>
-    <define name="DocumentType">
-      <choice>
-        <value>recommendation</value>
-        <value>plenary</value>
-        <value>addendum</value>
-        <value>communication</value>
-        <value>corrigendum</value>
-        <value>reissue</value>
-        <value>agenda</value>
-        <value>budgetary</value>
-        <value>sec-gen-notes</value>
-        <value>expert-report</value>
-        <value>resolution</value>
-      </choice>
-    </define>
-    <define name="editorialgroup">
-      <element name="editorialgroup">
-        <oneOrMore>
-          <ref name="committee"/>
-        </oneOrMore>
-      </element>
-    </define>
     <define name="sections">
       <element name="sections">
         <oneOrMore>
@@ -112,35 +91,6 @@
           </choice>
         </oneOrMore>
       </element>
-    </define>
-    <define name="BibDataExtensionType">
-      <optional>
-        <attribute name="schema-version"/>
-      </optional>
-      <optional>
-        <ref name="doctype"/>
-      </optional>
-      <optional>
-        <ref name="docsubtype"/>
-      </optional>
-      <zeroOrMore>
-        <ref name="submissionlanguage"/>
-      </zeroOrMore>
-      <optional>
-        <ref name="editorialgroup"/>
-      </optional>
-      <zeroOrMore>
-        <ref name="ics"/>
-      </zeroOrMore>
-      <optional>
-        <ref name="distribution"/>
-      </optional>
-      <optional>
-        <ref name="session"/>
-      </optional>
-      <optional>
-        <ref name="job_number"/>
-      </optional>
     </define>
     <define name="preface">
       <element name="preface">
@@ -256,99 +206,6 @@
       </group>
     </define>
   </include>
-  <define name="session">
-    <element name="session">
-      <optional>
-        <ref name="session-number"/>
-      </optional>
-      <optional>
-        <ref name="session-date"/>
-      </optional>
-      <zeroOrMore>
-        <ref name="item-number"/>
-      </zeroOrMore>
-      <zeroOrMore>
-        <ref name="item-name"/>
-      </zeroOrMore>
-      <zeroOrMore>
-        <ref name="subitem-name"/>
-      </zeroOrMore>
-      <optional>
-        <ref name="collaborator"/>
-      </optional>
-      <optional>
-        <ref name="agenda-id"/>
-      </optional>
-      <optional>
-        <ref name="item-footnote"/>
-      </optional>
-    </element>
-  </define>
-  <define name="committee">
-    <element name="committee">
-      <text/>
-    </element>
-  </define>
-  <define name="session-number">
-    <element name="number">
-      <text/>
-    </element>
-  </define>
-  <define name="session-date">
-    <element name="session-date">
-      <data type="date"/>
-    </element>
-  </define>
-  <define name="item-number">
-    <element name="item-number">
-      <text/>
-    </element>
-  </define>
-  <define name="collaborator">
-    <element name="collaborator">
-      <text/>
-    </element>
-  </define>
-  <define name="agenda-id">
-    <element name="agenda-id">
-      <text/>
-    </element>
-  </define>
-  <define name="item-name">
-    <element name="item-name">
-      <text/>
-    </element>
-  </define>
-  <define name="subitem-name">
-    <element name="subitem-name">
-      <text/>
-    </element>
-  </define>
-  <define name="item-footnote">
-    <element name="item-footnote">
-      <text/>
-    </element>
-  </define>
-  <define name="submissionlanguage">
-    <element name="submissionlanguage">
-      <text/>
-    </element>
-  </define>
-  <define name="distribution">
-    <element name="distribution">
-      <choice>
-        <value>general</value>
-        <value>limited</value>
-        <value>restricted</value>
-        <value>provisional</value>
-      </choice>
-    </element>
-  </define>
-  <define name="job_number">
-    <element name="job_number">
-      <text/>
-    </element>
-  </define>
   <define name="un-standard">
     <element name="un-standard">
       <attribute name="version"/>

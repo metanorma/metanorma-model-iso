@@ -46,3 +46,15 @@
 [submodule "grammars/relaton-model-itu"]
 	path = grammars/relaton-model-itu
 	url = https://github.com/relaton/relaton-model-itu
+[submodule "grammars/relaton-model-nist"]
+	path = grammars/relaton-model-nist
+	url = https://github.com/relaton/relaton-model-nist
+[submodule "grammars/relaton-model-ribose"]
+	path = grammars/relaton-model-ribose
+	url = https://github.com/relaton/relaton-model-ribose
+[submodule "grammars/relaton-model-ogc"]
+	path = grammars/relaton-model-ogc
+	url = https://github.com/relaton/relaton-model-ogc
+[submodule "grammars/relaton-model-un"]
+	path = grammars/relaton-model-un
+	url = https://github.com/relaton/relaton-model-un

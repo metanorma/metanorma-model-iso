@@ -2,27 +2,15 @@
 # we cannot have a new default namespace: we will end up with a grammar with two different
 # namespaces, one for isostandard and one for csand additions. And we do not want that.
 
+include "relaton-ogc.rnc" { }
 include "isodoc.rnc" {
 
 start = ogc-standard
-
-DocumentType =
-"abstract-specification-topic" | "best-practice" | "change-request-supporting-document" | "community-practice" | "community-standard" | "discussion-paper" | "engineering-report" | "other" | "policy" | "reference-model" | "release-notes" | "standard" | "user-guide" | "white-paper" | "test-suite"
-
-editorialgroup = element editorialgroup {
-  committee, subcommittee?, workgroup?
-}
-
-BibDataExtensionType =
-  attribute schema-version { text }?,
-    doctype?, docsubtype?, editorialgroup, ics*
 
 preface =
   element preface {
     abstract?, foreword, submitters?
 }
-
-DocumentSubtype = "conceptual-model" | "conceptual-model-and-encoding" | "conceptual-model-and-implementation" | "encoding" | "extension" | "implementation" | "profile" | "profile-with-extension" | "general"
 
 }
 
@@ -32,16 +20,6 @@ PureTextElement |= hi
 hi = element hi { (PureTextElement|stem)* }
 
 submitters = element submitters { Basic-Section }
-
-committee = element committee { 
-    "technical" | "planning" | "strategic-member-advisory"
-}
-
-subcommittee =
-  element subcommittee { IsoWorkgroup }
-
-workgroup =
-  element workgroup { IsoWorkgroup }
 
 ogc-standard =
   element ogc-standard {

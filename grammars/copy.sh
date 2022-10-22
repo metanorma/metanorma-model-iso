@@ -32,22 +32,26 @@ cp relaton-m3aawg.rng ../../metanorma-m3d/lib/metanorma/m3aawg
 cat m3d.rng | ruby -pe '$_.gsub!(/<grammar /, %{<grammar ns="https://www.metanorma.org/ns/m3d" }) '>  ../../metanorma-m3d/lib/metanorma/m3aawg/m3d.rng
 
 cp basicdoc.rng reqt.rng biblio.rng biblio-standoc.rng isodoc.rng ../../metanorma-rsd/lib/metanorma/ribose
+cp relaton-ribose.rng ../../metanorma-rsd/lib/metanorma/ribose
 cat rsd.rng | ruby -pe '$_.gsub!(/<grammar /, %{<grammar ns="https://www.metanorma.org/ns/rsd" }) '>  ../../metanorma-rsd/lib/metanorma/ribose/rsd.rng
 
 cp basicdoc.rng reqt.rng biblio.rng biblio-standoc.rng isodoc.rng ../../metanorma-acme/lib/metanorma/generic
-cat rsd.rng | ruby -pe '$_.gsub!(/rsd-standard/, "generic-standard") ' | ruby -pe '$_.gsub!(/<grammar /, %{<grammar ns="https://www.metanorma.org/ns/generic" }) ' > ../../metanorma-acme/lib/metanorma/generic/generic.rng
+cat isodoc-compile.rng | ruby -pe '$_.gsub!(/rsd-standard/, "generic-standard") ' | ruby -pe '$_.gsub!(/<grammar /, %{<grammar ns="https://www.metanorma.org/ns/generic" }) ' > ../../metanorma-acme/lib/metanorma/generic/generic.rng
 
 cp basicdoc.rng reqt.rng biblio.rng biblio-standoc.rng isodoc.rng ../../metanorma-ieee/lib/metanorma/ieee
 cp relaton-ieee.rng ../../metanorma-ieee/lib/metanorma/ieee
 cat ieee.rng | ruby -pe '$_.gsub!(/<grammar /, %{<grammar ns="https://www.metanorma.org/ns/ieee" }) '>  ../../metanorma-ieee/lib/metanorma/ieee/ieee.rng
 
 cp basicdoc.rng reqt.rng biblio.rng biblio-standoc.rng isodoc.rng ../../metanorma-unece/lib/metanorma/un
+cp relaton-un.rng ../../metanorma-unece/lib/metanorma/un
 cat un.rng | ruby -pe '$_.gsub!(/<grammar /, %{<grammar ns="https://www.metanorma.org/ns/un" }) '>  ../../metanorma-unece/lib/metanorma/un/un.rng
 
 cp basicdoc.rng reqt.rng biblio.rng biblio-standoc.rng isodoc.rng ../../metanorma-ogc/lib/metanorma/ogc
+cp relaton-ogc.rng ../../metanorma-ogc/lib/metanorma/ogc
 cat ogc.rng | ruby -pe '$_.gsub!(/<grammar /, %{<grammar ns="https://www.metanorma.org/ns/ogc" }) '>  ../../metanorma-ogc/lib/metanorma/ogc/ogc.rng
 
 cp basicdoc.rng reqt.rng biblio.rng biblio-standoc.rng isodoc.rng ../../metanorma-nist/lib/metanorma/nist
+cp relaton-nist.rng ../../metanorma-nist/lib/metanorma/nist
 cat nist.rng | ruby -pe '$_.gsub!(/<grammar /, %{<grammar ns="https://www.metanorma.org/ns/nist" }) '>  ../../metanorma-nist/lib/metanorma/nist/nist.rng
 
 cp basicdoc.rng reqt.rng biblio.rng biblio-standoc.rng isodoc.rng ../../metanorma-ietf/lib/metanorma/ietf

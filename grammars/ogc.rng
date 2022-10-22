@@ -5,55 +5,11 @@
     we cannot have a new default namespace: we will end up with a grammar with two different
     namespaces, one for isostandard and one for csand additions. And we do not want that.
   -->
+  <include href="relaton-ogc.rng"/>
   <include href="isodoc.rng">
     <start>
       <ref name="ogc-standard"/>
     </start>
-    <define name="DocumentType">
-      <choice>
-        <value>abstract-specification-topic</value>
-        <value>best-practice</value>
-        <value>change-request-supporting-document</value>
-        <value>community-practice</value>
-        <value>community-standard</value>
-        <value>discussion-paper</value>
-        <value>engineering-report</value>
-        <value>other</value>
-        <value>policy</value>
-        <value>reference-model</value>
-        <value>release-notes</value>
-        <value>standard</value>
-        <value>user-guide</value>
-        <value>white-paper</value>
-        <value>test-suite</value>
-      </choice>
-    </define>
-    <define name="editorialgroup">
-      <element name="editorialgroup">
-        <ref name="committee"/>
-        <optional>
-          <ref name="subcommittee"/>
-        </optional>
-        <optional>
-          <ref name="workgroup"/>
-        </optional>
-      </element>
-    </define>
-    <define name="BibDataExtensionType">
-      <optional>
-        <attribute name="schema-version"/>
-      </optional>
-      <optional>
-        <ref name="doctype"/>
-      </optional>
-      <optional>
-        <ref name="docsubtype"/>
-      </optional>
-      <ref name="editorialgroup"/>
-      <zeroOrMore>
-        <ref name="ics"/>
-      </zeroOrMore>
-    </define>
     <define name="preface">
       <element name="preface">
         <optional>
@@ -64,19 +20,6 @@
           <ref name="submitters"/>
         </optional>
       </element>
-    </define>
-    <define name="DocumentSubtype">
-      <choice>
-        <value>conceptual-model</value>
-        <value>conceptual-model-and-encoding</value>
-        <value>conceptual-model-and-implementation</value>
-        <value>encoding</value>
-        <value>extension</value>
-        <value>implementation</value>
-        <value>profile</value>
-        <value>profile-with-extension</value>
-        <value>general</value>
-      </choice>
     </define>
   </include>
   <define name="TextElement" combine="choice">
@@ -98,25 +41,6 @@
   <define name="submitters">
     <element name="submitters">
       <ref name="Basic-Section"/>
-    </element>
-  </define>
-  <define name="committee">
-    <element name="committee">
-      <choice>
-        <value>technical</value>
-        <value>planning</value>
-        <value>strategic-member-advisory</value>
-      </choice>
-    </element>
-  </define>
-  <define name="subcommittee">
-    <element name="subcommittee">
-      <ref name="IsoWorkgroup"/>
-    </element>
-  </define>
-  <define name="workgroup">
-    <element name="workgroup">
-      <ref name="IsoWorkgroup"/>
     </element>
   </define>
   <define name="ogc-standard">

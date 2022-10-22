@@ -2,31 +2,12 @@
 # we cannot have a new default namespace: we will end up with a grammar with two different
 # namespaces, one for isostandard and one for csand additions. And we do not want that.
 
+include "relaton-ribose.rnc" { }
 include "isodoc.rnc" {
 
 start = rsd-standard
 
-DocumentType =
-"policy-and-procedures" | "best-practices" | "supporting-document" | "report" | "legal" | "directives" | "proposal" | 
-        "standard" 
-
-editorialgroup = element editorialgroup {
-  committee+
 }
-
-BibDataExtensionType =
-  attribute schema-version { text }?,
-    doctype?, docsubtype?, editorialgroup, ics*, security?
-
-
-}
-
-committee = element committee { 
-    attribute type { ( "technical" | "provisional" ) },
-    text
-}
-
-security = element security { text }
 
 rsd-standard =
   element rsd-standard {

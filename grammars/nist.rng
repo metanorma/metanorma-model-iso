@@ -5,6 +5,7 @@
     we cannot have a new default namespace: we will end up with a grammar with two different
     namespaces, one for isostandard and one for csand additions. And we do not want that.
   -->
+  <include href="relaton-nist.rng"/>
   <include href="isodoc.rng">
     <start>
       <ref name="nist-standard"/>
@@ -30,9 +31,6 @@
         </zeroOrMore>
       </element>
     </define>
-    <define name="DocumentType">
-      <value>standard</value>
-    </define>
     <!-- TitleType = ( "alternative" | "original" | "unofficial" | "subtitle" | "main" ) -->
     <define name="preface">
       <element name="preface">
@@ -57,64 +55,7 @@
         </optional>
       </element>
     </define>
-    <define name="editorialgroup">
-      <element name="editorialgroup">
-        <oneOrMore>
-          <ref name="committee"/>
-        </oneOrMore>
-      </element>
-    </define>
-    <define name="BibDataExtensionType">
-      <optional>
-        <attribute name="schema-version"/>
-      </optional>
-      <optional>
-        <ref name="doctype"/>
-      </optional>
-      <optional>
-        <ref name="docsubtype"/>
-      </optional>
-      <optional>
-        <ref name="editorialgroup"/>
-      </optional>
-      <zeroOrMore>
-        <ref name="ics"/>
-      </zeroOrMore>
-      <optional>
-        <ref name="commentperiod"/>
-      </optional>
-    </define>
   </include>
-  <define name="DocRelationType" combine="choice">
-    <choice>
-      <value>obsoletedBy</value>
-      <value>supersedes</value>
-      <value>supersededBy</value>
-    </choice>
-  </define>
-  <define name="BibliographicDateType" combine="choice">
-    <choice>
-      <value>abandoned</value>
-      <value>superseded</value>
-    </choice>
-  </define>
-  <define name="commentperiod">
-    <element name="commentperiod">
-      <element name="from">
-        <ref name="ISO8601Date"/>
-      </element>
-      <optional>
-        <element name="to">
-          <ref name="ISO8601Date"/>
-        </element>
-      </optional>
-      <optional>
-        <element name="extended">
-          <ref name="ISO8601Date"/>
-        </element>
-      </optional>
-    </element>
-  </define>
   <define name="reviewernote">
     <element name="reviewernote">
       <ref name="Basic-Section"/>
@@ -123,11 +64,6 @@
   <define name="executivesummary">
     <element name="executivesummary">
       <ref name="Basic-Section"/>
-    </element>
-  </define>
-  <define name="committee">
-    <element name="committee">
-      <text/>
     </element>
   </define>
   <define name="errata">

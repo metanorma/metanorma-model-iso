@@ -2,6 +2,7 @@
 # we cannot have a new default namespace: we will end up with a grammar with two different
 # namespaces, one for isostandard and one for csand additions. And we do not want that.
 
+include "relaton-nist.rnc" {}
 include "isodoc.rnc" {
 
 start = nist-standard
@@ -13,9 +14,6 @@ ol =
     tname?, li+, note*
 }
 
-DocumentType =
-        "standard" 
-
 # TitleType = ( "alternative" | "original" | "unofficial" | "subtitle" | "main" )
 
 preface =
@@ -23,32 +21,10 @@ preface =
     abstract?, foreword?, (clause | errata_clause | acknowledgements)*, reviewernote?, executivesummary?
 }
 
-editorialgroup = element editorialgroup {
-      committee+
-    }
-
-BibDataExtensionType =
-  attribute schema-version { text }?,
-    doctype?, docsubtype?, editorialgroup?, ics*, commentperiod?
-
-}
-
-DocRelationType |= "obsoletedBy" | "supersedes" | "supersededBy"
-
-BibliographicDateType |= "abandoned" | "superseded"
-
-commentperiod = element commentperiod {
-element from { ISO8601Date },
-element to { ISO8601Date }?,
-element extended { ISO8601Date }?
 }
 
 reviewernote = element reviewernote { Basic-Section }
 executivesummary = element executivesummary { Basic-Section }
-
-committee = element committee {
-  text
-}
 
 errata = element errata { erratarow+ }
 
