@@ -13,3 +13,6 @@
 [submodule "grammars/relaton-model-iso"]
 	path = grammars/relaton-model-iso
 	url = https://github.com/relaton/relaton-model-iso
+[submodule "grammars/relaton-model-iec"]
+	path = grammars/relaton-model-iec
+	url = https://github.com/relaton/relaton-model-iec

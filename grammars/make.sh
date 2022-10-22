@@ -20,16 +20,13 @@ git checkout main && git pull
 cd ../..
 cp metanorma-requirements-models/grammars/reqt.rnc .
 
-cd relaton-model-ieee/grammars
+for i in ieee iso iec bsi
+do
+cd relaton-model-$i/grammars
 git checkout main && git pull
 cd ../..
-cp relaton-model-ieee/grammars/relaton-ieee.rnc .
-
-cd relaton-model-iso/grammars
-git checkout main && git pull
-cd ../..
-cp relaton-model-iso/grammars/relaton-iso.rnc .
-
+cp relaton-model-$i/grammars/relaton-$i.rnc .
+done
 
 gem list | grep rsec
 if [[ $? -ne 0 ]]; then
@@ -44,30 +41,9 @@ fi
 
 echo "Compiling..."
 
-java -jar jing-trang/build/trang.jar -I rnc -O rng biblio.rnc biblio.rng
-java -jar jing-trang/build/trang.jar -I rnc -O rng biblio-standoc.rnc biblio-standoc.rng
-java -jar jing-trang/build/trang.jar -I rnc -O rng basicdoc.rnc basicdoc.rng
-java -jar jing-trang/build/trang.jar -I rnc -O rng reqt.rnc reqt.rng
-java -jar jing-trang/build/trang.jar -I rnc -O rng relaton-ieee.rnc relaton-ieee.rng
-java -jar jing-trang/build/trang.jar -I rnc -O rng relaton-iso.rnc relaton-iso.rng
-java -jar jing-trang/build/trang.jar -I rnc -O rng isodoc.rnc isodoc.rng
-java -jar jing-trang/build/trang.jar -I rnc -O rng isostandard.rnc isostandard.rng
-java -jar jing-trang/build/trang.jar -I rnc -O rng isostandard-amd.rnc isostandard-amd.rng
-java -jar jing-trang/build/trang.jar -I rnc -O rng iec.rnc iec.rng
-java -jar jing-trang/build/trang.jar -I rnc -O rng csd.rnc csd.rng
-java -jar jing-trang/build/trang.jar -I rnc -O rng csa.rnc csa.rng
-java -jar jing-trang/build/trang.jar -I rnc -O rng gbstandard.rnc gbstandard.rng
-java -jar jing-trang/build/trang.jar -I rnc -O rng m3d.rnc m3d.rng
-java -jar jing-trang/build/trang.jar -I rnc -O rng rsd.rnc rsd.rng
-java -jar jing-trang/build/trang.jar -I rnc -O rng ieee.rnc ieee.rng
-java -jar jing-trang/build/trang.jar -I rnc -O rng un.rnc un.rng
-java -jar jing-trang/build/trang.jar -I rnc -O rng ogc.rnc ogc.rng
-java -jar jing-trang/build/trang.jar -I rnc -O rng nist.rnc nist.rng
-java -jar jing-trang/build/trang.jar -I rnc -O rng itu.rnc itu.rng
-java -jar jing-trang/build/trang.jar -I rnc -O rng ietf.rnc ietf.rng
-java -jar jing-trang/build/trang.jar -I rnc -O rng iho.rnc iho.rng
-java -jar jing-trang/build/trang.jar -I rnc -O rng bipm.rnc bipm.rng
-java -jar jing-trang/build/trang.jar -I rnc -O rng bsi.rnc bsi.rng
-java -jar jing-trang/build/trang.jar -I rnc -O rng 3gpp.rnc 3gpp.rng
-java -jar jing-trang/build/trang.jar -I rnc -O rng w3c.rnc w3c.rng
+for i in biblio biblio-standoc basicdoc reqt relaton-ieee relaton-iso relaton-iec relaton-bsi isodoc isostandard isostandard-compile isostandard-amd iec csd csa gbstandard m3d rsd ieee un ogc nist itu ietf iho bipm bsi 3gpp w3c
+do
+java -jar jing-trang/build/trang.jar -I rnc -O rng $i.rnc $i.rng
+done
+
 sh copy.sh

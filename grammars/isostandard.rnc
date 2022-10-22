@@ -1,6 +1,5 @@
 #default namespace isostandard = "https://www.metanorma.com/ns/iso"
 
-include "relaton-iso.rnc" { }
 include "isodoc.rnc" { 
 
 start = iso-standard

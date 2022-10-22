@@ -1,24 +1,9 @@
 #default namespace = "https://www.metanorma.com/ns/bsi"
 
+include "relaton-bsi.rnc" { }
 include "isostandard.rnc" {
 
 start = bsi-standard
-
-DocumentType =
-     "british-standard" | "draft-for-development" | "published-document" |
-     "privately-subscribed-standard" | "publicly-available-specification" |
-     "flex-standard" | "international-standard" | "technical-specification" |
-     "technical-report" | "guide" | "international-workshop-agreement" |
-     "industry-technical-agreement" | "standard" | "european-workshop-agreement" |
-     "fast-track-standard"
-
-DocumentSubtype = "specification" | "method-of-test" | "method-of-specifying" |
-                  "vocabulary" | "code-of-practice"
-
-BibDataExtensionType =
-  attribute schema-version { text }?,
-        doctype, docsubtype?, editorialgroup, ics*, structuredidentifier, 
-        stagename?, coverimages*
 
 admonition =
   element admonition {
@@ -94,8 +79,6 @@ floating-section-title =
 
 
 AdmonitionType |= "commentary"
-
-coverimages = element coverimages { image+ }
 
 # We display the Normative References between scope and terms; but to keep the
 # grammar simple, we keep the references together

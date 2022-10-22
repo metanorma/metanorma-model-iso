@@ -1,58 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <grammar xmlns="http://relaxng.org/ns/structure/1.0" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
   <!-- default namespace = "https://www.metanorma.com/ns/bsi" -->
+  <include href="relaton-bsi.rng"/>
   <include href="isostandard.rng">
     <start>
       <ref name="bsi-standard"/>
     </start>
-    <define name="DocumentType">
-      <choice>
-        <value>british-standard</value>
-        <value>draft-for-development</value>
-        <value>published-document</value>
-        <value>privately-subscribed-standard</value>
-        <value>publicly-available-specification</value>
-        <value>flex-standard</value>
-        <value>international-standard</value>
-        <value>technical-specification</value>
-        <value>technical-report</value>
-        <value>guide</value>
-        <value>international-workshop-agreement</value>
-        <value>industry-technical-agreement</value>
-        <value>standard</value>
-        <value>european-workshop-agreement</value>
-        <value>fast-track-standard</value>
-      </choice>
-    </define>
-    <define name="DocumentSubtype">
-      <choice>
-        <value>specification</value>
-        <value>method-of-test</value>
-        <value>method-of-specifying</value>
-        <value>vocabulary</value>
-        <value>code-of-practice</value>
-      </choice>
-    </define>
-    <define name="BibDataExtensionType">
-      <optional>
-        <attribute name="schema-version"/>
-      </optional>
-      <ref name="doctype"/>
-      <optional>
-        <ref name="docsubtype"/>
-      </optional>
-      <ref name="editorialgroup"/>
-      <zeroOrMore>
-        <ref name="ics"/>
-      </zeroOrMore>
-      <ref name="structuredidentifier"/>
-      <optional>
-        <ref name="stagename"/>
-      </optional>
-      <zeroOrMore>
-        <ref name="coverimages"/>
-      </zeroOrMore>
-    </define>
     <define name="admonition">
       <element name="admonition">
         <attribute name="type">
@@ -299,13 +252,6 @@
   </define>
   <define name="AdmonitionType" combine="choice">
     <value>commentary</value>
-  </define>
-  <define name="coverimages">
-    <element name="coverimages">
-      <oneOrMore>
-        <ref name="image"/>
-      </oneOrMore>
-    </element>
   </define>
   <!--
     We display the Normative References between scope and terms; but to keep the

@@ -4,12 +4,15 @@ cp basicdoc.rng reqt.rng biblio.rng biblio-standoc.rng ../../metanorma-standoc/l
 cat isodoc.rng | ruby -pe '$_.gsub!(/<grammar /, %{<grammar ns="https://www.metanorma.org/ns/standoc" }) '> ../../metanorma-standoc/lib/metanorma/standoc/isodoc.rng
 cp basicdoc.rng reqt.rng biblio.rng biblio-standoc.rng isodoc.rng ../../metanorma-iso/lib/metanorma/iso
 cp relaton-iso.rng ../../metanorma-iso/lib/metanorma/iso
-cat isostandard.rng | ruby -pe '$_.gsub!(/<grammar /, %{<grammar ns="https://www.metanorma.org/ns/iso" }) '>  ../../metanorma-iso/lib/metanorma/iso/isostandard.rng
+cp isostandard.rng ../../metanorma-iso/lib/metanorma/iso
+cat isostandard-compile.rng | ruby -pe '$_.gsub!(/<grammar /, %{<grammar ns="https://www.metanorma.org/ns/iso" }) '>  ../../metanorma-iso/lib/metanorma/iso/isostandard-compile.rng
 cat isostandard-amd.rng | ruby -pe '$_.gsub!(/<grammar /, %{<grammar ns="https://www.metanorma.org/ns/iso" }) '>  ../../metanorma-iso/lib/metanorma/iso/isostandard-amd.rng
 cp basicdoc.rng reqt.rng biblio.rng biblio-standoc.rng isodoc.rng ../../metanorma-iec/lib/metanorma/iec
+cp relaton-iec.rng ../../metanorma-iec/lib/metanorma/iec
 cp isostandard.rng ../../metanorma-iec/lib/metanorma/iec/isostandard.rng
 cat iec.rng | ruby -pe '$_.gsub!(/<grammar /, %{<grammar ns="https://www.metanorma.org/ns/iec" }) '>  ../../metanorma-iec/lib/metanorma/iec/iec.rng
 cp basicdoc.rng reqt.rng biblio.rng biblio-standoc.rng isodoc.rng ../../metanorma-bsi/lib/metanorma/bsi
+cp relaton-bsi.rng ../../metanorma-bsi/lib/metanorma/bsi
 cp isostandard.rng ../../metanorma-bsi/lib/metanorma/bsi/isostandard.rng
 cat bsi.rng | ruby -pe '$_.gsub!(/<grammar /, %{<grammar ns="https://www.metanorma.org/ns/bsi" }) '>  ../../metanorma-bsi/lib/metanorma/bsi/bsi.rng
 cp basicdoc.rng reqt.rng biblio.rng biblio-standoc.rng isodoc.rng ../../metanorma-csd/lib/metanorma/cc
