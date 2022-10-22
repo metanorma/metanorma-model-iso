@@ -19,16 +19,7 @@ grammar {
 
 include "reqt.rnc" { }
 
-#include "biblio.rnc" { }
-
 include "basicdoc.rnc" { 
-
-start = standard-document
-
-doctype = element doctype { 
-    attribute abbreviation { text }?,
-    DocumentType 
-}
 
 admonition =
   element admonition {
@@ -51,14 +42,6 @@ index = element index {
   element primary { (PureTextElement|stem)+ },
   element secondary { (PureTextElement|stem)+ }?,
   element tertiary { (PureTextElement|stem)+ }?
-}
-
-bibitem =
-  element bibitem {
-     attribute id { xsd:ID },
-     attribute hidden { xsd:boolean }?,
-     attribute suppress_identifier { xsd:boolean }?,
-     BibliographicItem
 }
 
 section-title =
@@ -95,19 +78,6 @@ erefType =
     attribute droploc { xsd:boolean }?,
     CitationType,
     PureTextElement+
-
-
-localityStack =
-  element localityStack { 
-    attribute connective { "and" | "or" | "from" | "to" | "" }?,
-    locality* 
-}
-
-sourceLocalityStack =
-  element sourceLocalityStack { 
-    attribute connective { "and" | "or" | "from" | "to" | "" }?,
-    sourceLocality* 
-}
 
 ul =
   element ul {
@@ -258,14 +228,6 @@ quote =
     note*
 }
 
-BibDataExtensionType = 
-  attribute schema-version { text }?,
-  doctype,
-  docsubtype?,
-  editorialgroup?,
-  ics*,
-  structuredidentifier*
-
 # TitleType = text
 
 sections =
@@ -280,7 +242,7 @@ references =
     attribute normative { xsd:boolean },
     section-title?,
     BasicBlock*,
-    (bibitem, note*)*,
+    (doc_bibitem, note*)*,
     references*
 }
 
@@ -369,6 +331,15 @@ pagebreak = element pagebreak {
 
 # end overrides
 
+doc_bibitem =
+  element bibitem {
+     attribute id { xsd:ID },
+     attribute hidden { xsd:boolean }?,
+     attribute suppress_identifier { xsd:boolean }?,
+     BibliographicItem
+}
+
+
 image |=
   element svg {
      ( text | AnyElement )+
@@ -376,10 +347,6 @@ image |=
 
 
 MultilingualRenderingType = "common" | "all-columns" | "parallel" | "tag"
-
-docsubtype = element subdoctype { DocumentSubtype }
-
-DocumentSubtype = text
 
 colgroup = element colgroup { col+ }
 
@@ -493,25 +460,6 @@ reference-clause =
     (
        reference-clause+ | references*
     )
-}
-
-editorialgroup = element editorialgroup {
-  technical-committee+
-}
-
-technical-committee =
-  element technical-committee { IsoWorkgroup }
-
-IsoWorkgroup =
-    attribute number { text }?,
-    attribute type { text }?,
-    attribute identifier { text }?,
-    attribute prefix { text }?,
-    text
-
-ics = element ics {
-  element code { text },
-  element text { text }?
 }
 
 standard-document =
@@ -789,22 +737,6 @@ termref = element termref {
   text?
 }
 
-structuredidentifier = element structuredidentifier {
-  attribute type { text }?,
-  element agency { text }+,
-  element class { text }?,
-  element docnumber { text },
-  element partnumber { text }?,
-  element edition { text }?,
-  element version { text }?,
-  element supplementtype { text }?,
-  element supplementnumber { text }?,
-  element amendment { text }?,
-  element corrigendum { text }?,
-  element language { text }?,
-  element year { text }?
-}
-
 term-clause =
   element clause {
     attribute id { xsd:ID }?,
@@ -899,4 +831,5 @@ XrefTarget =
     attribute connective { "and" | "or" | "from" | "to" | "" }
 }
 
+start = standard-document
 }

@@ -1,3 +1,5 @@
+echo "Updating submodules..."
+
 rm -f relaton-models/grammars/biblio.rng
 rm -f basicdoc-models/grammars/basicdoc.rng
 git submodule update
@@ -6,9 +8,10 @@ cd relaton-models/grammars
 git checkout main && git pull
 cd ../..
 cp relaton-models/grammars/biblio.rnc .
+cp relaton-models/grammars/biblio-standoc.rnc .
 
 cd basicdoc-models/grammars
-git checkout master && git pull
+git checkout main && git pull
 cd ../..
 cp basicdoc-models/grammars/basicdoc.rnc .
 
@@ -16,6 +19,17 @@ cd metanorma-requirements-models/grammars
 git checkout main && git pull
 cd ../..
 cp metanorma-requirements-models/grammars/reqt.rnc .
+
+cd relaton-model-ieee/grammars
+git checkout main && git pull
+cd ../..
+cp relaton-model-ieee/grammars/relaton-ieee.rnc .
+
+cd relaton-model-iso/grammars
+git checkout main && git pull
+cd ../..
+cp relaton-model-iso/grammars/relaton-iso.rnc .
+
 
 gem list | grep rsec
 if [[ $? -ne 0 ]]; then
@@ -28,9 +42,14 @@ if [[ ! -d jing-trang ]]; then
   cd ..
 fi
 
+echo "Compiling..."
+
 java -jar jing-trang/build/trang.jar -I rnc -O rng biblio.rnc biblio.rng
+java -jar jing-trang/build/trang.jar -I rnc -O rng biblio-standoc.rnc biblio-standoc.rng
 java -jar jing-trang/build/trang.jar -I rnc -O rng basicdoc.rnc basicdoc.rng
 java -jar jing-trang/build/trang.jar -I rnc -O rng reqt.rnc reqt.rng
+java -jar jing-trang/build/trang.jar -I rnc -O rng relaton-ieee.rnc relaton-ieee.rng
+java -jar jing-trang/build/trang.jar -I rnc -O rng relaton-iso.rnc relaton-iso.rng
 java -jar jing-trang/build/trang.jar -I rnc -O rng isodoc.rnc isodoc.rng
 java -jar jing-trang/build/trang.jar -I rnc -O rng isostandard.rnc isostandard.rng
 java -jar jing-trang/build/trang.jar -I rnc -O rng isostandard-amd.rnc isostandard-amd.rng

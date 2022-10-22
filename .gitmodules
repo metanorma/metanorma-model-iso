@@ -7,3 +7,9 @@
 [submodule "grammars/basicdoc-models"]
 	path = grammars/basicdoc-models
 	url = https://github.com/metanorma/basicdoc-models.git
+[submodule "grammars/relaton-model-ieee"]
+	path = grammars/relaton-model-ieee
+	url = https://github.com/relaton/relaton-model-ieee.git
+[submodule "grammars/relaton-model-iso"]
+	path = grammars/relaton-model-iso
+	url = https://github.com/relaton/relaton-model-iso

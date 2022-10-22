@@ -1,30 +1,9 @@
 #default namespace isostandard = "https://www.metanorma.com/ns/iso"
 
-include "isodoc.rnc" {
+include "relaton-iso.rnc" { }
+include "isodoc.rnc" { 
 
 start = iso-standard
-
-organization = 
-  element organization {
-    orgname+, abbreviation?, uri?, org-identifier*, contact*,
-    technical-committee?, subcommittee?, workgroup?, secretariat?  
-}
-
-BibDataExtensionType =
-  attribute schema-version { text }?,
-        doctype, docsubtype?, horizontal?, editorialgroup, approvalgroup?, ics*, structuredidentifier, stagename?
-
-bdate = element date {
-  attribute type { ( BibliographicDateType | text ) },
-  (
-(
-element from { ISO8601Date },
-element to { ISO8601Date }?
-) |
-element on { ISO8601Date | "--" | "–" }
-)
-
-}
 
 sections =
   element sections {
@@ -78,24 +57,8 @@ preface =
     abstract?, foreword, introduction?
 }
 
-DocumentType =
-     "international-standard" | "technical-specification" |
-     "technical-report" | "publicly-available-specification" |
-    "international-workshop-agreement" | "guide" |
-    "amendment" | "technical-corrigendum" | "directive"
-
-DocumentSubtype = "specification" | "method-of-test" | "vocabulary" | "code-of-practice"
-
-structuredidentifier =
-  element structuredidentifier {
-    attribute type { text }?,
-    (documentnumber, tc-documentnumber? )
-}
-
 foreword = element foreword { Basic-Section }
 introduction = element introduction { Content-Section }
-
-editorialgroup = element editorialgroup { ISOProjectGroup }
 
 Content-Section =
     attribute id { xsd:ID }?,
@@ -113,12 +76,6 @@ Content-Section =
 
 # end overrides
 
-ISOProjectGroup =
-  agency*, technical-committee+, subcommittee*, workgroup*, secretariat?
-approvalgroup = element approvalgroup { ISOProjectGroup }
-
-agency = element agency { text }
-
 # We display the Normative References between scope and terms; but to keep the
 # grammar simple, we keep the references together
 iso-standard = 
@@ -127,29 +84,6 @@ attribute version { text },
   attribute type { "semantic" | "presentation" },
     bibdata, termdocsource*, misccontainer?, boilerplate?, preface, sections+, annex*, bibliography, indexsect*
   }
-
-horizontal = element horizontal { xsd:boolean }
-
-documentnumber = 
-  element project-number { 
-    attribute part { xsd:int }?,
-    attribute subpart { xsd:int }?,
-    text
-   }
-
-tc-documentnumber = 
-  element tc-document-number { 
-    xsd:int 
-   }
-
-subcommittee =
-  element subcommittee { IsoWorkgroup }
-
-workgroup =
-  element workgroup { IsoWorkgroup }
-
-secretariat =
-  element secretariat { text }
 
 clause-hanging-paragraph-with-footnote =
   element clause {
@@ -166,9 +100,4 @@ clause-hanging-paragraph-with-footnote =
 
 annex-appendix =
   element appendix { Clause-Section }
-
-stagename = element stagename { 
-  attribute abbreviation { text }?,
-  text
-}
 
