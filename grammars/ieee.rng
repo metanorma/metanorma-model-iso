@@ -10,6 +10,22 @@
     <start>
       <ref name="ieee-standard"/>
     </start>
+    <define name="sections">
+      <element name="sections">
+        <optional>
+          <ref name="note"/>
+        </optional>
+        <oneOrMore>
+          <choice>
+            <ref name="clause"/>
+            <ref name="terms"/>
+            <ref name="term-clause"/>
+            <ref name="definitions"/>
+            <ref name="floating-title"/>
+          </choice>
+        </oneOrMore>
+      </element>
+    </define>
   </include>
   <define name="ieee-standard">
     <element name="ieee-standard">

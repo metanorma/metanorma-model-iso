@@ -3,7 +3,17 @@
 # namespaces, one for isostandard and one for csand additions. And we do not want that.
 
 include "relaton-ieee.rnc" { }
-include "isodoc.rnc" { start = ieee-standard }
+include "isodoc.rnc" { 
+
+start = ieee-standard 
+
+sections =
+  element sections {
+    note?,
+    ( clause | terms | term-clause | definitions | floating-title )+
+} 
+
+}
 
 ieee-standard =
   element ieee-standard {
