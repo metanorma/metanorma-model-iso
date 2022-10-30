@@ -65,7 +65,7 @@ xref =
      attribute alt { text }?,
      attribute case { "capital" | "lowercase" }?,
      attribute droploc { xsd:boolean }?,
-     attribute style { "basic" | "full" | "short" }?,
+     attribute style { XrefStyleType }?,
      XrefBody
 }
 
@@ -830,6 +830,8 @@ XrefTarget =
     attribute target { xsd:string { pattern = "\i\c*|\c+#\c+" }},
     attribute connective { "and" | "or" | "from" | "to" | "" }
 }
+
+XrefStyleType = "basic" | "full" | "short" |"id"
 
 start = standard-document
 }
