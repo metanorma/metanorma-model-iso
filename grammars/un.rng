@@ -15,6 +15,7 @@
         <text/>
         <ref name="em"/>
         <ref name="eref"/>
+        <ref name="erefstack"/>
         <ref name="strong"/>
         <ref name="stem"/>
         <ref name="sub"/>

@@ -313,9 +313,9 @@ table-note = element note {
  paragraph
 }
 
-em = element em { (PureTextElement|stem|index|eref|xref|hyperlink)* }
-strong = element strong { (PureTextElement|stem|index|eref|xref|hyperlink)* }
-tt = element tt { (PureTextElement|index|eref|xref|hyperlink)* }
+em = element em { (PureTextElement|stem|index|eref|erefstack|xref|hyperlink)* }
+strong = element strong { (PureTextElement|stem|index|eref|erefstack|xref|hyperlink)* }
+tt = element tt { (PureTextElement|index|eref|erefstack|xref|hyperlink)* }
 keyword = element keyword { (PureTextElement|index)* }
 strike = element strike { (PureTextElement|index)* }
 underline = element underline { (PureTextElement|index)* }
@@ -356,10 +356,10 @@ col = element col {
 
 BibItemType |= "internal"
 
-TextElement |= concept | add | del | span
+TextElement |= concept | add | del | span | erefstack
 
-add = element add { PureTextElement | eref | stem | keyword | xref | hyperlink }
-del = element del { PureTextElement | eref | stem | keyword | xref | hyperlink }
+add = element add { PureTextElement | eref | erefstack | stem | keyword | xref | hyperlink }
+del = element del { PureTextElement | eref | erefstack | stem | keyword | xref | hyperlink }
 span = element span {
   attribute class { text }?,
   attribute style { text }?,
@@ -373,7 +373,7 @@ concept = element concept {
   attribute linkref { xsd:boolean }?,
   element refterm { (PureTextElement|stem)* }?,
   element renderterm { (PureTextElement|stem)* }?,
-  ( eref | xref | termref )
+  ( eref | erefstack | xref | termref )
 }
 
 BasicBlock |= requirement | recommendation | permission | imagemap | svgmap | inputform | toc | passthrough
@@ -606,7 +606,7 @@ related =
   element related {
     attribute type { RelatedTermType },
     element preferred { Designation },
-    ( eref | xref | termref )
+    ( eref | erefstack | xref | termref )
 }
 
 RelatedTermType = 
@@ -784,7 +784,7 @@ imagemap = element imagemap {
   figure, 
   element area {
     attribute type { "rect" | "circle" | "ellipse" | "poly" },
-    ( xref | hyperlink | eref ),
+    ( xref | hyperlink | eref | erefstack ),
     element coords {
       attribute x { xsd:float },
       attribute y { xsd:float }
@@ -802,7 +802,7 @@ svgmap = element svgmap {
   figure,
   element target {
      attribute href { xsd:anyURI },
-    ( xref | hyperlink | eref )
+    ( xref | hyperlink | eref | erefstack )
   }*
 }
 
@@ -825,13 +825,23 @@ XrefBody =
      XrefTarget*,
      PureTextElement+
 
+XrefConnectiveType = "and" | "or" | "from" | "to" | ""
+
 XrefTarget =
   element location {
     attribute target { xsd:string { pattern = "\i\c*|\c+#\c+" }},
-    attribute connective { "and" | "or" | "from" | "to" | "" }
+    attribute connective { XrefConnectiveType }
 }
 
 XrefStyleType = "basic" | "full" | "short" |"id"
+
+erefTypeWithConnective =
+    attribute connective { XrefConnectiveType }?,
+    erefType
+
+erefstack = element erefstack {
+    element eref { erefTypeWithConnective }+
+}
 
 start = standard-document
 }

@@ -8,7 +8,7 @@ include "isodoc.rnc" {
   start = un-standard
 
   TextElement =
-    text | em | eref | strong | stem | sub | sup | tt |
+    text | em | eref | erefstack | strong | stem | sub | sup | tt |
     strike | smallcap | xref | br | hyperlink | hr | pagebreak | bookmark 
 
     admonition =
