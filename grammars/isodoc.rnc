@@ -336,7 +336,7 @@ doc_bibitem =
      attribute id { xsd:ID },
      attribute hidden { xsd:boolean }?,
      attribute suppress_identifier { xsd:boolean }?,
-     BibliographicItem
+     ReducedBibliographicItem
 }
 
 
