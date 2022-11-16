@@ -4,19 +4,27 @@ rm -f relaton-models/grammars/biblio.rng
 rm -f basicdoc-models/grammars/basicdoc.rng
 git submodule update
 
+echo "{" > versions.json
+
 cd relaton-models/grammars
 git checkout main && git pull
+var=`git tag --sort=committerdate | tail -1`
+echo "\"relaton-models\": \"$var\"," >> ../../versions.json
 cd ../..
 cp relaton-models/grammars/biblio.rnc .
 cp relaton-models/grammars/biblio-standoc.rnc .
 
 cd basicdoc-models/grammars
 git checkout main && git pull
+var=`git tag --sort=committerdate | tail -1`
+echo "\"basicdoc-models\": \"$var\"," >> ../../versions.json
 cd ../..
 cp basicdoc-models/grammars/basicdoc.rnc .
 
 cd metanorma-requirements-models/grammars
 git checkout main && git pull
+var=`git tag --sort=committerdate | tail -1`
+echo "\"metanorma-requirements-models\": \"$var\"," >> ../../versions.json
 cd ../..
 cp metanorma-requirements-models/grammars/reqt.rnc .
 
@@ -24,9 +32,15 @@ for i in ieee iso iec bsi gb mpfa bipm w3c 3gpp csa cc ietf iho itu m3aawg nist 
 do
   cd relaton-model-$i/grammars
   git checkout main && git pull
+  var=`git tag --sort=committerdate | tail -1`
+  echo "\"relaton-model-$i\": \"$var\"," >> ../../versions.json
   cd ../..
   cp relaton-model-$i/grammars/relaton-$i.rnc .
 done
+
+date=`TZ=GMT date +"%Y-%m-%dT%H:%M:%SZ"`
+echo "\"date\": \"$date\"" >> versions.json
+echo "}" >> versions.json
 
 gem list | grep rsec
 if [[ $? -ne 0 ]]; then
@@ -47,4 +61,7 @@ do
   java -jar jing-trang/build/trang.jar -I rnc -O rng $i.rnc $i.rng
 done
 
-sh copy.sh
+if [ -e ../../metanorma-standoc/lib/metanorma/standoc ]
+then
+  sh copy.sh
+fi
