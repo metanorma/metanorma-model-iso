@@ -55,7 +55,7 @@ fi
 
 echo "Compiling..."
 
-for i in biblio biblio-standoc basicdoc reqt relaton-ieee relaton-iso relaton-iec relaton-bsi relaton-gb relaton-mpfa relaton-bipm relaton-w3c relaton-3gpp relaton-csa relaton-cc relaton-ietf relaton-iho relaton-itu relaton-m3aawg relaton-nist relaton-ribose relaton-ogc relaton-un isodoc isodoc-compile isostandard isostandard-compile isostandard-amd iec csd csa gbstandard m3d rsd ieee un ogc nist itu ietf iho bipm bsi
+for i in biblio biblio-standoc basicdoc reqt relaton-ieee relaton-iso relaton-iec relaton-bsi relaton-gb relaton-mpfa relaton-bipm relaton-w3c relaton-3gpp relaton-csa relaton-cc relaton-ietf relaton-iho relaton-itu relaton-m3aawg relaton-nist relaton-ribose relaton-ogc relaton-un isodoc isodoc-compile isostandard isostandard-compile isostandard-amd iec csd csa gbstandard m3d rsd ieee un ogc nist itu ietf iho bipm bsi relaton-ieee-compile relaton-iso-compile relaton-iec-compile relaton-bsi-compile relaton-gb-compile relaton-mpfa-compile relaton-bipm-compile relaton-w3c-compile relaton-3gpp-compile relaton-csa-compile relaton-cc-compile relaton-ietf-compile relaton-iho-compile relaton-itu-compile relaton-m3aawg-compile relaton-nist-compile relaton-ribose-compile relaton-ogc-compile relaton-un-compile
 do
   echo $i
   java -jar jing-trang/build/trang.jar -I rnc -O rng $i.rnc $i.rng

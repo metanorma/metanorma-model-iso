@@ -1,0 +1,4 @@
+include "basicdoc.rnc" { }
+include "relaton-m3aawg.rnc" {
+ start = bibitem
+}

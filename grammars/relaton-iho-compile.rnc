@@ -1,0 +1,4 @@
+include "basicdoc.rnc" { }
+include "relaton-iho.rnc" {
+ start = bibitem
+}
