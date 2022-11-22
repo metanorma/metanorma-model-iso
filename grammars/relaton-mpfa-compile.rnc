@@ -1,4 +1,4 @@
 include "basicdoc.rnc" { }
-include "relaton-mpfa.rnc" {
+include "relaton-mpfa.rnc" { }
  start = bibitem
-}
+

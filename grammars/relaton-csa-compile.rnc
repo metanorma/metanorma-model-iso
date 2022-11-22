@@ -1,4 +1,4 @@
 include "basicdoc.rnc" { }
-include "relaton-csa.rnc" {
+include "relaton-csa.rnc" { }
  start = bibitem
-}
+
