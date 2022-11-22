@@ -1,5 +1,4 @@
 include "basicdoc.rnc" { }
 include "relaton-ieee.rnc" { }
 start = bibitem | bibdata
-bibdata = element bibdata { BibData }
 
