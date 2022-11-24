@@ -58,3 +58,6 @@
 [submodule "grammars/relaton-model-un"]
 	path = grammars/relaton-model-un
 	url = https://github.com/relaton/relaton-model-un
+[submodule "grammars/relaton-model-cen"]
+	path = grammars/relaton-model-cen
+	url = https://github.com/relaton/relaton-model-cen.git

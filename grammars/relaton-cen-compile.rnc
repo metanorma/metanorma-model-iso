@@ -1,0 +1,4 @@
+include "basicdoc.rnc" { }
+include "relaton-cen.rnc" { }
+start = bibitem | bibdata
+
