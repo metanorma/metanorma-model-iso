@@ -61,3 +61,15 @@
 [submodule "grammars/relaton-model-cen"]
 	path = grammars/relaton-model-cen
 	url = https://github.com/relaton/relaton-model-cen.git
+[submodule "grammars/relaton-model-omg"]
+	path = grammars/relaton-model-omg
+	url = https://github.com/relaton/relaton-model-omg.git
+[submodule "grammars/relaton-model-iana"]
+	path = grammars/relaton-model-iana
+	url = https://github.com/relaton/relaton-model-iana.git
+[submodule "grammars/relaton-model-ecma"]
+	path = grammars/relaton-model-ecma
+	url = https://github.com/relaton/relaton-model-ecma.git
+[submodule "grammars/relaton-model-cie"]
+	path = grammars/relaton-model-cie
+	url = https://github.com/relaton/relaton-model-cie.git

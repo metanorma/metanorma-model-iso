@@ -1,0 +1,4 @@
+include "basicdoc.rnc" { }
+include "relaton-ecma.rnc" { }
+start = bibitem | bibdata
+
