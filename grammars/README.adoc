@@ -2,11 +2,9 @@
 
 This directory contains RelaxNG Compact and RelaxNG grammars for:
 
-* the base IsoDoc Standard Document model (`isodoc*`),
-* https://github.com/metanorma/isodoc[ISO Standards] (`isostandard*`)
-* https://github.com/metanorma/metanorma-model-cc[CalConnect] (`csd*`)
-* https://github.com/metanorma/metanorma-model-gb[China Standards] (`gbstandard*`)
-* And so on
+* the base Metanorma Standard Document model (`isodoc*`),
+* Various Metanorma gramars
+* Various Relaton gramars
 
 RelaxNG Compact is the source specification for grammars; RelaxNG is generated
 from the RelaxNG Compact source, and is used by the Ruby gems validating
@@ -17,12 +15,8 @@ specifications against the models:
 * https://github.com/metanorma/metanorma-gb
 * And so on
 
-Instances of IsoDoc are derived from the base grammar by creating a diff
-grammar, containing the productions (assignments) and declarations where the
-instance overrides the base (e.g. `isostandard_diff.rnc`). 
-
-The two grammars are merged using the script `rnc.ebnf.rb`, and then RelaxNG
-schemas are generated from the RelaxNG Compact schemas, using the `jing-trang`
+RelaxNG schemas are generated from the RelaxNG Compact schemas, using the `jing-trang`
 gem. (The RelaxNG schemas are how documents are actually validated in the gems
-generating IsoDoc XML.)
+generating Metanorma XML.)
 
+The grammars are generated using `make.sh`. The grammars are validated using `bundle exec ruby test.rb`.

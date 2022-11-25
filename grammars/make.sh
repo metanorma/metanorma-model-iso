@@ -61,6 +61,9 @@ do
   java -jar jing-trang/build/trang.jar -I rnc -O rng $i.rnc $i.rng
 done
 
+bundle install
+bundle exec ruby test.rb
+
 if [ -e ../../metanorma-standoc/lib/metanorma/standoc ]
 then
   sh copy.sh

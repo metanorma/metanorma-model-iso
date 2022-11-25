@@ -6,3 +6,5 @@ cd jing-trang
 cd ..
 java -jar jing-trang/build/trang.jar -I rnc -O rng isodoc.rnc isodoc.rng
 
+
+java -jar jing-trang/build/jing.jar -c isodoc-compile.rng a.xml
