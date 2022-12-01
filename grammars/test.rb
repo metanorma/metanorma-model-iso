@@ -10,7 +10,8 @@ GRAMMARS = %w(biblio-compile isodoc-compile isostandard-compile isostandard-amd
               relaton-iho-compile relaton-itu-compile relaton-m3aawg-compile
               relaton-nist-compile relaton-ribose-compile relaton-ogc-compile
               relaton-un-compile relaton-cen-compile relaton-ecma-compile
-              relaton-cie-compile relaton-iana-compile relaton-omg-compile).freeze
+              relaton-cie-compile relaton-iana-compile relaton-omg-compile
+              relaton-oasis-compile).freeze
 
 GRAMMARS.each do |g|
   warn "validating #{g}"

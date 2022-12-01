@@ -1,0 +1,4 @@
+include "basicdoc.rnc" { }
+include "relaton-oasis.rnc" { }
+start = bibitem | bibdata
+
