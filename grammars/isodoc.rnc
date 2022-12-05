@@ -833,7 +833,7 @@ XrefTarget =
     attribute connective { XrefConnectiveType }
 }
 
-XrefStyleType = "basic" | "full" | "short" |"id"
+XrefStyleType = "basic" | "full" | "short" |"id" | "modspec"
 
 erefTypeWithConnective =
     attribute connective { XrefConnectiveType }?,
