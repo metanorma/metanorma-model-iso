@@ -367,6 +367,7 @@ span = element span {
 }
 
 concept = element concept {
+  attribute bold { xsd:boolean }?,
   attribute ital { xsd:boolean }?,
   attribute ref { xsd:boolean }?,
   attribute linkmention { xsd:boolean }?,
@@ -833,7 +834,7 @@ XrefTarget =
     attribute connective { XrefConnectiveType }
 }
 
-XrefStyleType = "basic" | "full" | "short" |"id" | "modspec"
+XrefStyleType = "basic" | "full" | "short" |"id" | text
 
 erefTypeWithConnective =
     attribute connective { XrefConnectiveType }?,
