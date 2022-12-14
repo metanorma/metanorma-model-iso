@@ -175,6 +175,7 @@ sourcecode =
     attribute lang { text }?,
     attribute tag { text }?,
     attribute multilingual-rendering { MultilingualRenderingType }?,
+    attribute linenums { xsd:boolean }?,
     tname?, ( text | callout )+, annotation*, note*
   }
 
