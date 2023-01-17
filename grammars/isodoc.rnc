@@ -471,7 +471,7 @@ element standard-document {
   bibdata, misccontainer?, boilerplate?, preface?, sections, annex*, bibliography?, indexsect*
 }
 
-misccontainer = element extension { AnyElement+ }
+misccontainer = element metanorma-extension { AnyElement+ }
 
 preface =
   element preface { ( content | abstract | foreword | introduction | acknowledgements)+ }
