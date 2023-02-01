@@ -35,7 +35,7 @@ admonition =
   }
 
 AdmonitionType = 
-  "warning" | "note" | "tip" | "important" | "caution" | "statement" | "editorial"
+  "warning" | "note" | "tip" | "important" | "caution" | "statement" | "editorial" | "box"
 
 index = element index {
   attribute to { xsd:IDREF }?,
