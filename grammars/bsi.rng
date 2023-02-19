@@ -287,6 +287,9 @@
       <zeroOrMore>
         <ref name="indexsect"/>
       </zeroOrMore>
+      <optional>
+        <ref name="colophon"/>
+      </optional>
     </element>
   </define>
 </grammar>

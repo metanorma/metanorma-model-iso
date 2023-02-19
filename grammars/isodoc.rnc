@@ -468,13 +468,16 @@ standard-document =
 element standard-document {
   attribute version { text },
   attribute type { "semantic" | "presentation" },
-  bibdata, misccontainer?, boilerplate?, preface?, sections, annex*, bibliography?, indexsect*
+  bibdata, misccontainer?, boilerplate?, preface?, sections, annex*, bibliography?, indexsect*, colophon?
 }
 
 misccontainer = element metanorma-extension { AnyElement+ }
 
 preface =
   element preface { ( content | abstract | foreword | introduction | acknowledgements)+ }
+
+colophon =
+  element colophon { content+ }
 
 foreword =
   element foreword { Content-Section }
