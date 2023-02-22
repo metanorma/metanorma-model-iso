@@ -235,6 +235,81 @@
         </oneOrMore>
       </element>
     </define>
+    <define name="figure">
+      <element name="figure">
+        <attribute name="id">
+          <data type="ID"/>
+        </attribute>
+        <optional>
+          <attribute name="unnumbered">
+            <data type="boolean"/>
+          </attribute>
+        </optional>
+        <optional>
+          <attribute name="number"/>
+        </optional>
+        <optional>
+          <attribute name="subsequence"/>
+        </optional>
+        <optional>
+          <attribute name="keep-with-next">
+            <data type="boolean"/>
+          </attribute>
+        </optional>
+        <optional>
+          <attribute name="keep-lines-together">
+            <data type="boolean"/>
+          </attribute>
+        </optional>
+        <optional>
+          <attribute name="class"/>
+        </optional>
+        <optional>
+          <attribute name="tag"/>
+        </optional>
+        <optional>
+          <attribute name="multilingual-rendering">
+            <ref name="MultilingualRenderingType"/>
+          </attribute>
+        </optional>
+        <optional>
+          <attribute name="width">
+            <choice>
+              <value>narrow</value>
+              <value>text-width</value>
+              <value>full-page-width</value>
+            </choice>
+          </attribute>
+        </optional>
+        <optional>
+          <ref name="source"/>
+        </optional>
+        <optional>
+          <ref name="tname"/>
+        </optional>
+        <choice>
+          <ref name="image"/>
+          <ref name="video"/>
+          <ref name="audio"/>
+          <ref name="pre"/>
+          <oneOrMore>
+            <ref name="paragraph-with-footnote"/>
+          </oneOrMore>
+          <zeroOrMore>
+            <ref name="figure"/>
+          </zeroOrMore>
+        </choice>
+        <zeroOrMore>
+          <ref name="fn"/>
+        </zeroOrMore>
+        <optional>
+          <ref name="dl"/>
+        </optional>
+        <zeroOrMore>
+          <ref name="note"/>
+        </zeroOrMore>
+      </element>
+    </define>
   </include>
   <!-- end overrides -->
   <define name="floating-section-title">

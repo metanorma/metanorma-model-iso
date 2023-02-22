@@ -66,6 +66,22 @@ sections =
     (clause | term-clause | terms | floating-title | floating-section-title)+
   } 
 
+figure =
+  element figure {
+    attribute id { xsd:ID },
+    attribute unnumbered { xsd:boolean }?,
+    attribute number { text }?,
+    attribute subsequence { text }?,
+    attribute keep-with-next { xsd:boolean }?,
+    attribute keep-lines-together { xsd:boolean }?,
+    attribute class { text }?,
+    attribute tag { text }?,
+    attribute multilingual-rendering { MultilingualRenderingType }?,
+    attribute width { "narrow" | "text-width" | "full-page-width" }?,
+     source?, tname?, (image | video | audio | pre | paragraph-with-footnote+ | figure*), fn*, dl?, note*
+  }  
+     
+
 }
 
 # end overrides
