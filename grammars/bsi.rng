@@ -310,6 +310,78 @@
         </zeroOrMore>
       </element>
     </define>
+    <define name="table">
+      <element name="table">
+        <attribute name="id">
+          <data type="ID"/>
+        </attribute>
+        <optional>
+          <attribute name="unnumbered">
+            <data type="boolean"/>
+          </attribute>
+        </optional>
+        <optional>
+          <attribute name="number"/>
+        </optional>
+        <optional>
+          <attribute name="subsequence"/>
+        </optional>
+        <optional>
+          <attribute name="alt"/>
+        </optional>
+        <optional>
+          <attribute name="summary"/>
+        </optional>
+        <optional>
+          <attribute name="uri">
+            <data type="anyURI"/>
+          </attribute>
+        </optional>
+        <optional>
+          <attribute name="keep-with-next">
+            <data type="boolean"/>
+          </attribute>
+        </optional>
+        <optional>
+          <attribute name="keep-lines-together">
+            <data type="boolean"/>
+          </attribute>
+        </optional>
+        <optional>
+          <attribute name="width"/>
+        </optional>
+        <optional>
+          <attribute name="tag"/>
+        </optional>
+        <optional>
+          <attribute name="multilingual-rendering">
+            <ref name="MultilingualRenderingType"/>
+          </attribute>
+        </optional>
+        <optional>
+          <attribute name="border-under-row"/>
+        </optional>
+        <optional>
+          <ref name="colgroup"/>
+        </optional>
+        <optional>
+          <ref name="tname"/>
+        </optional>
+        <optional>
+          <ref name="thead"/>
+        </optional>
+        <ref name="tbody"/>
+        <optional>
+          <ref name="tfoot"/>
+        </optional>
+        <zeroOrMore>
+          <ref name="table-note"/>
+        </zeroOrMore>
+        <optional>
+          <ref name="dl"/>
+        </optional>
+      </element>
+    </define>
   </include>
   <!-- end overrides -->
   <define name="floating-section-title">

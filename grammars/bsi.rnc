@@ -80,6 +80,24 @@ figure =
     attribute width { "narrow" | "text-width" | "full-page-width" }?,
      source?, tname?, (image | video | audio | pre | paragraph-with-footnote+ | figure*), fn*, dl?, note*
   }  
+
+table =
+  element table {
+    attribute id { xsd:ID },
+    attribute unnumbered { xsd:boolean }?, 
+    attribute number { text }?,
+    attribute subsequence { text }?,
+    attribute alt { text }?,
+    attribute summary { text }?,
+    attribute uri { xsd:anyURI }?,
+    attribute keep-with-next { xsd:boolean }?,
+    attribute keep-lines-together { xsd:boolean }?,
+    attribute width { text }?,
+    attribute tag { text }?,
+    attribute multilingual-rendering { MultilingualRenderingType }?,
+    attribute border-under-row { text }?,
+    colgroup?, tname?, thead?, tbody, tfoot?, table-note*, dl?
+  }
      
 
 }
