@@ -169,24 +169,7 @@
         <attribute name="id">
           <data type="ID"/>
         </attribute>
-        <optional>
-          <attribute name="keep-with-next">
-            <data type="boolean"/>
-          </attribute>
-        </optional>
-        <optional>
-          <attribute name="keep-lines-together">
-            <data type="boolean"/>
-          </attribute>
-        </optional>
-        <optional>
-          <attribute name="tag"/>
-        </optional>
-        <optional>
-          <attribute name="multilingual-rendering">
-            <ref name="MultilingualRenderingType"/>
-          </attribute>
-        </optional>
+        <ref name="BlockAttributes"/>
         <attribute name="type">
           <choice>
             <value>roman</value>

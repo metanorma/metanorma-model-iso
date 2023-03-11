@@ -72,11 +72,8 @@ figure =
     attribute unnumbered { xsd:boolean }?,
     attribute number { text }?,
     attribute subsequence { text }?,
-    attribute keep-with-next { xsd:boolean }?,
-    attribute keep-lines-together { xsd:boolean }?,
     attribute class { text }?,
-    attribute tag { text }?,
-    attribute multilingual-rendering { MultilingualRenderingType }?,
+    BlockAttributes,
     attribute width { "narrow" | "text-width" | "full-page-width" }?,
      source?, tname?, (image | video | audio | pre | paragraph-with-footnote+ | figure*), fn*, dl?, note*
   }  
@@ -90,11 +87,8 @@ table =
     attribute alt { text }?,
     attribute summary { text }?,
     attribute uri { xsd:anyURI }?,
-    attribute keep-with-next { xsd:boolean }?,
-    attribute keep-lines-together { xsd:boolean }?,
     attribute width { text }?,
-    attribute tag { text }?,
-    attribute multilingual-rendering { MultilingualRenderingType }?,
+    BlockAttributes,
     attribute border-under-row { text }?,
     colgroup?, tname?, thead?, tbody, tfoot?, table-note*, dl?
   }

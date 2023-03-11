@@ -26,8 +26,7 @@ term =
     attribute id { xsd:ID }?,
     attribute language { text }?,
     attribute script { text }?,
-    attribute tag { text }?,
-    attribute multilingual-rendering { MultilingualRenderingType }?,
+    BlockAttributes,
     preferred, admitted*, deprecates*,
     termdomain?, termdefinition, termnote*, termexample*, termsource*,
     term*

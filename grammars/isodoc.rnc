@@ -79,23 +79,24 @@ erefType =
     CitationType,
     PureTextElement+
 
-ul =
-  element ul {
-    attribute id { xsd:ID },
+BlockAttributes =
     attribute keep-with-next { xsd:boolean }?,
     attribute keep-lines-together { xsd:boolean }?,
     attribute tag { text }?,
     attribute multilingual-rendering { MultilingualRenderingType }?,
+    attribute columns { text }?
+
+ul =
+  element ul {
+    attribute id { xsd:ID },
+    BlockAttributes,
     tname?, ul_li+, note*
 }
 
 ol =
   element ol {
     attribute id { xsd:ID },
-    attribute keep-with-next { xsd:boolean }?,
-    attribute keep-lines-together { xsd:boolean }?,
-    attribute tag { text }?,
-    attribute multilingual-rendering { MultilingualRenderingType }?,
+    BlockAttributes,
     attribute type { ( "roman" | "alphabet" | "arabic" |
                        "roman_upper" | "alphabet_upper" ) }?,
     tname?, li+, note*
@@ -104,11 +105,8 @@ ol =
 dl =
   element dl {
     attribute id { xsd:ID },
-    attribute keep-with-next { xsd:boolean }?,
-    attribute keep-lines-together { xsd:boolean }?,
+    BlockAttributes,
     attribute key { xsd:boolean }?,
-    attribute tag { text }?,
-    attribute multilingual-rendering { MultilingualRenderingType }?,
     tname?, (dt, dd)+, note*
 }
 
@@ -124,10 +122,7 @@ example =
     attribute unnumbered { xsd:boolean }?,
     attribute subsequence { text }?,
     attribute number { text }?,
-    attribute keep-with-next { xsd:boolean }?,
-    attribute keep-lines-together { xsd:boolean }?,
-    attribute tag { text }?,
-    attribute multilingual-rendering { MultilingualRenderingType }?,
+    BlockAttributes,
     tname?,
     ( formula | ul | ol | dl | quote | sourcecode | paragraph-with-footnote | figure )+,
     note*
@@ -142,11 +137,8 @@ table =
     attribute alt { text }?,
     attribute summary { text }?,
     attribute uri { xsd:anyURI }?,
-    attribute keep-with-next { xsd:boolean }?,
-    attribute keep-lines-together { xsd:boolean }?,
     attribute width { text }?,
-    attribute tag { text }?,
-    attribute multilingual-rendering { MultilingualRenderingType }?,
+    BlockAttributes,
     colgroup?, tname?, thead?, tbody, tfoot?, table-note*, dl?
   }
 
@@ -156,11 +148,8 @@ figure =
     attribute unnumbered { xsd:boolean }?,
     attribute number { text }?,
     attribute subsequence { text }?,
-    attribute keep-with-next { xsd:boolean }?,
-    attribute keep-lines-together { xsd:boolean }?,
     attribute class { text }?,
-    attribute tag { text }?,
-    attribute multilingual-rendering { MultilingualRenderingType }?,
+    BlockAttributes,
      source?, tname?, (image | video | audio | pre | paragraph-with-footnote+ | figure*), fn*, dl?, note*
   }
 
@@ -170,11 +159,8 @@ sourcecode =
     attribute unnumbered { xsd:boolean }?,
     attribute number { text }?,
     attribute subsequence { text }?,
-    attribute keep-with-next { xsd:boolean }?,
-    attribute keep-lines-together { xsd:boolean }?,
     attribute lang { text }?,
-    attribute tag { text }?,
-    attribute multilingual-rendering { MultilingualRenderingType }?,
+    BlockAttributes,
     attribute linenums { xsd:boolean }?,
     tname?, ( text | callout )+, annotation*, note*
   }
@@ -185,33 +171,24 @@ formula =
     attribute unnumbered { xsd:boolean }?,
     attribute number { text }?,
     attribute subsequence { text }?,
-    attribute keep-with-next { xsd:boolean }?,
-    attribute keep-lines-together { xsd:boolean }?,
     attribute inequality { xsd:boolean }?,
-    attribute tag { text }?,
-    attribute multilingual-rendering { MultilingualRenderingType }?,
+    BlockAttributes,
     stem, dl?, note*
 }
 
 ParagraphType =
     attribute id { xsd:ID },
     attribute align { Alignments }?,
-    attribute keep-with-next { xsd:boolean }?,
-    attribute keep-lines-together { xsd:boolean }?,
     attribute tag { text }?,
-    attribute type { text }?,
-    attribute multilingual-rendering { MultilingualRenderingType }?,
+    BlockAttributes,
    ( TextElement )*, note*
 
 paragraph-with-footnote =
   element p {
     attribute id { xsd:ID },
     attribute align { Alignments }?,
-    attribute keep-with-next { xsd:boolean }?,
-    attribute keep-lines-together { xsd:boolean }?,
-    attribute tag { text }?,
     attribute type { text }?,
-    attribute multilingual-rendering { MultilingualRenderingType }?,
+    BlockAttributes,
    ( TextElement | fn  )*, note*
 }
 
@@ -219,10 +196,7 @@ quote =
   element quote {
     attribute id { xsd:ID },
     attribute alignment { Alignments }?,
-    attribute keep-with-next { xsd:boolean }?,
-    attribute keep-lines-together { xsd:boolean }?,
-    attribute tag { text }?,
-    attribute multilingual-rendering { MultilingualRenderingType }?,
+    BlockAttributes,
     quote-source?,
     quote-author?,
     paragraph-with-footnote+,
@@ -252,13 +226,10 @@ note = element note {
     attribute unnumbered { xsd:boolean }?,
     attribute number { text }?,
     attribute subsequence { text }?,
-    attribute keep-with-next { xsd:boolean }?,
-    attribute keep-lines-together { xsd:boolean }?,
     attribute type { text }?,
-    attribute tag { text }?,
-    attribute multilingual-rendering { MultilingualRenderingType }?,
     attribute coverpage { xsd:boolean }?,
     attribute notag { xsd:boolean }?,
+    BlockAttributes,
     (paragraph | ul | ol | dl | formula | quote | sourcecode)+
 }
 
@@ -394,8 +365,7 @@ inputform = element form {
     attribute name { text },
     attribute action { text },
     attribute class { text }?,
-    attribute tag { text }?,
-    attribute multilingual-rendering { MultilingualRenderingType }?,
+    BlockAttributes,
     ( TextElement | FormInput )*
 }
 
@@ -594,8 +564,7 @@ term =
     attribute id { xsd:ID }?,
     attribute language { text }?,
     attribute script { text }?,
-    attribute tag { text }?,
-    attribute multilingual-rendering { MultilingualRenderingType }?,
+    BlockAttributes,
     preferred+, admitted*, deprecates*, related*,
     termdomain?, termsubject?, 
     termdefinition+, termnote*, termexample*, termsource*
@@ -706,20 +675,14 @@ termnote =
     attribute unnumbered { xsd:boolean }?,
     attribute number { text }?,
     attribute subsequence { text }?,
-    attribute keep-with-next { xsd:boolean }?,
-    attribute keep-lines-together { xsd:boolean }?,
-    attribute tag { text }?,
-    attribute multilingual-rendering { MultilingualRenderingType }?,
+    BlockAttributes,
     (paragraph | ul | ol | dl | formula)+
 }
 
 termexample =
   element termexample { 
     attribute id { xsd:ID },
-    attribute keep-with-next { xsd:boolean }?,
-    attribute keep-lines-together { xsd:boolean }?,
-    attribute tag { text }?,
-    attribute multilingual-rendering { MultilingualRenderingType }?,
+    BlockAttributes,
     ( formula | ul | ol | dl | quote | sourcecode | paragraph | figure )+
 }
 
@@ -766,8 +729,7 @@ amend =
     attribute path { text }?,
     attribute path_end { text }?,
     attribute title { text }?,
-    attribute tag { text }?,
-    attribute multilingual-rendering { MultilingualRenderingType }?,
+    BlockAttributes,
     element location { locality* }?,
     autonumber*,
     element description { BasicBlock* }?,
@@ -784,8 +746,7 @@ autonumber =
 }
 
 imagemap = element imagemap {
-    attribute tag { text }?,
-    attribute multilingual-rendering { MultilingualRenderingType }?,
+    BlockAttributes,
   figure, 
   element area {
     attribute type { "rect" | "circle" | "ellipse" | "poly" },
@@ -802,8 +763,7 @@ imagemap = element imagemap {
 }
 
 svgmap = element svgmap {
-    attribute tag { text }?,
-    attribute multilingual-rendering { MultilingualRenderingType }?,
+    BlockAttributes,
   figure,
   element target {
      attribute href { xsd:anyURI },

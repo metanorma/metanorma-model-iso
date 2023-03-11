@@ -252,26 +252,9 @@
           <attribute name="subsequence"/>
         </optional>
         <optional>
-          <attribute name="keep-with-next">
-            <data type="boolean"/>
-          </attribute>
-        </optional>
-        <optional>
-          <attribute name="keep-lines-together">
-            <data type="boolean"/>
-          </attribute>
-        </optional>
-        <optional>
           <attribute name="class"/>
         </optional>
-        <optional>
-          <attribute name="tag"/>
-        </optional>
-        <optional>
-          <attribute name="multilingual-rendering">
-            <ref name="MultilingualRenderingType"/>
-          </attribute>
-        </optional>
+        <ref name="BlockAttributes"/>
         <optional>
           <attribute name="width">
             <choice>
@@ -338,26 +321,9 @@
           </attribute>
         </optional>
         <optional>
-          <attribute name="keep-with-next">
-            <data type="boolean"/>
-          </attribute>
-        </optional>
-        <optional>
-          <attribute name="keep-lines-together">
-            <data type="boolean"/>
-          </attribute>
-        </optional>
-        <optional>
           <attribute name="width"/>
         </optional>
-        <optional>
-          <attribute name="tag"/>
-        </optional>
-        <optional>
-          <attribute name="multilingual-rendering">
-            <ref name="MultilingualRenderingType"/>
-          </attribute>
-        </optional>
+        <ref name="BlockAttributes"/>
         <optional>
           <attribute name="border-under-row"/>
         </optional>
