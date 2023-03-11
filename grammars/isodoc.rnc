@@ -79,13 +79,6 @@ erefType =
     CitationType,
     PureTextElement+
 
-BlockAttributes =
-    attribute keep-with-next { xsd:boolean }?,
-    attribute keep-lines-together { xsd:boolean }?,
-    attribute tag { text }?,
-    attribute multilingual-rendering { MultilingualRenderingType }?,
-    attribute columns { text }?
-
 ul =
   element ul {
     attribute id { xsd:ID },
@@ -807,6 +800,13 @@ erefTypeWithConnective =
 erefstack = element erefstack {
     element eref { erefTypeWithConnective }+
 }
+
+BlockAttributes =
+    attribute keep-with-next { xsd:boolean }?,
+    attribute keep-lines-together { xsd:boolean }?,
+    attribute tag { text }?,
+    attribute multilingual-rendering { MultilingualRenderingType }?,
+    attribute columns { text }?
 
 start = standard-document
 }

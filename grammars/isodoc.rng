@@ -215,29 +215,6 @@
         <ref name="PureTextElement"/>
       </oneOrMore>
     </define>
-    <define name="BlockAttributes">
-      <optional>
-        <attribute name="keep-with-next">
-          <data type="boolean"/>
-        </attribute>
-      </optional>
-      <optional>
-        <attribute name="keep-lines-together">
-          <data type="boolean"/>
-        </attribute>
-      </optional>
-      <optional>
-        <attribute name="tag"/>
-      </optional>
-      <optional>
-        <attribute name="multilingual-rendering">
-          <ref name="MultilingualRenderingType"/>
-        </attribute>
-      </optional>
-      <optional>
-        <attribute name="columns"/>
-      </optional>
-    </define>
     <define name="ul">
       <element name="ul">
         <attribute name="id">
@@ -2446,6 +2423,29 @@
         </element>
       </oneOrMore>
     </element>
+  </define>
+  <define name="BlockAttributes">
+    <optional>
+      <attribute name="keep-with-next">
+        <data type="boolean"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="keep-lines-together">
+        <data type="boolean"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="tag"/>
+    </optional>
+    <optional>
+      <attribute name="multilingual-rendering">
+        <ref name="MultilingualRenderingType"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="columns"/>
+    </optional>
   </define>
   <start>
     <ref name="standard-document"/>
