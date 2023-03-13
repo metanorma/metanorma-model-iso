@@ -515,9 +515,6 @@
           <ref name="Alignments"/>
         </attribute>
       </optional>
-      <optional>
-        <attribute name="tag"/>
-      </optional>
       <ref name="BlockAttributes"/>
       <zeroOrMore>
         <ref name="TextElement"/>

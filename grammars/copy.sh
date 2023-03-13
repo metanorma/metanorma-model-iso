@@ -19,6 +19,11 @@ cp relaton-bsi.rng ../../metanorma-bsi/lib/metanorma/bsi
 cp isostandard.rng ../../metanorma-bsi/lib/metanorma/bsi/isostandard.rng
 cat bsi.rng | ruby -pe '$_.gsub!(/<grammar /, %{<grammar ns="https://www.metanorma.org/ns/bsi" }) '>  ../../metanorma-bsi/lib/metanorma/bsi/bsi.rng
 
+cp basicdoc.rng reqt.rng biblio.rng biblio-standoc.rng isodoc.rng ../../metanorma-jis/lib/metanorma/jis
+cp relaton-jis.rng ../../metanorma-jis/lib/metanorma/jis
+cp isostandard.rng ../../metanorma-jis/lib/metanorma/jis/isostandard.rng
+cat jis.rng | ruby -pe '$_.gsub!(/<grammar /, %{<grammar ns="https://www.metanorma.org/ns/jis" }) '>  ../../metanorma-jis/lib/metanorma/jis/jis.rng
+
 cp basicdoc.rng reqt.rng biblio.rng biblio-standoc.rng isodoc.rng ../../metanorma-csd/lib/metanorma/cc
 cp relaton-cc.rng ../../metanorma-csd/lib/metanorma/cc
 cat csd.rng | ruby -pe '$_.gsub!(/<grammar /, %{<grammar ns="https://www.metanorma.org/ns/csd" }) '>  ../../metanorma-csd/lib/metanorma/cc/cc.rng
@@ -26,10 +31,6 @@ cat csd.rng | ruby -pe '$_.gsub!(/<grammar /, %{<grammar ns="https://www.metanor
 cp basicdoc.rng reqt.rng biblio.rng biblio-standoc.rng isodoc.rng ../../metanorma-csand/lib/metanorma/csa
 cp relaton-csa.rng ../../metanorma-csand/lib/metanorma/csa
 cat csa.rng | ruby -pe '$_.gsub!(/<grammar /, %{<grammar ns="https://www.metanorma.org/ns/csa" }) '>  ../../metanorma-csand/lib/metanorma/csa/csa.rng
-
-cp basicdoc.rng reqt.rng biblio.rng biblio-standoc.rng isodoc.rng ../../metanorma-m3d/lib/metanorma/m3aawg
-cp relaton-m3aawg.rng ../../metanorma-m3d/lib/metanorma/m3aawg
-cat m3d.rng | ruby -pe '$_.gsub!(/<grammar /, %{<grammar ns="https://www.metanorma.org/ns/m3d" }) '>  ../../metanorma-m3d/lib/metanorma/m3aawg/m3d.rng
 
 cp basicdoc.rng reqt.rng biblio.rng biblio-standoc.rng isodoc.rng ../../metanorma-rsd/lib/metanorma/ribose
 cp relaton-ribose.rng ../../metanorma-rsd/lib/metanorma/ribose

@@ -76,3 +76,6 @@
 [submodule "grammars/relaton-model-oasis"]
 	path = grammars/relaton-model-oasis
 	url = https://github.com/relaton/relaton-model-oasis.git
+[submodule "grammars/relaton-model-jis"]
+	path = grammars/relaton-model-jis
+	url = https://github.com/relaton/relaton-model-jis.git

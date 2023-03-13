@@ -172,7 +172,6 @@ formula =
 ParagraphType =
     attribute id { xsd:ID },
     attribute align { Alignments }?,
-    attribute tag { text }?,
     BlockAttributes,
    ( TextElement )*, note*
 
