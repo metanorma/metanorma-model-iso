@@ -79,3 +79,9 @@
 [submodule "grammars/relaton-model-jis"]
 	path = grammars/relaton-model-jis
 	url = https://github.com/relaton/relaton-model-jis.git
+[submodule "grammars/relaton-model-m3aawg"]
+	path = grammars/relaton-model-m3aawg
+	url = https://github.com/relaton/relaton-model-m3aawg.git
+[submodule "grammars/relaton-model-bsi"]
+	path = grammars/relaton-model-bsi
+	url = https://github.com/relaton/relaton-model-bsi.git
