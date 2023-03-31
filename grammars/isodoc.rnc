@@ -132,7 +132,7 @@ table =
     attribute uri { xsd:anyURI }?,
     attribute width { text }?,
     BlockAttributes,
-    colgroup?, tname?, thead?, tbody, tfoot?, table-note*, dl?
+    colgroup?, tname?, thead?, tbody, tfoot?, table-note*, dl?, source?
   }
 
 figure =
@@ -143,8 +143,14 @@ figure =
     attribute subsequence { text }?,
     attribute class { text }?,
     BlockAttributes,
-     source?, tname?, (image | video | audio | pre | paragraph-with-footnote+ | figure*), fn*, dl?, note*
+     tname?, (image | video | audio | pre | paragraph-with-footnote+ | figure*), fn*, dl?, note*, source?
   }
+
+source =
+  element source {
+    attribute status { SourceStatusType },
+    origin, modification?
+} 
 
 sourcecode =
   element sourcecode {
@@ -680,10 +686,12 @@ termexample =
 
 termsource =
   element termsource {
-    attribute status { ( "identical" | "modified" ) },
+    attribute status { SourceStatusType },
     attribute type { ( "authoritative" | "lineage" ) },
     origin, modification?
 }
+
+SourceStatusType = "identical" | "modified" | "restyled" | "context-added" | "generalisation" | "specialisation" | "unspecified"
 
 origin =
   element origin { erefType | termref }
