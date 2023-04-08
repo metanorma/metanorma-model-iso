@@ -5,6 +5,12 @@ include "isostandard.rnc" {
 
 start = jis-standard
 
+annex =
+  element annex { 
+     attribute commentary { xsd:boolean }?,
+     Annex-Section 
+  }
+
 }
 
 # end overrides

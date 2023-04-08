@@ -6,6 +6,16 @@
     <start>
       <ref name="jis-standard"/>
     </start>
+    <define name="annex">
+      <element name="annex">
+        <optional>
+          <attribute name="commentary">
+            <data type="boolean"/>
+          </attribute>
+        </optional>
+        <ref name="Annex-Section"/>
+      </element>
+    </define>
   </include>
   <!-- end overrides -->
   <define name="floating-section-title">
