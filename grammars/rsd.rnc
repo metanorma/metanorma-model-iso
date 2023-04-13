@@ -11,8 +11,7 @@ start = rsd-standard
 
 rsd-standard =
   element rsd-standard {
-attribute version { text },
-  attribute type { "semantic" | "presentation" },
+    Root-Attributes,
     bibdata, termdocsource*, misccontainer?, boilerplate?, preface, sections+, annex*, bibliography, indexsect*
  }
 

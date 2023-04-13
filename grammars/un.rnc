@@ -66,8 +66,7 @@ Annex-Section =
 
 un-standard =
 element un-standard {
-attribute version { text },
-  attribute type { "semantic" | "presentation" },
+    Root-Attributes,
   bibdata, misccontainer?, boilerplate?, preface, sections+, annex*, indexsect*
 }
 

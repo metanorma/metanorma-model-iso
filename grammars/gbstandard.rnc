@@ -57,8 +57,7 @@ terms =
 # identical structure to iso-standard
 gb-standard =
   element gb-standard {
-attribute version { text },
-  attribute type { "semantic" | "presentation" },
+    Root-Attributes,
     bibdata, termdocsource*, misccontainer?, boilerplate?, preface, sections+, annex*, bibliography, indexsect*
   }     
 

@@ -112,8 +112,7 @@ AdmonitionType |= "commentary"
 # grammar simple, we keep the references together
 bsi-standard = 
   element bsi-standard {
-attribute version { text },
-  attribute type { "semantic" | "presentation" },
+    Root-Attributes,
     bibdata, termdocsource*, misccontainer?, boilerplate?, preface, sections+, annex*, bibliography, indexsect*, colophon?
   }
 

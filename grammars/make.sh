@@ -38,6 +38,9 @@ do
   cp relaton-model-$i/grammars/relaton-$i.rnc .
 done
 
+var=`git tag --sort=committerdate | tail -1`
+echo "\"metanorma-model\": \"$var\"," >> versions.json
+
 date=`TZ=GMT date +"%Y-%m-%dT%H:%M:%SZ"`
 echo "\"date\": \"$date\"" >> versions.json
 echo "}" >> versions.json

@@ -432,10 +432,14 @@ reference-clause =
     )
 }
 
+Root-Attributes =
+  attribute { text },
+  attribute schema-version { text },
+  attribute type { "semantic" | "presentation" }
+
 standard-document =
 element standard-document {
-  attribute version { text },
-  attribute type { "semantic" | "presentation" },
+  Root-Attributes,
   bibdata, misccontainer?, boilerplate?, preface?, sections, annex*, bibliography?, indexsect*, colophon?
 }
 

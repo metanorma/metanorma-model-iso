@@ -78,8 +78,7 @@ Content-Section =
 # grammar simple, we keep the references together
 iso-standard = 
   element iso-standard {
-attribute version { text },
-  attribute type { "semantic" | "presentation" },
+    Root-Attributes,
     bibdata, termdocsource*, misccontainer?, boilerplate?, preface, sections+, annex*, bibliography, indexsect*
   }
 

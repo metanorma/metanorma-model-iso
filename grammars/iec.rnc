@@ -23,8 +23,7 @@ term =
 # grammar simple, we keep the references together
 iec-standard = 
   element iec-standard {
-attribute version { text },
-  attribute type { "semantic" | "presentation" },
+    Root-Attributes,
     bibdata, termdocsource*, misccontainer?, boilerplate?, preface, sections+, annex*, bibliography, indexsect*
   }
 

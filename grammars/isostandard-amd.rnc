@@ -19,8 +19,7 @@ clause =
 
 iso-standard =
   element iso-standard {
-attribute version { text },
-  attribute type { "semantic" | "presentation" },
+    Root-Attributes,
     bibdata, misccontainer?, boilerplate?, preface, sections+
   }
 
