@@ -1,3 +1,4 @@
+# VERSION v1.1.8
 # instantiations of this grammar may replace leaf strings
 # with more elaborated types; e.g. title (text) replaced with
 # title-main, title-intro, title-part; type replaced with
@@ -433,7 +434,7 @@ reference-clause =
 }
 
 Root-Attributes =
-  attribute { text },
+  attribute version { text },
   attribute schema-version { text },
   attribute type { "semantic" | "presentation" }
 
