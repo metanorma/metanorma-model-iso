@@ -1,3 +1,6 @@
+# update tags...
+git pull
+
 echo "Updating submodules..."
 
 rm -f relaton-models/grammars/biblio.rng

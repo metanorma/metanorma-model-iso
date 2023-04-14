@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
+  VERSION v1.2.1
+  VERSION v1.1.8
   instantiations of this grammar may replace leaf strings
   with more elaborated types; e.g. title (text) replaced with
   title-main, title-intro, title-part; type replaced with
@@ -1349,15 +1351,19 @@
       </choice>
     </element>
   </define>
+  <define name="Root-Attributes">
+    <attribute name="version"/>
+    <attribute name="schema-version"/>
+    <attribute name="type">
+      <choice>
+        <value>semantic</value>
+        <value>presentation</value>
+      </choice>
+    </attribute>
+  </define>
   <define name="standard-document">
     <element name="standard-document">
-      <attribute name="version"/>
-      <attribute name="type">
-        <choice>
-          <value>semantic</value>
-          <value>presentation</value>
-        </choice>
-      </attribute>
+      <ref name="Root-Attributes"/>
       <ref name="bibdata"/>
       <optional>
         <ref name="misccontainer"/>

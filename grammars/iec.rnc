@@ -1,3 +1,4 @@
+# VERSION v1.2.1
 #default namespace = "https://www.metanorma.com/ns/iec"
 
 include "relaton-iec.rnc" { }

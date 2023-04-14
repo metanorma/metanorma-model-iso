@@ -1,4 +1,4 @@
-# VERSION v1.1.8
+# VERSION v1.2.1
 # instantiations of this grammar may replace leaf strings
 # with more elaborated types; e.g. title (text) replaced with
 # title-main, title-intro, title-part; type replaced with

@@ -1,4 +1,5 @@
-#default namespace = "https://www.metanorma.com/ns/jis"
+# VERSION v1.2.1
+# default namespace = "https://www.metanorma.com/ns/jis"
 
 include "relaton-jis.rnc" { }
 include "isostandard.rnc" {

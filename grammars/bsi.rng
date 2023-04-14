@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <grammar xmlns="http://relaxng.org/ns/structure/1.0" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
-  <!-- default namespace = "https://www.metanorma.com/ns/bsi" -->
+  <!--
+    VERSION v1.2.1
+    default namespace = "https://www.metanorma.com/ns/bsi"
+  -->
   <include href="relaton-bsi.rng"/>
   <include href="isostandard.rng">
     <start>
@@ -372,13 +375,7 @@
   -->
   <define name="bsi-standard">
     <element name="bsi-standard">
-      <attribute name="version"/>
-      <attribute name="type">
-        <choice>
-          <value>semantic</value>
-          <value>presentation</value>
-        </choice>
-      </attribute>
+      <ref name="Root-Attributes"/>
       <ref name="bibdata"/>
       <zeroOrMore>
         <ref name="termdocsource"/>

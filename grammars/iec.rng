@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <grammar xmlns="http://relaxng.org/ns/structure/1.0" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
-  <!-- default namespace = "https://www.metanorma.com/ns/iec" -->
+  <!--
+    VERSION v1.2.1
+    default namespace = "https://www.metanorma.com/ns/iec"
+  -->
   <include href="relaton-iec.rng"/>
   <include href="isostandard.rng">
     <start>
@@ -55,13 +58,7 @@
   -->
   <define name="iec-standard">
     <element name="iec-standard">
-      <attribute name="version"/>
-      <attribute name="type">
-        <choice>
-          <value>semantic</value>
-          <value>presentation</value>
-        </choice>
-      </attribute>
+      <ref name="Root-Attributes"/>
       <ref name="bibdata"/>
       <zeroOrMore>
         <ref name="termdocsource"/>
