@@ -433,7 +433,7 @@ reference-clause =
 }
 
 Root-Attributes =
-  attribute { text },
+  attribute version { text },
   attribute schema-version { text },
   attribute type { "semantic" | "presentation" }
 
