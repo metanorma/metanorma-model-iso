@@ -41,18 +41,12 @@ do
   cp relaton-model-$i/grammars/relaton-$i.rnc .
 done
 
-metanorma_version=`git tag --sort=committerdate | tail -1`
-echo "\"metanorma-model\": \"$metanorma_version\"," >> versions.json
+var=`git tag --sort=committerdate | tail -1`
+echo "\"metanorma-model\": \"$var\"," >> versions.json
 
 date=`TZ=GMT date +"%Y-%m-%dT%H:%M:%SZ"`
 echo "\"date\": \"$date\"" >> versions.json
 echo "}" >> versions.json
-
-for i in isodoc isostandard isostandard-amd iec csd csa rsd ieee un ogc nist itu ietf iho bipm bsi jis
-do
-  sed -i "" "1N;s/^(# VERSION [^\n]*)\n//" $i.rnc
-  sed -i "" "1s/^/# VERSION $metanorma_version\n/" $i.rnc
-done
 
 gem list | grep rsec
 if [[ $? -ne 0 ]]; then
