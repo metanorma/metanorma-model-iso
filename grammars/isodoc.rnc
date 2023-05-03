@@ -76,6 +76,7 @@ erefType =
     attribute alt { text }?,
     attribute case { "capital" | "lowercase" }?,
     attribute droploc { xsd:boolean }?,
+    attribute style { text }?,
     CitationType,
     PureTextElement+
 

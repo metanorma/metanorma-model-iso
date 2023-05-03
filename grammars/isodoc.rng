@@ -210,6 +210,9 @@
           <data type="boolean"/>
         </attribute>
       </optional>
+      <optional>
+        <attribute name="style"/>
+      </optional>
       <ref name="CitationType"/>
       <oneOrMore>
         <ref name="PureTextElement"/>
