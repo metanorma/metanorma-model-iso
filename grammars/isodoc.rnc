@@ -696,7 +696,8 @@ termsource =
     origin, modification?
 }
 
-SourceStatusType = "identical" | "modified" | "restyled" | "context-added" | "generalisation" | "specialisation" | "unspecified"
+SourceStatusType = "identical" | "modified" | "adapted" | "restyled" | "context-added" |
+  "generalisation" | "specialisation" | "unspecified"
 
 origin =
   element origin { erefType | termref }
