@@ -9,7 +9,7 @@
   <include href="biblio-standoc.rng"/>
   <include href="isodoc.rng">
     <start>
-      <ref name="generic"/>
+      <ref name="generic-standard"/>
     </start>
   </include>
   <define name="generic-standard">
