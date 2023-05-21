@@ -6,7 +6,7 @@
 include "biblio-standoc.rnc" { }
 include "isodoc.rnc" {
 
-start = generic
+start = generic-standard
 
 }
 
