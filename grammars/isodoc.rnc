@@ -327,7 +327,7 @@ col = element col {
 
 BibItemType |= "internal"
 
-TextElement |= concept | add | del | span | erefstack
+TextElement |= concept | add | del | span | erefstack | date_inline
 
 add = element add { PureTextElement | eref | erefstack | stem | keyword | xref | hyperlink }
 del = element del { PureTextElement | eref | erefstack | stem | keyword | xref | hyperlink }
@@ -335,6 +335,14 @@ span = element span {
   attribute class { text }?,
   attribute style { text }?,
   TextElement+
+}
+
+date_inline = element date {
+  attribute value { text },
+  attribute format { text }?,
+  attribute language { text }?,
+  attribute script { text }?,
+  attribute locale { text }?
 }
 
 concept = element concept {
