@@ -5,7 +5,7 @@ echo "Updating submodules..."
 
 rm -f relaton-models/grammars/biblio.rng
 rm -f basicdoc-models/grammars/basicdoc.rng
-git submodule update
+git submodule update --remote
 
 echo "{" > versions.json
 

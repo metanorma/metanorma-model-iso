@@ -57,3 +57,61 @@ image::images/IsoBlocks.png[]
 
 image::images/IsoStandardDocument.png[]
 
+== Grammars
+
+This repository also hosts the RNC and RNG grammars for Metanorma and Relaton. It relies on relaton model
+grammars as submodules.
+
+To install:
+
+[source,console]
+----
+git clone https://github.com/metanorma/metanorma-model-iso.git --recurse-submodules
+cd metanorma-model-iso/grammars
+sh make.sh # compiles the grammars for all of relaton and metanorma
+sh copy.sh # copies compiles grammars to all metanorma gem directories for inclusion in the release
+----
+
+If you get an error like
+
+[source,console]
+----
+fatal: remote error: upload-pack: not our ref
+----
+
+Then do (https://stackoverflow.com/questions/61163082/why-does-git-submodule-update-fail-with-fatal-remote-error-upload-pack-not-o?rq=3)
+
+[source,console]
+----
+git submodule foreach --recursive git reset --hard
+git submodule update --remote
+----
+
+`make.sh` updates submodules, and compiles all grammars.
+
+`copy.sh` presupposes that the metanorma gem directories are being used for development,
+and are in sister directories to metanorma-model-iso
+
+The structure of all grammars is as follows:
+
+* basicdoc-models/grammars/basicdoc.rnc [BasicDoc, inline element model that Metanorma is built on top of]
+* relaton-models/grammars/biblio.rnc [presupposes basicdoc, basic Relaton bibliographic model]
+* metanorma-requirements-models/grammars/reqt.rnc [presupposes basicdoc, biblio, grammar for generic Metanorma requirements]
+
+* biblio-standoc.rnc [wraps biblio.rnc, adds default ext/ extension point for use in Metanorma /bibdata document descriptor]
+* biblio-compile.rnc [wraps biblio-standoc.rnc and basicdoc.rnc: default Relaton grammar without flavour-specific extensions]
+
+* relaton-{FLAVOUR}.rnc [extensions to biblio-standoc.rnc specific to flavour, customises ext/ extension point]
+* relaton-{FLAVOUR}-compile.rnc [wraps relaton-{FLAVOUR}.rnc and basicdoc.rnc: Relaton grammar for flavour {FLAVOUR}]
+
+* isodoc.rnc [wraps basicdoc.rnc and reqt.rnc: base grammar for Metanorma]
+* isodoc-compile.rnc [wraps isodoc.rnc and biblio-standoc.rnc: default grammar for Metanorma. biblio-standoc.rnc and its descendants are included to add flavour-specific descriptions of document in /bibdata/ext.]
+
+* isostandard.rnc [extends isodoc.rnc for ISO and its descendant flavours]
+* isostandard-compile.rnc [wraps isostandard.rnc and relaton-iso.rnc: grammar for ISO]
+* isostandard-amd.rnc [extends isodoc.rnc for ISO amendments; wraps isostandard.rnc and relaton-iso.rnc: grammar for ISO amendmnets]
+* iec.rnc [extends isostandard.rnc to IEC; wraps isostandard.rnc and relaton-iec.rnc (instead of relaton-iso.rnc): grammar for IEC]
+* bsi.rnc [extends isostandard.rnc to BSI; wraps isostandard.rnc and relaton-bsi.rnc (instead of relaton-iso.rnc): grammar for BSI]
+* JIS.rnc [extends isostandard.rnc to JIS; wraps isostandard.rnc and relaton-jis.rnc (instead of relaton-iso.rnc): grammar for JIS]
+
+* {FLAVOUR}.rnc [extends isodoc.rnc to a Metanorma flavour that does not inherit from ISO; wraps isodoc.rnc and relaton-{FLAVOUR}.rnc: Metanorma grammar for flavour {FLAVOUR}]
