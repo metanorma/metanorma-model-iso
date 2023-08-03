@@ -72,7 +72,7 @@ xref =
 erefType =
     attribute normative { xsd:boolean }?,
     attribute citeas { text },
-    attribute type { ReferenceFormat },
+    attribute type { ReferenceFormat }?,
     attribute alt { text }?,
     attribute case { "capital" | "lowercase" }?,
     attribute droploc { xsd:boolean }?,
@@ -283,6 +283,13 @@ table-note = element note {
     attribute id { xsd:ID }?,
  paragraph
 }
+
+stem =
+  element stem {
+    attribute type { "MathML" | "AsciiMath" | "LatexMath" },
+    attribute block { xsd:boolean },
+     ( text | AnyElement )+
+} 
 
 em = element em { (PureTextElement|stem|index|eref|erefstack|xref|hyperlink)* }
 strong = element strong { (PureTextElement|stem|index|eref|erefstack|xref|hyperlink)* }
