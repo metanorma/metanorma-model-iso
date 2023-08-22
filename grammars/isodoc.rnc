@@ -674,7 +674,7 @@ termsubject =
 termdefinition =
   element definition {
     attribute type { text }?,
-    verbaldefinition | nonverbalrep | (verbaldefinition, nonverbalrep)
+    (verbaldefinition | nonverbalrep | (verbaldefinition, nonverbalrep))
   }
 
 verbaldefinition = element verbal-definition {

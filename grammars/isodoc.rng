@@ -2067,6 +2067,9 @@
   </define>
   <define name="termdefinition">
     <element name="definition">
+      <optional>
+        <attribute name="type"/>
+      </optional>
       <choice>
         <ref name="verbaldefinition"/>
         <ref name="nonverbalrep"/>
