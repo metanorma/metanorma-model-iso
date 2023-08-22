@@ -673,6 +673,7 @@ termsubject =
 
 termdefinition =
   element definition {
+    attribute type { text }?,
     verbaldefinition | nonverbalrep | (verbaldefinition, nonverbalrep)
   }
 
