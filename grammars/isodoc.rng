@@ -484,6 +484,8 @@
           <choice>
             <text/>
             <ref name="callout"/>
+            <ref name="xref"/>
+            <ref name="eref"/>
           </choice>
         </oneOrMore>
         <zeroOrMore>

@@ -162,7 +162,7 @@ sourcecode =
     attribute lang { text }?,
     BlockAttributes,
     attribute linenums { xsd:boolean }?,
-    tname?, ( text | callout )+, annotation*, note*
+    tname?, ( text | callout | xref | eref )+, annotation*, note*
   }
 
 formula =
