@@ -866,6 +866,7 @@
             <ref name="PureTextElement"/>
             <ref name="stem"/>
             <ref name="index"/>
+            <ref name="index-xref"/>
             <ref name="eref"/>
             <ref name="erefstack"/>
             <ref name="xref"/>
@@ -881,6 +882,7 @@
             <ref name="PureTextElement"/>
             <ref name="stem"/>
             <ref name="index"/>
+            <ref name="index-xref"/>
             <ref name="eref"/>
             <ref name="erefstack"/>
             <ref name="xref"/>
@@ -895,6 +897,7 @@
           <choice>
             <ref name="PureTextElement"/>
             <ref name="index"/>
+            <ref name="index-xref"/>
             <ref name="eref"/>
             <ref name="erefstack"/>
             <ref name="xref"/>
@@ -909,6 +912,7 @@
           <choice>
             <ref name="PureTextElement"/>
             <ref name="index"/>
+            <ref name="index-xref"/>
           </choice>
         </zeroOrMore>
       </element>
@@ -919,6 +923,7 @@
           <choice>
             <ref name="PureTextElement"/>
             <ref name="index"/>
+            <ref name="index-xref"/>
           </choice>
         </zeroOrMore>
       </element>
@@ -929,6 +934,7 @@
           <choice>
             <ref name="PureTextElement"/>
             <ref name="index"/>
+            <ref name="index-xref"/>
           </choice>
         </zeroOrMore>
       </element>
@@ -939,6 +945,7 @@
           <choice>
             <ref name="PureTextElement"/>
             <ref name="index"/>
+            <ref name="index-xref"/>
           </choice>
         </zeroOrMore>
       </element>
@@ -961,6 +968,14 @@
             <ref name="stem"/>
           </choice>
         </zeroOrMore>
+      </element>
+    </define>
+    <define name="BasicBlock" combine="choice">
+      <ref name="columnbreak"/>
+    </define>
+    <define name="columnbreak">
+      <element name="columnbreak">
+        <empty/>
       </element>
     </define>
     <define name="pagebreak">
@@ -1048,6 +1063,8 @@
         <ref name="keyword"/>
         <ref name="xref"/>
         <ref name="hyperlink"/>
+        <ref name="index"/>
+        <ref name="index-xref"/>
       </choice>
     </element>
   </define>
@@ -1061,6 +1078,8 @@
         <ref name="keyword"/>
         <ref name="xref"/>
         <ref name="hyperlink"/>
+        <ref name="index"/>
+        <ref name="index-xref"/>
       </choice>
     </element>
   </define>
@@ -1127,6 +1146,8 @@
             <choice>
               <ref name="PureTextElement"/>
               <ref name="stem"/>
+              <ref name="index"/>
+              <ref name="index-xref"/>
             </choice>
           </zeroOrMore>
         </element>
@@ -1137,6 +1158,8 @@
             <choice>
               <ref name="PureTextElement"/>
               <ref name="stem"/>
+              <ref name="index"/>
+              <ref name="index-xref"/>
             </choice>
           </zeroOrMore>
         </element>

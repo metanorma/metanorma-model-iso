@@ -10,7 +10,7 @@ include "isodoc.rnc" {
 
   TextElement =
     text | em | eref | erefstack | strong | stem | sub | sup | tt |
-    strike | smallcap | xref | br | hyperlink | hr | pagebreak | bookmark 
+    strike | smallcap | xref | br | hyperlink | bookmark 
 
     admonition =
     element admonition {

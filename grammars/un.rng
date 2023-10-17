@@ -27,8 +27,6 @@
         <ref name="xref"/>
         <ref name="br"/>
         <ref name="hyperlink"/>
-        <ref name="hr"/>
-        <ref name="pagebreak"/>
         <ref name="bookmark"/>
       </choice>
     </define>

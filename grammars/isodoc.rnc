@@ -291,15 +291,19 @@ stem =
      ( text | AnyElement )+
 } 
 
-em = element em { (PureTextElement|stem|index|eref|erefstack|xref|hyperlink)* }
-strong = element strong { (PureTextElement|stem|index|eref|erefstack|xref|hyperlink)* }
-tt = element tt { (PureTextElement|index|eref|erefstack|xref|hyperlink)* }
-keyword = element keyword { (PureTextElement|index)* }
-strike = element strike { (PureTextElement|index)* }
-underline = element underline { (PureTextElement|index)* }
-smallcap = element smallcap { (PureTextElement|index)* }
+em = element em { (PureTextElement|stem|index|index-xref|eref|erefstack|xref|hyperlink)* }
+strong = element strong { (PureTextElement|stem|index|index-xref|eref|erefstack|xref|hyperlink)* }
+tt = element tt { (PureTextElement|index|index-xref|eref|erefstack|xref|hyperlink)* }
+keyword = element keyword { (PureTextElement|index|index-xref)* }
+strike = element strike { (PureTextElement|index|index-xref)* }
+underline = element underline { (PureTextElement|index|index-xref)* }
+smallcap = element smallcap { (PureTextElement|index|index-xref)* }
 sub = element sub { (PureTextElement|stem)* }
 sup = element sup { (PureTextElement|stem)* }
+
+BasicBlock |= columnbreak
+
+columnbreak = element columnbreak { empty }
 
 pagebreak = element pagebreak { 
   attribute orientation { "landscape" | "portrait" }?
@@ -336,8 +340,8 @@ BibItemType |= "internal"
 
 TextElement |= concept | add | del | span | erefstack | date_inline
 
-add = element add { PureTextElement | eref | erefstack | stem | keyword | xref | hyperlink }
-del = element del { PureTextElement | eref | erefstack | stem | keyword | xref | hyperlink }
+add = element add { PureTextElement | eref | erefstack | stem | keyword | xref | hyperlink | index | index-xref }
+del = element del { PureTextElement | eref | erefstack | stem | keyword | xref | hyperlink | index | index-xref }
 span = element span {
   attribute class { text }?,
   attribute style { text }?,
@@ -358,8 +362,8 @@ concept = element concept {
   attribute ref { xsd:boolean }?,
   attribute linkmention { xsd:boolean }?,
   attribute linkref { xsd:boolean }?,
-  element refterm { (PureTextElement|stem)* }?,
-  element renderterm { (PureTextElement|stem)* }?,
+  element refterm { (PureTextElement|stem|index|index-xref)* }?,
+  element renderterm { (PureTextElement|stem|index|index-xref)* }?,
   ( eref | erefstack | xref | termref )
 }
 
