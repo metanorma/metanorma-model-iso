@@ -301,10 +301,6 @@ smallcap = element smallcap { (PureTextElement|index|index-xref)* }
 sub = element sub { (PureTextElement|stem)* }
 sup = element sup { (PureTextElement|stem)* }
 
-BasicBlock |= columnbreak
-
-columnbreak = element columnbreak { empty }
-
 pagebreak = element pagebreak { 
   attribute orientation { "landscape" | "portrait" }?
 }
@@ -327,6 +323,9 @@ image |=
      ( text | AnyElement )+
 }
 
+BasicBlock |= columnbreak
+
+columnbreak = element columnbreak { empty }
 
 MultilingualRenderingType = "common" | "all-columns" | "parallel" | "tag"
 
