@@ -344,6 +344,7 @@ del = element del { PureTextElement | eref | erefstack | stem | keyword | xref |
 span = element span {
   attribute class { text }?,
   attribute style { text }?,
+  attribute custom-charset { text }?,
   TextElement+
 }
 
