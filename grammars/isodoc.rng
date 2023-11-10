@@ -970,14 +970,6 @@
         </zeroOrMore>
       </element>
     </define>
-    <define name="BasicBlock" combine="choice">
-      <ref name="columnbreak"/>
-    </define>
-    <define name="columnbreak">
-      <element name="columnbreak">
-        <empty/>
-      </element>
-    </define>
     <define name="pagebreak">
       <element name="pagebreak">
         <optional>
@@ -1018,6 +1010,14 @@
           <ref name="AnyElement"/>
         </choice>
       </oneOrMore>
+    </element>
+  </define>
+  <define name="BasicBlock" combine="choice">
+    <ref name="columnbreak"/>
+  </define>
+  <define name="columnbreak">
+    <element name="columnbreak">
+      <empty/>
     </element>
   </define>
   <define name="MultilingualRenderingType">
@@ -1090,6 +1090,9 @@
       </optional>
       <optional>
         <attribute name="style"/>
+      </optional>
+      <optional>
+        <attribute name="custom-charset"/>
       </optional>
       <oneOrMore>
         <ref name="TextElement"/>
