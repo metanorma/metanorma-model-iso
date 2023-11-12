@@ -338,6 +338,12 @@ col = element col {
 BibItemType |= "internal"
 
 TextElement |= concept | add | del | span | erefstack | date_inline
+PureTextElement |= passthrough
+
+passthrough = element passthrough {
+        attribute formats { text },
+        text
+}
 
 add = element add { PureTextElement | eref | erefstack | stem | keyword | xref | hyperlink | index | index-xref }
 del = element del { PureTextElement | eref | erefstack | stem | keyword | xref | hyperlink | index | index-xref }
