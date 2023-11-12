@@ -1,0 +1,31 @@
+include "biblio-standoc.rnc" {
+
+BibDataExtensionType =
+  attribute schema-version { text }?,
+        doctype, docsubtype?, editorialgroup, marker, frequency*, mandate*, custom-collection?
+
+
+status =
+  element status {
+     ( stage )
+}
+
+stage = element stage { StageType }
+
+doctype = element doctype {
+    attribute abbreviation { DocumentTypeAbbreviation }?,
+    DocumentType
+}
+
+DocumentType = "European Standard" | "ETSI Standard" | "ETSI Guide" | "Technical Specification"
+
+}
+
+StageType = "EN approval" | "SG approval" | "ES approval" | "Published" | "Withdrawn" | "Historical"
+
+DocumentTypeAbbreviation = "EN" | "ES" | "EG" | "TS"
+
+marker = element marker { "Current" | "Superseded" }
+frequency = element frequency { text }
+mandate = element mandate { text }
+custom-collection = element custom-collection { "HSs cited in OJ" | "HSs not yet cited in OJ" | "HSs RED cited in OJ" | "HSs EMC cited in OJ" }
