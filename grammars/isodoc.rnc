@@ -338,10 +338,10 @@ col = element col {
 BibItemType |= "internal"
 
 TextElement |= concept | add | del | span | erefstack | date_inline
-PureTextElement |= passthrough
+PureTextElement |= passthrough_inline
 
-passthrough = element passthrough {
-        attribute formats { text },
+passthrough_inline = element passthrough {
+        attribute formats { text }?,
         text
 }
 
