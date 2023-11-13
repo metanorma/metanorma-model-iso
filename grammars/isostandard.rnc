@@ -66,6 +66,7 @@ Content-Section =
     attribute inline-header { xsd:boolean }?,
     attribute obligation { "normative" | "informative" }?,
     attribute number { text }?,
+    attribute branch-number { text }?,
     attribute type { text }?,
     section-title?,
     ( (BasicBlock*) |
