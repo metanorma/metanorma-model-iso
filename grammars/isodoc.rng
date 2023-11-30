@@ -1408,6 +1408,9 @@
         <attribute name="number"/>
       </optional>
       <optional>
+        <attribute name="branch-number"/>
+      </optional>
+      <optional>
         <attribute name="obligation">
           <choice>
             <value>normative</value>
@@ -1631,6 +1634,9 @@
       <attribute name="number"/>
     </optional>
     <optional>
+      <attribute name="branch-number"/>
+    </optional>
+    <optional>
       <attribute name="type"/>
     </optional>
     <optional>
@@ -1680,6 +1686,9 @@
     </optional>
     <optional>
       <attribute name="number"/>
+    </optional>
+    <optional>
+      <attribute name="branch-number"/>
     </optional>
     <optional>
       <ref name="section-title"/>
@@ -1777,6 +1786,9 @@
       </optional>
       <optional>
         <attribute name="number"/>
+      </optional>
+      <optional>
+        <attribute name="branch-number"/>
       </optional>
       <optional>
         <attribute name="obligation">

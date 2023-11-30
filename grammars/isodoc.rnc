@@ -637,6 +637,7 @@ usageinfo =
 letter_symbol_designation =
   element letter-symbol {
     attribute isInternational { xsd:boolean }?,
+    attribute type { "letter" | "symbol" | "formula" | "equation" }?,
     element name { (PureTextElement | stem)+ }
   }
 
