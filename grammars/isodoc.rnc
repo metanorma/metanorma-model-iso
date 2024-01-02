@@ -773,7 +773,8 @@ amend =
     element newcontent { 
         attribute id { xsd:ID }?,
         BasicBlock* }?,
-    element description { BasicBlock* }?
+    element keyword { text }*,
+    contributor*
 }
 
 autonumber =

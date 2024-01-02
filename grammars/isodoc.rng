@@ -2372,13 +2372,14 @@
           </zeroOrMore>
         </element>
       </optional>
-      <optional>
-        <element name="description">
-          <zeroOrMore>
-            <ref name="BasicBlock"/>
-          </zeroOrMore>
+      <zeroOrMore>
+        <element name="keyword">
+          <text/>
         </element>
-      </optional>
+      </zeroOrMore>
+      <zeroOrMore>
+        <ref name="contributor"/>
+      </zeroOrMore>
     </element>
   </define>
   <define name="autonumber">
