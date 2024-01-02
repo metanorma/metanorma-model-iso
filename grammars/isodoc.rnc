@@ -767,7 +767,7 @@ amend =
     attribute path_end { text }?,
     attribute title { text }?,
     BlockAttributes,
-    element location { locality* }?,
+    element location { (locality | localityStack)* }?,
     autonumber*,
     element description { BasicBlock* }?,
     element newcontent { 

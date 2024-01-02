@@ -2346,7 +2346,10 @@
       <optional>
         <element name="location">
           <zeroOrMore>
-            <ref name="locality"/>
+            <choice>
+              <ref name="locality"/>
+              <ref name="localityStack"/>
+            </choice>
           </zeroOrMore>
         </element>
       </optional>
