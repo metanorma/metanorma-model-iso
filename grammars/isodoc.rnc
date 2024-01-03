@@ -773,9 +773,11 @@ amend =
     element newcontent { 
         attribute id { xsd:ID }?,
         BasicBlock* }?,
-    element keyword { text }*,
+    classification*,
     contributor*
 }
+
+# classification is defined in reqt.rnc
 
 autonumber =
   element autonumber {

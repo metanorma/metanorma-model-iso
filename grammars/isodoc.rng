@@ -2376,15 +2376,14 @@
         </element>
       </optional>
       <zeroOrMore>
-        <element name="keyword">
-          <text/>
-        </element>
+        <ref name="classification"/>
       </zeroOrMore>
       <zeroOrMore>
         <ref name="contributor"/>
       </zeroOrMore>
     </element>
   </define>
+  <!-- classification is defined in reqt.rnc -->
   <define name="autonumber">
     <element name="autonumber">
       <attribute name="type">
