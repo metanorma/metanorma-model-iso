@@ -21,6 +21,12 @@ include "reqt.rnc" { }
 
 include "basicdoc.rnc" { 
 
+amend = element amend {
+  BlockAttributes,
+  AmendType,
+  autonumber*
+}
+
 admonition =
   element admonition {
     attribute type { AdmonitionType },
@@ -758,26 +764,6 @@ term-clause =
 
 termdocsource =
   element termdocsource { CitationType }
-
-amend = 
-  element amend {
-    attribute id { xsd:ID }?,
-    attribute change { "add" | "modify" | "delete" | "replace" },
-    attribute path { text }?,
-    attribute path_end { text }?,
-    attribute title { text }?,
-    BlockAttributes,
-    element location { (locality | localityStack)* }?,
-    autonumber*,
-    element description { BasicBlock* }?,
-    element newcontent { 
-        attribute id { xsd:ID }?,
-        BasicBlock* }?,
-    classification*,
-    contributor*
-}
-
-# classification is defined in reqt.rnc
 
 autonumber =
   element autonumber {
