@@ -32,4 +32,9 @@ class IsoBibDataExtensionType {
          Type of document being updated by this document, if it is an amendment or technical corrigendum.
        }
     }
+    +fast-track: Boolean[0..1] {
+       definition {
+         Whether this is a fast-track document
+       }
+    }
 }
