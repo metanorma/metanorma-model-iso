@@ -60,6 +60,7 @@ hyperlink =
     attribute type { ReferenceFormat }?,
     attribute alt { text }?,
     attribute update-type { xsd:boolean }?,
+    attribute style { text }?,
     PureTextElement+
 }
 
