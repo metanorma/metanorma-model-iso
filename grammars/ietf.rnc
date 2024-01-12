@@ -13,12 +13,14 @@ ParagraphType =
     attribute align { Alignments }?,
     attribute keep-with-next { xsd:boolean }?,
     attribute keep-with-previous { xsd:boolean }?,
+    attribute indent { text }?,
    ( TextElement )*, note*
 
 paragraph-with-footnote =
   element p {
     attribute id { xsd:ID },
     attribute align { Alignments }?,
+    attribute indent { text }?,
    ( TextElement | fn  )*, note*
 }
 ul =
@@ -26,6 +28,7 @@ ul =
     attribute id { xsd:ID },
     attribute nobullet { text }?,
     attribute spacing { text }?,
+    attribute indent { text }?,
     li+, note*
 }
 
@@ -37,6 +40,7 @@ ol =
     attribute group { text }?,
     attribute spacing { text }?,
     attribute start { text }?,
+    attribute indent { text }?,
     li+, note*
 }
 
