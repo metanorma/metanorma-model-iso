@@ -26,10 +26,9 @@ paragraph-with-footnote =
 ul =
   element ul {
     attribute id { xsd:ID },
-    attribute nobullet { text }?,
+    attribute nobullet { xsd:boolean }?,
     attribute spacing { text }?,
     attribute indent { text }?,
-    attribute empty { xsd:boolean }?,
     attribute bare { xsd:boolean }?,
     li+, note*
 }
