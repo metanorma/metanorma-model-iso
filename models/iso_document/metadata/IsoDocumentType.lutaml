@@ -48,4 +48,14 @@ enum IsoDocumentType {
       Technical Corrigendum.
     }
   }
+  committee-document {
+    definition {
+      Committee Document (for internal use).
+    }
+  }
+  recommendation {
+    definition {
+      Recommendation (legacy type).
+    }
+  }
 }
