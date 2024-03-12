@@ -15,6 +15,7 @@ include "isodoc.rnc" {
       attribute number { text }?,
       attribute subsequence { text }?,
       attribute class { text }?,
+      attribute width { text }?,
       source?, tname?, ( figure+ |  ( (TextElement* | pre), note*, dl? ) )
     }
 

@@ -150,6 +150,7 @@ figure =
     attribute number { text }?,
     attribute subsequence { text }?,
     attribute class { text }?,
+    attribute width { text }?,
     BlockAttributes,
      tname?, (image | video | audio | pre | paragraph-with-footnote+ | figure*), fn*, dl?, note*, source?
   }

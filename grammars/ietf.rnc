@@ -137,6 +137,7 @@ table =
     attribute summary { text }?,
     attribute uri { xsd:anyURI }?,
     attribute align { text }?,
+    attribute width { text }?,
     tname?, thead?, tbody, tfoot?, table-note*, dl?
   }
 

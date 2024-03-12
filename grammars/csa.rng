@@ -31,6 +31,9 @@
           <attribute name="class"/>
         </optional>
         <optional>
+          <attribute name="width"/>
+        </optional>
+        <optional>
           <ref name="source"/>
         </optional>
         <optional>
