@@ -10,12 +10,8 @@ include "isodoc.rnc" {
 
     figure =
     element figure {
-      attribute id { xsd:ID },
-      attribute unnumbered { xsd:boolean }?,
-      attribute number { text }?,
-      attribute subsequence { text }?,
-      attribute class { text }?,
-      attribute width { text }?,
+      FigureAttributes,
+      BlockAttributes,
       source?, tname?, ( figure+ |  ( (TextElement* | pre), note*, dl? ) )
     }
 

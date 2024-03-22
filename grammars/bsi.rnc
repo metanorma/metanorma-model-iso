@@ -69,13 +69,8 @@ sections =
 
 figure =
   element figure {
-    attribute id { xsd:ID },
-    attribute unnumbered { xsd:boolean }?,
-    attribute number { text }?,
-    attribute subsequence { text }?,
-    attribute class { text }?,
+    FigureAttributes
     BlockAttributes,
-    attribute width { "narrow" | "text-width" | "full-page-width" }?,
      source?, tname?, (image | video | audio | pre | paragraph-with-footnote+ | figure*), fn*, dl?, note*
   }  
 

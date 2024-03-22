@@ -145,12 +145,7 @@ table =
 
 figure =
   element figure {
-    attribute id { xsd:ID },
-    attribute unnumbered { xsd:boolean }?,
-    attribute number { text }?,
-    attribute subsequence { text }?,
-    attribute class { text }?,
-    attribute width { text }?,
+    FigureAttributes,
     BlockAttributes,
      tname?, (image | video | audio | pre | paragraph-with-footnote+ | figure*), fn*, dl?, note*, source?
   }
@@ -842,6 +837,14 @@ BlockAttributes =
     attribute tag { text }?,
     attribute multilingual-rendering { MultilingualRenderingType }?,
     attribute columns { text }?
+
+FigureAttributes =
+    attribute id { xsd:ID },
+    attribute unnumbered { xsd:boolean }?,
+    attribute number { text }?,
+    attribute subsequence { text }?,
+    attribute class { text }?,
+    attribute width { text }?
 
 start = standard-document
 }

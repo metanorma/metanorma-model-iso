@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<grammar xmlns="http://relaxng.org/ns/structure/1.0" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+<grammar xmlns="http://relaxng.org/ns/structure/1.0">
   <!--
     VERSION v1.2.1
     default namespace = "http://riboseinc.com/csd"
@@ -14,26 +14,8 @@
     </start>
     <define name="figure">
       <element name="figure">
-        <attribute name="id">
-          <data type="ID"/>
-        </attribute>
-        <optional>
-          <attribute name="unnumbered">
-            <data type="boolean"/>
-          </attribute>
-        </optional>
-        <optional>
-          <attribute name="number"/>
-        </optional>
-        <optional>
-          <attribute name="subsequence"/>
-        </optional>
-        <optional>
-          <attribute name="class"/>
-        </optional>
-        <optional>
-          <attribute name="width"/>
-        </optional>
+        <ref name="FigureAttributes"/>
+        <ref name="BlockAttributes"/>
         <optional>
           <ref name="source"/>
         </optional>
