@@ -240,33 +240,8 @@
     </define>
     <define name="figure">
       <element name="figure">
-        <attribute name="id">
-          <data type="ID"/>
-        </attribute>
-        <optional>
-          <attribute name="unnumbered">
-            <data type="boolean"/>
-          </attribute>
-        </optional>
-        <optional>
-          <attribute name="number"/>
-        </optional>
-        <optional>
-          <attribute name="subsequence"/>
-        </optional>
-        <optional>
-          <attribute name="class"/>
-        </optional>
+        <ref name="FigureAttributes"/>
         <ref name="BlockAttributes"/>
-        <optional>
-          <attribute name="width">
-            <choice>
-              <value>narrow</value>
-              <value>text-width</value>
-              <value>full-page-width</value>
-            </choice>
-          </attribute>
-        </optional>
         <optional>
           <ref name="source"/>
         </optional>

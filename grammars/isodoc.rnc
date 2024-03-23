@@ -36,6 +36,7 @@ admonition =
     attribute coverpage { xsd:boolean }?,
     attribute notag { xsd:boolean }?,
     tname?,
+
     paragraph-with-footnote*,
     note*
   }
@@ -66,13 +67,7 @@ hyperlink =
 
 xref =
   element xref {
-     attribute target { xsd:string { pattern = "\i\c*|\c+#\c+" }},
-     attribute to { xsd:string { pattern = "\i\c*|\c+#\c+" }}?,
-     attribute type { ReferenceFormat }?,
-     attribute alt { text }?,
-     attribute case { "capital" | "lowercase" }?,
-     attribute droploc { xsd:boolean }?,
-     attribute style { XrefStyleType }?,
+     XrefAttributes,
      XrefBody
 }
 
@@ -808,6 +803,16 @@ floating-title =
     attribute depth { xsd:int },
     TextElement*
 }
+
+XrefAttributes =
+     attribute target { xsd:string { pattern = "\i\c*|\c+#\c+" }},
+     attribute to { xsd:string { pattern = "\i\c*|\c+#\c+" }}?,
+     attribute type { ReferenceFormat }?,
+     attribute alt { text }?,
+     attribute case { "capital" | "lowercase" }?,
+     attribute droploc { xsd:boolean }?,
+     attribute style { XrefStyleType }?,
+     attribute label { text }?
 
 XrefBody =
      XrefTarget*,

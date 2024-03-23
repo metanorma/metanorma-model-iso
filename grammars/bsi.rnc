@@ -69,7 +69,7 @@ sections =
 
 figure =
   element figure {
-    FigureAttributes
+    FigureAttributes,
     BlockAttributes,
      source?, tname?, (image | video | audio | pre | paragraph-with-footnote+ | figure*), fn*, dl?, note*
   }  
