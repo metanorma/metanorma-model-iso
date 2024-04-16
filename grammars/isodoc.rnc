@@ -441,15 +441,18 @@ bibliography =
     (references | reference-clause)+
 }
 
-reference-clause =
-  element clause {
+Section-Attributes =
     attribute id { xsd:ID }?,
     attribute language { text }?,
     attribute script { text }?,
     attribute inline-header { xsd:boolean }?,
     attribute number { text }?,
     attribute branch-number { text }?,
-    attribute obligation { "normative" | "informative" }?,
+    attribute obligation { "normative" | "informative" }?
+
+reference-clause =
+  element clause {
+    Section-Attributes,
     section-title?,
     BasicBlock*,
     (
@@ -524,13 +527,7 @@ content-subsection =
   element clause { Content-Section }
 
 Content-Section =
-    attribute id { xsd:ID }?,
-    attribute language { text }?,
-    attribute script { text }?,
-    attribute inline-header { xsd:boolean }?,
-    attribute obligation { "normative" | "informative" }?,
-    attribute number { text }?,
-    attribute branch-number { text }?,
+    Section-Attributes,
     attribute type { text }?,
     section-title?,
     ( (BasicBlock*),
@@ -540,14 +537,8 @@ clause =
   element clause { Clause-Section }
 
 Clause-Section =
-    attribute id { xsd:ID }?,
-    attribute language { text }?,
-    attribute script { text }?,
-    attribute inline-header { xsd:boolean }?,
-    attribute obligation { "normative" | "informative" }?,
+    Section-Attributes,
     attribute type { text }?,
-    attribute number { text }?,
-    attribute branch-number { text }?,
     section-title?,
     (
       ( (  BasicBlock+ ) | amend ) |
@@ -577,13 +568,8 @@ annex =
 
 terms =
   element terms {
-    attribute id { xsd:ID }?,
-    attribute language { text }?,
-    attribute script { text }?,
+    Section-Attributes,
     attribute type { text }?,
-    attribute number { text }?,
-    attribute branch-number { text }?,
-    attribute obligation { "normative" | "informative" }?,
     section-title?,
     BasicBlock*,
     ( (term | terms)+ | ( terms*, definitions?) )
