@@ -2,7 +2,7 @@ echo "Copying..."
 
 metanorma_version=`git tag --sort=committerdate | tail -1`
 
-for i in standoc iso iec bsi jis cc csa ribose generic ieee un ogc nist ietf itu iho bipm
+for i in standoc iso iec bsi jis plateau cc csa ribose generic ieee un ogc nist ietf itu iho bipm
 do
   cat isodoc.rng | ruby -pe "\$_.gsub!(/<grammar/, %{<!-- VERSION ${metanorma_version} -->\n<grammar}) " > ../../metanorma-$i/lib/metanorma/$i/isodoc.rng
   cp basicdoc.rng reqt.rng biblio.rng biblio-standoc.rng ../../metanorma-$i/lib/metanorma/$i
@@ -13,7 +13,9 @@ do
   cp relaton-$i.rng ../../metanorma-$i/lib/metanorma/$i
 done
 
-for i in iso iec bsi jis
+cp relaton-jis.rng ../../metanorma-plateau/lib/metanorma/plateau
+
+for i in iso iec bsi jis plateau
 do
 cp isostandard.rng ../../metanorma-$i/lib/metanorma/$i
 done
