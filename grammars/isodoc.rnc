@@ -27,19 +27,12 @@ amend = element amend {
   autonumber*
 }
 
-admonition =
-  element admonition {
+AdmonitionAttr =
     attribute type { AdmonitionType },
     attribute class { text }?,
-    attribute id { xsd:ID },
     attribute uri { xsd:anyURI }?,
     attribute coverpage { xsd:boolean }?,
-    attribute notag { xsd:boolean }?,
-    tname?,
-
-    paragraph-with-footnote*,
-    note*
-  }
+    attribute notag { xsd:boolean }?
 
 AdmonitionType = 
   "warning" | "note" | "tip" | "important" | "caution" | "statement" | "editorial" | "box"
@@ -82,51 +75,45 @@ erefType =
     CitationType,
     PureTextElement+
 
-ul =
-  element ul {
-    attribute id { xsd:ID },
-    BlockAttributes,
-    tname?, ul_li+, note*
-}
+UlAttr =
+    BlockAttributes
 
-ol =
-  element ol {
-    attribute id { xsd:ID },
+UlBody =
+    tname?, ul_li+, note*
+
+OlBody =
+    tname?, li+, note*
+
+OlAttr =
     BlockAttributes,
     attribute type { ( "roman" | "alphabet" | "arabic" |
-                       "roman_upper" | "alphabet_upper" ) }?,
-    tname?, li+, note*
-}
+                       "roman_upper" | "alphabet_upper" ) }?
 
-dl =
-  element dl {
-    attribute id { xsd:ID },
+DlAttr =
     BlockAttributes,
-    attribute key { xsd:boolean }?,
+    attribute key { xsd:boolean }?
+
+DlBody =
     tname?, (dt, dd)+, note*
-}
 
 dt =
   element dt { 
-    attribute id { xsd:ID }?,
+    RequiredId,
     TextElement*
   }
 
-example =
-  element example {
-    attribute id { xsd:ID },
+ExampleAttr =
     attribute unnumbered { xsd:boolean }?,
     attribute subsequence { text }?,
     attribute number { text }?,
-    BlockAttributes,
+    BlockAttributes
+
+ExampleBody =
     tname?,
     ( formula | ul | ol | dl | quote | sourcecode | paragraph-with-footnote | figure )+,
     note*
-}
 
-table =
-  element table {
-    attribute id { xsd:ID },
+TableAttr =
     attribute unnumbered { xsd:boolean }?,
     attribute number { text }?,
     attribute subsequence { text }?,
@@ -134,16 +121,22 @@ table =
     attribute summary { text }?,
     attribute uri { xsd:anyURI }?,
     attribute width { text }?,
-    BlockAttributes,
-    colgroup?, tname?, thead?, tbody, tfoot?, table-note*, dl?, source?
-  }
+    BlockAttributes
 
-figure =
-  element figure {
-    FigureAttributes,
-    BlockAttributes,
+TableBody =
+    colgroup?, tname?, thead?, tbody, tfoot?, dl?, table-note*, source?
+
+FigureAttr =
+    attribute id { xsd:ID },
+    attribute unnumbered { xsd:boolean }?,
+    attribute number { text }?,
+    attribute subsequence { text }?,
+    attribute class { text }?,
+    attribute width { text }?,
+    BlockAttributes
+
+FigureBody =
      tname?, (image | video | audio | pre | paragraph-with-footnote+ | figure*), fn*, dl?, note*, source?
-  }
 
 source =
   element source {
@@ -151,54 +144,32 @@ source =
     origin, modification?
 } 
 
-sourcecode =
-  element sourcecode {
-    attribute id { xsd:ID },
+SourceAttr =
     attribute unnumbered { xsd:boolean }?,
     attribute number { text }?,
     attribute subsequence { text }?,
     attribute lang { text }?,
     BlockAttributes,
-    attribute linenums { xsd:boolean }?,
-    tname?, ( text | callout | xref | eref )+, annotation*, note*
-  }
+    attribute linenums { xsd:boolean }?
 
-formula =
-  element formula {
-    attribute id { xsd:ID },
+SourceBody =
+    tname?, ( text | callout | xref | eref )+, annotation*, note*
+
+FormulaAttr =
     attribute unnumbered { xsd:boolean }?,
     attribute number { text }?,
     attribute subsequence { text }?,
     attribute inequality { xsd:boolean }?,
-    BlockAttributes,
-    stem, dl?, note*
-}
+    BlockAttributes
 
-ParagraphType =
-    attribute id { xsd:ID },
-    attribute align { Alignments }?,
-    BlockAttributes,
-   ( TextElement )*, note*
-
-paragraph-with-footnote =
-  element p {
-    attribute id { xsd:ID },
+ParagraphAttrs =
     attribute align { Alignments }?,
     attribute type { text }?,
-    BlockAttributes,
-   ( TextElement | fn  )*, note*
-}
+    BlockAttributes
 
-quote =
-  element quote {
-    attribute id { xsd:ID },
+QuoteAttr =
     attribute alignment { Alignments }?,
-    BlockAttributes,
-    quote-source?,
-    quote-author?,
-    paragraph-with-footnote+,
-    note*
-}
+    BlockAttributes
 
 # TitleType = text
 
@@ -218,17 +189,17 @@ references =
     references*
 }
 
-note = element note {
-    attribute id { xsd:ID },
+NoteAttr =
     attribute unnumbered { xsd:boolean }?,
     attribute number { text }?,
     attribute subsequence { text }?,
     attribute type { text }?,
     attribute coverpage { xsd:boolean }?,
     attribute notag { xsd:boolean }?,
-    BlockAttributes,
+    BlockAttributes
+
+NoteBody =
     (paragraph | ul | ol | dl | formula | quote | sourcecode)+
-}
 
 Basic-Section =
     attribute id { xsd:ID }?,
@@ -238,12 +209,9 @@ Basic-Section =
     section-title?,
     (BasicBlock+)
 
-li =
-  element li {
-    attribute id { xsd:ID }?,
+LiBody =
     BasicBlock+
     # exclude figures?
-  }
 
 dd =
   element dd {
@@ -253,33 +221,21 @@ dd =
 
 thead = element thead { tr+ }
 
-td =
-  element td {
-    attribute colspan { text }?,
-    attribute rowspan { text }?,
-    attribute align { "left" | "right" | "center" }?,
-    attribute valign { "top" | "middle" | "bottom" | "baseline" }?,
+TdBody =
     (
       (TextElement | fn )* |
       (paragraph-with-footnote | dl | ul | ol | figure)+
     )
-}
 
-th =
-  element th {
-    attribute colspan { text }?,
-    attribute rowspan { text }?,
-    attribute align { "left" | "right" | "center" }?,
-    attribute valign { "top" | "middle" | "bottom" | "baseline" }?,
+ThBody =
     (
       (TextElement | fn )* |
       paragraph-with-footnote+
     )
-}
 
 table-note = element note {
     attribute id { xsd:ID }?,
- paragraph
+    paragraph
 }
 
 stem =
@@ -546,11 +502,18 @@ Clause-Section =
     )
 
 Annex-Section =
+    Annex-Section-Attr,
+    Annex-Section-Body
+
+Annex-Section-Attr =
     attribute id { xsd:ID }?,
     attribute language { text }?,
     attribute script { text }?,
     attribute inline-header { xsd:boolean }?,
     attribute obligation { "normative" | "informative" }?,
+    attribute type { text }?
+
+Annex-Section-Body =
     section-title?,
     (
       ( BasicBlock* ),
@@ -828,14 +791,6 @@ BlockAttributes =
     attribute tag { text }?,
     attribute multilingual-rendering { MultilingualRenderingType }?,
     attribute columns { text }?
-
-FigureAttributes =
-    attribute id { xsd:ID },
-    attribute unnumbered { xsd:boolean }?,
-    attribute number { text }?,
-    attribute subsequence { text }?,
-    attribute class { text }?,
-    attribute width { text }?
 
 start = standard-document
 }

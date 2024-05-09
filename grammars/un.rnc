@@ -12,18 +12,16 @@ include "isodoc.rnc" {
     text | em | eref | erefstack | strong | stem | sub | sup | tt |
     strike | smallcap | xref | br | hyperlink | bookmark 
 
-    admonition =
-    element admonition {
-      attribute id { xsd:ID },
-      attribute unnumbered { xsd:boolean }?,
-      attribute type {
-        ( "danger" | "caution" | "warning" | "important" | "safety precautions" )},
-    attribute coverpage { xsd:boolean }?,
-    attribute notag { xsd:boolean }?,
+  AdmonitionAttr &=
+      attribute unnumbered { xsd:boolean }?
+
+  AdmonitionType =
+        "danger" | "caution" | "warning" | "important" | "safety precautions" 
+
+  AdmonitionBody =
       tname?,
       (  paragraph-with-footnote | table | formula | ol | ul | dl | figure | quote | sourcecode | example | review )+,
       note*
-    }
 
 
   sections =
@@ -49,19 +47,8 @@ Clause-Section =
        (clause-subsection | terms | definitions | floating-title )*
     )
 
-Annex-Section =
-    attribute id { xsd:ID }?,
-    attribute language { text }?,
-    attribute script { text }?,
-    attribute inline-header { xsd:boolean }?,
-    attribute obligation { "normative" | "informative" }?,
-    attribute unnumbered { xsd:boolean }?,
-    section-title?,
-    (
-      ( BasicBlock* ),
-       (annex-subsection | terms | definitions | references | floating-title )*
-    )
-
+Annex-Section &=
+    attribute unnumbered { xsd:boolean }?
 
 }
 

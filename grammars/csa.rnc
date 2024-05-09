@@ -8,14 +8,8 @@ include "isodoc.rnc" {
 
   start = csand-standard
 
-    figure =
-    element figure {
-      FigureAttributes,
-      BlockAttributes,
+  FigureBody =
       source?, tname?, ( figure+ |  ( (TextElement* | pre), note*, dl? ) )
-    }
-
-
 
 }
 

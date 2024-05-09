@@ -30,57 +30,44 @@
         <ref name="bookmark"/>
       </choice>
     </define>
-    <define name="admonition">
-      <element name="admonition">
-        <attribute name="id">
-          <data type="ID"/>
+    <define name="AdmonitionAttr" combine="interleave">
+      <optional>
+        <attribute name="unnumbered">
+          <data type="boolean"/>
         </attribute>
-        <optional>
-          <attribute name="unnumbered">
-            <data type="boolean"/>
-          </attribute>
-        </optional>
-        <attribute name="type">
-          <choice>
-            <value>danger</value>
-            <value>caution</value>
-            <value>warning</value>
-            <value>important</value>
-            <value>safety precautions</value>
-          </choice>
-        </attribute>
-        <optional>
-          <attribute name="coverpage">
-            <data type="boolean"/>
-          </attribute>
-        </optional>
-        <optional>
-          <attribute name="notag">
-            <data type="boolean"/>
-          </attribute>
-        </optional>
-        <optional>
-          <ref name="tname"/>
-        </optional>
-        <oneOrMore>
-          <choice>
-            <ref name="paragraph-with-footnote"/>
-            <ref name="table"/>
-            <ref name="formula"/>
-            <ref name="ol"/>
-            <ref name="ul"/>
-            <ref name="dl"/>
-            <ref name="figure"/>
-            <ref name="quote"/>
-            <ref name="sourcecode"/>
-            <ref name="example"/>
-            <ref name="review"/>
-          </choice>
-        </oneOrMore>
-        <zeroOrMore>
-          <ref name="note"/>
-        </zeroOrMore>
-      </element>
+      </optional>
+    </define>
+    <define name="AdmonitionType">
+      <choice>
+        <value>danger</value>
+        <value>caution</value>
+        <value>warning</value>
+        <value>important</value>
+        <value>safety precautions</value>
+      </choice>
+    </define>
+    <define name="AdmonitionBody">
+      <optional>
+        <ref name="tname"/>
+      </optional>
+      <oneOrMore>
+        <choice>
+          <ref name="paragraph-with-footnote"/>
+          <ref name="table"/>
+          <ref name="formula"/>
+          <ref name="ol"/>
+          <ref name="ul"/>
+          <ref name="dl"/>
+          <ref name="figure"/>
+          <ref name="quote"/>
+          <ref name="sourcecode"/>
+          <ref name="example"/>
+          <ref name="review"/>
+        </choice>
+      </oneOrMore>
+      <zeroOrMore>
+        <ref name="note"/>
+      </zeroOrMore>
     </define>
     <define name="sections">
       <element name="sections">
@@ -157,53 +144,12 @@
         </zeroOrMore>
       </group>
     </define>
-    <define name="Annex-Section">
-      <optional>
-        <attribute name="id">
-          <data type="ID"/>
-        </attribute>
-      </optional>
-      <optional>
-        <attribute name="language"/>
-      </optional>
-      <optional>
-        <attribute name="script"/>
-      </optional>
-      <optional>
-        <attribute name="inline-header">
-          <data type="boolean"/>
-        </attribute>
-      </optional>
-      <optional>
-        <attribute name="obligation">
-          <choice>
-            <value>normative</value>
-            <value>informative</value>
-          </choice>
-        </attribute>
-      </optional>
+    <define name="Annex-Section" combine="interleave">
       <optional>
         <attribute name="unnumbered">
           <data type="boolean"/>
         </attribute>
       </optional>
-      <optional>
-        <ref name="section-title"/>
-      </optional>
-      <group>
-        <zeroOrMore>
-          <ref name="BasicBlock"/>
-        </zeroOrMore>
-        <zeroOrMore>
-          <choice>
-            <ref name="annex-subsection"/>
-            <ref name="terms"/>
-            <ref name="definitions"/>
-            <ref name="references"/>
-            <ref name="floating-title"/>
-          </choice>
-        </zeroOrMore>
-      </group>
     </define>
   </include>
   <define name="un-standard">

@@ -8,51 +8,39 @@ include "isodoc.rnc" {
 
 start = ietf-standard
 
-ParagraphType =
-    attribute id { xsd:ID },
+ParagraphAttrs =
     attribute align { Alignments }?,
     attribute keep-with-next { xsd:boolean }?,
     attribute keep-with-previous { xsd:boolean }?,
-    attribute indent { text }?,
-   ( TextElement )*, note*
+    attribute indent { text }?
 
-paragraph-with-footnote =
-  element p {
-    attribute id { xsd:ID },
-    attribute align { Alignments }?,
-    attribute indent { text }?,
-   ( TextElement | fn  )*, note*
-}
-ul =
-  element ul {
-    attribute id { xsd:ID },
+UlAttr =
     attribute nobullet { xsd:boolean }?,
     attribute spacing { text }?,
     attribute indent { text }?,
-    attribute bare { xsd:boolean }?,
-    li+, note*
-}
+    attribute bare { xsd:boolean }?
 
-ol =
-  element ol {
-    attribute id { xsd:ID },
+UlBody =
+    li+, note*
+
+OlAttr =
     attribute type { ( "roman" | "alphabet" | "arabic" |
                        "roman_upper" | "alphabet_upper" | "text" ) },
     attribute group { text }?,
     attribute spacing { text }?,
     attribute start { text }?,
-    attribute indent { text }?,
-    li+, note*
-}
+    attribute indent { text }?
 
-dl =
-  element dl {
-    attribute id { xsd:ID },
+OlBody =
+    li+, note*
+
+DlAttr =
     attribute newline { text }?,
     attribute indent { text }?,
-    attribute spacing { text }?,
+    attribute spacing { text }?
+
+DlBody =
     (dt, dd)+, note*
-}
 
 review =
   element review {
@@ -65,45 +53,22 @@ review =
   paragraph+
 }
 
-note =
-  element note {
-    attribute id { xsd:ID },
-    attribute removeInRFC { text }?,
+NoteAttr =
+    attribute removeInRFC { text }?
+
+NoteBody =
     tname?, paragraph+
-  }
 
-pre =
-  element pre {
-    attribute id { xsd:ID },
+PreAttr =
     attribute alt { text }?,
-    attribute align { text }?,
-    tname?, text, note*
-  }
-
-image =
-  element image {
-    attribute id { xsd:ID },
-    attribute src { xsd:anyURI },
-    attribute mimetype { text },
-    attribute filename { text }?,
-    attribute width { xsd:int | "auto" }?,
-    attribute height { xsd:int | "auto" }?,
-    attribute alt { text }?,
-    attribute title { text }?,
-    attribute longdesc { xsd:anyURI }?,
     attribute align { text }?
-}
 
-sourcecode =
-  element sourcecode {
-    attribute id { xsd:ID },
-    attribute unnumbered { xsd:boolean }?,
+ImageAttr &=
+    attribute align { text }?
+
+SourceAttr &=
     attribute number { text }?,
-    attribute subsequence { text }?,
-    attribute lang { text }?,
-    attribute markers { text }?,
-    tname?, ( text | callout )+, annotation*, note*
-  }
+    attribute markers { text }?
 
 xref =
   element xref {
@@ -127,19 +92,10 @@ erefType =
 quote-source =
   element source { erefTypeURI }
 
-table =
-  element table {
-    attribute id { xsd:ID },
-    attribute unnumbered { xsd:boolean }?,
+TableAttr &=
     attribute number { text }?,
-    attribute subsequence { text }?,
-    attribute alt { text }?,
-    attribute summary { text }?,
-    attribute uri { xsd:anyURI }?,
     attribute align { text }?,
-    attribute width { text }?,
-    tname?, thead?, tbody, tfoot?, table-note*, dl?
-  }
+    attribute width { text }?
 
 Clause-Section =
     attribute id { xsd:ID }?,

@@ -8,12 +8,8 @@ include "isodoc.rnc" {
 
 start = itu
 
-ol =
-  element ol {
-    attribute id { xsd:ID },
-    attribute class { "steps" }?,
-    tname?, li+, note*
-}
+OlAttr &=
+    attribute class { "steps" }?
 
 preface = element preface { ( content | abstract | foreword | introduction | acknowledgements | clause)+ }
 

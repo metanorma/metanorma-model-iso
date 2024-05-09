@@ -8,12 +8,8 @@ include "isodoc.rnc" {
 
 start = nist-standard
 
-ol =
-  element ol {
-    attribute id { xsd:ID },
-    attribute class { "steps" }?,
-    tname?, li+, note*
-}
+OlAttr &=
+    attribute class { "steps" }?
 
 # TitleType = ( "alternative" | "original" | "unofficial" | "subtitle" | "main" )
 

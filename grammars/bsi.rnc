@@ -6,19 +6,8 @@ include "isostandard.rnc" {
 
 start = bsi-standard
 
-admonition =
-  element admonition {
-    attribute type { AdmonitionType },
-    attribute class { text }?,
-    attribute id { xsd:ID },
-    attribute target { xsd:IDREF }?,
-    attribute uri { xsd:anyURI }?,
-    attribute coverpage { xsd:boolean }?,
-    attribute notag { xsd:boolean }?,
-    tname?,
-    paragraph-with-footnote*,
-    note*
-  }
+AdmonitionAttr &=
+    attribute target { xsd:IDREF }?
 
 Clause-Section =
     attribute id { xsd:ID }?,
@@ -67,28 +56,11 @@ sections =
     (clause | term-clause | terms | floating-title | floating-section-title)+
   } 
 
-figure =
-  element figure {
-    FigureAttributes,
-    BlockAttributes,
+FigureBody =
      source?, tname?, (image | video | audio | pre | paragraph-with-footnote+ | figure*), fn*, dl?, note*
-  }  
 
-table =
-  element table {
-    attribute id { xsd:ID },
-    attribute unnumbered { xsd:boolean }?, 
-    attribute number { text }?,
-    attribute subsequence { text }?,
-    attribute alt { text }?,
-    attribute summary { text }?,
-    attribute uri { xsd:anyURI }?,
-    attribute width { text }?,
-    BlockAttributes,
+TableAttr &=
     attribute border-under-row { text }?,
-    colgroup?, tname?, thead?, tbody, tfoot?, table-note*, dl?
-  }
-     
 
 }
 

@@ -27,28 +27,11 @@ Clause-Section =
        (clause-subsection | terms | definitions | floating-title )*
     )
 
-Annex-Section =
-    attribute id { xsd:ID }?,
-    attribute language { text }?,
-    attribute script { text }?,
-    attribute inline-header { xsd:boolean }?,
-    attribute obligation { "normative" | "informative" }?,
-    attribute unnumbered  { xsd:boolean }?,
-    section-title?,
-    (
-      ( BasicBlock* ),
-       (annex-subsection | terms | definitions | references | floating-title )*
-    )
+Annex-Section-Attr &=
+    attribute unnumbered  { xsd:boolean }?
 
-ol =
-  element ol {
-    attribute id { xsd:ID },
-    BlockAttributes,
-    attribute type { ( "roman" | "alphabet" | "arabic" |
-                       "roman_upper" | "alphabet_upper" ) },
-    attribute start { text }?,
-    tname?, li+, note*
-}
+OlAttr &=
+    attribute start { text }?
 
 }
 

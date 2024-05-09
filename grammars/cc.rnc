@@ -9,13 +9,8 @@ include "isodoc.rnc" {
 
 start = csd-standard
 
-figure =
-  element figure {
-     FigureAttributes,
-     BlockAttributes,
+FigureBody =
      source?, tname?, ( figure+ |  ( (TextElement* | pre), note*, dl? ) )
-  }
-
 
 }
 

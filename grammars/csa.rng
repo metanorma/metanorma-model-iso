@@ -11,36 +11,32 @@
     <start>
       <ref name="csand-standard"/>
     </start>
-    <define name="figure">
-      <element name="figure">
-        <ref name="FigureAttributes"/>
-        <ref name="BlockAttributes"/>
-        <optional>
-          <ref name="source"/>
-        </optional>
-        <optional>
-          <ref name="tname"/>
-        </optional>
-        <choice>
-          <oneOrMore>
-            <ref name="figure"/>
-          </oneOrMore>
-          <group>
-            <choice>
-              <zeroOrMore>
-                <ref name="TextElement"/>
-              </zeroOrMore>
-              <ref name="pre"/>
-            </choice>
+    <define name="FigureBody">
+      <optional>
+        <ref name="source"/>
+      </optional>
+      <optional>
+        <ref name="tname"/>
+      </optional>
+      <choice>
+        <oneOrMore>
+          <ref name="figure"/>
+        </oneOrMore>
+        <group>
+          <choice>
             <zeroOrMore>
-              <ref name="note"/>
+              <ref name="TextElement"/>
             </zeroOrMore>
-            <optional>
-              <ref name="dl"/>
-            </optional>
-          </group>
-        </choice>
-      </element>
+            <ref name="pre"/>
+          </choice>
+          <zeroOrMore>
+            <ref name="note"/>
+          </zeroOrMore>
+          <optional>
+            <ref name="dl"/>
+          </optional>
+        </group>
+      </choice>
     </define>
   </include>
   <define name="csand-standard">

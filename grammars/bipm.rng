@@ -81,82 +81,17 @@
         </zeroOrMore>
       </group>
     </define>
-    <define name="Annex-Section">
-      <optional>
-        <attribute name="id">
-          <data type="ID"/>
-        </attribute>
-      </optional>
-      <optional>
-        <attribute name="language"/>
-      </optional>
-      <optional>
-        <attribute name="script"/>
-      </optional>
-      <optional>
-        <attribute name="inline-header">
-          <data type="boolean"/>
-        </attribute>
-      </optional>
-      <optional>
-        <attribute name="obligation">
-          <choice>
-            <value>normative</value>
-            <value>informative</value>
-          </choice>
-        </attribute>
-      </optional>
+    <define name="Annex-Section-Attr" combine="interleave">
       <optional>
         <attribute name="unnumbered">
           <data type="boolean"/>
         </attribute>
       </optional>
-      <optional>
-        <ref name="section-title"/>
-      </optional>
-      <group>
-        <zeroOrMore>
-          <ref name="BasicBlock"/>
-        </zeroOrMore>
-        <zeroOrMore>
-          <choice>
-            <ref name="annex-subsection"/>
-            <ref name="terms"/>
-            <ref name="definitions"/>
-            <ref name="references"/>
-            <ref name="floating-title"/>
-          </choice>
-        </zeroOrMore>
-      </group>
     </define>
-    <define name="ol">
-      <element name="ol">
-        <attribute name="id">
-          <data type="ID"/>
-        </attribute>
-        <ref name="BlockAttributes"/>
-        <attribute name="type">
-          <choice>
-            <value>roman</value>
-            <value>alphabet</value>
-            <value>arabic</value>
-            <value>roman_upper</value>
-            <value>alphabet_upper</value>
-          </choice>
-        </attribute>
-        <optional>
-          <attribute name="start"/>
-        </optional>
-        <optional>
-          <ref name="tname"/>
-        </optional>
-        <oneOrMore>
-          <ref name="li"/>
-        </oneOrMore>
-        <zeroOrMore>
-          <ref name="note"/>
-        </zeroOrMore>
-      </element>
+    <define name="OlAttr" combine="interleave">
+      <optional>
+        <attribute name="start"/>
+      </optional>
     </define>
   </include>
   <define name="bipm-standard">
