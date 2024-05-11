@@ -242,7 +242,7 @@
     </define>
     <define name="dt">
       <element name="dt">
-        <ref name="RequiredId"/>
+        <ref name="OptionalId"/>
         <zeroOrMore>
           <ref name="TextElement"/>
         </zeroOrMore>
