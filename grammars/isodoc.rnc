@@ -98,7 +98,7 @@ DlBody =
 
 dt =
   element dt { 
-    RequiredId,
+    OptionalId,
     TextElement*
   }
 
