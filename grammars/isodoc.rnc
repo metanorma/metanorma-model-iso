@@ -127,7 +127,6 @@ TableBody =
     colgroup?, tname?, thead?, tbody, tfoot?, dl?, table-note*, source?
 
 FigureAttr =
-    attribute id { xsd:ID },
     attribute unnumbered { xsd:boolean }?,
     attribute number { text }?,
     attribute subsequence { text }?,
