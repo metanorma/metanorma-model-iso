@@ -9,47 +9,12 @@
     <start>
       <ref name="bsi-standard"/>
     </start>
-    <define name="admonition">
-      <element name="admonition">
-        <attribute name="type">
-          <ref name="AdmonitionType"/>
+    <define name="AdmonitionAttr" combine="interleave">
+      <optional>
+        <attribute name="target">
+          <data type="IDREF"/>
         </attribute>
-        <optional>
-          <attribute name="class"/>
-        </optional>
-        <attribute name="id">
-          <data type="ID"/>
-        </attribute>
-        <optional>
-          <attribute name="target">
-            <data type="IDREF"/>
-          </attribute>
-        </optional>
-        <optional>
-          <attribute name="uri">
-            <data type="anyURI"/>
-          </attribute>
-        </optional>
-        <optional>
-          <attribute name="coverpage">
-            <data type="boolean"/>
-          </attribute>
-        </optional>
-        <optional>
-          <attribute name="notag">
-            <data type="boolean"/>
-          </attribute>
-        </optional>
-        <optional>
-          <ref name="tname"/>
-        </optional>
-        <zeroOrMore>
-          <ref name="paragraph-with-footnote"/>
-        </zeroOrMore>
-        <zeroOrMore>
-          <ref name="note"/>
-        </zeroOrMore>
-      </element>
+      </optional>
     </define>
     <define name="Clause-Section">
       <optional>
@@ -238,93 +203,39 @@
         </oneOrMore>
       </element>
     </define>
-    <define name="figure">
-      <element name="figure">
-        <ref name="FigureAttributes"/>
-        <ref name="BlockAttributes"/>
-        <optional>
-          <ref name="source"/>
-        </optional>
-        <optional>
-          <ref name="tname"/>
-        </optional>
-        <choice>
-          <ref name="image"/>
-          <ref name="video"/>
-          <ref name="audio"/>
-          <ref name="pre"/>
-          <oneOrMore>
-            <ref name="paragraph-with-footnote"/>
-          </oneOrMore>
-          <zeroOrMore>
-            <ref name="figure"/>
-          </zeroOrMore>
-        </choice>
+    <define name="FigureBody">
+      <optional>
+        <ref name="source"/>
+      </optional>
+      <optional>
+        <ref name="tname"/>
+      </optional>
+      <choice>
+        <ref name="image"/>
+        <ref name="video"/>
+        <ref name="audio"/>
+        <ref name="pre"/>
+        <oneOrMore>
+          <ref name="paragraph-with-footnote"/>
+        </oneOrMore>
         <zeroOrMore>
-          <ref name="fn"/>
+          <ref name="figure"/>
         </zeroOrMore>
-        <optional>
-          <ref name="dl"/>
-        </optional>
-        <zeroOrMore>
-          <ref name="note"/>
-        </zeroOrMore>
-      </element>
+      </choice>
+      <zeroOrMore>
+        <ref name="fn"/>
+      </zeroOrMore>
+      <optional>
+        <ref name="dl"/>
+      </optional>
+      <zeroOrMore>
+        <ref name="note"/>
+      </zeroOrMore>
     </define>
-    <define name="table">
-      <element name="table">
-        <attribute name="id">
-          <data type="ID"/>
-        </attribute>
-        <optional>
-          <attribute name="unnumbered">
-            <data type="boolean"/>
-          </attribute>
-        </optional>
-        <optional>
-          <attribute name="number"/>
-        </optional>
-        <optional>
-          <attribute name="subsequence"/>
-        </optional>
-        <optional>
-          <attribute name="alt"/>
-        </optional>
-        <optional>
-          <attribute name="summary"/>
-        </optional>
-        <optional>
-          <attribute name="uri">
-            <data type="anyURI"/>
-          </attribute>
-        </optional>
-        <optional>
-          <attribute name="width"/>
-        </optional>
-        <ref name="BlockAttributes"/>
-        <optional>
-          <attribute name="border-under-row"/>
-        </optional>
-        <optional>
-          <ref name="colgroup"/>
-        </optional>
-        <optional>
-          <ref name="tname"/>
-        </optional>
-        <optional>
-          <ref name="thead"/>
-        </optional>
-        <ref name="tbody"/>
-        <optional>
-          <ref name="tfoot"/>
-        </optional>
-        <zeroOrMore>
-          <ref name="table-note"/>
-        </zeroOrMore>
-        <optional>
-          <ref name="dl"/>
-        </optional>
-      </element>
+    <define name="TableAttr" combine="interleave">
+      <optional>
+        <attribute name="border-under-row"/>
+      </optional>
     </define>
   </include>
   <!-- end overrides -->

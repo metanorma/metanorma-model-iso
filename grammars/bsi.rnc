@@ -60,7 +60,7 @@ FigureBody =
      source?, tname?, (image | video | audio | pre | paragraph-with-footnote+ | figure*), fn*, dl?, note*
 
 TableAttr &=
-    attribute border-under-row { text }?,
+    attribute border-under-row { text }?
 
 }
 
