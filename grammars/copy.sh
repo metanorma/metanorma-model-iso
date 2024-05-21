@@ -14,13 +14,14 @@ do
 done
 
 cp relaton-jis.rng ../../metanorma-plateau/lib/metanorma/plateau
+cp jis.rng ../../metanorma-plateau/lib/metanorma/plateau
 
 for i in iso iec bsi jis plateau
 do
 cp isostandard.rng ../../metanorma-$i/lib/metanorma/$i
 done
 
-for i in iec bsi jis cc csa ribose ieee un ogc nist ietf itu iho bipm generic
+for i in iec bsi jis cc csa ribose ieee un ogc nist ietf itu iho bipm generic plateau
 do
 cat $i.rng | ruby -pe "\$_.gsub!(/<grammar /, %{<grammar ns='https://www.metanorma.org/ns/${i}' }) ">  ../../metanorma-$i/lib/metanorma/$i/$i.rng
 done
