@@ -4,7 +4,10 @@
     VERSION v1.2.1
     default namespace = "https://www.metanorma.com/ns/jis"
   -->
-  <include href="relaton-jis.rng"/>
+  <!--
+    include "relaton-jis.rnc" { } 
+    jis.rnc already includes relaton-jis.rnc, if we have distinct metadata, will need to abstract jis-compile.rnc
+  -->
   <include href="jis.rng">
     <start>
       <ref name="plateau-standard"/>
