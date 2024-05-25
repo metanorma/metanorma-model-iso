@@ -88,3 +88,6 @@
 [submodule "grammars/relaton-model-etsi"]
 	path = grammars/relaton-model-etsi
 	url = https://github.com/relaton/relaton-model-etsi.git
+[submodule "grammars/relaton-model-plateau"]
+	path = grammars/relaton-model-plateau
+	url = https://github.com/relaton/relaton-model-plateau.git
