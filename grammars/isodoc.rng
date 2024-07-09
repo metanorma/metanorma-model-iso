@@ -330,9 +330,9 @@
       <zeroOrMore>
         <ref name="table-note"/>
       </zeroOrMore>
-      <optional>
+      <zeroOrMore>
         <ref name="source"/>
-      </optional>
+      </zeroOrMore>
     </define>
     <define name="FigureAttr">
       <optional>
@@ -379,9 +379,9 @@
       <zeroOrMore>
         <ref name="note"/>
       </zeroOrMore>
-      <optional>
+      <zeroOrMore>
         <ref name="source"/>
-      </optional>
+      </zeroOrMore>
     </define>
     <define name="source">
       <element name="source">

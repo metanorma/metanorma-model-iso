@@ -32,9 +32,9 @@
         <optional>
           <attribute name="width"/>
         </optional>
-        <optional>
+        <zeroOrMore>
           <ref name="source"/>
-        </optional>
+        </zeroOrMore>
         <optional>
           <ref name="tname"/>
         </optional>

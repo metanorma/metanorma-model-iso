@@ -124,7 +124,7 @@ TableAttr =
     BlockAttributes
 
 TableBody =
-    colgroup?, tname?, thead?, tbody, tfoot?, dl?, table-note*, source?
+    colgroup?, tname?, thead?, tbody, tfoot?, dl?, table-note*, source*
 
 FigureAttr =
     attribute unnumbered { xsd:boolean }?,
@@ -135,7 +135,7 @@ FigureAttr =
     BlockAttributes
 
 FigureBody =
-     tname?, (image | video | audio | pre | paragraph-with-footnote+ | figure*), fn*, dl?, note*, source?
+     tname?, (image | video | audio | pre | paragraph-with-footnote+ | figure*), fn*, dl?, note*, source*
 
 source =
   element source {

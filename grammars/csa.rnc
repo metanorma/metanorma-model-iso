@@ -9,7 +9,7 @@ include "isodoc.rnc" {
   start = csand-standard
 
   FigureBody =
-      source?, tname?, ( figure+ |  ( (TextElement* | pre), note*, dl? ) )
+      source*, tname?, ( figure+ |  ( (TextElement* | pre), note*, dl? ) )
 
 }
 

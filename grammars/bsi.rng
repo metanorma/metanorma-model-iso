@@ -204,9 +204,9 @@
       </element>
     </define>
     <define name="FigureBody">
-      <optional>
+      <zeroOrMore>
         <ref name="source"/>
-      </optional>
+      </zeroOrMore>
       <optional>
         <ref name="tname"/>
       </optional>
