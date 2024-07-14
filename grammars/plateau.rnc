@@ -7,6 +7,18 @@ include "jis.rnc" {
 
 start = plateau-standard
 
+ParagraphFnBody =
+   ( TextElement | fn )*, note*, source*
+
+UlBody =
+    li+, note*, source*
+
+OlBody =
+    li+, note*, source*
+
+DlBody =
+    (dt, dd)+, note*, source*
+
 }
 
 # end overrides
