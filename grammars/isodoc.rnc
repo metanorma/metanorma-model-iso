@@ -240,6 +240,7 @@ table-note = element note {
 stem =
   element stem {
     attribute type { "MathML" | "AsciiMath" | "LatexMath" },
+    attribute number-format { text }?,
     attribute block { xsd:boolean },
      ( text | AnyElement )+
 } 
