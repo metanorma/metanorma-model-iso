@@ -1,0 +1,21 @@
+include "isodoc.rnc" {
+
+misccontainer = element metanorma-extension { AnyElement+, metanorma-source-container }
+
+}
+
+metanorma-source-container = element metanorma { metanorma-source }
+
+## The metanorma-source element contains a copy of the Semantic XML, so that downstream
+## consumers can process Semantic XML and Presentation XML in tandem. The Semantic and
+## Presentation XML are aligned as follows, in order to avoid duplicate references and
+## to segregate the embedded XML from processing:
+##
+## * Each element in metanorma-source is prefixed with semantic__ : <semantic__p>
+## * Any namespaced element has semantic_ prefixed to its name : <mathml:semantic__math>
+## * The root namespace of the embedded Semantic XML is stripped : <semantic__iso-document> (no ns)
+## * Every attribute of the Semantic XML that is an identifier (id, name) is prefixed with semantic__ :
+##   <semantic__p id="semantic__A123">
+## * Every attribute of the Semantic XML that references an element identifier is prefixed with semantic__ :
+##   <semantic_xref target="semantic__A123">
+metanorma-source = element metanorma { AnyElement+ }
