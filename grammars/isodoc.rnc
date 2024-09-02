@@ -214,10 +214,7 @@ NoteBody =
     (paragraph | ul | ol | dl | formula | quote | sourcecode)+
 
 Basic-Section =
-    attribute id { xsd:ID }?,
-    attribute language { LanguageType }?,
-    attribute script { ScriptType }?,
-    attribute obligation { ObligationType }?,
+    Basic-Section-Attributes,
     section-title?,
     (BasicBlock+)
 
@@ -338,15 +335,33 @@ date_inline = element date {
   attribute locale { text }?
 }
 
+## Formally defined concept used in a standardisation document, aligned to a definition.
+## That concept may be defined as a term within the current document, or it may be defined externally
 concept = element concept {
+  ## Render the term in the concept in boldface
   attribute bold { xsd:boolean }?,
+  ## Render the term in the concept in italics
   attribute ital { xsd:boolean }?,
+  ## Render a reference to a definition for the concept, e.g. "widgets (3.1)"
   attribute ref { xsd:boolean }?,
+  ## Hyperlink the mention of the term to the definition for the concept
   attribute linkmention { xsd:boolean }?,
+  ## Hyperlink the reference for the term to the definition for the concept
   attribute linkref { xsd:boolean }?,
+  ## The canonical name of the concept being defined
   element refterm { (PureTextElement|stem|index|index-xref)* }?,
+  ## The rendering to be used for the concept
   element renderterm { (PureTextElement|stem|index|index-xref)* }?,
-  ( eref | erefstack | xref | termref )
+  ( 
+     ## Link to a definition of the term in a bibliographic entry
+     eref | 
+     ## Stack of links to a definition of the term in a bibliographic entry
+     erefstack | 
+     ## Link to a definition of the term in an element of the current document
+     xref | 
+     ## Link to a definition of the term in a termbase
+     termref 
+  )
 }
 
 BasicBlock |= requirement | recommendation | permission | imagemap | svgmap | inputform | toc | passthrough
@@ -420,12 +435,25 @@ bibliography =
 }
 
 Section-Attributes =
+    Basic-Section-Attributes,
+    attribute inline-header { xsd:boolean }?,
+    ## Value of number to be used for numbering of section, overriding any autonumbering in rendering.
+    ## The section number is still formed by appending this number to the hierarchical set of parent section numbers,
+    ## e.g. a number "3a" under Clause 1 subclause 2 will be numbered as 1.2.3a.
+    attribute number { text }?,
+    ## Value of number to be used for numbering of section, overriding any autonumbering in rendering,
+    ## and the hierarchy of parent section numbers. This attribute is mutually exclusive with `number`.
+    ## So under Clause 1 subclause 2, sub-subclause 3 is numbered as 1.2.3. If the following sub-subclause
+    ## is given a branch-number "7.2.1.5", that will be the overall section number given, ignoring the parent section
+    ## numbers.
+    attribute branch-number { text }?,
+    ## Do not apply numbering to this clause
+    attribute unnumbered { xsd:boolean }?
+
+Basic-Section-Attributes =
     attribute id { xsd:ID }?,
     attribute language { LanguageType }?,
     attribute script { ScriptType }?,
-    attribute inline-header { xsd:boolean }?,
-    attribute number { text }?,
-    attribute branch-number { text }?,
     attribute obligation { ObligationType }?
 
 reference-clause =
@@ -567,9 +595,13 @@ Clause-Section =
     attribute type { text }?,
     section-title?,
     (
-      ## Block content, mutually exclusive  with subclauses
-      ( (  BasicBlock+ ) | amend ) |
-      # Subclauses, can include terms and definitions
+      ( 
+        ## Block content, mutually exclusive  with subclauses
+        (  BasicBlock+ ) | 
+        ## Specification of machine-readable change outlined in this section,
+        ## used in document amendments
+        amend ) |
+        ## Subclauses, can include terms and definitions
        (clause-subsection | terms | definitions | floating-title )+
     )
 
@@ -579,11 +611,8 @@ Annex-Section =
     Annex-Section-Body
 
 Annex-Section-Attr =
-    attribute id { xsd:ID }?,
-    attribute language { LanguageType }?,
-    attribute script { ScriptType }?,
+    Basic-Section-Attributes,
     attribute inline-header { xsd:boolean }?,
-    attribute obligation { ObligationType }?,
     attribute type { text }?
 
 Annex-Section-Body =
@@ -604,24 +633,47 @@ annex-subsection =
 annex =
   element annex { Annex-Section }       
 
+## Terms sections give elaborated definitions of terms used in a standardization document
 terms =
   element terms {
     Section-Attributes,
     attribute type { text }?,
     section-title?,
+    ## Prefatory material
     BasicBlock*,
     ( (term | terms)+ | ( terms*, definitions?) )
   }
 
+## Terminology entry with its definition
 term =
   element term {
     attribute id { xsd:ID }?,
+    ## Langauge in which the term entry is written
     attribute language { LanguageType }?,
+    ## Script in which the term entry is written
     attribute script { ScriptType }?,
     BlockAttributes,
-    preferred+, admitted*, deprecates*, related*,
-    termdomain?, termsubject?, 
-    termdefinition+, termnote*, termexample*, termsource*
+    ## One or more names under which the term being defined is canonically known
+    preferred+,
+    ## Zero or more names which are acceptable synonyms for the term being defined
+    admitted*,
+    ## Zero or more names which are deprecated synonyms for the term being defined
+    deprecates*,
+    ## Zero or more names which are related to the term being defined. 
+    related*,
+    ## An optional semantic domain for the term being defined,
+    ##  in case the term is ambiguous between several semantic domains
+    termdomain?,
+    ## Subject of the term
+    termsubject?, 
+    ## The definition of the term applied in the current document
+    termdefinition+,
+    ## Zero or more notes about the term
+    termnote*,
+    ## Zero or more examples of how the term is to be used
+    termexample*,
+    ## Bibliographic references for the managed term
+    termsource*
   }
 
 preferred =
@@ -630,24 +682,66 @@ preferred =
 admitted =
   element admitted { Designation }
 
+## Term related to the current term
 related = 
   element related {
+    ## Type of relation of term applicable
     attribute type { RelatedTermType },
+    ## Preferred designation of the term related to the current term
     element preferred { Designation },
-    ( eref | erefstack | xref | termref )
+    ( 
+      ## Link to a definition of the term in a bibliographic entry
+      eref | 
+      ## Stack of links to a definition of the term in a bibliographic entry
+      erefstack |
+      ## Link to a definition of the term in an element of the current document
+      xref |
+      ## Link to a definition of the term in a termbase
+      termref
+    )
 }
 
+## The relation of a term to the current term
 RelatedTermType = 
-  "deprecates" | "supersedes" | "narrower" | "broader" | "equivalent" | "compare" | "contrast" | "see" | "seealso"
+  ## The current term deprecates the related term
+  "deprecates" |
+  ## The current term supersedes the related term
+  "supersedes" |
+  ## The current term is narrower in denotation than the related term
+  "narrower" |
+  ## The current term is broader in denotation than the related term
+  "broader" |
+  ## The current term is equivalent in denotation to the related term
+  "equivalent" |
+  ## The current term may be compared to the related term
+  "compare" |
+  ## The current term is understood in contrast to the related term
+  "contrast" |
+  ## For a better understanding of the current term, one should see the related term
+  "see" |
+  ## For a better understanding of the current term, one should also see the related term
+  "seealso"
 
 deprecates =
   element deprecates { Designation }
 
+## A name under which a managed term is known
 Designation = 
+  ## Indication that the term designation is missing
   attribute absent { xsd:boolean }?,
+  ## The geographic area in which the managed term is known under this designation
   attribute geographic-area { text }?,
-  (expression_designation | letter_symbol_designation | graphical_symbol_designation ),
-  fieldofapplication?, usageinfo?,
+  (
+    ## Realisation of a designation as a linguistic form
+    expression_designation | 
+    letter_symbol_designation | 
+    graphical_symbol_designation
+  ),
+  ## Information about what field/domain the designation is specifically applied to
+  fieldofapplication?,
+  ## Information about how the designation is to be used
+  usageinfo?,
+  ## Bibliographic references for this designation of the managed term
   termsource*
 
 fieldofapplication =
@@ -656,49 +750,118 @@ fieldofapplication =
 usageinfo =
   element usage-info { PureTextElement+ }
 
+## Designation realised as a letter, symbol, formula, equation
 letter_symbol_designation =
   element letter-symbol {
+    ## Whether the designation is the same across languages, or language-specific   
     attribute isInternational { xsd:boolean }?,
-    attribute type { "letter" | "symbol" | "formula" | "equation" }?,
+    ## Type of symbolic designation
+    attribute type { LetterSymbolType }?,
+    ## The symbolic form of the designation
     element name { (PureTextElement | stem)+ }
   }
 
+## The type of a symbol-like designation
+LetterSymbolType = 
+  ## A letter, possibly subscripted or superscripted, intended to denote some property that it abbreviates
+  "letter" |
+  ## A non-letter, intended to represent some property
+  "symbol" |
+  ## A mathematical formula
+  "formula" |
+  ## A mathematical equation (or inequation)
+  "equation"
+
+## Designation realised as a graphical symbol
 graphical_symbol_designation =
   element graphical-symbol {
+    ## Whether the designation is the same across languages, or language-specific
     attribute isInternational { xsd:boolean }?,
+    ## The graphical form of the designation
     figure
   }
 
+## A designation realised as a linguistic form
 expression_designation =
   element expression {
+    ## The language in which the designation is written
     attribute language { LanguageType }?,
+    ## The script in which the designation is written
     attribute script { ScriptType }?,
+    ## The type of linguistic form used as designation
     attribute type { ExpressionDesignationType }?,
+    ## Whether the designation (typically an abbreviation) is the same across languages, or language-specific
     attribute isInternational { xsd:boolean }?,
+    ## The textual form of the designation
     element name { (PureTextElement|stem|index)* },
+    ## Type of abbreviation that constitutes the designation, according to how it is formed
     element abbreviation-type { AbbreviationType }?,
+    ## A pronunciation guide to the designation
     element pronunciation { LocalizedString }?,
+    ## Grammatical information about the designation
     element grammar { Grammar }?
   }
 
-ExpressionDesignationType = "prefix" | "suffix" | "abbreviation" | "full"
+## Type of linguistic form used as designation
+ExpressionDesignationType =
+  ## The form is a prefix
+  "prefix" |
+  ## The form is a suffix
+  "suffix" |
+  ## The form is an abbreviation
+  "abbreviation" |
+  ## The form is a self-standing linguistic expression
+  "full"
 
-AbbreviationType = "truncation" | "acronym" | "initialism"
+## Type of abbreviation, according to how it is formed
+AbbreviationType =
+  ## Abbrevation formed by truncating constituent words
+  "truncation" |
+  ## Abbrevation formed from the initials of its constituent words, and pronounced as a new word
+  "acronym" |
+  ## Abbrevation formed from the initials of its constituent words, and pronounced as a sequence of letters
+  "initialism"
 
+## Grammatical information about a designation
 Grammar =
+  ## The grammatical gender of the designation
   element gender { GrammarGender }*,
+  ## The grammatical number of the designation
   element number { GrammarNumber }*,
+  ## The designation is a preposition
   element isPreposition { xsd:boolean }?,
+  ## The designation is a participle
   element isParticiple { xsd:boolean }?,
+  ## The designation is an adjective
   element isAdjective { xsd:boolean }?,
+  ## The designation is a verb
   element isVerb { xsd:boolean }?,
+  ## The designation is an adverb
   element isAdverb { xsd:boolean }?,
+  ## The designation is a noun
   element isNoun { xsd:boolean }?,
+  ## Miscellaneous grammatical information
   element grammar-value { text }*
 
-GrammarGender = "masculine" | "feminine" | "neuter" | "common"
+## The grammatical gender of the designation
+GrammarGender =
+  ## Masculine gender
+  "masculine" |
+  ## Feminine gender
+  "feminine" |
+  ## Neuter gender
+  "neuter" |
+  ## Masculine + Feminine gender
+  "common"
 
-GrammarNumber = "singular" | "dual" | "plural"
+## The grammatical number of the designation
+GrammarNumber =
+  ## Singular number
+  "singular" |
+  ## Dual number
+  "dual" |
+  ## Plural number
+  "plural"
   
 termdomain =
   element domain { TextElement+ }
@@ -706,10 +869,18 @@ termdomain =
 termsubject =
   element subject { TextElement+ }
 
+## The definition of a term applied in the current document
 termdefinition =
   element definition {
+    ## Type of definition, used to differentiate it from other definitions of the same term if present
     attribute type { text }?,
-    (verbaldefinition | nonverbalrep | (verbaldefinition, nonverbalrep))
+    (
+      ## The content of the definition of the term applied in the current document
+      verbaldefinition |
+      ## Non-verbal representation of the term applied in the current document
+      nonverbalrep |
+      (verbaldefinition, nonverbalrep)
+    )
   }
 
 verbaldefinition = element verbal-definition {
@@ -717,9 +888,12 @@ verbaldefinition = element verbal-definition {
     termsource*
 }
 
+## Non-verbal representation of the term
 nonverbalrep =
   element non-verbal-representation {
+    ## Content of the non-verbal representation of the term
     ( table | figure | formula )+,
+    ## Bibliographic references for this designation of the managed term
     termsource*
 }
 
@@ -740,15 +914,46 @@ termexample =
     ( formula | ul | ol | dl | quote | sourcecode | paragraph | figure )+
 }
 
+## The bibliographic source where a term is defined in the sense applicable in this standardisation document
 termsource =
   element termsource {
+    ## The status of the term as it is used in this document, relative to its definition in the original document
     attribute status { SourceStatusType },
-    attribute type { ( "authoritative" | "lineage" ) },
-    origin, modification?
+    ## The type of the managed term in the present context
+    attribute type { SourceTypeType },
+    ## The original document and location where the term definition has been obtained from
+    origin,
+    ## Any changes that the definition of the term has undergone relative to the original document,
+    ## in order to be applicable in this standardisation document
+    modification?
 }
 
-SourceStatusType = "identical" | "modified" | "adapted" | "restyled" | "context-added" |
-  "generalisation" | "specialisation" | "unspecified"
+## The status of a term as it is used in this document, relative to its definition in the original document
+SourceStatusType =
+   ## The managed term in the present context is identical to the term as found in the bibliographic source
+   "identical" |
+   ## The managed term in the present context has been modified from the term as found in the bibliographic source
+   "modified" |
+   ## The managed term in the present context has been modified from the term as found in the bibliographic source, in order
+   ## to better fit some local requirement, though still with the intent of retaining the original meaning as much as possible
+   "adapted" |
+   ## The managed term in the present context has been restyled from the term as found in the bibliographic source
+   "restyled" |
+   ## The managed term in the present context has had context added to it, relative to the term as found in the bibliographic source
+   "context-added" |
+   ## The managed term in the present context is a generalisation of the term as found in the bibliographic source
+   "generalisation" |
+   ## The managed term in the present context is a specialisation of the term as found in the bibliographic source
+   "specialisation" |
+   ## The managed term in the present context is in an unspecified relation to the term as found in the bibliographic source
+   "unspecified"
+
+## The type of the managed term in the present context
+SourceTypeType =
+  ## The managed term is authoritative in the present context
+  "authoritative" |
+  ## The managed term constitutes lineage in the present context
+  "lineage"
 
 origin =
   element origin { erefType | termref }
@@ -764,11 +969,8 @@ termref = element termref {
 
 term-clause =
   element clause {
-    attribute id { xsd:ID }?,
-    attribute language { LanguageType }?,
-    attribute script { ScriptType }?,
+    Basic-Section-Attributes,
     attribute inline-header { xsd:boolean }?,
-    attribute obligation { ObligationType }?,
     section-title?,
     BasicBlock*,
     (
@@ -864,7 +1066,9 @@ erefstack = element erefstack {
 BlockAttributes =
     attribute keep-with-next { xsd:boolean }?,
     attribute keep-lines-together { xsd:boolean }?,
+    ## Non-unique identifier within document. Used to align two blocks in different languages in a multilingual document
     attribute tag { text }?,
+    ## Specification of how a block element may be rendered in a multilingual document
     attribute multilingual-rendering { MultilingualRenderingType }?,
     attribute columns { text }?
 

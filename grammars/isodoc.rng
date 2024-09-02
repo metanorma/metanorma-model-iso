@@ -102,13 +102,16 @@
       </element>
     </define>
     <define name="section-title">
+      <a:documentation>Title(s) of a clause</a:documentation>
       <element name="title">
+        <a:documentation>Title proper for a clause</a:documentation>
         <zeroOrMore>
           <ref name="TextElement"/>
         </zeroOrMore>
       </element>
       <zeroOrMore>
         <element name="variant-title">
+          <a:documentation>Alternate title for a clause</a:documentation>
           <ref name="TypedTitleString"/>
         </element>
       </zeroOrMore>
@@ -407,7 +410,9 @@
         <attribute name="subsequence"/>
       </optional>
       <optional>
-        <attribute name="lang"/>
+        <attribute name="lang">
+          <ref name="LanguageType"/>
+        </attribute>
       </optional>
       <ref name="BlockAttributes"/>
       <optional>
@@ -488,6 +493,9 @@
       </element>
     </define>
     <define name="references">
+      <a:documentation>Bibliography clause. It is used to collate references within the document, where
+there could be one or more of such sections within a document. For example, some standardization documents differentiate
+normative or informative references, some split references into sections organized by concept relevance.</a:documentation>
       <element name="references">
         <optional>
           <attribute name="id">
@@ -496,25 +504,30 @@
         </optional>
         <optional>
           <attribute name="obligation">
-            <choice>
-              <value>normative</value>
-              <value>informative</value>
-            </choice>
+            <ref name="ObligationType"/>
           </attribute>
         </optional>
         <attribute name="normative">
+          <a:documentation>Whether this is a normative references section or informative (bibliography). Not the same as obligation:
+Normative References contents contain normative references, but as a clause in the document, they are informative.</a:documentation>
           <data type="boolean"/>
         </attribute>
         <optional>
           <ref name="section-title"/>
         </optional>
         <zeroOrMore>
-          <ref name="BasicBlock"/>
+          <ref name="BasicBlock">
+            <a:documentation>Prefatory text</a:documentation>
+          </ref>
         </zeroOrMore>
         <zeroOrMore>
-          <ref name="doc_bibitem"/>
+          <ref name="doc_bibitem">
+            <a:documentation>Bibliographic item cited in the document</a:documentation>
+          </ref>
           <zeroOrMore>
-            <ref name="note"/>
+            <ref name="note">
+              <a:documentation>Annotation of the bibliographic item</a:documentation>
+            </ref>
           </zeroOrMore>
         </zeroOrMore>
         <zeroOrMore>
@@ -563,25 +576,7 @@
       </oneOrMore>
     </define>
     <define name="Basic-Section">
-      <optional>
-        <attribute name="id">
-          <data type="ID"/>
-        </attribute>
-      </optional>
-      <optional>
-        <attribute name="language"/>
-      </optional>
-      <optional>
-        <attribute name="script"/>
-      </optional>
-      <optional>
-        <attribute name="obligation">
-          <choice>
-            <value>normative</value>
-            <value>informative</value>
-          </choice>
-        </attribute>
-      </optional>
+      <ref name="Basic-Section-Attributes"/>
       <optional>
         <ref name="section-title"/>
       </optional>
@@ -800,6 +795,21 @@
     </define>
   </include>
   <!-- end overrides -->
+  <define name="LanguageType">
+    <a:documentation>Two-letter language code taken from ISO-639, indicating the language in which the content is written</a:documentation>
+    <text/>
+  </define>
+  <define name="ScriptType">
+    <a:documentation>Four-letter script code taken from ISO-15924, indicating the script in which the content is written</a:documentation>
+    <text/>
+  </define>
+  <define name="ObligationType">
+    <a:documentation>The force of a clause in a standard document: whether it has normative or informative effect</a:documentation>
+    <choice>
+      <value>normative</value>
+      <value>informative</value>
+    </choice>
+  </define>
   <define name="doc_bibitem">
     <element name="bibitem">
       <attribute name="id">
@@ -933,10 +943,14 @@
         <attribute name="format"/>
       </optional>
       <optional>
-        <attribute name="language"/>
+        <attribute name="language">
+          <ref name="LanguageType"/>
+        </attribute>
       </optional>
       <optional>
-        <attribute name="script"/>
+        <attribute name="script">
+          <ref name="ScriptType"/>
+        </attribute>
       </optional>
       <optional>
         <attribute name="locale"/>
@@ -944,34 +958,42 @@
     </element>
   </define>
   <define name="concept">
+    <a:documentation>Formally defined concept used in a standardisation document, aligned to a definition.
+That concept may be defined as a term within the current document, or it may be defined externally</a:documentation>
     <element name="concept">
       <optional>
         <attribute name="bold">
+          <a:documentation>Render the term in the concept in boldface</a:documentation>
           <data type="boolean"/>
         </attribute>
       </optional>
       <optional>
         <attribute name="ital">
+          <a:documentation>Render the term in the concept in italics</a:documentation>
           <data type="boolean"/>
         </attribute>
       </optional>
       <optional>
         <attribute name="ref">
+          <a:documentation>Render a reference to a definition for the concept, e.g. "widgets (3.1)"</a:documentation>
           <data type="boolean"/>
         </attribute>
       </optional>
       <optional>
         <attribute name="linkmention">
+          <a:documentation>Hyperlink the mention of the term to the definition for the concept</a:documentation>
           <data type="boolean"/>
         </attribute>
       </optional>
       <optional>
         <attribute name="linkref">
+          <a:documentation>Hyperlink the reference for the term to the definition for the concept</a:documentation>
           <data type="boolean"/>
         </attribute>
       </optional>
       <optional>
         <element name="refterm">
+          <a:documentation>The canonical name of the concept being defined</a:documentation>
           <zeroOrMore>
             <choice>
               <ref name="PureTextElement"/>
@@ -984,6 +1006,7 @@
       </optional>
       <optional>
         <element name="renderterm">
+          <a:documentation>The rendering to be used for the concept</a:documentation>
           <zeroOrMore>
             <choice>
               <ref name="PureTextElement"/>
@@ -995,10 +1018,18 @@
         </element>
       </optional>
       <choice>
-        <ref name="eref"/>
-        <ref name="erefstack"/>
-        <ref name="xref"/>
-        <ref name="termref"/>
+        <ref name="eref">
+          <a:documentation>Link to a definition of the term in a bibliographic entry</a:documentation>
+        </ref>
+        <ref name="erefstack">
+          <a:documentation>Stack of links to a definition of the term in a bibliographic entry</a:documentation>
+        </ref>
+        <ref name="xref">
+          <a:documentation>Link to a definition of the term in an element of the current document</a:documentation>
+        </ref>
+        <ref name="termref">
+          <a:documentation>Link to a definition of the term in a termbase</a:documentation>
+        </ref>
       </choice>
     </element>
   </define>
@@ -1203,34 +1234,54 @@
     </element>
   </define>
   <define name="Section-Attributes">
-    <optional>
-      <attribute name="id">
-        <data type="ID"/>
-      </attribute>
-    </optional>
-    <optional>
-      <attribute name="language"/>
-    </optional>
-    <optional>
-      <attribute name="script"/>
-    </optional>
+    <ref name="Basic-Section-Attributes"/>
     <optional>
       <attribute name="inline-header">
         <data type="boolean"/>
       </attribute>
     </optional>
     <optional>
-      <attribute name="number"/>
+      <attribute name="number">
+        <a:documentation>Value of number to be used for numbering of section, overriding any autonumbering in rendering.
+The section number is still formed by appending this number to the hierarchical set of parent section numbers,
+e.g. a number "3a" under Clause 1 subclause 2 will be numbered as 1.2.3a.</a:documentation>
+      </attribute>
     </optional>
     <optional>
-      <attribute name="branch-number"/>
+      <attribute name="branch-number">
+        <a:documentation>Value of number to be used for numbering of section, overriding any autonumbering in rendering,
+and the hierarchy of parent section numbers. This attribute is mutually exclusive with `number`.
+So under Clause 1 subclause 2, sub-subclause 3 is numbered as 1.2.3. If the following sub-subclause
+is given a branch-number "7.2.1.5", that will be the overall section number given, ignoring the parent section
+numbers.</a:documentation>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="unnumbered">
+        <a:documentation>Do not apply numbering to this clause</a:documentation>
+        <data type="boolean"/>
+      </attribute>
+    </optional>
+  </define>
+  <define name="Basic-Section-Attributes">
+    <optional>
+      <attribute name="id">
+        <data type="ID"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="language">
+        <ref name="LanguageType"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="script">
+        <ref name="ScriptType"/>
+      </attribute>
     </optional>
     <optional>
       <attribute name="obligation">
-        <choice>
-          <value>normative</value>
-          <value>informative</value>
-        </choice>
+        <ref name="ObligationType"/>
       </attribute>
     </optional>
   </define>
@@ -1345,11 +1396,13 @@
     </element>
   </define>
   <define name="foreword">
+    <a:documentation>Foreword of document</a:documentation>
     <element name="foreword">
       <ref name="Content-Section"/>
     </element>
   </define>
   <define name="introduction">
+    <a:documentation>Introduction of document</a:documentation>
     <element name="introduction">
       <ref name="Content-Section"/>
     </element>
@@ -1360,18 +1413,27 @@
     </element>
   </define>
   <define name="boilerplate">
+    <a:documentation>Content addressing legal and licensing concerns around the document, outside of the main flow of document content</a:documentation>
     <element name="boilerplate">
       <optional>
-        <ref name="copyright-statement"/>
+        <ref name="copyright-statement">
+          <a:documentation>Preset templated text provided by the standardization body, describing the copyright status of the document</a:documentation>
+        </ref>
       </optional>
       <optional>
-        <ref name="license-statement"/>
+        <ref name="license-statement">
+          <a:documentation>Preset templated text provided by the standardization body, providing the licensing terms for the document content</a:documentation>
+        </ref>
       </optional>
       <optional>
-        <ref name="legal-statement"/>
+        <ref name="legal-statement">
+          <a:documentation>Preset templated text provided by the standardization body, providing the legal constraints and considerations around use of the document</a:documentation>
+        </ref>
       </optional>
       <optional>
-        <ref name="feedback-statement"/>
+        <ref name="feedback-statement">
+          <a:documentation>Preset templated text provided by the standardization body, providing information on where feedback on the document may be addressed to</a:documentation>
+        </ref>
       </optional>
     </element>
   </define>
@@ -1396,6 +1458,9 @@
     </element>
   </define>
   <define name="definitions">
+    <a:documentation>One or more definition lists, used to define symbols and abbreviations used in the remainder of the document.
+These can also be used as glossaries, with simple definitions, in contrast to the more elaborate definitions given in
+terms sections </a:documentation>
     <element name="definitions">
       <optional>
         <attribute name="id">
@@ -1403,20 +1468,21 @@
         </attribute>
       </optional>
       <optional>
-        <attribute name="language"/>
+        <attribute name="language">
+          <ref name="LanguageType"/>
+        </attribute>
       </optional>
       <optional>
-        <attribute name="script"/>
+        <attribute name="script">
+          <ref name="ScriptType"/>
+        </attribute>
       </optional>
       <optional>
         <attribute name="type"/>
       </optional>
       <optional>
         <attribute name="obligation">
-          <choice>
-            <value>normative</value>
-            <value>informative</value>
-          </choice>
+          <ref name="ObligationType"/>
         </attribute>
       </optional>
       <optional>
@@ -1424,9 +1490,13 @@
       </optional>
       <oneOrMore>
         <zeroOrMore>
-          <ref name="BasicBlock"/>
+          <ref name="BasicBlock">
+            <a:documentation>Prefatory material, may be specific to each definition list</a:documentation>
+          </ref>
         </zeroOrMore>
-        <ref name="dl"/>
+        <ref name="dl">
+          <a:documentation>Definition list containing symbols and abbreviations</a:documentation>
+        </ref>
       </oneOrMore>
     </element>
   </define>
@@ -1436,11 +1506,13 @@
     </element>
   </define>
   <define name="abstract">
+    <a:documentation>Abstract of a document, presented as a clause</a:documentation>
     <element name="abstract">
       <ref name="Content-Section"/>
     </element>
   </define>
   <define name="acknowledgements">
+    <a:documentation>Acknowledgements of a document, presented as a clause</a:documentation>
     <element name="acknowledgements">
       <ref name="Content-Section"/>
     </element>
@@ -1451,6 +1523,7 @@
     </element>
   </define>
   <define name="Content-Section">
+    <a:documentation>Unnumbered clause with no semantic specialisation, used in preface of document</a:documentation>
     <ref name="Section-Attributes"/>
     <optional>
       <attribute name="type"/>
@@ -1473,9 +1546,13 @@
     </element>
   </define>
   <define name="Clause-Section">
+    <a:documentation>Strictly hierarchical clause: all textual content belongs in a strict clause hierarchy. such that no blocks of text
+are siblings to subclauses (hanging paragraphs)</a:documentation>
     <ref name="Section-Attributes"/>
     <optional>
-      <attribute name="type"/>
+      <attribute name="type">
+        <a:documentation>Semantic class of the clause, e.g. "scope"</a:documentation>
+      </attribute>
     </optional>
     <optional>
       <ref name="section-title"/>
@@ -1483,12 +1560,17 @@
     <choice>
       <choice>
         <oneOrMore>
+          <a:documentation>Block content, mutually exclusive  with subclauses</a:documentation>
           <ref name="BasicBlock"/>
         </oneOrMore>
-        <ref name="amend"/>
+        <ref name="amend">
+          <a:documentation>Specification of machine-readable change outlined in this section,
+used in document amendments</a:documentation>
+        </ref>
       </choice>
       <oneOrMore>
         <choice>
+          <a:documentation>Subclauses, can include terms and definitions</a:documentation>
           <ref name="clause-subsection"/>
           <ref name="terms"/>
           <ref name="definitions"/>
@@ -1498,32 +1580,15 @@
     </choice>
   </define>
   <define name="Annex-Section">
+    <a:documentation>Clause constituting an annex or appendix</a:documentation>
     <ref name="Annex-Section-Attr"/>
     <ref name="Annex-Section-Body"/>
   </define>
   <define name="Annex-Section-Attr">
-    <optional>
-      <attribute name="id">
-        <data type="ID"/>
-      </attribute>
-    </optional>
-    <optional>
-      <attribute name="language"/>
-    </optional>
-    <optional>
-      <attribute name="script"/>
-    </optional>
+    <ref name="Basic-Section-Attributes"/>
     <optional>
       <attribute name="inline-header">
         <data type="boolean"/>
-      </attribute>
-    </optional>
-    <optional>
-      <attribute name="obligation">
-        <choice>
-          <value>normative</value>
-          <value>informative</value>
-        </choice>
       </attribute>
     </optional>
     <optional>
@@ -1536,10 +1601,12 @@
     </optional>
     <group>
       <zeroOrMore>
+        <a:documentation>Hanging paragraphs: Annexes permit top-level blocks that are not part of a subsection</a:documentation>
         <ref name="BasicBlock"/>
       </zeroOrMore>
       <zeroOrMore>
         <choice>
+          <a:documentation>Subclauses of the annex: these can include terms, definitions, and references</a:documentation>
           <ref name="annex-subsection"/>
           <ref name="terms"/>
           <ref name="definitions"/>
@@ -1565,6 +1632,7 @@
     </element>
   </define>
   <define name="terms">
+    <a:documentation>Terms sections give elaborated definitions of terms used in a standardization document</a:documentation>
     <element name="terms">
       <ref name="Section-Attributes"/>
       <optional>
@@ -1574,7 +1642,9 @@
         <ref name="section-title"/>
       </optional>
       <zeroOrMore>
-        <ref name="BasicBlock"/>
+        <ref name="BasicBlock">
+          <a:documentation>Prefatory material</a:documentation>
+        </ref>
       </zeroOrMore>
       <choice>
         <oneOrMore>
@@ -1595,6 +1665,7 @@
     </element>
   </define>
   <define name="term">
+    <a:documentation>Terminology entry with its definition</a:documentation>
     <element name="term">
       <optional>
         <attribute name="id">
@@ -1602,41 +1673,68 @@
         </attribute>
       </optional>
       <optional>
-        <attribute name="language"/>
+        <attribute name="language">
+          <a:documentation>Langauge in which the term entry is written</a:documentation>
+          <ref name="LanguageType"/>
+        </attribute>
       </optional>
       <optional>
-        <attribute name="script"/>
+        <attribute name="script">
+          <a:documentation>Script in which the term entry is written</a:documentation>
+          <ref name="ScriptType"/>
+        </attribute>
       </optional>
       <ref name="BlockAttributes"/>
       <oneOrMore>
-        <ref name="preferred"/>
+        <ref name="preferred">
+          <a:documentation>One or more names under which the term being defined is canonically known</a:documentation>
+        </ref>
       </oneOrMore>
       <zeroOrMore>
-        <ref name="admitted"/>
+        <ref name="admitted">
+          <a:documentation>Zero or more names which are acceptable synonyms for the term being defined</a:documentation>
+        </ref>
       </zeroOrMore>
       <zeroOrMore>
-        <ref name="deprecates"/>
+        <ref name="deprecates">
+          <a:documentation>Zero or more names which are deprecated synonyms for the term being defined</a:documentation>
+        </ref>
       </zeroOrMore>
       <zeroOrMore>
-        <ref name="related"/>
+        <ref name="related">
+          <a:documentation>Zero or more names which are related to the term being defined. </a:documentation>
+        </ref>
       </zeroOrMore>
       <optional>
-        <ref name="termdomain"/>
+        <ref name="termdomain">
+          <a:documentation>An optional semantic domain for the term being defined,
+ in case the term is ambiguous between several semantic domains</a:documentation>
+        </ref>
       </optional>
       <optional>
-        <ref name="termsubject"/>
+        <ref name="termsubject">
+          <a:documentation>Subject of the term</a:documentation>
+        </ref>
       </optional>
       <oneOrMore>
-        <ref name="termdefinition"/>
+        <ref name="termdefinition">
+          <a:documentation>The definition of the term applied in the current document</a:documentation>
+        </ref>
       </oneOrMore>
       <zeroOrMore>
-        <ref name="termnote"/>
+        <ref name="termnote">
+          <a:documentation>Zero or more notes about the term</a:documentation>
+        </ref>
       </zeroOrMore>
       <zeroOrMore>
-        <ref name="termexample"/>
+        <ref name="termexample">
+          <a:documentation>Zero or more examples of how the term is to be used</a:documentation>
+        </ref>
       </zeroOrMore>
       <zeroOrMore>
-        <ref name="termsource"/>
+        <ref name="termsource">
+          <a:documentation>Bibliographic references for the managed term</a:documentation>
+        </ref>
       </zeroOrMore>
     </element>
   </define>
@@ -1651,32 +1749,53 @@
     </element>
   </define>
   <define name="related">
+    <a:documentation>Term related to the current term</a:documentation>
     <element name="related">
       <attribute name="type">
+        <a:documentation>Type of relation of term applicable</a:documentation>
         <ref name="RelatedTermType"/>
       </attribute>
       <element name="preferred">
+        <a:documentation>Preferred designation of the term related to the current term</a:documentation>
         <ref name="Designation"/>
       </element>
       <choice>
-        <ref name="eref"/>
-        <ref name="erefstack"/>
-        <ref name="xref"/>
-        <ref name="termref"/>
+        <ref name="eref">
+          <a:documentation>Link to a definition of the term in a bibliographic entry</a:documentation>
+        </ref>
+        <ref name="erefstack">
+          <a:documentation>Stack of links to a definition of the term in a bibliographic entry</a:documentation>
+        </ref>
+        <ref name="xref">
+          <a:documentation>Link to a definition of the term in an element of the current document</a:documentation>
+        </ref>
+        <ref name="termref">
+          <a:documentation>Link to a definition of the term in a termbase</a:documentation>
+        </ref>
       </choice>
     </element>
   </define>
   <define name="RelatedTermType">
+    <a:documentation>The relation of a term to the current term</a:documentation>
     <choice>
       <value>deprecates</value>
+      <a:documentation>The current term deprecates the related term</a:documentation>
       <value>supersedes</value>
+      <a:documentation>The current term supersedes the related term</a:documentation>
       <value>narrower</value>
+      <a:documentation>The current term is narrower in denotation than the related term</a:documentation>
       <value>broader</value>
+      <a:documentation>The current term is broader in denotation than the related term</a:documentation>
       <value>equivalent</value>
+      <a:documentation>The current term is equivalent in denotation to the related term</a:documentation>
       <value>compare</value>
+      <a:documentation>The current term may be compared to the related term</a:documentation>
       <value>contrast</value>
+      <a:documentation>The current term is understood in contrast to the related term</a:documentation>
       <value>see</value>
+      <a:documentation>For a better understanding of the current term, one should see the related term</a:documentation>
       <value>seealso</value>
+      <a:documentation>For a better understanding of the current term, one should also see the related term</a:documentation>
     </choice>
   </define>
   <define name="deprecates">
@@ -1685,27 +1804,39 @@
     </element>
   </define>
   <define name="Designation">
+    <a:documentation>A name under which a managed term is known</a:documentation>
     <optional>
       <attribute name="absent">
+        <a:documentation>Indication that the term designation is missing</a:documentation>
         <data type="boolean"/>
       </attribute>
     </optional>
     <optional>
-      <attribute name="geographic-area"/>
+      <attribute name="geographic-area">
+        <a:documentation>The geographic area in which the managed term is known under this designation</a:documentation>
+      </attribute>
     </optional>
     <choice>
-      <ref name="expression_designation"/>
+      <ref name="expression_designation">
+        <a:documentation>Realisation of a designation as a linguistic form</a:documentation>
+      </ref>
       <ref name="letter_symbol_designation"/>
       <ref name="graphical_symbol_designation"/>
     </choice>
     <optional>
-      <ref name="fieldofapplication"/>
+      <ref name="fieldofapplication">
+        <a:documentation>Information about what field/domain the designation is specifically applied to</a:documentation>
+      </ref>
     </optional>
     <optional>
-      <ref name="usageinfo"/>
+      <ref name="usageinfo">
+        <a:documentation>Information about how the designation is to be used</a:documentation>
+      </ref>
     </optional>
     <zeroOrMore>
-      <ref name="termsource"/>
+      <ref name="termsource">
+        <a:documentation>Bibliographic references for this designation of the managed term</a:documentation>
+      </ref>
     </zeroOrMore>
   </define>
   <define name="fieldofapplication">
@@ -1723,23 +1854,22 @@
     </element>
   </define>
   <define name="letter_symbol_designation">
+    <a:documentation>Designation realised as a letter, symbol, formula, equation</a:documentation>
     <element name="letter-symbol">
       <optional>
         <attribute name="isInternational">
+          <a:documentation>Whether the designation is the same across languages, or language-specific   </a:documentation>
           <data type="boolean"/>
         </attribute>
       </optional>
       <optional>
         <attribute name="type">
-          <choice>
-            <value>letter</value>
-            <value>symbol</value>
-            <value>formula</value>
-            <value>equation</value>
-          </choice>
+          <a:documentation>Type of symbolic designation</a:documentation>
+          <ref name="LetterSymbolType"/>
         </attribute>
       </optional>
       <element name="name">
+        <a:documentation>The symbolic form of the designation</a:documentation>
         <oneOrMore>
           <choice>
             <ref name="PureTextElement"/>
@@ -1749,39 +1879,62 @@
       </element>
     </element>
   </define>
+  <define name="LetterSymbolType">
+    <a:documentation>The type of a symbol-like designation</a:documentation>
+    <choice>
+      <value>letter</value>
+      <a:documentation>A letter, possibly subscripted or superscripted, intended to denote some property that it abbreviates</a:documentation>
+      <value>symbol</value>
+      <a:documentation>A non-letter, intended to represent some property</a:documentation>
+      <value>formula</value>
+      <a:documentation>A mathematical formula</a:documentation>
+      <value>equation</value>
+      <a:documentation>A mathematical equation (or inequation)</a:documentation>
+    </choice>
+  </define>
   <define name="graphical_symbol_designation">
+    <a:documentation>Designation realised as a graphical symbol</a:documentation>
     <element name="graphical-symbol">
       <optional>
         <attribute name="isInternational">
+          <a:documentation>Whether the designation is the same across languages, or language-specific</a:documentation>
           <data type="boolean"/>
         </attribute>
       </optional>
-      <ref name="figure"/>
+      <ref name="figure">
+        <a:documentation>The graphical form of the designation</a:documentation>
+      </ref>
     </element>
   </define>
   <define name="expression_designation">
+    <a:documentation>A designation realised as a linguistic form</a:documentation>
     <element name="expression">
       <optional>
         <attribute name="language">
-          <a:documentation>ISO-639</a:documentation>
+          <a:documentation>The language in which the designation is written</a:documentation>
+          <ref name="LanguageType"/>
         </attribute>
       </optional>
       <optional>
         <attribute name="script">
-          <a:documentation>ISO-15924</a:documentation>
+          <a:documentation>The script in which the designation is written</a:documentation>
+          <ref name="ScriptType"/>
         </attribute>
       </optional>
       <optional>
         <attribute name="type">
+          <a:documentation>The type of linguistic form used as designation</a:documentation>
           <ref name="ExpressionDesignationType"/>
         </attribute>
       </optional>
       <optional>
         <attribute name="isInternational">
+          <a:documentation>Whether the designation (typically an abbreviation) is the same across languages, or language-specific</a:documentation>
           <data type="boolean"/>
         </attribute>
       </optional>
       <element name="name">
+        <a:documentation>The textual form of the designation</a:documentation>
         <zeroOrMore>
           <choice>
             <ref name="PureTextElement"/>
@@ -1792,96 +1945,127 @@
       </element>
       <optional>
         <element name="abbreviation-type">
+          <a:documentation>Type of abbreviation that constitutes the designation, according to how it is formed</a:documentation>
           <ref name="AbbreviationType"/>
         </element>
       </optional>
       <optional>
         <element name="pronunciation">
+          <a:documentation>A pronunciation guide to the designation</a:documentation>
           <ref name="LocalizedString"/>
         </element>
       </optional>
       <optional>
         <element name="grammar">
+          <a:documentation>Grammatical information about the designation</a:documentation>
           <ref name="Grammar"/>
         </element>
       </optional>
     </element>
   </define>
   <define name="ExpressionDesignationType">
+    <a:documentation>Type of linguistic form used as designation</a:documentation>
     <choice>
       <value>prefix</value>
+      <a:documentation>The form is a prefix</a:documentation>
       <value>suffix</value>
+      <a:documentation>The form is a suffix</a:documentation>
       <value>abbreviation</value>
+      <a:documentation>The form is an abbreviation</a:documentation>
       <value>full</value>
+      <a:documentation>The form is a self-standing linguistic expression</a:documentation>
     </choice>
   </define>
   <define name="AbbreviationType">
+    <a:documentation>Type of abbreviation, according to how it is formed</a:documentation>
     <choice>
       <value>truncation</value>
+      <a:documentation>Abbrevation formed by truncating constituent words</a:documentation>
       <value>acronym</value>
+      <a:documentation>Abbrevation formed from the initials of its constituent words, and pronounced as a new word</a:documentation>
       <value>initialism</value>
+      <a:documentation>Abbrevation formed from the initials of its constituent words, and pronounced as a sequence of letters</a:documentation>
     </choice>
   </define>
   <define name="Grammar">
+    <a:documentation>Grammatical information about a designation</a:documentation>
     <zeroOrMore>
       <element name="gender">
+        <a:documentation>The grammatical gender of the designation</a:documentation>
         <ref name="GrammarGender"/>
       </element>
     </zeroOrMore>
     <zeroOrMore>
       <element name="number">
+        <a:documentation>The grammatical number of the designation</a:documentation>
         <ref name="GrammarNumber"/>
       </element>
     </zeroOrMore>
     <optional>
       <element name="isPreposition">
+        <a:documentation>The designation is a preposition</a:documentation>
         <data type="boolean"/>
       </element>
     </optional>
     <optional>
       <element name="isParticiple">
+        <a:documentation>The designation is a participle</a:documentation>
         <data type="boolean"/>
       </element>
     </optional>
     <optional>
       <element name="isAdjective">
+        <a:documentation>The designation is an adjective</a:documentation>
         <data type="boolean"/>
       </element>
     </optional>
     <optional>
       <element name="isVerb">
+        <a:documentation>The designation is a verb</a:documentation>
         <data type="boolean"/>
       </element>
     </optional>
     <optional>
       <element name="isAdverb">
+        <a:documentation>The designation is an adverb</a:documentation>
         <data type="boolean"/>
       </element>
     </optional>
     <optional>
       <element name="isNoun">
+        <a:documentation>The designation is a noun</a:documentation>
         <data type="boolean"/>
       </element>
     </optional>
     <zeroOrMore>
       <element name="grammar-value">
+        <a:documentation>Miscellaneous grammatical information</a:documentation>
         <text/>
       </element>
     </zeroOrMore>
   </define>
   <define name="GrammarGender">
+    <a:documentation>The grammatical gender of the designation</a:documentation>
     <choice>
       <value>masculine</value>
+      <a:documentation>Masculine gender</a:documentation>
       <value>feminine</value>
+      <a:documentation>Feminine gender</a:documentation>
       <value>neuter</value>
+      <a:documentation>Neuter gender</a:documentation>
       <value>common</value>
+      <a:documentation>Masculine + Feminine gender</a:documentation>
     </choice>
   </define>
   <define name="GrammarNumber">
+    <a:documentation>The grammatical number of the designation</a:documentation>
     <choice>
       <value>singular</value>
+      <a:documentation>Singular number</a:documentation>
       <value>dual</value>
+      <a:documentation>Dual number</a:documentation>
       <value>plural</value>
+      <a:documentation>Plural number</a:documentation>
     </choice>
   </define>
   <define name="termdomain">
@@ -1899,13 +2083,20 @@
     </element>
   </define>
   <define name="termdefinition">
+    <a:documentation>The definition of a term applied in the current document</a:documentation>
     <element name="definition">
       <optional>
-        <attribute name="type"/>
+        <attribute name="type">
+          <a:documentation>Type of definition, used to differentiate it from other definitions of the same term if present</a:documentation>
+        </attribute>
       </optional>
       <choice>
-        <ref name="verbaldefinition"/>
-        <ref name="nonverbalrep"/>
+        <ref name="verbaldefinition">
+          <a:documentation>The content of the definition of the term applied in the current document</a:documentation>
+        </ref>
+        <ref name="nonverbalrep">
+          <a:documentation>Non-verbal representation of the term applied in the current document</a:documentation>
+        </ref>
         <group>
           <ref name="verbaldefinition"/>
           <ref name="nonverbalrep"/>
@@ -1932,16 +2123,20 @@
     </element>
   </define>
   <define name="nonverbalrep">
+    <a:documentation>Non-verbal representation of the term</a:documentation>
     <element name="non-verbal-representation">
       <oneOrMore>
         <choice>
+          <a:documentation>Content of the non-verbal representation of the term</a:documentation>
           <ref name="table"/>
           <ref name="figure"/>
           <ref name="formula"/>
         </choice>
       </oneOrMore>
       <zeroOrMore>
-        <ref name="termsource"/>
+        <ref name="termsource">
+          <a:documentation>Bibliographic references for this designation of the managed term</a:documentation>
+        </ref>
       </zeroOrMore>
     </element>
   </define>
@@ -1994,32 +2189,56 @@
     </element>
   </define>
   <define name="termsource">
+    <a:documentation>The bibliographic source where a term is defined in the sense applicable in this standardisation document</a:documentation>
     <element name="termsource">
       <attribute name="status">
+        <a:documentation>The status of the term as it is used in this document, relative to its definition in the original document</a:documentation>
         <ref name="SourceStatusType"/>
       </attribute>
       <attribute name="type">
-        <choice>
-          <value>authoritative</value>
-          <value>lineage</value>
-        </choice>
+        <a:documentation>The type of the managed term in the present context</a:documentation>
+        <ref name="SourceTypeType"/>
       </attribute>
-      <ref name="origin"/>
+      <ref name="origin">
+        <a:documentation>The original document and location where the term definition has been obtained from</a:documentation>
+      </ref>
       <optional>
-        <ref name="modification"/>
+        <ref name="modification">
+          <a:documentation>Any changes that the definition of the term has undergone relative to the original document,
+in order to be applicable in this standardisation document</a:documentation>
+        </ref>
       </optional>
     </element>
   </define>
   <define name="SourceStatusType">
+    <a:documentation>The status of a term as it is used in this document, relative to its definition in the original document</a:documentation>
     <choice>
       <value>identical</value>
+      <a:documentation>The managed term in the present context is identical to the term as found in the bibliographic source</a:documentation>
       <value>modified</value>
+      <a:documentation>The managed term in the present context has been modified from the term as found in the bibliographic source</a:documentation>
       <value>adapted</value>
+      <a:documentation>The managed term in the present context has been modified from the term as found in the bibliographic source, in order
+to better fit some local requirement, though still with the intent of retaining the original meaning as much as possible</a:documentation>
       <value>restyled</value>
+      <a:documentation>The managed term in the present context has been restyled from the term as found in the bibliographic source</a:documentation>
       <value>context-added</value>
+      <a:documentation>The managed term in the present context has had context added to it, relative to the term as found in the bibliographic source</a:documentation>
       <value>generalisation</value>
+      <a:documentation>The managed term in the present context is a generalisation of the term as found in the bibliographic source</a:documentation>
       <value>specialisation</value>
+      <a:documentation>The managed term in the present context is a specialisation of the term as found in the bibliographic source</a:documentation>
       <value>unspecified</value>
+      <a:documentation>The managed term in the present context is in an unspecified relation to the term as found in the bibliographic source</a:documentation>
+    </choice>
+  </define>
+  <define name="SourceTypeType">
+    <a:documentation>The type of the managed term in the present context</a:documentation>
+    <choice>
+      <value>authoritative</value>
+      <a:documentation>The managed term is authoritative in the present context</a:documentation>
+      <value>lineage</value>
+      <a:documentation>The managed term constitutes lineage in the present context</a:documentation>
     </choice>
   </define>
   <define name="origin">
@@ -2046,28 +2265,10 @@
   </define>
   <define name="term-clause">
     <element name="clause">
-      <optional>
-        <attribute name="id">
-          <data type="ID"/>
-        </attribute>
-      </optional>
-      <optional>
-        <attribute name="language"/>
-      </optional>
-      <optional>
-        <attribute name="script"/>
-      </optional>
+      <ref name="Basic-Section-Attributes"/>
       <optional>
         <attribute name="inline-header">
           <data type="boolean"/>
-        </attribute>
-      </optional>
-      <optional>
-        <attribute name="obligation">
-          <choice>
-            <value>normative</value>
-            <value>informative</value>
-          </choice>
         </attribute>
       </optional>
       <optional>
@@ -2197,15 +2398,19 @@
     </element>
   </define>
   <define name="floating-title">
+    <a:documentation>A floating title, outside of the clause hierarchy of the document</a:documentation>
     <element name="floating-title">
       <attribute name="id">
         <data type="ID"/>
       </attribute>
       <attribute name="depth">
+        <a:documentation>The ostensive depth of the floating title in the clause hierarchy: which level heading it should be presented as</a:documentation>
         <data type="int"/>
       </attribute>
       <zeroOrMore>
-        <ref name="TextElement"/>
+        <ref name="TextElement">
+          <a:documentation>Textual content of the floating title</a:documentation>
+        </ref>
       </zeroOrMore>
     </element>
   </define>
@@ -2319,10 +2524,13 @@
       </attribute>
     </optional>
     <optional>
-      <attribute name="tag"/>
+      <attribute name="tag">
+        <a:documentation>Non-unique identifier within document. Used to align two blocks in different languages in a multilingual document</a:documentation>
+      </attribute>
     </optional>
     <optional>
       <attribute name="multilingual-rendering">
+        <a:documentation>Specification of how a block element may be rendered in a multilingual document</a:documentation>
         <ref name="MultilingualRenderingType"/>
       </attribute>
     </optional>
