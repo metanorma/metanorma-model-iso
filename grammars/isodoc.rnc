@@ -44,8 +44,11 @@ index = element index {
   element tertiary { (PureTextElement|stem)+ }?
 }
 
+## Title(s) of a clause
 section-title =
+  ## Title proper for a clause
   element title { TextElement* },
+  ## Alternate title for a clause
   element variant-title { TypedTitleString }*
 
 hyperlink =
@@ -147,7 +150,7 @@ SourceAttr =
     attribute unnumbered { xsd:boolean }?,
     attribute number { text }?,
     attribute subsequence { text }?,
-    attribute lang { text }?,
+    attribute lang { LanguageType }?,
     BlockAttributes,
     attribute linenums { xsd:boolean }?
 
@@ -177,14 +180,24 @@ sections =
     ( clause | terms | term-clause | definitions | floating-title )+
 }
 
+## Bibliography clause. It is used to collate references within the document, where
+## there could be one or more of such sections within a document. For example, some standardization documents differentiate
+## normative or informative references, some split references into sections organized by concept relevance.
 references =
   element references {
     attribute id { xsd:ID }?,
-    attribute obligation { "normative" | "informative" }?,
+    attribute obligation { ObligationType }?,
+    ## Whether this is a normative references section or informative (bibliography). Not the same as obligation:
+    ## Normative References contents contain normative references, but as a clause in the document, they are informative.
     attribute normative { xsd:boolean },
     section-title?,
+    ## Prefatory text
     BasicBlock*,
-    (doc_bibitem, note*)*,
+    (
+      ## Bibliographic item cited in the document
+      doc_bibitem,
+      ## Annotation of the bibliographic item
+      note*)*,
     references*
 }
 
@@ -202,9 +215,9 @@ NoteBody =
 
 Basic-Section =
     attribute id { xsd:ID }?,
-    attribute language { text }?,
-    attribute script { text }?,
-    attribute obligation { "normative" | "informative" }?,
+    attribute language { LanguageType }?,
+    attribute script { ScriptType }?,
+    attribute obligation { ObligationType }?,
     section-title?,
     (BasicBlock+)
 
@@ -263,6 +276,15 @@ pagebreak = element pagebreak {
 
 # end overrides
 
+## Two-letter language code taken from ISO-639, indicating the language in which the content is written
+LanguageType = text
+
+## Four-letter script code taken from ISO-15924, indicating the script in which the content is written
+ScriptType = text
+
+## The force of a clause in a standard document: whether it has normative or informative effect
+ObligationType = "normative" | "informative"
+
 doc_bibitem =
   element bibitem {
      attribute id { xsd:ID },
@@ -311,8 +333,8 @@ span = element span {
 date_inline = element date {
   attribute value { text },
   attribute format { text }?,
-  attribute language { text }?,
-  attribute script { text }?,
+  attribute language { LanguageType }?,
+  attribute script { ScriptType }?,
   attribute locale { text }?
 }
 
@@ -399,12 +421,12 @@ bibliography =
 
 Section-Attributes =
     attribute id { xsd:ID }?,
-    attribute language { text }?,
-    attribute script { text }?,
+    attribute language { LanguageType }?,
+    attribute script { ScriptType }?,
     attribute inline-header { xsd:boolean }?,
     attribute number { text }?,
     attribute branch-number { text }?,
-    attribute obligation { "normative" | "informative" }?
+    attribute obligation { ObligationType }?
 
 reference-clause =
   element clause {
@@ -417,16 +439,39 @@ reference-clause =
 }
 
 Root-Attributes =
+  ## Version number of the gem used to generate this document
   attribute version { text },
+  ## Version number of the schema that this document is aligned to
   attribute schema-version { text },
+  ## Type of standards document representation. "Semantic" is the core representation of content.
+  ## "Presentation" manipulates and enhances the representation for rendering needs.
   attribute type { "semantic" | "presentation" }
 
+## Representation of a standardisation document
 standard-document =
 element standard-document {
   Root-Attributes,
-  bibdata, misccontainer?, boilerplate?, preface?, sections, annex*, bibliography?, indexsect*, colophon?
+  ## Bibliographic description of the document itself, expressed in the Relaton model
+  bibdata, 
+  ## Extension point for extraneous elements that need to be added to standards document as data
+  misccontainer?, 
+  ## Front matter that is repeated at the start of documents issued from an SDO, with content not specific to the document
+  boilerplate?, 
+  ## Prefatory sections
+  preface?, 
+  ## Main body of document
+  sections, 
+  ## Annex sections
+  annex*, 
+  ## Bibliographic sections
+  bibliography?, 
+  ## Index of the document
+  indexsect*, 
+  ## Colophon or postface material
+  colophon?
 }
 
+## Elements added to metanorma-extension are open-ended, and constitute source data
 misccontainer = element metanorma-extension { AnyElement+ }
 
 preface =
@@ -435,16 +480,28 @@ preface =
 colophon =
   element colophon { content+ }
 
+## Foreword of document
 foreword =
   element foreword { Content-Section }
 
+## Introduction of document
 introduction =
   element introduction { Content-Section }
 
 indexsect = element indexsect { Content-Section }
 
+## Content addressing legal and licensing concerns around the document, outside of the main flow of document content
 boilerplate = 
-  element boilerplate { copyright-statement?, license-statement?, legal-statement?, feedback-statement? }
+  element boilerplate { 
+     ## Preset templated text provided by the standardization body, describing the copyright status of the document
+     copyright-statement?, 
+     ## Preset templated text provided by the standardization body, providing the licensing terms for the document content
+     license-statement?, 
+     ## Preset templated text provided by the standardization body, providing the legal constraints and considerations around use of the document
+     legal-statement?, 
+     ## Preset templated text provided by the standardization body, providing information on where feedback on the document may be addressed to
+     feedback-statement? 
+}
 
 copyright-statement =
   element copyright-statement { Content-Section }
@@ -458,30 +515,40 @@ legal-statement =
 feedback-statement =
   element feedback-statement { Content-Section }
 
+## One or more definition lists, used to define symbols and abbreviations used in the remainder of the document.
+## These can also be used as glossaries, with simple definitions, in contrast to the more elaborate definitions given in
+## terms sections 
 definitions =
   element definitions {
     attribute id { xsd:ID }?,
-    attribute language { text }?,
-    attribute script { text }?,
+    attribute language { LanguageType }?,
+    attribute script { ScriptType }?,
     attribute type { text }?,
-    attribute obligation { "normative" | "informative" }?,
+    attribute obligation { ObligationType }?,
     section-title?,
-    (BasicBlock*,
-    dl)+
+    (
+      ## Prefatory material, may be specific to each definition list
+      BasicBlock*,
+      ## Definition list containing symbols and abbreviations
+      dl
+    )+
 }
 
 content =
   element clause { Content-Section }
 
+## Abstract of a document, presented as a clause
 abstract =
   element abstract { Content-Section }
 
+## Acknowledgements of a document, presented as a clause
 acknowledgements =
   element acknowledgements { Content-Section }
 
 content-subsection =
   element clause { Content-Section }
 
+## Unnumbered clause with no semantic specialisation, used in preface of document
 Content-Section =
     Section-Attributes,
     attribute type { text }?,
@@ -492,31 +559,39 @@ Content-Section =
 clause =
   element clause { Clause-Section }
 
+## Strictly hierarchical clause: all textual content belongs in a strict clause hierarchy. such that no blocks of text
+## are siblings to subclauses (hanging paragraphs)
 Clause-Section =
     Section-Attributes,
+    ## Semantic class of the clause, e.g. "scope"
     attribute type { text }?,
     section-title?,
     (
+      ## Block content, mutually exclusive  with subclauses
       ( (  BasicBlock+ ) | amend ) |
+      # Subclauses, can include terms and definitions
        (clause-subsection | terms | definitions | floating-title )+
     )
 
+## Clause constituting an annex or appendix
 Annex-Section =
     Annex-Section-Attr,
     Annex-Section-Body
 
 Annex-Section-Attr =
     attribute id { xsd:ID }?,
-    attribute language { text }?,
-    attribute script { text }?,
+    attribute language { LanguageType }?,
+    attribute script { ScriptType }?,
     attribute inline-header { xsd:boolean }?,
-    attribute obligation { "normative" | "informative" }?,
+    attribute obligation { ObligationType }?,
     attribute type { text }?
 
 Annex-Section-Body =
     section-title?,
     (
+      ## Hanging paragraphs: Annexes permit top-level blocks that are not part of a subsection
       ( BasicBlock* ),
+      ## Subclauses of the annex: these can include terms, definitions, and references
        (annex-subsection | terms | definitions | references | floating-title )*
     )
 
@@ -541,8 +616,8 @@ terms =
 term =
   element term {
     attribute id { xsd:ID }?,
-    attribute language { text }?,
-    attribute script { text }?,
+    attribute language { LanguageType }?,
+    attribute script { ScriptType }?,
     BlockAttributes,
     preferred+, admitted*, deprecates*, related*,
     termdomain?, termsubject?, 
@@ -596,10 +671,8 @@ graphical_symbol_designation =
 
 expression_designation =
   element expression {
-    ## ISO-639
-    attribute language { text }?,
-    ## ISO-15924
-    attribute script { text }?,
+    attribute language { LanguageType }?,
+    attribute script { ScriptType }?,
     attribute type { ExpressionDesignationType }?,
     attribute isInternational { xsd:boolean }?,
     element name { (PureTextElement|stem|index)* },
@@ -692,10 +765,10 @@ termref = element termref {
 term-clause =
   element clause {
     attribute id { xsd:ID }?,
-    attribute language { text }?,
-    attribute script { text }?,
+    attribute language { LanguageType }?,
+    attribute script { ScriptType }?,
     attribute inline-header { xsd:boolean }?,
-    attribute obligation { "normative" | "informative" }?,
+    attribute obligation { ObligationType }?,
     section-title?,
     BasicBlock*,
     (
@@ -746,10 +819,13 @@ ul_li =
     BasicBlock+
 }
 
+## A floating title, outside of the clause hierarchy of the document
 floating-title =
   element floating-title {
     attribute id { xsd:ID },
+    ## The ostensive depth of the floating title in the clause hierarchy: which level heading it should be presented as
     attribute depth { xsd:int },
+    ## Textual content of the floating title
     TextElement*
 }
 

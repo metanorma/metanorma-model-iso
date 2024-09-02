@@ -1254,9 +1254,15 @@
     </element>
   </define>
   <define name="Root-Attributes">
-    <attribute name="version"/>
-    <attribute name="schema-version"/>
+    <attribute name="version">
+      <a:documentation>Version number of the gem used to generate this document</a:documentation>
+    </attribute>
+    <attribute name="schema-version">
+      <a:documentation>Version number of the schema that this document is aligned to</a:documentation>
+    </attribute>
     <attribute name="type">
+      <a:documentation>Type of standards document representation. "Semantic" is the core representation of content.
+"Presentation" manipulates and enhances the representation for rendering needs.</a:documentation>
       <choice>
         <value>semantic</value>
         <value>presentation</value>
@@ -1264,34 +1270,54 @@
     </attribute>
   </define>
   <define name="standard-document">
+    <a:documentation>Representation of a standardisation document</a:documentation>
     <element name="standard-document">
       <ref name="Root-Attributes"/>
-      <ref name="bibdata"/>
+      <ref name="bibdata">
+        <a:documentation>Bibliographic description of the document itself, expressed in the Relaton model</a:documentation>
+      </ref>
       <optional>
-        <ref name="misccontainer"/>
+        <ref name="misccontainer">
+          <a:documentation>Extension point for extraneous elements that need to be added to standards document as data</a:documentation>
+        </ref>
       </optional>
       <optional>
-        <ref name="boilerplate"/>
+        <ref name="boilerplate">
+          <a:documentation>Front matter that is repeated at the start of documents issued from an SDO, with content not specific to the document</a:documentation>
+        </ref>
       </optional>
       <optional>
-        <ref name="preface"/>
+        <ref name="preface">
+          <a:documentation>Prefatory sections</a:documentation>
+        </ref>
       </optional>
-      <ref name="sections"/>
+      <ref name="sections">
+        <a:documentation>Main body of document</a:documentation>
+      </ref>
       <zeroOrMore>
-        <ref name="annex"/>
+        <ref name="annex">
+          <a:documentation>Annex sections</a:documentation>
+        </ref>
       </zeroOrMore>
       <optional>
-        <ref name="bibliography"/>
+        <ref name="bibliography">
+          <a:documentation>Bibliographic sections</a:documentation>
+        </ref>
       </optional>
       <zeroOrMore>
-        <ref name="indexsect"/>
+        <ref name="indexsect">
+          <a:documentation>Index of the document</a:documentation>
+        </ref>
       </zeroOrMore>
       <optional>
-        <ref name="colophon"/>
+        <ref name="colophon">
+          <a:documentation>Colophon or postface material</a:documentation>
+        </ref>
       </optional>
     </element>
   </define>
   <define name="misccontainer">
+    <a:documentation>Elements added to metanorma-extension are open-ended, and constitute source data</a:documentation>
     <element name="metanorma-extension">
       <oneOrMore>
         <ref name="AnyElement"/>
