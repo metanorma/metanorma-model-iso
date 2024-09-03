@@ -20,17 +20,28 @@
 <grammar xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0" xmlns="http://relaxng.org/ns/structure/1.0" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
   <include href="reqt.rng"/>
   <include href="basicdoc.rng">
+    <define name="NumberingAttributes" combine="choice">
+      <optional>
+        <attribute name="number">
+          <a:documentation>Override the numbering of this block in numbering</a:documentation>
+        </attribute>
+      </optional>
+    </define>
     <define name="amend">
+      <a:documentation>Block expressing a machine-readable change in a document</a:documentation>
       <element name="amend">
         <ref name="BlockAttributes"/>
         <ref name="AmendType"/>
         <zeroOrMore>
-          <ref name="autonumber"/>
+          <ref name="autonumber">
+            <a:documentation>Specification of how blocks of a given class should be autonumbered within an AmendBlock newContent element</a:documentation>
+          </ref>
         </zeroOrMore>
       </element>
     </define>
     <define name="AdmonitionAttr">
       <attribute name="type">
+        <a:documentation>Category of admonition</a:documentation>
         <ref name="AdmonitionType"/>
       </attribute>
       <optional>
@@ -43,11 +54,13 @@
       </optional>
       <optional>
         <attribute name="coverpage">
+          <a:documentation>Display the admonition on the document cover page</a:documentation>
           <data type="boolean"/>
         </attribute>
       </optional>
       <optional>
         <attribute name="notag">
+          <a:documentation>Do not insert text labelling the type of admonition in rendering</a:documentation>
           <data type="boolean"/>
         </attribute>
       </optional>
@@ -60,8 +73,11 @@
         <value>important</value>
         <value>caution</value>
         <value>statement</value>
+        <a:documentation>Intended for typographically separate statements in mathematics, such as propositions, proofs, or theorems. Statement conflates all of these for rendering, while Proposition, Proof, Theorem etc. can be treated as distinct classes</a:documentation>
         <value>editorial</value>
+        <a:documentation>Annotation by document editors, intended for all readers of the document and not just its authors</a:documentation>
         <value>box</value>
+        <a:documentation>Box annotation, intended as standalone sidebar element which can be referenced from within the document</a:documentation>
       </choice>
     </define>
     <define name="index">
@@ -200,7 +216,9 @@ titlecase, or lowercase</a:documentation>
     </define>
     <define name="UlBody">
       <optional>
-        <ref name="tname"/>
+        <ref name="tname">
+          <a:documentation>Caption of list</a:documentation>
+        </ref>
       </optional>
       <oneOrMore>
         <ref name="ul_li"/>
@@ -211,7 +229,9 @@ titlecase, or lowercase</a:documentation>
     </define>
     <define name="OlBody">
       <optional>
-        <ref name="tname"/>
+        <ref name="tname">
+          <a:documentation>Caption of list</a:documentation>
+        </ref>
       </optional>
       <oneOrMore>
         <ref name="li"/>
@@ -238,13 +258,16 @@ titlecase, or lowercase</a:documentation>
       <ref name="BlockAttributes"/>
       <optional>
         <attribute name="key">
+          <a:documentation>This definition list is the key of a figure or formula</a:documentation>
           <data type="boolean"/>
         </attribute>
       </optional>
     </define>
     <define name="DlBody">
       <optional>
-        <ref name="tname"/>
+        <ref name="tname">
+          <a:documentation>Caption of the list</a:documentation>
+        </ref>
       </optional>
       <oneOrMore>
         <ref name="dt"/>
@@ -256,24 +279,39 @@ titlecase, or lowercase</a:documentation>
     </define>
     <define name="dt">
       <element name="dt">
-        <ref name="OptionalId"/>
+        <ref name="OptionalId">
+          <a:documentation>Optional identifier for definition term (enabling crossreferencing of definitions)</a:documentation>
+        </ref>
         <zeroOrMore>
-          <ref name="TextElement"/>
+          <ref name="TextElement">
+            <a:documentation>Entry being defined in the definition</a:documentation>
+          </ref>
         </zeroOrMore>
       </element>
     </define>
-    <define name="ExampleAttr">
+    <define name="NumberingAttributes">
       <optional>
         <attribute name="unnumbered">
+          <a:documentation>Do not number this block in rendering</a:documentation>
           <data type="boolean"/>
         </attribute>
       </optional>
       <optional>
-        <attribute name="subsequence"/>
+        <attribute name="subsequence">
+          <a:documentation>Define a subsequence for numbering of this block; e.g. if this block would be numbered
+as 7, but it has a subsequence value of XYZ, this block, and all consecutive blocks
+of the same class and with the same subsequence value, will be numbered consecutively
+with the same number and in a subsequence: 7a, 7b, 7c etc</a:documentation>
+        </attribute>
       </optional>
       <optional>
-        <attribute name="number"/>
+        <attribute name="number">
+          <a:documentation>Override the numbering of this block in numbering</a:documentation>
+        </attribute>
       </optional>
+    </define>
+    <define name="ExampleAttr">
+      <ref name="NumberingAttributes"/>
       <ref name="BlockAttributes"/>
     </define>
     <define name="ExampleBody">
@@ -297,17 +335,7 @@ titlecase, or lowercase</a:documentation>
       </zeroOrMore>
     </define>
     <define name="TableAttr">
-      <optional>
-        <attribute name="unnumbered">
-          <data type="boolean"/>
-        </attribute>
-      </optional>
-      <optional>
-        <attribute name="number"/>
-      </optional>
-      <optional>
-        <attribute name="subsequence"/>
-      </optional>
+      <ref name="NumberingAttributes"/>
       <optional>
         <attribute name="alt"/>
       </optional>
@@ -320,13 +348,17 @@ titlecase, or lowercase</a:documentation>
         </attribute>
       </optional>
       <optional>
-        <attribute name="width"/>
+        <attribute name="width">
+          <a:documentation>Width of the table block in rendering</a:documentation>
+        </attribute>
       </optional>
       <ref name="BlockAttributes"/>
     </define>
     <define name="TableBody">
       <optional>
-        <ref name="colgroup"/>
+        <ref name="colgroup">
+          <a:documentation>The widths of the columns in the table</a:documentation>
+        </ref>
       </optional>
       <optional>
         <ref name="tname"/>
@@ -345,26 +377,20 @@ titlecase, or lowercase</a:documentation>
         <ref name="table-note"/>
       </zeroOrMore>
       <zeroOrMore>
-        <ref name="source"/>
+        <ref name="source">
+          <a:documentation>A URI or other reference intended to link to an externally hosted data source (or equivalent)</a:documentation>
+        </ref>
       </zeroOrMore>
     </define>
     <define name="FigureAttr">
-      <optional>
-        <attribute name="unnumbered">
-          <data type="boolean"/>
-        </attribute>
-      </optional>
-      <optional>
-        <attribute name="number"/>
-      </optional>
-      <optional>
-        <attribute name="subsequence"/>
-      </optional>
+      <ref name="NumberingAttributes"/>
       <optional>
         <attribute name="class"/>
       </optional>
       <optional>
-        <attribute name="width"/>
+        <attribute name="width">
+          <a:documentation>Width of the figure block in rendering</a:documentation>
+        </attribute>
       </optional>
       <ref name="BlockAttributes"/>
     </define>
@@ -394,40 +420,40 @@ titlecase, or lowercase</a:documentation>
         <ref name="note"/>
       </zeroOrMore>
       <zeroOrMore>
-        <ref name="source"/>
+        <ref name="source">
+          <a:documentation>A URI or other reference intended to link to an externally hosted image (or equivalent)</a:documentation>
+        </ref>
       </zeroOrMore>
     </define>
     <define name="source">
+      <a:documentation>The bibliographic source where a block (figure or term) appearing in this standardisation document is taken from</a:documentation>
       <element name="source">
         <attribute name="status">
+          <a:documentation>The status of the term as it is used in this document, relative to its definition in the original document</a:documentation>
           <ref name="SourceStatusType"/>
         </attribute>
-        <ref name="origin"/>
+        <ref name="origin">
+          <a:documentation>The original document and location where the block has been obtained from</a:documentation>
+        </ref>
         <optional>
-          <ref name="modification"/>
+          <ref name="modification">
+            <a:documentation>Any changes that the block has undergone relative to the original document,
+in order to be included in this standardisation document</a:documentation>
+          </ref>
         </optional>
       </element>
     </define>
     <define name="SourceAttr">
-      <optional>
-        <attribute name="unnumbered">
-          <data type="boolean"/>
-        </attribute>
-      </optional>
-      <optional>
-        <attribute name="number"/>
-      </optional>
-      <optional>
-        <attribute name="subsequence"/>
-      </optional>
+      <ref name="NumberingAttributes"/>
       <optional>
         <attribute name="lang">
-          <ref name="LanguageType"/>
+          <a:documentation>Computer language that the source code is in</a:documentation>
         </attribute>
       </optional>
       <ref name="BlockAttributes"/>
       <optional>
         <attribute name="linenums">
+          <a:documentation>Render the sourcecode block with line numbering. Default value is false</a:documentation>
           <data type="boolean"/>
         </attribute>
       </optional>
@@ -440,8 +466,12 @@ titlecase, or lowercase</a:documentation>
         <choice>
           <text/>
           <ref name="callout"/>
-          <ref name="xref"/>
-          <ref name="eref"/>
+          <ref name="xref">
+            <a:documentation>Hyperlink of code segment to another part of the document</a:documentation>
+          </ref>
+          <ref name="eref">
+            <a:documentation>Hyperlink of code segment to external bibliographic resource</a:documentation>
+          </ref>
         </choice>
       </oneOrMore>
       <zeroOrMore>
@@ -452,17 +482,7 @@ titlecase, or lowercase</a:documentation>
       </zeroOrMore>
     </define>
     <define name="FormulaAttr">
-      <optional>
-        <attribute name="unnumbered">
-          <data type="boolean"/>
-        </attribute>
-      </optional>
-      <optional>
-        <attribute name="number"/>
-      </optional>
-      <optional>
-        <attribute name="subsequence"/>
-      </optional>
+      <ref name="NumberingAttributes"/>
       <optional>
         <attribute name="inequality">
           <data type="boolean"/>
@@ -477,7 +497,9 @@ titlecase, or lowercase</a:documentation>
         </attribute>
       </optional>
       <optional>
-        <attribute name="type"/>
+        <attribute name="type">
+          <a:documentation>Semantic classification of paragraph</a:documentation>
+        </attribute>
       </optional>
       <ref name="BlockAttributes"/>
     </define>
@@ -508,11 +530,7 @@ titlecase, or lowercase</a:documentation>
 there could be one or more of such sections within a document. For example, some standardization documents differentiate
 normative or informative references, some split references into sections organized by concept relevance.</a:documentation>
       <element name="references">
-        <optional>
-          <attribute name="id">
-            <data type="ID"/>
-          </attribute>
-        </optional>
+        <ref name="OptionalId"/>
         <optional>
           <attribute name="obligation">
             <ref name="ObligationType"/>
@@ -547,33 +565,28 @@ Normative References contents contain normative references, but as a clause in t
       </element>
     </define>
     <define name="NoteAttr">
+      <ref name="NumberingAttrs"/>
       <optional>
-        <attribute name="unnumbered">
-          <data type="boolean"/>
+        <attribute name="type">
+          <a:documentation>Semantic classification of note</a:documentation>
         </attribute>
       </optional>
       <optional>
-        <attribute name="number"/>
-      </optional>
-      <optional>
-        <attribute name="subsequence"/>
-      </optional>
-      <optional>
-        <attribute name="type"/>
-      </optional>
-      <optional>
         <attribute name="coverpage">
+          <a:documentation>Display the note on the document cover page</a:documentation>
           <data type="boolean"/>
         </attribute>
       </optional>
       <optional>
         <attribute name="notag">
+          <a:documentation>Do not insert text labelling the note as a note in rendering</a:documentation>
           <data type="boolean"/>
         </attribute>
       </optional>
       <ref name="BlockAttributes"/>
     </define>
     <define name="NoteBody">
+      <a:documentation>Content of note</a:documentation>
       <oneOrMore>
         <choice>
           <ref name="paragraph"/>
@@ -650,17 +663,15 @@ Normative References contents contain normative references, but as a clause in t
     </define>
     <define name="table-note">
       <element name="note">
-        <optional>
-          <attribute name="id">
-            <data type="ID"/>
-          </attribute>
-        </optional>
+        <ref name="OptionalId"/>
         <ref name="paragraph"/>
       </element>
     </define>
     <define name="stem">
+      <a:documentation>Mathematically formatted text</a:documentation>
       <element name="stem">
         <attribute name="type">
+          <a:documentation>Schema of mathematical expression</a:documentation>
           <choice>
             <value>MathML</value>
             <value>AsciiMath</value>
@@ -668,108 +679,21 @@ Normative References contents contain normative references, but as a clause in t
           </choice>
         </attribute>
         <optional>
-          <attribute name="number-format"/>
+          <attribute name="number-format">
+            <a:documentation>Numeric formatting directives to apply to mathematically formatted text</a:documentation>
+          </attribute>
         </optional>
         <attribute name="block">
+          <a:documentation>Whether to treat the expression as a block or as an inline element, for display purposes</a:documentation>
           <data type="boolean"/>
         </attribute>
         <oneOrMore>
           <choice>
+            <a:documentation>Mathematical expression</a:documentation>
             <text/>
             <ref name="AnyElement"/>
           </choice>
         </oneOrMore>
-      </element>
-    </define>
-    <define name="em">
-      <element name="em">
-        <zeroOrMore>
-          <choice>
-            <ref name="PureTextElement"/>
-            <ref name="stem"/>
-            <ref name="index"/>
-            <ref name="index-xref"/>
-            <ref name="eref"/>
-            <ref name="erefstack"/>
-            <ref name="xref"/>
-            <ref name="hyperlink"/>
-          </choice>
-        </zeroOrMore>
-      </element>
-    </define>
-    <define name="strong">
-      <element name="strong">
-        <zeroOrMore>
-          <choice>
-            <ref name="PureTextElement"/>
-            <ref name="stem"/>
-            <ref name="index"/>
-            <ref name="index-xref"/>
-            <ref name="eref"/>
-            <ref name="erefstack"/>
-            <ref name="xref"/>
-            <ref name="hyperlink"/>
-          </choice>
-        </zeroOrMore>
-      </element>
-    </define>
-    <define name="tt">
-      <element name="tt">
-        <zeroOrMore>
-          <choice>
-            <ref name="PureTextElement"/>
-            <ref name="index"/>
-            <ref name="index-xref"/>
-            <ref name="eref"/>
-            <ref name="erefstack"/>
-            <ref name="xref"/>
-            <ref name="hyperlink"/>
-          </choice>
-        </zeroOrMore>
-      </element>
-    </define>
-    <define name="keyword">
-      <element name="keyword">
-        <zeroOrMore>
-          <choice>
-            <ref name="PureTextElement"/>
-            <ref name="index"/>
-            <ref name="index-xref"/>
-          </choice>
-        </zeroOrMore>
-      </element>
-    </define>
-    <define name="strike">
-      <element name="strike">
-        <zeroOrMore>
-          <choice>
-            <ref name="PureTextElement"/>
-            <ref name="index"/>
-            <ref name="index-xref"/>
-          </choice>
-        </zeroOrMore>
-      </element>
-    </define>
-    <define name="underline">
-      <element name="underline">
-        <zeroOrMore>
-          <choice>
-            <ref name="PureTextElement"/>
-            <ref name="index"/>
-            <ref name="index-xref"/>
-          </choice>
-        </zeroOrMore>
-      </element>
-    </define>
-    <define name="smallcap">
-      <element name="smallcap">
-        <zeroOrMore>
-          <choice>
-            <ref name="PureTextElement"/>
-            <ref name="index"/>
-            <ref name="index-xref"/>
-          </choice>
-        </zeroOrMore>
       </element>
     </define>
     <define name="sub">
@@ -796,6 +720,8 @@ Normative References contents contain normative references, but as a clause in t
       <element name="pagebreak">
         <optional>
           <attribute name="orientation">
+            <a:documentation>Orientation of pages in a section of text in paged media following this page break, applicable until the next page break that
+gives an explicit page orientation</a:documentation>
             <choice>
               <value>landscape</value>
               <value>portrait</value>
@@ -806,14 +732,6 @@ Normative References contents contain normative references, but as a clause in t
     </define>
   </include>
   <!-- end overrides -->
-  <define name="LanguageType">
-    <a:documentation>Two-letter language code taken from ISO-639, indicating the language in which the content is written</a:documentation>
-    <text/>
-  </define>
-  <define name="ScriptType">
-    <a:documentation>Four-letter script code taken from ISO-15924, indicating the script in which the content is written</a:documentation>
-    <text/>
-  </define>
   <define name="ObligationType">
     <a:documentation>The force of a clause in a standard document: whether it has normative or informative effect</a:documentation>
     <choice>
@@ -823,9 +741,7 @@ Normative References contents contain normative references, but as a clause in t
   </define>
   <define name="doc_bibitem">
     <element name="bibitem">
-      <attribute name="id">
-        <data type="ID"/>
-      </attribute>
+      <ref name="RequiredId"/>
       <optional>
         <attribute name="hidden">
           <data type="boolean"/>
@@ -833,6 +749,7 @@ Normative References contents contain normative references, but as a clause in t
       </optional>
       <optional>
         <attribute name="suppress_identifier">
+          <a:documentation>Suppress document identifier from item rendering</a:documentation>
           <data type="boolean"/>
         </attribute>
       </optional>
@@ -853,16 +770,22 @@ Normative References contents contain normative references, but as a clause in t
     <ref name="columnbreak"/>
   </define>
   <define name="columnbreak">
+    <a:documentation>Indication of a break in text rendered as columns</a:documentation>
     <element name="columnbreak">
       <empty/>
     </element>
   </define>
   <define name="MultilingualRenderingType">
+    <a:documentation>How a block element may be rendered in a multilingual document, with a column for each language</a:documentation>
     <choice>
       <value>common</value>
+      <a:documentation>Block is shared across all languages</a:documentation>
       <value>all-columns</value>
+      <a:documentation>Block spans all columns of text, and versions in different languages are displayed consecutively</a:documentation>
       <value>parallel</value>
+      <a:documentation>Block is to be aligned to the block occupying the same position in the document hierarchy</a:documentation>
       <value>tag</value>
+      <a:documentation>Block is to be aligned to all blocks sharing the same `tag` attribute as this block</a:documentation>
     </choice>
   </define>
   <define name="colgroup">
@@ -874,7 +797,9 @@ Normative References contents contain normative references, but as a clause in t
   </define>
   <define name="col">
     <element name="col">
-      <attribute name="width"/>
+      <attribute name="width">
+        <a:documentation>The width of an individual table column</a:documentation>
+      </attribute>
     </element>
   </define>
   <define name="BibItemType" combine="choice">
@@ -893,65 +818,73 @@ Normative References contents contain normative references, but as a clause in t
   <define name="PureTextElement" combine="choice">
     <ref name="passthrough_inline"/>
   </define>
+  <define name="NestedTextElement" combine="choice">
+    <ref name="erefstack"/>
+  </define>
   <define name="passthrough_inline">
+    <a:documentation>Inline text not to be processed semantically, and left in the markup of a target rendering language (e.g. raw HTML)</a:documentation>
     <element name="passthrough">
       <optional>
-        <attribute name="formats"/>
+        <attribute name="formats">
+          <a:documentation>List of the target formats for which the markup is intended, comma-delimited</a:documentation>
+        </attribute>
       </optional>
-      <text/>
+      <text>
+        <a:documentation>Markup specific to a target rendering language</a:documentation>
+      </text>
     </element>
   </define>
   <define name="add">
+    <a:documentation>Indication of text added through editorial intervention</a:documentation>
     <element name="add">
-      <choice>
-        <ref name="PureTextElement"/>
-        <ref name="eref"/>
-        <ref name="erefstack"/>
-        <ref name="stem"/>
-        <ref name="keyword"/>
-        <ref name="xref"/>
-        <ref name="hyperlink"/>
-        <ref name="index"/>
-        <ref name="index-xref"/>
-      </choice>
+      <zeroOrMore>
+        <ref name="NestedTextElement"/>
+      </zeroOrMore>
     </element>
   </define>
   <define name="del">
+    <a:documentation>Indication of text deleted through editorial intervention</a:documentation>
     <element name="del">
-      <choice>
-        <ref name="PureTextElement"/>
-        <ref name="eref"/>
-        <ref name="erefstack"/>
-        <ref name="stem"/>
-        <ref name="keyword"/>
-        <ref name="xref"/>
-        <ref name="hyperlink"/>
-        <ref name="index"/>
-        <ref name="index-xref"/>
-      </choice>
+      <zeroOrMore>
+        <ref name="NestedTextElement"/>
+      </zeroOrMore>
     </element>
   </define>
   <define name="span">
+    <a:documentation>Semantic or formatting markup for inline elements</a:documentation>
     <element name="span">
       <optional>
-        <attribute name="class"/>
+        <attribute name="class">
+          <a:documentation>Class of the inline span, as semantic markup</a:documentation>
+        </attribute>
       </optional>
       <optional>
-        <attribute name="style"/>
+        <attribute name="style">
+          <a:documentation>CSS style directive for the inline span. Is intended to be the same as HTML style attribute</a:documentation>
+        </attribute>
       </optional>
       <optional>
-        <attribute name="custom-charset"/>
+        <attribute name="custom-charset">
+          <a:documentation>Character set that the contained text belongs to; is used in particular to capture mutually agreed definitions of codepoints in Unicode Private Use Area</a:documentation>
+        </attribute>
       </optional>
       <oneOrMore>
-        <ref name="TextElement"/>
+        <ref name="TextElement">
+          <a:documentation>Textual content of span</a:documentation>
+        </ref>
       </oneOrMore>
     </element>
   </define>
   <define name="date_inline">
+    <a:documentation>Localisable rendering of a date</a:documentation>
     <element name="date">
-      <attribute name="value"/>
+      <attribute name="value">
+        <a:documentation>Date to be rendered, in ISO 8601 format</a:documentation>
+      </attribute>
       <optional>
-        <attribute name="format"/>
+        <attribute name="format">
+          <a:documentation>Format to be used to render date, as a strftime formatting string</a:documentation>
+        </attribute>
       </optional>
       <optional>
         <attribute name="language">
@@ -964,7 +897,9 @@ Normative References contents contain normative references, but as a clause in t
         </attribute>
       </optional>
       <optional>
-        <attribute name="locale"/>
+        <attribute name="locale">
+          <a:documentation>Locale to be used to render date</a:documentation>
+        </attribute>
       </optional>
     </element>
   </define>
@@ -1057,102 +992,138 @@ That concept may be defined as a term within the current document, or it may be 
     </choice>
   </define>
   <define name="toc">
+    <a:documentation>Table of contents, represented as a list of crossreferences, each with textual content</a:documentation>
     <element name="toc">
-      <ref name="ul"/>
+      <group>
+        <a:documentation>List of crossreferences</a:documentation>
+        <ref name="ul"/>
+      </group>
     </element>
   </define>
   <define name="passthrough">
+    <a:documentation>Wrapper around raw markup to be transferred into one or more nominated output formats during processing</a:documentation>
     <element name="passthrough">
       <optional>
-        <attribute name="formats"/>
+        <attribute name="formats">
+          <a:documentation>Format of markup to be transferred, comma-delimited</a:documentation>
+        </attribute>
       </optional>
-      <text/>
+      <text>
+        <a:documentation>Markup to be transferred</a:documentation>
+      </text>
     </element>
   </define>
   <define name="inputform">
+    <a:documentation>Input form, for use under HTML</a:documentation>
     <element name="form">
-      <attribute name="id">
-        <data type="ID"/>
+      <ref name="RequiredId"/>
+      <attribute name="name">
+        <a:documentation>Name of the input form block</a:documentation>
       </attribute>
-      <attribute name="name"/>
-      <attribute name="action"/>
+      <attribute name="action">
+        <a:documentation>Action to be taken on submission of the input form</a:documentation>
+      </attribute>
       <optional>
-        <attribute name="class"/>
+        <attribute name="class">
+          <a:documentation>Class of input form</a:documentation>
+        </attribute>
       </optional>
       <ref name="BlockAttributes"/>
       <zeroOrMore>
         <choice>
           <ref name="TextElement"/>
           <ref name="FormInput"/>
+          <ref name="formlabel"/>
         </choice>
       </zeroOrMore>
     </element>
   </define>
   <define name="FormInput">
+    <a:documentation>Input element for forms, associated with name/value pair to be submitted</a:documentation>
     <choice>
       <ref name="input"/>
-      <ref name="formlabel"/>
       <ref name="select"/>
       <ref name="textarea"/>
     </choice>
   </define>
+  <define name="FormInputAttrs">
+    <optional>
+      <attribute name="name">
+        <a:documentation>Name of value of input element to be submitted</a:documentation>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="value">
+        <a:documentation>Preset or default of value of input element to be submitted</a:documentation>
+      </attribute>
+    </optional>
+  </define>
   <define name="InputType">
+    <a:documentation>Type of simple Input element</a:documentation>
     <choice>
       <value>button</value>
+      <a:documentation>Input element is a button</a:documentation>
       <value>checkbox</value>
+      <a:documentation>Input element is a checkbox</a:documentation>
       <value>date</value>
+      <a:documentation>Input element contains date</a:documentation>
       <value>file</value>
+      <a:documentation>Input element selects file for upload</a:documentation>
       <value>password</value>
+      <a:documentation>Input element is a password field</a:documentation>
       <value>radio</value>
+      <a:documentation>Input element is a radio button</a:documentation>
       <value>submit</value>
+      <a:documentation>Input element is a submit button</a:documentation>
       <value>text</value>
+      <a:documentation>Input element contains text</a:documentation>
     </choice>
   </define>
   <define name="input">
+    <a:documentation>Input involving simple text</a:documentation>
     <element name="input">
       <attribute name="type">
+        <a:documentation>Type of input element</a:documentation>
         <ref name="InputType"/>
       </attribute>
       <optional>
         <attribute name="checked">
+          <a:documentation>Input element is checkbox, and has checked value</a:documentation>
           <data type="boolean"/>
         </attribute>
       </optional>
       <optional>
         <attribute name="disabled">
+          <a:documentation>Input element is disabled</a:documentation>
           <data type="boolean"/>
         </attribute>
       </optional>
       <optional>
         <attribute name="readonly">
+          <a:documentation>Input element is read-only</a:documentation>
           <data type="boolean"/>
         </attribute>
       </optional>
       <optional>
         <attribute name="maxlength">
+          <a:documentation>Maximum length of input in characters, for character input</a:documentation>
           <data type="int"/>
         </attribute>
       </optional>
       <optional>
         <attribute name="minlength">
+          <a:documentation>Minimum length of input in characters, for character input</a:documentation>
           <data type="int"/>
         </attribute>
       </optional>
-      <optional>
-        <attribute name="name"/>
-      </optional>
-      <optional>
-        <attribute name="value"/>
-      </optional>
-      <optional>
-        <attribute name="id">
-          <data type="ID"/>
-        </attribute>
-      </optional>
+      <ref name="FormInputAttrs"/>
+      <ref name="OptionalId"/>
     </element>
   </define>
   <define name="formlabel">
+    <a:documentation>Label associated with form input element</a:documentation>
     <element name="label">
+      <!-- Identifier of form input element that this element is a label of -->
       <attribute name="for">
         <data type="IDREF"/>
       </attribute>
@@ -1162,73 +1133,71 @@ That concept may be defined as a term within the current document, or it may be 
     </element>
   </define>
   <define name="select">
+    <a:documentation>Input allowing the selection of a value from a list of values. The value attribute is used instead of a selected
+attribute on a component option</a:documentation>
     <element name="select">
-      <optional>
-        <attribute name="name"/>
-      </optional>
-      <optional>
-        <attribute name="value"/>
-      </optional>
-      <optional>
-        <attribute name="id">
-          <data type="ID"/>
-        </attribute>
-      </optional>
+      <ref name="FormInputAttrs"/>
+      <ref name="OptionalId"/>
       <optional>
         <attribute name="disabled">
+          <a:documentation>Input is disabled</a:documentation>
           <data type="boolean"/>
         </attribute>
       </optional>
       <optional>
         <attribute name="multiple">
+          <a:documentation>Input can return multiple option values</a:documentation>
           <data type="boolean"/>
         </attribute>
       </optional>
       <optional>
         <attribute name="size">
+          <a:documentation>Suggested number of options to display</a:documentation>
           <data type="int"/>
         </attribute>
       </optional>
       <oneOrMore>
-        <ref name="option"/>
+        <ref name="option">
+          <a:documentation>Options to select from as value of the input</a:documentation>
+        </ref>
       </oneOrMore>
     </element>
   </define>
   <define name="option">
+    <a:documentation>Option of a Select input</a:documentation>
     <element name="option">
       <optional>
         <attribute name="disabled">
+          <a:documentation>Option is disabled</a:documentation>
           <data type="boolean"/>
         </attribute>
       </optional>
       <optional>
-        <attribute name="value"/>
+        <attribute name="value">
+          <a:documentation>Value associated with this option</a:documentation>
+        </attribute>
       </optional>
       <zeroOrMore>
-        <ref name="PureTextElement"/>
+        <ref name="PureTextElement">
+          <a:documentation>Display text associated with this option</a:documentation>
+        </ref>
       </zeroOrMore>
     </element>
   </define>
   <define name="textarea">
+    <a:documentation>Input involving extended text. The value attribute is used instead of text area content</a:documentation>
     <element name="textarea">
-      <optional>
-        <attribute name="name"/>
-      </optional>
-      <optional>
-        <attribute name="value"/>
-      </optional>
-      <optional>
-        <attribute name="id">
-          <data type="ID"/>
-        </attribute>
-      </optional>
+      <ref name="FormInputAttrs"/>
+      <ref name="OptionalId"/>
       <optional>
         <attribute name="rows">
+          <a:documentation>Suggested number of rows for the input area</a:documentation>
           <data type="int"/>
         </attribute>
       </optional>
       <optional>
         <attribute name="cols">
+          <a:documentation>Suggested number of columns for the input area</a:documentation>
           <data type="int"/>
         </attribute>
       </optional>
@@ -1275,11 +1244,7 @@ numbers.</a:documentation>
     </optional>
   </define>
   <define name="Basic-Section-Attributes">
-    <optional>
-      <attribute name="id">
-        <data type="ID"/>
-      </attribute>
-    </optional>
+    <ref name="OptionalId"/>
     <optional>
       <attribute name="language">
         <ref name="LanguageType"/>
@@ -1473,11 +1438,7 @@ numbers.</a:documentation>
 These can also be used as glossaries, with simple definitions, in contrast to the more elaborate definitions given in
 terms sections </a:documentation>
     <element name="definitions">
-      <optional>
-        <attribute name="id">
-          <data type="ID"/>
-        </attribute>
-      </optional>
+      <ref name="OptionalId"/>
       <optional>
         <attribute name="language">
           <ref name="LanguageType"/>
@@ -1678,11 +1639,7 @@ used in document amendments</a:documentation>
   <define name="term">
     <a:documentation>Terminology entry with its definition</a:documentation>
     <element name="term">
-      <optional>
-        <attribute name="id">
-          <data type="ID"/>
-        </attribute>
-      </optional>
+      <ref name="OptionalId"/>
       <optional>
         <attribute name="language">
           <a:documentation>Langauge in which the term entry is written</a:documentation>
@@ -1951,6 +1908,7 @@ used in document amendments</a:documentation>
             <ref name="PureTextElement"/>
             <ref name="stem"/>
             <ref name="index"/>
+            <ref name="index-xref"/>
           </choice>
         </zeroOrMore>
       </element>
@@ -2153,20 +2111,8 @@ used in document amendments</a:documentation>
   </define>
   <define name="termnote">
     <element name="termnote">
-      <attribute name="id">
-        <data type="ID"/>
-      </attribute>
-      <optional>
-        <attribute name="unnumbered">
-          <data type="boolean"/>
-        </attribute>
-      </optional>
-      <optional>
-        <attribute name="number"/>
-      </optional>
-      <optional>
-        <attribute name="subsequence"/>
-      </optional>
+      <ref name="RequiredId"/>
+      <ref name="NumberingAttrs"/>
       <ref name="BlockAttributes"/>
       <oneOrMore>
         <choice>
@@ -2181,9 +2127,7 @@ used in document amendments</a:documentation>
   </define>
   <define name="termexample">
     <element name="termexample">
-      <attribute name="id">
-        <data type="ID"/>
-      </attribute>
+      <ref name="RequiredId"/>
       <ref name="BlockAttributes"/>
       <oneOrMore>
         <choice>
@@ -2310,8 +2254,10 @@ to better fit some local requirement, though still with the intent of retaining 
     </element>
   </define>
   <define name="autonumber">
+    <a:documentation>Specification of how blocks of a given class should be autonumbered within an AmendBlock newContent element</a:documentation>
     <element name="autonumber">
       <attribute name="type">
+        <a:documentation>The class of block to apply autonumbering to, within an AmendBlock newContent element</a:documentation>
         <choice>
           <value>requirement</value>
           <value>recommendation</value>
@@ -2325,88 +2271,119 @@ to better fit some local requirement, though still with the intent of retaining 
           <value>note</value>
         </choice>
       </attribute>
-      <text/>
+      <text>
+        <a:documentation>The starting value of numbering for the blocks with that class</a:documentation>
+      </text>
     </element>
   </define>
   <define name="imagemap">
+    <a:documentation>Wrapper around an image file, to specify an image map, with areas of an image being hyperlinked</a:documentation>
     <element name="imagemap">
       <ref name="BlockAttributes"/>
-      <ref name="figure"/>
+      <ref name="figure">
+        <a:documentation>the image to be hyperlinked</a:documentation>
+      </ref>
       <zeroOrMore>
-        <element name="area">
-          <attribute name="type">
-            <choice>
-              <value>rect</value>
-              <value>circle</value>
-              <value>ellipse</value>
-              <value>poly</value>
-            </choice>
+        <ref name="imagemaparea">
+          <a:documentation>Specification of an area of an image to be hyperlinked, as part of an image map</a:documentation>
+        </ref>
+      </zeroOrMore>
+    </element>
+  </define>
+  <define name="imagemaparea">
+    <a:documentation>Specification of an area of an image to be hyperlinked, as part of an image map</a:documentation>
+    <element name="area">
+      <attribute name="type">
+        <a:documentation>Type of an image map area of an image that is hyperlinked</a:documentation>
+        <choice>
+          <value>rect</value>
+          <value>circle</value>
+          <value>ellipse</value>
+          <value>poly</value>
+        </choice>
+      </attribute>
+      <choice>
+        <a:documentation>Element that this image map area links to</a:documentation>
+        <ref name="xref"/>
+        <ref name="hyperlink"/>
+        <ref name="eref"/>
+        <ref name="erefstack"/>
+      </choice>
+      <oneOrMore>
+        <element name="coords">
+          <a:documentation>Polygon defined shape of the image map area</a:documentation>
+          <attribute name="x">
+            <a:documentation>X-coordinate of a coordinate point</a:documentation>
+            <data type="float"/>
           </attribute>
-          <choice>
-            <ref name="xref"/>
-            <ref name="hyperlink"/>
-            <ref name="eref"/>
-            <ref name="erefstack"/>
-          </choice>
-          <oneOrMore>
-            <element name="coords">
-              <attribute name="x">
-                <data type="float"/>
-              </attribute>
-              <attribute name="y">
-                <data type="float"/>
-              </attribute>
-            </element>
-          </oneOrMore>
+          <attribute name="y">
+            <a:documentation>Y-coordinate of a coordinate point</a:documentation>
+            <data type="float"/>
+          </attribute>
+        </element>
+      </oneOrMore>
+      <optional>
+        <element name="radius">
+          <a:documentation>Radius-defined shape of the image map area</a:documentation>
+          <attribute name="x">
+            <a:documentation>X-coordinate of the center of a circle area within the image map</a:documentation>
+            <data type="float"/>
+          </attribute>
           <optional>
-            <element name="radius">
-              <attribute name="x">
-                <data type="float"/>
-              </attribute>
-              <optional>
-                <attribute name="y">
-                  <data type="float"/>
-                </attribute>
-              </optional>
-            </element>
+            <attribute name="y">
+              <a:documentation>Y-coordinate of the center of a circle area within the image map</a:documentation>
+              <data type="float"/>
+            </attribute>
           </optional>
         </element>
-      </zeroOrMore>
+      </optional>
     </element>
   </define>
   <define name="svgmap">
+    <a:documentation>Wrapper around an SVG file, to update its hyperlinks with potentially document-specific
+links, so that the SVG file can hyperlink to anchors within the document</a:documentation>
     <element name="svgmap">
       <ref name="BlockAttributes"/>
-      <ref name="figure"/>
+      <ref name="figure">
+        <a:documentation>The SVG file to be updated</a:documentation>
+      </ref>
       <zeroOrMore>
-        <element name="target">
-          <attribute name="href">
-            <data type="anyURI"/>
-          </attribute>
-          <choice>
-            <ref name="xref"/>
-            <ref name="hyperlink"/>
-            <ref name="eref"/>
-            <ref name="erefstack"/>
-          </choice>
-        </element>
+        <ref name="svg_target">
+          <a:documentation>Specification of the cross-references to update the SVG file with</a:documentation>
+        </ref>
       </zeroOrMore>
     </element>
   </define>
+  <define name="svg_target">
+    <a:documentation>Specification of (potentially document-specific) cross-references, to overwrite the
+links within an SVG file, so that the SVG file can hyperlink to anchors within the document</a:documentation>
+    <element name="target">
+      <attribute name="href">
+        <a:documentation>The value of the `href` attribute in the SVG file to be overwritten</a:documentation>
+        <data type="anyURI"/>
+      </attribute>
+      <choice>
+        <a:documentation>The cross-reference or hyperlink, whose value is to overwrite the value of the `href` attribute in the SVG file</a:documentation>
+        <ref name="xref"/>
+        <ref name="hyperlink"/>
+        <ref name="eref"/>
+        <ref name="erefstack"/>
+      </choice>
+    </element>
+  </define>
   <define name="ul_li">
+    <a:documentation>Unorderd list item for standards documents</a:documentation>
     <element name="li">
-      <optional>
-        <attribute name="id">
-          <data type="ID"/>
-        </attribute>
-      </optional>
+      <ref name="OptionalId"/>
       <optional>
         <attribute name="uncheckedcheckbox">
+          <a:documentation>Include a checkbox for the list item</a:documentation>
           <data type="boolean"/>
         </attribute>
       </optional>
       <optional>
         <attribute name="checkedcheckbox">
+          <a:documentation>Check the checkbox for the list item</a:documentation>
           <data type="boolean"/>
         </attribute>
       </optional>
@@ -2418,9 +2395,7 @@ to better fit some local requirement, though still with the intent of retaining 
   <define name="floating-title">
     <a:documentation>A floating title, outside of the clause hierarchy of the document</a:documentation>
     <element name="floating-title">
-      <attribute name="id">
-        <data type="ID"/>
-      </attribute>
+      <ref name="RequiredId"/>
       <attribute name="depth">
         <a:documentation>The ostensive depth of the floating title in the clause hierarchy: which level heading it should be presented as</a:documentation>
         <data type="int"/>
@@ -2557,11 +2532,13 @@ titlecase, or lowercase</a:documentation>
   <define name="BlockAttributes">
     <optional>
       <attribute name="keep-with-next">
+        <a:documentation>Keep this block on the same page as the following block in paged media</a:documentation>
         <data type="boolean"/>
       </attribute>
     </optional>
     <optional>
       <attribute name="keep-lines-together">
+        <a:documentation>Do not permit a page break between the lines of the block in paged media</a:documentation>
         <data type="boolean"/>
       </attribute>
     </optional>
@@ -2577,7 +2554,11 @@ titlecase, or lowercase</a:documentation>
       </attribute>
     </optional>
     <optional>
-      <attribute name="columns"/>
+      <attribute name="columns">
+        <a:documentation>Set the columns display of the current block, overriding the display inherited from the document.
+For example, if the document is set to two-column, this attribute would be used to set the block
+to span across both columns</a:documentation>
+      </attribute>
     </optional>
   </define>
   <start>

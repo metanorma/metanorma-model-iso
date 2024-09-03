@@ -21,6 +21,10 @@ include "reqt.rnc" { }
 
 include "basicdoc.rnc" { 
 
+NumberingAttributes |=
+    ## Override the numbering of this block in numbering
+    attribute number { text }?
+
 ## Block expressing a machine-readable change in a document
 amend = element amend {
   BlockAttributes,
@@ -146,10 +150,10 @@ NumberingAttributes =
     ## with the same number and in a subsequence: 7a, 7b, 7c etc
     attribute subsequence { text }?,
     ## Override the numbering of this block in numbering
-    attribute number { text }?,
+    attribute number { text }?
 
 ExampleAttr =
-    NumberingAttrs,
+    NumberingAttributes,
     BlockAttributes
 
 ExampleBody =
@@ -327,13 +331,7 @@ stem =
      ( text | AnyElement )+
 } 
 
-em = element em { (PureTextElement|stem|index|index-xref|eref|erefstack|xref|hyperlink)* }
-strong = element strong { (PureTextElement|stem|index|index-xref|eref|erefstack|xref|hyperlink)* }
-tt = element tt { (PureTextElement|index|index-xref|eref|erefstack|xref|hyperlink)* }
-keyword = element keyword { (PureTextElement|index|index-xref)* }
-strike = element strike { (PureTextElement|index|index-xref)* }
-underline = element underline { (PureTextElement|index|index-xref)* }
-smallcap = element smallcap { (PureTextElement|index|index-xref)* }
+
 sub = element sub { (PureTextElement|stem)* }
 sup = element sup { (PureTextElement|stem)* }
 
@@ -347,12 +345,6 @@ pagebreak = element pagebreak {
 }
 
 # end overrides
-
-## Two-letter language code taken from ISO-639, indicating the language in which the content is written
-LanguageType = text
-
-## Four-letter script code taken from ISO-15924, indicating the script in which the content is written
-ScriptType = text
 
 ## The force of a clause in a standard document: whether it has normative or informative effect
 ObligationType = "normative" | "informative"
@@ -399,6 +391,7 @@ BibItemType |= "internal"
 
 TextElement |= concept | add | del | span | erefstack | date_inline
 PureTextElement |= passthrough_inline
+NestedTextElement |= erefstack
 
 ## Inline text not to be processed semantically, and left in the markup of a target rendering language (e.g. raw HTML)
 passthrough_inline = element passthrough {
@@ -409,10 +402,10 @@ passthrough_inline = element passthrough {
 }
 
 ## Indication of text added through editorial intervention
-add = element add { PureTextElement | eref | erefstack | stem | keyword | xref | hyperlink | index | index-xref }
+add = element add { NestedTextElement* }
 
 ## Indication of text deleted through editorial intervention
-del = element del { PureTextElement | eref | erefstack | stem | keyword | xref | hyperlink | index | index-xref }
+del = element del { NestedTextElement* }
 
 ## Semantic or formatting markup for inline elements
 span = element span {
@@ -503,7 +496,7 @@ FormInputAttrs =
     ## Name of value of input element to be submitted
     attribute name { text }?,
     ## Preset or default of value of input element to be submitted
-    attribute value { text }?,
+    attribute value { text }?
 
 ## Type of simple Input element
 InputType =
@@ -948,7 +941,7 @@ expression_designation =
     ## Whether the designation (typically an abbreviation) is the same across languages, or language-specific
     attribute isInternational { xsd:boolean }?,
     ## The textual form of the designation
-    element name { (PureTextElement|stem|index)* },
+    element name { (PureTextElement|stem|index|index-xref)* },
     ## Type of abbreviation that constitutes the designation, according to how it is formed
     element abbreviation-type { AbbreviationType }?,
     ## A pronunciation guide to the designation
@@ -1177,8 +1170,7 @@ imagemaparea =
       ## Y-coordinate of the center of a circle area within the image map
       attribute y { xsd:float }?
     }?
-  }*
-}
+  }
 
 ## Wrapper around an SVG file, to update its hyperlinks with potentially document-specific
 ## links, so that the SVG file can hyperlink to anchors within the document
