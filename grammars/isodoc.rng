@@ -299,6 +299,11 @@ with the same number and in a subsequence: 7a, 7b, 7c etc</a:documentation>
       </optional>
       <ref name="BlockAttributes"/>
     </define>
+    <define name="TermSource">
+      <zeroOrMore>
+        <ref name="termsource"/>
+      </zeroOrMore>
+    </define>
     <define name="TableBody">
       <optional>
         <ref name="colgroup">
@@ -333,11 +338,9 @@ with the same number and in a subsequence: 7a, 7b, 7c etc</a:documentation>
           <a:documentation>Notes specific to this block</a:documentation>
         </ref>
       </zeroOrMore>
-      <zeroOrMore>
-        <ref name="source">
-          <a:documentation>A URI or other reference intended to link to an externally hosted data source (or equivalent)</a:documentation>
-        </ref>
-      </zeroOrMore>
+      <ref name="TermSource">
+        <a:documentation>A source for the table</a:documentation>
+      </ref>
     </define>
     <define name="FigureAttributes" combine="interleave">
       <optional>
@@ -390,6 +393,9 @@ and is intended to be referenced by a callout within the source code</a:document
           <a:documentation>Notes whose scope is the current block</a:documentation>
         </ref>
       </zeroOrMore>
+      <ref name="TermSource">
+        <a:documentation>A source for the block</a:documentation>
+      </ref>
     </define>
     <define name="FormulaAttributes" combine="interleave">
       <ref name="BlockAttributes"/>
@@ -1629,11 +1635,9 @@ used in document amendments</a:documentation>
           <a:documentation>Zero or more examples of how the term is to be used</a:documentation>
         </ref>
       </zeroOrMore>
-      <zeroOrMore>
-        <ref name="termsource">
-          <a:documentation>Bibliographic references for the managed term</a:documentation>
-        </ref>
-      </zeroOrMore>
+      <ref name="TermSource">
+        <a:documentation>Bibliographic references for the managed term</a:documentation>
+      </ref>
     </element>
   </define>
   <define name="preferred">
@@ -1735,11 +1739,9 @@ used in document amendments</a:documentation>
         <a:documentation>Information about how the designation is to be used</a:documentation>
       </ref>
     </optional>
-    <zeroOrMore>
-      <ref name="termsource">
-        <a:documentation>Bibliographic references for this designation of the managed term</a:documentation>
-      </ref>
-    </zeroOrMore>
+    <ref name="TermSource">
+      <a:documentation>Bibliographic references for this designation of the managed term</a:documentation>
+    </ref>
   </define>
   <define name="fieldofapplication">
     <element name="field-of-application">
@@ -2010,11 +2012,9 @@ used in document amendments</a:documentation>
           <ref name="formula"/>
         </choice>
       </oneOrMore>
-      <zeroOrMore>
-        <ref name="termsource">
-          <a:documentation>Bibliographic references for this designation of the managed term</a:documentation>
-        </ref>
-      </zeroOrMore>
+      <ref name="TermSource">
+        <a:documentation>Bibliographic references for this designation of the managed term</a:documentation>
+      </ref>
     </element>
   </define>
   <define name="nonverbalrep">
@@ -2028,11 +2028,9 @@ used in document amendments</a:documentation>
           <ref name="formula"/>
         </choice>
       </oneOrMore>
-      <zeroOrMore>
-        <ref name="termsource">
-          <a:documentation>Bibliographic references for this designation of the managed term</a:documentation>
-        </ref>
-      </zeroOrMore>
+      <ref name="TermSource">
+        <a:documentation>Bibliographic references for this designation of the managed term</a:documentation>
+      </ref>
     </element>
   </define>
   <define name="termnote">

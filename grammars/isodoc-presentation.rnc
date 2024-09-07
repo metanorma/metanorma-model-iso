@@ -1,4 +1,7 @@
-# In the following, unaltered fields are uncommented
+# In the following, unaltered fields are uncommented. Changes in cardinality are still commented.
+# When a semantic element wrapper are removed, as in <concept id=...>{content}</concept> => <concept>,
+# that is indicated as "(UNWRAPPED)": in such cases, any anchor of the wrapper is lost, and
+# alignment between Semantic and Presentation XML cannot be recovered through matching anchors
 include "isodoc.rnc" {
 
 misccontainer = element metanorma-extension { AnyElement+, metanorma-source-container }
@@ -136,8 +139,8 @@ FormulaBody =
 ## (20 chars), in order to allow table cells not to be artificially widened
 TdBody &= empty
 
+## (UNWRAPPED): Strip autonumber element, strip `amend` wrapper
 amend = 
-  ## Strip autonumber element, strip `amend` wrapper
   AmendType
 
 AmendType =
@@ -173,11 +176,61 @@ termsource = element termsource {
     attribute status { SourceStatusType },
     attribute type { SourceTypeType },
     origin,
-    ## Replace modification with a commma, then text representing the status, then a dash, then text representing the modification
-    ## e.g. <termsource status="adapted"><origin>...</origin><modification>enhanced</modification></termsource> becomes:
-    ## <termsource status="adapted"><origin>...</origin>, adapted – enhanced</termsource>
+    ## UNWRAP: Replace modification with a commma, then text representing the status, then a dash, then text representing the modification
+    ## e.g.
+    ##    <termsource status="adapted"><origin>...</origin><modification>enhanced</modification></termsource>
+    ## becomes:
+    ##    <termsource status="adapted"><origin>...</origin>, adapted – enhanced</termsource>
     TextElement*
 }
+
+## UNWRAP: replace <concept> with the rendered form of the crossreference
+concept = element concept {
+  ## refterm and renderterm are removed. The crossrefence, eref, erefstack, xref, termref, is replaced with
+  ## the content of renderterm if present and requested (@ref),
+  ## with the attributes of Semantic XML concept used to determine its rendering: 
+  ## ital: italicise the crossreference text
+  ## bold: boldface the crossreference text
+  ## ref: append the citation of the concept definition (clause number, for local definitions)
+  ## linkmention: use renderterm as the cross-reference text; if false, leave the cross-reference as is, to be resolved
+  ## as is normal for Presentation XML
+  ## linkref: cross-reference the citation of the concept definition to the source of that definition
+  ## (same destination as linkmention). If false, unwrap the cross-references, and use only their text, with no cross-referencing
+  ## e.g. 
+  ##    <concept><refterm>term123</refterm> <renderterm>Term</renderterm> 
+  ##       <eref bibitemid="ISO712" type="inline" citeas="ISO 712"/></concept>
+  ## becomes
+  ##    <em>Term</em> (<xref type="inline" target="ISO712">ISO 712</xref>)
+  ( 
+     ## Link to a definition of the term in a bibliographic entry
+     eref |
+     ## Stack of links to a definition of the term in a bibliographic entry
+     erefstack |
+     ## Link to a definition of the term in an element of the current document
+     xref |
+     ## Link to a definition of the term in a termbase
+     termref
+  )
+}
+
+## UNWRAP: replace <related> with the crossreference to the term being related to
+related =
+  ## paragraph is: 
+  ##    <p><strong>{related/@type}:</strong> <em>{related/preferred}</em> 
+  ##       ({related/xref | related/eref | related/termref})</p>
+  ## e.g.
+  ##    <related type='contrast'><preferred><expression><name>Fifth Designation</name></expression></preferred>
+  ##       <xref target='second'/></related>
+  ## becomes: 
+  ##    <p><strong>CONTRAST:</strong> <em><preferred><strong>Fifth Designation</strong></preferred></em> 
+  ##       (<xref target='second'>Clause 1.1</xref>)</p>
+  paragraph
+
+
+
+
+
+
 
 }
 
