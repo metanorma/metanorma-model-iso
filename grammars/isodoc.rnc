@@ -153,6 +153,9 @@ TableAttributes &=
     attribute width { text }?,
     BlockAttributes
 
+TermSource =
+    termsource*
+
 TableBody =
     ## The widths of the columns in the table
     colgroup?,
@@ -168,8 +171,8 @@ TableBody =
     dl?,
     ## Notes specific to this block
     table-note*,
-    ## A URI or other reference intended to link to an externally hosted data source (or equivalent)
-    source*
+    ## A source for the table
+    TermSource
 
 FigureAttributes &=
     ## Width of the figure block in rendering
@@ -199,7 +202,9 @@ SourceBody =
     ## and is intended to be referenced by a callout within the source code
     annotation*,
     ## Notes whose scope is the current block
-    note*
+    note*,
+    ## A source for the block
+    TermSource
 
 FormulaAttributes &=
     BlockAttributes
@@ -828,7 +833,7 @@ term =
     ## Zero or more examples of how the term is to be used
     termexample*,
     ## Bibliographic references for the managed term
-    termsource*
+    TermSource
   }
 
 preferred =
@@ -899,7 +904,7 @@ Designation =
   ## Information about how the designation is to be used
   usageinfo?,
   ## Bibliographic references for this designation of the managed term
-  termsource*
+  TermSource
 
 fieldofapplication =
   element field-of-application { PureTextElement+ }
@@ -1041,7 +1046,7 @@ verbaldefinition = element verbal-definition {
     ## Content of the verbal representation of the term
     (paragraph | dl | ol | ul | table | figure | formula)+,
     ## Bibliographic references for this designation of the managed term
-    termsource*
+    TermSource
 }
 
 ## Non-verbal representation of the term
@@ -1050,7 +1055,7 @@ nonverbalrep =
     ## Content of the non-verbal representation of the term
     ( table | figure | formula )+,
     ## Bibliographic references for this designation of the managed term
-    termsource*
+    TermSource
 }
 
 termnote =

@@ -1,3 +1,4 @@
+# In the following, unaltered fields are uncommented
 include "isodoc.rnc" {
 
 misccontainer = element metanorma-extension { AnyElement+, metanorma-source-container }
@@ -117,7 +118,66 @@ edition = element edition {
   text
 }
 
+## All captions of blocks are prefixed by the i18n'd numbered label of the block, where applicable,
+## followed by a delimiter (as dictated by the house style):
+## e.g. the first table in a French document, with the label "Tabular data",
+## becomes "Tableau 1 – Tabular data". If no caption is present, one is generated, without the delimiter;
+## e.g. "Tableau 1". No prefix is added for blocks with @unnumbered = true, or notag = true.
+tname = element name { NestedTextElement+ }
 
+FormulaBody =
+  stem,
+  ## Any key in a formula is preceded with a paragraph with the i18n'd word "where" or "where_one" (for singular value).
+  ## The key itself is given @class = formula_dl
+  (p, dl)?,
+  note
+
+## All strings in table cells are broken up if they exceed a threshold of length
+## (20 chars), in order to allow table cells not to be artificially widened
+TdBody &= empty
+
+amend = 
+  ## Strip autonumber element, strip `amend` wrapper
+  AmendType
+
+AmendType =
+    ## Remove locality, localityStack, classification, contributor.
+    ## Replace the `description`  element with its children
+    BasicBlock*,
+    ## replace `newcontent` element with `quote`
+    quote?
+
+OlAttributes =
+    BlockAttributes,
+    ## The type of numbering to be applied to the list items is forced
+    ## according to a fixed nesting hierarchy set for a flavour
+    attribute type { ( "roman" | "alphabet" | "arabic" |
+                       "roman_upper" | "alphabet_upper" ) }?
+
+li =
+  element li {
+    ## an anchor is set for all //ol//li, because ordered list items can be cross-referenced
+    RequiredId,
+    LiAttributes,
+    ## Each //ol//li has a label, set by //ol[@type] (e.g. "a", "ii", "C", "3"):
+    ## this is made explicit for Presentation XML, so that it can render them if automatic list labelling doesn't work
+    attribute label { string },
+    LiBody
+} 
+
+TermSource =
+    ## Concatenate all consecutive term sources and block sources into a single semicolon delimited expression
+    termsource?
+
+termsource = element termsource {
+    attribute status { SourceStatusType },
+    attribute type { SourceTypeType },
+    origin,
+    ## Replace modification with a commma, then text representing the status, then a dash, then text representing the modification
+    ## e.g. <termsource status="adapted"><origin>...</origin><modification>enhanced</modification></termsource> becomes:
+    ## <termsource status="adapted"><origin>...</origin>, adapted – enhanced</termsource>
+    TextElement*
+}
 
 }
 
