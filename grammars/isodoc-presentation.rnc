@@ -4,7 +4,49 @@
 # alignment between Semantic and Presentation XML cannot be recovered through matching anchors
 include "isodoc.rnc" {
 
-misccontainer = element metanorma-extension { AnyElement+, metanorma-source-container }
+## In addition to the new elements added to metanorma-extension:
+## * Add <presentation-metadata><name>fonts</name><value>{..}</value></presentation-metadata> for every font required for Fontist.
+## * Add <presentation-metadata><name>font-license-agreement</name><value>{..}</value></presentation-metadata> for 
+##   any needed license agreement language.
+## * Extract any attachments into an _{output filename}_attachments folder, to be linked to in HTML.
+misccontainer = element metanorma-extension { 
+  AnyElement+, 
+  toc+, 
+  preprocess-xslt*, 
+  localized-strings, 
+  metanorma-source-container
+}
+
+## Indicate that a table of contents for specific assets is required
+toc = element toc {
+  ## The type of asset to generate a separate table of contents for
+  attribute type ( "figure" | "table" | "recommendation" ),
+  ## The i18n'd title for the particular table of contents
+  element title { PureTextElement+ }
+}
+
+## Preprocessing XSLT to apply for a specific output format
+preprocess-xslt = element preprocess-xslt {
+  ## The format on which to run this Preprocessing XSLT
+  attribute format { "html" | "pdf" | "doc" },
+  ## The XSLT to run on the Presentation XML, before passing it for processing on to the target format
+  AnyElement+
+}
+
+## i18n equivalents, to be applied in PDF when needing to generate i18n output on the fly
+localized-strings = element localized-strings {
+  localized-string+
+}
+
+## i18n equivalence
+localized-string = element localized-string {
+  ## The name of the i18n string
+  attribute key { text },
+  attribute language { LanguageType },
+  ## The i18n'd rendering of @key; e.g.
+  ##   <localized-string key="table" language="fr">tableau</localized-string>
+  text
+}
 
 ## ONLY in the context of //bibdata/language
 language = element language {
@@ -354,6 +396,18 @@ ruby = element ruby {
   ## content of Semantic XML ruby/pronunciation or ruby/annotation
   element rt { text }
 }   
+
+## UNWRAP: Number formatting is applied to stem/mathml expressions: inline stem, and if number formatting is specified 
+## (@data-metanorma-numberformat), ## formula/stem/mathml as well. 
+## If the stem expression is MathML consisting only of mn, it is replaced with the text content of mn,
+## to reduce processing load. If the stem expression does not already contain <asciimath>,
+## an Asciimath version of the MathML is added, for human readability and potential round-tripping.
+## If the attribute @linebreak is present in the MatML, two different MathML expressions are generated:
+## math-no-linebreak, containing the original MathML, and math-with-linebreak, which breaks the source MathML
+## expression up into separate MathML expressions, joined by <br/>: this is to enable correct rendering in Word.
+## If the MathML has <strong> as an ancestor, <mstyle mathvariant="bold"> is wrapped around the MathML contents:
+## this is because the PDF rendering is not dealing with boldfacing MathML when its container is boldface.
+stem |= text
 
 
 }
