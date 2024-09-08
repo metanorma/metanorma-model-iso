@@ -336,7 +336,7 @@ XrefBody =
      ## Description of location in a reference, which can be combined with other locations in a single citation
      XrefTarget*,
      ## The textual content of the element. The `text` is what we wish to show the link as (e.g., the "content" of `<xx>my link text</xx>`)
-     PureTextElement+
+     PureTextElement*
 
 }
 
@@ -401,7 +401,7 @@ passthrough_inline = element passthrough {
   ## List of the target formats for which the markup is intended, comma-delimited
   attribute formats { text }?,
   ## Markup specific to a target rendering language
-  text
+  (text | AnyElement)+
 }
 
 ## Indication of text added through editorial intervention
@@ -474,7 +474,7 @@ passthrough = element passthrough {
     ## Format of markup to be transferred, comma-delimited
     attribute formats { text }?,
     ## Markup to be transferred
-    text
+    (text | AnyElement)+
 }
 
 ## Input form, for use under HTML

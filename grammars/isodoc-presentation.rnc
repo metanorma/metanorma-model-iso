@@ -226,10 +226,134 @@ related =
   ##       (<xref target='second'>Clause 1.1</xref>)</p>
   paragraph
 
+erefAttributes =
+    attribute normative { xsd:boolean }?,
+    ## Regenerated, based on any potential flavour-specific rendering of the bibliographic citation
+    attribute citeas { text },
+    attribute type { ReferenceFormat }?,
+    attribute alt { text }?
 
+## UNWRAP: lists of erefs with @connective attributes are resolved to a single human-readable string of
+## eref, with connectives linking them; e.g. 
+##    <erefstack><eref connective="from" target="A"/><eref connective="to" target="A"/></erefstack>
+## becomes
+##    from <eref connective="from" target="A"/> to <eref connective="to" target="A"/>
+erefstack = (
+  element eref { erefTypeWithConnective } |
+  text
+)+
 
+## UNWRAP: lists of locality with @connective attributes are resolved to a single human-readable string of
+## locality, with connectives linking them; e.g. 
+##    <eref bibitemid="ISO712" type="inline" citeas="ISO 712">
+##      <localityStack connective="and">
+##        <locality type='clause'><referenceFrom>3.1</referenceFrom></locality>
+##      </localityStack>
+##      <localityStack connective="and">
+##        <locality type='figure'><referenceFrom>b</referenceFrom></locality>
+##      </localityStack>
+##    </eref>
+## becomes
+##    <locality type='clause'><referenceFrom>3.1</referenceFrom></locality> and <locality type='figure'><referenceFrom>b</referenceFrom></locality>
+localityStack =
+   element localityStack {
+     ( locality | text )*
+ }
 
+## UNWRAP: as with localityStack
+sourcelocalityStack =
+   element sourcelocalityStack {
+     ( sourcelocality | text )*
+ }
 
+## UNWRAP: locality becomes text; e.g.
+##     <locality type='clause'><referenceFrom>3.1</referenceFrom></locality>
+## becomes
+##     Clause 3.1
+## If eref/@droploc = true, do not insert the locality name. If eref/@case = capital, titlecase it. 
+## If  eref/@case = lowercase, lowercase it
+locality = text
+
+## UNWRAP: as with locality
+sourcelocality = text
+
+## UNWRAP: convert eref to xref (pointing to bibliography anchor, xref/@target = eref/@bibitemid),
+## or link (if a URI for the reference is supplied in the bibitem being referenced).
+## The locality text (locality, sourcelocality), if present, is inserted as part of the cross-referenced text.
+## If the locality is an anchor, and the eref is converted to link, append the anchor to the URI.
+## If there is no text in the Semantic XML eref, it is populated with eref/@citeas
+eref =
+  xref | hyperlink
+
+## UNWRAP: as for eref
+origin =
+  xref | hyperlink
+
+## UNWRAP: as for eref
+quote-source =
+  xref | hyperlink
+
+## Move svg to image/svg, for consistency.
+## If image contains Data URI-encoded SVG, make it image/svg with explicit SVG markup.
+## If the image is EPS, convert it to SVG.
+## If the image is SVG, convert it to EMF, and add that as a separate child along SVG (for use by Word).
+## If the image is EMF, convert it to SVG, and add that along the img/src EMG (for use outside of Word)
+image = element image { 
+    RequiredId,
+    ImageAttributes,
+     element svg {
+       ( text | AnyElement )+
+     }?,
+     element emf { AnyElement }?
+}
+
+## Any instances of pseudocode figures are processed as sourcecode is.
+## If figure is labelled with figure/@class (e.g. "diagram"), use the i18n of figure/@class, rather than "Figure",
+## to label the figure
+figure &= empty
+
+## UNWRAP: the links in svgmap are already resolved in standoc postprocessing, so they need not be retained
+svgmap = figure
+
+## If the xref is empty, it is resolved to the computed cross-reference label for the element being pointed to.
+## <location>, the locations within the reference being specified, are resolved into text appended to the body, and removed as an element
+XrefBody = PureTextElement+
+
+## If the eref is empty, it is resolved to the citation of the bibliographic element being pointed to.
+## <location>, the locations within the reference being specified, are resolved into text appended to the body, and removed as an element
+ErefBody = PureTextElement+
+
+## change identifier of requirement to just monospace
+reqtlabel = tt
+
+## UNWRAP: Dates marked up with value and format are converted into an i18n'd rendering of the date
+date_inline |= text
+
+## <span> with @style=text-transform... is converted into case transformed text (rather than leaving that to CSS).
+## <span> with @custom-charset= is converted to include font markup in @style appropriate to that charset
+span &= empty
+
+passthrough_inline = element passthrough { 
+  ## @formats is made mandatory, populated with "all" if missing, and brought in line with the permitted output formats
+  ## for the current flavour
+  attribute formats { text },
+  (text | AnyElement)+
+}
+
+passthrough = element passthrough {
+  ## Format of markup to be transferred, comma-delimited
+  ## @formats is made mandatory, populated with "all" if missing, and brought in line with the permitted output formats
+  ## for the current flavour
+  attribute formats { text }?,
+  (text | AnyElement)+
+} 
+
+ruby = element ruby { 
+  ## text content of ruby, or recursing of ruby
+  element rb { text | ruby },
+  ## content of Semantic XML ruby/pronunciation or ruby/annotation
+  element rt { text }
+}   
 
 
 }

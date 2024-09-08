@@ -671,11 +671,11 @@ titlecase, or lowercase</a:documentation>
           <a:documentation>Description of location in a reference, which can be combined with other locations in a single citation</a:documentation>
         </ref>
       </zeroOrMore>
-      <oneOrMore>
+      <zeroOrMore>
         <ref name="PureTextElement">
           <a:documentation>The textual content of the element. The `text` is what we wish to show the link as (e.g., the "content" of `&lt;xx&gt;my link text&lt;/xx&gt;`)</a:documentation>
         </ref>
-      </oneOrMore>
+      </zeroOrMore>
     </define>
   </include>
   <!-- end overrides -->
@@ -780,9 +780,13 @@ titlecase, or lowercase</a:documentation>
           <a:documentation>List of the target formats for which the markup is intended, comma-delimited</a:documentation>
         </attribute>
       </optional>
-      <text>
-        <a:documentation>Markup specific to a target rendering language</a:documentation>
-      </text>
+      <oneOrMore>
+        <choice>
+          <a:documentation>Markup specific to a target rendering language</a:documentation>
+          <text/>
+          <ref name="AnyElement"/>
+        </choice>
+      </oneOrMore>
     </element>
   </define>
   <define name="add">
@@ -947,9 +951,13 @@ That concept may be defined as a term within the current document, or it may be 
           <a:documentation>Format of markup to be transferred, comma-delimited</a:documentation>
         </attribute>
       </optional>
-      <text>
-        <a:documentation>Markup to be transferred</a:documentation>
-      </text>
+      <oneOrMore>
+        <choice>
+          <a:documentation>Markup to be transferred</a:documentation>
+          <text/>
+          <ref name="AnyElement"/>
+        </choice>
+      </oneOrMore>
     </element>
   </define>
   <define name="inputform">
