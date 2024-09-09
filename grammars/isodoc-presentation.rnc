@@ -25,7 +25,7 @@ misccontainer = element metanorma-extension {
 ## Indicate that a table of contents for specific assets is required
 toc = element toc {
   ## The type of asset to generate a separate table of contents for
-  attribute type ( "figure" | "table" | "recommendation" ),
+  attribute type { "figure" | "table" | "recommendation" },
   ## The i18n'd title for the particular table of contents
   element title { PureTextElement+ }
 }

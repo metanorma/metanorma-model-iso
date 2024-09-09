@@ -430,16 +430,7 @@ there could be one or more of such sections within a document. For example, some
 normative or informative references, some split references into sections organized by concept relevance.</a:documentation>
       <element name="references">
         <ref name="OptionalId"/>
-        <optional>
-          <attribute name="obligation">
-            <ref name="ObligationType"/>
-          </attribute>
-        </optional>
-        <attribute name="normative">
-          <a:documentation>Whether this is a normative references section or informative (bibliography). Not the same as obligation:
-Normative References contents contain normative references, but as a clause in the document, they are informative.</a:documentation>
-          <data type="boolean"/>
-        </attribute>
+        <ref name="ReferencesAttributes"/>
         <optional>
           <ref name="section-title"/>
         </optional>
@@ -464,6 +455,18 @@ Normative References contents contain normative references, but as a clause in t
           </ref>
         </zeroOrMore>
       </element>
+    </define>
+    <define name="ReferencesAttributes">
+      <optional>
+        <attribute name="obligation">
+          <ref name="ObligationType"/>
+        </attribute>
+      </optional>
+      <attribute name="normative">
+        <a:documentation>Whether this is a normative references section or informative (bibliography). Not the same as obligation:
+Normative References contents contain normative references, but as a clause in the document, they are informative.</a:documentation>
+        <data type="boolean"/>
+      </attribute>
     </define>
     <define name="NoteAttributes" combine="interleave">
       <optional>
