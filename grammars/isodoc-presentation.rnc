@@ -4,6 +4,11 @@
 # alignment between Semantic and Presentation XML cannot be recovered through matching anchors
 include "isodoc.rnc" {
 
+PureTextElement |= tab
+
+## A tab or similar spacing; used to delimit clause numbers from clause titles
+tab = element tab { empty }
+
 ## In addition to the new elements added to metanorma-extension:
 ## * Add <presentation-metadata><name>fonts</name><value>{..}</value></presentation-metadata> for every font required for Fontist.
 ## * Add <presentation-metadata><name>font-license-agreement</name><value>{..}</value></presentation-metadata> for 
@@ -409,6 +414,48 @@ ruby = element ruby {
 ## this is because the PDF rendering is not dealing with boldfacing MathML when its container is boldface.
 stem |= text
 
+## When the flavour displays normative references among the main section clauses, we move it to /sections/references
+## from /bibliography/references
+sections |= references
+
+## When all bibitem children of references have @hidden = true, set @hidden = true on references
+## as well: this suppresses display of the entire clause (including title and boilerplate)
+ReferencesAttributes &=
+    attribute hidden { xsd:boolean }?
+
+## All bibliographic entries are rendered through relaton-render, which applies the Metanorma flavour's
+## citation stylesheet to populate bibitem/formattedref, according to bibitem/@type. (Different bibliographic types
+## have different rendering templates.) Do not populate formattedref if it is already supplied, and there is no title
+## (to indicate that there is semantic information present: i.e. formattedref is supplied, and cannot be overwritten
+## based on semantic elements). If populating formattedref, strip most other semantic element of bibitem as no longer
+## relevant; by default, retain docidentifier, uri, note, biblio-tag.
+## If bibitem/@suppress_identifier = true, all bibitem/docidentifier are stripped prior to rendering.
+## If bibitem/@type is empty, set it to "standard".
+## If bibitem belongs to a class of implicit references defined for the flavour (e.g. IEV references for ISO),
+## mark it as @hidden = true.
+## If bibitem belongs to a bibliography (informative references), by default we assume it to be numbered:
+## if it is, insert <docidentifier type = 'metanorma-ordinal'>[{ordinal number}]</docidentifier> to provide the number,
+## and renumber all such references from 1.
+doc_bibitem &= biblio-tag?
+
+## In references listings, bibliographic entries typicaly have either the document identifier or an ordinal number
+## prefixed to them, depending on SDO style. biblio-tag identifies which if any identifier(s) will precede the bibliographic entry,
+## and marks them up as a separate tag.
+## The biblio-tag may be footnoted with information about its draft status, if so required by the SDO;
+## that is extracted from bibitem/note[@type = 'Unpublished-Status'] or bibitem/docidentifier/fn
+biblio-tag = element biblio-tag { text, fn?, tab? }
+
+## Depending on the flavour, the docidentifier type for references is prefixed to the docidentifier contents, as its
+## publisher indicator, for disambiguation; e.g. 
+##    <docidentifier type="IETF">I.-D. Arthur</docidentifier>
+## becomes
+##    <docidentifier type="IETF">IETF I.-D. Arthur</docidentifier>
+docidentifier &= empty
+
+## UNWRAP: Requirements may be rendered arbitrarily depending on the requirements model; in the case of Modspec,
+## they are rendered as tables. Requirements are labelled with requirement/@class, or according to their element name
+## if requirement/@class is absent, just as with figures
+RequirementType |= BasicBlock+
 
 }
 

@@ -228,10 +228,7 @@ sections =
 references =
   element references {
     OptionalId,
-    attribute obligation { ObligationType }?,
-    ## Whether this is a normative references section or informative (bibliography). Not the same as obligation:
-    ## Normative References contents contain normative references, but as a clause in the document, they are informative.
-    attribute normative { xsd:boolean },
+    ReferencesAttributes,
     section-title?,
     ## Prefatory text
     BasicBlock*,
@@ -243,6 +240,13 @@ references =
     ## Recursive references section
     references*
 }
+
+ReferencesAttributes =
+    attribute obligation { ObligationType }?,
+    ## Whether this is a normative references section or informative (bibliography). Not the same as obligation:
+    ## Normative References contents contain normative references, but as a clause in the document, they are informative.
+    attribute normative { xsd:boolean }
+
 
 NoteAttributes &=
     ## Semantic classification of note
