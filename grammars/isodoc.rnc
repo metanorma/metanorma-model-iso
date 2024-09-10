@@ -125,17 +125,6 @@ dt =
     TextElement*
   }
 
-NumberingAttributes =
-    ## Do not number this block in rendering
-    attribute unnumbered { xsd:boolean }?,
-    ## Define a subsequence for numbering of this block; e.g. if this block would be numbered
-    ## as 7, but it has a subsequence value of XYZ, this block, and all consecutive blocks
-    ## of the same class and with the same subsequence value, will be numbered consecutively
-    ## with the same number and in a subsequence: 7a, 7b, 7c etc
-    attribute subsequence { text }?,
-    ## Override the numbering of this block in numbering
-    attribute number { text }?
-
 ExampleAttributes =
     NumberingAttributes,
     BlockAttributes

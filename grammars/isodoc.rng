@@ -241,27 +241,6 @@ titlecase, or lowercase</a:documentation>
         </zeroOrMore>
       </element>
     </define>
-    <define name="NumberingAttributes">
-      <optional>
-        <attribute name="unnumbered">
-          <a:documentation>Do not number this block in rendering</a:documentation>
-          <data type="boolean"/>
-        </attribute>
-      </optional>
-      <optional>
-        <attribute name="subsequence">
-          <a:documentation>Define a subsequence for numbering of this block; e.g. if this block would be numbered
-as 7, but it has a subsequence value of XYZ, this block, and all consecutive blocks
-of the same class and with the same subsequence value, will be numbered consecutively
-with the same number and in a subsequence: 7a, 7b, 7c etc</a:documentation>
-        </attribute>
-      </optional>
-      <optional>
-        <attribute name="number">
-          <a:documentation>Override the numbering of this block in numbering</a:documentation>
-        </attribute>
-      </optional>
-    </define>
     <define name="ExampleAttributes">
       <ref name="NumberingAttributes"/>
       <ref name="BlockAttributes"/>

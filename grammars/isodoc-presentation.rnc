@@ -16,14 +16,15 @@ tab = element tab { empty }
 ## * Extract any attachments into an _{output filename}_attachments folder, to be linked to in HTML.
 misccontainer = element metanorma-extension { 
   AnyElement+, 
-  toc+, 
-  preprocess-xslt*, 
-  localized-strings, 
-  metanorma-source-container
+  (ext_toc+ & preprocess-xslt* & localized-strings & metanorma-source-container & source-highlighter-css)
 }
 
+## CSS of the Rouge code highlighter for the document: consists of flavour default,
+## plus any document-specific //metanorma-extension/clause[title = 'user-css']/sourcecode/* 
+source-highlighter-css = element source-highlighter-css { text }
+
 ## Indicate that a table of contents for specific assets is required
-toc = element toc {
+ext_toc = element toc {
   ## The type of asset to generate a separate table of contents for
   attribute type { "figure" | "table" | "recommendation" },
   ## The i18n'd title for the particular table of contents
@@ -414,9 +415,14 @@ ruby = element ruby {
 ## this is because the PDF rendering is not dealing with boldfacing MathML when its container is boldface.
 stem |= text
 
-## When the flavour displays normative references among the main section clauses, we move it to /sections/references
-## from /bibliography/references
-sections |= references
+sections = 
+  ## For most flavours, insert initial typed paragraphs to repeat the document title at the start of `sections`
+  paragraph*,
+  ## When the flavour displays normative references among the main section clauses, we move it to /sections/references
+  ## from /bibliography/references
+  ( clause | terms | term-clause | definitions | floating-title |
+    references
+  )+
 
 ## When all bibitem children of references have @hidden = true, set @hidden = true on references
 ## as well: this suppresses display of the entire clause (including title and boilerplate)
@@ -456,6 +462,88 @@ docidentifier &= empty
 ## they are rendered as tables. Requirements are labelled with requirement/@class, or according to their element name
 ## if requirement/@class is absent, just as with figures
 RequirementType |= BasicBlock+
+
+## All clause titles by default are prefixed by the i18n'd numbered label of the clause, where applicable,
+## followed by a delimiter (as dictated by the house style):
+## e.g. 
+##     <title>Discussion</title>
+## becomes
+##     <title depth="1">4.<tab/>Discussion</title>
+## Annex titles also usually include indication of the annex obligation (not in boldface).
+## If no caption is present, one is generated, without the delimiter; e.g. "Clause 4". 
+## No prefix is added for clauses with @unnumbered = true, or if the document processing directive is to drop heading numbers
+## (e.g. ISO Amendments). No prefix is added for single special clauses in annexes:
+## //annex/terms and //annex/references are a Terms or References section put in an annex, and they are not labelled
+## separately from the containing annex. 
+## Top-level section titles in CJK 3 characters or less in size are rendered extended 
+section-title =
+  element title { 
+    ## A hierarchical section title is given an explicit count of its nesting depth, as a hint for rendering
+    attribute depth { xsd:integer }?,
+    TextElement* 
+  },
+  element variant-title { TypedTitleString }*
+
+## UNWRAP: Change floating-title to a paragraph, of type "floating-title".
+## Top-level section titles in CJK 3 characters or less in size are rendered extended 
+floating-title = paragraph
+
+## Document title in metadata, in CJK 3 characters or less in size, is rendered extended 
+btitle &= empty
+
+## If this is a single special clause in an annex (terms, or references), then this is a Terms or References section put in an annex,
+## and it is not treated as a distinct subclause from its parent; if the annex has no distinct title, use the special clause title instead.
+## Adjust title/@depth accordingly
+annex-subsection &= empty
+
+term = element term {
+    OptionalId,
+    LocalizedStringAttributes,
+    BlockAttributes,
+    ## Clause number of term
+    tname,
+    preferred+,
+    admitted*,
+    deprecates*,
+    related*,
+    termdomain?,
+    termsubject?,
+    termdefinition+,
+    termnote*,
+    termexample*,
+    TermSource
+}
+
+## In some flavours, the index section is not rendered.
+## In others, e.g. ISO, it is populated with a list of cross-references, each representing an index entry
+indexsect |= empty
+
+## In flavours which do not support indexes, index terms are deleted
+index |= empty
+
+## In flavours which do not support indexes, index cross-references are deleted
+index-xref |= empty
+
+Basic-Section-Attributes &= DisplayOrder
+
+## If a block occurs at top level of the document (e.g. initial admonition, repetition of title at start of `sections`,
+## it gets a displayorder attribute
+BlockAttributes &= DisplayOrder
+
+DisplayOrder =
+  ## The top-level clauses and blocks of the document are numbered in the order in which they should be rendered,
+  ## taking floating titles into account.
+  ## Rendering follows that ordering, rather than the ordering of claues in the XML
+  attribute displayorder { xsd:int }
+
+## Clauses in the preface are rearranged into canonical order.
+## An initial table of contents placeholder is inserted at the start of the preface by default, as
+##    <clause type="toc"><title depth="1">{ i18n of 'Table of contents' }</title></clause>
+## If the flavour requires them, additional placeholders are inserted for tables of figures, tables, requirements
+preface &= empty
+
+## Any instances of xref in a pre-populated table of contents are prefixed with the clause number they are referencing
+toc &= empty
 
 }
 
