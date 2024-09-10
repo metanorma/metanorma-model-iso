@@ -364,7 +364,9 @@ figure &= empty
 svgmap = figure
 
 ## If the xref is empty, it is resolved to the computed cross-reference label for the element being pointed to.
-## <location>, the locations within the reference being specified, are resolved into text appended to the body, and removed as an element
+## xref/@case, xref/@droploc, xref/@style, xref/@label are used in computing the label.
+## <location>, the locations within the reference being specified, are combined and  resolved into text appended to the body, 
+## and removed as an element
 XrefBody = PureTextElement+
 
 ## If the eref is empty, it is resolved to the citation of the bibliographic element being pointed to.
@@ -377,7 +379,7 @@ reqtlabel = tt
 ## UNWRAP: Dates marked up with value and format are converted into an i18n'd rendering of the date
 date_inline |= text
 
-## <span> with @style=text-transform... is converted into case transformed text (rather than leaving that to CSS).
+## <span> with @style=text-transform... is converted into case-transformed text (rather than leaving that to CSS).
 ## <span> with @custom-charset= is converted to include font markup in @style appropriate to that charset
 span &= empty
 
