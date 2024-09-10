@@ -502,17 +502,52 @@ term = element term {
     BlockAttributes,
     ## Clause number of term
     tname,
+    ## UNWRAP: Consecutive preferred designations are concatenated into a single designation, delimited by semicolon,
+    ## if they are both verbal designations, in the same language and locale, and neither has pronunciation or grammar information
     preferred+,
+    ## In some flavours, admited designations are prefixed with the i18n of "ADMITTED:"
     admitted*,
+    ## Deprecated designations are prefixed with the i18n of "DEPRECATED:"
     deprecates*,
     related*,
     termdomain?,
     termsubject?,
-    termdefinition+,
+    ## UNWRAP: multiple termdefinitions are replaced with a single definition, consiting of an ordered list of definitions
+    termdefinition,
     termnote*,
     termexample*,
     TermSource
 }
+
+## UNWRAP: The designation is replaced with a string concatenating its data:
+## The designation name, then field-of-application and usage-info comma-delimited and in angle brackets,
+## then expression/grammar information comma-delimited, then language, script and locale comma-delimited,
+## then expression/pronunciation comma-delimited and in slashes.
+## Bookmarks inside the designation are removed. Preferred designations are boldfaced.
+## Any termsources within the designation are moved after it
+Designation = 
+  attribute absent { xsd:boolean }?,
+  attribute geographic-area { text }?,
+  PureTextElement+
+
+## Any termsources within the designation are moved after it
+preferred &= TermSource
+
+## Any termsources within the designation are moved after it
+admitted &= TermSource
+
+## Any termsources within the designation are moved after it
+deprecates &= TermSource
+
+## UNWRAP: remove verbaldefinition wrapper
+verbaldefinition =
+    (paragraph | dl | ol | ul | table | figure | formula)+,
+    TermSource
+
+## UNWRAP: remove nonverbalrep wrapper
+nonverbalrep =
+    ( table | figure | formula )+,
+    TermSource
 
 ## In some flavours, the index section is not rendered.
 ## In others, e.g. ISO, it is populated with a list of cross-references, each representing an index entry
@@ -545,6 +580,20 @@ preface &= empty
 ## Any instances of xref in a pre-populated table of contents are prefixed with the clause number they are referencing
 toc &= empty
 
+SourceBody |=
+  tname?,
+  (
+    ( text | callout )+ |
+    ## UNWRAP: Source code rendered with source highlighting, as a table of line numbers and source code;
+    ## the source code is rendered as with sourcecode within table cells
+    table |
+    ## UNWRAP: The source-highlighted sourcecode within the table cell uses span elements to semantically classify the keywords, 
+    ## and the span tags are coloured through the supplied source-highlighter-css
+    ( text | callout | span )+
+  ),
+  ## UNWRAP: annotations are replaced by a definition list
+  dl?,
+  note*
 }
 
 # end overrides
