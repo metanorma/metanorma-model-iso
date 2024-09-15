@@ -4,8 +4,6 @@
 # alignment between Semantic and Presentation XML cannot be recovered through matching anchors
 include "isodoc.rnc" {
 
-PureTextElement |= tab
-
 ## A tab or similar spacing; used to delimit clause numbers from clause titles
 tab = element tab { empty }
 
@@ -183,10 +181,6 @@ FormulaBody =
   (p, dl)?,
   note
 
-## All strings in table cells are broken up if they exceed a threshold of length
-## (20 chars), in order to allow table cells not to be artificially widened
-TdBody &= empty
-
 ## (UNWRAPPED): Strip autonumber element, strip `amend` wrapper
 amend = 
   AmendType
@@ -355,11 +349,6 @@ image = element image {
      element emf { AnyElement }?
 }
 
-## Any instances of pseudocode figures are processed as sourcecode is.
-## If figure is labelled with figure/@class (e.g. "diagram"), use the i18n of figure/@class, rather than "Figure",
-## to label the figure
-figure &= empty
-
 ## UNWRAP: the links in svgmap are already resolved in standoc postprocessing, so they need not be retained
 svgmap = figure
 
@@ -375,13 +364,6 @@ ErefBody = PureTextElement+
 
 ## change identifier of requirement to just monospace
 reqtlabel = tt
-
-## UNWRAP: Dates marked up with value and format are converted into an i18n'd rendering of the date
-date_inline |= text
-
-## <span> with @style=text-transform... is converted into case-transformed text (rather than leaving that to CSS).
-## <span> with @custom-charset= is converted to include font markup in @style appropriate to that charset
-span &= empty
 
 passthrough_inline = element passthrough { 
   ## @formats is made mandatory, populated with "all" if missing, and brought in line with the permitted output formats
@@ -405,18 +387,6 @@ ruby = element ruby {
   element rt { text }
 }   
 
-## UNWRAP: Number formatting is applied to stem/mathml expressions: inline stem, and if number formatting is specified 
-## (@data-metanorma-numberformat), ## formula/stem/mathml as well. 
-## If the stem expression is MathML consisting only of mn, it is replaced with the text content of mn,
-## to reduce processing load. If the stem expression does not already contain <asciimath>,
-## an Asciimath version of the MathML is added, for human readability and potential round-tripping.
-## If the attribute @linebreak is present in the MatML, two different MathML expressions are generated:
-## math-no-linebreak, containing the original MathML, and math-with-linebreak, which breaks the source MathML
-## expression up into separate MathML expressions, joined by <br/>: this is to enable correct rendering in Word.
-## If the MathML has <strong> as an ancestor, <mstyle mathvariant="bold"> is wrapped around the MathML contents:
-## this is because the PDF rendering is not dealing with boldfacing MathML when its container is boldface.
-stem |= text
-
 sections = 
   ## For most flavours, insert initial typed paragraphs to repeat the document title at the start of `sections`
   paragraph*,
@@ -426,44 +396,12 @@ sections =
     references
   )+
 
-## When all bibitem children of references have @hidden = true, set @hidden = true on references
-## as well: this suppresses display of the entire clause (including title and boilerplate)
-ReferencesAttributes &=
-    attribute hidden { xsd:boolean }?
-
-## All bibliographic entries are rendered through relaton-render, which applies the Metanorma flavour's
-## citation stylesheet to populate bibitem/formattedref, according to bibitem/@type. (Different bibliographic types
-## have different rendering templates.) Do not populate formattedref if it is already supplied, and there is no title
-## (to indicate that there is semantic information present: i.e. formattedref is supplied, and cannot be overwritten
-## based on semantic elements). If populating formattedref, strip most other semantic element of bibitem as no longer
-## relevant; by default, retain docidentifier, uri, note, biblio-tag.
-## If bibitem/@suppress_identifier = true, all bibitem/docidentifier are stripped prior to rendering.
-## If bibitem/@type is empty, set it to "standard".
-## If bibitem belongs to a class of implicit references defined for the flavour (e.g. IEV references for ISO),
-## mark it as @hidden = true.
-## If bibitem belongs to a bibliography (informative references), by default we assume it to be numbered:
-## if it is, insert <docidentifier type = 'metanorma-ordinal'>[{ordinal number}]</docidentifier> to provide the number,
-## and renumber all such references from 1.
-doc_bibitem &= biblio-tag?
-
 ## In references listings, bibliographic entries typicaly have either the document identifier or an ordinal number
 ## prefixed to them, depending on SDO style. biblio-tag identifies which if any identifier(s) will precede the bibliographic entry,
 ## and marks them up as a separate tag.
 ## The biblio-tag may be footnoted with information about its draft status, if so required by the SDO;
 ## that is extracted from bibitem/note[@type = 'Unpublished-Status'] or bibitem/docidentifier/fn
 biblio-tag = element biblio-tag { text, fn?, tab? }
-
-## Depending on the flavour, the docidentifier type for references is prefixed to the docidentifier contents, as its
-## publisher indicator, for disambiguation; e.g. 
-##    <docidentifier type="IETF">I.-D. Arthur</docidentifier>
-## becomes
-##    <docidentifier type="IETF">IETF I.-D. Arthur</docidentifier>
-docidentifier &= empty
-
-## UNWRAP: Requirements may be rendered arbitrarily depending on the requirements model; in the case of Modspec,
-## they are rendered as tables. Requirements are labelled with requirement/@class, or according to their element name
-## if requirement/@class is absent, just as with figures
-RequirementType |= BasicBlock+
 
 ## All clause titles by default are prefixed by the i18n'd numbered label of the clause, where applicable,
 ## followed by a delimiter (as dictated by the house style):
@@ -489,14 +427,6 @@ section-title =
 ## UNWRAP: Change floating-title to a paragraph, of type "floating-title".
 ## Top-level section titles in CJK 3 characters or less in size are rendered extended 
 floating-title = paragraph
-
-## Document title in metadata, in CJK 3 characters or less in size, is rendered extended 
-btitle &= empty
-
-## If this is a single special clause in an annex (terms, or references), then this is a Terms or References section put in an annex,
-## and it is not treated as a distinct subclause from its parent; if the annex has no distinct title, use the special clause title instead.
-## Adjust title/@depth accordingly
-annex-subsection &= empty
 
 term = element term {
     OptionalId,
@@ -532,15 +462,6 @@ Designation =
   attribute geographic-area { text }?,
   PureTextElement+
 
-## Any termsources within the designation are moved after it
-preferred &= TermSource
-
-## Any termsources within the designation are moved after it
-admitted &= TermSource
-
-## Any termsources within the designation are moved after it
-deprecates &= TermSource
-
 ## UNWRAP: remove verbaldefinition wrapper
 verbaldefinition =
     (paragraph | dl | ol | ul | table | figure | formula)+,
@@ -551,27 +472,14 @@ nonverbalrep =
     ( table | figure | formula )+,
     TermSource
 
-## In some flavours, the index section is not rendered.
-## In others, e.g. ISO, it is populated with a list of cross-references, each representing an index entry
-indexsect |= empty
-
-## In flavours which do not support indexes, index terms are deleted
-index |= empty
-
-## In flavours which do not support indexes, index cross-references are deleted
-index-xref |= empty
-
-Basic-Section-Attributes &= DisplayOrder
-
-## If a block occurs at top level of the document (e.g. initial admonition, repetition of title at start of `sections`,
-## it gets a displayorder attribute
-BlockAttributes &= DisplayOrder
-
 DisplayOrder =
   ## The top-level clauses and blocks of the document are numbered in the order in which they should be rendered,
   ## taking floating titles into account.
   ## Rendering follows that ordering, rather than the ordering of claues in the XML
   attribute displayorder { xsd:int }
+
+}
+# end overrides
 
 ## Clauses in the preface are rearranged into canonical order.
 ## An initial table of contents placeholder is inserted at the start of the preface by default, as
@@ -596,11 +504,104 @@ SourceBody |=
   ## UNWRAP: annotations are replaced by a definition list
   dl?,
   note*
-}
 
-# end overrides
+PureTextElement |= tab
+
+## All strings in table cells are broken up if they exceed a threshold of length
+## (20 chars), in order to allow table cells not to be artificially widened
+TdBody &= empty
+
+## Any instances of pseudocode figures are processed as sourcecode is.
+## If figure is labelled with figure/@class (e.g. "diagram"), use the i18n of figure/@class, rather than "Figure",
+## to label the figure
+figure &= empty
+
+## UNWRAP: Dates marked up with value and format are converted into an i18n'd rendering of the date
+date_inline |= text
+
+## <span> with @style=text-transform... is converted into case-transformed text (rather than leaving that to CSS).
+## <span> with @custom-charset= is converted to include font markup in @style appropriate to that charset
+span &= empty
+
+## UNWRAP: Number formatting is applied to stem/mathml expressions: inline stem, and if number formatting is specified 
+## (@data-metanorma-numberformat), ## formula/stem/mathml as well. 
+## If the stem expression is MathML consisting only of mn, it is replaced with the text content of mn,
+## to reduce processing load. If the stem expression does not already contain <asciimath>,
+## an Asciimath version of the MathML is added, for human readability and potential round-tripping.
+## If the attribute @linebreak is present in the MatML, two different MathML expressions are generated:
+## math-no-linebreak, containing the original MathML, and math-with-linebreak, which breaks the source MathML
+## expression up into separate MathML expressions, joined by <br/>: this is to enable correct rendering in Word.
+## If the MathML has <strong> as an ancestor, <mstyle mathvariant="bold"> is wrapped around the MathML contents:
+## this is because the PDF rendering is not dealing with boldfacing MathML when its container is boldface.
+stem |= text
 
 metanorma-source-container = element metanorma { metanorma-source }
+
+## When all bibitem children of references have @hidden = true, set @hidden = true on references
+## as well: this suppresses display of the entire clause (including title and boilerplate)
+ReferencesAttributes &=
+    attribute hidden { xsd:boolean }?
+
+## All bibliographic entries are rendered through relaton-render, which applies the Metanorma flavour's
+## citation stylesheet to populate bibitem/formattedref, according to bibitem/@type. (Different bibliographic types
+## have different rendering templates.) Do not populate formattedref if it is already supplied, and there is no title
+## (to indicate that there is semantic information present: i.e. formattedref is supplied, and cannot be overwritten
+## based on semantic elements). If populating formattedref, strip most other semantic element of bibitem as no longer
+## relevant; by default, retain docidentifier, uri, note, biblio-tag.
+## If bibitem/@suppress_identifier = true, all bibitem/docidentifier are stripped prior to rendering.
+## If bibitem/@type is empty, set it to "standard".
+## If bibitem belongs to a class of implicit references defined for the flavour (e.g. IEV references for ISO),
+## mark it as @hidden = true.
+## If bibitem belongs to a bibliography (informative references), by default we assume it to be numbered:
+## if it is, insert <docidentifier type = 'metanorma-ordinal'>[{ordinal number}]</docidentifier> to provide the number,
+## and renumber all such references from 1.
+doc_bibitem &= biblio-tag?
+  
+## Depending on the flavour, the docidentifier type for references is prefixed to the docidentifier contents, as its
+## publisher indicator, for disambiguation; e.g. 
+##    <docidentifier type="IETF">I.-D. Arthur</docidentifier>
+## becomes
+##    <docidentifier type="IETF">IETF I.-D. Arthur</docidentifier>
+docidentifier &= empty
+  
+## UNWRAP: Requirements may be rendered arbitrarily depending on the requirements model; in the case of Modspec,
+## they are rendered as tables. Requirements are labelled with requirement/@class, or according to their element name
+## if requirement/@class is absent, just as with figures
+RequirementType |= BasicBlock+
+
+## Document title in metadata, in CJK 3 characters or less in size, is rendered extended 
+btitle &= empty
+
+## If this is a single special clause in an annex (terms, or references), then this is a Terms or References section put in an annex,
+## and it is not treated as a distinct subclause from its parent; if the annex has no distinct title, use the special clause title instead.
+## Adjust title/@depth accordingly
+annex-subsection &= empty
+
+## Any termsources within the designation are moved after it
+preferred &= TermSource
+
+## Any termsources within the designation are moved after it
+admitted &= TermSource
+
+## Any termsources within the designation are moved after it
+deprecates &= TermSource
+
+## In some flavours, the index section is not rendered.
+## In others, e.g. ISO, it is populated with a list of cross-references, each representing an index entry
+indexsect |= empty
+
+## In flavours which do not support indexes, index terms are deleted
+index |= empty
+  
+## In flavours which do not support indexes, index cross-references are deleted
+index-xref |= empty
+
+Basic-Section-Attributes &= DisplayOrder
+
+## If a block occurs at top level of the document (e.g. initial admonition, repetition of title at start of `sections`,
+## it gets a displayorder attribute
+BlockAttributes &= DisplayOrder
+
 
 ## The metanorma-source element contains a copy of the Semantic XML, so that downstream
 ## consumers can process Semantic XML and Presentation XML in tandem. The Semantic and
