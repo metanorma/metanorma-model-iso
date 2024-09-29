@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<grammar xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0" xmlns="http://relaxng.org/ns/structure/1.0" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+  <include href="isodoc.rng">
+    <define name="Root-Attributes" combine="choice">
+      <attribute name="document_suffix">
+        <a:documentation>Every document contained in a Metanorma collection has all its anchors and references to anchors
+(xsd:ID, xsd:IDREF) suffixed with a unique identifier,
+derived from the document identifier, so that instances of the same anchor in different documents
+are deduplicated within the one document; so if two documents, ISO 1 and ISO 2, are in the collection 
+and each contain the anchor xyz, that anchor is converted to xyz_ISO_1 for ISO 1, and xyz_ISO_2 for ISO 2.
+The anchor suffix used for that document is included at the root of the document, so that it can be
+recovered.</a:documentation>
+        <data type="ID"/>
+      </attribute>
+    </define>
+  </include>
+  <define name="collection">
+    <a:documentation>A collection of Metanorma documnts</a:documentation>
+    <element name="collection">
+      <ref name="bibdata">
+        <a:documentation>Bibliographic description of the document collection, expressed in the Relaton model</a:documentation>
+      </ref>
+      <zeroOrMore>
+        <ref name="directive"/>
+      </zeroOrMore>
+      <ref name="manifest"/>
+      <zeroOrMore>
+        <ref name="collection_format"/>
+      </zeroOrMore>
+      <optional>
+        <ref name="output_folder"/>
+      </optional>
+      <optional>
+        <ref name="coverpage"/>
+      </optional>
+      <optional>
+        <ref name="compile-options"/>
+      </optional>
+      <optional>
+        <ref name="prefatory-content"/>
+      </optional>
+      <oneOrMore>
+        <ref name="doc-container"/>
+      </oneOrMore>
+      <optional>
+        <ref name="final-content"/>
+      </optional>
+    </element>
+  </define>
+  <define name="prefatory-content">
+    <a:documentation>Metanorma content, to be rendered as the preface to the collection proper</a:documentation>
+    <oneOrMore>
+      <choice>
+        <ref name="clause"/>
+        <ref name="floating-title"/>
+      </choice>
+    </oneOrMore>
+  </define>
+  <define name="final-content">
+    <a:documentation>Metanorma content, to be rendered as the postface to the collection proper</a:documentation>
+    <oneOrMore>
+      <choice>
+        <ref name="clause"/>
+        <ref name="floating-title"/>
+        <ref name="bibliography"/>
+      </choice>
+    </oneOrMore>
+  </define>
+  <define name="doc-container">
+    <a:documentation>Container for a Metanorma document</a:documentation>
+    <element name="doc-container">
+      <ref name="RequiredId"/>
+      <optional>
+        <ref name="standard-document">
+          <a:documentation>The Metanorma XML document; the root name changes according to the flavour, as is the normal case for Metanorma.
+All cross-references to other files in the same collection (as identified in the bibliographies of each document)
+are resolved into hyperlinks to the other files; this includes references in SVG maps.</a:documentation>
+        </ref>
+      </optional>
+    </element>
+  </define>
+  <define name="directive">
+    <a:documentation>Directive for Metanorma compilation: see https://www.metanorma.org/author/topics/collections/configuration/ 
+for documentation.</a:documentation>
+    <element name="directive">
+      <element name="key">
+        <text/>
+      </element>
+      <element name="value">
+        <text/>
+      </element>
+    </element>
+  </define>
+  <define name="collection_format">
+    <a:documentation>Format to output the collection as: xml, presentation, html, doc, pdf.
+See https://www.metanorma.org/author/topics/collections/configuration/ </a:documentation>
+    <element name="format">
+      <text/>
+    </element>
+  </define>
+  <define name="output_folder">
+    <a:documentation>The local output folder in which the collection will be generated, as a file path.</a:documentation>
+    <element name="output_folder">
+      <text/>
+    </element>
+  </define>
+  <define name="coverpage">
+    <a:documentation>The cover page for the collection, as a file name. This is an HTML file consisting of a Liquid template
+that takes the collection manifest as its input. It is intended to provide navigation to the collection contents:
+every node of the manifest with entry/@index = true is represented, and </a:documentation>
+    <element name="coverpage">
+      <text/>
+    </element>
+  </define>
+  <define name="compile-options">
+    <a:documentation>Metanorma document compilation options applied to the collection</a:documentation>
+    <element name="compile">
+      <element name="install_fonts">
+        <a:documentation>Install fonts used in the documents</a:documentation>
+        <data type="boolean"/>
+      </element>
+      <element name="agree_to_terms">
+        <a:documentation>Agree to terms for font installation without user interaction</a:documentation>
+        <data type="boolean"/>
+      </element>
+    </element>
+  </define>
+  <define name="manifest">
+    <a:documentation>Manifest of the collection</a:documentation>
+    <element name="entry">
+      <optional>
+        <attribute name="id">
+          <a:documentation>The doc-container/@id referenced by this manifest entry, if it is a leaf node (describing a document)</a:documentation>
+          <data type="IDREF"/>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="attachment">
+          <a:documentation>This node in the manifest is an attachment file (it is not to be parsed as a Metanorma document, but copied
+into the output directory as is)</a:documentation>
+          <data type="boolean"/>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="sectionsplit">
+          <a:documentation>This node in the manifest is a Metanorma document that is to be broken down into a collection in rendering,
+generating one document per clause of the original document</a:documentation>
+          <data type="boolean"/>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="index">
+          <a:documentation>This node in the manifest is to be included in the cover page table of contents/index of the collection</a:documentation>
+          <data type="boolean"/>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="fileref">
+          <a:documentation>File path of the file being described, if this is a leaf node</a:documentation>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="url">
+          <a:documentation>URI to be used to reference this file in the document in cross-references, if this is a leaf node. Used in case the url 
+to be used is different from the filename given in fileref, for whatever reason</a:documentation>
+        </attribute>
+      </optional>
+      <optional>
+        <element name="identifier">
+          <a:documentation>The document identifier of the file described, used for rendering of the manifest and for cross-referencing</a:documentation>
+          <text/>
+        </element>
+      </optional>
+      <optional>
+        <element name="type">
+          <text/>
+        </element>
+      </optional>
+      <optional>
+        <element name="title">
+          <a:documentation>Title of this node in the manifest structure</a:documentation>
+          <text/>
+        </element>
+      </optional>
+      <optional>
+        <ref name="bibdata">
+          <a:documentation>Bibliographic description of the document, copied out from the document itself (if this a leaf node),
+so that the manifest can access any needed metadata</a:documentation>
+        </ref>
+      </optional>
+      <zeroOrMore>
+        <ref name="manifest">
+          <a:documentation>Recursive manifests, used to represent a tree structure of documents in the collection.
+Note that by contrast doc-container, the actual documents being referenced, is a flat list.
+This element only appears if the element is describing a branch of the collection structure;
+it does not appear if entry is a leaf node (describing a document)</a:documentation>
+        </ref>
+      </zeroOrMore>
+    </element>
+  </define>
+  <start>
+    <ref name="collection"/>
+  </start>
+</grammar>
