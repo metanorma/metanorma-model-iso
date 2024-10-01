@@ -33,6 +33,11 @@ class IsoDocumentId{
       Representation in the identifier of the type of document technical corrigendum, if this is a document technical corrigendum.
        }
     }
+    +addendumNumber: Integer[0..1] {
+       definition {
+      Representation in the identifier of the type of document addendum, if this is a document addendum (legacy type).
+       }
+    }
     +originalyear: Integer[0..1] {
        definition {
          Year of publication of the document in its current version or edition.

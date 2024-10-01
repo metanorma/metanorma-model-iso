@@ -48,6 +48,11 @@ enum IsoDocumentType {
       Technical Corrigendum.
     }
   }
+  addendum {
+    definition {
+      Addendum (legacy type).
+    }
+  }
   committee-document {
     definition {
       Committee Document (for internal use).

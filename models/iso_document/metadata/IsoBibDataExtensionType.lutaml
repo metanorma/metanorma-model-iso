@@ -29,7 +29,7 @@ class IsoBibDataExtensionType {
     }
     +updatesDocumentType: DocumentType[0..1] {
        definition {
-         Type of document being updated by this document, if it is an amendment or technical corrigendum.
+         Type of document being updated by this document, if it is an amendment, addendum, or technical corrigendum.
        }
     }
     +fast-track: Boolean[0..1] {
