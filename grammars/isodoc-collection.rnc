@@ -76,7 +76,7 @@ compile-options = element compile {
 ## Manifest of the collection
 manifest = element entry {
   ## The doc-container/@id referenced by this manifest entry, if it is a leaf node (describing a document)
-  attribute id { xsd:IDREF }?,
+  attribute target { xsd:IDREF }?,
   ## This node in the manifest is an attachment file (it is not to be parsed as a Metanorma document, but copied
   ## into the output directory as is)
   attribute attachment { xsd:boolean }?,

@@ -129,7 +129,7 @@ every node of the manifest with entry/@index = true is represented, and </a:docu
     <a:documentation>Manifest of the collection</a:documentation>
     <element name="entry">
       <optional>
-        <attribute name="id">
+        <attribute name="target">
           <a:documentation>The doc-container/@id referenced by this manifest entry, if it is a leaf node (describing a document)</a:documentation>
           <data type="IDREF"/>
         </attribute>

@@ -87,6 +87,7 @@ BibDataExtensionType =
   ## Duplicate doctype, giving a translation of the doctype into the current i18n language
   doctype+,
   docsubtype?,
+  flavor,
   editorialgroup?,
   ics*,
   structuredidentifier*
@@ -134,6 +135,11 @@ BibliographicItem =
     bkeyword*,
     validity?,
     depiction?
+
+bDateAttributes |=
+  ## Through i18n, generate a translation of the Semantic date value, with language set to the current language.
+  ## The original value is indicated with language=""
+  attribute language { LanguageType }?
 
 doctype = element doctype {
   ## Through i18n, generate a translation of the Semantic doctype value, with language set to the current language.
