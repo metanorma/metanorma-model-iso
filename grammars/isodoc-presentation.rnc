@@ -178,6 +178,11 @@ edition = element edition {
 ## e.g. the first table in a French document, with the label "Tabular data",
 ## becomes "Tableau 1 – Tabular data". If no caption is present, one is generated, without the delimiter;
 ## e.g. "Tableau 1". No prefix is added for blocks with @unnumbered = true, or notag = true.
+##
+## Captions always have inserted into them the delimiter text that separates them from the block content
+## they apply to, rather than leaving that to the renderer. So formula/name is transformed from "1" to "(1)";
+## note/name is populated as "Note 1:" or "NOTE —"  and not just "Note". In future versions, the autonumber and delimiter
+## content will be tagged separately.
 tname = element name { NestedTextElement+ }
 
 FormulaBody =
@@ -341,6 +346,35 @@ origin =
 quote-source =
   xref | hyperlink
 
+## UNWRAP: Append to blockquote attribution paragraph, containing formatted rendering of author and source
+QuoteBody &=
+    quote-attribution
+
+## UNWRAP: Append to blockquote attribution paragraph, containing formatted rendering of author and source
+QuoteNoIdBody &=
+    quote-attribution
+
+## Blockquote attribution paragraph, containing formatted rendering of author and source
+quote-attribution = element attribution  {
+    attribution-para
+}
+
+## TODO this is not a great pattern, we will want these inline Semantic XML elements to be spans pointing to their Semantic XML origin
+attribution-para = element p {
+  TextElement* & quote-author & quote-source
+}
+
+## TODO the same has been done for term definitions: we are inserting domain as a Semantic XML into the first definition
+## paragraph, rather than leaving that to the renderer. In the future, we will make that instead a span with class fmt-domain,
+## pointing to the source domain element. I'm not updating the grammar for now, because it would be nightmarish to and will not persist.
+termdefinition &= empty
+  
+quote-source =
+  element source { erefType }
+
+quote-author =
+  element author { text }
+
 ## Move svg to image/svg, for consistency.
 ## If image contains Data URI-encoded SVG, make it image/svg with explicit SVG markup.
 ## If the image is EPS, convert it to SVG.
@@ -422,6 +456,8 @@ biblio-tag = element biblio-tag { text, fn?, tab? }
 ## //annex/terms and //annex/references are a Terms or References section put in an annex, and they are not labelled
 ## separately from the containing annex. 
 ## Top-level section titles in CJK 3 characters or less in size are rendered extended 
+##
+## Titles missing in the Semantic XML for forewords and definitions are populated here.
 section-title =
   element title { 
     ## A hierarchical section title is given an explicit count of its nesting depth, as a hint for rendering
@@ -456,6 +492,11 @@ term = element term {
     termexample*,
     TermSource
 }
+
+## Indicate that domain display is to be suppressed if it is being rendered inside of a definition
+## TODO will rescind that and put in a pattern that crossreferences rendered Semantic XML elements and their original
+termdomain &=
+  attribute hidden { xsd: boolean }
 
 ## UNWRAP: The designation is replaced with a string concatenating its data:
 ## The designation name, then field-of-application and usage-info comma-delimited and in angle brackets,
@@ -520,6 +561,12 @@ TdBody &= empty
 ## Any instances of pseudocode figures are processed as sourcecode is.
 ## If figure is labelled with figure/@class (e.g. "diagram"), use the i18n of figure/@class, rather than "Figure",
 ## to label the figure
+##
+## By default, any footnotes of the figure are moved to the beginning of the Figure key: the definition term is
+## the footnote reference, the definition content is the footnote content. This follows ISO rendering, and presupposes
+## that the footnote reference is embedded in the figure graphically.
+##
+## If not supplied, a label paragraph is given for the key. TODO: this should be dl/name throughout, not p
 figure &= empty
 
 ## UNWRAP: Dates marked up with value and format are converted into an i18n'd rendering of the date
