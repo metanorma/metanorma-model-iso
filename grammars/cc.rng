@@ -10,7 +10,7 @@
   <include href="relaton-cc.rng"/>
   <include href="isodoc.rng">
     <start>
-      <ref name="csd-standard"/>
+      <ref name="cc-standard"/>
     </start>
     <define name="FigureBody">
       <zeroOrMore>
@@ -40,8 +40,8 @@
       </choice>
     </define>
   </include>
-  <define name="csd-standard">
-    <element name="csd-standard">
+  <define name="cc-standard">
+    <element name="cc-standard">
       <ref name="Root-Attributes"/>
       <ref name="bibdata"/>
       <zeroOrMore>

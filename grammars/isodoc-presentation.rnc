@@ -496,7 +496,7 @@ term = element term {
 ## Indicate that domain display is to be suppressed if it is being rendered inside of a definition
 ## TODO will rescind that and put in a pattern that crossreferences rendered Semantic XML elements and their original
 termdomain &=
-  attribute hidden { xsd: boolean }
+  attribute hidden { xsd:boolean }
 
 ## UNWRAP: The designation is replaced with a string concatenating its data:
 ## The designation name, then field-of-application and usage-info comma-delimited and in angle brackets,

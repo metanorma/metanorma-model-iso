@@ -7,15 +7,15 @@
 include "relaton-cc.rnc" {}
 include "isodoc.rnc" {
 
-start = csd-standard
+start = cc-standard
 
 FigureBody =
      source*, tname?, ( figure+ |  ( (TextElement* | pre), note*, dl? ) )
 
 }
 
-csd-standard =
-  element csd-standard {
+cc-standard =
+  element cc-standard {
     Root-Attributes,
     bibdata, termdocsource*, misccontainer?, boilerplate?, preface, sections+, annex*, bibliography, indexsect*
  }

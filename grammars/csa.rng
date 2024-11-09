@@ -9,7 +9,7 @@
   <include href="relaton-csa.rng"/>
   <include href="isodoc.rng">
     <start>
-      <ref name="csand-standard"/>
+      <ref name="csa-standard"/>
     </start>
     <define name="FigureBody">
       <zeroOrMore>
@@ -39,7 +39,7 @@
       </choice>
     </define>
   </include>
-  <define name="csand-standard">
+  <define name="csa-standard">
     <element name="csa-standard">
       <ref name="Root-Attributes"/>
       <ref name="bibdata"/>
