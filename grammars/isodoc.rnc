@@ -167,7 +167,7 @@ references =
 
 ## Content of note
 NoteBody =
-    (paragraph | ul | ol | dl | formula | quote | sourcecode)+
+    (paragraph-with-footnote | ul | ol | dl | formula | quote | sourcecode)+
 
 ## Group of blocks within text, which is a leaf node in the hierarchical organisation of text (does not contain any sections of its own)
 Basic-Section =
@@ -208,7 +208,7 @@ ThBody =
 
 table-note = element note {
     OptionalId,
-    paragraph+
+    paragraph-with-footnote+
 }
 
 ## Subscript text. Corresponds to HTML `sub
@@ -1028,7 +1028,7 @@ termdefinition =
 
 verbaldefinition = element verbal-definition {
     ## Content of the verbal representation of the term
-    (paragraph | dl | ol | ul | table | figure | formula)+,
+    (paragraph-with-footnote | dl | ol | ul | table | figure | formula)+,
     ## Bibliographic references for this designation of the managed term
     TermSource
 }
@@ -1048,7 +1048,7 @@ termnote =
     NumberingAttributes,
     BlockAttributes,
     ## Content of the term note
-    (paragraph | ul | ol | dl | formula)+
+    (paragraph-with-footnote | ul | ol | dl | formula)+
 }
 
 termexample =
@@ -1056,7 +1056,7 @@ termexample =
     RequiredId,
     BlockAttributes,
     ## Content of the term example
-    ( formula | ul | ol | dl | quote | sourcecode | paragraph | figure )+
+    ( formula | ul | ol | dl | quote | sourcecode | paragraph-with-footnote | figure )+
 }
 
 ## The bibliographic source where a term is defined in the sense applicable in this standardisation document
