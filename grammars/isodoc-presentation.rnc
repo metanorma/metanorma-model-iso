@@ -14,7 +14,7 @@ tab = element tab { empty }
 ## * Extract any attachments into an _{output filename}_attachments folder, to be linked to in HTML.
 misccontainer = element metanorma-extension { 
   AnyElement+, 
-  (ext_toc+ & preprocess-xslt* & localized-strings & metanorma-source-container & source-highlighter-css)
+  (ext_toc+ & localized-strings & metanorma-source-container & source-highlighter-css)
 }
 
 ## CSS of the Rouge code highlighter for the document: consists of flavour default,
@@ -27,14 +27,6 @@ ext_toc = element toc {
   attribute type { "figure" | "table" | "recommendation" },
   ## The i18n'd title for the particular table of contents
   element title { PureTextElement+ }
-}
-
-## Preprocessing XSLT to apply for a specific output format
-preprocess-xslt = element preprocess-xslt {
-  ## The format on which to run this Preprocessing XSLT
-  attribute format { "html" | "pdf" | "doc" },
-  ## The XSLT to run on the Presentation XML, before passing it for processing on to the target format
-  AnyElement+
 }
 
 ## i18n equivalents, to be applied in PDF when needing to generate i18n output on the fly

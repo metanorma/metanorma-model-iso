@@ -325,7 +325,7 @@ normative or informative references, some split references into sections organiz
       <a:documentation>Content of note</a:documentation>
       <oneOrMore>
         <choice>
-          <ref name="paragraph"/>
+          <ref name="paragraph-with-footnote"/>
           <ref name="ul"/>
           <ref name="ol"/>
           <ref name="dl"/>
@@ -411,7 +411,7 @@ normative or informative references, some split references into sections organiz
       <element name="note">
         <ref name="OptionalId"/>
         <oneOrMore>
-          <ref name="paragraph"/>
+          <ref name="paragraph-with-footnote"/>
         </oneOrMore>
       </element>
     </define>
@@ -1976,7 +1976,7 @@ used in document amendments</a:documentation>
       <oneOrMore>
         <choice>
           <a:documentation>Content of the verbal representation of the term</a:documentation>
-          <ref name="paragraph"/>
+          <ref name="paragraph-with-footnote"/>
           <ref name="dl"/>
           <ref name="ol"/>
           <ref name="ul"/>
@@ -2014,7 +2014,7 @@ used in document amendments</a:documentation>
       <oneOrMore>
         <choice>
           <a:documentation>Content of the term note</a:documentation>
-          <ref name="paragraph"/>
+          <ref name="paragraph-with-footnote"/>
           <ref name="ul"/>
           <ref name="ol"/>
           <ref name="dl"/>
@@ -2036,7 +2036,7 @@ used in document amendments</a:documentation>
           <ref name="dl"/>
           <ref name="quote"/>
           <ref name="sourcecode"/>
-          <ref name="paragraph"/>
+          <ref name="paragraph-with-footnote"/>
           <ref name="figure"/>
         </choice>
       </oneOrMore>
