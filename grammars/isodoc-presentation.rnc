@@ -165,17 +165,74 @@ edition = element edition {
   text
 }
 
-## All captions of blocks are prefixed by the i18n'd numbered label of the block, where applicable,
-## followed by a delimiter (as dictated by the house style):
-## e.g. the first table in a French document, with the label "Tabular data",
-## becomes "Tableau 1 – Tabular data". If no caption is present, one is generated, without the delimiter;
-## e.g. "Tableau 1". No prefix is added for blocks with @unnumbered = true, or notag = true.
-##
+NestedTextElement |= semx
+
+## Autonumbers and other content duplicated from Semantic XML into new Presentation XML content is annotated by the <semx> element,
+## which connects the inserted content back to its Semantic XML source. So in the generated crossreference "Clause *2*, Note 1",
+## the "1" is marked up as <semx element='autonum' source='A'>2</semx>, indicating that the "2" is an auto-number
+## associated with the element with id A (the Clause tag). In a caption like "Clause 2: *Discussion*", the "Discussion"
+## is marked up as <semx element='title' source='B'>, indicating that the user-supplied title content is taken from the
+## Semantic XML <title> element with id B.
+semx = element semx {
+  ## Name of source element that the Semantic XML content is derived from. "autonum" indicates that the content is an autonumber.
+  attribute element { text },
+  ## id of the source element that the Semantic XML content is derived from.
+  attribute source { xsd:IDREF },
+  ## Duplicated Semantic XML content, or content derived from it (such as an autonumber).
+  PureTextElement*
+}
+
 ## Captions always have inserted into them the delimiter text that separates them from the block content
 ## they apply to, rather than leaving that to the renderer. So formula/name is transformed from "1" to "(1)";
 ## note/name is populated as "Note 1:" or "NOTE —"  and not just "Note". In future versions, the autonumber and delimiter
 ## content will be tagged separately.
 tname = element name { NestedTextElement+ }
+
+## Asset captions are transformed analogously to section-title; see documentation there
+## (with fmt-name replacing fmt-title as the Presentation XML-specific caption of a block).
+## The following additional provisos apply:
+## * fmt-caption-label is not added to fmt-name
+tname =
+  element name {
+    attribute id { xsd:ID },
+    NestedTextElement+
+  }?,
+  fmt-name,
+  fmt-xref-label*
+
+## See fmt-title for rationale for the Presentation XML counterpart to name and title, and how it is structured.
+## The following additional provisos apply to fmt-name:
+##
+## * fmt-caption-label is not added to fmt-name, not only if @unnumbered = true, but also if @notag = true
+## * Autonumber delimiters are added to the caption, using span[@class = 'fmt-autonum-delim']; so formula
+## will have <name>1</name>, but
+##   <fmt-name>
+##     <span class="fmt-caption-delim">
+##       <span class="fmt-autonum-delim">(</span>
+##       <semx element="autonum" source="A">1</semx>
+##       <span class="fmt-autonum-delim">)</span>
+##     </span>
+##   </fmt-name>
+## * As with inline section titles, the fmt-name content may be followed immediately by block content; in that
+## case, span[@class = 'fmt-label-delim'] separates the name from the content; e.g. 
+##   <note>
+##     <fmt-name>
+##       <span class="fmt-caption-delim">
+##         <span class="fmt-element-name">NOTE</span>
+##         <semx element="autonum" source="A">1</semx>
+##       </span>
+##       <span class="fmt-label-delim">:<tab/></span>
+##     </fmt-name>
+##     <p>This is a note...</p>
+##  To be rendered as:
+##    <p>NOTE 1:<tab/>This is a note...</p>
+fmt-title = element fmt-title {
+    ## A hierarchical section title is given an explicit count of its nesting depth, as a hint for rendering
+    attribute depth { xsd:integer }?,
+    ## The ID of the title that the fmt-title is derived from
+    attribute source { xsd:IDREF }?,
+    TextElement*
+  } 
 
 FormulaBody =
   stem,
@@ -435,32 +492,76 @@ sections =
 ## that is extracted from bibitem/note[@type = 'Unpublished-Status'] or bibitem/docidentifier/fn
 biblio-tag = element biblio-tag { text, fn?, tab? }
 
-## All clause titles by default are prefixed by the i18n'd numbered label of the clause, where applicable,
-## followed by a delimiter (as dictated by the house style):
+## The user-supplied Semantic XML title (if any) is given a unique ID number for cross-referencing.
+## 
+## It is followed by a Presentation XML-specific fmt-title, which is derived from the Semantic XML title,
+## and adds to it autonumbering. fmt-title indexes the title it is derived from.
+## Titles missing in the Semantic XML for forewords and definitions are populated here.
+##
+## The default cross-reference text for the clause is then given
+section-title =
+  element title {
+    attribute id { xsd:ID },
+    TextElement*
+  }?,
+  element variant-title { TypedTitleString }*,
+  fmt-title,
+  fmt-xref-label*
+
+## All clause titles by default are prefixed by the i18n'd autonumbered label of the clause, where applicable,
+## followed by a delimiter (as dictated by the house style). Autonumbers are given in <semx/>, and the content
+## of fmt-title is annotated with spans of class fmt-*, as described under <span>
 ## e.g. 
+##     <clause id="A">
 ##     <title>Discussion</title>
 ## becomes
-##     <title depth="1">4.<tab/>Discussion</title>
-## Annex titles also usually include indication of the annex obligation (not in boldface).
-## If no caption is present, one is generated, without the delimiter; e.g. "Clause 4". 
-## No prefix is added for clauses with @unnumbered = true, or if the document processing directive is to drop heading numbers
-## (e.g. ISO Amendments). No prefix is added for single special clauses in annexes:
+##     <clause id="A">
+##     <title id="A1">Discussion</title>
+##     <fmt-title depth="1" source="A1">
+##       <span class="fmt-caption-label">
+##         <span class="fmt-element-name">Clause</span> <semx element="autonum" source="A">4</semx>
+##       </span><span class="fmt-autonum-delim">.</span><span class="fmt-caption-delim"><tab/></span>
+##       <semx element="title" source="A1">Discussion</semx>
+##      </fmt-title>
+## Annex titles also usually include indication of the annex obligation (span[@class = 'fmt-obligation']).
+## If no title is present in the Semantic XML, fmt-title is generated without the title caption (semx[@element = "title"])
+## and the caption delimiter (span[@class="fmt-caption-delim]); span[@fmt-autonum-delim] is still added
+## (so "Clause 4*.*", if the flavour requires it, but not "Clause 4.*<tab/>*".)
+## No fmt-caption-label is added for clauses with @unnumbered = true, or if the document processing directive is to drop heading numbers
+## (e.g. ISO Amendments). No fmt-caption-label is added for single special clauses in annexes:
 ## //annex/terms and //annex/references are a Terms or References section put in an annex, and they are not labelled
 ## separately from the containing annex. 
 ## Top-level section titles in CJK 3 characters or less in size are rendered extended 
-##
-## Titles missing in the Semantic XML for forewords and definitions are populated here.
-section-title =
-  element title { 
+fmt-title = element fmt-title {
     ## A hierarchical section title is given an explicit count of its nesting depth, as a hint for rendering
     attribute depth { xsd:integer }?,
-    TextElement* 
-  },
-  element variant-title { TypedTitleString }*
+    ## The ID of the title that the fmt-title is derived from
+    attribute source { xsd:IDREF }?,
+    TextElement*
+  }
 
-## UNWRAP: Change floating-title to a paragraph, of type "floating-title".
+## The default cross-reference text for the element; for example, "Clause 1" for a clause.
+## This text may be different from the caption for the element; for example, ISO labels notes as "NOTE 1",
+## but cross-references them as "note 1". 
+fmt-xref-label = element fmt-xref-label {
+  ## Some assets have a different default cross-reference based on whether they are inside or outside of a container element;
+  ## for instance, because note numbering restarts in most flavours each clause, a Note may be referenced as "Note 1"
+  ## within Clause 2, but as "Clause 2, Note 1" outside of Clause 2. These cross-references are differentiated by
+  ## using the container attribute to point to that container element. If two fmt-xref-label elements are provided,
+  ## one with a container attribute, and one without, then any cross-references from a descendant of the container node 
+  ## will use the latter element for its text, and any cross-references from outside the container node will use the former:
+  ##  <fmt-xref-label container="A">Clause 2, Note 1</fmt-xref-label> # used outside of A; "Clause 2" is itself element A.
+  ##  <fmt-xref-label>Note 1</fmt-xref-label> # used within A
+  attribute container { xsd:IDREF }?,
+  ## The cross-reference text is semantically annotated with span[@class='fmt-*'] and semx, as for captions;
+  ## refer to those elements for definitions.
+  TextElement*
+}
+
+## Semantic XML floating-title has a paragraph added after it, of type "floating-title".
+## The content of floating-title is replicated to p[@type = 'floating-title'] as semx[@element = 'floating-title'].
 ## Top-level section titles in CJK 3 characters or less in size are rendered extended 
-floating-title = paragraph
+floating-title &&= paragraph
 
 term = element term {
     OptionalId,
@@ -566,6 +667,42 @@ date_inline |= text
 
 ## <span> with @style=text-transform... is converted into case-transformed text (rather than leaving that to CSS).
 ## <span> with @custom-charset= is converted to include font markup in @style appropriate to that charset
+##
+## <span> with classes prefixed with "fmt-" are used to annotate semantically content introduced in Presentation XML.
+## In particular:
+## * fmt-element-name is an element name (or other name of an asset type), used to label an autonumbered asset
+## (block or clause) in a caption and in a cross-reference. For example, *Table* 1, *Drawing* 3, *Annex* A.
+## This name is i18n'ised, as appropriate (e.g. *Tableau* 1 in French).
+## * fmt-caption-label is used to annotate the autonumber label for an asset in captions.
+## For example, *Table 1*, *Drawing 3*, *Annex A*. The fmt-caption-label span is differentiated from a following
+## user-supplied title, e.g. "*Table 1*: After-effects of plutonium." It typically consists of an asset type name
+## (span[@class = 'fmt-element-name']) plus an autonumber (semx).
+## * fmt-caption-delim is used to annotate punctuation or space delimiting the  autonumber label (fmt-caption-label) from
+## any user-supplied title of the asset, e.g. "Table 1*:* After-effects of plutonium.",
+## "Clause 3*<tab/>*Discussion".
+## * fmt-label-delim is used to annotate puncutation or space inserted after the autonumber label and any user-supplied title,
+## e.g. "Table 1: After-effects of plutonium*.*" (at the end of a table caption), 
+## or "Note 3*:<tab/>* The after-effects are outlined above." (the delimiter separates the note label from note content,
+## and would follow any note title if one were given.) The sequence in a caption is thus 
+## (with <semx element='autonum'/> the autonumber itself, and <semx element='name/title'> the user-supplied title):
+##
+## <fmt-caption-label><fmt-element-name/> <semx element='autonum'/></fmt-caption-label><fmt-caption-delim/>
+##   <semx element='name'><fmt-label-delim/>
+## * fmt-autonum-delim is used to separate numbers in a hierarchy, when an autonumber is built up of other numbers;
+## e.g. Clause 2*.*1, Figure 1*-*2. It is also used for punctuation surrounding an autonumber (as opposed to separating it
+## from a following user-supplied caption; e.g. Formula *(*2*)*, Figure 1 a*)*.
+## The numbers it separates will typically be <semx class='autonum'/>
+## * fmt-xref-container is used in cross-references, to indicate the label of an ancestor node of the target node,
+## used to disambiguate the cross-reference to that node. For example, notes are typically renumbered each clause,
+## so "Note 1" is ambiguous in a cross-reference outside the current node; the cross-reference will instead be generated
+## as "*Clause 5*, Note 1". "Clause 5" is annotated as fmt-xref-container.
+## * fmt-comma is used to annotate a comma used as a delimiter for autonumbers, especially between fmt-xref-container
+## and the cross-reference proper, e.g. "Clause 5*,* Note 1". 
+## * fmt-enum-comma  is used for commas introduced in auto-generated enumerations, such as Boolean conjunctions of 
+## more than two cross-references, e.g. "Clauses 2*,* 3 and 5".
+## * fmt-conn is used to annotate Boolean conjunctions introduced in auto-generated text, such as of multiple cross-references,
+## e.g. "Clauses 2, 3 *and* 5".
+## * fmt-obligation is used to annotate the indication of obligation in annex titles ("normative", "informative").
 span &= empty
 
 ## UNWRAP: Number formatting is applied to stem/mathml expressions: inline stem, and if number formatting is specified 
