@@ -65,6 +65,17 @@ script = element script {
   ScriptType
 }
 
+## If Semantic XML content is replicated in a Presentation XML element, any @id attributes need to be restricted
+## to the Presentation XML element, because that is what anchors in rendered documents will point to.
+## Any @id attributes in the source Semantic XML element need to be moved to @original-id, to avoid there
+## being two elements in the Presentation XML with the same @id
+RequiredId &=
+    attribute original-id { xsd:ID }?
+
+## As for RequiredId
+OptionalId &=
+    attribute original-id { xsd:ID }?
+
 address =
   element address {
     ## Address decomposed into its component parts
