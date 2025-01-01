@@ -572,7 +572,7 @@ fmt-xref-label = element fmt-xref-label {
 ## Semantic XML floating-title has a paragraph added after it, of type "floating-title".
 ## The content of floating-title is replicated to p[@type = 'floating-title'] as semx[@element = 'floating-title'].
 ## Top-level section titles in CJK 3 characters or less in size are rendered extended 
-floating-title &&= paragraph
+floating-title &= paragraph
 
 term = element term {
     OptionalId,
