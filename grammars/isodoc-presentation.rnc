@@ -285,15 +285,19 @@ TermSource =
     ## Concatenate all consecutive term sources and block sources into a single semicolon delimited expression
     termsource?
 
-termsource = element termsource {
+## Concatenate all consecutive term sources and block sources into a single semicolon delimited expression
+fmt_termsource = element fmt-termsource {
     attribute status { SourceStatusType },
     attribute type { SourceTypeType },
     origin,
-    ## UNWRAP: Replace modification with a commma, then text representing the status, then a dash, then text representing the modification
+    ## Replace modification with a commma, then text representing the status, then a dash, then text representing the modification
     ## e.g.
     ##    <termsource status="adapted"><origin>...</origin><modification>enhanced</modification></termsource>
     ## becomes:
-    ##    <termsource status="adapted"><origin>...</origin>, adapted – enhanced</termsource>
+    ##    <fmt-termsource status="adapted"><semx element='termsource'>
+    ##      <origin>...</origin>,
+    ##      adapted – <semx element='modification'>enhanced</semx>
+    ##    </semx></fmt-termsource>
     TextElement*
 }
 
@@ -326,18 +330,17 @@ concept = element concept {
   )
 }
 
-## UNWRAP: replace <related> with the crossreference to the term being related to
-related =
-  ## paragraph is: 
-  ##    <p><strong>{related/@type}:</strong> <em>{related/preferred}</em> 
-  ##       ({related/xref | related/eref | related/termref})</p>
-  ## e.g.
-  ##    <related type='contrast'><preferred><expression><name>Fifth Designation</name></expression></preferred>
-  ##       <xref target='second'/></related>
-  ## becomes: 
-  ##    <p><strong>CONTRAST:</strong> <em><preferred><strong>Fifth Designation</strong></preferred></em> 
-  ##       (<xref target='second'>Clause 1.1</xref>)</p>
-  paragraph
+## replace <related> with the crossreference to the term being related to (wrapped in semx for related)
+## paragraph is: 
+##    <p><strong>{related/@type}:</strong> <em>{related/preferred}</em> 
+##       ({related/xref | related/eref | related/termref})</p>
+## e.g.
+##    <related type='contrast'><preferred><expression><name>Fifth Designation</name></expression></preferred>
+##       <xref target='second'/></related>
+## becomes: 
+##    <p><strong>CONTRAST:</strong> <em><semx element="preferred"><strong>Fifth Designation</strong></semx></em> 
+##       (<xref target='second'>Clause 1.1</xref>)</p>
+fmt_related = element fmt-related { paragraph }
 
 erefAttributes =
     attribute normative { xsd:boolean }?,
@@ -424,10 +427,10 @@ attribution-para = element p {
   TextElement* & quote-author & quote-source
 }
 
-## TODO the same has been done for term definitions: we are inserting domain as a Semantic XML into the first definition
-## paragraph, rather than leaving that to the renderer. In the future, we will make that instead a span with class fmt-domain,
-## pointing to the source domain element. I'm not updating the grammar for now, because it would be nightmarish to and will not persist.
-termdefinition &= empty
+## The term domain may be inserted into fmt_termdefinition via semx.
+## Multiple termdefinitions are replaced with a single definition, consiting of an ordered list of definitions
+## As normal, each Semantic XML definition is referenced via semx.
+fmt_termdefinition = element fmt-termdefinition { TextElement+ }
   
 quote-source =
   element source { erefType }
@@ -580,48 +583,25 @@ term = element term {
     BlockAttributes,
     ## Clause number of term
     tname,
-    ## UNWRAP: Consecutive preferred designations are concatenated into a single designation, delimited by semicolon,
+    ## Consecutive preferred designations are concatenated into a single designation, delimited by semicolon,
     ## if they are both verbal designations, in the same language and locale, and neither has pronunciation or grammar information
     preferred+,
-    ## In some flavours, admited designations are prefixed with the i18n of "ADMITTED:"
+    fmt_preferred?,
     admitted*,
-    ## Deprecated designations are prefixed with the i18n of "DEPRECATED:"
+    fmt_admitted?,
     deprecates*,
+    fmt_deprecates?,
     related*,
+    fmt_related?,
     termdomain?,
     termsubject?,
-    ## UNWRAP: multiple termdefinitions are replaced with a single definition, consiting of an ordered list of definitions
     termdefinition,
+    fmt_termdefinition?,
     termnote*,
     termexample*,
-    TermSource
+    TermSource,
+    fmt_termsource
 }
-
-## Indicate that domain display is to be suppressed if it is being rendered inside of a definition
-## TODO will rescind that and put in a pattern that crossreferences rendered Semantic XML elements and their original
-termdomain &=
-  attribute hidden { xsd:boolean }
-
-## UNWRAP: The designation is replaced with a string concatenating its data:
-## The designation name, then field-of-application and usage-info comma-delimited and in angle brackets,
-## then expression/grammar information comma-delimited, then language, script and locale comma-delimited,
-## then expression/pronunciation comma-delimited and in slashes.
-## Bookmarks inside the designation are removed. Preferred designations are boldfaced.
-## Any termsources within the designation are moved after it
-Designation = 
-  attribute absent { xsd:boolean }?,
-  attribute geographic-area { text }?,
-  PureTextElement+
-
-## UNWRAP: remove verbaldefinition wrapper
-verbaldefinition =
-    (paragraph | dl | ol | ul | table | figure | formula)+,
-    TermSource
-
-## UNWRAP: remove nonverbalrep wrapper
-nonverbalrep =
-    ( table | figure | formula )+,
-    TermSource
 
 DisplayOrder =
   ## The top-level clauses and blocks of the document are numbered in the order in which they should be rendered,
@@ -714,6 +694,9 @@ date_inline |= text
 ## * fmt-conn is used to annotate Boolean conjunctions introduced in auto-generated text, such as of multiple cross-references,
 ## e.g. "Clauses 2, 3 *and* 5".
 ## * fmt-obligation is used to annotate the indication of obligation in annex titles ("normative", "informative").
+## * fmt-designation-field is used to annotate grammatical and usage annotations of designations, including their
+## delimiers, in order to enable easy deletion; e.g. 
+##   <strong>paddy</strong><span class="fmt-designation-field">, &lt;<semx element="field-of-application" source="_">in agriculture</semx>&gt;</span>
 span &= empty
 
 ## UNWRAP: Number formatting is applied to stem/mathml expressions: inline stem, and if number formatting is specified 
@@ -770,14 +753,25 @@ btitle &= empty
 ## Adjust title/@depth accordingly
 annex-subsection &= empty
 
-## Any termsources within the designation are moved after it
-preferred &= TermSource
+## The designation is replaced with a string concatenating its data:
+## The designation name, then field-of-application and usage-info comma-delimited and in angle brackets,
+## then expression/grammar information comma-delimited, then language, script and locale comma-delimited,
+## then expression/pronunciation comma-delimited and in slashes.
+## Bookmarks inside the designation are removed. Preferred designations are boldfaced.
+### The verbaldefinition and nonverbalrep wrappers are removed.
+## <semx> is used to reference the Semantic XML designations and their components; and the elements expression, name, name, abbreviation-type,
+## pronunciation, grammar are resolved to text.
+## Consecutive preferred designations are concatenated into a single designation, delimited by semicolon,
+## if they are both verbal designations, in the same language and locale, and neither has pronunciation or grammar information.
+## Separate designations are wrapped in paragraphs; if designations are concatenated, they occur within a single paragraph.
+## In some flavours, the fmt_preferred element is not used, as the designations appear within fmt_definition instead, as a single paragraph.
+fmt_preferred = element fmt-preferred { TextElement+ }
 
-## Any termsources within the designation are moved after it
-admitted &= TermSource
+## As for fmt_preferred. In some flavours, admited designations are prefixed with the i18n of "ADMITTED:"
+fmt_admitted = element fmt-admitted { TextElement+ }
 
-## Any termsources within the designation are moved after it
-deprecates &= TermSource
+## As for fmt_preferred. Deprecated designations are prefixed with the i18n of "DEPRECATED:"
+fmt_deprecates = element fmt-deprecates { TextElement+ }
 
 ## In some flavours, the index section is not rendered.
 ## In others, e.g. ISO, it is populated with a list of cross-references, each representing an index entry
