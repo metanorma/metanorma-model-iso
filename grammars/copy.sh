@@ -23,12 +23,12 @@ done
 
 for i in iec bsi jis cc csa ribose ieee ogc nist ietf itu iho bipm generic plateau
 do
-cat $i.rng | ruby -pe "\$_.gsub!(/<grammar /, %{<grammar ns='https://www.metanorma.org/ns/${i}' }) ">  ../../metanorma-$i/lib/metanorma/$i/$i.rng
+cat $i.rng | ruby -pe "\$_.gsub!(/<grammar /, %{<grammar ns='https://www.metanorma.org/ns/standoc' }) ">  ../../metanorma-$i/lib/metanorma/$i/$i.rng
 done
 
 cat isodoc-compile.rng | ruby -pe '$_.gsub!(/<grammar /, %{<grammar ns="https://www.metanorma.org/ns/standoc" }) '> ../../metanorma-standoc/lib/metanorma/standoc/isodoc-compile.rng
 
-cat isostandard-compile.rng | ruby -pe '$_.gsub!(/<grammar /, %{<grammar ns="https://www.metanorma.org/ns/iso" }) '>  ../../metanorma-iso/lib/metanorma/iso/isostandard-compile.rng
-cat isostandard-amd.rng | ruby -pe '$_.gsub!(/<grammar /, %{<grammar ns="https://www.metanorma.org/ns/iso" }) '>  ../../metanorma-iso/lib/metanorma/iso/isostandard-amd.rng
+cat isostandard-compile.rng | ruby -pe '$_.gsub!(/<grammar /, %{<grammar ns="https://www.metanorma.org/ns/standoc" }) '>  ../../metanorma-iso/lib/metanorma/iso/isostandard-compile.rng
+cat isostandard-amd.rng | ruby -pe '$_.gsub!(/<grammar /, %{<grammar ns="https://www.metanorma.org/ns/standoc" }) '>  ../../metanorma-iso/lib/metanorma/iso/isostandard-amd.rng
 
 

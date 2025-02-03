@@ -1,5 +1,3 @@
-#default namespace isostandard = "https://www.metanorma.com/ns/iso"
-
 include "biblio-standoc.rnc" { }
 include "isodoc.rnc" {
 
