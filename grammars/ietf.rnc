@@ -6,8 +6,6 @@
 include "relaton-ietf.rnc" { }
 include "isodoc.rnc" {
 
-start = ietf-standard
-
 ParagraphAttrs =
     attribute align { Alignments }?,
     attribute keep-with-next { xsd:boolean }?,
@@ -145,7 +143,15 @@ index = element index {
   element tertiary { PureTextElement+ }?
 }
 
+standard-document =
+  element metanorma { 
+    Root-Attributes, 
+    bibdata, termdocsource*, misccontainer?, boilerplate?, preface, sections+, annex*, bibliography, indexsect*
+ }
+
 }
+
+# end overrides
 
 
 TextElement |= bcp14 | review
@@ -166,10 +172,4 @@ erefTypeURI =
     locality*, date?,
     text
 
-
-ietf-standard =
-  element ietf-standard {
-    Root-Attributes,
-    bibdata, termdocsource*, misccontainer?, boilerplate?, preface, sections+, annex*, bibliography, indexsect*
- }
 

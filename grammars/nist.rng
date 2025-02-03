@@ -8,9 +8,6 @@
   -->
   <include href="relaton-nist.rng"/>
   <include href="isodoc.rng">
-    <start>
-      <ref name="nist-standard"/>
-    </start>
     <define name="OlAttr" combine="interleave">
       <optional>
         <attribute name="class">
@@ -42,7 +39,36 @@
         </optional>
       </element>
     </define>
+    <define name="standard-document">
+      <element name="metanorma">
+        <ref name="Root-Attributes"/>
+        <ref name="bibdata"/>
+        <zeroOrMore>
+          <ref name="termdocsource"/>
+        </zeroOrMore>
+        <optional>
+          <ref name="misccontainer"/>
+        </optional>
+        <optional>
+          <ref name="boilerplate"/>
+        </optional>
+        <ref name="preface"/>
+        <oneOrMore>
+          <ref name="sections"/>
+        </oneOrMore>
+        <zeroOrMore>
+          <ref name="annex"/>
+        </zeroOrMore>
+        <optional>
+          <ref name="bibliography"/>
+        </optional>
+        <zeroOrMore>
+          <ref name="indexsect"/>
+        </zeroOrMore>
+      </element>
+    </define>
   </include>
+  <!-- end overrides -->
   <define name="reviewernote">
     <element name="reviewernote">
       <ref name="Basic-Section"/>
@@ -106,34 +132,6 @@
         <ref name="BasicBlock"/>
       </zeroOrMore>
       <ref name="errata"/>
-    </element>
-  </define>
-  <define name="nist-standard">
-    <element name="nist-standard">
-      <ref name="Root-Attributes"/>
-      <ref name="bibdata"/>
-      <zeroOrMore>
-        <ref name="termdocsource"/>
-      </zeroOrMore>
-      <optional>
-        <ref name="misccontainer"/>
-      </optional>
-      <optional>
-        <ref name="boilerplate"/>
-      </optional>
-      <ref name="preface"/>
-      <oneOrMore>
-        <ref name="sections"/>
-      </oneOrMore>
-      <zeroOrMore>
-        <ref name="annex"/>
-      </zeroOrMore>
-      <optional>
-        <ref name="bibliography"/>
-      </optional>
-      <zeroOrMore>
-        <ref name="indexsect"/>
-      </zeroOrMore>
     </element>
   </define>
 </grammar>

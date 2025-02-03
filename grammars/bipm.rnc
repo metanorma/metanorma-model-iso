@@ -6,8 +6,6 @@
 include "relaton-bipm.rnc" {}
 include "isodoc.rnc" {
 
-start = bipm-standard
-
 XrefAttributes &=
      attribute pagenumber { xsd:boolean }?,
      attribute nosee { xsd:boolean }?,
@@ -33,11 +31,9 @@ Annex-Section-Attr &=
 OlAttr &=
     attribute start { text }?
 
-}
-
-bipm-standard =
-  element bipm-standard {
+standard-document =
+  element metanorma {
     Root-Attributes,
     bibdata, termdocsource*, misccontainer?, boilerplate?, preface?, sections+, annex*, bibliography?, indexsect*
  }
-
+}

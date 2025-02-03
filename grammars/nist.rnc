@@ -6,8 +6,6 @@
 include "relaton-nist.rnc" {}
 include "isodoc.rnc" {
 
-start = nist-standard
-
 OlAttr &=
     attribute class { "steps" }?
 
@@ -18,7 +16,15 @@ preface =
     abstract?, foreword?, (clause | errata_clause | acknowledgements)*, reviewernote?, executivesummary?
 }
 
+standard-document =
+  element metanorma {
+    Root-Attributes,
+    bibdata, termdocsource*, misccontainer?, boilerplate?, preface, sections+, annex*, bibliography?, indexsect*
+ }
+
 }
+
+# end overrides
 
 reviewernote = element reviewernote { Basic-Section }
 executivesummary = element executivesummary { Basic-Section }
@@ -41,10 +47,4 @@ errata_clause = element clause {
     (BasicBlock*),
     errata 
 }
-
-nist-standard =
-  element nist-standard {
-    Root-Attributes,
-    bibdata, termdocsource*, misccontainer?, boilerplate?, preface, sections+, annex*, bibliography?, indexsect*
- }
 

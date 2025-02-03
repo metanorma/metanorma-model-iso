@@ -7,16 +7,13 @@
 include "relaton-cc.rnc" {}
 include "isodoc.rnc" {
 
-start = cc-standard
-
 FigureBody =
      source*, tname?, ( figure+ |  ( (TextElement* | pre), note*, dl? ) )
 
-}
 
-cc-standard =
-  element cc-standard {
+standard-document =
+  element metanorma {
     Root-Attributes,
     bibdata, termdocsource*, misccontainer?, boilerplate?, preface, sections+, annex*, bibliography, indexsect*
  }
-
+}

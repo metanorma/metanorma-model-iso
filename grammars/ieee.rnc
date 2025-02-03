@@ -6,19 +6,16 @@
 include "relaton-ieee.rnc" { }
 include "isodoc.rnc" { 
 
-start = ieee-standard 
-
 sections =
   element sections {
     note?,
     ( clause | terms | term-clause | definitions | floating-title )+
 } 
 
-}
 
-ieee-standard =
-  element ieee-standard {
+standard-document =
+  element metanorma {
     Root-Attributes,
     bibdata, termdocsource*, misccontainer?, boilerplate?, preface, sections+, annex*, bibliography, indexsect*
  }
-
+}

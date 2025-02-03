@@ -4,8 +4,6 @@
 include "relaton-iso.rnc" { }
 include "isostandard.rnc" {
 
-start = iso-standard
-
 sections =
   element sections {
     clause+
@@ -18,8 +16,8 @@ clause =
     Clause-Section
   }
 
-iso-standard =
-  element iso-standard {
+standard-document =
+  element metanorma {
     Root-Attributes,
     bibdata, misccontainer?, boilerplate?, preface, sections+
   }

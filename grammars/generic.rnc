@@ -6,13 +6,10 @@
 include "biblio-standoc.rnc" { }
 include "isodoc.rnc" {
 
-start = generic-standard
 
-}
-
-generic-standard =
-  element generic-standard {
+standard-document =
+  element metanorma {
     Root-Attributes,
     bibdata, termdocsource*, misccontainer?, boilerplate?, preface, sections+, annex*, bibliography, indexsect*
  }
-
+}

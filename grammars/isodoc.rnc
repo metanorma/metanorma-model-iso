@@ -614,7 +614,7 @@ Root-Attributes =
 
 ## Representation of a standardisation document
 standard-document =
-element standard-document {
+element metanorma {
   Root-Attributes,
   ## Bibliographic description of the document itself, expressed in the Relaton model
   bibdata, 

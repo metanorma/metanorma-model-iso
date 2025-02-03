@@ -6,8 +6,6 @@
 include "relaton-itu.rnc" { }
 include "isodoc.rnc" {
 
-start = itu
-
 OlAttr &=
     attribute class { "steps" }?
 
@@ -28,11 +26,10 @@ Clause-Section =
     )
 
 
-}
 
-itu =
-  element itu-standard {
+standard-document =
+  element metanorma {
     Root-Attributes,
     bibdata, termdocsource*, misccontainer?, boilerplate?, preface, sections+, annex*, bibliography, indexsect*
  }
-
+}

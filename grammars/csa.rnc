@@ -6,16 +6,14 @@
 include "relaton-csa.rnc" {}
 include "isodoc.rnc" {
 
-  start = csa-standard
 
   FigureBody =
       source*, tname?, ( figure+ |  ( (TextElement* | pre), note*, dl? ) )
 
-}
 
-csa-standard =
-element csa-standard {
+standard-document =
+element metanorma {
   Root-Attributes,
   bibdata, termdocsource*, misccontainer?, boilerplate?, preface, sections+, annex*, bibliography, indexsect*
 }
-
+}

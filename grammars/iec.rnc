@@ -4,8 +4,6 @@
 include "relaton-iec.rnc" { }
 include "isostandard.rnc" {
 
-start = iec-standard
-
 term = 
   element term { 
     attribute id { xsd:ID }?,
@@ -16,15 +14,13 @@ term =
     termdomain?, termdefinition, termnote*, termexample*, termsource*,
     term*
   }
-}
-
-# end overrides
 
 # We display the Normative References between scope and terms; but to keep the
 # grammar simple, we keep the references together
-iec-standard = 
-  element iec-standard {
+standard-document = 
+  element metanorma {
     Root-Attributes,
     bibdata, termdocsource*, misccontainer?, boilerplate?, preface, sections+, annex*, bibliography, indexsect*
   }
-
+}
+# end overrides

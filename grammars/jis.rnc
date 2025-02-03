@@ -4,13 +4,19 @@
 include "relaton-jis.rnc" { }
 include "isostandard.rnc" {
 
-start = jis-standard
-
 annex =
   element annex { 
      attribute commentary { xsd:boolean }?,
      Annex-Section 
   }
+
+# We display the Normative References between scope and terms; but to keep the
+# grammar simple, we keep the references together
+standard-document =
+  element metanorma {
+    Root-Attributes,
+    bibdata, termdocsource*, misccontainer?, boilerplate?, preface, sections+, annex*, bibliography, indexsect*, colophon?
+  } 
 
 }
 
@@ -23,12 +29,4 @@ floating-section-title =
     TextElement*
 }
 
-
-# We display the Normative References between scope and terms; but to keep the
-# grammar simple, we keep the references together
-jis-standard = 
-  element jis-standard {
-    Root-Attributes,
-    bibdata, termdocsource*, misccontainer?, boilerplate?, preface, sections+, annex*, bibliography, indexsect*, colophon?
-  }
 

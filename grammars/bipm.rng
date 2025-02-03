@@ -8,9 +8,6 @@
   -->
   <include href="relaton-bipm.rng"/>
   <include href="isodoc.rng">
-    <start>
-      <ref name="bipm-standard"/>
-    </start>
     <define name="XrefAttributes" combine="interleave">
       <optional>
         <attribute name="pagenumber">
@@ -93,35 +90,35 @@
         <attribute name="start"/>
       </optional>
     </define>
+    <define name="standard-document">
+      <element name="metanorma">
+        <ref name="Root-Attributes"/>
+        <ref name="bibdata"/>
+        <zeroOrMore>
+          <ref name="termdocsource"/>
+        </zeroOrMore>
+        <optional>
+          <ref name="misccontainer"/>
+        </optional>
+        <optional>
+          <ref name="boilerplate"/>
+        </optional>
+        <optional>
+          <ref name="preface"/>
+        </optional>
+        <oneOrMore>
+          <ref name="sections"/>
+        </oneOrMore>
+        <zeroOrMore>
+          <ref name="annex"/>
+        </zeroOrMore>
+        <optional>
+          <ref name="bibliography"/>
+        </optional>
+        <zeroOrMore>
+          <ref name="indexsect"/>
+        </zeroOrMore>
+      </element>
+    </define>
   </include>
-  <define name="bipm-standard">
-    <element name="bipm-standard">
-      <ref name="Root-Attributes"/>
-      <ref name="bibdata"/>
-      <zeroOrMore>
-        <ref name="termdocsource"/>
-      </zeroOrMore>
-      <optional>
-        <ref name="misccontainer"/>
-      </optional>
-      <optional>
-        <ref name="boilerplate"/>
-      </optional>
-      <optional>
-        <ref name="preface"/>
-      </optional>
-      <oneOrMore>
-        <ref name="sections"/>
-      </oneOrMore>
-      <zeroOrMore>
-        <ref name="annex"/>
-      </zeroOrMore>
-      <optional>
-        <ref name="bibliography"/>
-      </optional>
-      <zeroOrMore>
-        <ref name="indexsect"/>
-      </zeroOrMore>
-    </element>
-  </define>
 </grammar>

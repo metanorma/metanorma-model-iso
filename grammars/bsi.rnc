@@ -4,8 +4,6 @@
 include "relaton-bsi.rnc" { }
 include "isostandard.rnc" {
 
-start = bsi-standard
-
 AdmonitionAttr &=
     attribute target { xsd:IDREF }?
 
@@ -62,6 +60,14 @@ FigureBody =
 TableAttr &=
     attribute border-under-row { text }?
 
+# We display the Normative References between scope and terms; but to keep the
+# grammar simple, we keep the references together
+standard-document = 
+  element metanorma {
+    Root-Attributes,
+    bibdata, termdocsource*, misccontainer?, boilerplate?, preface, sections+, annex*, bibliography, indexsect*, colophon?
+  }
+
 }
 
 # end overrides
@@ -76,11 +82,4 @@ floating-section-title =
 
 AdmonitionType |= "commentary"
 
-# We display the Normative References between scope and terms; but to keep the
-# grammar simple, we keep the references together
-bsi-standard = 
-  element bsi-standard {
-    Root-Attributes,
-    bibdata, termdocsource*, misccontainer?, boilerplate?, preface, sections+, annex*, bibliography, indexsect*, colophon?
-  }
 

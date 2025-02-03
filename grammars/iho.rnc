@@ -6,8 +6,6 @@
 include "relaton-iho.rnc" {}
 include "isodoc.rnc" {
 
-start = iho-standard
-
 annex =
   element annex {
     attribute id { xsd:ID }?,
@@ -21,14 +19,15 @@ annex =
       annex-appendix*
 }
 
+standard-document =
+  element metanorma {
+    Root-Attributes,
+    bibdata, termdocsource*, misccontainer?, boilerplate?, preface, sections+, annex*, bibliography, indexsect*
+ }  
+
 }
 
 annex-appendix =
   element appendix { Clause-Section }
 
-iho-standard =
-  element iho-standard {
-    Root-Attributes,
-    bibdata, termdocsource*, misccontainer?, boilerplate?, preface, sections+, annex*, bibliography, indexsect*
- }
 

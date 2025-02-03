@@ -3,8 +3,6 @@
 
 include "isodoc.rnc" { 
 
-start = iso-standard
-
 sections =
   element sections {
     (note | admonition)*, clause, (term-clause | terms)?, definitions?, (clause | term-clause | terms)+
@@ -72,18 +70,17 @@ Content-Section =
     ( (BasicBlock*) |
       content-subsection+ )
 
-}
-
-# end overrides
-
 # We display the Normative References between scope and terms; but to keep the
 # grammar simple, we keep the references together
-iso-standard = 
-  element iso-standard {
+standard-document = 
+  element metanorma {
     Root-Attributes,
     bibdata, termdocsource*, misccontainer?, boilerplate?, preface, sections+, annex*, bibliography, indexsect*
   }
 
+}
+
+# end overrides
 clause-hanging-paragraph-with-footnote =
   element clause {
     attribute id { xsd:ID }?,

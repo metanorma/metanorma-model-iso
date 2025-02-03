@@ -6,13 +6,11 @@
 include "relaton-ribose.rnc" { }
 include "isodoc.rnc" {
 
-start = rsd-standard
 
-}
-
-rsd-standard =
-  element rsd-standard {
+standard-document =
+  element metanorma {
     Root-Attributes,
     bibdata, termdocsource*, misccontainer?, boilerplate?, preface, sections+, annex*, bibliography, indexsect*
  }
 
+}

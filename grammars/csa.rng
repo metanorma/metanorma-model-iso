@@ -8,9 +8,6 @@
   -->
   <include href="relaton-csa.rng"/>
   <include href="isodoc.rng">
-    <start>
-      <ref name="csa-standard"/>
-    </start>
     <define name="FigureBody">
       <zeroOrMore>
         <ref name="source"/>
@@ -38,31 +35,31 @@
         </group>
       </choice>
     </define>
+    <define name="standard-document">
+      <element name="metanorma">
+        <ref name="Root-Attributes"/>
+        <ref name="bibdata"/>
+        <zeroOrMore>
+          <ref name="termdocsource"/>
+        </zeroOrMore>
+        <optional>
+          <ref name="misccontainer"/>
+        </optional>
+        <optional>
+          <ref name="boilerplate"/>
+        </optional>
+        <ref name="preface"/>
+        <oneOrMore>
+          <ref name="sections"/>
+        </oneOrMore>
+        <zeroOrMore>
+          <ref name="annex"/>
+        </zeroOrMore>
+        <ref name="bibliography"/>
+        <zeroOrMore>
+          <ref name="indexsect"/>
+        </zeroOrMore>
+      </element>
+    </define>
   </include>
-  <define name="csa-standard">
-    <element name="csa-standard">
-      <ref name="Root-Attributes"/>
-      <ref name="bibdata"/>
-      <zeroOrMore>
-        <ref name="termdocsource"/>
-      </zeroOrMore>
-      <optional>
-        <ref name="misccontainer"/>
-      </optional>
-      <optional>
-        <ref name="boilerplate"/>
-      </optional>
-      <ref name="preface"/>
-      <oneOrMore>
-        <ref name="sections"/>
-      </oneOrMore>
-      <zeroOrMore>
-        <ref name="annex"/>
-      </zeroOrMore>
-      <ref name="bibliography"/>
-      <zeroOrMore>
-        <ref name="indexsect"/>
-      </zeroOrMore>
-    </element>
-  </define>
 </grammar>

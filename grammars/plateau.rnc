@@ -5,8 +5,6 @@
 # jis.rnc already includes relaton-jis.rnc, if we have distinct metadata, will need to abstract jis-compile.rnc
 include "jis.rnc" {
 
-start = plateau-standard
-
 ParagraphFnBody =
    ( TextElement | fn )*, note*, source*
 
@@ -19,16 +17,14 @@ OlBody =
 DlBody =
     (dt, dd)+, note*, source*
 
-}
-
-# end overrides
 
 
 # We display the Normative References between scope and terms; but to keep the
 # grammar simple, we keep the references together
-plateau-standard = 
-  element plateau-standard {
+standard-document = 
+  element metanorma {
     Root-Attributes,
     bibdata, termdocsource*, misccontainer?, boilerplate?, preface, sections+, annex*, bibliography, indexsect*, colophon?
   }
 
+}

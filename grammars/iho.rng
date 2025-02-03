@@ -8,9 +8,6 @@
   -->
   <include href="relaton-iho.rng"/>
   <include href="isodoc.rng">
-    <start>
-      <ref name="iho-standard"/>
-    </start>
     <define name="annex">
       <element name="annex">
         <optional>
@@ -56,36 +53,36 @@
         </zeroOrMore>
       </element>
     </define>
+    <define name="standard-document">
+      <element name="metanorma">
+        <ref name="Root-Attributes"/>
+        <ref name="bibdata"/>
+        <zeroOrMore>
+          <ref name="termdocsource"/>
+        </zeroOrMore>
+        <optional>
+          <ref name="misccontainer"/>
+        </optional>
+        <optional>
+          <ref name="boilerplate"/>
+        </optional>
+        <ref name="preface"/>
+        <oneOrMore>
+          <ref name="sections"/>
+        </oneOrMore>
+        <zeroOrMore>
+          <ref name="annex"/>
+        </zeroOrMore>
+        <ref name="bibliography"/>
+        <zeroOrMore>
+          <ref name="indexsect"/>
+        </zeroOrMore>
+      </element>
+    </define>
   </include>
   <define name="annex-appendix">
     <element name="appendix">
       <ref name="Clause-Section"/>
-    </element>
-  </define>
-  <define name="iho-standard">
-    <element name="iho-standard">
-      <ref name="Root-Attributes"/>
-      <ref name="bibdata"/>
-      <zeroOrMore>
-        <ref name="termdocsource"/>
-      </zeroOrMore>
-      <optional>
-        <ref name="misccontainer"/>
-      </optional>
-      <optional>
-        <ref name="boilerplate"/>
-      </optional>
-      <ref name="preface"/>
-      <oneOrMore>
-        <ref name="sections"/>
-      </oneOrMore>
-      <zeroOrMore>
-        <ref name="annex"/>
-      </zeroOrMore>
-      <ref name="bibliography"/>
-      <zeroOrMore>
-        <ref name="indexsect"/>
-      </zeroOrMore>
     </element>
   </define>
 </grammar>

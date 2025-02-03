@@ -6,14 +6,20 @@
 include "relaton-ogc.rnc" { }
 include "isodoc.rnc" {
 
-start = ogc-standard
-
 preface =
   element preface {
     abstract?, foreword, submitters?
 }
 
+standard-document =
+  element metanorma {
+    Root-Attributes,
+    bibdata, termdocsource*, misccontainer?, boilerplate?, preface, sections+, annex*, bibliography, indexsect*
+ }
+
 }
+
+# end overrides
 
 TextElement |= hi
 PureTextElement |= hi
@@ -21,10 +27,4 @@ PureTextElement |= hi
 hi = element hi { (PureTextElement|stem)* }
 
 submitters = element submitters { Basic-Section }
-
-ogc-standard =
-  element ogc-standard {
-    Root-Attributes,
-    bibdata, termdocsource*, misccontainer?, boilerplate?, preface, sections+, annex*, bibliography, indexsect*
- }
 
