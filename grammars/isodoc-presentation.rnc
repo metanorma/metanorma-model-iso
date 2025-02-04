@@ -465,8 +465,11 @@ XrefBody = PureTextElement+
 ## <location>, the locations within the reference being specified, are resolved into text appended to the body, and removed as an element
 ErefBody = PureTextElement+
 
-## change identifier of requirement to just monospace
-reqtlabel = tt
+## Change identifier of requirement to just monospace
+reqtlabel &= fmt-identifier
+
+## Renderable equivalent of identifier
+fmt-identifier = element fmt-identifier { TextElement+ }
 
 passthrough_inline = element passthrough { 
   ## @formats is made mandatory, populated with "all" if missing, and brought in line with the permitted output formats
@@ -740,10 +743,13 @@ doc_bibitem &= biblio-tag?
 ##    <docidentifier type="IETF">IETF I.-D. Arthur</docidentifier>
 docidentifier &= empty
   
-## UNWRAP: Requirements may be rendered arbitrarily depending on the requirements model; in the case of Modspec,
-## they are rendered as tables. Requirements are labelled with requirement/@class, or according to their element name
+## Requirements are labelled with requirement/@class, or according to their element name
 ## if requirement/@class is absent, just as with figures
-RequirementType |= BasicBlock+
+RequirementType &= fmt-provision
+
+## Requirements may be rendered arbitrarily depending on the requirements model; in the case of Modspec,
+## they are rendered as tables. 
+fmt-provision = element fmt-provision { BasicBlock+ }
 
 ## Document title in metadata, in CJK 3 characters or less in size, is rendered extended 
 btitle &= empty
