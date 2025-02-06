@@ -301,8 +301,9 @@ fmt_termsource = element fmt-termsource {
     TextElement*
 }
 
-## UNWRAP: replace <concept> with the rendered form of the crossreference
-concept = element concept {
+## replace <concept> with the rendered form of the crossreference
+concept &= fmt-concept
+fmt-concept = element fmt-concept {
   ## refterm and renderterm are removed. The crossrefence, eref, erefstack, xref, termref, is replaced with
   ## the content of renderterm if present and requested (@ref),
   ## with the attributes of Semantic XML concept used to determine its rendering: 
@@ -326,8 +327,9 @@ concept = element concept {
      ## Link to a definition of the term in an element of the current document
      xref |
      ## Link to a definition of the term in a termbase
-     termref
-  )
+     termref |
+     TextElement
+  )+
 }
 
 ## replace <related> with the crossreference to the term being related to (wrapped in semx for related)
