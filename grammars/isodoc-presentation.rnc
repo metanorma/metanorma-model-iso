@@ -656,8 +656,9 @@ TdBody &= empty
 ## If not supplied, a label paragraph is given for the key. TODO: this should be dl/name throughout, not p
 figure &= empty
 
-## UNWRAP: Dates marked up with value and format are converted into an i18n'd rendering of the date
-date_inline |= text
+## Dates marked up with value and format are converted into an i18n'd rendering of the date
+date_inline &= fmt-date-inline
+fmt-date-inline = element fmt-date-inline {TextElement+}
 
 ## <span> with @style=text-transform... is converted into case-transformed text (rather than leaving that to CSS).
 ## <span> with @custom-charset= is converted to include font markup in @style appropriate to that charset
@@ -702,7 +703,7 @@ date_inline |= text
 ##   <strong>paddy</strong><span class="fmt-designation-field">, &lt;<semx element="field-of-application" source="_">in agriculture</semx>&gt;</span>
 span &= empty
 
-## UNWRAP: Number formatting is applied to stem/mathml expressions: inline stem, and if number formatting is specified 
+## Number formatting is applied to stem/mathml expressions: inline stem, and if number formatting is specified 
 ## (@data-metanorma-numberformat), ## formula/stem/mathml as well. 
 ## If the stem expression is MathML consisting only of mn, it is replaced with the text content of mn,
 ## to reduce processing load. If the stem expression does not already contain <asciimath>,
@@ -712,7 +713,8 @@ span &= empty
 ## expression up into separate MathML expressions, joined by <br/>: this is to enable correct rendering in Word.
 ## If the MathML has <strong> as an ancestor, <mstyle mathvariant="bold"> is wrapped around the MathML contents:
 ## this is because the PDF rendering is not dealing with boldfacing MathML when its container is boldface.
-stem |= text
+stem &= fmt-stem
+fmt-stem = element fmt-stem { TextElement+ }
 
 metanorma-source-container = element metanorma { metanorma-source }
 
