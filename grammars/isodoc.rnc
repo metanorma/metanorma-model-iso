@@ -610,7 +610,9 @@ Root-Attributes =
   attribute schema-version { text },
   ## Type of standards document representation. "Semantic" is the core representation of content.
   ## "Presentation" manipulates and enhances the representation for rendering needs.
-  attribute type { "semantic" | "presentation" }
+  attribute type { "semantic" | "presentation" },
+  ## Metanorma flavor, indicating SDO whose requiremnts the realisation aligns to
+  attribute flavor { text }
 
 ## Representation of a standardisation document
 standard-document =

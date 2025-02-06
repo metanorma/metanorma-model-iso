@@ -1204,6 +1204,9 @@ numbers</a:documentation>
         <value>presentation</value>
       </choice>
     </attribute>
+    <attribute name="flavor">
+      <a:documentation>Metanorma flavor, indicating SDO whose requiremnts the realisation aligns to</a:documentation>
+    </attribute>
   </define>
   <define name="standard-document">
     <a:documentation>Representation of a standardisation document</a:documentation>
