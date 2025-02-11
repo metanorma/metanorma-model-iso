@@ -351,17 +351,15 @@ erefAttributes =
     attribute type { ReferenceFormat }?,
     attribute alt { text }?
 
-## UNWRAP: lists of erefs with @connective attributes are resolved to a single human-readable string of
+## Lists of erefs with @connective attributes are resolved to a single human-readable string of
 ## eref, with connectives linking them; e.g. 
 ##    <erefstack><eref connective="from" target="A"/><eref connective="to" target="A"/></erefstack>
 ## becomes
-##    from <eref connective="from" target="A"/> to <eref connective="to" target="A"/>
-erefstack = (
-  element eref { erefTypeWithConnective } |
-  text
-)+
+##    <semx>from <eref connective="from" target="A"/> to <eref connective="to" target="A"/></semx>
+erefstack &= semx
+# content of semx: (element eref { erefTypeWithConnective } | text)+
 
-## UNWRAP: lists of locality with @connective attributes are resolved to a single human-readable string of
+## lists of locality with @connective attributes are resolved within fmt-eref to a single human-readable string of
 ## locality, with connectives linking them; e.g. 
 ##    <eref bibitemid="ISO712" type="inline" citeas="ISO 712">
 ##      <localityStack connective="and">
@@ -378,34 +376,53 @@ localityStack =
      ( locality | text )*
  }
 
-## UNWRAP: as with localityStack
+## as with localityStack
 sourcelocalityStack =
    element sourcelocalityStack {
      ( sourcelocality | text )*
  }
 
-## UNWRAP: locality becomes text; e.g.
+## locality under fmt-xref fmt-eref becomes text; e.g.
 ##     <locality type='clause'><referenceFrom>3.1</referenceFrom></locality>
 ## becomes
 ##     Clause 3.1
 ## If eref/@droploc = true, do not insert the locality name. If eref/@case = capital, titlecase it. 
 ## If  eref/@case = lowercase, lowercase it
-locality = text
+locality |= text
 
-## UNWRAP: as with locality
-sourcelocality = text
+## as with locality
+sourcelocality |= text
 
-## UNWRAP: convert eref to xref (pointing to bibliography anchor, xref/@target = eref/@bibitemid),
+## convert eref to xref (pointing to bibliography anchor, xref/@target = eref/@bibitemid),
 ## or link (if a URI for the reference is supplied in the bibitem being referenced).
 ## The locality text (locality, sourcelocality), if present, is inserted as part of the cross-referenced text.
 ## If the locality is an anchor, and the eref is converted to link, append the anchor to the URI.
 ## If there is no text in the Semantic XML eref, it is populated with eref/@citeas
-eref =
-  xref | hyperlink
+eref &= semx
+# semx = ( fmt-eref | fmt-xref | fmt-link )
 
-## UNWRAP: as for eref
-origin =
-  xref | hyperlink
+## bibliographic reference left as eref in Presentation XML, because there is no bibliographic entry or URL to reference
+fmt-eref = element fmt-eref {
+  erefAttributes,
+  CitationType,
+  ErefBody
+}
+
+## convert origin to normalised reference text
+origin &= semx
+# semx contains fmt-origin
+
+fmt-origin = element fmt-origin {
+  erefAttributes,
+  CitationType,
+  ErefBody
+}
+
+## Normalises hyperlink content, appears when eref converted to citation hyperlink
+fmt-link = element fmt-link {
+    HyperlinkAttributes,
+    PureTextElement+
+}
 
 ## UNWRAP: as for eref
 quote-source =
@@ -454,8 +471,10 @@ image = element image {
      element emf { AnyElement }?
 }
 
-## UNWRAP: the links in svgmap are already resolved in standoc postprocessing, so they need not be retained
-svgmap = figure
+## The links in svgmap are already resolved in standoc postprocessing, so svgmap is ignored as Semantic XML markup, and the SVG
+## marked up by it is appended to svgmap, if present, wrapped in semx for referencing
+svgmap &= semx
+# semx contains figure
 
 ## If the xref is empty, it is resolved to the computed cross-reference label for the element being pointed to.
 ## xref/@case, xref/@droploc, xref/@style, xref/@label are used in computing the label.
@@ -463,7 +482,7 @@ svgmap = figure
 ## and removed as an element
 XrefBody = PureTextElement+
 
-## If the eref is empty, it is resolved to the citation of the bibliographic element being pointed to.
+## If the eref is empty, it is resolved in fmt-eref to the citation of the bibliographic element being pointed to.
 ## <location>, the locations within the reference being specified, are resolved into text appended to the body, and removed as an element
 ErefBody = PureTextElement+
 
@@ -626,28 +645,32 @@ preface &= empty
 ## Any instances of xref in a pre-populated table of contents are prefixed with the clause number they are referencing
 toc &= empty
 
-SourceBody |=
+SourceBody &= fmt-sourcecode
+
+## Rendering of sourcecode
+fmt-sourcecode = element fmt-sourcecode {
   tname?,
   (
     ( text | callout )+ |
-    ## UNWRAP: Source code rendered with source highlighting, as a table of line numbers and source code;
+    ## Source code rendered with source highlighting, as a table of line numbers and source code;
     ## the source code is rendered as with sourcecode within table cells
     table |
-    ## UNWRAP: The source-highlighted sourcecode within the table cell uses span elements to semantically classify the keywords, 
+    ## The source-highlighted sourcecode within the table cell uses span elements to semantically classify the keywords, 
     ## and the span tags are coloured through the supplied source-highlighter-css
     ( text | callout | span )+
   ),
-  ## UNWRAP: annotations are replaced by a definition list
+  ## annotations are replaced by a definition list; semx is used in dd to reference the annotation text in Semantic XML
   dl?,
   note*
+}
 
-PureTextElement |= tab
+PureTextElement |= tab | fmt-origin | fmt-link | fmt-eref | fmt-xref
 
 ## All strings in table cells are broken up if they exceed a threshold of length
 ## (20 chars), in order to allow table cells not to be artificially widened
 TdBody &= empty
 
-## Any instances of pseudocode figures are processed as sourcecode is.
+## Any instances of pseudocode figures are processed as sourcecode is, in a fmt-figure element corresponding to fmt-sourcecode.
 ## If figure is labelled with figure/@class (e.g. "diagram"), use the i18n of figure/@class, rather than "Figure",
 ## to label the figure
 ##
@@ -656,7 +679,9 @@ TdBody &= empty
 ## that the footnote reference is embedded in the figure graphically.
 ##
 ## If not supplied, a label paragraph is given for the key. TODO: this should be dl/name throughout, not p
-figure &= empty
+figure &= fmt-figure
+
+fmt-figure = element fmt-figure { Block+ }
 
 ## Dates marked up with value and format are converted into an i18n'd rendering of the date
 date_inline &= fmt-date-inline

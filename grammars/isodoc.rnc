@@ -228,7 +228,7 @@ XrefBody =
      ## Description of location in a reference, which can be combined with other locations in a single citation
      XrefTarget*,
      ## The textual content of the element. The `text` is what we wish to show the link as (e.g., the "content" of `<xx>my link text</xx>`)
-     PureTextElement*
+     element display-text { PureTextElement+ }?
 
 }
 
