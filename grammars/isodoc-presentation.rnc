@@ -252,16 +252,12 @@ FormulaBody =
   (p, dl)?,
   note
 
-## (UNWRAPPED): Strip autonumber element, strip `amend` wrapper
-amend = 
-  AmendType
-
-AmendType =
-    ## Remove locality, localityStack, classification, contributor.
-    ## Replace the `description`  element with its children
-    BasicBlock*,
-    ## replace `newcontent` element with `quote`
-    quote?
+## In Presentation XML: Strip autonumber element, strip `amend` wrapper.
+## Remove locality, localityStack, classification, contributor.
+## Replace the `description`  element with its children.
+## replace `newcontent` element with `quote`.
+amend &= semx
+# semx = BasicBlock*, quote?
 
 OlAttributes =
     BlockAttributes,
@@ -424,15 +420,11 @@ fmt-link = element fmt-link {
     PureTextElement+
 }
 
-## UNWRAP: as for eref
-quote-source =
-  xref | hyperlink
-
-## UNWRAP: Append to blockquote attribution paragraph, containing formatted rendering of author and source
+## Append to blockquote attribution paragraph, containing formatted rendering of author and source
 QuoteBody &=
     quote-attribution
 
-## UNWRAP: Append to blockquote attribution paragraph, containing formatted rendering of author and source
+## Append to blockquote attribution paragraph, containing formatted rendering of author and source
 QuoteNoIdBody &=
     quote-attribution
 
@@ -441,10 +433,11 @@ quote-attribution = element attribution  {
     attribution-para
 }
 
-## TODO this is not a great pattern, we will want these inline Semantic XML elements to be spans pointing to their Semantic XML origin
+## Text rendering quote-author & quote-source
 attribution-para = element p {
-  TextElement* & quote-author & quote-source
+  TextElement+
 }
+# semx references quote-author & quote-source
 
 ## The term domain may be inserted into fmt_termdefinition via semx.
 ## Multiple termdefinitions are replaced with a single definition, consiting of an ordered list of definitions
