@@ -91,3 +91,6 @@
 [submodule "grammars/relaton-model-plateau"]
 	path = grammars/relaton-model-plateau
 	url = https://github.com/relaton/relaton-model-plateau.git
+[submodule "grammars/relaton-model-ccsds"]
+	path = grammars/relaton-model-ccsds
+	url = https://github.com/relaton/relaton-model-ccsds.git
