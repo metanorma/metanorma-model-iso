@@ -14,7 +14,7 @@ GRAMMARS =
      relaton-un-compile relaton-cen-compile relaton-ecma-compile
      relaton-cie-compile relaton-iana-compile relaton-omg-compile
      relaton-oasis-compile relaton-jis-compile relaton-etsi-compile
-     relaton-plateau-compile)
+     relaton-plateau-compile relaton-ccdsd-compile)
     .freeze
 
 GRAMMARS.each do |g|

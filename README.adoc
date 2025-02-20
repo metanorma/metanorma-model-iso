@@ -66,8 +66,11 @@ To install:
 
 [source,console]
 ----
-git clone https://github.com/metanorma/metanorma-model-iso.git --recurse-submodules
-cd metanorma-model-iso/grammars
+git clone https://github.com/metanorma/metanorma-model-iso.git
+cd metanorma-model-iso
+git submodule init
+git submodule update --init
+cd grammars
 sh make.sh # compiles the grammars for all of relaton and metanorma
 sh copy.sh # copies compiles grammars to all metanorma gem directories for inclusion in the release
 ----
