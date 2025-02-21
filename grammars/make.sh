@@ -16,6 +16,7 @@ echo "\"relaton-models\": \"$var\"," >> ../../versions.json
 cd ../..
 cp relaton-models/grammars/biblio.rnc .
 cp relaton-models/grammars/biblio-standoc.rnc .
+cp relaton-models/grammars/biblio-compile.rnc .
 
 cd basicdoc-models/grammars
 git checkout main && git pull
