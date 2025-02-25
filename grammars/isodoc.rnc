@@ -123,7 +123,7 @@ SourceBody =
     ## The caption of the block
     tname?,
     ## The sourcecode content
-    sourecodebody,
+    sourcecodebody,
     ## Annotations to the source code; each annotation consists of zero or more paragraphs,
     ## and is intended to be referenced by a callout within the source code
     annotation*,
@@ -134,7 +134,7 @@ SourceBody =
 
 ## The computer code or other such text presented in the block, as a single unformatted string. 
 ## (The string should be treated as pre-formatted text, with whitespace treated as significant)
-sourececodebody = element body {
+sourcecodebody = element body {
 (   
        text |
        ## Zero or more cross-references; these are intended to be embedded within the content string, and link to annotations
