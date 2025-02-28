@@ -620,14 +620,89 @@ term = element term {
     fmt_termsource
 }
 
+## The reference values for document footnotes are renumbered from 1 in Presentation XML, to respect the rendering
+## order of the text; that is determined by @displayorder for each section containing footnotes. bibdata and boilerplate
+## do not have a @displayorder attribute (since their content is not rendered as a block); but the Presentation XML
+## presupposes that bibdata footnotes (title footnotes) and boilerplate footnotes will be rendered before the first
+## @displayorder section, and will number them accordingly. Renumbering is also needed for content that is only realised as
+## footnotes in Presentation XML, and not in Semantic XML: this involves notes in bibliographic references for certain
+## flavours (e.g. provenance of reference in ITU, draft status in ISO.)
+fn &= 
+  ## The identifier of this footnote
+  attribute id { xsd:ID },
+  ## The identifier of the footnote body corresponding to the footnote
+  attribute target { xsd:IDREF },
+  ## The body of the footnote is copied to fmt-footnote-container/fmt-fn-body, and that is where it is rendered from.
+  ## The Semantic XML content of fn is not rendered, and instead, fmt-fn-label is, as the presentation of the
+  ## footnote/@reference value.
+  fmt-fn-label
+
 DisplayOrder =
   ## The top-level clauses and blocks of the document are numbered in the order in which they should be rendered,
   ## taking floating titles into account.
   ## Rendering follows that ordering, rather than the ordering of claues in the XML
   attribute displayorder { xsd:int }
 
+## Add container for document footnotes
+standard-document &=
+  fmt-footnote-container?
+
 }
 # end overrides
+
+## Container for footnote bodies. In Presentation XML, the footnote body to be rendered
+## is moved to a separate container from the footnote reference; in Semantic XML, the footnote
+## reference contains the footnote body. The footnote container contains all footnotes relevant
+## to a table, a figure, or an entire document (excluding those in tables and figures):
+## that is because table and figure footnotes are numbered and rendered separately.
+## In most flavours, the footnote of a table or figure caption is included among the
+## document footnotes and not the table/figure footnotes. If footnote bodies are repeated,
+## the container contains only one instance; this deduplication already happens in Semantic XML,
+## where two footnote references containing the same footnote body assigned the same reference attribute.
+## That is how Presentation XML determines that a footnote is repeated
+fmt-footnote-container = element fmt-footnote-container {
+  fmt-fn-body+
+}
+
+## Footnote body, the content of a footnote
+fmt-fn-body = element fmt-fn-body {
+  ## The identifier of this footnote body
+  attribute id { xsd:ID },
+  ## The identifier of the first footnote reference corresponding to the footnote body
+  attribute target { xsd:IDREF },
+  ## The number of the footnote, displayed as a reference both in the footnote reference and in  
+  ## the footnote body. This is the bare number value, without any formatting characters, so
+  ## "a" or "1", rather than "a)" or "1)".
+  attribute reference { text },
+  ## The footnote body content, linked to its Semantic XML source in <fn>. The footnote body content
+  ## is prefixed with fmt-fn-label, at the start
+  ## of the first footnote paragraph or else before any footnote blocks:
+  ##   <fmt-fn-body id="1" target="2" reference="a">
+  ##     <semx element="fn" source="2">
+  ##       <p id="3">
+  ##         <fmt-fn-label>...</fmt-fn-label>
+  ##         Footnote content
+  ##       </p>
+  ##     </semx>
+  ##   </fmt-fn-body>
+  semx
+}
+
+## The display rendering of the footnote reference value, typically a superscript autonumber semx value,
+## optionally followed by a delimiter. This rendering appears both within the footnote reference <fn>,
+## and at the start of the footnote body <fmt-fn-body>. It consists of a superscript semx value
+## corresponding to the footnote reference attribute, optionally followed by a span with a flavour-specific
+## delimiter (fmt-label-delim), or preceded by a flavour-specific label (fmt-element-name). 
+## In fmt-fn-body, <tab/> is also added, to delimit the footnote label from the following text (fmt-caption-delim). 
+## In at least some rendering formats, the footnote body label is
+## provided by external software, so fmt-fn-label needs to be stripped.
+##    <fmt-fn-label>
+##      <sup>
+##        <semx element="autonum" source="3">a</semx><span class="fmt-label-delim">)</span>
+###     </sup>
+##      <span class="fmt-caption-label"><tab/></span>
+##      </fmt-fn-label>
+fmt-fn-label = element fmt-fn-label { PureTextElement+ }
 
 ## Clauses in the preface are rearranged into canonical order.
 ## An initial table of contents placeholder is inserted at the start of the preface by default, as
@@ -657,7 +732,7 @@ fmt-sourcecode = element fmt-sourcecode {
   note*
 }
 
-PureTextElement |= tab | fmt-origin | fmt-link | fmt-eref | fmt-xref
+PureTextElement |= tab | fmt-origin | fmt-link | fmt-eref | fmt-xref | fmt-fn-label
 
 ## All strings in table cells are broken up if they exceed a threshold of length
 ## (20 chars), in order to allow table cells not to be artificially widened
@@ -728,7 +803,7 @@ span &= empty
 ## If the stem expression is MathML consisting only of mn, it is replaced with the text content of mn,
 ## to reduce processing load. If the stem expression does not already contain <asciimath>,
 ## an Asciimath version of the MathML is added, for human readability and potential round-tripping.
-## If the attribute @linebreak is present in the MatML, two different MathML expressions are generated:
+## If the attribute @linebreak is present in the MathML, two different MathML expressions are generated:
 ## math-no-linebreak, containing the original MathML, and math-with-linebreak, which breaks the source MathML
 ## expression up into separate MathML expressions, joined by <br/>: this is to enable correct rendering in Word.
 ## If the MathML has <strong> as an ancestor, <mstyle mathvariant="bold"> is wrapped around the MathML contents:
