@@ -1,0 +1,8 @@
+include "biblio-standoc.rnc" { }
+include "isodoc-presentation.rnc" {
+
+}
+
+# end overrides
+
+
