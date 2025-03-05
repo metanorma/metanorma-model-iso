@@ -33,7 +33,6 @@ fn &=
     ## If true, number the footnote as normal, but suppress display of the footnote reference in the document body.
     ## This is done if the footnote reference is already presented in some other form, e.g. within a figure image.
     attribute hiddenref { xsd:boolean }?
-}  
 
 index-primary = element primary { (PureTextElement|stem)+ }
 index-secondary = element secondary { (PureTextElement|stem)+ }
