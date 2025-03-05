@@ -745,9 +745,36 @@ TdBody &= empty
 ## If figure is labelled with figure/@class (e.g. "diagram"), use the i18n of figure/@class, rather than "Figure",
 ## to label the figure
 ##
-## By default, any footnotes of the figure are moved to the beginning of the Figure key: the definition term is
-## the footnote reference, the definition content is the footnote content. This follows ISO rendering, and presupposes
-## that the footnote reference is embedded in the figure graphically.
+## By default, any footnotes of the figure are moved to the beginning of the Figure key: 
+## the definition content is the footnote content (fmt-fn-body), he definition term is
+## the footnote reference (fmt-fn-label, removed from fmt-fn-body, and with span[@class = 'fmt-caption-label'] stripped out).
+## This follows ISO rendering.
+## 
+## * Before:
+## <fmt-fn-body>
+##   <semx element="fn">
+##     <p>
+##       <fmt-fn-label>
+##         <sup><semx element="autonum">a</semx></sup>
+##         <span class="fmt-caption-label"><tab/></span>
+##       </fmt-fn-label>
+##       Footnote content
+##   </semx>
+##  </fmt-fn-body>
+##   
+## * After:
+## <dl class="formula_dl">
+##   <dt><p>
+##     <fmt-fn-label>
+##       <sup><semx element="autonum">a</semx></sup>
+##     </fmt-fn-label>
+##   </p></dt>   
+##   <dd>
+##     <fmt-fn-body>
+##       <semx element="fn"><p>Footnote content</p></semx>
+##     </fmt-fn-body>
+##   </dd>
+## </dl>
 ##
 ## If not supplied, a label paragraph is given for the key. TODO: this should be dl/name throughout, not p
 figure &= fmt-figure
