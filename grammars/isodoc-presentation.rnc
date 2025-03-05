@@ -702,7 +702,10 @@ fmt-fn-body = element fmt-fn-body {
 ###     </sup>
 ##      <span class="fmt-caption-label"><tab/></span>
 ##      </fmt-fn-label>
-fmt-fn-label = element fmt-fn-label { PureTextElement+ }
+## If fn/@hiddenref = true, then fn/fmt-fn-label is empty: display of the footnote reference value
+## is meant to be suppressed (although it is not in the corresponding fmt-fn-body.) This is done for
+## figures where the footnote reference is already contained in the image.
+fmt-fn-label = element fmt-fn-label { PureTextElement* }
 
 ## Clauses in the preface are rearranged into canonical order.
 ## An initial table of contents placeholder is inserted at the start of the preface by default, as
