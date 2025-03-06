@@ -259,6 +259,16 @@ FormulaBody =
 amend &= semx
 # semx = BasicBlock*, quote?
 
+## In a figure key, represented as dl, figure footnotes are presented as definition list entries
+## at the start of the list: dl/dt contains fmt-fn-label, the reference number for the footnote.
+## dl/dd contains fmt-fn-body, the body of the footnote, excluding fmt-fn-label and its following
+## delimiter span[@class = 'fmt-caption-delim']
+dd =
+  element dd {
+    # exclude figures?
+    BasicBlock* | fmt-fn-body
+  }
+
 OlAttributes =
     BlockAttributes,
     ## The type of numbering to be applied to the list items is forced
@@ -646,6 +656,15 @@ DisplayOrder =
 ## Add container for document footnotes
 standard-document &=
   fmt-footnote-container?
+
+## Add container for table footnotes
+TableBody &=
+  fmt-footnote-container?
+
+## Add container for figure footnotes. (Used only in BSI.)
+FigureBody &=
+  fmt-footnote-container?
+  
 
 }
 # end overrides
