@@ -2,7 +2,8 @@ require "jing"
 
 ret = ""
 GRAMMARS =
-  %w(biblio-compile isodoc-compile isostandard-compile isostandard-amd
+  %w(biblio-compile isodoc-compile isodoc-presentation-compile
+     isostandard-compile isostandard-amd
      iec generic csd csa gbstandard m3d rsd ieee un ogc nist itu ietf
      iho bipm bsi jis plateau
      relaton-ieee-compile relaton-iso-compile relaton-iec-compile
