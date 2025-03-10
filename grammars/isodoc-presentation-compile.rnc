@@ -1,4 +1,4 @@
-include "biblio-standoc.rnc" { }
+include "biblio-presentation.rnc" { }
 include "isodoc-presentation.rnc" {
 
 }

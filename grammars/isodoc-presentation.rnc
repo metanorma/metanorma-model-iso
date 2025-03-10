@@ -44,27 +44,6 @@ localized-string = element localized-string {
   text
 }
 
-## ONLY in the context of //bibdata/language
-language = element language {
-  ## of the languages present in document metadata, this language value corresponds to the document default
-  attribute current { xsd:boolean }?,
-  LanguageType
-}
-
-## ONLY in the context of //bibdata/locale
-locale = element locale {
-  ## of the locales present in document metadata, this locale value corresponds to the document default
-  attribute current { xsd:boolean }?,
-  LocaleType
-}
-
-## ONLY in the context of //bibdata/script
-script = element script {
-  ## of the scripts present in document metadata, this script value corresponds to the document default
-  attribute current { xsd:boolean }?,
-  ScriptType
-}
-
 ## If Semantic XML content is replicated in a Presentation XML element, any @id attributes need to be restricted
 ## to the Presentation XML element, because that is what anchors in rendered documents will point to.
 ## Any @id attributes in the source Semantic XML element need to be moved to @original-id, to avoid there
@@ -75,106 +54,6 @@ RequiredId &=
 ## As for RequiredId
 OptionalId &=
     attribute original-id { xsd:ID }?
-
-address =
-  element address {
-    ## Address decomposed into its component parts
-    AddressComponents?,
-    ## If not already present, generate a preformatted version of the address, concatenating its component parts,
-    ## delimited by linebreak
-    formattedAddress
-}
-
-BibDataExtensionType =
-  attribute schema-version { text }?,
-  ## Duplicate doctype, giving a translation of the doctype into the current i18n language
-  doctype+,
-  docsubtype?,
-  flavor,
-  editorialgroup?,
-  ics*,
-  structuredidentifier*
-
-status =
-  element status {
-     ## Duplicate stage, giving a translation of the stage into the current i18n language
-     stage+,
-     ## Duplicate substage, giving a translation of the substage into the current i18n language
-     substage*,
-     iteration?
-}
-
-BibliographicItem =
-    attribute type { BibItemType }?,
-    attribute schema-version { text }?,
-    fetched?,
-    formattedref?,
-    btitle+,
-    bsource*,
-    docidentifier+,
-    docnumber?,
-    bdate*,
-    contributor*,
-    ## Duplicate edition, giving a translation of the substage into the current i18n language
-    edition*,
-    version*,
-    biblionote*,
-    language*,
-    locale*,
-    script*,
-    bibabstract*,
-    status?,
-    copyright*,
-    docrelation*,
-    series*,
-    medium?,
-    bplace*,
-    bprice*,
-    extent*,
-    bibliographic_size?,
-    accesslocation*,
-    license*,
-    bclassification*,
-    bkeyword*,
-    validity?,
-    depiction?
-
-bDateAttributes |=
-  ## Through i18n, generate a translation of the Semantic date value, with language set to the current language.
-  ## The original value is indicated with language=""
-  attribute language { LanguageType }?
-
-doctype = element doctype {
-  ## Through i18n, generate a translation of the Semantic doctype value, with language set to the current language.
-  ## The original value is indicated with language=""
-  attribute language { LanguageType }?,
-  attribute abbreviation { text }?,
-  DocumentType
-}
-
-stage = element stage {
-  ## Through i18n, generate a translation of the Semantic stage value, with language set to the current language.
-  ## The original value is indicated with language=""
-  attribute language { LanguageType }?,
-  attribute abbreviation { text }?,
-  text
-}
-
-substage = element substage {
-  ## Through i18n, generate a translation of the Semantic substage value, with language set to the current language.
-  ## The original value is indicated with language=""
-  attribute language { LanguageType }?,
-  attribute abbreviation { text }?,
-  text
-}
-
-edition = element edition {
-  ## Through i18n, generate a translation of the Semantic human-readable edition value, with language set to the current language.
-  ## The original value is indicated with language="". The i18n may involve ordinals
-  attribute language { LanguageType }?,
-  attribute number { text }?,
-  text
-}
 
 NestedTextElement |= semx
 
@@ -237,13 +116,9 @@ tname =
 ##     <p>This is a note...</p>
 ##  To be rendered as:
 ##    <p>NOTE 1:<tab/>This is a note...</p>
-fmt-title = element fmt-title {
-    ## A hierarchical section title is given an explicit count of its nesting depth, as a hint for rendering
-    attribute depth { xsd:integer }?,
-    ## The ID of the title that the fmt-title is derived from
-    attribute source { xsd:IDREF }?,
+fmt-name = element fmt-name {
     TextElement*
-  } 
+} 
 
 FormulaBody =
   stem,
