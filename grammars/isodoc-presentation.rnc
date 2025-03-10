@@ -657,8 +657,13 @@ DisplayOrder =
 standard-document &=
   fmt-footnote-container?
 
-## Add container for table footnotes
+## Add container for table footnotes, if the container appears after the table
 TableBody &=
+  fmt-footnote-container?
+
+## Add container for table footnotes, if the container appears inside a table cell (i.e. in the table footer, as is the case
+## with Plateau)
+TdBody &=
   fmt-footnote-container?
 
 ## Add container for figure footnotes. (Used only in BSI.)
