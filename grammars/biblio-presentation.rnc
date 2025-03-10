@@ -23,8 +23,11 @@ script = element script {
 
 address =
   element address {
-    ## Address decomposed into its component parts
-    AddressComponents?,
+    street*,
+    city?,
+    state?,
+    country?,
+    postcode?,
     ## If not already present, generate a preformatted version of the address, concatenating its component parts,
     ## delimited by linebreak
     formattedAddress
@@ -32,7 +35,8 @@ address =
 
 BibDataExtensionType =
   attribute schema-version { text }?,
-  ## Duplicate doctype, giving a translation of the doctype into the current i18n language
+  ## Duplicate doctype: alongside the Semantic XML doctype, add a doctype with @current = true, 
+  ## giving a translation of the doctype into the current i18n language
   doctype+,
   docsubtype?,
   flavor,
@@ -42,9 +46,11 @@ BibDataExtensionType =
 
 status =
   element status {
-     ## Duplicate stage, giving a translation of the stage into the current i18n language
+     ## Duplicate stage: alongside the Semantic XML stage, add a stage with @current = true,
+     ## giving a translation of the stage into the current i18n language
      stage+,
-     ## Duplicate substage, giving a translation of the substage into the current i18n language
+     ## Duplicate substage: alongside the Semantic XML substage, add a substage with @current = true,
+     ## giving a translation of the substage into the current i18n language
      substage*,
      iteration?
 }
@@ -60,7 +66,8 @@ BibliographicItem =
     docnumber?,
     bdate*,
     contributor*,
-    ## Duplicate edition, giving a translation of the substage into the current i18n language
+    ## Duplicate edition: along the Semantic XML edition, @language = "", add an edition with @language set,
+    ## giving a translation of the substage into the current i18n language
     edition*,
     version*,
     biblionote*,
@@ -85,41 +92,66 @@ BibliographicItem =
     depiction?
 
 bDateAttributes |=
-  ## Through i18n, generate a translation of the Semantic date value, with language set to the current language.
-  ## The original value is indicated with language=""
+  ## Through i18n, generate a translation of the Semantic date value, with @language set to the current language.
+  ## The Semantic XML value is retained, indicated with @language=""
   attribute language { LanguageType }?
 
 doctype = element doctype {
-  ## Through i18n, generate a translation of the Semantic doctype value, with language set to the current language.
-  ## The original value is indicated with language=""
+  ## Through i18n, generate a translation of the Semantic doctype value, with @language set to the current language.
+  ## The Semantic XML value is retained, indicated with @language=""
   attribute language { LanguageType }?,
   attribute abbreviation { text }?,
   DocumentType
 }
 
 stage = element stage {
-  ## Through i18n, generate a translation of the Semantic stage value, with language set to the current language.
-  ## The original value is indicated with language=""
+  ## Through i18n, generate a translation of the Semantic stage value, with @language set to the current language.
+  ## The Semantic XML value is retained, indicated with @language=""
   attribute language { LanguageType }?,
   attribute abbreviation { text }?,
   text
 }
 
 substage = element substage {
-  ## Through i18n, generate a translation of the Semantic substage value, with language set to the current language.
-  ## The original value is indicated with language=""
+  ## Through i18n, generate a translation of the Semantic substage value, with @language set to the current language.
+  ## The original value is indicated with @language=""
   attribute language { LanguageType }?,
   attribute abbreviation { text }?,
   text
 }
 
 edition = element edition {
-  ## Through i18n, generate a translation of the Semantic human-readable edition value, with language set to the current language.
-  ## The original value is indicated with language="". The i18n may involve ordinals
+  ## Through i18n, generate a translation of the Semantic human-readable edition value, with @language set to the current language.
+  ## The original value is indicated with @language="". The i18n may involve ordinals
   attribute language { LanguageType }?,
   attribute number { text }?,
   text
 }
+
+## lists of locality with @connective attributes are resolved within fmt-eref to a single human-readable string of
+## locality, with connectives linking them; e.g. 
+##    <eref bibitemid="ISO712" type="inline" citeas="ISO 712">
+##      <localityStack connective="and">
+##        <locality type='clause'><referenceFrom>3.1</referenceFrom></locality>
+##      </localityStack>
+##      <localityStack connective="and">
+##        <locality type='figure'><referenceFrom>b</referenceFrom></locality>
+##      </localityStack>
+##    </eref>
+## becomes
+##    <locality type='clause'><referenceFrom>3.1</referenceFrom></locality> and <locality type='figure'><referenceFrom>b</referenceFrom></locality>
+localityStack =
+   element localityStack {
+     ( locality | text )*
+ }
+
+## locality under fmt-xref fmt-eref becomes text; e.g. 
+##     <locality type='clause'><referenceFrom>3.1</referenceFrom></locality>
+## becomes
+##     Clause 3.1
+## If eref/@droploc = true, do not insert the locality name. If eref/@case = capital, titlecase it. 
+## If  eref/@case = lowercase, lowercase it
+locality |= text
 
 
 }

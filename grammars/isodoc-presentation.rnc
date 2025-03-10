@@ -1,7 +1,4 @@
 # In the following, unaltered fields are uncommented. Changes in cardinality are still commented.
-# When a semantic element wrapper are removed, as in <concept id=...>{content}</concept> => <concept>,
-# that is indicated as "(UNWRAPPED)": in such cases, any anchor of the wrapper is lost, and
-# alignment between Semantic and Presentation XML cannot be recovered through matching anchors
 include "isodoc.rnc" {
 
 ## A tab or similar spacing; used to delimit clause numbers from clause titles
@@ -14,11 +11,11 @@ tab = element tab { empty }
 ## * Extract any attachments into an _{output filename}_attachments folder, to be linked to in HTML.
 misccontainer = element metanorma-extension { 
   AnyElement+, 
-  (ext_toc+ & localized-strings & metanorma-source-container & source-highlighter-css)
+  (ext_toc+ & localized-strings & source-highlighter-css)
 }
 
-## CSS of the Rouge code highlighter for the document: consists of flavour default,
-## plus any document-specific //metanorma-extension/clause[title = 'user-css']/sourcecode/* 
+## CSS of the Rouge code highlighter for the document: consists of flavour default CSS,
+## plus any document-specific stylesheet, specified as //metanorma-extension/clause[title = 'user-css']/sourcecode/* 
 source-highlighter-css = element source-highlighter-css { text }
 
 ## Indicate that a table of contents for specific assets is required
@@ -29,15 +26,17 @@ ext_toc = element toc {
   element title { PureTextElement+ }
 }
 
-## i18n equivalents, to be applied in PDF when needing to generate i18n output on the fly
+## i18n equivalent strings in the current language for automatic text generation,
+## to be applied in PDF when needing to generate i18n output on the fly
 localized-strings = element localized-strings {
   localized-string+
 }
 
-## i18n equivalence
+## i18n equivalent string, specifying the localised language value of a phrase used in generating Metanorma output
 localized-string = element localized-string {
   ## The name of the i18n string
   attribute key { text },
+  ## The language of the i18n'd rendering
   attribute language { LanguageType },
   ## The i18n'd rendering of @key; e.g.
   ##   <localized-string key="table" language="fr">tableau</localized-string>
@@ -57,7 +56,7 @@ OptionalId &=
 
 NestedTextElement |= semx
 
-## Autonumbers and other content duplicated from Semantic XML into new Presentation XML content is annotated by the <semx> element,
+## Autonumbers and other content duplicated from Semantic XML into new Presentation XML content are annotated by the <semx> element,
 ## which connects the inserted content back to its Semantic XML source. So in the generated crossreference "Clause *2*, Note 1",
 ## the "1" is marked up as <semx element='autonum' source='A'>2</semx>, indicating that the "2" is an auto-number
 ## associated with the element with id A (the Clause tag). In a caption like "Clause 2: *Discussion*", the "Discussion"
@@ -68,17 +67,13 @@ semx = element semx {
   attribute element { text },
   ## id of the source element that the Semantic XML content is derived from.
   attribute source { xsd:IDREF },
-  ## Duplicated Semantic XML content, or content derived from it (such as an autonumber).
+  ## Duplicated Semantic XML content, or content derived from it (such as an autonumber). Any such content will preserve
+  ## its @id attributes recursively; the corresponding @id attributes in the Semantic XML original are moved to @original-id,
+  ## to avoid conflict
   PureTextElement*
 }
 
-## Captions always have inserted into them the delimiter text that separates them from the block content
-## they apply to, rather than leaving that to the renderer. So formula/name is transformed from "1" to "(1)";
-## note/name is populated as "Note 1:" or "NOTE —"  and not just "Note". In future versions, the autonumber and delimiter
-## content will be tagged separately.
-tname = element name { NestedTextElement+ }
-
-## Asset captions are transformed analogously to section-title; see documentation there
+## Asset captions are transformed in the same way as section-title; see documentation there
 ## (with fmt-name replacing fmt-title as the Presentation XML-specific caption of a block).
 ## The following additional provisos apply:
 ## * fmt-caption-label is not added to fmt-name
@@ -105,7 +100,7 @@ tname =
 ##   </fmt-name>
 ## * As with inline section titles, the fmt-name content may be followed immediately by block content; in that
 ## case, span[@class = 'fmt-label-delim'] separates the name from the content; e.g. 
-##   <note>
+##   <note id="A">
 ##     <fmt-name>
 ##       <span class="fmt-caption-delim">
 ##         <span class="fmt-element-name">NOTE</span>
@@ -122,19 +117,20 @@ fmt-name = element fmt-name {
 
 FormulaBody =
   stem,
-  ## Any key in a formula is preceded with a paragraph with the i18n'd word "where" or "where_one" (for singular value).
-  ## The key itself is given @class = formula_dl
+  ## Any key in a formula is preceded with a paragraph with the i18n'd word "where", or "where_one" (for singular value).
+  ## The key dl itself is given the attribute @class = formula_dl
   (p, dl)?,
   note
 
-## In Presentation XML: Strip autonumber element, strip `amend` wrapper.
-## Remove locality, localityStack, classification, contributor.
-## Replace the `description`  element with its children.
-## replace `newcontent` element with `quote`.
+## In Presentation XML, the rendering of the amend block (wrapped in semx) does the following:
+## *  Strip autonumber element, strip `amend` wrapper.
+## * Remove locality, localityStack, classification, contributor.
+## * Replace the `description`  element with its children.
+## * Replace `newcontent` element with `quote`.
 amend &= semx
 # semx = BasicBlock*, quote?
 
-## In a figure key, represented as dl, figure footnotes are presented as definition list entries
+## Within a figure key, represented as dl, figure footnotes are presented as definition list entries
 ## at the start of the list: dl/dt contains fmt-fn-label, the reference number for the footnote.
 ## dl/dd contains fmt-fn-body, the body of the footnote, excluding fmt-fn-label and its following
 ## delimiter span[@class = 'fmt-caption-delim']
@@ -162,44 +158,48 @@ li =
     LiBody
 } 
 
-TermSource =
-    ## Concatenate all consecutive term sources and block sources into a single semicolon delimited expression
-    termsource?
-
-## Concatenate all consecutive term sources and block sources into a single semicolon delimited expression
+## Rendering of Termsource: Concatenate all consecutive term sources and block sources into a single semicolon delimited expression.
+## Wrapped in semx pointing back to Termsource.
+## Replace modification with a commma, then text representing the status, then a dash, then text representing the modification
+## e.g.
+##    <termsource status="adapted" id="A"><origin>...</origin><modification>enhanced</modification></termsource>
+## becomes:
+##    <fmt-termsource status="adapted"><semx element='termsource' source="A">
+##      <origin>...</origin>,
+##      adapted – <semx element='modification'>enhanced</semx>
+##    </semx></fmt-termsource>
 fmt_termsource = element fmt-termsource {
     attribute status { SourceStatusType },
     attribute type { SourceTypeType },
-    origin,
-    ## Replace modification with a commma, then text representing the status, then a dash, then text representing the modification
-    ## e.g.
-    ##    <termsource status="adapted"><origin>...</origin><modification>enhanced</modification></termsource>
-    ## becomes:
-    ##    <fmt-termsource status="adapted"><semx element='termsource'>
-    ##      <origin>...</origin>,
-    ##      adapted – <semx element='modification'>enhanced</semx>
-    ##    </semx></fmt-termsource>
-    TextElement*
+    semx
 }
 
-## replace <concept> with the rendered form of the crossreference
+## Replace <concept> with the rendered form of the crossreference. Only fmt-concept is rendered within concept; all other
+## elements are Semantic XML
 concept &= fmt-concept
 fmt-concept = element fmt-concept {
-  ## refterm and renderterm are removed. The crossrefence, eref, erefstack, xref, termref, is replaced with
+  ## refterm and renderterm from the Semantic XML are removed. The crossrefence -- eref, erefstack, xref, termref -- is replaced with
   ## the content of renderterm if present and requested (@ref),
   ## with the attributes of Semantic XML concept used to determine its rendering: 
-  ## ital: italicise the crossreference text
-  ## bold: boldface the crossreference text
-  ## ref: append the citation of the concept definition (clause number, for local definitions)
-  ## linkmention: use renderterm as the cross-reference text; if false, leave the cross-reference as is, to be resolved
+  ## * ital: italicise the crossreference text
+  ## * bold: boldface the crossreference text
+  ## * ref: append the citation of the concept definition (clause number, for local definitions)
+  ## * linkmention: use renderterm as the cross-reference text; if false, leave the cross-reference as is, to be resolved
   ## as is normal for Presentation XML
-  ## linkref: cross-reference the citation of the concept definition to the source of that definition
+  ## * linkref: cross-reference the citation of the concept definition to the source of that definition
   ## (same destination as linkmention). If false, unwrap the cross-references, and use only their text, with no cross-referencing
   ## e.g. 
-  ##    <concept><refterm>term123</refterm> <renderterm>Term</renderterm> 
-  ##       <eref bibitemid="ISO712" type="inline" citeas="ISO 712"/></concept>
+  ##    <concept>
+  ##       <refterm>term123</refterm> <renderterm>Term</renderterm> 
+  ##       <eref bibitemid="ISO712" type="inline" citeas="ISO 712"/>
+  ##    </concept>
   ## becomes
-  ##    <em>Term</em> (<xref type="inline" target="ISO712">ISO 712</xref>)
+  ##    <concept>
+  ##    ...
+  ##      <fmt-concept>
+  ##        <em>Term</em> (<xref type="inline" target="ISO712">ISO 712</xref>)
+  ##      </fmt-concept>
+  ##    </concept>
   ( 
      ## Link to a definition of the term in a bibliographic entry
      eref |
@@ -213,17 +213,21 @@ fmt-concept = element fmt-concept {
   )+
 }
 
-## replace <related> with the crossreference to the term being related to (wrapped in semx for related)
-## paragraph is: 
+## replace <related> with a paragraph for the crossreference to the term being related to (wrapped in semx, pointing back to related).
+## The paragraph is: 
 ##    <p><strong>{related/@type}:</strong> <em>{related/preferred}</em> 
 ##       ({related/xref | related/eref | related/termref})</p>
 ## e.g.
-##    <related type='contrast'><preferred><expression><name>Fifth Designation</name></expression></preferred>
-##       <xref target='second'/></related>
+##    <related type='contrast' id="A">
+##       <preferred><expression><name>Fifth Designation</name></expression></preferred>
+##       <xref target='second'/>
+##    </related>
 ## becomes: 
-##    <p><strong>CONTRAST:</strong> <em><semx element="preferred"><strong>Fifth Designation</strong></semx></em> 
+##    <fmt-related><semx element="related" source="A">
+##      <p><strong>CONTRAST:</strong> <em><semx element="preferred"><strong>Fifth Designation</strong></semx></em> 
 ##       (<xref target='second'>Clause 1.1</xref>)</p>
-fmt_related = element fmt-related { paragraph }
+##    </semx><fmt-related>
+fmt_related = element fmt-related { semx }
 
 erefAttributes =
     attribute normative { xsd:boolean }?,
@@ -234,47 +238,22 @@ erefAttributes =
 
 ## Lists of erefs with @connective attributes are resolved to a single human-readable string of
 ## eref, with connectives linking them; e.g. 
-##    <erefstack><eref connective="from" target="A"/><eref connective="to" target="A"/></erefstack>
-## becomes
-##    <semx>from <eref connective="from" target="A"/> to <eref connective="to" target="A"/></semx>
+##    <erefstack id="A"><eref connective="from" target="B"/><eref connective="to" target="B"/></erefstack>
+## has attached to it
+##    <semx element="erefstack" source="A">from <eref connective="from" target="B"/> to <eref connective="to" target="B"/></semx>
 erefstack &= semx
 # content of semx: (element eref { erefTypeWithConnective } | text)+
 
-## lists of locality with @connective attributes are resolved within fmt-eref to a single human-readable string of
-## locality, with connectives linking them; e.g. 
-##    <eref bibitemid="ISO712" type="inline" citeas="ISO 712">
-##      <localityStack connective="and">
-##        <locality type='clause'><referenceFrom>3.1</referenceFrom></locality>
-##      </localityStack>
-##      <localityStack connective="and">
-##        <locality type='figure'><referenceFrom>b</referenceFrom></locality>
-##      </localityStack>
-##    </eref>
-## becomes
-##    <locality type='clause'><referenceFrom>3.1</referenceFrom></locality> and <locality type='figure'><referenceFrom>b</referenceFrom></locality>
-localityStack =
-   element localityStack {
-     ( locality | text )*
- }
-
-## as with localityStack
+## as with localityStack, see biblio-presentation
 sourcelocalityStack =
    element sourcelocalityStack {
      ( sourcelocality | text )*
  }
 
-## locality under fmt-xref fmt-eref becomes text; e.g.
-##     <locality type='clause'><referenceFrom>3.1</referenceFrom></locality>
-## becomes
-##     Clause 3.1
-## If eref/@droploc = true, do not insert the locality name. If eref/@case = capital, titlecase it. 
-## If  eref/@case = lowercase, lowercase it
-locality |= text
-
-## as with locality
+## as with locality, see biblio-presentation
 sourcelocality |= text
 
-## convert eref to xref (pointing to bibliography anchor, xref/@target = eref/@bibitemid),
+## Convert eref to xref (pointing to bibliography anchor, xref/@target = eref/@bibitemid),
 ## or link (if a URI for the reference is supplied in the bibitem being referenced).
 ## The locality text (locality, sourcelocality), if present, is inserted as part of the cross-referenced text.
 ## If the locality is an anchor, and the eref is converted to link, append the anchor to the URI.
@@ -299,7 +278,7 @@ fmt-origin = element fmt-origin {
   ErefBody
 }
 
-## Normalises hyperlink content, appears when eref converted to citation hyperlink
+## Normalises hyperlink content, appears when eref is converted to citation hyperlink
 fmt-link = element fmt-link {
     HyperlinkAttributes,
     PureTextElement+
@@ -322,7 +301,7 @@ quote-attribution = element attribution  {
 attribution-para = element p {
   TextElement+
 }
-# semx references quote-author & quote-source
+# semx within p references quote-author & quote-source
 
 ## The term domain may be inserted into fmt_termdefinition via semx.
 ## Multiple termdefinitions are replaced with a single definition, consiting of an ordered list of definitions
@@ -354,14 +333,16 @@ image = element image {
 svgmap &= semx
 # semx contains figure
 
-## If the xref is empty, it is resolved to the computed cross-reference label for the element being pointed to.
+## If the xref is empty, it is resolved in fmt-xref to the computed cross-reference label for the element being pointed to.
 ## xref/@case, xref/@droploc, xref/@style, xref/@label are used in computing the label.
-## <location>, the locations within the reference being specified, are combined and  resolved into text appended to the body, 
-## and removed as an element
+## <location>, the locations within the reference being specified, are combined and  resolved in fmt-xref
+## into text appended to the body, and removed as an element
 XrefBody = PureTextElement+
 
-## If the eref is empty, it is resolved in fmt-eref to the citation of the bibliographic element being pointed to.
-## <location>, the locations within the reference being specified, are resolved into text appended to the body, and removed as an element
+## If the eref is empty, it is resolved in the corresponding fmt-eref or fmt-xref 
+## to the citation of the bibliographic element being pointed to.
+## <location>, the locations within the reference being specified, are resolved in fmt-eref or fmt-xref 
+## into text appended to the body, and removed as an element
 ErefBody = PureTextElement+
 
 ## Change identifier of requirement to just monospace
@@ -447,7 +428,7 @@ section-title =
 ## (e.g. ISO Amendments). No fmt-caption-label is added for single special clauses in annexes:
 ## //annex/terms and //annex/references are a Terms or References section put in an annex, and they are not labelled
 ## separately from the containing annex. 
-## Top-level section titles in CJK 3 characters or less in size are rendered extended 
+## Top-level section titles in CJK 3 characters or less in size are rendered in extended style.
 fmt-title = element fmt-title {
     ## A hierarchical section title is given an explicit count of its nesting depth, as a hint for rendering
     attribute depth { xsd:integer }?,
@@ -479,6 +460,11 @@ fmt-xref-label = element fmt-xref-label {
 ## Top-level section titles in CJK 3 characters or less in size are rendered extended 
 floating-title &= paragraph
 
+## The Semantic XML elements of term are given rendering equivalents, organised as fmt_preferred, fmt_admitted, fmt_deprecates,
+## fmt_related, fmt_termdefinition, fmt_termsource; the elements to be rendered in Presentation XML are those elements, plus
+## termnote and termexample. Different flavours of Metanorma will arrange Semantic XML information into different Presentation
+## elements: at minimum, we expect there to be a fmt_termdefinition, and if e.g. designations are rendered in the same paragraph
+## as the definition, they appear within the fmt_termdefinition paragraph, rather than as separate fmt_preferred etc. elements.
 term = element term {
     OptionalId,
     LocalizedStringAttributes,
@@ -617,10 +603,13 @@ preface &= empty
 ## Any instances of xref in a pre-populated table of contents are prefixed with the clause number they are referencing
 toc &= empty
 
+## In sourcecode, only the fmt-sourcecode element is expected to be rendered: all other elements of sourcecode
+## are considered Semantic XML.
 SourceBody &= fmt-sourcecode
 
 ## Rendering of sourcecode
 fmt-sourcecode = element fmt-sourcecode {
+  # Sourcecode caption
   tname?,
   (
     ( text | callout )+ |
@@ -631,7 +620,7 @@ fmt-sourcecode = element fmt-sourcecode {
     ## and the span tags are coloured through the supplied source-highlighter-css
     ( text | callout | span )+
   ),
-  ## annotations are replaced by a definition list; semx is used in dd to reference the annotation text in Semantic XML
+  ## annotations are replaced by a definition list; semx is used in dl/dd to reference the annotation text in Semantic XML
   dl?,
   note*
 }
@@ -653,10 +642,10 @@ TdBody &= empty
 ## 
 ## * Before:
 ## <fmt-fn-body>
-##   <semx element="fn">
+##   <semx element="fn" source="A">
 ##     <p>
 ##       <fmt-fn-label>
-##         <sup><semx element="autonum">a</semx></sup>
+##         <sup><semx element="autonum" source="A">a</semx></sup>
 ##         <span class="fmt-caption-label"><tab/></span>
 ##       </fmt-fn-label>
 ##       Footnote content
@@ -667,12 +656,12 @@ TdBody &= empty
 ## <dl class="formula_dl">
 ##   <dt><p>
 ##     <fmt-fn-label>
-##       <sup><semx element="autonum">a</semx></sup>
+##       <sup><semx element="autonum" source="A">a</semx></sup>
 ##     </fmt-fn-label>
 ##   </p></dt>   
 ##   <dd>
 ##     <fmt-fn-body>
-##       <semx element="fn"><p>Footnote content</p></semx>
+##       <semx element="fn" source="A"><p>Footnote content</p></semx>
 ##     </fmt-fn-body>
 ##   </dd>
 ## </dl>
@@ -701,12 +690,13 @@ fmt-date-inline = element fmt-date-inline {TextElement+}
 ## * fmt-caption-delim is used to annotate punctuation or space delimiting the  autonumber label (fmt-caption-label) from
 ## any user-supplied title of the asset, e.g. "Table 1*:* After-effects of plutonium.",
 ## "Clause 3*<tab/>*Discussion".
+## * fmt-dt-delim is used to delimit a definition list term from a definition list definition, if they are serialised
+## in a single paragraph (currently only used in Plateau).
 ## * fmt-label-delim is used to annotate puncutation or space inserted after the autonumber label and any user-supplied title,
 ## e.g. "Table 1: After-effects of plutonium*.*" (at the end of a table caption), 
 ## or "Note 3*:<tab/>* The after-effects are outlined above." (the delimiter separates the note label from note content,
 ## and would follow any note title if one were given.) The sequence in a caption is thus 
 ## (with <semx element='autonum'/> the autonumber itself, and <semx element='name/title'> the user-supplied title):
-##
 ## <fmt-caption-label><fmt-element-name/> <semx element='autonum'/></fmt-caption-label><fmt-caption-delim/>
 ##   <semx element='name'><fmt-label-delim/>
 ## * fmt-autonum-delim is used to separate numbers in a hierarchy, when an autonumber is built up of other numbers;
@@ -729,26 +719,27 @@ fmt-date-inline = element fmt-date-inline {TextElement+}
 ##   <strong>paddy</strong><span class="fmt-designation-field">, &lt;<semx element="field-of-application" source="_">in agriculture</semx>&gt;</span>
 span &= empty
 
+## The rendering of the stem element is given in fmt-stem; all other elements are considered Semantic XML.
+## This is done to differentiate the original Semantic XML, from stem expressions for presentation, to which
+## number formatting has been applied, altering the values of stem/math//mn.
 ## Number formatting is applied to stem/mathml expressions: inline stem, and if number formatting is specified 
-## (@data-metanorma-numberformat), ## formula/stem/mathml as well. 
+## (@data-metanorma-numberformat), formula/stem/mathml as well. 
 ## If the stem expression is MathML consisting only of mn, it is replaced with the text content of mn,
-## to reduce processing load. If the stem expression does not already contain <asciimath>,
+## to reduce processing load. If the stem expression does not already contain <asciimath> under its Semantic XML elements,
 ## an Asciimath version of the MathML is added, for human readability and potential round-tripping.
-## If the attribute @linebreak is present in the MathML, two different MathML expressions are generated:
-## math-no-linebreak, containing the original MathML, and math-with-linebreak, which breaks the source MathML
-## expression up into separate MathML expressions, joined by <br/>: this is to enable correct rendering in Word.
 ## If the MathML has <strong> as an ancestor, <mstyle mathvariant="bold"> is wrapped around the MathML contents:
 ## this is because the PDF rendering is not dealing with boldfacing MathML when its container is boldface.
 stem &= fmt-stem
 fmt-stem = element fmt-stem { TextElement+ }
-
-metanorma-source-container = element metanorma { metanorma-source }
 
 ## When all bibitem children of references have @hidden = true, set @hidden = true on references
 ## as well: this suppresses display of the entire clause (including title and boilerplate)
 ReferencesAttributes &=
     attribute hidden { xsd:boolean }?
 
+## The only elements of doc_bibitem expected to be rendered are formattedref (the reference itself) and biblio-tag
+## (the initial tag identifying the reference in the hanging indent.)
+## 
 ## All bibliographic entries are rendered through relaton-render, which applies the Metanorma flavour's
 ## citation stylesheet to populate bibitem/formattedref, according to bibitem/@type. (Different bibliographic types
 ## have different rendering templates.) Do not populate formattedref if it is already supplied, and there is no title
@@ -779,7 +770,7 @@ RequirementType &= fmt-provision
 ## they are rendered as tables. 
 fmt-provision = element fmt-provision { BasicBlock+ }
 
-## Document title in metadata, in CJK 3 characters or less in size, is rendered extended 
+## Document title in metadata, in CJK 3 characters or less in size, is rendered in extended style
 btitle &= empty
 
 ## If this is a single special clause in an annex (terms, or references), then this is a Terms or References section put in an annex,
@@ -824,16 +815,3 @@ Basic-Section-Attributes &= DisplayOrder
 BlockAttributes &= DisplayOrder
 
 
-## The metanorma-source element contains a copy of the Semantic XML, so that downstream
-## consumers can process Semantic XML and Presentation XML in tandem. The Semantic and
-## Presentation XML are aligned as follows, in order to avoid duplicate references and
-## to segregate the embedded XML from processing:
-##
-## * Each element in metanorma-source is prefixed with semantic__ : <semantic__p>
-## * Any namespaced element has semantic_ prefixed to its name : <mathml:semantic__math>
-## * The root namespace of the embedded Semantic XML is stripped : <semantic__iso-document> (no ns)
-## * Every attribute of the Semantic XML that is an identifier (id, name) is prefixed with semantic__ :
-##   <semantic__p id="semantic__A123">
-## * Every attribute of the Semantic XML that references an element identifier is prefixed with semantic__ :
-##   <semantic_xref target="semantic__A123">
-metanorma-source = element metanorma { AnyElement+ }
