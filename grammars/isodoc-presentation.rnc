@@ -664,7 +664,9 @@ TableBody &=
 ## Add container for table footnotes, if the container appears inside a table cell (i.e. in the table footer, as is the case
 ## with Plateau)
 TdBody &=
-  fmt-footnote-container?
+  fmt-footnote-container?,
+## A source for the table (in the table footer, again in Plateau)
+  TermSource*
 
 ## Add container for figure footnotes. (Used only in BSI.)
 FigureBody &=
