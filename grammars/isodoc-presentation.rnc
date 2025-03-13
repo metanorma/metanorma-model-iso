@@ -70,7 +70,7 @@ semx = element semx {
   ## Duplicated Semantic XML content, or content derived from it (such as an autonumber). Any such content will preserve
   ## its @id attributes recursively; the corresponding @id attributes in the Semantic XML original are moved to @original-id,
   ## to avoid conflict
-  PureTextElement*
+  (TextElement* | BasicBlock*)
 }
 
 ## Asset captions are transformed in the same way as section-title; see documentation there
