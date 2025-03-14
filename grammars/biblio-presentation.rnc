@@ -46,10 +46,10 @@ BibDataExtensionType =
 
 status =
   element status {
-     ## Duplicate stage: alongside the Semantic XML stage, add a stage with @current = true,
+     ## Duplicate stage: alongside the Semantic XML stage, @language = "", add a stage with @language set,
      ## giving a translation of the stage into the current i18n language
      stage+,
-     ## Duplicate substage: alongside the Semantic XML substage, add a substage with @current = true,
+     ## Duplicate substage: alongside the Semantic XML substage, @language = "", add a substage with @language set,
      ## giving a translation of the substage into the current i18n language
      substage*,
      iteration?
