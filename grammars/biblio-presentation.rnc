@@ -101,6 +101,9 @@ doctype = element doctype {
   ## The Semantic XML value is retained, indicated with @language=""
   attribute language { LanguageType }?,
   attribute abbreviation { text }?,
+  ## The type of translation, if multiple translations are provided for whatever reason (e.g. differentiating rendering
+  ## on coverpage vs document body)
+  attribute type { text }?,
   DocumentType
 }
 
@@ -109,7 +112,10 @@ stage = element stage {
   ## The Semantic XML value is retained, indicated with @language=""
   attribute language { LanguageType }?,
   attribute abbreviation { text }?,
-  text
+  ## The type of translation, if multiple translations are provided for whatever reason (e.g. differentiating rendering
+  ## on coverpage vs document body)
+  attribute type { text }?,
+  TextElement*
 }
 
 substage = element substage {
@@ -117,7 +123,10 @@ substage = element substage {
   ## The original value is indicated with @language=""
   attribute language { LanguageType }?,
   attribute abbreviation { text }?,
-  text
+  ## The type of translation, if multiple translations are provided for whatever reason (e.g. differentiating rendering
+  ## on coverpage vs document body)
+  attribute type { text }?,
+  TextElement*
 }
 
 edition = element edition {
@@ -125,7 +134,10 @@ edition = element edition {
   ## The original value is indicated with @language="". The i18n may involve ordinals
   attribute language { LanguageType }?,
   attribute number { text }?,
-  text
+  ## The type of translation, if multiple translations are provided for whatever reason (e.g. differentiating rendering
+  ## on coverpage vs document body)
+  attribute type { text }?,
+  TextElement*
 }
 
 ## lists of locality with @connective attributes are resolved within fmt-eref to a single human-readable string of
