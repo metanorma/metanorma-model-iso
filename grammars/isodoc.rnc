@@ -216,6 +216,18 @@ ThBody =
       paragraph-with-footnote+
     )
 
+TdAttributes &=
+  ## CSS style: only background-color supported
+  attribute style { text }
+
+ThAttributes &=
+  ## CSS style: only background-color supported
+  attribute style { text }
+
+TrAttributes =
+  ## CSS style: only background-color supported
+  attribute style { text }
+
 table-note = element note {
     OptionalId,
     paragraph-with-footnote+
