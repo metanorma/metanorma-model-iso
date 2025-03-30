@@ -532,7 +532,17 @@ TdBody &=
 ## Add container for figure footnotes. (Used only in BSI.)
 FigureBody &=
   fmt-footnote-container?
-  
+ 
+## Shadow each review body with a review rendering
+review-container = element review-container { (review, fmt-review-body)+ }
+
+## Currenty, the rendered review body is no different from the Semantic XML review body, but for the semx pointing back to it
+fmt-review-body = element fmt-review-body {
+  RequiredId,
+  ReviewAttributes,
+  ## semx points to corresponding review element
+  semx
+}
 
 }
 # end overrides
@@ -625,7 +635,7 @@ fmt-sourcecode = element fmt-sourcecode {
   note*
 }
 
-PureTextElement |= tab | fmt-origin | fmt-link | fmt-eref | fmt-xref | fmt-fn-label
+PureTextElement |= tab | fmt-origin | fmt-link | fmt-eref | fmt-xref | fmt-fn-label | fmt-review-start | fmt-review-end
 
 ## All strings in table cells are broken up if they exceed a threshold of length
 ## (20 chars), in order to allow table cells not to be artificially widened
@@ -813,5 +823,51 @@ Basic-Section-Attributes &= DisplayOrder
 ## If a block occurs at top level of the document (e.g. initial admonition, repetition of title at start of `sections`,
 ## it gets a displayorder attribute
 BlockAttributes &= DisplayOrder
+
+## Bookmark indicating where a review annotation starts in the text. This is inserted at the start of the first text node descendant of
+## the source review element's @from attribute; if the destination is a milestone (no textual content, e.g. bookmark), it is inserted
+## in front of it. Bookmarks are used so that there is no differential processing in rendering between element destinations and
+## milestone destinations of reviews: they are consistently milestones, and locating the milestone at the first text node of a container
+## element ensures that the full text content of the element is annotated in rendering, rather than having downstream processors
+## work out where to insert the annotation.
+fmt-review-start = element fmt-review-start {
+  attribute id { xsd:ID },
+  ## id of the semantic XML element that fmt-review-start signposts.
+  attribute source { xsd:IDREF },
+  ## Identifier of the fmt-review-end element corresponding to fmt-review-start. If missing, the annotation has scope 
+  ## only over the point identifier id
+  attribute end { xsd:IDREF }?,
+  ## id of the fmt-review-body annotation that corresponds to fmt-review-start.
+  attribute target { xsd:IDREF },
+  ## The party who has offered the comment
+  attribute reviewer { text },
+  ## The type of reviewer comment
+  attribute type { text }?,
+  ## The date when the comment was made
+  attribute date { xsd:dateTime }?,
+  ## Optional textual content indicating annotation start; for BSI correction markup, this is an SVG giving the amendment identifier.
+  PureTextElement*
+}
+
+## Bookmark indicating where a review annotation ends in the text. This is inserted at the start of the last text node descendant of
+## the source review element's @to attribute; if the destination is a milestone (no textual content, e.g. bookmark), it is inserted
+## after it.
+fmt-review-end = element fmt-review-end {
+  attribute id { xsd:ID },
+  ## id of the semantic XML element that fmt-review-end signposts.
+  attribute source { xsd:IDREF },
+  ## Identifier of the fmt-review-start element corresponding to fmt-review-end. 
+  attribute start { xsd:IDREF },
+  ## id of the fmt-review-body annotation that corresponds to fmt-review-end.
+  attribute target { xsd:IDREF },
+  ## The party who has offered the comment
+  attribute reviewer { text },
+  ## The type of reviewer comment
+  attribute type { text }?,
+  ## The date when the comment was made
+  attribute date { xsd:dateTime }?,
+  ## Optional textual content indicating annotation end; for BSI correction markup, this is an SVG giving the amendment identifier.
+  PureTextElement*
+}
 
 

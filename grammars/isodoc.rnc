@@ -657,11 +657,15 @@ element metanorma {
   ## Index of the document
   indexsect*, 
   ## Colophon or postface material
-  colophon?
+  colophon?,
+  ## Annotations to the document
+  review-container?
 }
 
 ## Elements added to metanorma-extension are open-ended, and constitute source data
 misccontainer = element metanorma-extension { AnyElement+ }
+
+review-container = element review-container { review+ }
 
 preface =
   element preface { ( content | abstract | foreword | introduction | acknowledgements)+ }
