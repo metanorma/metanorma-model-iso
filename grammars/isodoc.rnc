@@ -38,6 +38,9 @@ index-primary = element primary { (PureTextElement|stem)+ }
 index-secondary = element secondary { (PureTextElement|stem)+ }
 index-tertiary =  element tertiary { (PureTextElement|stem)+ }
 
+ReviewAttributes &=
+  RequiredId
+
 ## Title(s) of a clause
 section-title =
   ## Title proper for a clause
@@ -218,15 +221,23 @@ ThBody =
 
 TdAttributes &=
   ## CSS style: only background-color supported
-  attribute style { text }
+  attribute style { text }?,
+  ## vertical alignment, taken from HTML 4
+  attribute valign { text }?,
+  ## horizontal alignment, taken from HTML 4
+  attribute valign { text }?
 
 ThAttributes &=
   ## CSS style: only background-color supported
-  attribute style { text }
+  attribute style { text }?,
+  ## vertical alignment, taken from HTML 4
+  attribute valign { text }?,
+  ## horizontal alignment, taken from HTML 4
+  attribute valign { text }?
 
 TrAttributes =
   ## CSS style: only background-color supported
-  attribute style { text }
+  attribute style { text }?
 
 table-note = element note {
     OptionalId,
