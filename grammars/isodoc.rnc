@@ -221,19 +221,11 @@ ThBody =
 
 TdAttributes &=
   ## CSS style: only background-color supported
-  attribute style { text }?,
-  ## vertical alignment, taken from HTML 4
-  attribute valign { text }?,
-  ## horizontal alignment, taken from HTML 4
-  attribute valign { text }?
+  attribute style { text }?
 
 ThAttributes &=
   ## CSS style: only background-color supported
-  attribute style { text }?,
-  ## vertical alignment, taken from HTML 4
-  attribute valign { text }?,
-  ## horizontal alignment, taken from HTML 4
-  attribute valign { text }?
+  attribute style { text }?
 
 TrAttributes =
   ## CSS style: only background-color supported
