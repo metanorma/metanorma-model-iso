@@ -1,7 +1,7 @@
 include "relaton-bsi.rnc" { }
 include "isostandard.rnc" {
 
-AdmonitionAttr &=
+AdmonitionAttributes &=
     attribute target { xsd:IDREF }?
 
 Clause-Section =
@@ -54,7 +54,7 @@ sections =
 FigureBody =
      source*, tname?, (image | video | audio | pre | paragraph-with-footnote+ | figure*), fn*, dl?, note*
 
-TableAttr &=
+TableAttributes &=
     attribute border-under-row { text }?
 
 # We display the Normative References between scope and terms; but to keep the

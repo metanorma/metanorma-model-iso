@@ -2,7 +2,7 @@
 <grammar xmlns="http://relaxng.org/ns/structure/1.0" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
   <include href="relaton-bsi.rng"/>
   <include href="isostandard.rng">
-    <define name="AdmonitionAttr" combine="interleave">
+    <define name="AdmonitionAttributes" combine="interleave">
       <optional>
         <attribute name="target">
           <data type="IDREF"/>
@@ -225,7 +225,7 @@
         <ref name="note"/>
       </zeroOrMore>
     </define>
-    <define name="TableAttr" combine="interleave">
+    <define name="TableAttributes" combine="interleave">
       <optional>
         <attribute name="border-under-row"/>
       </optional>

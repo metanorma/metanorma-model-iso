@@ -1,13 +1,13 @@
 include "relaton-ietf.rnc" { }
 include "isodoc.rnc" {
 
-ParagraphAttrs =
+ParagraphAttributes =
     attribute align { Alignments }?,
     attribute keep-with-next { xsd:boolean }?,
     attribute keep-with-previous { xsd:boolean }?,
     attribute indent { text }?
 
-UlAttr =
+UlAttributes =
     attribute nobullet { xsd:boolean }?,
     attribute spacing { text }?,
     attribute indent { text }?,
@@ -27,7 +27,7 @@ OlAttributes =
 OlBody =
     li+, note*
 
-DlAttr =
+DlAttributes =
     attribute newline { text }?,
     attribute indent { text }?,
     attribute spacing { text }?
@@ -46,20 +46,20 @@ review =
   paragraph+
 }
 
-NoteAttr =
+NoteAttributes =
     attribute removeInRFC { text }?
 
 NoteBody =
     tname?, paragraph+
 
-PreAttr =
+PreAttributes =
     attribute alt { text }?,
     attribute align { text }?
 
-ImageAttr &=
+ImageAttributes &=
     attribute align { text }?
 
-SourceAttr &=
+SourceAttributes &=
     attribute number { text }?,
     attribute markers { text }?
 
@@ -85,7 +85,7 @@ erefType =
 quote-source =
   element source { erefTypeURI }
 
-TableAttr &=
+TableAttributes &=
     attribute number { text }?,
     attribute align { text }?,
     attribute width { text }?
