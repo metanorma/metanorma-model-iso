@@ -1,11 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <grammar xmlns="http://relaxng.org/ns/structure/1.0" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
-  <!-- default namespace = "https://www.metanorma.com/ns/gb" -->
-  <!--
-    Currently we inherit from a namespaced grammar, isostandard. Unless we inherit from isodoc,
-    we cannot have a new default namespace: we will end up with a grammar with two different
-    namespaces, one for isostandard and one for csd additions. And we do not want that.
-  -->
   <include href="relaton-gb.rng"/>
   <include href="isostandard.rng">
     <start>

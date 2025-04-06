@@ -1,14 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <grammar xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0" xmlns="http://relaxng.org/ns/structure/1.0">
-  <!--
-    VERSION v1.2.1
-    default namespace = "https://www.metanorma.com/ns/jis"
-  -->
-  <!--
-    include "relaton-jis.rnc" { } 
-    jis.rnc already includes relaton-jis.rnc, if we have distinct metadata, will need to abstract jis-compile.rnc
-  -->
   <include href="jis.rng">
+    <!--
+      include "relaton-jis.rnc" { } 
+      jis.rnc already includes relaton-jis.rnc, if we have distinct metadata, will need to abstract jis-compile.rnc
+      
+    -->
     <define name="ParagraphFnBody">
       <zeroOrMore>
         <choice>

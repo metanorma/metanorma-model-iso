@@ -1,6 +1,8 @@
-# In the following, unaltered fields are uncommented. Changes in cardinality are still commented.
 include "isodoc.rnc" {
+# ALERT: cannot have root comments, because of https://github.com/metanorma/metanorma/issues/437
 
+# In the following, unaltered fields are uncommented. Changes in cardinality are still commented.
+#
 ## A tab or similar spacing; used to delimit clause numbers from clause titles
 tab = element tab { empty }
 

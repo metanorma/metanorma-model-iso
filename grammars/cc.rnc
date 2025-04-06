@@ -1,9 +1,3 @@
-# VERSION v1.2.1
-# default namespace = "http://riboseinc.com/csd"
-# Currently we inherit from a namespaced grammar, isostandard. Until we inherit from isodoc,
-# we cannot have a new default namespace: we will end up with a grammar with two different
-# namespaces, one for isostandard and one for csd additions. And we do not want that.
-
 include "relaton-cc.rnc" {}
 include "isodoc.rnc" {
 

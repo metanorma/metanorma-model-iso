@@ -4,7 +4,7 @@ metanorma_version=`git tag --sort=committerdate | tail -1`
 
 for i in standoc iso iec bsi jis plateau cc csa ribose generic ieee ogc nist ietf itu iho bipm
 do
-  cat isodoc.rng | ruby -pe "\$_.gsub!(/<grammar/, %{<!-- VERSION ${metanorma_version} -->\n<grammar}) " > ../../metanorma-$i/lib/metanorma/$i/isodoc.rng
+  cat isodoc.rng | ruby -pe "\$_.gsub!(/(<grammar[^>]+>)/, %{\\\\1\n<!-- VERSION ${metanorma_version} -->\n}) " > ../../metanorma-$i/lib/metanorma/$i/isodoc.rng
   cp basicdoc.rng reqt.rng biblio.rng biblio-standoc.rng ../../metanorma-$i/lib/metanorma/$i
 done
 

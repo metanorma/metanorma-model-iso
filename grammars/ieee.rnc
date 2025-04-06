@@ -1,8 +1,3 @@
-# VERSION v1.2.1
-# Currently we inherit from a namespaced grammar, isostandard. Until we inherit from isodoc,
-# we cannot have a new default namespace: we will end up with a grammar with two different
-# namespaces, one for isostandard and one for csand additions. And we do not want that.
-
 include "relaton-ieee.rnc" { }
 include "isodoc.rnc" { 
 

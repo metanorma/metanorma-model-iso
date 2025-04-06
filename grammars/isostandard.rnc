@@ -1,6 +1,3 @@
-# VERSION v1.2.1
-#default namespace isostandard = "https://www.metanorma.com/ns/iso"
-
 include "isodoc.rnc" { 
 
 sections =

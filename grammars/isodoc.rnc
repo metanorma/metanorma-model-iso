@@ -1,3 +1,7 @@
+grammar {
+
+# ALERT: cannot have root comments, because of https://github.com/metanorma/metanorma/issues/437
+#
 # instantiations of this grammar may replace leaf strings
 # with more elaborated types; e.g. title (text) replaced with
 # title-main, title-intro, title-part; type replaced with
@@ -14,8 +18,6 @@
 # for these elements, and a distinct namespace for any grammar inheriting
 # these elements; we just want one namespace for any child grammars
 # of this.
-
-grammar {
 
 include "reqt.rnc" { }
 
@@ -37,9 +39,6 @@ fn &=
 index-primary = element primary { (PureTextElement|stem)+ }
 index-secondary = element secondary { (PureTextElement|stem)+ }
 index-tertiary =  element tertiary { (PureTextElement|stem)+ }
-
-ReviewAttributes &=
-  RequiredId
 
 ## Title(s) of a clause
 section-title =
