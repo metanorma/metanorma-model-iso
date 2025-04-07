@@ -34,30 +34,7 @@
     </define>
     <define name="annex">
       <element name="annex">
-        <optional>
-          <attribute name="id">
-            <data type="ID"/>
-          </attribute>
-        </optional>
-        <optional>
-          <attribute name="language"/>
-        </optional>
-        <optional>
-          <attribute name="script"/>
-        </optional>
-        <optional>
-          <attribute name="inline-header">
-            <data type="boolean"/>
-          </attribute>
-        </optional>
-        <optional>
-          <attribute name="obligation">
-            <choice>
-              <value>normative</value>
-              <value>informative</value>
-            </choice>
-          </attribute>
-        </optional>
+        <ref name="Annex-Section-Attributes"/>
         <optional>
           <ref name="section-title"/>
         </optional>

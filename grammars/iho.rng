@@ -1,31 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<grammar xmlns="http://relaxng.org/ns/structure/1.0" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+<grammar xmlns="http://relaxng.org/ns/structure/1.0">
   <include href="relaton-iho.rng"/>
   <include href="isodoc.rng">
     <define name="annex">
       <element name="annex">
-        <optional>
-          <attribute name="id">
-            <data type="ID"/>
-          </attribute>
-        </optional>
-        <optional>
-          <attribute name="language"/>
-        </optional>
-        <optional>
-          <attribute name="script"/>
-        </optional>
-        <optional>
-          <attribute name="inline-header">
-            <data type="boolean"/>
-          </attribute>
-        </optional>
-        <attribute name="obligation">
-          <choice>
-            <value>normative</value>
-            <value>informative</value>
-          </choice>
-        </attribute>
+        <ref name="Annex-Section-Attributes"/>
         <optional>
           <ref name="section-title"/>
         </optional>

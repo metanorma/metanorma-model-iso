@@ -103,10 +103,7 @@ Clause-Section =
 
 annex =
   element annex {
-    attribute id { xsd:ID }?,
-    attribute language { text }?,
-    attribute script { text }?,
-    attribute obligation { ( "normative" | "informative" ) },
+    Annex-Section-Attributes,
     attribute numbered { text }?,
     attribute removeInRFC { text }?,
     attribute toc { text }?,

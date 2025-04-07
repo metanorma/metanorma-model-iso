@@ -3,11 +3,7 @@ include "isodoc.rnc" {
 
 annex =
   element annex {
-    attribute id { xsd:ID }?,
-    attribute language { text }?,
-    attribute script { text }?,
-    attribute inline-header { xsd:boolean }?,
-    attribute obligation { ( "normative" | "informative" ) },
+    Annex-Section-Attributes,
     section-title?,
     ( ( BasicBlock* ),
       (annex-subsection | terms | definitions | references)* ),
