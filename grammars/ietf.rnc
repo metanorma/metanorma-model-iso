@@ -35,17 +35,9 @@ DlAttributes =
 DlBody =
     (dt, dd)+, note*
 
-review =
-  element review {
-  attribute id { xsd:ID },
-  attribute reviewer { text },
-  attribute date { xsd:dateTime }?,
-  attribute from { xsd:IDREF },
-  attribute to { xsd:IDREF }?,
-  attribute display { text }?,
-  paragraph+
-}
-
+ReviewAttributes &=
+  attribute display { text }?
+  
 NoteAttributes =
     attribute removeInRFC { text }?
 
@@ -124,9 +116,9 @@ Content-Section =
 index = element index {
   attribute to { xsd:IDREF }?,
   attribute primary { xsd:boolean }?,
-  element primary { PureTextElement+ },
-  element secondary { PureTextElement+ }?,
-  element tertiary { PureTextElement+ }?
+  index-primary,
+  index-secondary,
+  index-tertiary
 }
 
 standard-document =
