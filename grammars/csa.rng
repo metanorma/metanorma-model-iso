@@ -2,33 +2,6 @@
 <grammar xmlns="http://relaxng.org/ns/structure/1.0">
   <include href="relaton-csa.rng"/>
   <include href="isodoc.rng">
-    <define name="FigureBody">
-      <zeroOrMore>
-        <ref name="source"/>
-      </zeroOrMore>
-      <optional>
-        <ref name="tname"/>
-      </optional>
-      <choice>
-        <oneOrMore>
-          <ref name="figure"/>
-        </oneOrMore>
-        <group>
-          <choice>
-            <zeroOrMore>
-              <ref name="TextElement"/>
-            </zeroOrMore>
-            <ref name="pre"/>
-          </choice>
-          <zeroOrMore>
-            <ref name="note"/>
-          </zeroOrMore>
-          <optional>
-            <ref name="dl"/>
-          </optional>
-        </group>
-      </choice>
-    </define>
     <define name="standard-document">
       <element name="metanorma">
         <ref name="Root-Attributes"/>

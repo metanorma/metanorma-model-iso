@@ -8,9 +8,4 @@ sections =
 } 
 
 
-standard-document =
-  element metanorma {
-    Root-Attributes,
-    bibdata, termdocsource*, misccontainer?, boilerplate?, preface, sections+, annex*, bibliography, indexsect*
- }
 }

@@ -127,35 +127,6 @@
         </oneOrMore>
       </element>
     </define>
-    <define name="FigureBody">
-      <zeroOrMore>
-        <ref name="source"/>
-      </zeroOrMore>
-      <optional>
-        <ref name="tname"/>
-      </optional>
-      <choice>
-        <ref name="image"/>
-        <ref name="video"/>
-        <ref name="audio"/>
-        <ref name="pre"/>
-        <oneOrMore>
-          <ref name="paragraph-with-footnote"/>
-        </oneOrMore>
-        <zeroOrMore>
-          <ref name="figure"/>
-        </zeroOrMore>
-      </choice>
-      <zeroOrMore>
-        <ref name="fn"/>
-      </zeroOrMore>
-      <optional>
-        <ref name="dl"/>
-      </optional>
-      <zeroOrMore>
-        <ref name="note"/>
-      </zeroOrMore>
-    </define>
     <define name="TableAttributes" combine="interleave">
       <optional>
         <attribute name="border-under-row"/>

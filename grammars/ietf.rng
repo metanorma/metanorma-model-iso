@@ -100,32 +100,10 @@
         <ref name="note"/>
       </zeroOrMore>
     </define>
-    <define name="review">
-      <element name="review">
-        <attribute name="id">
-          <data type="ID"/>
-        </attribute>
-        <attribute name="reviewer"/>
-        <optional>
-          <attribute name="date">
-            <data type="dateTime"/>
-          </attribute>
-        </optional>
-        <attribute name="from">
-          <data type="IDREF"/>
-        </attribute>
-        <optional>
-          <attribute name="to">
-            <data type="IDREF"/>
-          </attribute>
-        </optional>
-        <optional>
-          <attribute name="display"/>
-        </optional>
-        <oneOrMore>
-          <ref name="paragraph"/>
-        </oneOrMore>
-      </element>
+    <define name="ReviewAttributes" combine="interleave">
+      <optional>
+        <attribute name="display"/>
+      </optional>
     </define>
     <define name="NoteAttributes">
       <optional>
@@ -305,25 +283,9 @@
             <data type="boolean"/>
           </attribute>
         </optional>
-        <element name="primary">
-          <oneOrMore>
-            <ref name="PureTextElement"/>
-          </oneOrMore>
-        </element>
-        <optional>
-          <element name="secondary">
-            <oneOrMore>
-              <ref name="PureTextElement"/>
-            </oneOrMore>
-          </element>
-        </optional>
-        <optional>
-          <element name="tertiary">
-            <oneOrMore>
-              <ref name="PureTextElement"/>
-            </oneOrMore>
-          </element>
-        </optional>
+        <ref name="index-primary"/>
+        <ref name="index-secondary"/>
+        <ref name="index-tertiary"/>
       </element>
     </define>
     <define name="standard-document">

@@ -4,18 +4,10 @@ include "isostandard.rnc" {
 term = 
   element term { 
     TermAttributes,
-    BlockAttributes,
     preferred+, admitted*, deprecates*,
     termdomain?, termdefinition, termnote*, termexample*, termsource*,
     term*
   }
 
-# We display the Normative References between scope and terms; but to keep the
-# grammar simple, we keep the references together
-standard-document = 
-  element metanorma {
-    Root-Attributes,
-    bibdata, termdocsource*, misccontainer?, boilerplate?, preface, sections+, annex*, bibliography, indexsect*
-  }
 }
 # end overrides

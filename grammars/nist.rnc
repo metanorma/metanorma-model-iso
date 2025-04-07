@@ -11,12 +11,6 @@ preface =
     abstract?, foreword?, (clause | errata_clause | acknowledgements)*, reviewernote?, executivesummary?
 }
 
-standard-document =
-  element metanorma {
-    Root-Attributes,
-    bibdata, termdocsource*, misccontainer?, boilerplate?, preface, sections+, annex*, bibliography?, indexsect*
- }
-
 }
 
 # end overrides

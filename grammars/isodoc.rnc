@@ -644,10 +644,18 @@ element metanorma {
   Root-Attributes,
   ## Bibliographic description of the document itself, expressed in the Relaton model
   bibdata, 
+  ## Source for term definitions in the document
+  termdocsource*, 
   ## Extension point for extraneous elements that need to be added to standards document as data
   misccontainer?, 
   ## Front matter that is repeated at the start of documents issued from an SDO, with content not specific to the document
   boilerplate?, 
+  DocumentBody,
+  ## Annotations to the document
+  review-container?
+}
+
+DocumentBody =
   ## Prefatory sections
   preface?, 
   ## Main body of document
@@ -660,9 +668,6 @@ element metanorma {
   indexsect*, 
   ## Colophon or postface material
   colophon?,
-  ## Annotations to the document
-  review-container?
-}
 
 ## Elements added to metanorma-extension are open-ended, and constitute source data
 misccontainer = element metanorma-extension { AnyElement+ }
