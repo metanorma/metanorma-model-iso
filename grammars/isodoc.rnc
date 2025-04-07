@@ -667,7 +667,7 @@ DocumentBody =
   ## Index of the document
   indexsect*, 
   ## Colophon or postface material
-  colophon?,
+  colophon?
 
 ## Elements added to metanorma-extension are open-ended, and constitute source data
 misccontainer = element metanorma-extension { AnyElement+ }

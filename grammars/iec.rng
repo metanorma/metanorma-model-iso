@@ -5,7 +5,6 @@
     <define name="term">
       <element name="term">
         <ref name="TermAttributes"/>
-        <ref name="BlockAttributes"/>
         <oneOrMore>
           <ref name="preferred"/>
         </oneOrMore>
@@ -30,36 +29,6 @@
         </zeroOrMore>
         <zeroOrMore>
           <ref name="term"/>
-        </zeroOrMore>
-      </element>
-    </define>
-    <!--
-      We display the Normative References between scope and terms; but to keep the
-      grammar simple, we keep the references together
-    -->
-    <define name="standard-document">
-      <element name="metanorma">
-        <ref name="Root-Attributes"/>
-        <ref name="bibdata"/>
-        <zeroOrMore>
-          <ref name="termdocsource"/>
-        </zeroOrMore>
-        <optional>
-          <ref name="misccontainer"/>
-        </optional>
-        <optional>
-          <ref name="boilerplate"/>
-        </optional>
-        <ref name="preface"/>
-        <oneOrMore>
-          <ref name="sections"/>
-        </oneOrMore>
-        <zeroOrMore>
-          <ref name="annex"/>
-        </zeroOrMore>
-        <ref name="bibliography"/>
-        <zeroOrMore>
-          <ref name="indexsect"/>
         </zeroOrMore>
       </element>
     </define>

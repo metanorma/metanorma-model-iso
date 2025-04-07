@@ -12,39 +12,6 @@
         <ref name="Annex-Section"/>
       </element>
     </define>
-    <!--
-      We display the Normative References between scope and terms; but to keep the
-      grammar simple, we keep the references together
-    -->
-    <define name="standard-document">
-      <element name="metanorma">
-        <ref name="Root-Attributes"/>
-        <ref name="bibdata"/>
-        <zeroOrMore>
-          <ref name="termdocsource"/>
-        </zeroOrMore>
-        <optional>
-          <ref name="misccontainer"/>
-        </optional>
-        <optional>
-          <ref name="boilerplate"/>
-        </optional>
-        <ref name="preface"/>
-        <oneOrMore>
-          <ref name="sections"/>
-        </oneOrMore>
-        <zeroOrMore>
-          <ref name="annex"/>
-        </zeroOrMore>
-        <ref name="bibliography"/>
-        <zeroOrMore>
-          <ref name="indexsect"/>
-        </zeroOrMore>
-        <optional>
-          <ref name="colophon"/>
-        </optional>
-      </element>
-    </define>
   </include>
   <!-- end overrides -->
   <define name="floating-section-title">
