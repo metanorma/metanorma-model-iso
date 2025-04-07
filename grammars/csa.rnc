@@ -2,10 +2,6 @@ include "relaton-csa.rnc" {}
 include "isodoc.rnc" {
 
 
-  FigureBody =
-      source*, tname?, ( figure+ |  ( (TextElement* | pre), note*, dl? ) )
-
-
 standard-document =
 element metanorma {
   Root-Attributes,
