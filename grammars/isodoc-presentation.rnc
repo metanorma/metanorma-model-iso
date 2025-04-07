@@ -154,11 +154,23 @@ li =
     ## an anchor is set for all //ol//li, because ordered list items can be cross-referenced
     RequiredId,
     LiAttributes,
-    ## Each //ol//li has a label, set by //ol[@type] (e.g. "a", "ii", "C", "3"):
-    ## this is made explicit for Presentation XML, so that it can render them if automatic list labelling doesn't work
-    attribute label { string },
     LiBody
 } 
+
+LiBody =
+    ## contains semx[@element = 'autonum'], the label for the list item, set by //ol[@type] (e.g. "a", "ii", "C", "3"):
+    ## this is made explicit for Presentation XML, so that it can render them if automatic list labelling doesn't work
+    ## optionally also contains span[@class = 'fmt-label-delim'], for list item label delimiters such as ")" and ".". e.g.
+    ##    <fmt-name><semx element='autonum' source='A'>a</semx><span class='fmt-label-delim'>)</span></fmt-name>
+    fmt-name,
+    BasicBlock+
+
+UlLiBody =
+    ## contains semx[@element = 'autonum'], the label for the list item, typically set by the list item depth (e.g. "•", "—"):
+    ## this is made explicit for Presentation XML, so that it can render them if automatic list labelling doesn't work. e.g.
+    ##    <fmt-name><semx element='autonum' source='A'>•</semx></fmt-name>
+    fmt-name,
+    BasicBlock+
 
 ## Rendering of Termsource: Concatenate all consecutive term sources and block sources into a single semicolon delimited expression.
 ## Wrapped in semx pointing back to Termsource.

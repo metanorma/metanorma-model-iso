@@ -1223,16 +1223,23 @@ svg_target =
     ( xref | hyperlink | eref | erefstack )
 }
 
-## Unorderd list item for standards documents
+## Unordered list item for standards documents
 ul_li =
   element li {
-    OptionalId,
+    OptionalId, 
+    UlLiAttributes, 
+    UlBody
+}  
+
+UlBody =
+    BasicBlock+
+
+UlLiAttributes =
     ## Include a checkbox for the list item
     attribute uncheckedcheckbox { xsd:boolean }?,
     ## Check the checkbox for the list item
-    attribute checkedcheckbox { xsd:boolean }?,
-    BasicBlock+
-}
+    attribute checkedcheckbox { xsd:boolean }?
+
 
 ## A floating title, outside of the clause hierarchy of the document
 floating-title =
