@@ -1228,10 +1228,10 @@ ul_li =
   element li {
     OptionalId, 
     UlLiAttributes, 
-    UlBody
+    UlLiBody
 }  
 
-UlBody =
+UlLiBody =
     BasicBlock+
 
 UlLiAttributes =
