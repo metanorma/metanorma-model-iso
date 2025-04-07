@@ -3,9 +3,7 @@ include "isostandard.rnc" {
 
 term = 
   element term { 
-    attribute id { xsd:ID }?,
-    attribute language { text }?,
-    attribute script { text }?,
+    TermAttributes,
     BlockAttributes,
     preferred+, admitted*, deprecates*,
     termdomain?, termdefinition, termnote*, termexample*, termsource*,

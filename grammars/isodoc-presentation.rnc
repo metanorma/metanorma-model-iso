@@ -480,9 +480,7 @@ floating-title &= paragraph
 ## elements: at minimum, we expect there to be a fmt_termdefinition, and if e.g. designations are rendered in the same paragraph
 ## as the definition, they appear within the fmt_termdefinition paragraph, rather than as separate fmt_preferred etc. elements.
 term = element term {
-    OptionalId,
-    LocalizedStringAttributes,
-    BlockAttributes,
+    TermAttributes,
     ## Clause number of term
     tname,
     ## Consecutive preferred designations are concatenated into a single designation, delimited by semicolon,

@@ -1615,9 +1615,7 @@ used in document amendments</a:documentation>
   <define name="term">
     <a:documentation>Terminology entry with its definition</a:documentation>
     <element name="term">
-      <ref name="OptionalId"/>
-      <ref name="LocalizedStringAttributes"/>
-      <ref name="BlockAttributes"/>
+      <ref name="TermAttributes"/>
       <oneOrMore>
         <ref name="preferred">
           <a:documentation>One or more names under which the term being defined is canonically known</a:documentation>
@@ -1668,6 +1666,11 @@ used in document amendments</a:documentation>
         <a:documentation>Bibliographic references for the managed term</a:documentation>
       </ref>
     </element>
+  </define>
+  <define name="TermAttributes">
+    <ref name="OptionalId"/>
+    <ref name="LocalizedStringAttributes"/>
+    <ref name="BlockAttributes"/>
   </define>
   <define name="preferred">
     <element name="preferred">

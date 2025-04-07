@@ -824,9 +824,7 @@ terms =
 ## Terminology entry with its definition
 term =
   element term {
-    OptionalId,
-    LocalizedStringAttributes,
-    BlockAttributes,
+    TermAttributes,
     ## One or more names under which the term being defined is canonically known
     preferred+,
     ## Zero or more names which are acceptable synonyms for the term being defined
@@ -849,6 +847,11 @@ term =
     ## Bibliographic references for the managed term
     TermSource
   }
+
+TermAttributes =
+    OptionalId,
+    LocalizedStringAttributes,
+    BlockAttributes
 
 preferred =
   element preferred { Designation }
