@@ -7,13 +7,8 @@ OlAttributes &=
 preface = element preface { ( content | abstract | foreword | introduction | acknowledgements | clause)+ }
 
 Clause-Section =
-    attribute id { xsd:ID }?,
-    attribute language { text }?,
-    attribute script { text }?,
-    attribute inline-header { xsd:boolean }?,
-    attribute obligation { "normative" | "informative" }?,
+    Section-Attributes,
     attribute type { text }?,
-    attribute unnumbered { xsd:boolean }?,
     section-title?,
     (
       ( (  BasicBlock* ) | amend ),

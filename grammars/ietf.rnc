@@ -91,14 +91,10 @@ TableAttributes &=
     attribute width { text }?
 
 Clause-Section =
-    attribute id { xsd:ID }?,
-    attribute language { text }?,
-    attribute script { text }?,
+    Section-Attributes,
     attribute numbered { text }?,
     attribute removeInRFC { text }?,
     attribute toc { text }?,
-    attribute inline-header { xsd:boolean }?,
-    attribute obligation { ( "normative" | "informative" ) },
     section-title?,
     (
       ( BasicBlock* ),
@@ -119,9 +115,7 @@ annex =
 }
 
 Content-Section =
-    attribute id { xsd:ID }?,
-    attribute language { text }?,
-    attribute script { text }?,
+    Section-Attributes,
     attribute numbered { text }?,
     attribute removeInRFC { text }?,
     attribute toc { text }?,
@@ -152,8 +146,6 @@ standard-document =
 TextElement |= bcp14 | review
 
 bcp14 = element bcp14 { text }
-
-comment = element comment { text }
 
 erefTypeURI =
     attribute normative { xsd:boolean }?,

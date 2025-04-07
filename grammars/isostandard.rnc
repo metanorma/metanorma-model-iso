@@ -6,11 +6,7 @@ sections =
   }
 
 Clause-Section =
-    attribute id { xsd:ID }?,
-    attribute language { text }?,
-    attribute script { text }?,
-    attribute inline-header { xsd:boolean }?,
-    attribute obligation { "normative" | "informative" }?,
+    Section-Attributes,
     attribute type { text }?,
     section-title?,
     (
@@ -55,13 +51,7 @@ foreword = element foreword { Basic-Section }
 introduction = element introduction { Content-Section }
 
 Content-Section =
-    attribute id { xsd:ID }?,
-    attribute language { text }?,
-    attribute script { text }?,
-    attribute inline-header { xsd:boolean }?,
-    attribute obligation { "normative" | "informative" }?,
-    attribute number { text }?,
-    attribute branch-number { text }?,
+    Section-Attributes,
     attribute type { text }?,
     section-title?,
     ( (BasicBlock*) |
@@ -80,11 +70,7 @@ standard-document =
 # end overrides
 clause-hanging-paragraph-with-footnote =
   element clause {
-    attribute id { xsd:ID }?,
-    attribute language { text }?,
-    attribute script { text }?,
-    attribute  inline-header  {   xsd:boolean  } ? ,
-    attribute obligation { "normative" | "informative" }?,
+    Section-Attributes,
     section-title?,
     # allow hanging paragraphs in annexes: they introduce lists
     BasicBlock*,

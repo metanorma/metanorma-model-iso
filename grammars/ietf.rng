@@ -219,17 +219,7 @@
       </optional>
     </define>
     <define name="Clause-Section">
-      <optional>
-        <attribute name="id">
-          <data type="ID"/>
-        </attribute>
-      </optional>
-      <optional>
-        <attribute name="language"/>
-      </optional>
-      <optional>
-        <attribute name="script"/>
-      </optional>
+      <ref name="Section-Attributes"/>
       <optional>
         <attribute name="numbered"/>
       </optional>
@@ -239,17 +229,6 @@
       <optional>
         <attribute name="toc"/>
       </optional>
-      <optional>
-        <attribute name="inline-header">
-          <data type="boolean"/>
-        </attribute>
-      </optional>
-      <attribute name="obligation">
-        <choice>
-          <value>normative</value>
-          <value>informative</value>
-        </choice>
-      </attribute>
       <optional>
         <ref name="section-title"/>
       </optional>
@@ -308,17 +287,7 @@
       </element>
     </define>
     <define name="Content-Section">
-      <optional>
-        <attribute name="id">
-          <data type="ID"/>
-        </attribute>
-      </optional>
-      <optional>
-        <attribute name="language"/>
-      </optional>
-      <optional>
-        <attribute name="script"/>
-      </optional>
+      <ref name="Section-Attributes"/>
       <optional>
         <attribute name="numbered"/>
       </optional>
@@ -409,11 +378,6 @@
   </define>
   <define name="bcp14">
     <element name="bcp14">
-      <text/>
-    </element>
-  </define>
-  <define name="comment">
-    <element name="comment">
       <text/>
     </element>
   </define>

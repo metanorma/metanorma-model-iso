@@ -5,11 +5,7 @@ AdmonitionAttributes &=
     attribute target { xsd:IDREF }?
 
 Clause-Section =
-    attribute id { xsd:ID }?,
-    attribute language { text }?,
-    attribute script { text }?,
-    attribute inline-header { xsd:boolean }?,
-    attribute obligation { "normative" | "informative" }?,
+    Section-Attributes,
     attribute type { text }?,
     section-title?,
     (
@@ -33,11 +29,7 @@ annex =
 
 clause-hanging-paragraph-with-footnote =
   element clause {
-    attribute id { xsd:ID }?,
-    attribute language { text }?,
-    attribute script { text }?,
-    attribute  inline-header  {   xsd:boolean  } ? ,
-    attribute obligation { "normative" | "informative" }?,
+    Section-Attributes,
     section-title?,
     # allow hanging paragraphs in annexes: they introduce lists
     BasicBlock*,
