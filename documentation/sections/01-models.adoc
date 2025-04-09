@@ -9,33 +9,108 @@ The Metanorma schemas rely heavily on inheritance of document models, which are 
 * Individual flavours of Metanorma often have their own schemas, which introduce further refinements to the semantic structure of standardisation documents, specific to that flavour (e.g. `isostandard.rnc`, `ietf.rnc`, `nist.rnc`)
 * The metadata about indiviudal flavours of Metanorma is modelled as an extension of the StanDoc extension of the Relaton model (`relaton-iso.rnc`, `relaton-ietf.rnc`, `relaton-nist.rnc`)
 * In order to enable the consistent rendering of Metanorma documents in different formats, a Presentation XML form of the document is generated from the Semantic XML of the particular flavour: this introduces presentation-suited versions of semantic elements alongside those semantic elements, as well as traceability between the two. The format also deals with internationalisation, labelling of cross-references, and resolving auto-numbering. The Presentation XML form is itself described in a schema derived from the Semantic XML schema (`isodoc-presentation.rnc`).
-  * Properly, the Presentation XML form of a document is based on the flavour-specific Semantic XML form of the document. However, we do not currently generate a schema inheriting flavour-specific Presentation XML from each flavour schema; and the divergences are relatively minor.
+* There is also a Presentation XML form of the metadata about StanDoc documents (`biblio-presentation.rnc`).
+  * Properly, the Presentation XML form of a document is based on the flavour-specific Semantic XML form of the document. However, we do not currently generate a schema inheriting flavour-specific Presentation XML from each flavour schema; and the divergences are relatively minor. The same applies to the Presentation XML form of flavour-specific metadata.
 
 The inheritance of schemas shown above is as follows:
 
 [plantuml]
 ....
 @startuml
-biblio <-- basicdoc
+package BasicDoc {
+  class biblio
+}
+package StanDoc {
+  class biblio_standoc
+}
+package Presentation {
+  class biblio_presentation
+}
+package "Semantic ISO" {
+  class relaton_iso
+}
+package "Presentation ISO" {
+  class relaton_iso_presentation
+}
 biblio <|-- biblio_standoc
-basicdoc <|-- isodoc
-biblio_standoc <-- isodoc
+biblio_standoc <|-- biblio_presentation
 biblio_standoc <|-- relaton_iso
+relaton_iso <|-- relaton_iso_presentation
+biblio_presentation <|-- relaton_iso_presentation
+@enduml
+....
+
+[plantuml]
+....
+@startuml
+package BasicDoc {
+  class basicdoc
+}
+package StanDoc {
+  class isodoc
+}
+package Presentation {
+  class isodoc_presentation
+}
+package "Semantic ISO" {
+  class isostandard
+}
+package "Presentation ISO" {
+  class isostandard_presentation
+}
+basicdoc <|-- isodoc
 isodoc <|-- isostandard
-relaton_iso <-- isostandard
 isodoc <|-- isodoc_presentation
 isostandard <|-- isostandard_presentation
 isodoc_presentation <|-- isostandard_presentation
 @enduml
 ....
 
-(Note that `isostandard-presentation.rnc` is not currently defined.)
+[plantuml]
+....
+@startuml
+package BasicDoc {
+  class biblio
+  class basicdoc
+}
+package StanDoc {
+  class biblio_standoc
+  class isodoc
+}
+package Presentation {
+  class biblio_presentation
+  class isodoc_presentation
+}
+package "Semantic ISO" {
+  class relaton_iso
+  class isostandard
+}
+package "Presentation ISO" {
+  class relaton_iso_presentation
+  class isostandard_presentation
+}
+biblio <-- basicdoc
+basicdoc <|-- isodoc
+biblio_standoc <-- isodoc
+isodoc <|-- isostandard
+relaton_iso <-- isostandard
+isodoc <|-- isodoc_presentation
+biblio_presentation <-- isodoc_presentation
+isostandard <|-- isostandard_presentation
+isodoc_presentation <|-- isostandard_presentation
+relaton_iso_presentation <-- isostandard_presentation
+@enduml
+....
+
+(Note that `isostandard-presentation.rnc` and relaton-iso-presentation.rnc` is not currently defined.)
 
 Compilation of Metanorma documents follows the workflow:
 
 * Source markup (Asciidoc) is compiled into a Semantic XML format, capturing the meaningful structures of the document, according to a specific flavour (e.g. `isostandard.rnc` < `isodoc.rnc`)
 * The Semantic XML format in turn is compiled into a Presentation XML format, capturing the rendering-ready presentation of the document (`isodoc-presentation.rnc`)
 * The Presentation XML format is compiled into the various supported formats for the flavour (PDF, DOC, HTML)
+
+Exceptionally, there is no intermediate Presentation XML format for IETF: the target RFC XML format already plays that role, and the shared Presentation XML structures of Metanorma would not be useful.
 
 There are additional workflows for generating document sites, and document collections.
 

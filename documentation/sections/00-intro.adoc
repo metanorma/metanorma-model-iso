@@ -7,6 +7,11 @@ To use the defined document metamodels, there needs to be a machine-readable fil
 This documentation describes the suite of XML schemas that define the structure of documents in Metanorma. It is primarily intended for consumers of Metanorma Presentation XML, who will generate renderings of Metanorma documents based on it.
 
 [.preface]
+== Document conventions
+
+In listings of element content, attributes are prefixed with `@`.
+
+[.preface]
 == Currency
 
 The Metanorma schemas are updated relatively rapidly as new requirements emerge from the SDOs that Metanorma supports. Updates to the Metanorma schemas are published to https://github.com/metanorma/metanorma-model-iso/releases[the Metanorma schema release log], which should be read in conjunction with this document.
