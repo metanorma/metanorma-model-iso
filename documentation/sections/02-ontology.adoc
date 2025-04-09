@@ -1,0 +1,65 @@
+== Ontology
+
+=== Element types
+
+==== Document
+
+A Metanorma document (<<document>>) is a single XML element, that contains a hierarchical arrangement of subelements. These include content elements, and metadata elements.
+
+==== Content
+
+The classes involved in the document model to represent document content of three classes:
+
+* Sections (<<section>>)
+* Blocks (paragraph-level groupings of text) (<<block>>)
+* Inline elements (groupings of text smaller than a paragraph, including plain strings) (<<inline>>)
+
+The _BasicDocument_ model is most fleshed out at the level of blocks and inline elements. Specialisation for flavours mostly involves sections; but there are some refinements in the standardisation model treatment of blocks.
+
+==== Metadata
+
+In addition to content, the document model contains metadata about the document (<<metadata>>). This metadata is expressed in an extension of the Relaton citation model: the bibliographic information about the document is expressed using the Relaton model, and metadata specific to standardisation documents is expressed in the `biblio-standoc` extension, and in the flavour-specific refinements of that extension (`relaton-*`).
+
+The document model also allows for an extension point to contain arbitrary data, `metanorma-extension`. This container fulfils one of the major points of Metanorma, to allow the presentation of structured data in a document, generating the document from the data.
+
+=== Relations between elements
+
+==== Containing
+
+In Metanorma, the classes are in a strict hierarchical relation:
+
+* Documents consist of sections, which consist of blocks, which consist of inline elements.
+* Sections can be nested within sections (e.g. clauses and subclauses); blocks can be nested within blocks (e.g. nested lists);
+* Inline elements can also be embedded within other inline elements (e.g. bold + italics).
+
+However, sections should not be siblings of blocks, nor blocks of inline elements.
+For this reason, paragraphs cannot contain other block elements, such as lists or tables.
+So a list (block) is not expected to occur next to inline text within a paragraph.
+There are only rare instances where this is not adhered to, and such instances are signposted.
+
+NOTE: This constraint is imposed in order to maintain structural simplicity of this model.
+While it sacrifices some expressive potential, the difference is minor, particularly with regards to the rendering of paragraphs.
+This is a major difference between this model and the more flexible document models in XML-based schemas, such as HTML, TEI-C, and DocBook, which do not have this limitation.
+
+
+==== Referencing
+
+Some elements can reference other elements. Elements are referenced through an `id` attribute, of type `xsd:ID`, that appears on all section and block elements, and on a subset of inline elements. Those elements that reference other elements do so with a separate attribute of type `xsd:IDREF`, which gives the value of the `id` attribute referenced. Referencing elements are indicated as such in the following discussion.
+
+
+=== Semantic and Presentation XML
+
+The Presentation XML form of a document makes rendering decisions about the Semantic XML content, which apply to all rendering formats of a document. This can result in the introduction of new Presentation elements, which are based on Semantic elements, and which are rendered instead of the Semantic elements. 
+
+For example, tables can have captions in Semantic XML, but those captions are optional, and do not include autonumbering, or the localised label for tables. In Presentation XML, tables are expected by default to have a caption, and that caption will include both the localised label for tables ("Table" in English, "Tableau" in French), and the autonumber assigned to the table in rendering. So a table can have no caption in Semantic XML, but the caption "Table 3" in Presentation XML. A table can have the caption "Corrections" in Semantic XML, but the caption "Table 4: Corrections" in Presentation XML.
+
+A design concern in Metanorma has been that the Semantic XML content is preserved in the Presentation XML: this allows downstream renderers to override or enhance the Presentation content added by referring back to the source semantics. Any added Presentation XML content references the Semantic XML element it is derived from, using a referencing element specific to Presentation XML, `semx`. Formatting characters introduced in Presentation XML, such as the colon in "Table 4: Corrections", are also signposted with their functional role, so that downstream renderers can parse them and override them if needed.
+
+Generating Presentation XML addresses a number of concerns not met by Semantic XML. These include:
+
+* Assigning autonumbering to sections and blocks
+* Providing appropriate rendered text for cross-references to autonumbered sections and blocks
+* Providing internationalisation, including for labelling autonumbered sections and blocks, and document metadata
+* Providing renderable content for highly semantic elements, such as terms and bibliographic references
+* Resolving the display ordering of sections
+

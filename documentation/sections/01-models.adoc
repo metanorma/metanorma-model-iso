@@ -1,0 +1,59 @@
+== Models
+
+The Metanorma schemas rely heavily on inheritance of document models, which are refined to define documents structures at different levels of specificity. This results in inheritance between the Relax NG schemas used together to define Metanorma XML. In the following, the schema names for each level of the model are given as *.rnc files.
+
+* The starting point of Metanorma schemas is the BasicDocument model (`basicdoc.rnc`), which expresses the structure of generic documents in a lightweight form. This document is defined in https://github.com/CalConnect/cc-lightweight-doc[ISO 36010]. It can be seen as a high-level semantic document model, corresponding to DocBook or TEI: it shares many of its structures with HTML (such as paragraphs, tables, and clauses), but it also introduces semantic markup of meaningful components of documents, such as notes, examples, and annexes.
+* BasicDoc incorporates a separate model for bibliographic citations, the Relaton model (`biblio.rnc`), https://github.com/CalConnect/cc-citation-models[ISO 6900] and https://www.relaton.org/model/[Relaton information models].
+* The StanDoc model is a refinement of BasicDocument, used to express the semantic structure of standardisation documents specifically. This models Semantic XML for Metanorma (`isodoc.rnc`).  
+* The metadata about StanDoc documents is modelled as an extension of the Relaton model (`biblio-standoc.rnc`).
+* Individual flavours of Metanorma often have their own schemas, which introduce further refinements to the semantic structure of standardisation documents, specific to that flavour (e.g. `isostandard.rnc`, `ietf.rnc`, `nist.rnc`)
+* The metadata about indiviudal flavours of Metanorma is modelled as an extension of the StanDoc extension of the Relaton model (`relaton-iso.rnc`, `relaton-ietf.rnc`, `relaton-nist.rnc`)
+* In order to enable the consistent rendering of Metanorma documents in different formats, a Presentation XML form of the document is generated from the Semantic XML of the particular flavour: this introduces presentation-suited versions of semantic elements alongside those semantic elements, as well as traceability between the two. The format also deals with internationalisation, labelling of cross-references, and resolving auto-numbering. The Presentation XML form is itself described in a schema derived from the Semantic XML schema (`isodoc-presentation.rnc`).
+  * Properly, the Presentation XML form of a document is based on the flavour-specific Semantic XML form of the document. However, we do not currently generate a schema inheriting flavour-specific Presentation XML from each flavour schema; and the divergences are relatively minor.
+
+The inheritance of schemas shown above is as follows:
+
+[plantuml]
+....
+@startuml
+biblio <-- basicdoc
+biblio <|-- biblio_standoc
+basicdoc <|-- isodoc
+biblio_standoc <-- isodoc
+biblio_standoc <|-- relaton_iso
+isodoc <|-- isostandard
+relaton_iso <-- isostandard
+isodoc <|-- isodoc_presentation
+isostandard <|-- isostandard_presentation
+isodoc_presentation <|-- isostandard_presentation
+@enduml
+....
+
+(Note that `isostandard-presentation.rnc` is not currently defined.)
+
+Compilation of Metanorma documents follows the workflow:
+
+* Source markup (Asciidoc) is compiled into a Semantic XML format, capturing the meaningful structures of the document, according to a specific flavour (e.g. `isostandard.rnc` < `isodoc.rnc`)
+* The Semantic XML format in turn is compiled into a Presentation XML format, capturing the rendering-ready presentation of the document (`isodoc-presentation.rnc`)
+* The Presentation XML format is compiled into the various supported formats for the flavour (PDF, DOC, HTML)
+
+There are additional workflows for generating document sites, and document collections.
+
+* A document site is a set of documents that are compiled separately, and presented with a web index. The documents are not expected to be hyperlinked to each other.
+* A document collection is a set of documents that are compiled together, and that are expected to hyperlink to each other; one of the major activities in that compilation is to resolve all hyperlinks between documents. The documents in a collection may also be rendered as a single document, in the case of PDF and DOC formats.
+
+The schemas governing those documents are not discussed in this specification.
+
+In the following, discussion of the schema elements is organised as follows:
+
+* The overall ontology of the Metanorma XML model is given: what kinds of elements are present in the model, how they are related, and how the Presentation XML form of documents is derived from the Semantic XML..
+* Each group of elements is outlined separately. For each element, discussion is organised as with the schemas:
+  * First, the BasicDoc definitions of the elements, as applicable. 
+  * Then the general Semantic XML modifications to the elements.
+  * Then the flavour-specific Semantic XML modifications to the elements, where present.
+  * And finally the Presentation XML modifications to the elements, where present, and any new elements introduced in Presentation XML.
+* A separate branch of the ontology consists of the Relaton model and its descendants
+  * Relaton, as a document citation model, is already an extensive model, and much of the content of Relaton specifically is overridden by presentation elements in Metanorma Presentation XML for rendering citations; so most of its elements are not discussed extensively here.
+  * Then the Biblio-Standoc extensions, describing general standardisation document metadata.
+  * Then the Relaton-* extensions, describing standardisation document metadata specific to a flavour.
+
