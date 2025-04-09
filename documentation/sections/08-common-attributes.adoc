@@ -1,2 +1,12 @@
 [[common-attributes]]
 == Common attributes
+
+The following attributes are recurrent in Metanorma XML
+
+=== `@language`
+
+=== `@script`
+
+=== `@script`
+
+=== LocalizedStringAttributes

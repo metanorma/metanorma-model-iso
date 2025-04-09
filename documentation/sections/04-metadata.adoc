@@ -21,14 +21,14 @@ Detailed documentation of the Relaton model is available in https://relaton.org[
 `docnumber`:: Unprefixed, preferably numeric version of an identifier of the bibliographic item, intended for sorting of bibliography
 `date`:: One or more date-times associated with the production of or access to the bibliographic item
 `contributor`:: Contributors to the production of the bibliographic item
-`edition`:: The edition of the bibliographic item
+`edition`:: The edition of the bibliographic item (<<edition>>)
 `version`:: The version of the bibliographic item (within an edition). Can be used for drafts. Can be more than one, in case of multiple versioning schemes
 `biblionote`:: Note(s) associated with the bibliographic item
 `language`:: The language(s) in which the bibliographic item is expressed
 `locale`:: The locale(s) in which the bibliographic item is expressed
 `script`:: The script(s) in which the bibliographic item is written
 `abstract`:: The abstract of the bibliographic item
-`status`:: The publication or preparation status of the bibliographic item
+`status`:: The publication or preparation status of the bibliographic item (<<status>>)
 `copyright`:: The copyright status of the bibliographic item
 `docrelation`:: The relation(s) of the bibliographic item to other bibliographic items
 `series`:: The series of the bibliographic item
@@ -51,7 +51,7 @@ The `biblio-standoc` schema introduces the `bibdata` element itself, used to des
 The following elements are appended to `bibdata`:
 
 `amend`:: Description of changes specific to this document (<<amend>>). This element is shared with `bibitem` under StanDoc
-`ext`:: The extension point of the bibliographic description of a standardisation document
+`ext`:: The extension point of the bibliographic description of a standardisation document (<<ext>>)
 
 ==== Presentation XML
 
@@ -128,7 +128,7 @@ The following elements are added for ITU document metadata:
 
 `question`:: Question group under which document was authored
 `recommendationstatus`:: Recommendation status of document
-`ipnoticereceived`:: WHether an IP notice has been received for the document
+`ipnoticereceived`:: Whether an IP notice has been received for the document
 `meeting`:: Meeting during which document is being considered
 `meeting-place`:: Place of meeting during which document is being considered
 `meeting-date`:: Date of meeting during which document is being considered
@@ -202,3 +202,45 @@ The following elements are added for Plateau document metadata:
 
 Alongside the Semantic XML `doctype` instance, add a `doctype` instance with `@current = true`, giving a translation of the doctype 
 into the current internationalisation language.
+
+[[status]]
+=== `status`
+
+==== Relaton
+
+The publication or preparation status of a document.
+
+`stage`:: The stage of the document status, e.g. "Published", "Unpublished", "Committee Draft", "Preprint" (<<stage>>)
+`substage`:: The substage of the document status. These are used particularly in Standards Defining Organizations (<<substage>>)
+`iteration`:: The iteration of the given status that the document is currently in (e.g. "3" for a third draft)
+
+[[stage]]
+=== `stage`
+
+==== Relaton
+
+The stage of the document status, e.g. "Published", "Unpublished", "Committee Draft", "Preprint"
+
+`@abbreviation`:: A canonical abbreviation of the document stage
+(value):: The name of the document stage
+
+[[substage]]
+=== `substage`
+
+==== Relaton
+
+The substage of the document status. These are used particularly in Standards Defining Organizations
+
+`@abbreviation`:: A canonical abbreviation of the document substage
+(value):: The name of the document substage
+
+[[edition]]
+=== `edition`
+
+==== Relaton 
+
+Edition of a bibliographic item
+
+`@number`:: Number of edition. The number attribute can be used to represent the numeric equivalent of the edition string
+(value):: Formatted, human-readable edition string
+
