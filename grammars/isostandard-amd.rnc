@@ -16,7 +16,7 @@ clause =
 standard-document =
   element metanorma {
     Root-Attributes,
-    bibdata, misccontainer?, boilerplate?, preface, sections+
+    bibdata, misccontainer?, boilerplate?, preface, sections, review-container?
   }
 
 }

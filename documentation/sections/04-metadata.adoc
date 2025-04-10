@@ -20,7 +20,7 @@ Detailed documentation of the Relaton model is available in https://relaton.org[
 `docidentifier`:: The identifier(s) of the bibliographic item in an international standard scheme
 `docnumber`:: Unprefixed, preferably numeric version of an identifier of the bibliographic item, intended for sorting of bibliography
 `date`:: One or more date-times associated with the production of or access to the bibliographic item
-`contributor`:: Contributors to the production of the bibliographic item
+`contributor`:: Contributors to the production of the bibliographic item (<<contributor>>)
 `edition`:: The edition of the bibliographic item (<<edition>>)
 `version`:: The version of the bibliographic item (within an edition). Can be used for drafts. Can be more than one, in case of multiple versioning schemes
 `biblionote`:: Note(s) associated with the bibliographic item
@@ -244,3 +244,40 @@ Edition of a bibliographic item
 `@number`:: Number of edition. The number attribute can be used to represent the numeric equivalent of the edition string
 (value):: Formatted, human-readable edition string
 
+[[contributor]]
+=== `contributor`
+
+==== Relaton
+
+Description of a contributor to the production of the bibliographic item
+
+`role`:: A description of the role of the contributor in the production of the bibliographic item (<<role>>)
+`person`: The contributor involved in the production of the bibliographic item, if a person (<<person>>)
+`organization`: The contributor involved in the production of the bibliographic item, if an organisation
+
+[[role]]
+=== `role`
+
+==== Relaton
+
+A description of the role of the contributor in the production of a bibliographic item
+
+`@type`:: The broad class of role of the contributor. Mandatory in order to enforce orderly management of contributors.
+Detailed in https://www.relaton.org/model/creator/
+`description`:: A more detailed description of the role of the contributor (<<LocalizedMarkedUpString>>)
+
+[[person]]
+=== `person`
+
+=== Relaton
+
+Person associated with a bibliographic item
+
+`name`:: The name of the person (<<FullNameType>>)
+`credential`:: Credentials given for the person postnominally, e.g. "PhD"
+`affiliation`::  The affiliation of the person within an organization
+`identifier`:: An identifier of the person according to an international identifier scheme
+`Contact`:: Contact information for the person, including URI, address, phone number, and email
+
+[[FullNameType]]
+=== `FullNameType`

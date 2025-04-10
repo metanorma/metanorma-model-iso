@@ -4,3 +4,5 @@ source "https://rubygems.org"
 
 gem "lutaml"
 gem "lutaml-uml"
+gem "metanorma-cli"
+gem "metanorma-ribose"

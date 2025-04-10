@@ -1,12 +1,31 @@
 [[common-attributes]]
-== Common attributes
+== Common attributes and types
 
-The following attributes are recurrent in Metanorma XML
+The following attributes and types are recurrent in Metanorma XML
 
 === `@language`
 
-=== `@script`
+Two-letter language code taken from ISO 639, indicating the language in which the content is written
 
 === `@script`
 
-=== LocalizedStringAttributes
+Four-letter script code taken from ISO 15924, indicating the script in which the content is written
+
+=== `@locale`
+
+(Two-letter) Country and country subdivisions identifier taken from ISO 3166, indicating the locale in which the content is written
+
+[[LocalizedStringAttributes]]
+=== `LocalizedStringAttributes`
+
+Combination of `@language`, `@script`, and `@locale`, used to localise content
+
+[[LocalizedString]]
+=== `LocalizedString`
+
+Text field with `LocalizedStringAttributes` attributes
+
+[[LocalizedMarkedUpString]]
+=== `LocalizedMarkedUpString`
+
+Metanorma block (`PureTextElement`, <<PureTextElement>>) with `LocalizedStringAttributes` attributes

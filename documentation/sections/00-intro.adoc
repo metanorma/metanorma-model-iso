@@ -9,7 +9,7 @@ This documentation describes the suite of XML schemas that define the structure 
 [.preface]
 == Document conventions
 
-In listings of element content, attributes are prefixed with `@`.
+In listings of element content, attributes are prefixed with `@`. Types are capitalised, e.g. `FullNameType`. Elements are lowercase, e.g. `name`.
 
 [.preface]
 == Currency

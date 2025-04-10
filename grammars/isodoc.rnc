@@ -635,7 +635,7 @@ Root-Attributes =
   ## Type of standards document representation. "Semantic" is the core representation of content.
   ## "Presentation" manipulates and enhances the representation for rendering needs.
   attribute type { "semantic" | "presentation" },
-  ## Metanorma flavor, indicating SDO whose requiremnts the realisation aligns to
+  ## Metanorma flavor, indicating SDO whose requirements the realisation aligns to
   attribute flavor { text }
 
 ## Representation of a standardisation document
