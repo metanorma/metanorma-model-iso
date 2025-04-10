@@ -1246,7 +1246,7 @@ numbers</a:documentation>
       </choice>
     </attribute>
     <attribute name="flavor">
-      <a:documentation>Metanorma flavor, indicating SDO whose requiremnts the realisation aligns to</a:documentation>
+      <a:documentation>Metanorma flavor, indicating SDO whose requirements the realisation aligns to</a:documentation>
     </attribute>
   </define>
   <define name="standard-document">
