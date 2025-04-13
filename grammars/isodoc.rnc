@@ -31,11 +31,6 @@ amend = element amend {
   autonumber*
 }
 
-fn &=
-    ## If true, number the footnote as normal, but suppress display of the footnote reference in the document body.
-    ## This is done if the footnote reference is already presented in some other form, e.g. within a figure image.
-    attribute hiddenref { xsd:boolean }?
-
 index-primary = element primary { (PureTextElement|stem)+ }
 index-secondary = element secondary { (PureTextElement|stem)+ }
 index-tertiary =  element tertiary { (PureTextElement|stem)+ }
@@ -218,14 +213,6 @@ ThBody =
       paragraph-with-footnote+
     )
 
-TdAttributes &=
-  ## CSS style: only background-color supported
-  attribute style { text }?
-
-ThAttributes &=
-  ## CSS style: only background-color supported
-  attribute style { text }?
-
 TrAttributes =
   ## CSS style: only background-color supported
   attribute style { text }?
@@ -257,6 +244,20 @@ XrefBody =
 }
 
 # end overrides
+
+fn &=
+    ## If true, number the footnote as normal, but suppress display of the footnote reference in the document body.
+    ## This is done if the footnote reference is already presented in some other form, e.g. within a figure image.
+    attribute hiddenref { xsd:boolean }?
+
+TdAttributes &=
+  ## CSS style: only background-color supported
+  attribute style { text }?
+
+ThAttributes &=
+  ## CSS style: only background-color supported
+  attribute style { text }?
+    
 
 NumberingAttributes &=
     ## Override the numbering of this block in numbering

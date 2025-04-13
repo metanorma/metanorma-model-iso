@@ -45,18 +45,6 @@ localized-string = element localized-string {
   text
 }
 
-## If Semantic XML content is replicated in a Presentation XML element, any @id attributes need to be restricted
-## to the Presentation XML element, because that is what anchors in rendered documents will point to.
-## Any @id attributes in the source Semantic XML element need to be moved to @original-id, to avoid there
-## being two elements in the Presentation XML with the same @id
-RequiredId &=
-    attribute original-id { xsd:ID }?
-
-## As for RequiredId
-OptionalId &=
-    attribute original-id { xsd:ID }?
-
-NestedTextElement |= semx
 
 ## Autonumbers and other content duplicated from Semantic XML into new Presentation XML content are annotated by the <semx> element,
 ## which connects the inserted content back to its Semantic XML source. So in the generated crossreference "Clause *2*, Note 1",
@@ -124,14 +112,6 @@ FormulaBody =
   (p, dl)?,
   note
 
-## In Presentation XML, the rendering of the amend block (wrapped in semx) does the following:
-## *  Strip autonumber element, strip `amend` wrapper.
-## * Remove locality, localityStack, classification, contributor.
-## * Replace the `description`  element with its children.
-## * Replace `newcontent` element with `quote`.
-amend &= semx
-# semx = BasicBlock*, quote?
-
 ## Within a figure key, represented as dl, figure footnotes are presented as definition list entries
 ## at the start of the list: dl/dt contains fmt-fn-label, the reference number for the footnote.
 ## dl/dd contains fmt-fn-body, the body of the footnote, excluding fmt-fn-label and its following
@@ -188,9 +168,7 @@ fmt_termsource = element fmt-termsource {
     semx
 }
 
-## Replace <concept> with the rendered form of the crossreference. Only fmt-concept is rendered within concept; all other
-## elements are Semantic XML
-concept &= fmt-concept
+
 fmt-concept = element fmt-concept {
   ## refterm and renderterm from the Semantic XML are removed. The crossrefence -- eref, erefstack, xref, termref -- is replaced with
   ## the content of renderterm if present and requested (@ref),
@@ -250,30 +228,11 @@ erefAttributes =
     attribute type { ReferenceFormat }?,
     attribute alt { text }?
 
-## Lists of erefs with @connective attributes are resolved to a single human-readable string of
-## eref, with connectives linking them; e.g. 
-##    <erefstack id="A"><eref connective="from" target="B"/><eref connective="to" target="B"/></erefstack>
-## has attached to it
-##    <semx element="erefstack" source="A">from <eref connective="from" target="B"/> to <eref connective="to" target="B"/></semx>
-erefstack &= semx
-# content of semx: (element eref { erefTypeWithConnective } | text)+
-
 ## as with localityStack, see biblio-presentation
 sourcelocalityStack =
    element sourcelocalityStack {
      ( sourcelocality | text )*
  }
-
-## as with locality, see biblio-presentation
-sourcelocality |= text
-
-## Convert eref to xref (pointing to bibliography anchor, xref/@target = eref/@bibitemid),
-## or link (if a URI for the reference is supplied in the bibitem being referenced).
-## The locality text (locality, sourcelocality), if present, is inserted as part of the cross-referenced text.
-## If the locality is an anchor, and the eref is converted to link, append the anchor to the URI.
-## If there is no text in the Semantic XML eref, it is populated with eref/@citeas
-eref &= semx
-# semx = ( fmt-eref | fmt-xref | fmt-link )
 
 ## bibliographic reference left as eref in Presentation XML, because there is no bibliographic entry or URL to reference
 fmt-eref = element fmt-eref {
@@ -281,10 +240,6 @@ fmt-eref = element fmt-eref {
   CitationType,
   ErefBody
 }
-
-## convert origin to normalised reference text
-origin &= semx
-# semx contains fmt-origin
 
 fmt-origin = element fmt-origin {
   erefAttributes,
@@ -297,14 +252,6 @@ fmt-link = element fmt-link {
     HyperlinkAttributes,
     PureTextElement+
 }
-
-## Append to blockquote attribution paragraph, containing formatted rendering of author and source
-QuoteBody &=
-    quote-attribution
-
-## Append to blockquote attribution paragraph, containing formatted rendering of author and source
-QuoteNoIdBody &=
-    quote-attribution
 
 ## Blockquote attribution paragraph, containing formatted rendering of author and source
 quote-attribution = element attribution  {
@@ -342,11 +289,6 @@ image = element image {
      element emf { AnyElement }?
 }
 
-## The links in svgmap are already resolved in standoc postprocessing, so svgmap is ignored as Semantic XML markup, and the SVG
-## marked up by it is appended to svgmap, if present, wrapped in semx for referencing
-svgmap &= semx
-# semx contains figure
-
 ## If the xref is empty, it is resolved in fmt-xref to the computed cross-reference label for the element being pointed to.
 ## xref/@case, xref/@droploc, xref/@style, xref/@label are used in computing the label.
 ## <location>, the locations within the reference being specified, are combined and  resolved in fmt-xref
@@ -358,9 +300,6 @@ XrefBody = PureTextElement+
 ## <location>, the locations within the reference being specified, are resolved in fmt-eref or fmt-xref 
 ## into text appended to the body, and removed as an element
 ErefBody = PureTextElement+
-
-## Change identifier of requirement to just monospace
-reqtlabel &= fmt-identifier
 
 ## Renderable equivalent of identifier
 fmt-identifier = element fmt-identifier { TextElement+ }
@@ -469,11 +408,6 @@ fmt-xref-label = element fmt-xref-label {
   TextElement*
 }
 
-## Semantic XML floating-title has a paragraph added after it, of type "floating-title".
-## The content of floating-title is replicated to p[@type = 'floating-title'] as semx[@element = 'floating-title'].
-## Top-level section titles in CJK 3 characters or less in size are rendered extended 
-floating-title &= paragraph
-
 ## The Semantic XML elements of term are given rendering equivalents, organised as fmt_preferred, fmt_admitted, fmt_deprecates,
 ## fmt_related, fmt_termdefinition, fmt_termsource; the elements to be rendered in Presentation XML are those elements, plus
 ## termnote and termexample. Different flavours of Metanorma will arrange Semantic XML information into different Presentation
@@ -503,28 +437,25 @@ term = element term {
     fmt_termsource
 }
 
-## The reference values for document footnotes are renumbered from 1 in Presentation XML, to respect the rendering
-## order of the text; that is determined by @displayorder for each section containing footnotes. bibdata and boilerplate
-## do not have a @displayorder attribute (since their content is not rendered as a block); but the Presentation XML
-## presupposes that bibdata footnotes (title footnotes) and boilerplate footnotes will be rendered before the first
-## @displayorder section, and will number them accordingly. Renumbering is also needed for content that is only realised as
-## footnotes in Presentation XML, and not in Semantic XML: this involves notes in bibliographic references for certain
-## flavours (e.g. provenance of reference in ITU, draft status in ISO.)
-fn &= 
-  ## The identifier of this footnote
-  attribute id { xsd:ID },
-  ## The identifier of the footnote body corresponding to the footnote
-  attribute target { xsd:IDREF },
-  ## The body of the footnote is copied to fmt-footnote-container/fmt-fn-body, and that is where it is rendered from.
-  ## The Semantic XML content of fn is not rendered, and instead, fmt-fn-label is, as the presentation of the
-  ## footnote/@reference value.
-  fmt-fn-label
-
 DisplayOrder =
   ## The top-level clauses and blocks of the document are numbered in the order in which they should be rendered,
   ## taking floating titles into account.
   ## Rendering follows that ordering, rather than the ordering of claues in the XML
   attribute displayorder { xsd:int }
+
+## Shadow each review body with a review rendering
+review-container = element review-container { (review, fmt-review-body)+ }
+
+## Currenty, the rendered review body is no different from the Semantic XML review body, but for the semx pointing back to it
+fmt-review-body = element fmt-review-body {
+  RequiredId,
+  ReviewAttributes,
+  ## semx points to corresponding review element
+  semx
+}
+
+}
+# end overrides
 
 ## Add container for document footnotes
 standard-document &=
@@ -545,19 +476,93 @@ TdBody &=
 FigureBody &=
   fmt-footnote-container?
  
-## Shadow each review body with a review rendering
-review-container = element review-container { (review, fmt-review-body)+ }
 
-## Currenty, the rendered review body is no different from the Semantic XML review body, but for the semx pointing back to it
-fmt-review-body = element fmt-review-body {
-  RequiredId,
-  ReviewAttributes,
-  ## semx points to corresponding review element
-  semx
-}
+## If Semantic XML content is replicated in a Presentation XML element, any @id attributes need to be restricted
+## to the Presentation XML element, because that is what anchors in rendered documents will point to.
+## Any @id attributes in the source Semantic XML element need to be moved to @original-id, to avoid there
+## being two elements in the Presentation XML with the same @id
+RequiredId &=
+    attribute original-id { xsd:ID }?
 
-}
-# end overrides
+## As for RequiredId
+OptionalId &=
+    attribute original-id { xsd:ID }?
+
+NestedTextElement |= semx
+
+## In Presentation XML, the rendering of the amend block (wrapped in semx) does the following:
+## *  Strip autonumber element, strip `amend` wrapper.
+## * Remove locality, localityStack, classification, contributor.
+## * Replace the `description`  element with its children.
+## * Replace `newcontent` element with `quote`.
+amend &= semx
+# semx = BasicBlock*, quote?
+
+## Replace <concept> with the rendered form of the crossreference. Only fmt-concept is rendered within concept; all other
+## elements are Semantic XML
+concept &= fmt-concept
+
+## Lists of erefs with @connective attributes are resolved to a single human-readable string of
+## eref, with connectives linking them; e.g. 
+##    <erefstack id="A"><eref connective="from" target="B"/><eref connective="to" target="B"/></erefstack>
+## has attached to it
+##    <semx element="erefstack" source="A">from <eref connective="from" target="B"/> to <eref connective="to" target="B"/></semx>
+erefstack &= semx
+# content of semx: (element eref { erefTypeWithConnective } | text)+
+
+## Convert eref to xref (pointing to bibliography anchor, xref/@target = eref/@bibitemid),
+## or link (if a URI for the reference is supplied in the bibitem being referenced).
+## The locality text (locality, sourcelocality), if present, is inserted as part of the cross-referenced text.
+## If the locality is an anchor, and the eref is converted to link, append the anchor to the URI.
+## If there is no text in the Semantic XML eref, it is populated with eref/@citeas
+eref &= semx
+# semx = ( fmt-eref | fmt-xref | fmt-link )
+
+## as with locality, see biblio-presentation
+sourcelocality |= text
+
+## convert origin to normalised reference text
+origin &= semx
+# semx contains fmt-origin
+
+## Append to blockquote attribution paragraph, containing formatted rendering of author and source
+QuoteBody &=
+    quote-attribution
+
+## Append to blockquote attribution paragraph, containing formatted rendering of author and source
+QuoteNoIdBody &=
+    quote-attribution
+
+## The links in svgmap are already resolved in standoc postprocessing, so svgmap is ignored as Semantic XML markup, and the SVG
+## marked up by it is appended to svgmap, if present, wrapped in semx for referencing
+svgmap &= semx
+# semx contains figure
+
+## Change identifier of requirement to just monospace
+reqtlabel &= fmt-identifier
+
+## Semantic XML floating-title has a paragraph added after it, of type "floating-title".
+## The content of floating-title is replicated to p[@type = 'floating-title'] as semx[@element = 'floating-title'].
+## Top-level section titles in CJK 3 characters or less in size are rendered extended 
+floating-title &= paragraph
+
+## The reference values for document footnotes are renumbered from 1 in Presentation XML, to respect the rendering
+## order of the text; that is determined by @displayorder for each section containing footnotes. bibdata and boilerplate
+## do not have a @displayorder attribute (since their content is not rendered as a block); but the Presentation XML
+## presupposes that bibdata footnotes (title footnotes) and boilerplate footnotes will be rendered before the first
+## @displayorder section, and will number them accordingly. Renumbering is also needed for content that is only realised as
+## footnotes in Presentation XML, and not in Semantic XML: this involves notes in bibliographic references for certain
+## flavours (e.g. provenance of reference in ITU, draft status in ISO.)
+fn &= 
+  ## The identifier of this footnote
+  attribute id { xsd:ID },
+  ## The identifier of the footnote body corresponding to the footnote
+  attribute target { xsd:IDREF },
+  ## The body of the footnote is copied to fmt-footnote-container/fmt-fn-body, and that is where it is rendered from.
+  ## The Semantic XML content of fn is not rendered, and instead, fmt-fn-label is, as the presentation of the
+  ## footnote/@reference value.
+  fmt-fn-label
+
 
 ## Container for footnote bodies. In Presentation XML, the footnote body to be rendered
 ## is moved to a separate container from the footnote reference; in Semantic XML, the footnote
