@@ -1326,6 +1326,7 @@ numbers</a:documentation>
           <ref name="foreword"/>
           <ref name="introduction"/>
           <ref name="acknowledgements"/>
+          <ref name="executivesummary"/>
         </choice>
       </oneOrMore>
     </element>
@@ -1574,6 +1575,15 @@ used in document amendments</a:documentation>
   <define name="annex">
     <element name="annex">
       <ref name="Annex-Section"/>
+      <zeroOrMore>
+        <ref name="annex-appendix"/>
+      </zeroOrMore>
+    </element>
+  </define>
+  <define name="annex-appendix">
+    <a:documentation>Appendix, distinct subclause type for annexes (annex to annex, rather than subclause to annex)</a:documentation>
+    <element name="appendix">
+      <ref name="Clause-Section"/>
     </element>
   </define>
   <define name="terms">

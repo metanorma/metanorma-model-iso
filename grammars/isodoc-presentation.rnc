@@ -154,7 +154,7 @@ UlLiBody =
 
 ## Rendering of Termsource: Concatenate all consecutive term sources and block sources into a single semicolon delimited expression.
 ## Wrapped in semx pointing back to Termsource.
-## Replace modification with a commma, then text representing the status, then a dash, then text representing the modification
+## Replace modification with a comma, then text representing the status, then a dash, then text representing the modification
 ## e.g.
 ##    <termsource status="adapted" id="A"><origin>...</origin><modification>enhanced</modification></termsource>
 ## becomes:

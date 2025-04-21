@@ -671,7 +671,7 @@ misccontainer = element metanorma-extension { AnyElement+ }
 review-container = element review-container { review+ }
 
 preface =
-  element preface { ( content | abstract | foreword | introduction | acknowledgements)+ }
+  element preface { ( content | abstract | foreword | introduction | acknowledgements | executivesummary )+ }
 
 colophon =
   element colophon { content+ }
@@ -807,7 +807,14 @@ annex-subsection =
   element clause { Annex-Section }
 
 annex =
-  element annex { Annex-Section }       
+  element annex {
+        Annex-Section,
+        annex-appendix*
+  }       
+
+## Appendix, distinct subclause type for annexes (annex to annex, rather than subclause to annex)
+annex-appendix =
+  element appendix { Clause-Section }
 
 ## Terms sections give elaborated definitions of terms used in a standardization document
 terms =

@@ -62,6 +62,3 @@ clause-hanging-paragraph-with-footnote =
     clause-hanging-paragraph-with-footnote*
   }
 
-annex-appendix =
-  element appendix { Clause-Section }
-

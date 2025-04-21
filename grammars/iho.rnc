@@ -12,7 +12,3 @@ annex =
 
 }
 
-annex-appendix =
-  element appendix { Clause-Section }
-
-

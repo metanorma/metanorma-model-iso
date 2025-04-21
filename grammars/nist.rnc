@@ -8,15 +8,12 @@ OlAttributes &=
 
 preface =
   element preface {
-    abstract?, foreword?, (clause | errata_clause | acknowledgements)*, reviewernote?, executivesummary?
+    abstract?, foreword?, (clause | errata_clause | acknowledgements)*, content*, executivesummary?
 }
 
 }
 
 # end overrides
-
-reviewernote = element reviewernote { Basic-Section }
-executivesummary = element executivesummary { Basic-Section }
 
 errata = element errata { erratarow+ }
 

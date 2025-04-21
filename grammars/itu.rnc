@@ -4,8 +4,6 @@ include "isodoc.rnc" {
 OlAttributes &=
     attribute class { "steps" }?
 
-preface = element preface { ( content | abstract | foreword | introduction | acknowledgements | clause)+ }
-
 Clause-Section =
     Section-Attributes,
     attribute type { text }?,

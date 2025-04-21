@@ -25,9 +25,9 @@
             <ref name="acknowledgements"/>
           </choice>
         </zeroOrMore>
-        <optional>
-          <ref name="reviewernote"/>
-        </optional>
+        <zeroOrMore>
+          <ref name="content"/>
+        </zeroOrMore>
         <optional>
           <ref name="executivesummary"/>
         </optional>
@@ -35,16 +35,6 @@
     </define>
   </include>
   <!-- end overrides -->
-  <define name="reviewernote">
-    <element name="reviewernote">
-      <ref name="Basic-Section"/>
-    </element>
-  </define>
-  <define name="executivesummary">
-    <element name="executivesummary">
-      <ref name="Basic-Section"/>
-    </element>
-  </define>
   <define name="errata">
     <element name="errata">
       <oneOrMore>

@@ -1,39 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <grammar xmlns="http://relaxng.org/ns/structure/1.0">
   <include href="relaton-ogc.rng"/>
-  <include href="isodoc.rng">
-    <define name="preface">
-      <element name="preface">
-        <optional>
-          <ref name="abstract"/>
-        </optional>
-        <ref name="foreword"/>
-        <optional>
-          <ref name="submitters"/>
-        </optional>
-      </element>
-    </define>
-  </include>
-  <!-- end overrides -->
-  <define name="TextElement" combine="choice">
-    <ref name="hi"/>
-  </define>
-  <define name="PureTextElement" combine="choice">
-    <ref name="hi"/>
-  </define>
-  <define name="hi">
-    <element name="hi">
-      <zeroOrMore>
-        <choice>
-          <ref name="PureTextElement"/>
-          <ref name="stem"/>
-        </choice>
-      </zeroOrMore>
-    </element>
-  </define>
-  <define name="submitters">
-    <element name="submitters">
-      <ref name="Basic-Section"/>
-    </element>
-  </define>
+  <include href="isodoc.rng"/>
 </grammar>
+<!-- end overrides -->

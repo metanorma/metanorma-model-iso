@@ -1,14 +1,8 @@
 include "relaton-ogc.rnc" { }
 include "isodoc.rnc" {
 
-preface =
-  element preface {
-    abstract?, foreword, submitters?
-}
-
 }
 
 # end overrides
 
-submitters = element submitters { Basic-Section }
 
