@@ -127,11 +127,6 @@
         </oneOrMore>
       </element>
     </define>
-    <define name="TableAttributes" combine="interleave">
-      <optional>
-        <attribute name="border-under-row"/>
-      </optional>
-    </define>
   </include>
   <!-- end overrides -->
   <define name="floating-section-title">

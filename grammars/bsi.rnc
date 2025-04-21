@@ -39,9 +39,6 @@ sections =
     (clause | term-clause | terms | floating-title | floating-section-title)+
   } 
 
-TableAttributes &=
-    attribute border-under-row { text }?
-
 }
 
 # end overrides
