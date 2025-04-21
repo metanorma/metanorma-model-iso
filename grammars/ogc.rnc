@@ -10,10 +10,5 @@ preface =
 
 # end overrides
 
-TextElement |= hi
-PureTextElement |= hi
-
-hi = element hi { (PureTextElement|stem)* }
-
 submitters = element submitters { Basic-Section }
 

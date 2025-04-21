@@ -126,9 +126,7 @@ TableAttributes &=
     attribute align { text }?,
     attribute width { text }?
 
-TextElement |= bcp14 | review
-
-bcp14 = element bcp14 { text }
+TextElement |= review
 
 erefTypeURI =
     attribute normative { xsd:boolean }?,
