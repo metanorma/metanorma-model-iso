@@ -484,7 +484,7 @@ gives an explicit page orientation</a:documentation>
     </define>
   </include>
   <!-- end overrides -->
-  <define name="fn" combine="interleave">
+  <define name="FnAttributes" combine="interleave">
     <optional>
       <attribute name="hiddenref">
         <a:documentation>If true, number the footnote as normal, but suppress display of the footnote reference in the document body.
@@ -494,13 +494,6 @@ This is done if the footnote reference is already presented in some other form, 
     </optional>
   </define>
   <define name="TdAttributes" combine="interleave">
-    <optional>
-      <attribute name="style">
-        <a:documentation>CSS style: only background-color supported</a:documentation>
-      </attribute>
-    </optional>
-  </define>
-  <define name="ThAttributes" combine="interleave">
     <optional>
       <attribute name="style">
         <a:documentation>CSS style: only background-color supported</a:documentation>
@@ -682,6 +675,13 @@ titlecase, or lowercase</a:documentation>
     <optional>
       <attribute name="label">
         <a:documentation>Substitute the expected label of the item being cross-referenced with a custom label (e.g. "subclause" instead of "clause")</a:documentation>
+      </attribute>
+    </optional>
+  </define>
+  <define name="Basic-Section-Attributes" combine="interleave">
+    <optional>
+      <attribute name="obligation">
+        <ref name="ObligationType"/>
       </attribute>
     </optional>
   </define>
@@ -1196,13 +1196,6 @@ numbers</a:documentation>
       <attribute name="unnumbered">
         <a:documentation>Do not apply numbering to this clause</a:documentation>
         <data type="boolean"/>
-      </attribute>
-    </optional>
-  </define>
-  <define name="Basic-Section-Attributes" combine="interleave">
-    <optional>
-      <attribute name="obligation">
-        <ref name="ObligationType"/>
       </attribute>
     </optional>
   </define>

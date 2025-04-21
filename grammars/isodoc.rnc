@@ -245,7 +245,7 @@ XrefBody =
 
 # end overrides
 
-fn &=
+FnAttributes &=
     ## If true, number the footnote as normal, but suppress display of the footnote reference in the document body.
     ## This is done if the footnote reference is already presented in some other form, e.g. within a figure image.
     attribute hiddenref { xsd:boolean }?
@@ -253,11 +253,6 @@ fn &=
 TdAttributes &=
   ## CSS style: only background-color supported
   attribute style { text }?
-
-ThAttributes &=
-  ## CSS style: only background-color supported
-  attribute style { text }?
-    
 
 NumberingAttributes &=
     ## Override the numbering of this block in numbering
@@ -349,6 +344,9 @@ XrefAttributes &=
      attribute style { XrefStyleType }?,
      ## Substitute the expected label of the item being cross-referenced with a custom label (e.g. "subclause" instead of "clause")
      attribute label { text }?
+
+Basic-Section-Attributes &=
+    attribute obligation { ObligationType }?
 
 
 ## The force of a clause in a standard document: whether it has normative or informative effect
@@ -610,9 +608,6 @@ Section-Attributes =
     attribute branch-number { text }?,
     ## Do not apply numbering to this clause
     attribute unnumbered { xsd:boolean }?
-
-Basic-Section-Attributes &=
-    attribute obligation { ObligationType }?
 
 ## References clause with recursive nesting
 reference-clause =

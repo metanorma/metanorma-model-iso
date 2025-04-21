@@ -35,9 +35,6 @@ DlAttributes =
 DlBody =
     (dt, dd)+, note*
 
-ReviewAttributes &=
-  attribute display { text }?
-  
 NoteAttributes =
     attribute removeInRFC { text }?
 
@@ -47,13 +44,6 @@ NoteBody =
 PreAttributes =
     attribute alt { text }?,
     attribute align { text }?
-
-ImageAttributes &=
-    attribute align { text }?
-
-SourceAttributes &=
-    attribute number { text }?,
-    attribute markers { text }?
 
 xref =
   element xref {
@@ -76,11 +66,6 @@ erefType =
 
 quote-source =
   element source { erefTypeURI }
-
-TableAttributes &=
-    attribute number { text }?,
-    attribute align { text }?,
-    attribute width { text }?
 
 Clause-Section =
     Section-Attributes,
@@ -125,6 +110,21 @@ index = element index {
 
 # end overrides
 
+ReviewAttributes &=
+  attribute display { text }?
+
+
+ImageAttributes &=
+    attribute align { text }?
+
+SourceAttributes &=
+    attribute number { text }?,
+    attribute markers { text }?
+
+TableAttributes &=
+    attribute number { text }?,
+    attribute align { text }?,
+    attribute width { text }?
 
 TextElement |= bcp14 | review
 
