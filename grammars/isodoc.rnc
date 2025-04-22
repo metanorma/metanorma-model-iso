@@ -684,6 +684,9 @@ foreword =
 introduction =
   element introduction { Content-Section }
 
+executivesummary =
+  element executivesummary { Content-Section }
+
 indexsect = element indexsect { Content-Section }
 
 ## Content addressing legal and licensing concerns around the document, outside of the main flow of document content

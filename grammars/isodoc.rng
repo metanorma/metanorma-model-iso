@@ -1350,6 +1350,11 @@ numbers</a:documentation>
       <ref name="Content-Section"/>
     </element>
   </define>
+  <define name="executivesummary">
+    <element name="executivesummary">
+      <ref name="Content-Section"/>
+    </element>
+  </define>
   <define name="indexsect">
     <element name="indexsect">
       <ref name="Content-Section"/>
