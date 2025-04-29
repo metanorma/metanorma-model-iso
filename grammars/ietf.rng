@@ -259,6 +259,9 @@
         <ref name="index-tertiary"/>
       </element>
     </define>
+    <define name="TextElement" combine="choice">
+      <ref name="review"/>
+    </define>
   </include>
   <!-- end overrides -->
   <define name="ReviewAttributes" combine="interleave">
@@ -273,25 +276,13 @@
   </define>
   <define name="SourceAttributes" combine="interleave">
     <optional>
-      <attribute name="number"/>
-    </optional>
-    <optional>
       <attribute name="markers"/>
     </optional>
   </define>
   <define name="TableAttributes" combine="interleave">
     <optional>
-      <attribute name="number"/>
-    </optional>
-    <optional>
       <attribute name="align"/>
     </optional>
-    <optional>
-      <attribute name="width"/>
-    </optional>
-  </define>
-  <define name="TextElement" combine="choice">
-    <ref name="review"/>
   </define>
   <define name="erefTypeURI">
     <optional>

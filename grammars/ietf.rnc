@@ -106,6 +106,8 @@ index = element index {
   index-tertiary
 }
 
+TextElement |= review
+
 }
 
 # end overrides
@@ -113,20 +115,14 @@ index = element index {
 ReviewAttributes &=
   attribute display { text }?
 
-
 ImageAttributes &=
     attribute align { text }?
 
 SourceAttributes &=
-    attribute number { text }?,
     attribute markers { text }?
 
 TableAttributes &=
-    attribute number { text }?,
-    attribute align { text }?,
-    attribute width { text }?
-
-TextElement |= review
+    attribute align { text }?
 
 erefTypeURI =
     attribute normative { xsd:boolean }?,
