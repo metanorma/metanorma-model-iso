@@ -348,6 +348,14 @@ XrefAttributes &=
 Basic-Section-Attributes &=
     attribute obligation { ObligationType }?
 
+RequiredId &=
+     ##  User-supplied anchor of element; replaced by content-based id, with all references to the anchor updated accordingly
+    attribute anchor { text }?
+
+OptionalId &= 
+     ##  User-supplied anchor of element; replaced by content-based id, with all references to the anchor updated accordingly
+    attribute anchor { text }?
+
 
 ## The force of a clause in a standard document: whether it has normative or informative effect
 ObligationType = "normative" | "informative"
