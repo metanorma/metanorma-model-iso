@@ -470,11 +470,29 @@ TableBody &=
 TdBody &=
   fmt-footnote-container?,
 ## A source for the table (in the table footer, again in Plateau)
-  TermSource*
+  BlockSource*
 
 ## Add container for figure footnotes. (Used only in BSI.)
 FigureBody &=
   fmt-footnote-container?
+
+BlockSource &= fmt-source*
+
+## Rendering of source: Concatenate all consecutive sources and block sources into a single semicolon delimited expression.
+## Wrapped in semx pointing back to Source.
+## Replace modification with a comma, then text representing the status, then a dash, then text representing the modification
+## e.g.
+##    <source status="adapted" id="A"><origin>...</origin><modification>enhanced</modification></source>
+## becomes:
+##    <fmt-source status="adapted"><semx element='source' source="A">
+##      <origin>...</origin>,
+##      adapted – <semx element='modification'>enhanced</semx>
+##    </semx></fmt-source>
+fmt-source = element fmt-source {
+    attribute status { SourceStatusType },
+    attribute type { SourceTypeType },
+    semx
+} 
  
 
 ## If Semantic XML content is replicated in a Presentation XML element, any @id attributes need to be restricted

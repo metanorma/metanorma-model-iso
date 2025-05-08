@@ -119,7 +119,7 @@ TableBody =
     ## Notes specific to this block
     table-note*,
     ## A source for the table
-    TermSource
+    BlockSource
 
 SourceBody =
     ## The caption of the block
@@ -132,7 +132,51 @@ SourceBody =
     ## Notes whose scope is the current block
     note*,
     ## A source for the block
-    TermSource
+    BlockSource
+
+FigureBody =
+     ## The caption of the block
+     tname?,
+     ## Content of the figure
+     (image | video | audio | pre | paragraph-with-footnote+ | figure*),
+     ## Footnotes specific to the figure
+     fn*,
+     ## An optional definitions list defining any symbols used in the figure
+     dl?,
+     ## Notes whose scope is the current block
+     note*,
+     ## A source for the block
+     BlockSource
+
+FigureNoIdBody =
+     ## A URI or other reference intended to link to an externally hosted image (or equivalent)
+     source?,
+     ## The caption of the block
+     tname?,
+     ## Content of the figure
+     (image-no-id | video-no-id | audio-no-id | pre-no-id | paragraph-with-footnote-no-id+ | figure-no-id*),
+     ## Footnotes specific to the figure
+     fn*,
+     ## An optional definitions list defining any symbols used in the figure
+     dl-no-id?,
+     ## Notes whose scope is the current block
+     note-no-id*,
+     ## A source for the block
+     BlockSource
+
+BlockSource = source*
+
+source = element source {
+    ## The status of the term as it is used in this document, relative to its definition in the original document
+    attribute status { SourceStatusType },
+    ## The type of the managed term in the present context
+    attribute type { SourceTypeType },
+    ## The original document and location where the term definition has been obtained from
+    origin,
+    ## Any changes that the definition of the term has undergone relative to the original document,
+    ## in order to be applicable in this standardisation document
+    modification?
+}
 
 ## The computer code or other such text presented in the block, as a single unformatted string. 
 ## (The string should be treated as pre-formatted text, with whitespace treated as significant)
