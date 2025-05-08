@@ -2235,7 +2235,7 @@ used in document amendments</a:documentation>
   </define>
   <define name="termsource">
     <a:documentation>The bibliographic source where a term is defined in the sense applicable in this standardisation document</a:documentation>
-    <element name="termsource">
+    <element name="source">
       <attribute name="status">
         <a:documentation>The status of the term as it is used in this document, relative to its definition in the original document</a:documentation>
         <ref name="SourceStatusType"/>
