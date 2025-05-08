@@ -1155,7 +1155,7 @@ termexample =
 
 ## The bibliographic source where a term is defined in the sense applicable in this standardisation document
 termsource =
-  element termsource {
+  element source {
     ## The status of the term as it is used in this document, relative to its definition in the original document
     attribute status { SourceStatusType },
     ## The type of the managed term in the present context
