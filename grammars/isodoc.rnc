@@ -25,7 +25,6 @@ include "basicdoc.rnc" {
 
 ## Block expressing a machine-readable change in a document
 amend = element amend {
-  RequiredId,
   BlockAttributes,
   AmendType,
   ## Specification of how blocks of a given class should be autonumbered within an AmendBlock newContent element
