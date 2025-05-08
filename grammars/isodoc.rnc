@@ -164,8 +164,6 @@ FigureNoIdBody =
      ## A source for the block
      BlockSource
 
-BlockSource = source*
-
 source = element source {
     ## The status of the term as it is used in this document, relative to its definition in the original document
     attribute status { SourceStatusType },
@@ -1376,6 +1374,8 @@ ReferencesAttributes =
 
 TermSource =
     termsource*
+
+BlockSource = source*
 
 start = standard-document
 }

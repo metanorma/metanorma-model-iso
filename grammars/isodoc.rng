@@ -345,11 +345,6 @@ and is intended to be referenced by a callout within the source code</a:document
         <a:documentation>A source for the block</a:documentation>
       </ref>
     </define>
-    <define name="BlockSource">
-      <zeroOrMore>
-        <ref name="source"/>
-      </zeroOrMore>
-    </define>
     <define name="source">
       <element name="source">
         <attribute name="status">
@@ -2620,6 +2615,11 @@ Normative References contents contain normative references, but as a clause in t
   <define name="TermSource">
     <zeroOrMore>
       <ref name="termsource"/>
+    </zeroOrMore>
+  </define>
+  <define name="BlockSource">
+    <zeroOrMore>
+      <ref name="source"/>
     </zeroOrMore>
   </define>
   <start>
