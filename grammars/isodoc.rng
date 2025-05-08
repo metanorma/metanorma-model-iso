@@ -25,6 +25,7 @@
     <define name="amend">
       <a:documentation>Block expressing a machine-readable change in a document</a:documentation>
       <element name="amend">
+        <ref name="RequiredId"/>
         <ref name="BlockAttributes"/>
         <ref name="AmendType"/>
         <zeroOrMore>
@@ -33,6 +34,12 @@
           </ref>
         </zeroOrMore>
       </element>
+    </define>
+    <define name="IdRefType">
+      <a:documentation>Cross-references are not normalised to xsd:IDREF in Semantic XML: that is deferred to Presentation XML.
+All IdRefType instances point not to `@id` in Semantic XML, which is the Content GUID for an element,
+but to `@anchor`, the user-supplied cross-reference</a:documentation>
+      <text/>
     </define>
     <define name="index-primary">
       <element name="primary">
@@ -790,7 +797,7 @@ titlecase, or lowercase</a:documentation>
   <define name="RequiredId" combine="interleave">
     <optional>
       <attribute name="anchor">
-        <a:documentation> User-supplied anchor of element; replaced by content-based id, with all references to the anchor updated accordingly</a:documentation>
+        <a:documentation>User-supplied anchor of element; replaced by content-based id, with all references to the anchor updated accordingly</a:documentation>
       </attribute>
     </optional>
   </define>
@@ -1195,7 +1202,7 @@ That concept may be defined as a term within the current document, or it may be 
     <element name="label">
       <!-- Identifier of form input element that this element is a label of -->
       <attribute name="for">
-        <data type="IDREF"/>
+        <ref name="IdRefType"/>
       </attribute>
       <zeroOrMore>
         <ref name="PureTextElement"/>

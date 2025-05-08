@@ -32,6 +32,11 @@ amend = element amend {
   autonumber*
 }
 
+## Cross-references are not normalised to xsd:IDREF in Semantic XML: that is deferred to Presentation XML.
+## All IdRefType instances point not to `@id` in Semantic XML, which is the Content GUID for an element,
+## but to `@anchor`, the user-supplied cross-reference
+IdRefType = text
+
 index-primary = element primary { (PureTextElement|stem)+ }
 index-secondary = element secondary { (PureTextElement|stem)+ }
 index-tertiary =  element tertiary { (PureTextElement|stem)+ }
@@ -392,7 +397,7 @@ Basic-Section-Attributes &=
     attribute obligation { ObligationType }?
 
 RequiredId &=
-     ##  User-supplied anchor of element; replaced by content-based id, with all references to the anchor updated accordingly
+    ## User-supplied anchor of element; replaced by content-based id, with all references to the anchor updated accordingly
     attribute anchor { text }?
 
 OptionalId &= 
@@ -598,7 +603,7 @@ input = element input {
 ## Label associated with form input element
 formlabel = element label {
     # Identifier of form input element that this element is a label of
-    attribute for { xsd:IDREF },
+    attribute for { IdRefType },
     PureTextElement*
 }
 

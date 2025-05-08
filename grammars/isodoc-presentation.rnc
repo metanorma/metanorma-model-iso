@@ -13,6 +13,10 @@ misccontainer = element metanorma-extension {
   (ext_toc+ & localized-strings & source-highlighter-css)
 }
 
+## Cross-references are normalised to xsd:IDREF syntax (NCName type), as will be expected of downstream XML-based systems.
+## This is done by normalising illegal characters, and converting Unicode non-Ascii characters to escaped values.
+IdRefType = xsd:IDREF
+
 ## Asset captions are transformed in the same way as section-title; see documentation there
 ## (with fmt-name replacing fmt-title as the Presentation XML-specific caption of a block).
 ## The following additional provisos apply:
@@ -248,7 +252,7 @@ semx = element semx {
   ## Name of source element that the Semantic XML content is derived from. "autonum" indicates that the content is an autonumber.
   attribute element { text },
   ## id of the source element that the Semantic XML content is derived from.
-  attribute source { xsd:IDREF },
+  attribute source { IdRefType },
   ## Duplicated Semantic XML content, or content derived from it (such as an autonumber). Any such content will preserve
   ## its @id attributes recursively; the corresponding @id attributes in the Semantic XML original are moved to @original-id,
   ## to avoid conflict
@@ -392,7 +396,7 @@ fmt-title = element fmt-title {
     ## A hierarchical section title is given an explicit count of its nesting depth, as a hint for rendering
     attribute depth { xsd:integer }?,
     ## The ID of the title that the fmt-title is derived from
-    attribute source { xsd:IDREF }?,
+    attribute source { IdRefType }?,
     TextElement*
   }
 
@@ -408,7 +412,7 @@ fmt-xref-label = element fmt-xref-label {
   ## will use the latter element for its text, and any cross-references from outside the container node will use the former:
   ##  <fmt-xref-label container="A">Clause 2, Note 1</fmt-xref-label> # used outside of A; "Clause 2" is itself element A.
   ##  <fmt-xref-label>Note 1</fmt-xref-label> # used within A
-  attribute container { xsd:IDREF }?,
+  attribute container { IdRefType }?,
   ## The cross-reference text is semantically annotated with span[@class='fmt-*'] and semx, as for captions;
   ## refer to those elements for definitions.
   TextElement*
@@ -495,18 +499,28 @@ fmt-source = element fmt-source {
     attribute type { SourceTypeType },
     semx
 } 
- 
 
-## If Semantic XML content is replicated in a Presentation XML element, any @id attributes need to be restricted
-## to the Presentation XML element, because that is what anchors in rendered documents will point to.
-## Any @id attributes in the source Semantic XML element need to be moved to @original-id, to avoid there
-## being two elements in the Presentation XML with the same @id
 RequiredId &=
-    attribute original-id { xsd:ID }?
-
+  ## The Semantic XML content ID for the element is moved from @id to @semx-id. 
+  ## @id instead assumes the value of @anchor if present, but normalised to xsd:IDREF syntax (NCName type).
+  ## This is done by normalising illegal characters, and converting Unicode non-Ascii characters to escaped values.    
+  ## If no @anchor value is present, the @semx-id value is retained for @id
+  attribute semx-id { xsd:ID }?,
+  
+  ## If Semantic XML nodes are replicated in a Presentation XML counterpart, the two nodes cannot have the same 
+  ## @id attribute: the @id attribute needs to be restricted
+  ## to the Presentation XML element, because that is what anchors in rendered documents will point to.
+  ## Any @id attributes in the source Semantic XML element need to be moved to @original-id, to avoid there
+  ## being two elements in the Presentation XML with the same @id. This value is kept distinct from @semx-id and @anchor,
+  ## which originate from the conversion of Semantic to Presentation XML: @original-id is the Presentation XML-specific
+  ## value of @id for a Semantic XML element (either @anchor or @semx-id-based), which has subsequently been replicated
+  ## to a new rendering element.
+  attribute original-id { xsd:ID }?
+  
 ## As for RequiredId
 OptionalId &=
-    attribute original-id { xsd:ID }?
+  attribute semx-id { xsd:ID }?,  
+  attribute original-id { xsd:ID }?
 
 NestedTextElement |= semx
 
@@ -577,7 +591,7 @@ fn &=
   ## The identifier of this footnote
   attribute id { xsd:ID },
   ## The identifier of the footnote body corresponding to the footnote
-  attribute target { xsd:IDREF },
+  attribute target { IdRefType },
   ## The body of the footnote is copied to fmt-footnote-container/fmt-fn-body, and that is where it is rendered from.
   ## The Semantic XML content of fn is not rendered, and instead, fmt-fn-label is, as the presentation of the
   ## footnote/@reference value.
@@ -603,7 +617,7 @@ fmt-fn-body = element fmt-fn-body {
   ## The identifier of this footnote body
   attribute id { xsd:ID },
   ## The identifier of the first footnote reference corresponding to the footnote body
-  attribute target { xsd:IDREF },
+  attribute target { IdRefType },
   ## The number of the footnote, displayed as a reference both in the footnote reference and in  
   ## the footnote body. This is the bare number value, without any formatting characters, so
   ## "a" or "1", rather than "a)" or "1)".
@@ -873,12 +887,12 @@ BlockAttributes &= DisplayOrder
 fmt-review-start = element fmt-review-start {
   attribute id { xsd:ID },
   ## id of the semantic XML element that fmt-review-start signposts.
-  attribute source { xsd:IDREF },
+  attribute source { IdRefType },
   ## Identifier of the fmt-review-end element corresponding to fmt-review-start. If missing, the annotation has scope 
   ## only over the point identifier id
-  attribute end { xsd:IDREF }?,
+  attribute end { IdRefType }?,
   ## id of the fmt-review-body annotation that corresponds to fmt-review-start.
-  attribute target { xsd:IDREF },
+  attribute target { IdRefType },
   ## The party who has offered the comment
   attribute reviewer { text },
   ## The type of reviewer comment
@@ -895,11 +909,11 @@ fmt-review-start = element fmt-review-start {
 fmt-review-end = element fmt-review-end {
   attribute id { xsd:ID },
   ## id of the semantic XML element that fmt-review-end signposts.
-  attribute source { xsd:IDREF },
+  attribute source { IdRefType },
   ## Identifier of the fmt-review-start element corresponding to fmt-review-end. 
-  attribute start { xsd:IDREF },
+  attribute start { IdRefType },
   ## id of the fmt-review-body annotation that corresponds to fmt-review-end.
-  attribute target { xsd:IDREF },
+  attribute target { IdRefType },
   ## The party who has offered the comment
   attribute reviewer { text },
   ## The type of reviewer comment
