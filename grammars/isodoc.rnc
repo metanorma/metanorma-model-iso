@@ -397,12 +397,15 @@ Basic-Section-Attributes &=
 
 RequiredId &=
     ## User-supplied anchor of element; replaced by content-based id, with all references to the anchor updated accordingly
-    attribute anchor { text }?
+    attribute anchor { text }?,
+    ## Sourcing of the current element in an external data model
+    attribute source { IdRefType }?
 
 OptionalId &= 
      ##  User-supplied anchor of element; replaced by content-based id, with all references to the anchor updated accordingly
-    attribute anchor { text }?
-
+    attribute anchor { text }?,
+    ## Sourcing of the current element in an external data model
+    attribute source { IdRefType }?
 
 ## The force of a clause in a standard document: whether it has normative or informative effect
 ObligationType = "normative" | "informative"
@@ -481,6 +484,7 @@ span = element span {
   ## Character set that the contained text belongs to; 
   ## is used in particular to capture mutually agreed definitions of codepoints in Unicode Private Use Area
   attribute custom-charset { text }?,
+  OptionalId,
   ## Textual content of span
   TextElement+
 }
