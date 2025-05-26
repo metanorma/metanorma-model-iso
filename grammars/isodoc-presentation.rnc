@@ -451,7 +451,7 @@ attribution-para = element p {
 ## The term domain may be inserted into fmt_termdefinition via semx.
 ## Multiple termdefinitions are replaced with a single definition, consiting of an ordered list of definitions
 ## As normal, each Semantic XML definition is referenced via semx.
-fmt_termdefinition = element fmt-termdefinition { TextElement+ }
+fmt_termdefinition = element fmt-definition { TextElement+ }
 
 
 
