@@ -43,9 +43,20 @@ index-tertiary =  element tertiary { (PureTextElement|stem)+ }
 ## Title(s) of a clause
 section-title =
   ## Title proper for a clause
-  element title { TextElement* },
+  element title { 
+    RequiredId,
+    TextElement* 
+  },
   ## Alternate title for a clause
-  element variant-title { TypedTitleString }*
+  element variant-title { 
+    RequiredId,
+    TypedTitleString 
+  }*
+
+tname = element name { 
+  RequiredId,
+  NestedTextElement+
+ }
 
 UlBody =
     ## Caption of list
@@ -238,6 +249,7 @@ LiBody =
 
 dd =
   element dd {
+    OptionalId,
     # exclude figures?
     BasicBlock*
   }
@@ -261,6 +273,7 @@ ThBody =
     )
 
 TrAttributes =
+  OptionalId,
   ## CSS style: only background-color supported
   attribute style { text }?
 
@@ -293,11 +306,13 @@ XrefBody =
 # end overrides
 
 FnAttributes &=
+    RequiredId,
     ## If true, number the footnote as normal, but suppress display of the footnote reference in the document body.
     ## This is done if the footnote reference is already presented in some other form, e.g. within a figure image.
     attribute hiddenref { xsd:boolean }?
 
 TdAttributes &=
+  RequiredId,
   ## CSS style: only background-color supported
   attribute style { text }?
 
@@ -919,7 +934,7 @@ term =
   }
 
 TermAttributes =
-    OptionalId,
+    RequiredId,
     LocalizedStringAttributes,
     BlockAttributes
 
@@ -1118,6 +1133,7 @@ termsubject =
 ## The definition of a term applied in the current document
 termdefinition =
   element definition {
+    RequiredId,
     ## Type of definition, used to differentiate it from other definitions of the same term if present
     attribute type { text }?,
     (
@@ -1130,6 +1146,7 @@ termdefinition =
   }
 
 verbaldefinition = element verbal-definition {
+    RequiredId,
     ## Content of the verbal representation of the term
     (paragraph-with-footnote | dl | ol | ul | table | figure | formula)+,
     ## Bibliographic references for this designation of the managed term
@@ -1139,6 +1156,7 @@ verbaldefinition = element verbal-definition {
 ## Non-verbal representation of the term
 nonverbalrep =
   element non-verbal-representation {
+    RequiredId,
     ## Content of the non-verbal representation of the term
     ( table | figure | formula )+,
     ## Bibliographic references for this designation of the managed term

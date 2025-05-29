@@ -365,6 +365,7 @@ fmt_related = element fmt-related { semx }
 ##  To be rendered as:
 ##    <p>NOTE 1:<tab/>This is a note...</p>
 fmt-name = element fmt-name {
+    RequiredId,
     TextElement*
 }   
 
@@ -395,8 +396,8 @@ fmt-name = element fmt-name {
 fmt-title = element fmt-title {
     ## A hierarchical section title is given an explicit count of its nesting depth, as a hint for rendering
     attribute depth { xsd:integer }?,
-    ## The ID of the title that the fmt-title is derived from
-    attribute source { IdRefType }?,
+    ## attribute @source within RequiredId is used for the ID of the title that the fmt-title is derived from
+    RequiredId,
     TextElement*
   }
 
@@ -451,7 +452,10 @@ attribution-para = element p {
 ## The term domain may be inserted into fmt_termdefinition via semx.
 ## Multiple termdefinitions are replaced with a single definition, consiting of an ordered list of definitions
 ## As normal, each Semantic XML definition is referenced via semx.
-fmt_termdefinition = element fmt-definition { TextElement+ }
+fmt_termdefinition = element fmt-definition { 
+  RequiredId,
+  TextElement+ 
+}
 
 
 
@@ -670,6 +674,7 @@ SourceBody &= fmt-sourcecode
 
 ## Rendering of sourcecode
 fmt-sourcecode = element fmt-sourcecode {
+  RequiredId,
   # Sourcecode caption
   tname?,
   (
@@ -832,7 +837,10 @@ RequirementType &= fmt-provision
 
 ## Requirements may be rendered arbitrarily depending on the requirements model; in the case of Modspec,
 ## they are rendered as tables. 
-fmt-provision = element fmt-provision { BasicBlock+ }
+fmt-provision = element fmt-provision { 
+  RequiredId,
+  BasicBlock+ 
+}
 
 ## Document title in metadata, in CJK 3 characters or less in size, is rendered in extended style
 btitle &= empty
