@@ -274,7 +274,7 @@ ThBody =
 
 TrAttributes =
   OptionalId,
-  ## CSS style: only background-color supported
+  ## CSS style: only background-color, color, border supported
   attribute style { text }?
 
 table-note = element note {
@@ -313,7 +313,7 @@ FnAttributes &=
 
 TdAttributes &=
   RequiredId,
-  ## CSS style: only background-color supported
+  ## CSS style: only background-color, color, border supported
   attribute style { text }?
 
 NumberingAttributes &=
