@@ -139,7 +139,7 @@ passthrough = element passthrough {
 ruby = element ruby { 
   ## text content of ruby, or recursing of ruby
   element rb { text | ruby },
-  ## content of Semantic XML ruby/pronunciation or ruby/annotation
+  ## content of Semantic XML ruby/ruby-pronunciation or ruby/ruby-annotation
   element rt { text }
 }   
 

@@ -50,6 +50,27 @@ review =
   paragraph+
 }
 
+## Ruby annotation giving pronunciation of text: change tag from BasicDoc for disambiguation
+ruby_pronunciation = element ruby-pronunciation {
+  ## Ruby annotation value
+  attribute value { text },
+  LocalizedStringAttributes
+}   
+       
+## Ruby annotation giving information other than pronunciation of text: change tag from BasicDoc for disambiguation
+ruby_annotation = element ruby-annotation {
+  ## Ruby annotation value
+  attribute value { text },
+  LocalizedStringAttributes
+}
+
+## Source code annotation, corresponding to a callout
+annotation =
+  element callout-annotation {
+    RequiredId,
+    paragraph+
+}
+
 ## Title(s) of a clause
 section-title =
   ## Title proper for a clause
