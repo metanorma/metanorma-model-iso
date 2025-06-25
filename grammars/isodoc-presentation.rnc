@@ -203,8 +203,8 @@ DisplayOrder =
   ## Rendering follows that ordering, rather than the ordering of claues in the XML
   attribute displayorder { xsd:int }
 
-## Shadow each review body with a review rendering
-review-container = element review-container { (review, fmt-review-body)+ }
+## Shadow each annotation body with a annotation rendering
+annotation-container = element annotation-container { (review, fmt-annotation-body)+ }
 
 }
 # end overrides
@@ -459,11 +459,11 @@ fmt_termdefinition = element fmt-definition {
 
 
 
-## Currenty, the rendered review body is no different from the Semantic XML review body, but for the semx pointing back to it
-fmt-review-body = element fmt-review-body {
+## Currenty, the rendered annotation body is no different from the Semantic XML annotation body, but for the semx pointing back to it
+fmt-annotation-body = element fmt-annotation-body {
   RequiredId,
   ReviewAttributes,
-  ## semx points to corresponding review element
+  ## semx points to corresponding annotation element
   semx
 }
 
@@ -691,7 +691,7 @@ fmt-sourcecode = element fmt-sourcecode {
   note*
 }
 
-PureTextElement |= tab | fmt-origin | fmt-link | fmt-eref | fmt-xref | fmt-fn-label | fmt-review-start | fmt-review-end
+PureTextElement |= tab | fmt-origin | fmt-link | fmt-eref | fmt-xref | fmt-fn-label | fmt-annotation-start | fmt-annotation-end
 
 ## All strings in table cells are broken up if they exceed a threshold of length
 ## (20 chars), in order to allow table cells not to be artificially widened
@@ -886,24 +886,24 @@ Basic-Section-Attributes &= DisplayOrder
 ## it gets a displayorder attribute
 BlockAttributes &= DisplayOrder
 
-## Bookmark indicating where a review annotation starts in the text. This is inserted at the start of the first text node descendant of
-## the source review element's @from attribute; if the destination is a milestone (no textual content, e.g. bookmark), it is inserted
+## Bookmark indicating where an annotation starts in the text. This is inserted at the start of the first text node descendant of
+## the source annotation element's @from attribute; if the destination is a milestone (no textual content, e.g. bookmark), it is inserted
 ## in front of it. Bookmarks are used so that there is no differential processing in rendering between element destinations and
-## milestone destinations of reviews: they are consistently milestones, and locating the milestone at the first text node of a container
+## milestone destinations of annotations: they are consistently milestones, and locating the milestone at the first text node of a container
 ## element ensures that the full text content of the element is annotated in rendering, rather than having downstream processors
 ## work out where to insert the annotation.
-fmt-review-start = element fmt-review-start {
+fmt-annotation-start = element fmt-annotation-start {
   attribute id { xsd:ID },
-  ## id of the semantic XML element that fmt-review-start signposts.
+  ## id of the semantic XML element that fmt-annotation-start signposts.
   attribute source { IdRefType },
-  ## Identifier of the fmt-review-end element corresponding to fmt-review-start. If missing, the annotation has scope 
+  ## Identifier of the fmt-annotation-end element corresponding to fmt-annotation-start. If missing, the annotation has scope 
   ## only over the point identifier id
   attribute end { IdRefType }?,
-  ## id of the fmt-review-body annotation that corresponds to fmt-review-start.
+  ## id of the fmt-annotation-body annotation that corresponds to fmt-annotation-start.
   attribute target { IdRefType },
   ## The party who has offered the comment
   attribute reviewer { text },
-  ## The type of reviewer comment
+  ## The type of annotation
   attribute type { text }?,
   ## The date when the comment was made
   attribute date { xsd:dateTime }?,
@@ -911,20 +911,20 @@ fmt-review-start = element fmt-review-start {
   PureTextElement*
 }
 
-## Bookmark indicating where a review annotation ends in the text. This is inserted at the start of the last text node descendant of
-## the source review element's @to attribute; if the destination is a milestone (no textual content, e.g. bookmark), it is inserted
+## Bookmark indicating where an annotation ends in the text. This is inserted at the start of the last text node descendant of
+## the source annotation element's @to attribute; if the destination is a milestone (no textual content, e.g. bookmark), it is inserted
 ## after it.
-fmt-review-end = element fmt-review-end {
+fmt-annotation-end = element fmt-annotation-end {
   attribute id { xsd:ID },
-  ## id of the semantic XML element that fmt-review-end signposts.
+  ## id of the semantic XML element that fmt-annotation-end signposts.
   attribute source { IdRefType },
-  ## Identifier of the fmt-review-start element corresponding to fmt-review-end. 
+  ## Identifier of the fmt-annotation-start element corresponding to fmt-annotation-end. 
   attribute start { IdRefType },
-  ## id of the fmt-review-body annotation that corresponds to fmt-review-end.
+  ## id of the fmt-annotation-body annotation that corresponds to fmt-annotation-end.
   attribute target { IdRefType },
   ## The party who has offered the comment
   attribute reviewer { text },
-  ## The type of reviewer comment
+  ## The type of annotation
   attribute type { text }?,
   ## The date when the comment was made
   attribute date { xsd:dateTime }?,

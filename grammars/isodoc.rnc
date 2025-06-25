@@ -40,6 +40,16 @@ index-primary = element primary { (PureTextElement|stem)+ }
 index-secondary = element secondary { (PureTextElement|stem)+ }
 index-tertiary =  element tertiary { (PureTextElement|stem)+ }
 
+## Generalise BasicDoc element from just review comments, to general annotations;
+## the type attribute defaults to `review` for reviews
+review =
+  element annotation {
+  RequiredId,
+  ReviewAttributes,
+  ## Reviewer comments content
+  paragraph+
+}
+
 ## Title(s) of a clause
 section-title =
   ## Title proper for a clause
@@ -724,7 +734,7 @@ element metanorma {
   boilerplate?, 
   DocumentBody,
   ## Annotations to the document
-  review-container?
+  annotation-container?
 }
 
 DocumentBody =
@@ -744,7 +754,7 @@ DocumentBody =
 ## Elements added to metanorma-extension are open-ended, and constitute source data
 misccontainer = element metanorma-extension { AnyElement+ }
 
-review-container = element review-container { review+ }
+annotation-container = element annotation-container { review+ }
 
 preface =
   element preface { ( content | abstract | foreword | introduction | acknowledgements | executivesummary )+ }

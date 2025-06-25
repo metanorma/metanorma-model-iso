@@ -70,6 +70,19 @@ but to `@anchor`, the user-supplied cross-reference</a:documentation>
         </oneOrMore>
       </element>
     </define>
+    <define name="review">
+      <a:documentation>Generalise BasicDoc element from just review comments, to general annotations;
+the type attribute defaults to `review` for reviews</a:documentation>
+      <element name="annotation">
+        <ref name="RequiredId"/>
+        <ref name="ReviewAttributes"/>
+        <oneOrMore>
+          <ref name="paragraph">
+            <a:documentation>Reviewer comments content</a:documentation>
+          </ref>
+        </oneOrMore>
+      </element>
+    </define>
     <define name="section-title">
       <a:documentation>Title(s) of a clause</a:documentation>
       <element name="title">
@@ -1420,7 +1433,7 @@ numbers</a:documentation>
       </optional>
       <ref name="DocumentBody"/>
       <optional>
-        <ref name="review-container">
+        <ref name="annotation-container">
           <a:documentation>Annotations to the document</a:documentation>
         </ref>
       </optional>
@@ -1464,8 +1477,8 @@ numbers</a:documentation>
       </oneOrMore>
     </element>
   </define>
-  <define name="review-container">
-    <element name="review-container">
+  <define name="annotation-container">
+    <element name="annotation-container">
       <oneOrMore>
         <ref name="review"/>
       </oneOrMore>
