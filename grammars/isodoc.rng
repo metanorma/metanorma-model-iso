@@ -538,7 +538,7 @@ normative or informative references, some split references into sections organiz
       <ref name="OptionalId"/>
       <optional>
         <attribute name="style">
-          <a:documentation>CSS style: only background-color supported</a:documentation>
+          <a:documentation>CSS style: only background-color, color, border supported</a:documentation>
         </attribute>
       </optional>
     </define>
@@ -618,7 +618,7 @@ This is done if the footnote reference is already presented in some other form, 
     <ref name="RequiredId"/>
     <optional>
       <attribute name="style">
-        <a:documentation>CSS style: only background-color supported</a:documentation>
+        <a:documentation>CSS style: only background-color, color, border supported</a:documentation>
       </attribute>
     </optional>
   </define>
@@ -696,6 +696,11 @@ titlecase, or lowercase</a:documentation>
     <optional>
       <attribute name="width">
         <a:documentation>Width of the table block in rendering</a:documentation>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="style">
+        <a:documentation>CSS style: only background-color, color, border supported</a:documentation>
       </attribute>
     </optional>
     <ref name="BlockAttributes"/>
