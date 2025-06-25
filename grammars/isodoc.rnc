@@ -355,6 +355,8 @@ UlAttributes &=
 TableAttributes &=
     ## Width of the table block in rendering
     attribute width { text }?,
+    ## CSS style: only background-color, color, border supported
+    attribute style { text }?,
     BlockAttributes
 
 FigureAttributes &=
