@@ -734,6 +734,17 @@ titlecase, or lowercase</a:documentation>
   </define>
   <define name="TableAttributes" combine="interleave">
     <optional>
+      <attribute name="plain">
+        <a:documentation>Render as a plain attribute, with no shading or borders</a:documentation>
+        <data type="boolean"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="width">
+        <a:documentation>Width of the table block in rendering</a:documentation>
+      </attribute>
+    </optional>
+    <optional>
       <attribute name="width">
         <a:documentation>Width of the table block in rendering</a:documentation>
       </attribute>
