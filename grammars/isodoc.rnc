@@ -388,8 +388,6 @@ TableAttributes &=
     attribute plain { xsd:boolean }?,
     ## Width of the table block in rendering
     attribute width { text }?,
-    ## Width of the table block in rendering
-    attribute width { text }?,
     ## CSS style: only background-color, color, border supported
     attribute style { text }?,
     BlockAttributes
