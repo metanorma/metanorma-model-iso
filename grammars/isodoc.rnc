@@ -36,10 +36,6 @@ amend = element amend {
 ## but to `@anchor`, the user-supplied cross-reference
 IdRefType = text
 
-index-primary = element primary { (PureTextElement|stem)+ }
-index-secondary = element secondary { (PureTextElement|stem)+ }
-index-tertiary =  element tertiary { (PureTextElement|stem)+ }
-
 ## Generalise BasicDoc element from just review comments, to general annotations;
 ## the type attribute defaults to `review` for reviews
 review =
@@ -313,12 +309,6 @@ table-note = element note {
     paragraph-with-footnote+
 }
 
-## Subscript text. Corresponds to HTML `sub
-sub = element sub { (PureTextElement|stem)* }
-
-## Superscript text. Corresponds to HTML `sup`
-sup = element sup { (PureTextElement|stem)* }
-
 ## Page break. Only applicable in paged layouts (e.g. PDF, Word), and not flow layouts (e.g. HTML)
 pagebreak = element pagebreak { 
   ## Orientation of pages in a section of text in paged media following this page break, applicable until the next page break that
@@ -507,7 +497,8 @@ BibItemType |=
 
 TextElement |= concept | add | del | span | erefstack | date_inline
 
-PureTextElement |= passthrough_inline
+## Treat stem as a pure text element in isodoc
+PureTextElement |= passthrough_inline | stem
 
 NestedTextElement |= erefstack
 
@@ -562,9 +553,9 @@ concept = element concept {
   ## Hyperlink the reference for the term to the definition for the concept
   attribute linkref { xsd:boolean }?,
   ## The canonical name of the concept being defined
-  element refterm { (PureTextElement|stem|index|index-xref)* }?,
+  element refterm { (PureTextElement|index|index-xref)* }?,
   ## The rendering to be used for the concept
-  element renderterm { (PureTextElement|stem|index|index-xref)* }?,
+  element renderterm { (PureTextElement|index|index-xref)* }?,
   ( 
      ## Link to a definition of the term in a bibliographic entry
      eref | 
@@ -1057,7 +1048,7 @@ letter_symbol_designation =
     ## Type of symbolic designation
     attribute type { LetterSymbolType }?,
     ## The symbolic form of the designation
-    element name { (PureTextElement | stem)+ }
+    element name { (PureTextElement)+ }
   }
 
 ## The type of a symbol-like designation
@@ -1089,7 +1080,7 @@ expression_designation =
     ## Whether the designation (typically an abbreviation) is the same across languages, or language-specific
     attribute isInternational { xsd:boolean }?,
     ## The textual form of the designation
-    element name { (PureTextElement|stem|index|index-xref)* },
+    element name { (PureTextElement|index|index-xref)* },
     ## Type of abbreviation that constitutes the designation, according to how it is formed
     element abbreviation-type { AbbreviationType }?,
     ## A pronunciation guide to the designation
