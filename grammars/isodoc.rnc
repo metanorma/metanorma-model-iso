@@ -497,8 +497,7 @@ BibItemType |=
 
 TextElement |= concept | add | del | span | erefstack | date_inline
 
-## Treat stem as a pure text element in isodoc
-PureTextElement |= passthrough_inline | stem
+PureTextElement |= passthrough_inline 
 
 NestedTextElement |= erefstack
 
