@@ -1193,6 +1193,8 @@ termnote =
     RequiredId,
     NumberingAttributes,
     BlockAttributes,
+    ## Semantic classification of note
+    attribute type { text }?,
     ## Content of the term note
     (paragraph-with-footnote | ul | ol | dl | formula)+
 }
