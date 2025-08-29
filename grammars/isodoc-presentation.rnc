@@ -31,7 +31,7 @@ tname =
 
 BasicBlock |= 
         ## Bibliographic sources can be rendered as separate blocks in Presentation XML, following the content they relate to
-        ## (e.g. bibliographic sources of paragraphs).
+        ## (e.g. bibliographic sources of paragraphs). This is currently the case only in metanorma-plateau.
         fmt-source
 
 FormulaBody =
