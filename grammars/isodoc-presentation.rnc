@@ -29,6 +29,11 @@ tname =
   fmt-name,
   fmt-xref-label*
 
+BasicBlock |= 
+        ## Bibliographic sources can be rendered as separate blocks in Presentation XML, following the content they relate to
+        ## (e.g. bibliographic sources of paragraphs).
+        fmt-source
+
 FormulaBody =
   stem,
   ## Any key in a formula is preceded with a paragraph with the i18n'd word "where", or "where_one" (for singular value).

@@ -121,12 +121,10 @@ the type attribute defaults to `review` for reviews</a:documentation>
           <a:documentation>Notes whose scope is the current block</a:documentation>
         </ref>
       </zeroOrMore>
-      <zeroOrMore>
-        <ref name="source">
-          <a:documentation>Bibliographic source for the information in the list.
+      <ref name="BlockSource">
+        <a:documentation>Bibliographic source for the information in the list.
 Sources are currently only rendered in metanorma-plateau</a:documentation>
-        </ref>
-      </zeroOrMore>
+      </ref>
     </define>
     <define name="OlBody">
       <optional>
@@ -144,12 +142,10 @@ Sources are currently only rendered in metanorma-plateau</a:documentation>
           <a:documentation>Notes whose scope is the current block</a:documentation>
         </ref>
       </zeroOrMore>
-      <zeroOrMore>
-        <ref name="source">
-          <a:documentation>Bibliographic source for the information in the list.
+      <ref name="BlockSource">
+        <a:documentation>Bibliographic source for the information in the list.
 Sources are currently only rendered in metanorma-plateau</a:documentation>
-        </ref>
-      </zeroOrMore>
+      </ref>
     </define>
     <define name="OlAttributes">
       <a:documentation>NOTE: `start` attribute is not included by default, because of problems it raises with DOC output</a:documentation>
@@ -198,12 +194,10 @@ Sources are currently only rendered in metanorma-plateau</a:documentation>
           <a:documentation>Notes whose scope is the current block</a:documentation>
         </ref>
       </zeroOrMore>
-      <zeroOrMore>
-        <ref name="source">
-          <a:documentation>Bibliographic source for the information in the list.
+      <ref name="BlockSource">
+        <a:documentation>Bibliographic source for the information in the list.
 Sources are currently only rendered in metanorma-plateau</a:documentation>
-        </ref>
-      </zeroOrMore>
+      </ref>
     </define>
     <define name="dt">
       <element name="dt">
@@ -888,12 +882,10 @@ titlecase, or lowercase</a:documentation>
     </element>
   </define>
   <define name="ParagraphFnBody" combine="interleave">
-    <zeroOrMore>
-      <ref name="source">
-        <a:documentation>Bibliographic source for the information in the paragraph
+    <ref name="BlockSource">
+      <a:documentation>Bibliographic source for the information in the paragraph
 parargaph sources are currently only rendered in metanorma-plateau</a:documentation>
-      </ref>
-    </zeroOrMore>
+    </ref>
   </define>
   <define name="BasicBlock" combine="choice">
     <ref name="columnbreak"/>
