@@ -121,6 +121,12 @@ the type attribute defaults to `review` for reviews</a:documentation>
           <a:documentation>Notes whose scope is the current block</a:documentation>
         </ref>
       </zeroOrMore>
+      <zeroOrMore>
+        <ref name="source">
+          <a:documentation>Bibliographic source for the information in the list.
+Sources are currently only rendered in metanorma-plateau</a:documentation>
+        </ref>
+      </zeroOrMore>
     </define>
     <define name="OlBody">
       <optional>
@@ -136,6 +142,12 @@ the type attribute defaults to `review` for reviews</a:documentation>
       <zeroOrMore>
         <ref name="note">
           <a:documentation>Notes whose scope is the current block</a:documentation>
+        </ref>
+      </zeroOrMore>
+      <zeroOrMore>
+        <ref name="source">
+          <a:documentation>Bibliographic source for the information in the list.
+Sources are currently only rendered in metanorma-plateau</a:documentation>
         </ref>
       </zeroOrMore>
     </define>
@@ -184,6 +196,12 @@ the type attribute defaults to `review` for reviews</a:documentation>
       <zeroOrMore>
         <ref name="note">
           <a:documentation>Notes whose scope is the current block</a:documentation>
+        </ref>
+      </zeroOrMore>
+      <zeroOrMore>
+        <ref name="source">
+          <a:documentation>Bibliographic source for the information in the list.
+Sources are currently only rendered in metanorma-plateau</a:documentation>
         </ref>
       </zeroOrMore>
     </define>
@@ -868,6 +886,14 @@ titlecase, or lowercase</a:documentation>
         </choice>
       </oneOrMore>
     </element>
+  </define>
+  <define name="ParagraphFnBody" combine="interleave">
+    <zeroOrMore>
+      <ref name="source">
+        <a:documentation>Bibliographic source for the information in the paragraph
+parargaph sources are currently only rendered in metanorma-plateau</a:documentation>
+      </ref>
+    </zeroOrMore>
   </define>
   <define name="BasicBlock" combine="choice">
     <ref name="columnbreak"/>

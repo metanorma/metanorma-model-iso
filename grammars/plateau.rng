@@ -4,56 +4,7 @@
     <!--
       include "relaton-jis.rnc" { } 
       jis.rnc already includes relaton-jis.rnc, if we have distinct metadata, will need to abstract jis-compile.rnc
-      
     -->
-    <define name="ParagraphFnBody">
-      <zeroOrMore>
-        <choice>
-          <ref name="TextElement"/>
-          <ref name="fn"/>
-        </choice>
-      </zeroOrMore>
-      <zeroOrMore>
-        <ref name="note"/>
-      </zeroOrMore>
-      <zeroOrMore>
-        <ref name="source"/>
-      </zeroOrMore>
-    </define>
-    <define name="UlBody">
-      <oneOrMore>
-        <ref name="li"/>
-      </oneOrMore>
-      <zeroOrMore>
-        <ref name="note"/>
-      </zeroOrMore>
-      <zeroOrMore>
-        <ref name="source"/>
-      </zeroOrMore>
-    </define>
-    <define name="OlBody">
-      <oneOrMore>
-        <ref name="li"/>
-      </oneOrMore>
-      <zeroOrMore>
-        <ref name="note"/>
-      </zeroOrMore>
-      <zeroOrMore>
-        <ref name="source"/>
-      </zeroOrMore>
-    </define>
-    <define name="DlBody">
-      <oneOrMore>
-        <ref name="dt"/>
-        <ref name="dd"/>
-      </oneOrMore>
-      <zeroOrMore>
-        <ref name="note"/>
-      </zeroOrMore>
-      <zeroOrMore>
-        <ref name="source"/>
-      </zeroOrMore>
-    </define>
     <define name="TableBody">
       <optional>
         <ref name="colgroup">
@@ -93,7 +44,7 @@
           <a:documentation>Examples specific to this block</a:documentation>
         </ref>
       </zeroOrMore>
-      <ref name="TermSource">
+      <ref name="BlockSource">
         <a:documentation>A source for the table</a:documentation>
       </ref>
     </define>
