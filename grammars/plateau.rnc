@@ -2,18 +2,6 @@ include "jis.rnc" {
 
 # include "relaton-jis.rnc" { } 
 # jis.rnc already includes relaton-jis.rnc, if we have distinct metadata, will need to abstract jis-compile.rnc
-#
-ParagraphFnBody =
-   ( TextElement | fn )*, note*, source*
-
-UlBody =
-    li+, note*, source*
-
-OlBody =
-    li+, note*, source*
-
-DlBody =
-    (dt, dd)+, note*, source*
 
 TableBody =
     ## The widths of the columns in the table
@@ -33,7 +21,7 @@ TableBody =
     ## Examples specific to this block
     example*,
     ## A source for the table
-    TermSource
+    BlockSource
 
 
 }

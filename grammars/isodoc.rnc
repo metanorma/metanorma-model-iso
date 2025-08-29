@@ -91,7 +91,10 @@ UlBody =
     ## List items
     ul_li+,
     ## Notes whose scope is the current block
-    note*
+    note*,
+    ## Bibliographic source for the information in the list.
+    ## Sources are currently only rendered in metanorma-plateau
+    source*
 
 OlBody =
     ## Caption of list
@@ -99,7 +102,10 @@ OlBody =
     ## List items
     li+,
     ## Notes whose scope is the current block
-    note*
+    note*,
+    ## Bibliographic source for the information in the list.
+    ## Sources are currently only rendered in metanorma-plateau
+    source*
 
 ## NOTE: `start` attribute is not included by default, because of problems it raises with DOC output
 OlAttributes =
@@ -124,7 +130,10 @@ DlBody =
       dd
     )+,
     ## Notes whose scope is the current block
-    note*
+    note*,
+    ## Bibliographic source for the information in the list.
+    ## Sources are currently only rendered in metanorma-plateau
+    source*
 
 dt =
   element dt { 
@@ -467,6 +476,11 @@ image |=
   element svg {
      ( text | AnyElement )+
 }
+
+ParagraphFnBody &= 
+        ## Bibliographic source for the information in the paragraph
+        ## parargaph sources are currently only rendered in metanorma-plateau
+        source*
 
 BasicBlock |= columnbreak
 
