@@ -331,11 +331,13 @@ XrefBody =
 
 # end overrides
 
-FnAttributes &=
+FnAttributes =
     RequiredId,
     ## If true, number the footnote as normal, but suppress display of the footnote reference in the document body.
     ## This is done if the footnote reference is already presented in some other form, e.g. within a figure image.
     attribute hiddenref { xsd:boolean }?
+    ## The number of the footnote, used to identify it visually
+    attribute reference { text }
 
 TdAttributes &=
   RequiredId,

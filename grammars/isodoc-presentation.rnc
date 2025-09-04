@@ -17,6 +17,15 @@ misccontainer = element metanorma-extension {
 ## This is done by normalising illegal characters, and converting Unicode non-Ascii characters to escaped values.
 IdRefType = xsd:IDREF
 
+FnAttributes =
+    RequiredId,
+    ## If true, number the footnote as normal, but suppress display of the footnote reference in the document body.
+    ## This is done if the footnote reference is already presented in some other form, e.g. within a figure image.
+    attribute hiddenref { xsd:boolean }?
+    ## The number of the footnote, used to identify it visually: omitted if this is a footnote specific to Semantic XML
+    ## content, which is excluded from numbering and display, and replicated elsewhere in the Presentation XML
+    attribute reference { text }?
+
 ## Asset captions are transformed in the same way as section-title; see documentation there
 ## (with fmt-name replacing fmt-title as the Presentation XML-specific caption of a block).
 ## The following additional provisos apply:
