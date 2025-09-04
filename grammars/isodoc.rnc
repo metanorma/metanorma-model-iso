@@ -257,11 +257,7 @@ references =
     section-title?,
     ## Prefatory text
     BasicBlock*,
-    (
-      ## Bibliographic item cited in the document
-      doc_bibitem,
-      ## Annotation of the bibliographic item
-      note*)*,
+    ReferenceEntry*,
     ## Recursive references section
     references*
 }
@@ -458,6 +454,13 @@ OptionalId &=
 
 ## The force of a clause in a standard document: whether it has normative or informative effect
 ObligationType = "normative" | "informative"
+
+## Entry in bibliography
+ReferenceEntry =
+      ## Bibliographic item cited in the document
+      doc_bibitem,
+      ## Annotation of the bibliographic item
+      note*
 
 ## Standardisation document representation of bibliographic entry
 doc_bibitem =

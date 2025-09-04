@@ -453,14 +453,7 @@ normative or informative references, some split references into sections organiz
           </ref>
         </zeroOrMore>
         <zeroOrMore>
-          <ref name="doc_bibitem">
-            <a:documentation>Bibliographic item cited in the document</a:documentation>
-          </ref>
-          <zeroOrMore>
-            <ref name="note">
-              <a:documentation>Annotation of the bibliographic item</a:documentation>
-            </ref>
-          </zeroOrMore>
+          <ref name="ReferenceEntry"/>
         </zeroOrMore>
         <zeroOrMore>
           <ref name="references">
@@ -850,6 +843,17 @@ titlecase, or lowercase</a:documentation>
       <value>normative</value>
       <value>informative</value>
     </choice>
+  </define>
+  <define name="ReferenceEntry">
+    <a:documentation>Entry in bibliography</a:documentation>
+    <ref name="doc_bibitem">
+      <a:documentation>Bibliographic item cited in the document</a:documentation>
+    </ref>
+    <zeroOrMore>
+      <ref name="note">
+        <a:documentation>Annotation of the bibliographic item</a:documentation>
+      </ref>
+    </zeroOrMore>
   </define>
   <define name="doc_bibitem">
     <a:documentation>Standardisation document representation of bibliographic entry</a:documentation>

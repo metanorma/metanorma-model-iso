@@ -100,6 +100,29 @@ quote-source =
 quote-author =
   element author { text }
 
+## The only elements of doc_bibitem expected to be rendered are formattedref (the reference itself) and biblio-tag
+## (the initial tag identifying the reference in the hanging indent.)
+##  
+## All bibliographic entries are rendered through relaton-render, which applies the Metanorma flavour's
+## citation stylesheet to populate bibitem/formattedref, according to bibitem/@type. (Different bibliographic types
+## have different rendering templates.) Do not populate formattedref if it is already supplied, and there is no title
+## (to indicate that there is semantic information present: i.e. formattedref is supplied, and cannot be overwritten
+## based on semantic elements). If populating formattedref, strip most other semantic element of bibitem as no longer
+## relevant; by default, retain docidentifier, uri, note, biblio-tag.
+## If bibitem/@suppress_identifier = true, all bibitem/docidentifier are stripped prior to rendering.
+## If bibitem/@type is empty, set it to "standard".
+## If bibitem belongs to a class of implicit references defined for the flavour (e.g. IEV references for ISO),
+## mark it as @hidden = true.
+## If bibitem belongs to a bibliography (informative references), by default we assume it to be numbered:
+## if it is, insert <docidentifier type = 'metanorma-ordinal'>[{ordinal number}]</docidentifier> to provide the number,
+## and renumber all such references from 1.
+ReferenceEntry =
+      biblio-tag?,
+      ## Bibliographic item cited in the document
+      doc_bibitem,
+      ## Annotation of the bibliographic item
+      note*
+
 ## Move svg to image/svg, for consistency.
 ## If image contains Data URI-encoded SVG, make it image/svg with explicit SVG markup.
 ## If the image is EPS, convert it to SVG.
@@ -811,24 +834,6 @@ fmt-stem = element fmt-stem { TextElement+ }
 ReferencesAttributes &=
     attribute hidden { xsd:boolean }?
 
-## The only elements of doc_bibitem expected to be rendered are formattedref (the reference itself) and biblio-tag
-## (the initial tag identifying the reference in the hanging indent.)
-## 
-## All bibliographic entries are rendered through relaton-render, which applies the Metanorma flavour's
-## citation stylesheet to populate bibitem/formattedref, according to bibitem/@type. (Different bibliographic types
-## have different rendering templates.) Do not populate formattedref if it is already supplied, and there is no title
-## (to indicate that there is semantic information present: i.e. formattedref is supplied, and cannot be overwritten
-## based on semantic elements). If populating formattedref, strip most other semantic element of bibitem as no longer
-## relevant; by default, retain docidentifier, uri, note, biblio-tag.
-## If bibitem/@suppress_identifier = true, all bibitem/docidentifier are stripped prior to rendering.
-## If bibitem/@type is empty, set it to "standard".
-## If bibitem belongs to a class of implicit references defined for the flavour (e.g. IEV references for ISO),
-## mark it as @hidden = true.
-## If bibitem belongs to a bibliography (informative references), by default we assume it to be numbered:
-## if it is, insert <docidentifier type = 'metanorma-ordinal'>[{ordinal number}]</docidentifier> to provide the number,
-## and renumber all such references from 1.
-doc_bibitem &= biblio-tag?
-  
 ## Depending on the flavour, the docidentifier type for references is prefixed to the docidentifier contents, as its
 ## publisher indicator, for disambiguation; e.g. 
 ##    <docidentifier type="IETF">I.-D. Arthur</docidentifier>
