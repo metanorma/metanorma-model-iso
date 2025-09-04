@@ -116,13 +116,18 @@ quote-author =
 ## If bibitem belongs to a bibliography (informative references), by default we assume it to be numbered:
 ## if it is, insert <docidentifier type = 'metanorma-ordinal'>[{ordinal number}]</docidentifier> to provide the number,
 ## and renumber all such references from 1.
-ReferenceEntry =
-      biblio-tag?,
-      ## Bibliographic item cited in the document
-      doc_bibitem,
-      ## Annotation of the bibliographic item
-      note*
-
+## Standardisation document representation of bibliographic entry
+doc_bibitem =
+  element bibitem {
+     RequiredId,
+     ## Suppress from dislay in rendered document
+     attribute hidden { xsd:boolean }?,
+     ## Suppress document identifier from item rendering
+     attribute suppress_identifier { xsd:boolean }?,
+     biblio-tag?
+     ReducedBibliographicItem
+}
+   
 ## Move svg to image/svg, for consistency.
 ## If image contains Data URI-encoded SVG, make it image/svg with explicit SVG markup.
 ## If the image is EPS, convert it to SVG.
