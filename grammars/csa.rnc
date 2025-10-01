@@ -1,4 +1,0 @@
-include "relaton-csa.rnc" {}
-include "isodoc.rnc" {
-
-}
