@@ -21,7 +21,7 @@ FnAttributes =
     RequiredId,
     ## If true, number the footnote as normal, but suppress display of the footnote reference in the document body.
     ## This is done if the footnote reference is already presented in some other form, e.g. within a figure image.
-    attribute hiddenref { xsd:boolean }?
+    attribute hiddenref { xsd:boolean }?,
     ## The number of the footnote, used to identify it visually: omitted if this is a footnote specific to Semantic XML
     ## content, which is excluded from numbering and display, and replicated elsewhere in the Presentation XML
     attribute reference { text }?
@@ -133,7 +133,7 @@ doc_bibitem =
      attribute hidden { xsd:boolean }?,
      ## Suppress document identifier from item rendering
      attribute suppress_identifier { xsd:boolean }?,
-     biblio-tag?
+     biblio-tag?,
      ReducedBibliographicItem
 }
    

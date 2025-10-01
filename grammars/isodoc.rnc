@@ -189,8 +189,19 @@ SourceBody =
 FigureBody =
      ## The caption of the block
      tname?,
-     ## Content of the figure
-     (image | video | audio | pre | paragraph-with-footnote+ | figure*),
+     ## Content of the figure     
+     (
+      ## by default the content of a figure is a media file
+      image | video | audio | 
+      ## figures can contain ASCII art
+      pre | 
+      ## figures can contain discursive art
+      paragraph-with-footnote+ | 
+      ## subfigures, nested directly within a figure
+      figure* |
+       ## Table is understood in this context to be a tabular arrangement of subfigures
+      table
+     ),
      ## Footnotes specific to the figure
      fn*,
      ## An optional definitions list defining any symbols used in the figure
@@ -205,8 +216,19 @@ FigureNoIdBody =
      source?,
      ## The caption of the block
      tname?,
-     ## Content of the figure
-     (image-no-id | video-no-id | audio-no-id | pre-no-id | paragraph-with-footnote-no-id+ | figure-no-id*),
+     ## Content of the figure     
+     (
+      ## by default the content of a figure is a media file
+      image-no-id | video-no-id | audio-no-id |
+      ## figures can contain ASCII art
+      pre-no-id | 
+      ## figures can contain discursive art
+      paragraph-with-footnote-no-id+ |
+      ## subfigures, nested directly within a figure
+      figure-no-id* |
+       ## Table is understood in this context to be a tabular arrangement of subfigures
+      table-no-id
+     ),
      ## Footnotes specific to the figure
      fn*,
      ## An optional definitions list defining any symbols used in the figure
@@ -327,17 +349,17 @@ XrefBody =
      ## The textual content of the element. The `text` is what we wish to show the link as (e.g., the "content" of `<xx>my link text</xx>`)
      element display-text { PureTextElement+ }?
 
-}
-
-# end overrides
-
 FnAttributes =
     RequiredId,
     ## If true, number the footnote as normal, but suppress display of the footnote reference in the document body.
     ## This is done if the footnote reference is already presented in some other form, e.g. within a figure image.
-    attribute hiddenref { xsd:boolean }?
+    attribute hiddenref { xsd:boolean }?,
     ## The number of the footnote, used to identify it visually
     attribute reference { text }
+
+}
+
+# end overrides
 
 TdAttributes &=
   RequiredId,
