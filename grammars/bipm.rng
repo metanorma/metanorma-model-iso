@@ -2,23 +2,6 @@
 <grammar xmlns="http://relaxng.org/ns/structure/1.0" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
   <include href="relaton-bipm.rng"/>
   <include href="isodoc.rng">
-    <define name="XrefAttributes" combine="interleave">
-      <optional>
-        <attribute name="pagenumber">
-          <data type="boolean"/>
-        </attribute>
-      </optional>
-      <optional>
-        <attribute name="nosee">
-          <data type="boolean"/>
-        </attribute>
-      </optional>
-      <optional>
-        <attribute name="nopage">
-          <data type="boolean"/>
-        </attribute>
-      </optional>
-    </define>
     <define name="Clause-Section">
       <ref name="Section-Attributes"/>
       <optional>
@@ -44,17 +27,34 @@
         </zeroOrMore>
       </group>
     </define>
-    <define name="Annex-Section-Attributes" combine="interleave">
-      <optional>
-        <attribute name="unnumbered">
-          <data type="boolean"/>
-        </attribute>
-      </optional>
-    </define>
-    <define name="OlAttributes" combine="interleave">
-      <optional>
-        <attribute name="start"/>
-      </optional>
-    </define>
   </include>
+  <define name="XrefAttributes" combine="interleave">
+    <optional>
+      <attribute name="pagenumber">
+        <data type="boolean"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="nosee">
+        <data type="boolean"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="nopage">
+        <data type="boolean"/>
+      </attribute>
+    </optional>
+  </define>
+  <define name="Annex-Section-Attributes" combine="interleave">
+    <optional>
+      <attribute name="unnumbered">
+        <data type="boolean"/>
+      </attribute>
+    </optional>
+  </define>
+  <define name="OlAttributes" combine="interleave">
+    <optional>
+      <attribute name="start"/>
+    </optional>
+  </define>
 </grammar>

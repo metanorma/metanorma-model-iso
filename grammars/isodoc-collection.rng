@@ -1,19 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <grammar xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0" xmlns="http://relaxng.org/ns/structure/1.0" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
-  <include href="isodoc.rng">
-    <define name="Root-Attributes" combine="choice">
-      <attribute name="document_suffix">
-        <a:documentation>Every document contained in a Metanorma collection has all its anchors and references to anchors
+  <include href="isodoc.rng"/>
+  <define name="Root-Attributes" combine="choice">
+    <attribute name="document_suffix">
+      <a:documentation>Every document contained in a Metanorma collection has all its anchors and references to anchors
 (xsd:ID, xsd:IDREF) suffixed with a unique identifier,
 derived from the document identifier, so that instances of the same anchor in different documents
 are deduplicated within the one document; so if two documents, ISO 1 and ISO 2, are in the collection 
 and each contain the anchor xyz, that anchor is converted to xyz_ISO_1 for ISO 1, and xyz_ISO_2 for ISO 2.
 The anchor suffix used for that document is included at the root of the document, so that it can be
 recovered.</a:documentation>
-        <data type="ID"/>
-      </attribute>
-    </define>
-  </include>
+      <data type="ID"/>
+    </attribute>
+  </define>
   <define name="collection">
     <a:documentation>A collection of Metanorma documnts</a:documentation>
     <element name="collection">

@@ -2,13 +2,6 @@
 <grammar xmlns="http://relaxng.org/ns/structure/1.0" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
   <include href="relaton-nist.rng"/>
   <include href="isodoc.rng">
-    <define name="OlAttributes" combine="interleave">
-      <optional>
-        <attribute name="class">
-          <value>steps</value>
-        </attribute>
-      </optional>
-    </define>
     <!-- TitleType = ( "alternative" | "original" | "unofficial" | "subtitle" | "main" ) -->
     <define name="preface">
       <element name="preface">
@@ -35,6 +28,13 @@
     </define>
   </include>
   <!-- end overrides -->
+  <define name="OlAttributes" combine="interleave">
+    <optional>
+      <attribute name="class">
+        <value>steps</value>
+      </attribute>
+    </optional>
+  </define>
   <define name="errata">
     <element name="errata">
       <oneOrMore>

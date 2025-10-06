@@ -32,7 +32,7 @@ echo "\"metanorma-requirements-models\": \"$var\"," >> ../../versions.json
 cd ../..
 cp metanorma-requirements-models/grammars/reqt.rnc .
 
-for i in ieee iso iec bsi gb mpfa bipm w3c 3gpp cc ietf iho itu m3aawg nist ribose ogc un cen ecma cie iana omg oasis jis etsi plateau ccsds
+for i in ieee iso iec bsi gb mpfa bipm w3c 3gpp cc ietf iho itu m3aawg nist ribose ogc cen ecma cie iana omg oasis jis etsi plateau ccsds
 do
   cd relaton-model-$i/grammars
   git checkout main && git pull
