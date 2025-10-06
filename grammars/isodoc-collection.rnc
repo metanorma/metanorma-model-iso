@@ -1,6 +1,6 @@
 grammar {
 
-include "isodoc.rnc" { 
+include "isodoc.rnc" { }
 
   Root-Attributes |=
     ## Every document contained in a Metanorma collection has all its anchors and references to anchors
@@ -11,7 +11,6 @@ include "isodoc.rnc" {
     ## The anchor suffix used for that document is included at the root of the document, so that it can be
     ## recovered.
     attribute document_suffix { xsd:ID }
-}
 
 ## A collection of Metanorma documnts
 collection = element collection {

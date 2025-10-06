@@ -106,11 +106,11 @@ index = element index {
   index-tertiary
 }
 
-TextElement |= review
-
 }
 
 # end overrides
+
+TextElement |= review
 
 ReviewAttributes &=
   attribute display { text }?

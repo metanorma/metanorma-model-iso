@@ -1,9 +1,6 @@
 include "relaton-itu.rnc" { }
 include "isodoc.rnc" {
 
-OlAttributes &=
-    attribute class { "steps" }?
-
 Clause-Section =
     Section-Attributes,
     attribute type { text }?,
@@ -15,3 +12,6 @@ Clause-Section =
 
 
 }
+
+OlAttributes &=
+    attribute class { "steps" }?

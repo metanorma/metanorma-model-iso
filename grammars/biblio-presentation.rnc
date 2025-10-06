@@ -91,11 +91,6 @@ BibliographicItem =
     validity?,
     depiction?
 
-bDateAttributes |=
-  ## Through i18n, generate a translation of the Semantic date value, with @language set to the current language.
-  ## The Semantic XML value is retained, indicated with @language=""
-  attribute language { LanguageType }?
-
 doctype = element doctype {
   ## Through i18n, generate a translation of the Semantic doctype value, with @language set to the current language.
   ## The Semantic XML value is retained, indicated with @language=""
@@ -157,15 +152,22 @@ localityStack =
      ( locality | text )*
  }
 
-## locality under fmt-xref fmt-eref becomes text; e.g. 
+}
+
+# end overrides
+
+## locality under fmt-xref fmt-eref becomes text; e.g.
 ##     <locality type='clause'><referenceFrom>3.1</referenceFrom></locality>
 ## becomes
 ##     Clause 3.1
-## If eref/@droploc = true, do not insert the locality name. If eref/@case = capital, titlecase it. 
+## If eref/@droploc = true, do not insert the locality name. If eref/@case = capital, titlecase it.
 ## If  eref/@case = lowercase, lowercase it
 locality |= text
 
 
-}
+bDateAttributes |=
+  ## Through i18n, generate a translation of the Semantic date value, with @language set to the current language.
+  ## The Semantic XML value is retained, indicated with @language=""
+  attribute language { LanguageType }?
 
-# end overrides
+

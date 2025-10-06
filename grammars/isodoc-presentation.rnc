@@ -38,11 +38,6 @@ tname =
   fmt-name,
   fmt-xref-label*
 
-BasicBlock |= 
-        ## Bibliographic sources can be rendered as separate blocks in Presentation XML, following the content they relate to
-        ## (e.g. bibliographic sources of paragraphs). This is currently the case only in metanorma-plateau.
-        fmt-source
-
 FormulaBody =
   stem,
   ## Any key in a formula is preceded with a paragraph with the i18n'd word "where", or "where_one" (for singular value).
@@ -250,6 +245,11 @@ annotation-container = element annotation-container { (review, fmt-annotation-bo
 
 }
 # end overrides
+
+BasicBlock |=
+        ## Bibliographic sources can be rendered as separate blocks in Presentation XML, following the content they relate to
+        ## (e.g. bibliographic sources of paragraphs). This is currently the case only in metanorma-plateau.
+        fmt-source
 
 ## A tab or similar spacing; used to delimit clause numbers from clause titles
 tab = element tab { empty }

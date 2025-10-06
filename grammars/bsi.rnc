@@ -1,9 +1,6 @@
 include "relaton-bsi.rnc" { }
 include "isostandard.rnc" {
 
-AdmonitionAttributes &=
-    attribute target { xsd:IDREF }?
-
 Clause-Section =
     Section-Attributes,
     attribute type { text }?,
@@ -53,4 +50,6 @@ floating-section-title =
 
 AdmonitionType |= "commentary"
 
+AdmonitionAttributes &=
+    attribute target { xsd:IDREF }?
 

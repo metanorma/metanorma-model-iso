@@ -1,9 +1,6 @@
 include "relaton-nist.rnc" {}
 include "isodoc.rnc" {
 
-OlAttributes &=
-    attribute class { "steps" }?
-
 # TitleType = ( "alternative" | "original" | "unofficial" | "subtitle" | "main" )
 
 preface =
@@ -14,6 +11,10 @@ preface =
 }
 
 # end overrides
+
+OlAttributes &=
+    attribute class { "steps" }?
+
 
 errata = element errata { erratarow+ }
 
