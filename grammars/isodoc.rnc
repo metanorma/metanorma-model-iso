@@ -494,6 +494,8 @@ doc_bibitem =
      attribute hidden { xsd:boolean }?,
      ## Suppress document identifier from item rendering
      attribute suppress_identifier { xsd:boolean }?,
+     ## Specify language of bibitem, can be used to render it with language-specific bibliographic style
+     LocalizedStringAttributes,
      ReducedBibliographicItem
 }
 
