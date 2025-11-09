@@ -501,6 +501,14 @@ doc_bibitem =
 
 
 image |=
+  element image { 
+    RequiredId,
+    ImageAttributes,
+    ## Allow svg in image/svg, for consistency
+     element svg {
+       ( text | AnyElement )+
+     }?
+} |
   ## Add svg mark up to image
   element svg {
      ( text | AnyElement )+

@@ -903,15 +903,32 @@ titlecase, or lowercase</a:documentation>
     </element>
   </define>
   <define name="image" combine="choice">
-    <element name="svg">
-      <a:documentation>Add svg mark up to image</a:documentation>
-      <oneOrMore>
-        <choice>
-          <text/>
-          <ref name="AnyElement"/>
-        </choice>
-      </oneOrMore>
-    </element>
+    <choice>
+      <element name="image">
+        <ref name="RequiredId"/>
+        <ref name="ImageAttributes"/>
+        <optional>
+          <element name="svg">
+            <a:documentation>Allow svg in image/svg, for consistency</a:documentation>
+            <oneOrMore>
+              <choice>
+                <text/>
+                <ref name="AnyElement"/>
+              </choice>
+            </oneOrMore>
+          </element>
+        </optional>
+      </element>
+      <element name="svg">
+        <a:documentation>Add svg mark up to image</a:documentation>
+        <oneOrMore>
+          <choice>
+            <text/>
+            <ref name="AnyElement"/>
+          </choice>
+        </oneOrMore>
+      </element>
+    </choice>
   </define>
   <define name="ParagraphFnBody" combine="interleave">
     <ref name="BlockSource">
