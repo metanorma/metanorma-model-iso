@@ -159,6 +159,11 @@ generating one document per clause of the original document</a:documentation>
         </attribute>
       </optional>
       <optional>
+        <attribute name="pdf-file">
+          <a:documentation>Output file name of PDF file, to be used in pdf collections</a:documentation>
+        </attribute>
+      </optional>
+      <optional>
         <attribute name="url">
           <a:documentation>URI to be used to reference this file in the document in cross-references, if this is a leaf node. Used in case the url 
 to be used is different from the filename given in fileref, for whatever reason</a:documentation>

@@ -86,6 +86,8 @@ manifest = element entry {
   attribute index { xsd:boolean }?,
   ## File path of the file being described, if this is a leaf node
   attribute fileref { text }?,
+  ## Output file name of PDF file, to be used in pdf collections
+  attribute pdf-file { text }?,
   ## URI to be used to reference this file in the document in cross-references, if this is a leaf node. Used in case the url 
   ## to be used is different from the filename given in fileref, for whatever reason
   attribute url { text }?,

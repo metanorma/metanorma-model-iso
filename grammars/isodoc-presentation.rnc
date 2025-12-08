@@ -477,6 +477,8 @@ fmt-origin = element fmt-origin {
 ## Normalises hyperlink content, appears when eref is converted to citation hyperlink
 fmt-link = element fmt-link {
     HyperlinkAttributes,
+    ## hyperlink is to an attachment of the document
+    attribute attachment { xsd:boolean }?,
     PureTextElement+
 }
 
