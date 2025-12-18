@@ -21,6 +21,7 @@ collection = element collection {
   collection_format*,
   output_folder?,
   coverpage?,
+  coverpage_pdf_portfolio?,
   compile-options?,
   prefatory-content?,
   doc-container+,
@@ -63,6 +64,11 @@ output_folder = element output_folder { text }
 ## that takes the collection manifest as its input. It is intended to provide navigation to the collection contents:
 ## every node of the manifest with entry/@index = true is represented, and 
 coverpage = element coverpage { text }
+
+## The cover page for the PDF portfolio, as a file name. This is is a fallback PDF file,
+## to be rendered if the PDF browser does not support PDF Portfolio, and a PDF Portfolio
+## has been generated
+coverpage_pdf_portfolio = element coverpage-pd-portfolio { text }
 
 ## Metanorma document compilation options applied to the collection
 compile-options = element compile {
