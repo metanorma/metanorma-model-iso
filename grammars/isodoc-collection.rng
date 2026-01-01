@@ -33,6 +33,9 @@ recovered.</a:documentation>
         <ref name="coverpage"/>
       </optional>
       <optional>
+        <ref name="coverpage_pdf_portfolio"/>
+      </optional>
+      <optional>
         <ref name="compile-options"/>
       </optional>
       <optional>
@@ -108,6 +111,14 @@ See https://www.metanorma.org/author/topics/collections/configuration/ </a:docum
 that takes the collection manifest as its input. It is intended to provide navigation to the collection contents:
 every node of the manifest with entry/@index = true is represented, and </a:documentation>
     <element name="coverpage">
+      <text/>
+    </element>
+  </define>
+  <define name="coverpage_pdf_portfolio">
+    <a:documentation>The cover page for the PDF portfolio, as a file name. This is is a fallback PDF file,
+to be rendered if the PDF browser does not support PDF Portfolio, and a PDF Portfolio
+has been generated</a:documentation>
+    <element name="coverpage-pd-portfolio">
       <text/>
     </element>
   </define>

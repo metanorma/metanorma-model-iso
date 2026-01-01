@@ -1429,7 +1429,9 @@ XrefTarget =
     ## Anchor within the document to point to
     attribute target { xsd:string { pattern = "\i\c*|\c+#\c+" }},
     ## Connective linking this location to its predecessor. _from/to_ are presumed to nest more closely than _and_ or _or_
-    attribute connective { XrefConnectiveType }
+    attribute connective { XrefConnectiveType },
+    ## Custom wording for connnective linking this location to its predecessor, custom wording. If provided, is treated as equivalent semantically to connective value
+    attribute custom-connective { text }?
 }
 
 ## Style of how a cross-reference is to be rendered
@@ -1449,6 +1451,8 @@ XrefStyleType =
 erefTypeWithConnective =
     ## Connective linking this location to its predecessor. _from/to_ are presumed to nest more closely than _and_ or _or_
     attribute connective { XrefConnectiveType }?,
+    ## Custom wording for connnective linking this location to its predecessor, custom wording. If provided, is treated as equivalent semantically to connective value
+    attribute custom-connective { text }?,
     erefType
 
 ## Set of cross-references to bibliographic references within a standardisation document, joined with connectives
