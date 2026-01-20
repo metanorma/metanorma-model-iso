@@ -116,8 +116,6 @@ OlAttributes =
 
 DlAttributes =
     BlockAttributes,
-    ## This definition list is the key of a figure or formula
-    attribute key { xsd:boolean }?
 
 DlBody =
     ## Caption of the list
@@ -204,8 +202,8 @@ FigureBody =
      ),
      ## Footnotes specific to the figure
      fn*,
-     ## An optional definitions list defining any symbols used in the figure
-     dl?,
+     ## An key defining any symbols used in the figure
+     key?,
      ## Notes whose scope is the current block
      note*,
      ## A source for the block
@@ -315,7 +313,7 @@ TdBody =
       ## Table cell is a block
       (TextElement | fn )* |
       ## Table cell contains a block
-      (paragraph-with-footnote | dl | ul | ol | figure)+
+      (paragraph-with-footnote | Key | ul | ol | figure)+
     )
 
 ThBody =
@@ -335,6 +333,15 @@ table-note = element note {
     OptionalId,
     paragraph-with-footnote+
 }
+
+## Key to a table, figure, or formula
+Key =
+  element key (
+    ## optional title of key
+    tname?,
+    ## Definition list and/or paragraph content
+    ( dl | p )+
+  )
 
 ## Page break. Only applicable in paged layouts (e.g. PDF, Word), and not flow layouts (e.g. HTML)
 pagebreak = element pagebreak { 
@@ -498,6 +505,14 @@ doc_bibitem =
      LocalizedStringAttributes,
      ReducedBibliographicItem
 }
+
+FormulaBody =
+    ## The content of the formula, as a mathematical expression
+    stem,
+    ## A key defining any symbols used in the formula
+    Key?,
+    ## Notes whose scope is the current block
+    note*
 
 
 image |=
