@@ -21,7 +21,7 @@ grammar {
 
 include "reqt.rnc" { }
 
-include "basicdoc.rnc" { 
+include "basicdoc.rnc" {
 
 ## Block expressing a machine-readable change in a document
 amend = element amend {
@@ -51,8 +51,8 @@ ruby_pronunciation = element ruby-pronunciation {
   ## Ruby annotation value
   attribute value { text },
   LocalizedStringAttributes
-}   
-       
+}
+
 ## Ruby annotation giving information other than pronunciation of text: change tag from BasicDoc for disambiguation
 ruby_annotation = element ruby-annotation {
   ## Ruby annotation value
@@ -70,17 +70,17 @@ annotation =
 ## Title(s) of a clause
 section-title =
   ## Title proper for a clause
-  element title { 
+  element title {
     RequiredId,
-    TextElement* 
+    TextElement*
   },
   ## Alternate title for a clause
-  element variant-title { 
+  element variant-title {
     RequiredId,
-    TypedTitleString 
+    TypedTitleString
   }*
 
-tname = element name { 
+tname = element name {
   RequiredId,
   NestedTextElement+
  }
@@ -115,7 +115,7 @@ OlAttributes =
                        "roman_upper" | "alphabet_upper" ) }?
 
 DlAttributes =
-    BlockAttributes,
+    BlockAttributes
 
 DlBody =
     ## Caption of the list
@@ -134,7 +134,7 @@ DlBody =
     BlockSource
 
 dt =
-  element dt { 
+  element dt {
     ## Optional identifier for definition term (enabling crossreferencing of definitions)
     OptionalId,
     ## Entry being defined in the definition
@@ -187,14 +187,14 @@ SourceBody =
 FigureBody =
      ## The caption of the block
      tname?,
-     ## Content of the figure     
+     ## Content of the figure
      (
       ## by default the content of a figure is a media file
-      image | video | audio | 
+      image | video | audio |
       ## figures can contain ASCII art
-      pre | 
+      pre |
       ## figures can contain discursive art
-      paragraph-with-footnote+ | 
+      paragraph-with-footnote+ |
       ## subfigures, nested directly within a figure
       figure* |
        ## Table is understood in this context to be a tabular arrangement of subfigures
@@ -214,12 +214,12 @@ FigureNoIdBody =
      source?,
      ## The caption of the block
      tname?,
-     ## Content of the figure     
+     ## Content of the figure
      (
       ## by default the content of a figure is a media file
       image-no-id | video-no-id | audio-no-id |
       ## figures can contain ASCII art
-      pre-no-id | 
+      pre-no-id |
       ## figures can contain discursive art
       paragraph-with-footnote-no-id+ |
       ## subfigures, nested directly within a figure
@@ -248,10 +248,10 @@ source = element source {
     modification?
 }
 
-## The computer code or other such text presented in the block, as a single unformatted string. 
+## The computer code or other such text presented in the block, as a single unformatted string.
 ## (The string should be treated as pre-formatted text, with whitespace treated as significant)
 sourcecodebody = element body {
-(   
+(
        text |
        ## Zero or more cross-references; these are intended to be embedded within the content string, and link to annotations
        callout |
@@ -336,15 +336,15 @@ table-note = element note {
 
 ## Key to a table, figure, or formula
 Key =
-  element key (
+  element key {
     ## optional title of key
     tname?,
     ## Definition list and/or paragraph content
     ( dl | p )+
-  )
+  }
 
 ## Page break. Only applicable in paged layouts (e.g. PDF, Word), and not flow layouts (e.g. HTML)
-pagebreak = element pagebreak { 
+pagebreak = element pagebreak {
   ## Orientation of pages in a section of text in paged media following this page break, applicable until the next page break that
   ## gives an explicit page orientation
   attribute orientation { "landscape" | "portrait" }?
@@ -363,6 +363,14 @@ FnAttributes =
     attribute hiddenref { xsd:boolean }?,
     ## The number of the footnote, used to identify it visually
     attribute reference { text }
+
+FormulaBody =
+    ## The content of the formula, as a mathematical expression
+    stem,
+    ## A key defining any symbols used in the formula
+    Key?,
+    ## Notes whose scope is the current block
+    note*
 
 }
 
@@ -477,7 +485,7 @@ RequiredId &=
     ## Sourcing of the current element in an external data model
     attribute source { IdRefType }?
 
-OptionalId &= 
+OptionalId &=
      ##  User-supplied anchor of element; replaced by content-based id, with all references to the anchor updated accordingly
     attribute anchor { text }?,
     ## Sourcing of the current element in an external data model
@@ -506,17 +514,8 @@ doc_bibitem =
      ReducedBibliographicItem
 }
 
-FormulaBody =
-    ## The content of the formula, as a mathematical expression
-    stem,
-    ## A key defining any symbols used in the formula
-    Key?,
-    ## Notes whose scope is the current block
-    note*
-
-
 image |=
-  element image { 
+  element image {
     RequiredId,
     ImageAttributes,
     ## Allow svg in image/svg, for consistency
@@ -529,7 +528,7 @@ image |=
      ( text | AnyElement )+
 }
 
-ParagraphFnBody &= 
+ParagraphFnBody &=
         ## Bibliographic source for the information in the paragraph
         ## parargaph sources are currently only rendered in metanorma-plateau
         BlockSource
@@ -557,13 +556,13 @@ col = element col {
     attribute width { text }
 }
 
-BibItemType |= 
+BibItemType |=
   ## Internal reference (for Metanorma document collections)
   "internal"
 
 TextElement |= concept | add | del | span | erefstack | date_inline
 
-PureTextElement |= passthrough_inline 
+PureTextElement |= passthrough_inline
 
 NestedTextElement |= erefstack
 
@@ -587,7 +586,7 @@ span = element span {
   attribute class { text }?,
   ## CSS style directive for the inline span. Is intended to be the same as HTML style attribute
   attribute style { text }?,
-  ## Character set that the contained text belongs to; 
+  ## Character set that the contained text belongs to;
   ## is used in particular to capture mutually agreed definitions of codepoints in Unicode Private Use Area
   attribute custom-charset { text }?,
   OptionalId,
@@ -621,15 +620,15 @@ concept = element concept {
   element refterm { (PureTextElement|index|index-xref)* }?,
   ## The rendering to be used for the concept
   element renderterm { (PureTextElement|index|index-xref)* }?,
-  ( 
+  (
      ## Link to a definition of the term in a bibliographic entry
-     eref | 
+     eref |
      ## Stack of links to a definition of the term in a bibliographic entry
-     erefstack | 
+     erefstack |
      ## Link to a definition of the term in an element of the current document
-     xref | 
+     xref |
      ## Link to a definition of the term in a termbase
-     termref 
+     termref
   )
 }
 
@@ -804,13 +803,13 @@ standard-document =
 element metanorma {
   Root-Attributes,
   ## Bibliographic description of the document itself, expressed in the Relaton model
-  bibdata, 
+  bibdata,
   ## Source for term definitions in the document
-  termdocsource*, 
+  termdocsource*,
   ## Extension point for extraneous elements that need to be added to standards document as data
-  misccontainer?, 
+  misccontainer?,
   ## Front matter that is repeated at the start of documents issued from an SDO, with content not specific to the document
-  boilerplate?, 
+  boilerplate?,
   DocumentBody,
   ## Annotations to the document
   annotation-container?
@@ -818,15 +817,15 @@ element metanorma {
 
 DocumentBody =
   ## Prefatory sections
-  preface?, 
+  preface?,
   ## Main body of document
-  sections, 
+  sections,
   ## Annex sections
-  annex*, 
+  annex*,
   ## Bibliographic sections
-  bibliography?, 
+  bibliography?,
   ## Index of the document
-  indexsect*, 
+  indexsect*,
   ## Colophon or postface material
   colophon?
 
@@ -855,16 +854,16 @@ executivesummary =
 indexsect = element indexsect { Content-Section }
 
 ## Content addressing legal and licensing concerns around the document, outside of the main flow of document content
-boilerplate = 
-  element boilerplate { 
+boilerplate =
+  element boilerplate {
      ## Preset templated text provided by the standardization body, describing the copyright status of the document
-     copyright-statement?, 
+     copyright-statement?,
      ## Preset templated text provided by the standardization body, providing the licensing terms for the document content
-     license-statement?, 
+     license-statement?,
      ## Preset templated text provided by the standardization body, providing the legal constraints and considerations around use of the document
-     legal-statement?, 
+     legal-statement?,
      ## Preset templated text provided by the standardization body, providing information on where feedback on the document may be addressed to
-     feedback-statement? 
+     feedback-statement?
 }
 
 copyright-statement =
@@ -881,7 +880,7 @@ feedback-statement =
 
 ## One or more definition lists, used to define symbols and abbreviations used in the remainder of the document.
 ## These can also be used as glossaries, with simple definitions, in contrast to the more elaborate definitions given in
-## terms sections 
+## terms sections
 definitions =
   element definitions {
     OptionalId,
@@ -935,9 +934,9 @@ Clause-Section =
     ## Title of section
     section-title?,
     (
-      ( 
+      (
         ## Block content, mutually exclusive  with subclauses
-        BasicBlock+ | 
+        BasicBlock+ |
         ## Specification of machine-readable change outlined in this section,
         ## used in document amendments
         amend
@@ -978,7 +977,7 @@ annex =
   element annex {
         Annex-Section,
         annex-appendix*
-  }       
+  }
 
 ## Appendix, distinct subclause type for annexes (annex to annex, rather than subclause to annex)
 annex-appendix =
@@ -1007,13 +1006,13 @@ term =
     admitted*,
     ## Zero or more names which are deprecated synonyms for the term being defined
     deprecates*,
-    ## Zero or more names which are related to the term being defined. 
+    ## Zero or more names which are related to the term being defined.
     related*,
     ## An optional semantic domain for the term being defined,
     ##  in case the term is ambiguous between several semantic domains
     termdomain?,
     ## Subject of the term
-    termsubject?, 
+    termsubject?,
     ## The definition of the term applied in the current document
     termdefinition+,
     ## Zero or more notes about the term
@@ -1036,15 +1035,15 @@ admitted =
   element admitted { Designation }
 
 ## Term related to the current term
-related = 
+related =
   element related {
     ## Type of relation of term applicable
     attribute type { RelatedTermType },
     ## Preferred designation of the term related to the current term
     element preferred { Designation },
-    ( 
+    (
       ## Link to a definition of the term in a bibliographic entry
-      eref | 
+      eref |
       ## Stack of links to a definition of the term in a bibliographic entry
       erefstack |
       ## Link to a definition of the term in an element of the current document
@@ -1055,7 +1054,7 @@ related =
 }
 
 ## The relation of a term to the current term
-RelatedTermType = 
+RelatedTermType =
   ## The current term deprecates the related term
   "deprecates" |
   ## The current term supersedes the related term
@@ -1079,16 +1078,16 @@ deprecates =
   element deprecates { Designation }
 
 ## A name under which a managed term is known
-Designation = 
+Designation =
   ## Indication that the term designation is missing
   attribute absent { xsd:boolean }?,
   ## The geographic area in which the managed term is known under this designation
   attribute geographic-area { text }?,
   (
     ## Realisation of a designation as a linguistic form
-    expression_designation | 
+    expression_designation |
     ## Realisation of a designation as a letter or symbol
-    letter_symbol_designation | 
+    letter_symbol_designation |
     ## Realisation of a designation as a graphical rendering
     graphical_symbol_designation
   ),
@@ -1108,7 +1107,7 @@ usageinfo =
 ## Designation realised as a letter, symbol, formula, equation
 letter_symbol_designation =
   element letter-symbol {
-    ## Whether the designation is the same across languages, or language-specific   
+    ## Whether the designation is the same across languages, or language-specific
     attribute isInternational { xsd:boolean }?,
     ## Type of symbolic designation
     attribute type { LetterSymbolType }?,
@@ -1117,7 +1116,7 @@ letter_symbol_designation =
   }
 
 ## The type of a symbol-like designation
-LetterSymbolType = 
+LetterSymbolType =
   ## A letter, possibly subscripted or superscripted, intended to denote some property that it abbreviates
   "letter" |
   ## A non-letter, intended to represent some property
@@ -1214,7 +1213,7 @@ GrammarNumber =
   "dual" |
   ## Plural number
   "plural"
-  
+
 termdomain =
   element domain { TextElement+ }
 
@@ -1255,7 +1254,7 @@ nonverbalrep =
 }
 
 termnote =
-  element termnote { 
+  element termnote {
     RequiredId,
     NumberingAttributes,
     BlockAttributes,
@@ -1266,7 +1265,7 @@ termnote =
 }
 
 termexample =
-  element termexample { 
+  element termexample {
     RequiredId,
     BlockAttributes,
     ## Content of the term example
@@ -1359,10 +1358,10 @@ autonumber =
 imagemap = element imagemap {
   BlockAttributes,
   ## the image to be hyperlinked
-  figure, 
+  figure,
   ## Specification of an area of an image to be hyperlinked, as part of an image map
   imagemaparea*
-} 
+}
 
 ## Specification of an area of an image to be hyperlinked, as part of an image map
 imagemaparea =
@@ -1410,10 +1409,10 @@ svg_target =
 ## Unordered list item for standards documents
 ul_li =
   element li {
-    OptionalId, 
-    UlLiAttributes, 
+    OptionalId,
+    UlLiAttributes,
     UlLiBody
-}  
+}
 
 UlLiBody =
     BasicBlock+
