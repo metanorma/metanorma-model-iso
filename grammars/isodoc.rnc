@@ -334,15 +334,6 @@ table-note = element note {
     paragraph-with-footnote+
 }
 
-## Key to a table, figure, or formula
-Key =
-  element key {
-    ## optional title of key
-    tname?,
-    ## Definition list and/or paragraph content
-    ( dl | p )+
-  }
-
 ## Page break. Only applicable in paged layouts (e.g. PDF, Word), and not flow layouts (e.g. HTML)
 pagebreak = element pagebreak {
   ## Orientation of pages in a section of text in paged media following this page break, applicable until the next page break that
@@ -375,6 +366,15 @@ FormulaBody =
 }
 
 # end overrides
+
+## Key to a table, figure, or formula
+Key =
+  element key {
+    ## optional title of key
+    tname?,
+    ## Definition list and/or paragraph content
+    ( dl | p )+
+  }
 
 TdAttributes &=
   RequiredId,
