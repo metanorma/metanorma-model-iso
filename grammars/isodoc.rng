@@ -541,7 +541,7 @@ normative or informative references, some split references into sections organiz
           <choice>
             <a:documentation>Table cell contains a block</a:documentation>
             <ref name="paragraph-with-footnote"/>
-            <ref name="Key"/>
+            <ref name="key"/>
             <ref name="ul"/>
             <ref name="ol"/>
             <ref name="figure"/>
@@ -629,7 +629,7 @@ This is done if the footnote reference is already presented in some other form, 
         <a:documentation>The content of the formula, as a mathematical expression</a:documentation>
       </ref>
       <optional>
-        <ref name="Key">
+        <ref name="key">
           <a:documentation>A key defining any symbols used in the formula</a:documentation>
         </ref>
       </optional>
@@ -641,7 +641,7 @@ This is done if the footnote reference is already presented in some other form, 
     </define>
   </include>
   <!-- end overrides -->
-  <define name="Key">
+  <define name="key">
     <a:documentation>Key to a table, figure, or formula</a:documentation>
     <element name="key">
       <optional>
