@@ -313,7 +313,7 @@ TdBody =
       ## Table cell is a block
       (TextElement | fn )* |
       ## Table cell contains a block
-      (paragraph-with-footnote | Key | ul | ol | figure)+
+      (paragraph-with-footnote | key | ul | ol | figure)+
     )
 
 ThBody =
@@ -359,7 +359,7 @@ FormulaBody =
     ## The content of the formula, as a mathematical expression
     stem,
     ## A key defining any symbols used in the formula
-    Key?,
+    key?,
     ## Notes whose scope is the current block
     note*
 
@@ -368,7 +368,7 @@ FormulaBody =
 # end overrides
 
 ## Key to a table, figure, or formula
-Key =
+key =
   element key {
     ## optional title of key
     tname?,
