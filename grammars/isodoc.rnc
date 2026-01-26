@@ -373,7 +373,7 @@ key =
     ## optional title of key
     tname?,
     ## Definition list and/or paragraph content
-    ( dl | p )+
+    ( dl | paragraph )+
   }
 
 TdAttributes &=

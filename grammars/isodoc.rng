@@ -653,7 +653,7 @@ This is done if the footnote reference is already presented in some other form, 
         <choice>
           <a:documentation>Definition list and/or paragraph content</a:documentation>
           <ref name="dl"/>
-          <ref name="p"/>
+          <ref name="paragraph"/>
         </choice>
       </oneOrMore>
     </element>
