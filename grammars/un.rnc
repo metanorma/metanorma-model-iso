@@ -7,9 +7,6 @@ include "isodoc.rnc" {
     text | em | eref | erefstack | strong | stem | sub | sup | tt |
     strike | smallcap | xref | br | hyperlink | bookmark 
 
-  AdmonitionAttr &=
-      attribute unnumbered { xsd:boolean }?
-
   AdmonitionType =
         "danger" | "caution" | "warning" | "important" | "safety precautions" 
 
@@ -42,10 +39,13 @@ Clause-Section =
        (clause-subsection | terms | definitions | floating-title )*
     )
 
-Annex-Section &=
+}
+
+AdmonitionAttr &=
     attribute unnumbered { xsd:boolean }?
 
-}
+Annex-Section &=
+    attribute unnumbered { xsd:boolean }?
 
 un-standard =
 element un-standard {
