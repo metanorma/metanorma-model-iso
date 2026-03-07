@@ -363,9 +363,50 @@ FormulaBody =
     ## Notes whose scope is the current block
     note*
 
+## Alternative file to use as media
+altsource =
+  element altsource { 
+    MediaAttributes,
+    ## Comma-delimited tag to indicate when the alternate file is to be used, 
+    ## at minimum allows contain `html`, `doc`, `pdf` as the main target formats of Metanorma,
+    ## and `default` for the fallback. The presence of an altsource tagged `default` is required
+    attribute tag { text }?,
+    ## CSS media query to indicate when the alternate file is to be used
+    attribute media { text }?
+  }
+
+## Container for image content
+image = element image {
+    RequiredId,
+    ## When specified along with altsource, ImageAttributes give the default image to be rendered
+    ImageAttributes,
+    ImageBody
+} |
+  ## Add svg mark up to image
+  element svg {
+     ( text | AnyElement )+
+  }
+
+ImageAttributes =
+    ## If the image contains altsource, the media attributes are given on each of the altsource elements instead of the root node
+    MediaAttributes?,
+    MediaAccessibilityAttributes,
+    ## Height of image
+    attribute width { ImageSize }?,
+    ## Width of image
+    attribute height { ImageSize }?
+
 }
 
 # end overrides
+
+ImageBody =
+    ## image can contain SVG XML, which is used to access its identifiers within the Metanorma XML
+    element svg  {
+       ( text | AnyElement )+
+     }?,
+    ## Alternative files to use as media
+    altsource*
 
 ## Key to a table, figure, or formula
 key =
@@ -512,20 +553,6 @@ doc_bibitem =
      ## Specify language of bibitem, can be used to render it with language-specific bibliographic style
      LocalizedStringAttributes,
      ReducedBibliographicItem
-}
-
-image |=
-  element image {
-    RequiredId,
-    ImageAttributes,
-    ## Allow svg in image/svg, for consistency
-     element svg {
-       ( text | AnyElement )+
-     }?
-} |
-  ## Add svg mark up to image
-  element svg {
-     ( text | AnyElement )+
 }
 
 ParagraphFnBody &=
