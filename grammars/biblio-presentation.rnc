@@ -40,7 +40,6 @@ BibDataExtensionType =
   doctype+,
   docsubtype?,
   flavor,
-  editorialgroup?,
   ics*,
   structuredidentifier*
 

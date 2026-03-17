@@ -45,6 +45,10 @@ FormulaBody =
   (p, dl)?,
   note
 
+QuoteAttributes &=
+  ## type of blockquote. If type = newcontent, flags that this is a blockquote rendering amend/newcontent
+  attribute type { text }?
+
 ## Within a figure key, represented as dl, figure footnotes are presented as definition list entries
 ## at the start of the list: dl/dt contains fmt-fn-label, the reference number for the footnote.
 ## dl/dd contains fmt-fn-body, the body of the footnote, excluding fmt-fn-label and its following
@@ -576,7 +580,7 @@ NestedTextElement |= semx
 ## *  Strip autonumber element, strip `amend` wrapper.
 ## * Remove locality, localityStack, classification, contributor.
 ## * Replace the `description`  element with its children.
-## * Replace `newcontent` element with `quote`.
+## * Replace `newcontent` element with `quote[@type = 'newcontent']`.
 amend &= semx
 # semx = BasicBlock*, quote?
 
