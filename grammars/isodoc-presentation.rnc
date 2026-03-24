@@ -66,6 +66,14 @@ OlAttributes =
     attribute type { ( "roman" | "alphabet" | "arabic" |
                        "roman_upper" | "alphabet_upper" ) }?
 
+UlBody &=
+  ## If present, render this to the exclusion of any other child elements. This is to allow different renderings of lists, e.g. as tables
+  fmt-ul?
+
+OlBody &=
+  ## If present, render this to the exclusion of any other child elements. This is to allow different renderings of lists, e.g. as tables
+  fmt-ol?
+
 li =
   element li {
     ## an anchor is set for all //ol//li, because ordered list items can be cross-referenced
@@ -961,5 +969,17 @@ fmt-annotation-end = element fmt-annotation-end {
   ## Optional textual content indicating annotation end; for BSI correction markup, this is an SVG giving the amendment identifier.
   PureTextElement*
 }
+
+    
+## Presentation rendering of an unordered list, if it deviates from a sequence of list elements, e.g. it is a table
+fmt-ul = element fmt-ul {
+  BasicBlock+
+}
+
+## Presentation rendering of an ordered list, if it deviates from a sequence of list elements, e.g. it is a table
+fmt-ol = element fmt-ol {
+  BasicBlock+
+}
+
 
 

@@ -162,6 +162,9 @@ Sources are currently only rendered in metanorma-plateau</a:documentation>
           </choice>
         </attribute>
       </optional>
+      <optional>
+        <ref name="DisplayDirective"/>
+      </optional>
     </define>
     <define name="DlAttributes">
       <ref name="BlockAttributes"/>
@@ -812,6 +815,9 @@ titlecase, or lowercase</a:documentation>
   </define>
   <define name="UlAttributes" combine="interleave">
     <ref name="BlockAttributes"/>
+    <optional>
+      <ref name="DisplayDirective"/>
+    </optional>
   </define>
   <define name="TableAttributes" combine="interleave">
     <optional>
@@ -2783,6 +2789,26 @@ links within an SVG file, so that the SVG file can hyperlink to anchors within t
         <a:documentation>Set the columns display of the current block, overriding the display inherited from the document.
 For example, if the document is set to two-column, this attribute would be used to set the block
 to span across both columns</a:documentation>
+      </attribute>
+    </optional>
+  </define>
+  <define name="DisplayDirective">
+    <a:documentation>Directive on how to render a block in Presentation XML </a:documentation>
+    <optional>
+      <attribute name="display">
+        <a:documentation>Display style for block.
+If the block is `ol` or `ul` and dispay is `table`, 
+the list is to be rendered as a table, with a column for each nested level, and a row for each terminal sublist</a:documentation>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="display-directives">
+        <a:documentation>display-directives is a key-value set of attributes, guiding how the rendering of the block should happen. 
+The key-value set is comma-delimited, and encoded as `key1='value1',key2='value'`, 
+as with stem//mn/@data-metanorma-numberformat
+*  If the block is `ol` or `ul` and dispay is `table`,  display-directives can have the value `colgroup='col1,col2,...coln'`, 
+where each col value is a percentage width of the column in the output table (with no % suffix). 
+e.g. `colgroup='50,33.3,16.7'`  </a:documentation>
       </attribute>
     </optional>
   </define>

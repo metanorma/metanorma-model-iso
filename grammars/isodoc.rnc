@@ -112,7 +112,8 @@ OlAttributes =
     BlockAttributes,
     ## Type of numbering to be applied to the list items
     attribute type { ( "roman" | "alphabet" | "arabic" |
-                       "roman_upper" | "alphabet_upper" ) }?
+                       "roman_upper" | "alphabet_upper" ) }?,
+    DisplayDirective?
 
 DlAttributes =
     BlockAttributes
@@ -456,7 +457,8 @@ erefAttributes &=
     attribute style { text }?
 
 UlAttributes &=
-    BlockAttributes
+    BlockAttributes,
+    DisplayDirective?
 
 TableAttributes &=
     ## Render as a plain attribute, with no shading or borders
@@ -1515,6 +1517,20 @@ BlockAttributes =
     ## For example, if the document is set to two-column, this attribute would be used to set the block
     ## to span across both columns
     attribute columns { text }?
+
+## Directive on how to render a block in Presentation XML 
+DisplayDirective =
+    ## Display style for block.
+    ## If the block is `ol` or `ul` and dispay is `table`, 
+    ## the list is to be rendered as a table, with a column for each nested level, and a row for each terminal sublist
+    attribute display { text }?,
+    ## display-directives is a key-value set of attributes, guiding how the rendering of the block should happen. 
+    ## The key-value set is comma-delimited, and encoded as `key1='value1',key2='value'`, 
+    ## as with stem//mn/@data-metanorma-numberformat
+    ## *  If the block is `ol` or `ul` and dispay is `table`,  display-directives can have the value `colgroup='col1,col2,...coln'`, 
+    ## where each col value is a percentage width of the column in the output table (with no % suffix). 
+    ## e.g. `colgroup='50,33.3,16.7'`  
+    attribute display-directives { text }?
 
 ReferencesAttributes =
     attribute obligation { ObligationType }?,
