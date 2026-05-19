@@ -226,15 +226,17 @@ This is a very long plan. Colleagues — `@ronaldtse`, `@HassanAkbar`, anyone el
 - **`#90` becomes the parent index.** A single coordination comment on `#90` carries the high-level summary and the table of links to phase tickets. Nothing else of substance goes on `#90` itself.
 - **Each phase gets its own ticket** on `metanorma/metanorma-model-iso`, titled `Schema documentation — Phase N: <topic>`. Each phase ticket links back to `#90` in its opening line (`Part of <https://github.com/metanorma/metanorma-model-iso/issues/90>`). The phase tickets themselves are big — they get the **indexed-multi-comment pattern** internally (one short index comment at the top, topical follow-up comments below), same legibility fix as before but scoped to one phase.
 
-Phase tickets to raise, with their titles:
+Phase tickets (filed 2026-05-19):
 
-1. **Phase 0a** — `Schema documentation — Phase 0a: setup the documentation pipeline` (assigned `@kwkwan`)
-2. **Phase 0b** — `Schema documentation — Phase 0b: engine validation against real grammars` (assigned `opoudjis`; blocked on 0a)
-3. **Phase 0.5** — `Schema documentation — Phase 0.5: RNC comment conventions spec` (assigned `opoudjis`)
-4. **Phase 1** — `Schema documentation — Phase 1: corpus salvage with anchors baked in` (assigned `opoudjis`)
-5. **Phase 2** — `Schema documentation — Phase 2: gap-fill editorial (open-ended)` (assigned `opoudjis`)
-6. **Phase 3** — `Schema documentation — Phase 3: lutaml-xsd engineering` (assigned `@HassanAkbar`)
-7. **Phase 4** — `Schema documentation — Phase 4: publication and version-aligned hosting` (assigned `opoudjis`)
+1. **Phase 0a** — [#115](https://github.com/metanorma/metanorma-model-iso/issues/115) — `Schema documentation — Phase 0a: setup the documentation pipeline` (assigned `@kwkwan`)
+2. **Phase 0b** — [#116](https://github.com/metanorma/metanorma-model-iso/issues/116) — `Schema documentation — Phase 0b: engine validation against real grammars` (assigned `opoudjis`; blocked on 0a)
+3. **Phase 0.5** — [#117](https://github.com/metanorma/metanorma-model-iso/issues/117) — `Schema documentation — Phase 0.5: RNC comment conventions spec` (assigned `opoudjis`)
+4. **Phase 1** — [#118](https://github.com/metanorma/metanorma-model-iso/issues/118) — `Schema documentation — Phase 1: corpus salvage with anchors baked in` (assigned `opoudjis`)
+5. **Phase 2** — [#119](https://github.com/metanorma/metanorma-model-iso/issues/119) — `Schema documentation — Phase 2: gap-fill editorial (open-ended)` (assigned `opoudjis`)
+6. **Phase 3** — [#120](https://github.com/metanorma/metanorma-model-iso/issues/120) — `Schema documentation — Phase 3: lutaml-xsd engineering` (assigned `@HassanAkbar`)
+7. **Phase 4** — [#121](https://github.com/metanorma/metanorma-model-iso/issues/121) — `Schema documentation — Phase 4: publication and version-aligned hosting` (assigned `opoudjis`)
+
+Coordination comment on the parent ticket: [#90 comment](https://github.com/metanorma/metanorma-model-iso/issues/90#issuecomment-4488258134). All seven phase tickets added to the org-level Metanorma project (project 15) on filing.
 
 Phase 2–4 tickets are raised at the same time as 0a / 0b / 0.5 / 1 even though their substantive work is later — the structure is what's published up front, so colleagues can see the whole shape. Phase 2–4 tickets carry a "blocked on Phase N-1" note at the top until predecessor work completes.
 
@@ -306,7 +308,7 @@ Operational rules for posting (as before):
 
 - write each comment body to a temp file (`/tmp/issue-90-comment-N.md`) and post with `gh issue comment 90 --repo metanorma/metanorma-model-iso -F <file>`. No inline `-b "..."` heredocs; the bilingual content + AsciiDoc-style references would trip shell quoting.
 - Post comments 2–8 in order, capture each comment's URL from the gh response, then back-edit comment 1 (the index) with the actual `#issuecomment-<id>` anchors. `gh issue comment 90 --edit-last` doesn't target an arbitrary comment, so use `gh api repos/metanorma/metanorma-model-iso/issues/comments/<id> -X PATCH -f body=@/tmp/issue-90-index-final.md` to update the index.
-- every comment carries the robot footer (`🤖 Generated with [Claude Code](https://claude.com/claude-code)` on its own line, blank line above).
+- every comment carries the robot footer (`
 - After posting, run `gh project item-add 15 --owner metanorma --url <issue-url>` is **not** needed (it's a comment thread on an existing issue, not a new issue) — the rule scope is issue creation, not commenting.
 - The follow-up comments cross-referencing each Phase-0-surfaced lutaml-side issue (when filed) are separate from this initial plan-record set — they land on `#90` *after* the lutaml-side issues are filed, with each follow-up linking to the relevant lutaml issue.
 
