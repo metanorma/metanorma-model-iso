@@ -1,0 +1,439 @@
+= RNC comment conventions for metanorma-model-iso
+:doctype: article
+:toc: macro
+:source-highlighter: rouge
+
+This document is the contract between the RelaxNG Compact (`.rnc`) grammars in this repository and the tools that consume them — primarily `lutaml/rng` (the parser) and `lutaml/lutaml-xsd` (the documentation pipeline that builds LXR packages and SPAs from the parsed grammars). Both tools must implement the conventions defined here; the grammars in `grammars/*.rnc` must comply with them. The spec is versioned in lockstep with the schemas — bumps move together.
+
+Part of https://github.com/metanorma/metanorma-model-iso/issues/117. Full programme plan: https://github.com/metanorma/metanorma-model-iso/blob/main/plans/Schema-documentation-master-plan.md.
+
+toc::[]
+
+== Why this contract exists
+
+The metanorma-model-iso grammars carry significant documentation content as `##`-prefixed comments (`isodoc.rnc` alone has over 500 such lines). That content needs to flow predictably through three independent tools — the grammar parser, the documentation pipeline, the rendered SPA — without each tool reinventing its own interpretation of how comments work. Without a written contract, three implementations drift apart; with one, they all bend to the same rules.
+
+The audience for this spec is the maintainers of `lutaml/rng` and `lutaml/lutaml-xsd` (who implement the conventions) and the grammar authors in this repository (who write to them). Readers of the rendered SPA see the *output* of these conventions, not the conventions themselves.
+
+== Foundational constraint — native AsciiDoc only
+
+Documentation inside `##` blocks is rendered by `lutaml/lutaml-xsd`'s documentation pipeline, which processes the text as **native AsciiDoc** (the standard syntax recognised by Asciidoctor and equivalent processors). It is **not** processed by metanorma. Authors must therefore stay within native AsciiDoc and avoid any metanorma-flavoured extensions:
+
+* No metanorma-specific block macros (`[bibliography]`, `[appendix]` with metanorma semantics, attribute-rich source-highlighter directives, etc.)
+* No metanorma-specific inline macros, URI schemes, or cross-reference semantics beyond stock AsciiDoc
+* No metanorma-specific include directives or attribute substitutions
+
+If a construct doesn't work with stock Asciidoctor on its own, it doesn't belong inside a `##` block. This applies uniformly to all the constructs described below — coalesced prose, cross-reference directives, worked-example payloads.
+
+This constraint does *not* extend to the per-element AsciiDoc pages elsewhere in `documentation/schemas/<schema>/elements/<name>.adoc`. Those pages live in a different pipeline and may legitimately use richer markup. The constraint is specifically on what the `lutaml/lutaml-xsd` documentation pipeline sees coming out of grammar comments.
+
+== 1. Baseline `##` doc-comments
+
+One or more lines beginning with `##` immediately preceding a `define`, `element`, `attribute`, or `start` are documentation attached to that non-terminal. The convention is already implemented in `lutaml/rng` — see `rnc_parser.rb` lines 27-28 (the `doc_comment` parslet rule), 270 (`define`), 281 (`element`), 382 (`attribute`), 391 (`start`).
+
+[source,rnc]
+.From `grammars/isodoc.rnc` lines 26-32 — `##` on a `define` (attached to `amend`) and on an inner `attribute`-bound element (attached to `autonumber`)
+----
+## Block expressing a machine-readable change in a document
+amend = element amend {
+  BlockAttributes,
+  AmendType,
+  ## Specification of how blocks of a given class should be autonumbered within an AmendBlock newContent element
+  autonumber*
+}
+----
+
+When the parser emits RelaxNG XML (the `.rng` form), each `##` block becomes an `<a:documentation>` element in the RelaxNG annotations namespace, attached to the same non-terminal. The round-trip (RNC → RNG → RNC) is preserved.
+
+== 2. Plain `#` comments are stripped
+
+Lines beginning with `#` (single hash, not double) are deliberately ignored by the parser. The convention reserves `#` for grammar-maintainer annotations that are *not* user-facing documentation — commented-out alternatives, ALERTs to other maintainers, ad-hoc TODOs, design notes.
+
+[source,rnc]
+.From `grammars/isodoc.rnc` line 3 — a maintainer-only ALERT that must not appear in user docs
+----
+# ALERT: cannot have root comments, because of https://github.com/metanorma/metanorma/issues/437
+----
+
+Authors who want a line to appear in documentation use `##`. Authors who want a line discarded by the parser use `#`. The distinction is load-bearing: any tool that silently treats single-`#` lines as documentation breaks this contract.
+
+== 3. Coalescing across multiple `##` lines
+
+Adjacent `##` lines coalesce into one documentation block attached to the next non-terminal. The block's body is native AsciiDoc (per the foundational constraint above) — line breaks, paragraph breaks, lists, and inline markup (`*bold*`, `_italic_`, `\`code\``, cross-references) are all rendered by the documentation pipeline.
+
+**Boundary rule.** Coalescing continues as long as each subsequent line begins with `##` (possibly followed by whitespace and content, possibly empty). A line that does not begin with `##` ends the block. The next non-terminal definition is what the coalesced block attaches to — that definition can be a `define`, `element`, `attribute`, or `start`. Comments that fall through to no following definition are dropped.
+
+The three subcases below are *all* valid and produce different rendered output.
+
+=== 3a. Adjacent `##` lines — a single paragraph
+
+The simplest case: each `##` line is one prose line, all rendered as one paragraph.
+
+[source,rnc]
+.From `grammars/isodoc.rnc` lines 34-37 — three adjacent `##` lines coalescing into a single paragraph on `IdRefType`
+----
+## Cross-references are not normalised to xsd:IDREF in Semantic XML: that is deferred to Presentation XML.
+## All IdRefType instances point not to `@id` in Semantic XML, which is the Content GUID for an element,
+## but to `@anchor`, the user-supplied cross-reference
+IdRefType = text
+----
+
+=== 3b. Multiple paragraphs — blank `##` lines as paragraph separators
+
+A `##` line with no content (or only whitespace after `##`) is *still part of the block* — it does not end coalescing — but it renders as a paragraph break in the AsciiDoc output. Use this to split long discussions into readable paragraphs without losing the attachment to the non-terminal.
+
+[source,rnc]
+.From `grammars/isodoc-presentation.rnc` lines 204-211 — three paragraphs separated by blank `##` lines, all attached to `section-title`
+----
+## The user-supplied Semantic XML title (if any) is given a unique ID number for cross-referencing.
+##
+## It is followed by a Presentation XML-specific fmt-title, which is derived from the Semantic XML title,
+## and adds to it autonumbering. fmt-title indexes the title it is derived from.
+## Titles missing in the Semantic XML for forewords and definitions are populated here.
+##
+## The default cross-reference text for the clause is then given
+section-title =
+  element title {
+    attribute id { xsd:ID },
+    ...
+  }
+----
+
+The rendered output is three paragraphs, one block attached to `section-title`. Distinguish this carefully from the case where a genuinely *empty* line (no `##` at all) appears — that ends the block and resets coalescing.
+
+=== 3c. Lists and other AsciiDoc block content
+
+Because the body of a coalesced block is native AsciiDoc, any AsciiDoc block-level syntax is valid inside it — bulleted lists (lines beginning `* `), numbered lists (`. `), description lists (`term::`), nested lists (with indentation), tables, and source-code spans. The parser strips the leading `## ` and the remaining content is fed to the AsciiDoc renderer as-is.
+
+[source,rnc]
+.From `grammars/isodoc-presentation.rnc` lines 6-10 — an introductory line followed by a bulleted list with a continuation, all one block on `misccontainer`
+----
+## In addition to the new elements added to metanorma-extension:
+## * Add <presentation-metadata><name>fonts</name><value>{..}</value></presentation-metadata> for every font required for Fontist.
+## * Add <presentation-metadata><name>font-license-agreement</name><value>{..}</value></presentation-metadata> for
+##   any needed license agreement language.
+## * Extract any attachments into an _{output filename}_attachments folder, to be linked to in HTML.
+misccontainer = element metanorma-extension {
+  AnyElement+,
+  (ext_toc+ & localized-strings & source-highlighter-css)
+}
+----
+
+Note line 9 (`##   any needed license agreement language.`) — three spaces of indentation after the `## ` mark a list-item continuation in AsciiDoc, attaching that text to the preceding bullet rather than starting a new one. Indentation inside the coalesced block is preserved verbatim after the leading `## ` is stripped. The same mechanism supports nested lists, multi-paragraph list items, and code blocks within the documentation.
+
+== 4. Cross-reference directives — `@see` and `@see-also`
+
+A grammar author can declare prose cross-references from a non-terminal's documentation into other parts of the documentation surface. Two directives are defined; both live in the reserved `## @*` directive namespace (see section 6).
+
+`## @see <<anchor>>`:: A *primary* cross-reference. Used at most once per non-terminal. The SPA renders this as the primary "Discussion" link from the element panel.
+
+`## @see-also <<anchor>>`:: A *secondary* cross-reference. Used zero or more times per non-terminal, on separate lines. The SPA renders these as "See also" entries in the element panel, merged with prose-declared cross-references on the corresponding per-element AsciiDoc page.
+
+Both directives reference anchors that resolve at SPA-composition time against the resolution rule in section 4b. An unresolved anchor in either directive is an error.
+
+=== 4a. Targets are abstract anchor names, not physical locations
+
+`<<X>>` in a `@see` or `@see-also` directive names an abstract documentation target, not a physical file. The target's location follows from the *kind* of anchor.
+
+The two documentation surfaces — the SPA generated by `lutaml/lutaml-xsd` and the prose corpus authored at `documentation/...` — are kept in alignment by a convention: every grammar non-terminal has a prose page at `documentation/schemas/<schema>/elements/<name>.adoc` carrying `[#<name>]`, and a SPA panel at URL fragment `#define-<name>`. The two surfaces are two views of the same anchor. The same alignment-by-name pattern applies to common attributes and named groups, which live in their own prose subtrees (`attributes/`, `groups/`) and have corresponding SPA panels — though the *anchor IDs* the prose author picks inside those files are at the author's discretion (see section 7).
+
+Cross-cutting chapter content and inline concepts live *only* in the prose corpus — there's no SPA equivalent of a cross-cutting chapter. The resolution rule in section 4b handles both cases: bare anchors that don't match a grammar non-terminal fall through to the prose, finding the chapter / concept / arbitrary anchor wherever the author placed it.
+
+=== 4b. Resolution rule
+
+At SPA-composition time the resolver translates an anchor name in a `<<...>>` reference into a concrete link. The resolution order is fixed:
+
+1. **Bare anchor `<<foo>>`** (no colon, no namespace marker): the resolver applies a two-step fallback.
+   a. Search across all grammar non-terminals in the LXR package. If a `define` (or `element` / `attribute` declared at top level) with that name exists, resolve to that non-terminal. Both documentation surfaces — the SPA panel and the per-element prose page — exist by the alignment contract.
+   b. If no grammar match, search the AsciiDoc anchor namespace across all prose files under `documentation/` for `[#foo]`. If a match exists, resolve to that prose location.
+   c. If neither, error: unresolved reference.
+
+2. **`<<doc:foo>>`** (single reserved namespace marker): the resolver searches **only** the prose, never falls through to the grammar.
+   a. Try `[#doc:foo]` literal first.
+   b. If not found, try `[#foo]` — the bare-name fallback, so prose authors who prefer unprefixed anchor IDs in their own writing don't have to change their conventions.
+   c. If neither, error: unresolved reference in the doc namespace.
+
+3. **Any other prefix-with-colon `<<other:foo>>`**: unknown namespace, error. Only `doc:` is recognised; this prevents typos like `<<dco:foo>>` from falling through silently into the bare-slug branch.
+
+Authors use `<<doc:foo>>` only when they need to force prose-only resolution — typically because a bare-named prose anchor accidentally collides with a grammar non-terminal of the same name. In well-disciplined doc, the bare-anchor form is sufficient.
+
+=== 4c. Why `doc:`, not `doc-`
+
+The namespace marker uses a colon, not a hyphen, for a structural reason rather than a stylistic one. RelaxNG non-terminal names are **NCNames** — the "NC" stands for **Non-Colonized**, because colons are reserved in XML / RelaxNG for namespace-prefix separators on qualified names. An RNC source line like `doc:foo = ...` would not declare a local non-terminal — it would be parsed as a qname referencing a foreign namespace. The local-name space and the colon-bearing name space are disjoint at the grammar-syntax level.
+
+The practical consequence is that the resolution rule's reserved marker (`doc:`) **cannot collide** with any local non-terminal in any current or future RNC grammar. No build check is needed; no audit is needed; the disjointness is guaranteed by the grammar formalism itself. The hyphen alternative (`doc-`) would have required a build check, because `doc-something` *is* a valid NCName — and an audit at the time of writing showed `doc-container` already exists in `grammars/isodoc-collection.rnc`, which would have forced either a grammar rename or an awkward exception. The colon escapes that entire class of problems.
+
+AsciiDoc anchor IDs permit colons by spec; URL fragments containing colons are RFC-3986-legal. A minor footnote for CSS authors: a selector targeting `[#doc:foo]` needs backslash-escaping (`#doc\:foo`) because `:` would otherwise be parsed as a pseudo-class. That's a CSS-side concern, not a user-facing concern.
+
+=== 4d. Authoring guidance
+
+As a grammar author writing a `@see` or `@see-also` directive, choose the anchor name based on **what you mean to refer to**:
+
+* To refer to another non-terminal's documentation, or to a prose-only anchor whose name doesn't collide with any grammar non-terminal, use the bare form `<<name>>`. The resolver finds the right surface.
+* To refer to a prose anchor whose name happens to collide with a grammar non-terminal (rare, generally avoidable), use `<<doc:name>>` to force prose resolution.
+
+Prose authors writing `documentation/...` files have no obligation to use any prefix or naming scheme — they can write `[#amendments]`, `[#ontology-relations]`, `[#chapter-foo]`, or whatever fits their writing. The resolver doesn't impose conventions on the prose corpus.
+
+=== 4e. Worked example
+
+[source,rnc]
+.Synthetic example — these directives are not yet present in the grammars at the time of writing; this illustrates intended usage with real non-terminal names
+----
+## Block expressing a machine-readable change in a document
+## @see <<amendments>>
+## @see-also <<amend-content>>
+## @see-also <<autonumber>>
+amend = element amend {
+  BlockAttributes,
+  AmendType,
+  autonumber*
+}
+----
+
+The three references resolve as follows:
+
+* `<<amendments>>`: bare anchor. Grammar lookup finds no `amendments` non-terminal, so the resolver falls through to the prose. If a chapter page anywhere under `documentation/` carries `[#amendments]`, that's the target.
+* `<<amend-content>>`: bare anchor. Grammar lookup finds a non-terminal `amend-content`, so the SPA renders a "See also" entry that navigates to its element panel.
+* `<<autonumber>>`: same — bare anchor, grammar non-terminal exists, resolves to the `autonumber` panel.
+
+A `<<doc:amend>>` form would appear only if some prose page genuinely has an `[#amend]` anchor that's distinct from the grammar non-terminal `amend` and the author wants to force the prose target — an authoring corner case, not the common path.
+
+== 5. Worked-example directive — `@example` / `@endexample`
+
+Worked XML usage examples attached to a non-terminal are delimited by a paired directive. Indented examples in `##` prose text (as currently appears in some places) work *only* because AsciiDoc happens to render indentation as a code block — that's fragile, has no language metadata, and collides with prose paragraphs or list continuations that happen to indent. The explicit directive replaces it.
+
+[source,rnc]
+.Synthetic example — illustrates the directive shape with two examples on the same non-terminal
+----
+## Block expressing a machine-readable change in a document
+## @example xml
+##   <amend id="a01">
+##     <description>
+##       <p>The numbering of clause 4.2 is corrected from "(a)" to "(b)".</p>
+##     </description>
+##   </amend>
+## @endexample
+## @example xml
+##   <amend id="a02" change="add">
+##     <description>
+##       <p>A new normative reference to ISO 5807 is added.</p>
+##     </description>
+##     <newcontent>
+##       <eref bibitemid="iso5807"/>
+##     </newcontent>
+##   </amend>
+## @endexample
+amend = element amend {
+  BlockAttributes,
+  AmendType,
+  autonumber*
+}
+----
+
+The SPA renders both examples in source order, each in its own panel with the `xml` language tag highlighting. A non-terminal with N examples gets N rendered panels — useful for illustrating different cases (a deletion, an addition, a re-ordering) without forcing one example to carry everything.
+
+Rules:
+
+* `## @example` opens. An optional language tag — `## @example xml`, `## @example json`, `## @example adoc` — selects the syntax highlighting for the rendered example. Default is `xml`.
+* Lines between `@example` and `@endexample` are example content. The parser strips the leading `## ` (the two hashes plus one space) and preserves the remaining characters verbatim, including indentation.
+* `## @endexample` closes.
+* Multiple `@example` / `@endexample` pairs per non-terminal are permitted and rendered in source order.
+* Nesting is prohibited. An `@example` line inside an open `@example` block is a parse error.
+
+The SPA renders examples as a discrete panel attached to the element view, separate from the prose discussion — not interleaved with the `##` short-form description. Each example carries the language tag for highlighting.
+
+The directive lives in the comment stream, not in the rendered AsciiDoc body, which means: (a) the parser extracts examples as structured payloads before AsciiDoc rendering touches them; (b) we can attach metadata (the language tag now, future title or caption) without polluting prose markup; (c) AsciiDoc's own block delimiters (`====` for example blocks, `----` for source blocks) remain available for prose-side use in the per-element pages under `documentation/schemas/<schema>/elements/<name>.adoc` without ambiguity.
+
+When the example payload itself contains AsciiDoc — i.e. `@example adoc` — that payload must be native AsciiDoc per the foundational constraint, not metanorma-flavoured.
+
+==== `@example` (in the grammar) vs. `====` (in the prose page) — distinct, non-overlapping uses
+
+The two have different scopes and shouldn't be confused.
+
+The `@example` directive lives inside `##` comments in the grammar source and produces a discrete, separately-rendered panel attached to the non-terminal's element view in the SPA. The example payload is preserved verbatim; the surrounding `##` text is short-form description. The directive is for **schema-level, structurally-locked examples** that travel with the grammar.
+
+The AsciiDoc `====` example block, by contrast, lives in the per-element prose page at `documentation/schemas/<schema>/elements/<name>.adoc` and is rendered as part of the long-form prose flow. It can sit inline between paragraphs, alongside related discussion, with a caption, with cross-references to other prose anchors. The `====` block is for **prose-level, narratively-embedded examples** that belong in the surrounding discussion.
+
+[source,rnc]
+.In the grammar — `@example` carries the schema-locked exemplars
+----
+## Block expressing a machine-readable change in a document
+## @example xml
+##   <amend id="a01" change="modify">
+##     <description><p>The numbering of clause 4.2 is corrected.</p></description>
+##   </amend>
+## @endexample
+amend = element amend {
+  BlockAttributes,
+  AmendType,
+  autonumber*
+}
+----
+
+[source,asciidoc]
+.In `documentation/schemas/isodoc/elements/amend.adoc` — `====` carries prose-embedded examples
+----
+[#amend]
+= amend
+
+== Concept
+
+An `amend` element marks a discrete, machine-readable change to an
+existing standardisation document. Amendments are typed: the
+`@change` attribute distinguishes addition, deletion, modification,
+and re-ordering.
+
+The canonical structure is illustrated below.
+
+.A modification amendment with explanatory description
+====
+[source,xml]
+----
+<amend id="a01" change="modify">
+  <description>
+    <p>The numbering of clause 4.2 is corrected from "(a)" to "(b)".</p>
+  </description>
+</amend>
+----
+The `<description>` is rendered prominently in the change log; the
+`@change="modify"` value places this amendment under the
+"Modifications" heading rather than under "Additions".
+====
+
+== Model-level discussion
+
+…
+----
+
+Both surfaces end up rendering an XML example, but they serve different reading modes: the SPA panel for `amend` shows the `@example` payload as a small canonical snippet next to the schema structure ("this is what an `amend` looks like"); the prose page shows the `====` block embedded in surrounding explanation ("here's an amendment of the modify type, and here's why the `<description>` matters"). The two complement each other; neither replaces the other.
+
+Authors don't need to keep the two payloads in sync. They're different artefacts targeting different reading modes.
+
+== 6. Reserved directive namespace `## @*`
+
+Any `##` line whose first non-whitespace token after the hashes is `@<keyword>` is reserved for grammar-side directives, not prose. The reservation applies to the *whole* line — even if the rest of the line happens to look like English, a leading `@<keyword>` claims the line as a directive.
+
+Authors who genuinely want a paragraph that starts with `@` use one of:
+
+* a leading space: `## \ @decorator is a Python feature, not a directive` (the parser strips one leading space but keeps the rest)
+* a rephrasing: `## The decorator syntax \`@foo\` is a Python feature`
+
+Current allocations:
+
+`@see`:: primary cross-reference (section 4)
+`@see-also`:: secondary cross-reference, multiple allowed (section 4)
+`@example`:: open worked-example block (section 5)
+`@endexample`:: close worked-example block (section 5)
+
+Future allocations are added through PRs against this document, not invented in-line.
+
+==== Plausible future candidates — flagged, not yet adopted
+
+The following directives have precedent in established documentation systems and could be useful. None is currently committed; they're listed here to reserve the conceptual space and so reviewers don't have to keep re-asking whether to add them.
+
+`@constraint <expression>`:: Machine-readable Schematron-style constraints attached to a non-terminal. Precedent: TEI ODD `<constraintSpec>`. Deferred; see the project plan for the optional-future-avenue discussion.
+
+`@deprecated`:: Marks a non-terminal scheduled for removal. Precedent: JavaDoc `@deprecated`, Doxygen `@deprecated`, Rustdoc `#[deprecated]`, near-universal.
+
+`@since <version>`:: The schema version that introduced the non-terminal. Precedent: JavaDoc `@since`, Doxygen `@since`.
+
+`@gloss <short term>`:: A one-line alternative label, shorter than the `##` description. Useful when the non-terminal name doesn't immediately convey meaning. Precedent: TEI `<gloss>` (alongside `<desc>`).
+
+`@internal`:: Marks a non-terminal as an implementation detail not for external consumers. The SPA could hide `@internal`-tagged non-terminals from the default view. Useful for utility / building-block non-terminals (`PureTextElement`, `LocalizedString`-family) that exist for grammar composition rather than as documentation targets. Precedent: Doxygen `@internal`, Rustdoc `#[doc(hidden)]`.
+
+`@stability stable\|experimental\|frozen\|deprecated`:: Schema-evolution status, richer than a binary `@deprecated`. Distinguishes "experimental, may change" from "frozen at v3, won't be extended" from "canonical and supported". Precedent: Node.js docs stability indicators.
+
+`@altIdent <name>`:: Alternative identifier for the same concept under a different naming convention or in a different flavour. Use case is narrow — most plausibly the ietf-attribute / nist-element surviving exceptions where a non-terminal has a flavour-specific override. Precedent: TEI `<altIdent>`.
+
+==== Considered and not adopted
+
+Directives surveyed against prior art and explicitly **not** added, to close the question:
+
+* `@param`, `@return`, `@throws`, `@exception` (JavaDoc / Doxygen function-doc paradigm) — schema documentation isn't function documentation. Per-attribute documentation lives on the inline `##` attached to each `attribute ...` declaration; no separate directive needed.
+* `@author`, `@version`, `@bug` (Doxygen) — wrong granularity. Authorship and bug-tracking belong at the schema or repo level.
+* `@todo` (Doxygen) — `#` plain comments already serve maintainer TODOs.
+* `@note`, `@warning`, `@important` (Doxygen, AsciiDoc admonitions) — AsciiDoc admonition syntax (`NOTE:`, `WARNING:`, `IMPORTANT:`) works natively inside `##` content; no new directive needed.
+* `@equiv` (TEI cross-schema equivalents) — explicitly out of scope; equivalents to DocBook, JATS, etc. are not maintained in this corpus.
+* `@class`, `@memberOf` (TEI / DocBook element-class membership) — already expressed by the RNG content model and named patterns.
+* `@include <path>` — see appendix A for the rejection.
+
+Reserving the namespace up front prevents future additions from accidentally colliding with paragraphs already written under the assumption that `## @foo …` is just text.
+
+== 7. Anchor naming contract
+
+Documentation references to a non-terminal are identified by the *RelaxNG non-terminal name* (the name to the left of the `=` in the `.rnc` source), not by the XML tag the non-terminal happens to emit. XML tags can be ambiguous — the same tag may be emitted by multiple non-terminals in different contexts — and the non-terminal name disambiguates.
+
+Three anchor derivations are defined for a non-terminal, all keyed on the same name:
+
+[cols="1,2,3"]
+|===
+| Surface | Anchor shape | Example for `amend`
+
+| AsciiDoc prose page (`documentation/schemas/<schema>/elements/<name>.adoc`)
+| `[#<name>]` at the top of the file
+| `[#amend]`
+
+| SPA URL fragment
+| `#define-<name>` in the SPA's URL
+| `…/isodoc.html#define-amend`
+
+| Cross-reference target (`## @see` / `## @see-also` / AsciiDoc `<<...>>`)
+| `<<<name>>>`
+| `<<amend>>`
+|===
+
+The XML tag is *not* the anchor source. In a definition like `amend = element amend { ... }` the non-terminal and the tag happen to share the name, so the distinction is invisible. In a definition like `foo = element bar { ... }`, the anchor is `#foo`, not `#bar`.
+
+=== Documentation surface anchors
+
+The cross-reference directives in section 4 also need to be able to point at documentation targets that are *not* per-non-terminal pages — chapter-level discussions, named concepts, common attributes, named attribute groups. Those targets live in different parts of the AsciiDoc source tree, but the spec **does not impose a prefix convention on them**. Prose authors choose whatever AsciiDoc anchor naming fits their writing.
+
+The four expected non-element documentation target classes — and where they live in the source tree — are:
+
+[cols="1,2"]
+|===
+| Target class | Location in source
+
+| Common attribute documentation
+| `documentation/schemas/<schema>/attributes/<name>.adoc`
+
+| Named attribute group documentation
+| `documentation/schemas/<schema>/groups/<name>.adoc`
+
+| Cross-cutting chapter
+| `documentation/sections/<chapter>.adoc`
+
+| Concept introduced in chapter prose
+| Inline anchor (`[#name]`) inside one of the chapter files
+|===
+
+The anchor IDs used inside these files are up to the prose author — `[#language]` or `[#attr-language]` or `[#the-language-attribute]` are all valid AsciiDoc anchors and all reachable through the resolution rule in section 4b. The spec's only requirement is the `<<doc:foo>>` escape hatch when an unprefixed anchor in the prose accidentally collides with a grammar non-terminal name. In well-disciplined prose authoring — i.e. not deliberately naming a chapter the same as an existing non-terminal — the escape hatch is rarely needed.
+
+=== Anchor stability
+
+Anchor stability is part of the published contract for the documentation pipeline. A non-terminal rename in the grammar invalidates the corresponding URL fragment and AsciiDoc anchor; the rename must be paired with a redirect entry in `documentation/_redirects.adoc` (to be specified separately) so existing external citations don't 404.
+
+== 8. Worked examples in this spec itself
+
+Every directive defined in this document is illustrated either by a real fragment from `grammars/*.rnc` (for conventions already in use — sections 1, 2, 3) or by a synthetic fragment built from real non-terminal names (for conventions introduced by this spec — sections 4, 5). Synthetic fragments are marked as such in the caption.
+
+A grep test against `grammars/` is the integrity check on this spec: any directive defined here should eventually appear in the source. A directive defined in the spec but absent from `grammars/` after a reasonable adoption period is a sign that either the directive isn't being used (and should be removed from the spec) or the grammars are missing usage (and should be patched). The first such grep audit is deferred until after the conventions are implemented in `lutaml/rng` and the spec is reviewed.
+
+[appendix]
+== Appendix A — Considered and rejected: `@include`
+
+An `## @include <path>` directive — which would pull external AsciiDoc content from somewhere under `documentation/` into a non-terminal's `##` stream at parse time — was considered and rejected. The rejection is recorded here so the question doesn't keep getting re-asked.
+
+The motivating use case is single-source authoring: write long-form discussion of a non-terminal once in `documentation/schemas/<schema>/elements/<name>.adoc`, include it from the grammar so the SPA panel can show the long form inline without requiring a click-through to the prose page. This is a legitimate goal.
+
+The reasons against:
+
+. **Inverts the layering.** The clean separation today is: short form lives in the grammar (`##`, the TEI `<desc>` equivalent), long form lives in the prose page (`documentation/schemas/.../elements/<name>.adoc`, the TEI `<remarks>` equivalent), and `@see` links the two. An `@include` directive blurs the short/long boundary and lets the grammar's "comment" balloon to arbitrary length.
+
+. **Adds filesystem awareness to `lutaml/rng`.** The parser today is concerned only with the grammar source. An `@include` directive forces it to resolve paths, read external files, and handle the failure modes that come with that. A reshuffle of the prose tree breaks grammar parsing — the dependency direction inverts.
+
+. **The SPA can achieve the same effect without a grammar-side directive.** Configure the SPA's element-panel component to pull in the prose page (identified by the `@see` or by the alignment contract) at composition time, rendering it inline within the panel. That's a presentation-side decision local to `lutaml/lutaml-xsd`, with no impact on the grammar or the parser. The grammar continues to carry only short-form `##`; the SPA decides whether to render the linked prose inline or behind a click.
+
+. **`@include` is harder to reason about per-non-terminal.** A `##` block is bounded by its surrounding non-terminal context. An `@include`d file isn't — it can contain any AsciiDoc, including its own cross-references, anchors, sub-sections — and reasoning about how those compose with the surrounding `##` content gets complicated quickly.
+
+If a need for `@include` emerges that the SPA-side composition can't satisfy, the question can be revisited. For now, the rule is: short form in grammar, long form in prose, `@see` to link.
