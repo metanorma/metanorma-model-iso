@@ -4,3 +4,4 @@ source "https://rubygems.org"
 
 gem "lutaml"
 gem "lutaml-uml"
+gem "lutaml-xsd"
