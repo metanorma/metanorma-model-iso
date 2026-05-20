@@ -219,6 +219,7 @@ We are not rewriting the RNC grammars as ODD — that's out of scope. We are ado
 
 ## Phasing
 
+<a id="kick-off"></a>
 ### Kick-off — raise a ticket per phase, with `#90` as the parent index (today, before any code)
 
 This is a very long plan. Colleagues — `@ronaldtse`, `@HassanAkbar`, anyone else watching — will refuse to read it as a single wall of text on `#90`, and they shouldn't have to. The plan record is split:
@@ -312,6 +313,7 @@ Operational rules for posting (as before):
 - After posting, run `gh project item-add 15 --owner metanorma --url <issue-url>` is **not** needed (it's a comment thread on an existing issue, not a new issue) — the rule scope is issue creation, not commenting.
 - The follow-up comments cross-referencing each Phase-0-surfaced lutaml-side issue (when filed) are separate from this initial plan-record set — they land on `#90` *after* the lutaml-side issues are filed, with each follow-up linking to the relevant lutaml issue.
 
+<a id="phase-0"></a>
 ### Phase 0a + 0b — setup by @kwkwan, then engine validation by opoudjis
 
 **Reframed after exchange with `@ronaldtse`.** Originally Phase 0 was a single ticket: "user iterates on the engine and files bugs". @ronaldtse pointed out that `@kwkwan` knows how to set the pipeline up (he authored the `metanorma/plateau-iur-schema-browser` exemplar) and is the right person to do the setup for `metanorma-model-iso` before the user-side validation begins. So Phase 0 splits into two tickets, one per person.
@@ -326,9 +328,15 @@ Three components, three maintainers:
 2. `lutaml/rng` — parses RNG/RNC grammars (`@HassanAkbar`)
 3. **Site for documentation** — the integration / config / workflow / hosting layer (`@kwkwan`)
 
-**Phase 0a — setup (assigned to @kwkwan).** Wa sets up the schema-documentation pipeline for `metanorma-model-iso` in the shape his `plateau-iur-schema-browser` exemplar established — `config.yml` with metanorma metadata / namespace mappings / branding, `.github/workflows/deploy.yml` adapted from plateau's, decisions on the three grammars lacking a `*-compile.rnc` at the right documentation scope, decisions on the hosting venue (gh-pages on this repo? separate `metanorma-model-iso-schema-browser` repo? sub-path under metanorma.org?). Delivers via PR with a minimal README explaining how opoudjis runs the pipeline locally. Fallback: opoudjis adapts plateau directly if Wa's plate doesn't fit it.
+<a id="phase-0a"></a>
+#### Phase 0a — setup (assigned to @kwkwan)
 
-**Phase 0b — engine validation (assigned to opoudjis, blocked on 0a).** Once Wa's setup PR lands, opoudjis runs the pipeline against the seven real metanorma-model-iso schema roots — `basicdoc.rnc`, `biblio.rnc` (the cross-grammar-reference canary, referencing `BasicBlockNoId` from `basicdoc.rnc`), `biblio-standoc.rnc`, `biblio-presentation.rnc`, `relaton-iso-compile.rnc` (relaton-flavour exemplar), `isodoc-compile.rnc`, `isodoc-presentation-compile.rnc`. Where the engine struggles, file the resulting issues against `lutaml/rng` or `lutaml/lutaml-xsd` with `@HassanAkbar`. **The strong preference**: the engine bends, not the grammar (see decision point below) — `biblio.rnc` rewrite is mutual-recursion hell and we'd rather wait for the lutaml-side fix.
+Wa sets up the schema-documentation pipeline for `metanorma-model-iso` in the shape his `plateau-iur-schema-browser` exemplar established — `config.yml` with metanorma metadata / namespace mappings / branding, `.github/workflows/deploy.yml` adapted from plateau's, decisions on the three grammars lacking a `*-compile.rnc` at the right documentation scope, decisions on the hosting venue (gh-pages on this repo? separate `metanorma-model-iso-schema-browser` repo? sub-path under metanorma.org?). Delivers via PR with a minimal README explaining how opoudjis runs the pipeline locally. Fallback: opoudjis adapts plateau directly if Wa's plate doesn't fit it.
+
+<a id="phase-0b"></a>
+#### Phase 0b — engine validation (assigned to opoudjis, blocked on 0a)
+
+Once Wa's setup PR lands, opoudjis runs the pipeline against the seven real metanorma-model-iso schema roots — `basicdoc.rnc`, `biblio.rnc` (the cross-grammar-reference canary, referencing `BasicBlockNoId` from `basicdoc.rnc`), `biblio-standoc.rnc`, `biblio-presentation.rnc`, `relaton-iso-compile.rnc` (relaton-flavour exemplar), `isodoc-compile.rnc`, `isodoc-presentation-compile.rnc`. Where the engine struggles, file the resulting issues against `lutaml/rng` or `lutaml/lutaml-xsd` with `@HassanAkbar`. **The strong preference**: the engine bends, not the grammar (see decision point below) — `biblio.rnc` rewrite is mutual-recursion hell and we'd rather wait for the lutaml-side fix.
 
 Steps:
 
@@ -378,6 +386,7 @@ Expected outcomes:
 - Likely case: one or two of the four fail in ways the gem maintainers haven't seen, because they only tested with `iec.rnc`/`bsi.rnc`. Today's value is the bug report, not the SPA.
 - Worst case: all four fail. Phase 1 then waits on lutaml-side fixes before salvage authoring begins.
 
+<a id="phase-0-5"></a>
 ### Phase 0.5 — document the RNC comment conventions (≤ 1 day, after Phase 0)
 
 Goal: lock the RNC comment conventions in writing before Phase 1 authoring touches them, and lock them in a place lutaml/rng and lutaml-xsd can implement against. The conventions have to exist as a contract on paper — not just as ad-hoc behaviour in three tools that drift apart.
@@ -399,6 +408,7 @@ After the spec is written:
 - File a coordination issue on `lutaml/rng` — assigned + reviewed by `@HassanAkbar` — capturing any directives beyond plain `##` that need parser support (`## @see` / `## @see-also` recognition; the reserved-namespace rule). File a parallel issue on `lutaml/lutaml-xsd` for the SPA-side render of the directives.
 - Spec is **versioned with the schemas** (per the version-control section) — bumps in lockstep, anchor stability contract carries.
 
+<a id="phase-1"></a>
 ### Phase 1 — corpus salvage with anchors baked in (1–2 weeks of editorial effort)
 
 Goal: gather the existing scattered prose into a single canonical source tree, organised against the four schemas, **with the cross-link anchors baked into every file as it's written**. No new writing yet — just consolidation. The anchor discipline is a Phase-1 deliverable, not a Phase-2 retrofit: every salvaged section lands with its `[#<name>]` already in place, because retrofitting anchors across hundreds of files later is the kind of churn that just doesn't happen and the cross-link contract erodes silently.
@@ -436,6 +446,7 @@ Goal: gather the existing scattered prose into a single canonical source tree, o
 
 Deliverable: a complete `documentation/` source tree committed to this repo, no new prose yet, just consolidation. PR against `main`. Issue #90 comment narrating what was salvaged from where.
 
+<a id="phase-2"></a>
 ### Phase 2 — gap-filling and authoring (open-ended, multi-month)
 
 Goal: bring the corpus up to coverage. Where Phase 1 left gaps (any element in any of the four schemas without a corresponding prose stanza), write them. Apply the issue-90 layered structure consistently. This is the bulk of the editorial work, and is explicitly open-ended — incremental PRs, no end-date commitment. Anchor discipline carries over from Phase 1 unchanged: any new stub created here lands with its `[#<name>]` anchor and "Schema definition" callout in place at file-creation time. **Phase 2 is the latest acceptable point for cross-links to be present in the prose corpus** — anything later is retrofit territory and degrades.
@@ -455,6 +466,7 @@ Goal: bring the corpus up to coverage. Where Phase 1 left gaps (any element in a
 
 Deliverable: `schemas/` tree populated to whatever coverage threshold the user sets. Iterative PRs.
 
+<a id="phase-3"></a>
 ### Phase 3 — extend lutaml-xsd to consume the corpus + emit bidirectional crosslinks (engineering against `../lutaml-xsd`)
 
 Goal: teach the SPA to (a) render the Track-1 prose alongside the schema nodes, (b) emit stable per-element URL fragments, (c) link out to the narrative document — i.e. the SPA half of the twin-artefact bidirectional contract.
@@ -472,6 +484,7 @@ This is **engineering work in lutaml-xsd**, not in metanorma-model-iso. Coordina
 
 While we're there, raise the **fixture-drift issue** the implementer left behind: `lutaml-xsd/spec/fixtures/metanorma-model-iso-grammars/` should either become a git submodule pointing at this repo, or be reduced to a minimal synthetic grammar suite. The current stale copy is a maintenance trap.
 
+<a id="phase-4"></a>
 ### Phase 4 — publish (deferred until 1–3 are real)
 
 Goal: a hosted URL where developers reading the schemas can land.
