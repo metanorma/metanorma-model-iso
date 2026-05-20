@@ -1,0 +1,13 @@
+= Metanorma XML documentation
+Nick Nicholas, Ribose
+:flavor: ribose
+
+include::sections/00-intro.adoc[]
+include::sections/01-models.adoc[]
+include::sections/02-ontology.adoc[]
+include::sections/03-document.adoc[]
+include::sections/04-metadata.adoc[]
+include::sections/05-section.adoc[]
+include::sections/06-block.adoc[]
+include::sections/07-inline.adoc[]
+include::sections/08-common-attributes.adoc[]

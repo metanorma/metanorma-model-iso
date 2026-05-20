@@ -1,0 +1,12 @@
+[#TermSource]
+= `TermSource`
+:schema: isodoc
+
+// TODO: salvage prose for this non-terminal. The anchor `[#TermSource]`
+// above is the canonical stable ID that grammar `## @see <<TermSource>>`
+// references will resolve to (per documentation/RNC-COMMENT-CONVENTIONS.adoc).
+
+[discrete]
+== Schema definition
+
+See the corresponding SPA panel: link:../../../../isodoc.html#define-TermSource[isodoc.html#define-TermSource]

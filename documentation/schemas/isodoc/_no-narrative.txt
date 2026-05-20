@@ -1,0 +1,12 @@
+# Defines opted out of the per-element prose tree. The cross-link invariant
+# checker (documentation/scripts/check-anchors.rb) skips coverage assertions
+# for any name listed here.
+
+# Case-insensitive-filesystem collision: `TermSource` and `termsource` are
+# distinct defines in isodoc.rnc but cannot coexist as <name>.adoc files on
+# case-insensitive APFS (macOS default). The `TermSource.adoc` file covers
+# both for now; the salvaged prose should explicitly note that `termsource`
+# is the element-form non-terminal that emits the `<source>` XML tag while
+# `TermSource` is the attribute-group named pattern. Resolve by renaming one
+# in a grammar refactor when the time comes.
+termsource

@@ -1,0 +1,41 @@
+= Schema documentation source
+
+This directory holds the authored prose corpus for the schema documentation programme. Full plan: link:../plans/Schema-documentation-master-plan.md[plans/Schema-documentation-master-plan.md]. The corresponding lutaml-xsd Vue SPAs are at <https://metanorma.github.io/metanorma-model-iso/>; the two surfaces are kept in alignment by the bidirectional cross-linking architecture (per the plan).
+
+== Layout
+
+`document.adoc`::
+Master AsciiDoc document that includes every section under `sections/`. The rendered output ships alongside the SPAs as the long-form narrative.
+
+`sections/`::
+Cross-cutting chapters with no per-non-terminal anchor contract (00-intro, 01-models, 02-ontology, 03-document, 04-metadata, 05-section, 06-block, 07-inline, 08-common-attributes). Resurrected from the abandoned April 2025 commits in this repo (`fa72827e`, `f87523e8`, `fefdc23d`) — the originals were never merged, and the source files were deleted from disk after rendering. `01-models.adoc` still treats the document-level flavour schemas as first-class architecture members; that's the bit that needs rewriting now under the four-schema target architecture (the basicdoc / `relaton-*` family treatment in the salvaged file remains correct).
+
+`schemas/<schema>/elements/`::
+Per-non-terminal prose pages. One stub per top-level `define` across the six document-side grammars (basicdoc, biblio, biblio-standoc, biblio-presentation, isodoc, isodoc-presentation). Each carries a `[#<name>]` anchor matching the grammar's non-terminal name verbatim — that's the cross-link contract anchor the SPA's URL fragment `#define-<name>` mirrors. Stubs are TODOs; salvaging the long-form prose into them is the Phase 2 editorial work.
+
+`schemas/<schema>/_no-narrative.txt`::
+Opt-out manifest for defines deliberately not given a stub. Currently used to register the `TermSource` / `termsource` case-collision in `isodoc.rnc` (the two distinct defines alias on case-insensitive filesystems; resolvable by a grammar rename, not blocking Phase 1).
+
+`schemas/<schema>/attributes/`, `schemas/<schema>/groups/`::
+Reserved for the per-attribute and per-named-pattern parallel trees described in the plan. Empty at the time of writing — the elements/attributes/groups split will be applied in a follow-up pass once the SPA's category-discrimination is observable (currently blocked on lutaml/rng#19; see link:../plans/Schema-documentation-master-plan.md#phase-0b-grammar-wrapper-discovery[plan §Phase 0b discovery]).
+
+`plantuml/`::
+Rendered PlantUML diagrams from the April 2025 build of `document.adoc` (16 PNGs). The diagram **source** lives inline in the relevant `sections/*.adoc` files (chiefly `01-models.adoc`) — three `[plantuml]` blocks restored from the resurrection — so the PNGs are reproducible by re-rendering `document.adoc`. The pre-rendered PNGs are kept for now as a visual reference until a fresh render is verified equivalent.
+
+`plantuml-src/`::
+Extracted standalone `.puml` source files, if any — currently empty (the source lives inline in the sections, not as standalone files).
+
+`scripts/generate-element-stubs.rb`::
+Walks each of the six document-side grammars and emits a stub `<name>.adoc` for every top-level define that doesn't already have one. Idempotent; re-run after grammar changes to fill in new stubs without overwriting existing prose. Currently lumps all defines under `elements/`; the per-category split into `attributes/` and `groups/` is deferred (see above).
+
+`scripts/check-anchors.rb`::
+Cross-link invariant checker. Walks each grammar's top-level defines and the corresponding `schemas/<schema>/elements/` tree; asserts that every define has a matching `[#<name>]`-anchored stub (or an opt-out manifest entry), and every stub corresponds to a real define (or carries an explicit `// orphan:` marker). Exit status 0 on success, 1 on any violation. Will run in CI from Phase 4 onwards; runs locally throughout Phase 2 to catch drift.
+
+`document.{xml,html,pdf,doc,presentation.xml,rxl}`, `*.err.html`, `*.log`::
+Local renders from the April 10 2025 build of `document.adoc` (untracked from before the abandoned commits). Kept as a fallback reference for prose that wasn't in the three GitHub commits — see link:../plans/Schema-documentation-master-plan.md[the plan §Phase 1] for the salvage strategy.
+
+== Current state (2026-05-21)
+
+Phase 1 scaffolding landed: 567 anchored stub files across the six layers, the nine cross-cutting chapter files resurrected from the April 2025 commits, the invariant checker, and this README. The substantive prose-salvage work (reverse-engineering `document.xml`, folding in `CalConnect/cc-lightweight-doc`, etc.) is the Phase 2 editorial pass, ongoing.
+
+Phase 0b (engine validation; link:../plans/Schema-documentation-master-plan.md#phase-0b[plan §Phase 0b]) is blocked on lutaml/rng#19 — the lutaml-xsd converter doesn't extract from inside the standard RelaxNG `grammar { ... }` block, so the published SPAs render empty regardless of the prose corpus state. Phase 1 proceeds in parallel; once the upstream bug is fixed the cross-link contract gets verified end-to-end.
