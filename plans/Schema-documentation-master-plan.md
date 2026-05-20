@@ -391,6 +391,27 @@ Expected outcomes:
 - Likely case: one or two of the four fail in ways the gem maintainers haven't seen, because they only tested with `iec.rnc`/`bsi.rnc`. Today's value is the bug report, not the SPA.
 - Worst case: all four fail. Phase 1 then waits on lutaml-side fixes before salvage authoring begins.
 
+<a id="phase-0b-grammar-wrapper-discovery"></a>
+#### Phase 0b discovery 2026-05-20 — `lutaml/rng` does not parse the `grammar { ... }` wrapper
+
+Once the seven-SPA pipeline shipped end-to-end (PR #125 + PR #126 merged, deploy.yml runs green, GitHub Pages live at <https://metanorma.github.io/metanorma-model-iso/>), inspection of the published SPAs revealed **0 types / 0 elements / 0 groups / 0 attributes** across all seven layers. The build pipeline is sound; the engine's RNC parser is the problem.
+
+**Diagnosis.** Every metanorma source `.rnc` file opens with `grammar {` — the standard RelaxNG enclosing block for declaring a complete grammar. `lutaml/rng` registers each file as a schema by filename but does not recurse into the wrapped content, so the resulting LXR packages contain schema-name registrations with no types / elements / groups / attributes inside. The bug surfaces precisely because the existing `lutaml/rng` test fixtures (`iec.rnc`, `bsi.rnc`) are tiny `include`-only wrappers with no `grammar { ... }` block — exactly the code path Phase 0b was scoped to exercise on the real grammars.
+
+**Supporting evidence.**
+
+- `basicdoc.rnc`, `biblio.rnc`, `biblio-standoc.rnc`, `biblio-presentation.rnc`, `isodoc.rnc`, `isodoc-presentation.rnc`, `biblio-compile.rnc` all open with `grammar {` → all produce 0 elements.
+- `relaton-iso-compile.rnc` is top-level `include` directives + `start = bibitem | bibdata` (no `grammar` block) → produces 2 elements + 1 group, which is just the `start` declaration. Included files (`basicdoc.rnc`, `relaton-iso.rnc`) are still wrapped → their content stays invisible.
+- Wa's earlier combined-SPA build (single config covering all seven roots fused into one package) was also empty — the LXR package was 9342 bytes. The bug was masked by the "Generation complete" success message; no one had checked the content.
+
+**Two actions, per the strong preference (engine bends, not grammar).**
+
+1. **Filed against `lutaml/rng`** as [lutaml/rng#19](https://github.com/lutaml/rng/issues/19) with a minimal wrapped-vs-unwrapped reproducer plus the per-layer evidence from the deployed SPAs. Assigned to `@HassanAkbar`. The issue body explicitly notes the tactical workaround (next item) and asks for its removal once the parser is fixed.
+
+2. **Tactical workaround** in [PR #127](https://github.com/metanorma/metanorma-model-iso/pull/127): extends `scripts/flatten-include-files.rb` to strip the outer `grammar { ... }` block from every `grammars/*.rnc` after flattening. The wrapper is purely syntactic — the content inside is identical to top-level RNC — so the workaround is semantics-preserving for the documentation pipeline. The added code carries a prominent `# TODO: REMOVE WHEN lutaml/rng#19 IS FIXED` marker citing the issue URL; the two pointers (script-side TODO + upstream-issue ask-for-removal) prevent the workaround from outliving the bug.
+
+After PR #127 lands and the next CI run completes, the seven published SPAs should produce non-empty content reflecting the actual grammar size (basicdoc ~50+ elements, isodoc ~200+, etc.) and per-layer scoping behaviour can be verified.
+
 <a id="phase-0-5"></a>
 ### Phase 0.5 — document the RNC comment conventions (≤ 1 day, after Phase 0)
 
