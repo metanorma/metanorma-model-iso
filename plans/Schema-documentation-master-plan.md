@@ -230,6 +230,7 @@ This is a very long plan. Colleagues — `@ronaldtse`, `@HassanAkbar`, anyone el
 Phase tickets (filed 2026-05-19):
 
 1. **Phase 0a** — [#115](https://github.com/metanorma/metanorma-model-iso/issues/115) — `Schema documentation — Phase 0a: setup the documentation pipeline` (assigned `@kwkwan`)
+   - Sub-task: [#124](https://github.com/metanorma/metanorma-model-iso/issues/124) — `Create Github Page to deploy SPA site` (assigned `@kwkwan`, filed 2026-05-20). GitHub Pages enablement on this repo so the deploy workflow has a target.
 2. **Phase 0b** — [#116](https://github.com/metanorma/metanorma-model-iso/issues/116) — `Schema documentation — Phase 0b: engine validation against real grammars` (assigned `opoudjis`; blocked on 0a)
 3. **Phase 0.5** — [#117](https://github.com/metanorma/metanorma-model-iso/issues/117) — `Schema documentation — Phase 0.5: RNC comment conventions spec` (assigned `opoudjis`)
 4. **Phase 1** — [#118](https://github.com/metanorma/metanorma-model-iso/issues/118) — `Schema documentation — Phase 1: corpus salvage with anchors baked in` (assigned `opoudjis`)
@@ -332,6 +333,10 @@ Three components, three maintainers:
 #### Phase 0a — setup (assigned to @kwkwan)
 
 Wa sets up the schema-documentation pipeline for `metanorma-model-iso` in the shape his `plateau-iur-schema-browser` exemplar established — `config.yml` with metanorma metadata / namespace mappings / branding, `.github/workflows/deploy.yml` adapted from plateau's, decisions on the three grammars lacking a `*-compile.rnc` at the right documentation scope, decisions on the hosting venue (gh-pages on this repo? separate `metanorma-model-iso-schema-browser` repo? sub-path under metanorma.org?). Delivers via PR with a minimal README explaining how opoudjis runs the pipeline locally. Fallback: opoudjis adapts plateau directly if Wa's plate doesn't fit it.
+
+**Status as of 2026-05-20.** Wa delivered the build pipeline in [PR #125](https://github.com/metanorma/metanorma-model-iso/pull/125) (merged): `.github/workflows/deploy.yml`, `Gemfile` with `gem "lutaml-xsd"`, `scripts/flatten-include-files.rb` (copies submodule RNC files up to `grammars/` flat dir to resolve cross-grammar `include`s), and a `build-config-small.yml` config listing all seven schema roots in one combined LXR package. Hosting-venue decision: gh-pages on this repo (sub-task [#124](https://github.com/metanorma/metanorma-model-iso/issues/124) enables it). [PR #126](https://github.com/metanorma/metanorma-model-iso/pull/126) (follow-up by opoudjis) fills the three gaps: per-layer SPAs (one per conceptual schema layer rather than one combined SPA, per the cross-link contract), an `index.html` landing page, and `doc-build/README.adoc` documenting the local-run pipeline. The per-layer split uses listing-prerequisites-in-config rather than thin doc-only wrappers; if CI shows the layered SPAs blur together rather than scoping per-target, a follow-up switches to wrappers.
+
+**Per-layer-SPA decision (recorded).** One SPA per conceptual schema layer was the chosen path over the combined-SPA alternative. The combined approach was simpler from a build-pipeline standpoint (one config, one output) but blurred the per-layer cross-link contract — every URL was a deep link into one combined page rather than into a per-schema document. Per-layer SPAs preserve the alignment between the SPA's element panels and the per-schema prose pages under `documentation/schemas/<schema>/elements/`.
 
 <a id="phase-0b"></a>
 #### Phase 0b — engine validation (assigned to opoudjis, blocked on 0a)
