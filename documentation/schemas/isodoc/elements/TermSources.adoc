@@ -1,9 +1,9 @@
-[#termsource]
-= `termsource`
+[#TermSources]
+= `TermSources`
 :schema: isodoc
 
-// TODO: salvage prose for this non-terminal. The anchor `[#termsource]`
-// above is the canonical stable ID that grammar `## @see <<termsource>>`
+// TODO: salvage prose for this non-terminal. The anchor `[#TermSources]`
+// above is the canonical stable ID that grammar `## @see <<TermSources>>`
 // references will resolve to (per documentation/RNC-COMMENT-CONVENTIONS.adoc).
 //
 // Per-element structure (see plans/Schema-documentation-master-plan.md
@@ -19,4 +19,4 @@
 [discrete]
 == Schema definition
 
-See the corresponding SPA panel: link:../../../../isodoc.html#define-termsource[isodoc.html#define-termsource]
+See the corresponding SPA panel: link:../../../../isodoc.html#define-TermSources[isodoc.html#define-TermSources]
