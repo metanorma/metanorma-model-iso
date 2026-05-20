@@ -1,0 +1,22 @@
+[#hr]
+= `hr`
+:schema: basicdoc
+
+// TODO: salvage prose for this non-terminal. The anchor `[#hr]`
+// above is the canonical stable ID that grammar `## @see <<hr>>`
+// references will resolve to (per documentation/RNC-COMMENT-CONVENTIONS.adoc).
+//
+// Per-element structure (see plans/Schema-documentation-master-plan.md
+// §Per-element layer scheme):
+//   - one-line summary (TEI <desc>-style)
+//   - Relaton layer (citation-model elements only)
+//   - Semantic XML (StanDoc body + Flavours subsections)
+//   - Presentation XML (StanDoc body + Flavours subsections)
+//   - Rendering (HTML / PDF / DOC / Firelight / other formats)
+//   - Examples (XML usage exemplars)
+//   - See also (sibling / variant cross-references)
+
+[discrete]
+== Schema definition
+
+See the corresponding SPA panel: link:../../../../basicdoc.html#define-hr[basicdoc.html#define-hr]

@@ -5,3 +5,18 @@
 
 doc-build/out/
 _site/
+
+# Local renders of documentation/document.adoc — kept locally as a salvage
+# reference for prose that the abandoned April 2025 commits didn't preserve,
+# but not committed (large binaries + intermediate build state). To regenerate,
+# run `metanorma documentation/document.adoc`.
+documentation/document.xml
+documentation/document.html
+documentation/document.pdf
+documentation/document.doc
+documentation/document.presentation.xml
+documentation/document.rxl
+documentation/document.err.html
+documentation/document.pdf.err
+documentation/metanorma.err.html
+documentation/*-error.log
