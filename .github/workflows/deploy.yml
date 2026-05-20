@@ -33,7 +33,7 @@ jobs:
 
       - name: Fix include paths in rnc files
         run: |
-          ruby ./scripts/fix-rnc-includes.rb
+          ruby scripts/flatten-include-files.rb
 
       - name: Build LXR package
         run: bundle exec lutaml-xsd build from-config build-config-small.yml --output metanorma-model-iso.lxr
