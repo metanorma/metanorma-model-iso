@@ -1,0 +1,9 @@
+# Per-layer documentation build config for biblio (base citation model).
+# biblio.rnc references BasicBlockNoId from basicdoc.rnc without including it,
+# so basicdoc.rnc is listed first as a dependency for cross-grammar reference
+# resolution. The SPA primary target is biblio; basicdoc elements appear as
+# referenced types.
+
+files:
+  - ../../grammars/basicdoc.rnc
+  - ../../grammars/biblio.rnc

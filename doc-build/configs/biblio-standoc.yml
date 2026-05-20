@@ -1,0 +1,8 @@
+# Per-layer documentation build config for biblio-standoc (document metadata
+# layer extending biblio). Dependencies listed for cross-grammar reference
+# resolution.
+
+files:
+  - ../../grammars/basicdoc.rnc
+  - ../../grammars/biblio.rnc
+  - ../../grammars/biblio-standoc.rnc

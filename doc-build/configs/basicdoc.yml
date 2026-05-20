@@ -1,0 +1,5 @@
+# Per-layer documentation build config for basicdoc
+# Built into doc-build/out/basicdoc.html as a stand-alone SPA.
+
+files:
+  - ../../grammars/basicdoc.rnc
