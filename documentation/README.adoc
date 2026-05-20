@@ -14,7 +14,7 @@ Cross-cutting chapters with no per-non-terminal anchor contract (00-intro, 01-mo
 Per-non-terminal prose pages. One stub per top-level `define` across the six document-side grammars (basicdoc, biblio, biblio-standoc, biblio-presentation, isodoc, isodoc-presentation). Each carries a `[#<name>]` anchor matching the grammar's non-terminal name verbatim — that's the cross-link contract anchor the SPA's URL fragment `#define-<name>` mirrors. Stubs are TODOs; salvaging the long-form prose into them is the Phase 2 editorial work.
 
 `schemas/<schema>/_no-narrative.txt`::
-Opt-out manifest for defines deliberately not given a stub. Currently used to register the `TermSource` / `termsource` case-collision in `isodoc.rnc` (the two distinct defines alias on case-insensitive filesystems; resolvable by a grammar rename, not blocking Phase 1).
+Opt-out manifest for defines deliberately not given a stub. Empty at the time of writing.
 
 `schemas/<schema>/attributes/`, `schemas/<schema>/groups/`::
 Reserved for the per-attribute and per-named-pattern parallel trees described in the plan. Empty at the time of writing — the elements/attributes/groups split will be applied in a follow-up pass once the SPA's category-discrimination is observable (currently blocked on lutaml/rng#19; see link:../plans/Schema-documentation-master-plan.md#phase-0b-grammar-wrapper-discovery[plan §Phase 0b discovery]).
@@ -36,6 +36,6 @@ Local renders from the April 10 2025 build of `document.adoc` (untracked from be
 
 == Current state (2026-05-21)
 
-Phase 1 scaffolding landed: 567 anchored stub files across the six layers, the nine cross-cutting chapter files resurrected from the April 2025 commits, the invariant checker, and this README. The substantive prose-salvage work (reverse-engineering `document.xml`, folding in `CalConnect/cc-lightweight-doc`, etc.) is the Phase 2 editorial pass, ongoing.
+Phase 1 scaffolding landed: 568 anchored stub files across the six layers, the nine cross-cutting chapter files resurrected from the April 2025 commits, the invariant checker, and this README. The substantive prose-salvage work (reverse-engineering `document.xml`, folding in `CalConnect/cc-lightweight-doc`, etc.) is the Phase 2 editorial pass, ongoing.
 
 Phase 0b (engine validation; link:../plans/Schema-documentation-master-plan.md#phase-0b[plan §Phase 0b]) is blocked on lutaml/rng#19 — the lutaml-xsd converter doesn't extract from inside the standard RelaxNG `grammar { ... }` block, so the published SPAs render empty regardless of the prose corpus state. Phase 1 proceeds in parallel; once the upstream bug is fixed the cross-link contract gets verified end-to-end.
