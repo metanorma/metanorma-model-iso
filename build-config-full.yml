@@ -1,7 +1,7 @@
 # RNG Configuration
 
 files:
-  - grammars/basicdoc-models/grammars/basicdoc-compile.rnc
+  - grammars/basicdoc-compile.rnc
   - grammars/biblio-presentation.rnc
   - grammars/bipm.rnc
   - grammars/bsi.rnc
@@ -20,7 +20,7 @@ files:
   - grammars/itu.rnc
   - grammars/jis.rnc
   - grammars/m3d.rnc
-  - grammars/metanorma-requirements-models/grammars/reqt.rnc
+  - grammars/reqt.rnc
   - grammars/nist.rnc
   - grammars/ogc.rnc
   - grammars/plateau.rnc
@@ -44,9 +44,9 @@ files:
   - grammars/relaton-itu-compile.rnc
   - grammars/relaton-jis-compile.rnc
   - grammars/relaton-m3aawg-compile.rnc
-  - grammars/relaton-models/grammars/biblio-compile.rnc
-  - grammars/relaton-models/grammars/biblio-standoc.rnc
-  - grammars/relaton-models/grammars/biblio.rnc
+  - grammars/biblio-compile.rnc
+  - grammars/biblio-standoc.rnc
+  - grammars/biblio.rnc
   - grammars/relaton-mpfa-compile.rnc
   - grammars/relaton-nist-compile.rnc
   - grammars/relaton-oasis-compile.rnc

@@ -1,0 +1,10 @@
+# RNG Configuration
+
+files:
+  - grammars/basicdoc.rnc
+  - grammars/biblio.rnc
+  - grammars/biblio-standoc.rnc
+  - grammars/biblio-presentation.rnc
+  - grammars/relaton-iso-compile.rnc
+  - grammars/isodoc-compile.rnc
+  - grammars/isodoc-presentation-compile.rnc
