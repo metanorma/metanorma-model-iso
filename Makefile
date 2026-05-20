@@ -20,7 +20,7 @@ PNG := $(patsubst views/%.lutaml,images/%.png,$(SRC))
 all: $(PNG)
 
 images/%.png: views/%.lutaml
-	lutaml -t png -o $@ $<
+	lutaml lml generate $< -o $@
 
 views/%.lutaml: models/%.wsd | views
 	lutaml-wsd2uml $< > $@

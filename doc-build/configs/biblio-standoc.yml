@@ -3,6 +3,6 @@
 # resolution.
 
 files:
-  - grammars/basicdoc.rnc
-  - grammars/biblio.rnc
-  - grammars/biblio-standoc.rnc
+  - ../../grammars/basicdoc.rnc
+  - ../../grammars/biblio.rnc
+  - ../../grammars/biblio-standoc.rnc

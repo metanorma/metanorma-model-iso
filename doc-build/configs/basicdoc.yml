@@ -2,4 +2,4 @@
 # Built into doc-build/out/basicdoc.html as a stand-alone SPA.
 
 files:
-  - grammars/basicdoc.rnc
+  - ../../grammars/basicdoc.rnc

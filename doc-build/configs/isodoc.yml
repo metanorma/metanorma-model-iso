@@ -2,4 +2,4 @@
 # Built into doc-build/out/isodoc.html as a stand-alone SPA.
 
 files:
-  - grammars/isodoc-compile.rnc
+  - ../../grammars/isodoc-compile.rnc

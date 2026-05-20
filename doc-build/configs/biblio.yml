@@ -5,5 +5,5 @@
 # referenced types.
 
 files:
-  - grammars/basicdoc.rnc
-  - grammars/biblio.rnc
+  - ../../grammars/basicdoc.rnc
+  - ../../grammars/biblio.rnc
