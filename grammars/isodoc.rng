@@ -1972,7 +1972,7 @@ used in document amendments</a:documentation>
           <a:documentation>Zero or more examples of how the term is to be used</a:documentation>
         </ref>
       </zeroOrMore>
-      <ref name="TermSource">
+      <ref name="TermSources">
         <a:documentation>Bibliographic references for the managed term</a:documentation>
       </ref>
     </element>
@@ -2081,7 +2081,7 @@ used in document amendments</a:documentation>
         <a:documentation>Information about how the designation is to be used</a:documentation>
       </ref>
     </optional>
-    <ref name="TermSource">
+    <ref name="TermSources">
       <a:documentation>Bibliographic references for this designation of the managed term</a:documentation>
     </ref>
   </define>
@@ -2352,7 +2352,7 @@ used in document amendments</a:documentation>
           <ref name="formula"/>
         </choice>
       </oneOrMore>
-      <ref name="TermSource">
+      <ref name="TermSources">
         <a:documentation>Bibliographic references for this designation of the managed term</a:documentation>
       </ref>
     </element>
@@ -2369,7 +2369,7 @@ used in document amendments</a:documentation>
           <ref name="formula"/>
         </choice>
       </oneOrMore>
-      <ref name="TermSource">
+      <ref name="TermSources">
         <a:documentation>Bibliographic references for this designation of the managed term</a:documentation>
       </ref>
     </element>
@@ -2824,7 +2824,7 @@ Normative References contents contain normative references, but as a clause in t
       <data type="boolean"/>
     </attribute>
   </define>
-  <define name="TermSource">
+  <define name="TermSources">
     <zeroOrMore>
       <ref name="termsource"/>
     </zeroOrMore>
