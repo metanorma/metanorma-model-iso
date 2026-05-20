@@ -1,0 +1,5 @@
+# Per-layer documentation build config for relaton-iso
+# Built into doc-build/out/relaton-iso.html as a stand-alone SPA.
+
+files:
+  - grammars/relaton-iso-compile.rnc

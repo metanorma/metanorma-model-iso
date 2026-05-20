@@ -1,0 +1,8 @@
+# Per-layer documentation build config for biblio-presentation (presentation
+# form of metadata). Dependencies listed for cross-grammar reference
+# resolution.
+
+files:
+  - grammars/basicdoc.rnc
+  - grammars/biblio.rnc
+  - grammars/biblio-presentation.rnc

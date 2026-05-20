@@ -1,0 +1,5 @@
+# Per-layer documentation build config for isodoc-presentation
+# Built into doc-build/out/isodoc-presentation.html as a stand-alone SPA.
+
+files:
+  - grammars/isodoc-presentation-compile.rnc

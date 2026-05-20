@@ -32,20 +32,23 @@ jobs:
           bundler-cache: true
 
       - name: Fix include paths in rnc files
+        run: ruby scripts/flatten-include-files.rb
+
+      - name: Build seven per-layer SPAs
         run: |
-          ruby scripts/flatten-include-files.rb
+          mkdir -p _site/spa
+          for s in basicdoc biblio biblio-standoc biblio-presentation relaton-iso isodoc isodoc-presentation; do
+            echo "::group::Build $s"
+            bundle exec lutaml-xsd build from-config doc-build/configs/$s.yml --output _site/spa/$s.lxr
+            bundle exec lutaml-xsd spa _site/spa/$s.lxr --mode inlined --output _site/spa/$s.html
+            rm -f _site/spa/$s.lxr
+            echo "::endgroup::"
+          done
 
-      - name: Build LXR package
-        run: bundle exec lutaml-xsd build from-config build-config-small.yml --output metanorma-model-iso.lxr
-
-      - name: Generate SPA documentation
-        run: bundle exec lutaml-xsd spa metanorma-model-iso.lxr --mode inlined --output metanorma-model-iso.html
-
-      - name: Prepare artifact
+      - name: Prepare site index and assets
         run: |
-          mkdir -p _site
-          cp metanorma-model-iso.html _site/index.html
-          cp -r images _site/
+          cp doc-build/index.html _site/index.html
+          if [ -d images ]; then cp -r images _site/; fi
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v4

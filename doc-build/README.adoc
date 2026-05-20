@@ -1,0 +1,121 @@
+= Building the schema-documentation SPAs locally
+
+This directory carries the per-layer build configuration for the schema-documentation SPAs published from this repository. The pipeline is `RNC -> lutaml-xsd builds an LXR package -> lutaml-xsd builds an SPA for the LXR package`; CI publishes seven SPAs (one per conceptual schema layer) to GitHub Pages via `.github/workflows/deploy.yml`. This README documents the local-development equivalent of the CI build, so a contributor can iterate on the grammars or the configs without waiting for a push to `main`.
+
+Full programme plan: https://github.com/metanorma/metanorma-model-iso/blob/main/plans/Schema-documentation-master-plan.md.
+
+== Prerequisites
+
+* Ruby 4.0 (matching CI; older 3.x lines have not been validated).
+* Bundler.
+* Git, with submodule access — the grammars depend on several sibling submodules (`grammars/basicdoc-models/`, `grammars/bib-models/`, `grammars/metanorma-requirements-models/`, the `grammars/relaton-models/` family).
+
+== One-time setup
+
+. Clone the repo with submodules:
++
+[source,sh]
+----
+git clone --recurse-submodules https://github.com/metanorma/metanorma-model-iso.git
+cd metanorma-model-iso
+----
++
+If you already cloned without submodules, run `git submodule update --init --recursive`.
+
+. Install Ruby dependencies:
++
+[source,sh]
+----
+bundle install
+----
+
+. Flatten the submodule RNC files into the top-level `grammars/` directory. The submodules carry their RNC sources at deeper paths (e.g. `grammars/basicdoc-models/grammars/basicdoc.rnc`); the flatten script copies them up so `lutaml-xsd`'s `include "basicdoc.rnc"` resolves without path traversal:
++
+[source,sh]
+----
+ruby scripts/flatten-include-files.rb
+----
++
+The script is idempotent — re-running is safe. CI runs it once per build. Re-run locally whenever a submodule pull brings in changed RNC sources.
+
+== Building one SPA
+
+The seven per-layer configs live in `doc-build/configs/`. Pick one and run the two-step pipeline:
+
+[source,sh]
+----
+SCHEMA=isodoc                       # or basicdoc / biblio / biblio-standoc / biblio-presentation / relaton-iso / isodoc-presentation
+mkdir -p doc-build/out
+bundle exec lutaml-xsd build from-config doc-build/configs/$SCHEMA.yml \
+  --output doc-build/out/$SCHEMA.lxr
+bundle exec lutaml-xsd spa doc-build/out/$SCHEMA.lxr \
+  --mode inlined \
+  --output doc-build/out/$SCHEMA.html
+open doc-build/out/$SCHEMA.html     # or xdg-open on Linux
+----
+
+The `inlined` mode bundles the Vue SPA assets into a single self-contained HTML file (works with `file://`, no HTTP server required). The output is typically 200-300 KB per schema.
+
+== Building all seven SPAs
+
+[source,sh]
+----
+mkdir -p doc-build/out
+for s in basicdoc biblio biblio-standoc biblio-presentation relaton-iso isodoc isodoc-presentation; do
+  bundle exec lutaml-xsd build from-config doc-build/configs/$s.yml \
+    --output doc-build/out/$s.lxr
+  bundle exec lutaml-xsd spa doc-build/out/$s.lxr \
+    --mode inlined \
+    --output doc-build/out/$s.html
+done
+cp doc-build/index.html doc-build/out/index.html
+open doc-build/out/index.html
+----
+
+The local `index.html` mirrors what CI publishes at the gh-pages root: a landing page linking to all seven per-layer SPAs.
+
+== The seven schema layers
+
+[cols="1,3", options="header"]
+|===
+| Config | Documents
+
+| `doc-build/configs/basicdoc.yml`
+| BasicDocument foundation. Standalone root.
+
+| `doc-build/configs/biblio.yml`
+| Base Relaton citation model. Includes `basicdoc.rnc` as a dependency because `biblio.rnc` references `BasicBlockNoId` from basicdoc without an `include` directive — the config-level listing makes the cross-grammar reference resolve cleanly.
+
+| `doc-build/configs/biblio-standoc.yml`
+| biblio expanded to document metadata (the `bibdata` shape isodoc consumes). Lists basicdoc + biblio + biblio-standoc as the layered prerequisites.
+
+| `doc-build/configs/biblio-presentation.yml`
+| Presentation form of bibliographic metadata. Lists basicdoc + biblio + biblio-presentation.
+
+| `doc-build/configs/relaton-iso.yml`
+| relaton-flavour exemplar (ISO). Built from `relaton-iso-compile.rnc` which already composes basicdoc + relaton-iso. The wider `relaton-*` flavour family follows the same pattern and gets added in parallel as the documentation effort expands.
+
+| `doc-build/configs/isodoc.yml`
+| StanDoc semantic schema. Built from `isodoc-compile.rnc` which composes biblio-standoc + isodoc.
+
+| `doc-build/configs/isodoc-presentation.yml`
+| Presentation form of isodoc. Built from `isodoc-presentation-compile.rnc` which composes biblio-presentation + isodoc-presentation.
+|===
+
+== Adding documentation comments
+
+The `##` doc-comment convention used by the SPAs is documented at `documentation/RNC-COMMENT-CONVENTIONS.adoc`. Edits to those comments in `grammars/*.rnc` show up in the next SPA build with no other action needed.
+
+== Troubleshooting
+
+* **`Cannot find file basicdoc.rnc`** in the build step — the flatten script hasn't been run, or the submodules aren't up to date. Re-run `git submodule update --init --recursive && ruby scripts/flatten-include-files.rb`.
+* **Unresolved pattern `BasicBlockNoId`** in the biblio / biblio-standoc / biblio-presentation builds — the prerequisite-list ordering in the config matters; basicdoc must precede biblio.
+* **Empty or sparse SPA** for a layer — the grammar likely has few `##` doc-comments. The documentation density is uneven across the seven layers; the small flavour wrappers carry fewer comments than the big core grammars.
+* **CI succeeded but local fails** (or vice versa) — check the Ruby version (`ruby --version` should report `4.0.x` to match CI). The `bundler-cache` step in CI also pulls a fresh `Gemfile.lock` — locally, `bundle update lutaml-xsd` if the gem moved.
+
+== Files in this directory
+
+* `configs/` — per-layer build configs (seven YAML files, one per schema layer).
+* `index.html` — the gh-pages landing page copied to `_site/index.html` at deploy time.
+* `out/` — local build outputs (`.lxr` and `.html` files). Not committed; in `.gitignore`.
+* `README.adoc` — this file.
