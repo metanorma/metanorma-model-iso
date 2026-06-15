@@ -144,7 +144,9 @@ dt =
 
 ExampleAttributes =
     NumberingAttributes,
-    BlockAttributes
+    BlockAttributes,
+    ## Render the example as collapsible (HTML5 details/summary)
+    attribute collapsible { xsd:boolean }?
 
 ExampleBody =
     ## The caption of the example
