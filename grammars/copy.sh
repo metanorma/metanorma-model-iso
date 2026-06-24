@@ -3,12 +3,12 @@ echo "Copying..."
 metanorma_version=`git tag --sort=committerdate | tail -1`
 
 cat isodoc.rng | ruby -pe "\$_.gsub!(/(<grammar[^>]+>)/, %{\\\\1\n<!-- VERSION ${metanorma_version} -->\n}) " > ../../metanorma-standoc/lib/metanorma/validate/isodoc.rng
-cp basicdoc.rng reqt.rng biblio.rng biblio-standoc.rng ../../metanorma-standoc/lib/metanorma/validate
+cp basicdoc.rng metanorma-mathml.rng mathml3*.rng reqt.rng biblio.rng biblio-standoc.rng ../../metanorma-standoc/lib/metanorma/validate
 
 for i in iso iec bsi jis plateau cc ribose generic ieee ogc nist ietf itu iho bipm
 do
   cat isodoc.rng | ruby -pe "\$_.gsub!(/(<grammar[^>]+>)/, %{\\\\1\n<!-- VERSION ${metanorma_version} -->\n}) " > ../../metanorma-$i/lib/metanorma/$i/isodoc.rng
-  cp basicdoc.rng reqt.rng biblio.rng biblio-standoc.rng ../../metanorma-$i/lib/metanorma/$i
+  cp basicdoc.rng metanorma-mathml.rng mathml3*.rng reqt.rng biblio.rng biblio-standoc.rng ../../metanorma-$i/lib/metanorma/$i
 done
 
 for i in iso iec bsi jis cc ribose ieee ogc nist ietf itu iho bipm

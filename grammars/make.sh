@@ -24,6 +24,9 @@ var=`git tag --sort=committerdate | tail -1`
 echo "\"basicdoc-models\": \"$var\"," >> ../../versions.json
 cd ../..
 cp basicdoc-models/grammars/basicdoc.rnc .
+# basicdoc.rnc references the W3C MathML grammar via `external "mathml/..."`;
+# vendor those sources so trang can resolve them at compile time.
+cp -r basicdoc-models/grammars/mathml .
 
 cd metanorma-requirements-models/grammars
 git checkout main && git pull
