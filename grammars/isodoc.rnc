@@ -469,9 +469,6 @@ TableAttributes &=
     attribute width { text }?,
     ## CSS style: only background-color, color, border supported
     attribute style { text }?,
-    ## Custom CSS class(es), space-separated, appended to the HTML table
-    ## class (HTML output only). See metanorma/metanorma-pdfa#33
-    attribute class { text }?,
     BlockAttributes
 
 FigureAttributes &=
