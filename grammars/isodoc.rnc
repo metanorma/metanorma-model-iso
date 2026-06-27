@@ -477,7 +477,7 @@ TableAttributes &=
 FigureAttributes &=
     ## Width of the figure block in rendering
     attribute width { text }?,
-    BlockAttributes
+    BlockAttributesCore
 
 SourceAttributes &=
     BlockAttributes,
@@ -691,7 +691,10 @@ inputform = element form {
     attribute action { text },
     ## Class of input form
     attribute class { text }?,
-    BlockAttributes,
+    ## form declares its own class above, so it uses BlockAttributesCore to
+    ## avoid duplicating the custom-class slot in BlockAttributes. Treated like
+    ## figure. See metanorma/metanorma-standoc#1197
+    BlockAttributesCore,
     # Input form contents
     ( TextElement | FormInput | formlabel )*
 }
@@ -1509,7 +1512,11 @@ erefstack = element erefstack {
     element eref { erefTypeWithConnective }+
 }
 
-BlockAttributes =
+## Block attributes excluding the custom CSS class. Blocks that already carry
+## their own `class` attribute (e.g. figure, via basicdoc FigureAttributes)
+## include this directly, to avoid a duplicate-attribute collision with the
+## `class` added in BlockAttributes. See metanorma/metanorma-standoc#1197
+BlockAttributesCore =
     ## Keep this block on the same page as the following block in paged media
     attribute keep-with-next { xsd:boolean }?,
     ## Do not permit a page break between the lines of the block in paged media
@@ -1522,6 +1529,14 @@ BlockAttributes =
     ## For example, if the document is set to two-column, this attribute would be used to set the block
     ## to span across both columns
     attribute columns { text }?
+
+## Universal block attributes, including a custom CSS class (space-separated,
+## appended additively to the block's built-in HTML class, HTML output only).
+## See metanorma/metanorma-standoc#1197
+BlockAttributes =
+    BlockAttributesCore,
+    ## Custom CSS class(es) for the block in HTML output
+    attribute class { text }?
 
 ## Directive on how to render a block in Presentation XML 
 DisplayDirective =
