@@ -12,10 +12,6 @@ preface =
 
 # end overrides
 
-OlAttributes &=
-    attribute class { "steps" }?
-
-
 errata = element errata { erratarow+ }
 
 erratarow = element row {

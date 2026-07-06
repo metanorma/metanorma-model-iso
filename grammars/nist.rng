@@ -28,13 +28,6 @@
     </define>
   </include>
   <!-- end overrides -->
-  <define name="OlAttributes" combine="interleave">
-    <optional>
-      <attribute name="class">
-        <value>steps</value>
-      </attribute>
-    </optional>
-  </define>
   <define name="errata">
     <element name="errata">
       <oneOrMore>
