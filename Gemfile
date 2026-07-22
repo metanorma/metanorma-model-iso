@@ -4,4 +4,11 @@ source "https://rubygems.org"
 
 gem "lutaml"
 gem "lutaml-uml"
+# lutaml-xsd is required by repos whose CI runs `bundle exec lutaml-xsd
+# build` for grammar-package generation (currently metanorma-model-iso's
+# "Build and Deploy Grammars" workflow). The lutaml-xsd executable
+# dropped out of the lutaml gem's runtime dep chain in the early-July
+# 2026 lutaml restructuring; before that, plain `gem "lutaml"` transitively
+# provided it. Adding it explicitly here so the sync survives the next
+# lutaml release without silently re-breaking the workflow.
 gem "lutaml-xsd"
