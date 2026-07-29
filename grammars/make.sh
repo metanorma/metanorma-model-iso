@@ -35,7 +35,9 @@ echo "\"metanorma-requirements-models\": \"$var\"," >> ../../versions.json
 cd ../..
 cp metanorma-requirements-models/grammars/reqt.rnc .
 
-for i in ieee iso iec bsi gb mpfa bipm w3c 3gpp cc ietf iho itu m3aawg nist ribose ogc cen ecma cie iana omg oasis jis etsi plateau ccsds un
+relaton_models="ieee iso iec bsi gb mpfa bipm w3c 3gpp csa cc ietf iho itu m3aawg nist ribose ogc cen ecma cie iana omg oasis jis etsi plateau ccsds un"
+
+for i in $relaton_models
 do
   cd relaton-model-$i/grammars
   git checkout main && git pull
@@ -44,6 +46,21 @@ do
   cd ../..
   cp relaton-model-$i/grammars/relaton-$i.rnc .
 done
+
+# a failed pull or copy above would otherwise surface only as an unrelated
+# trang "file not found" error at compile time
+for f in biblio.rnc biblio-standoc.rnc biblio-compile.rnc basicdoc.rnc reqt.rnc \
+  $(for i in $relaton_models; do echo relaton-$i.rnc; done)
+do
+  if [[ ! -s $f ]]; then
+    echo "ERROR: $f is missing or empty after submodule update; aborting." >&2
+    exit 1
+  fi
+done
+if [[ ! -d mathml ]]; then
+  echo "ERROR: mathml/ directory is missing after submodule update; aborting." >&2
+  exit 1
+fi
 
 var=`git tag --sort=committerdate | tail -1`
 echo "\"metanorma-model\": \"$var\"," >> versions.json
