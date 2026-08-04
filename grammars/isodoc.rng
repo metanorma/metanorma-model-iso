@@ -1064,6 +1064,9 @@ parargaph sources are currently only rendered in metanorma-plateau</a:documentat
     <a:documentation>Internal reference (for Metanorma document collections)</a:documentation>
   </define>
   <define name="TextElement" combine="choice">
+    <a:documentation>Form input elements are admitted as inline content generally, mirroring
+HTML phrasing content: inputs sit inside paragraphs and table cells
+within forms (metanorma-model-iso#145)</a:documentation>
     <choice>
       <ref name="concept"/>
       <ref name="add"/>
@@ -1071,6 +1074,8 @@ parargaph sources are currently only rendered in metanorma-plateau</a:documentat
       <ref name="span"/>
       <ref name="erefstack"/>
       <ref name="date_inline"/>
+      <ref name="FormInput"/>
+      <ref name="formlabel"/>
     </choice>
   </define>
   <define name="PureTextElement" combine="choice">
@@ -1225,7 +1230,24 @@ That concept may be defined as a term within the current document, or it may be 
         <ref name="termref">
           <a:documentation>Link to a definition of the term in a termbase</a:documentation>
         </ref>
+        <ref name="errormsg">
+          <a:documentation>Error message inserted by the Metanorma generator, replacing a concept reference
+that could not be resolved. Only ever emitted by Metanorma itself, never authored;
+its presence marks the document as not ready for publication</a:documentation>
+        </ref>
       </choice>
+    </element>
+  </define>
+  <define name="errormsg">
+    <a:documentation>Error message inserted by the Metanorma generator, replacing markup it could not process</a:documentation>
+    <element name="errormsg">
+      <zeroOrMore>
+        <choice>
+          <ref name="PureTextElement"/>
+          <ref name="index"/>
+          <ref name="index-xref"/>
+        </choice>
+      </zeroOrMore>
     </element>
   </define>
   <define name="BasicBlock" combine="choice">
@@ -1270,12 +1292,16 @@ That concept may be defined as a term within the current document, or it may be 
     <a:documentation>Input form, for use under HTML</a:documentation>
     <element name="form">
       <ref name="RequiredId"/>
-      <attribute name="name">
-        <a:documentation>Name of the input form block</a:documentation>
-      </attribute>
-      <attribute name="action">
-        <a:documentation>Action to be taken on submission of the input form</a:documentation>
-      </attribute>
+      <optional>
+        <attribute name="name">
+          <a:documentation>Name of the input form block</a:documentation>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="action">
+          <a:documentation>Action to be taken on submission of the input form</a:documentation>
+        </attribute>
+      </optional>
       <optional>
         <attribute name="class">
           <a:documentation>Class of input form</a:documentation>
@@ -1287,8 +1313,13 @@ avoid duplicating the custom-class slot in BlockAttributes. Treated like
 figure. See metanorma/metanorma-standoc#1197</a:documentation>
       </ref>
       <zeroOrMore>
-        <!-- Input form contents -->
+        <!--
+          Input form contents: as in HTML, a form contains block-level content,
+          with form input elements appearing inline within it
+        -->
         <choice>
+          <ref name="paragraph-with-footnote"/>
+          <ref name="table"/>
           <ref name="TextElement"/>
           <ref name="FormInput"/>
           <ref name="formlabel"/>

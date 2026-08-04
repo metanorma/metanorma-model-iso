@@ -591,7 +591,11 @@ BibItemType |=
   ## Internal reference (for Metanorma document collections)
   "internal"
 
-TextElement |= concept | add | del | span | erefstack | date_inline
+## Form input elements are admitted as inline content generally, mirroring
+## HTML phrasing content: inputs sit inside paragraphs and table cells
+## within forms (metanorma-model-iso#145)
+TextElement |= concept | add | del | span | erefstack | date_inline |
+  FormInput | formlabel
 
 PureTextElement |= passthrough_inline
 
@@ -659,9 +663,16 @@ concept = element concept {
      ## Link to a definition of the term in an element of the current document
      xref |
      ## Link to a definition of the term in a termbase
-     termref
+     termref |
+     ## Error message inserted by the Metanorma generator, replacing a concept reference
+     ## that could not be resolved. Only ever emitted by Metanorma itself, never authored;
+     ## its presence marks the document as not ready for publication
+     errormsg
   )
 }
+
+## Error message inserted by the Metanorma generator, replacing markup it could not process
+errormsg = element errormsg { (PureTextElement|index|index-xref)* }
 
 BasicBlock |= requirement | recommendation | permission | imagemap | svgmap | inputform | toc | passthrough
 
@@ -683,17 +694,18 @@ passthrough = element passthrough {
 inputform = element form {
     RequiredId,
     ## Name of the input form block
-    attribute name { text },
+    attribute name { text }?,
     ## Action to be taken on submission of the input form
-    attribute action { text },
+    attribute action { text }?,
     ## Class of input form
     attribute class { text }?,
     ## form declares its own class above, so it uses BlockAttributesCore to
     ## avoid duplicating the custom-class slot in BlockAttributes. Treated like
     ## figure. See metanorma/metanorma-standoc#1197
     BlockAttributesCore,
-    # Input form contents
-    ( TextElement | FormInput | formlabel )*
+    # Input form contents: as in HTML, a form contains block-level content,
+    # with form input elements appearing inline within it
+    ( paragraph-with-footnote | table | TextElement | FormInput | formlabel )*
 }
 
 ## Input element for forms, associated with name/value pair to be submitted
