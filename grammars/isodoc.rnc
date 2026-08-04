@@ -1085,17 +1085,25 @@ related =
   element related {
     ## Type of relation of term applicable
     attribute type { RelatedTermType },
-    ## Preferred designation of the term related to the current term
-    element preferred { Designation },
     (
-      ## Link to a definition of the term in a bibliographic entry
-      eref |
-      ## Stack of links to a definition of the term in a bibliographic entry
-      erefstack |
-      ## Link to a definition of the term in an element of the current document
-      xref |
-      ## Link to a definition of the term in a termbase
-      termref
+      (
+        ## Preferred designation of the term related to the current term
+        element preferred { Designation },
+        (
+          ## Link to a definition of the term in a bibliographic entry
+          eref |
+          ## Stack of links to a definition of the term in a bibliographic entry
+          erefstack |
+          ## Link to a definition of the term in an element of the current document
+          xref |
+          ## Link to a definition of the term in a termbase
+          termref
+        )
+      ) |
+      ## Error message inserted by the Metanorma generator, replacing a related-term
+      ## reference that could not be resolved. Only ever emitted by Metanorma itself,
+      ## never authored; its presence marks the document as not ready for publication
+      errormsg
     )
 }
 
