@@ -25,10 +25,34 @@ include "basicdoc.rnc" {
 
 ## Block expressing a machine-readable change in a document
 amend = element amend {
+  OptionalId,
   BlockAttributes,
-  AmendType,
-  ## Specification of how blocks of a given class should be autonumbered within an AmendBlock newContent element
-  autonumber*
+  ## The type of change described in this block
+  attribute change { "add" | "modify" | "delete" | "replace" },
+  attribute path { text }?,
+  attribute path_end { text }?,
+  attribute title { text }?,
+  attribute position { "before" | "after" }?,
+  ## The location(s) in the original document which have undergone the change described in this block
+  element location { (locality | localityStack)* }?,
+  ## Specification of how blocks of a given class should be autonumbered within the newcontent element.
+  ## Precedes the content it numbers
+  autonumber*,
+  ## Description(s) of the change described in this block
+  element description { BasicBlock+ }*,
+  ## New content to be added to the document; applicable to add and modify.
+  ## Can be blocks and/or clauses
+  element newcontent {
+      OptionalId,
+      (BasicBlock | clause)*
+  }?,
+  ## Further description(s) of the change, following the new content
+  ## (e.g. consequential renumbering instructions)
+  element description { BasicBlock+ }*,
+  ## Classification of the change
+  classification*,
+  ## Contributor responsible for the change
+  contributor*
 }
 
 ## Cross-references are not normalised to xsd:IDREF in Semantic XML: that is deferred to Presentation XML.
@@ -43,7 +67,7 @@ review =
   RequiredId,
   ReviewAttributes,
   ## Reviewer comments content
-  paragraph+
+  BasicBlock+
 }
 
 ## Ruby annotation giving pronunciation of text: change tag from BasicDoc for disambiguation
@@ -599,7 +623,7 @@ TextElement |= concept | add | del | span | erefstack | date_inline |
 
 PureTextElement |= passthrough_inline
 
-NestedTextElement |= erefstack
+NestedTextElement |= erefstack | concept
 
 ## Inline text not to be processed semantically, and left in the markup of a target rendering language (e.g. raw HTML)
 passthrough_inline = element passthrough {
@@ -1403,7 +1427,7 @@ termdocsource =
 autonumber =
   element autonumber {
     ## The class of block to apply autonumbering to, within an AmendBlock newContent element
-    attribute type { "requirement" | "recommendation" | "permission" | "table" | "figure" | "admonition" | "formula" | "sourcecode" | "example" | "note" },
+    attribute type { "requirement" | "recommendation" | "permission" | "table" | "figure" | "admonition" | "formula" | "sourcecode" | "example" | "note" | "clause" },
     ## The starting value of numbering for the blocks with that class
     text
 }

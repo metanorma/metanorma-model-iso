@@ -25,11 +25,89 @@
     <define name="amend">
       <a:documentation>Block expressing a machine-readable change in a document</a:documentation>
       <element name="amend">
+        <ref name="OptionalId"/>
         <ref name="BlockAttributes"/>
-        <ref name="AmendType"/>
+        <attribute name="change">
+          <a:documentation>The type of change described in this block</a:documentation>
+          <choice>
+            <value>add</value>
+            <value>modify</value>
+            <value>delete</value>
+            <value>replace</value>
+          </choice>
+        </attribute>
+        <optional>
+          <attribute name="path"/>
+        </optional>
+        <optional>
+          <attribute name="path_end"/>
+        </optional>
+        <optional>
+          <attribute name="title"/>
+        </optional>
+        <optional>
+          <attribute name="position">
+            <choice>
+              <value>before</value>
+              <value>after</value>
+            </choice>
+          </attribute>
+        </optional>
+        <optional>
+          <element name="location">
+            <a:documentation>The location(s) in the original document which have undergone the change described in this block</a:documentation>
+            <zeroOrMore>
+              <choice>
+                <ref name="locality"/>
+                <ref name="localityStack"/>
+              </choice>
+            </zeroOrMore>
+          </element>
+        </optional>
         <zeroOrMore>
           <ref name="autonumber">
-            <a:documentation>Specification of how blocks of a given class should be autonumbered within an AmendBlock newContent element</a:documentation>
+            <a:documentation>Specification of how blocks of a given class should be autonumbered within the newcontent element.
+Precedes the content it numbers</a:documentation>
+          </ref>
+        </zeroOrMore>
+        <zeroOrMore>
+          <element name="description">
+            <a:documentation>Description(s) of the change described in this block</a:documentation>
+            <oneOrMore>
+              <ref name="BasicBlock"/>
+            </oneOrMore>
+          </element>
+        </zeroOrMore>
+        <optional>
+          <element name="newcontent">
+            <a:documentation>New content to be added to the document; applicable to add and modify.
+Can be blocks and/or clauses</a:documentation>
+            <ref name="OptionalId"/>
+            <zeroOrMore>
+              <choice>
+                <ref name="BasicBlock"/>
+                <ref name="clause"/>
+              </choice>
+            </zeroOrMore>
+          </element>
+        </optional>
+        <zeroOrMore>
+          <element name="description">
+            <a:documentation>Further description(s) of the change, following the new content
+(e.g. consequential renumbering instructions)</a:documentation>
+            <oneOrMore>
+              <ref name="BasicBlock"/>
+            </oneOrMore>
+          </element>
+        </zeroOrMore>
+        <zeroOrMore>
+          <ref name="classification">
+            <a:documentation>Classification of the change</a:documentation>
+          </ref>
+        </zeroOrMore>
+        <zeroOrMore>
+          <ref name="contributor">
+            <a:documentation>Contributor responsible for the change</a:documentation>
           </ref>
         </zeroOrMore>
       </element>
@@ -47,7 +125,7 @@ the type attribute defaults to `review` for reviews</a:documentation>
         <ref name="RequiredId"/>
         <ref name="ReviewAttributes"/>
         <oneOrMore>
-          <ref name="paragraph">
+          <ref name="BasicBlock">
             <a:documentation>Reviewer comments content</a:documentation>
           </ref>
         </oneOrMore>
@@ -1082,7 +1160,10 @@ within forms (metanorma-model-iso#145)</a:documentation>
     <ref name="passthrough_inline"/>
   </define>
   <define name="NestedTextElement" combine="choice">
-    <ref name="erefstack"/>
+    <choice>
+      <ref name="erefstack"/>
+      <ref name="concept"/>
+    </choice>
   </define>
   <define name="passthrough_inline">
     <a:documentation>Inline text not to be processed semantically, and left in the markup of a target rendering language (e.g. raw HTML)</a:documentation>
@@ -2594,6 +2675,7 @@ to better fit some local requirement, though still with the intent of retaining 
           <value>sourcecode</value>
           <value>example</value>
           <value>note</value>
+          <value>clause</value>
         </choice>
       </attribute>
       <text>
