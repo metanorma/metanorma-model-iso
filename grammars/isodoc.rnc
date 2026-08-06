@@ -264,14 +264,14 @@ FigureNoIdBody =
      BlockSource
 
 source = element source {
-    ## The status of the term as it is used in this document, relative to its definition in the original document
+    ## The status of the block content, relative to the source it has been taken from
     attribute status { SourceStatusType },
-    ## The type of the managed term in the present context
-    attribute type { SourceTypeType },
-    ## The original document and location where the term definition has been obtained from
+    ## The type of the source relation. Term-management vocabulary (authoritative/lineage);
+    ## not normally applicable to block attribution, and omitted by the generator for blocks
+    attribute type { SourceTypeType }?,
+    ## The original document and location the block content has been obtained from
     origin,
-    ## Any changes that the definition of the term has undergone relative to the original document,
-    ## in order to be applicable in this standardisation document
+    ## Any changes that the block content has undergone relative to the original document
     modification?
 }
 
@@ -961,10 +961,13 @@ definitions =
     ## Title of section
     section-title?,
     (
-      ## Prefatory material, may be specific to each definition list
-      BasicBlock*,
-      ## Definition list containing symbols and abbreviations
-      dl
+      ## Prefatory or discursive material; a symbols section may consist of prose only,
+      ## e.g. deferring to symbols defined in another standard
+      BasicBlock |
+      ## Definition list(s) containing symbols and abbreviations
+      dl |
+      ## Subsections of the symbols section
+      definitions
     )+
 }
 

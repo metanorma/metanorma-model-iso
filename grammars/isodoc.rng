@@ -489,20 +489,22 @@ and is intended to be referenced by a callout within the source code</a:document
     <define name="source">
       <element name="source">
         <attribute name="status">
-          <a:documentation>The status of the term as it is used in this document, relative to its definition in the original document</a:documentation>
+          <a:documentation>The status of the block content, relative to the source it has been taken from</a:documentation>
           <ref name="SourceStatusType"/>
         </attribute>
-        <attribute name="type">
-          <a:documentation>The type of the managed term in the present context</a:documentation>
-          <ref name="SourceTypeType"/>
-        </attribute>
+        <optional>
+          <attribute name="type">
+            <a:documentation>The type of the source relation. Term-management vocabulary (authoritative/lineage);
+not normally applicable to block attribution, and omitted by the generator for blocks</a:documentation>
+            <ref name="SourceTypeType"/>
+          </attribute>
+        </optional>
         <ref name="origin">
-          <a:documentation>The original document and location where the term definition has been obtained from</a:documentation>
+          <a:documentation>The original document and location the block content has been obtained from</a:documentation>
         </ref>
         <optional>
           <ref name="modification">
-            <a:documentation>Any changes that the definition of the term has undergone relative to the original document,
-in order to be applicable in this standardisation document</a:documentation>
+            <a:documentation>Any changes that the block content has undergone relative to the original document</a:documentation>
           </ref>
         </optional>
       </element>
@@ -1844,14 +1846,18 @@ terms sections</a:documentation>
         </ref>
       </optional>
       <oneOrMore>
-        <zeroOrMore>
+        <choice>
           <ref name="BasicBlock">
-            <a:documentation>Prefatory material, may be specific to each definition list</a:documentation>
+            <a:documentation>Prefatory or discursive material; a symbols section may consist of prose only,
+e.g. deferring to symbols defined in another standard</a:documentation>
           </ref>
-        </zeroOrMore>
-        <ref name="dl">
-          <a:documentation>Definition list containing symbols and abbreviations</a:documentation>
-        </ref>
+          <ref name="dl">
+            <a:documentation>Definition list(s) containing symbols and abbreviations</a:documentation>
+          </ref>
+          <ref name="definitions">
+            <a:documentation>Subsections of the symbols section</a:documentation>
+          </ref>
+        </choice>
       </oneOrMore>
     </element>
   </define>
