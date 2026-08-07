@@ -118,6 +118,27 @@ All IdRefType instances point not to `@id` in Semantic XML, which is the Content
 but to `@anchor`, the user-supplied cross-reference</a:documentation>
       <text/>
     </define>
+    <define name="image-no-id">
+      <a:documentation>Container for image content: optional ID attributes recursively (for use in Relaton, metadata).
+The embedded SVG content is admitted here as in ImageBody, and is NOT subject to the no-id
+convention of this model family: SVGs carry ids pervasively, and those ids cannot be stripped,
+because they are load-bearing for image-map functionality (svgmap hyperlink targets)</a:documentation>
+      <element name="image">
+        <ref name="OptionalId"/>
+        <ref name="ImageAttributes"/>
+        <optional>
+          <element name="svg">
+            <a:documentation>image can contain SVG XML, which is used to access its identifiers within the Metanorma XML</a:documentation>
+            <oneOrMore>
+              <choice>
+                <text/>
+                <ref name="AnyElement"/>
+              </choice>
+            </oneOrMore>
+          </element>
+        </optional>
+      </element>
+    </define>
     <define name="review">
       <a:documentation>Generalise BasicDoc element from just review comments, to general annotations;
 the type attribute defaults to `review` for reviews</a:documentation>
@@ -928,6 +949,11 @@ titlecase, or lowercase</a:documentation>
     <optional>
       <attribute name="width">
         <a:documentation>Width of the figure block in rendering</a:documentation>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="height">
+        <a:documentation>Height of the figure block in rendering</a:documentation>
       </attribute>
     </optional>
     <ref name="BlockAttributesCore"/>

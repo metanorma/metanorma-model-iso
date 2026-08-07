@@ -60,6 +60,17 @@ amend = element amend {
 ## but to `@anchor`, the user-supplied cross-reference
 IdRefType = text
 
+## Container for image content: optional ID attributes recursively (for use in Relaton, metadata).
+## The embedded SVG content is admitted here as in ImageBody, and is NOT subject to the no-id
+## convention of this model family: SVGs carry ids pervasively, and those ids cannot be stripped,
+## because they are load-bearing for image-map functionality (svgmap hyperlink targets)
+image-no-id = element image {
+    OptionalId,
+    ImageAttributes,
+    ## image can contain SVG XML, which is used to access its identifiers within the Metanorma XML
+    element svg { ( text | AnyElement )+ }?
+}
+
 ## Generalise BasicDoc element from just review comments, to general annotations;
 ## the type attribute defaults to `review` for reviews
 review =
@@ -498,6 +509,8 @@ TableAttributes &=
 FigureAttributes &=
     ## Width of the figure block in rendering
     attribute width { text }?,
+    ## Height of the figure block in rendering
+    attribute height { text }?,
     BlockAttributesCore
 
 SourceAttributes &=
