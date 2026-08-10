@@ -104,10 +104,11 @@ annotation =
 
 ## Title(s) of a clause
 section-title =
-  ## Title proper for a clause
+  ## Title proper for a clause. Footnotes on section headings are admitted
+  ## (metanorma-model-iso#154)
   element title {
     RequiredId,
-    TextElement*
+    ( TextElement | fn )*
   },
   ## Alternate title for a clause
   element variant-title {
@@ -1237,8 +1238,13 @@ expression_designation =
     attribute type { ExpressionDesignationType }?,
     ## Whether the designation (typically an abbreviation) is the same across languages, or language-specific
     attribute isInternational { xsd:boolean }?,
-    ## The textual form of the designation
-    element name { (PureTextElement|index|index-xref)* },
+    ## The textual form of the designation. Repeated for language variants of the
+    ## same designation: repetition of name with language attributes replaces the
+    ## retired variant element (metanorma-standoc#940, metanorma-model-iso#155)
+    element name {
+      LocalizedStringAttributes,
+      (PureTextElement|index|index-xref)*
+    }+,
     ## Type of abbreviation that constitutes the designation, according to how it is formed
     element abbreviation-type { AbbreviationType }?,
     ## A pronunciation guide to the designation

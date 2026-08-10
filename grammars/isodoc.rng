@@ -182,10 +182,14 @@ the type attribute defaults to `review` for reviews</a:documentation>
     <define name="section-title">
       <a:documentation>Title(s) of a clause</a:documentation>
       <element name="title">
-        <a:documentation>Title proper for a clause</a:documentation>
+        <a:documentation>Title proper for a clause. Footnotes on section headings are admitted
+(metanorma-model-iso#154)</a:documentation>
         <ref name="RequiredId"/>
         <zeroOrMore>
-          <ref name="TextElement"/>
+          <choice>
+            <ref name="TextElement"/>
+            <ref name="fn"/>
+          </choice>
         </zeroOrMore>
       </element>
       <zeroOrMore>
@@ -2328,16 +2332,21 @@ never authored; its presence marks the document as not ready for publication</a:
           <data type="boolean"/>
         </attribute>
       </optional>
-      <element name="name">
-        <a:documentation>The textual form of the designation</a:documentation>
-        <zeroOrMore>
-          <choice>
-            <ref name="PureTextElement"/>
-            <ref name="index"/>
-            <ref name="index-xref"/>
-          </choice>
-        </zeroOrMore>
-      </element>
+      <oneOrMore>
+        <element name="name">
+          <a:documentation>The textual form of the designation. Repeated for language variants of the
+same designation: repetition of name with language attributes replaces the
+retired variant element (metanorma-standoc#940, metanorma-model-iso#155)</a:documentation>
+          <ref name="LocalizedStringAttributes"/>
+          <zeroOrMore>
+            <choice>
+              <ref name="PureTextElement"/>
+              <ref name="index"/>
+              <ref name="index-xref"/>
+            </choice>
+          </zeroOrMore>
+        </element>
+      </oneOrMore>
       <optional>
         <element name="abbreviation-type">
           <a:documentation>Type of abbreviation that constitutes the designation, according to how it is formed</a:documentation>
