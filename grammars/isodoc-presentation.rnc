@@ -426,6 +426,11 @@ fmt-name = element fmt-name {
 ## All clause titles by default are prefixed by the i18n'd autonumbered label of the clause, where applicable,
 ## followed by a delimiter (as dictated by the house style). Autonumbers are given in <semx/>, and the content
 ## of fmt-title is annotated with spans of class fmt-*, as described under <span>
+## The terminal clause-number delimiter (after the final autonumber, before the title caption) is
+## span[@class = 'fmt-clause-delim'], distinct from span[@class = 'fmt-autonum-delim'] which delimits the
+## internal autonumber components (e.g. the "." separators within 1.1.1); this makes the terminal delimiter
+## uniquely targetable. It is configurable via the i18n key clause_delimiter (falling back to
+## caption_delimiter); setting it to "" suppresses the terminal delimiter.
 ## e.g.
 ##     <clause id="A">
 ##     <title>Discussion</title>
@@ -435,12 +440,12 @@ fmt-name = element fmt-name {
 ##     <fmt-title depth="1" source="A1">
 ##       <span class="fmt-caption-label">
 ##         <span class="fmt-element-name">Clause</span> <semx element="autonum" source="A">4</semx>
-##       </span><span class="fmt-autonum-delim">.</span><span class="fmt-caption-delim"><tab/></span>
+##       </span><span class="fmt-clause-delim">.</span><span class="fmt-caption-delim"><tab/></span>
 ##       <semx element="title" source="A1">Discussion</semx>
 ##      </fmt-title>
 ## Annex titles also usually include indication of the annex obligation (span[@class = 'fmt-obligation']).
 ## If no title is present in the Semantic XML, fmt-title is generated without the title caption (semx[@element = "title"])
-## and the caption delimiter (span[@class="fmt-caption-delim]); span[@fmt-autonum-delim] is still added
+## and the caption delimiter (span[@class="fmt-caption-delim]); span[@class="fmt-clause-delim"] is still added
 ## (so "Clause 4*.*", if the flavour requires it, but not "Clause 4.*<tab/>*".)
 ## No fmt-caption-label is added for clauses with @unnumbered = true, or if the document processing directive is to drop heading numbers
 ## (e.g. ISO Amendments). No fmt-caption-label is added for single special clauses in annexes:
