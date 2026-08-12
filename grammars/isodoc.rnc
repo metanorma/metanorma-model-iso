@@ -146,9 +146,12 @@ OlBody =
 ## NOTE: `start` attribute is not included by default, because of problems it raises with DOC output
 OlAttributes =
     BlockAttributes,
-    ## Type of numbering to be applied to the list items
+    ## Type of numbering to be applied to the list items: one of the five named
+    ## numbering styles, or a renderer-native numbering format string passed
+    ## through for the target rendering language to expand (e.g. xml2rfc v2
+    ## format strings such as "R%d", carried through by metanorma-ietf)
     attribute type { ( "roman" | "alphabet" | "arabic" |
-                       "roman_upper" | "alphabet_upper" ) }?,
+                       "roman_upper" | "alphabet_upper" | text ) }?,
     DisplayDirective?
 
 DlAttributes =

@@ -255,13 +255,17 @@ Sources are currently only rendered in metanorma-plateau</a:documentation>
       <ref name="BlockAttributes"/>
       <optional>
         <attribute name="type">
-          <a:documentation>Type of numbering to be applied to the list items</a:documentation>
+          <a:documentation>Type of numbering to be applied to the list items: one of the five named
+numbering styles, or a renderer-native numbering format string passed
+through for the target rendering language to expand (e.g. xml2rfc v2
+format strings such as "R%d", carried through by metanorma-ietf)</a:documentation>
           <choice>
             <value>roman</value>
             <value>alphabet</value>
             <value>arabic</value>
             <value>roman_upper</value>
             <value>alphabet_upper</value>
+            <text/>
           </choice>
         </attribute>
       </optional>

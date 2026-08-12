@@ -17,8 +17,11 @@ UlBody =
     li+, note*
 
 OlAttributes =
+    ## One of the named numbering styles, or a renderer-native numbering
+    ## format string passed through for xml2rfc to expand, e.g. "R%d"
+    ## (metanorma-model-iso#159; subsumes the former "text" named value)
     attribute type { ( "roman" | "alphabet" | "arabic" |
-                       "roman_upper" | "alphabet_upper" | "text" ) },
+                       "roman_upper" | "alphabet_upper" | text ) },
     attribute group { text }?,
     attribute spacing { text }?,
     attribute start { text }?,
@@ -53,16 +56,6 @@ xref =
      attribute format { text }?,
      XrefBody
 }
-
-erefType =
-    attribute normative { xsd:boolean }?,
-    attribute citeas { text },
-    attribute type { ReferenceFormat },
-    attribute alt { text }?,
-    attribute displayFormat { text }?,
-    attribute relative { text }?,
-    CitationType,
-    text
 
 quote-source =
   element source { erefTypeURI }
@@ -109,6 +102,19 @@ index = element index {
 }
 
 # end overrides
+
+## RFC XML idiosyncratic attributes on cross-references to bibliographic
+## entities. Additive augmentation of the base erefType: the former wholesale
+## redefinition in the override block had rotted against the base grammar
+## (bare mixed text predating ErefBody/display-text), and is retired per the
+## flavor-override-elimination direction (metanorma-model-iso#158). NB @type
+## thereby reverts to optional (base): requiredness cannot be tightened
+## through &=; the generator always emits it
+erefType &=
+    ## Rendering format for the reference in RFC XML (xml2rfc displayFormat)
+    attribute displayFormat { text }?,
+    ## Reference target expressed relative to the containing document (xml2rfc relative)
+    attribute relative { text }?
 
 TextElement |= review
 
