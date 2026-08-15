@@ -246,6 +246,35 @@ term = element term {
     fmt_termsource
 }
 
+## In Presentation XML, term notes are captioned like other assets: fmt-name contains the
+## rendered "Note N to entry" caption (with its delimiters), and fmt-xref-label the default
+## cross-reference text for the note (e.g. "Note 1", or "Clause 2, Note 1" outside its container).
+## The semantic content of the note is retained after the rendering channels.
+termnote =
+  element termnote {
+    RequiredId,
+    NumberingAttributes,
+    BlockAttributes,
+    ## Semantic classification of note
+    attribute type { text }?,
+    fmt-name?,
+    fmt-xref-label*,
+    ## Content of the term note
+    (paragraph-with-footnote | ul | ol | dl | formula)+
+}
+
+## As with termnote: in Presentation XML, term examples are captioned with fmt-name
+## ("EXAMPLE") and cross-referenced via fmt-xref-label, followed by the semantic content.
+termexample =
+  element termexample {
+    RequiredId,
+    BlockAttributes,
+    fmt-name?,
+    fmt-xref-label*,
+    ## Content of the term example
+    ( formula | ul | ol | dl | quote | sourcecode | paragraph-with-footnote | figure )+
+}
+
 DisplayOrder =
   ## The top-level clauses and blocks of the document are numbered in the order in which they should be rendered,
   ## taking floating titles into account.
@@ -870,8 +899,10 @@ ReferencesAttributes &=
 docidentifier &= empty
   
 ## Requirements are labelled with requirement/@class, or according to their element name
-## if requirement/@class is absent, just as with figures
-RequirementType &= fmt-provision
+## if requirement/@class is absent, just as with figures. In Presentation XML, the rendered
+## caption of the requirement is fmt-name, and its default cross-reference text fmt-xref-label
+## (as with other captioned assets); fmt-provision carries the rendered block content.
+RequirementType &= fmt-name?, fmt-xref-label*, fmt-provision
 
 ## Requirements may be rendered arbitrarily depending on the requirements model; in the case of Modspec,
 ## they are rendered as tables. 
