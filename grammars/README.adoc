@@ -20,3 +20,36 @@ gem. (The RelaxNG schemas are how documents are actually validated in the gems
 generating Metanorma XML.)
 
 The grammars are generated using `make.sh`. The grammars are validated using `bundle exec ruby test.rb`.
+
+== Presentation XML contract
+
+The grammars `isodoc-presentation.rnc` and `biblio-presentation.rnc` (composed by
+`isodoc-presentation-compile.rnc`) define the Presentation XML overlay on the Semantic
+XML grammar: the semantic document, with rendering channels (`fmt-*` elements) tagged
+alongside the semantic elements they were derived from, and `semx` provenance links
+pointing back to the semantic source of each rendered fragment.
+
+The overlay exists to serve both smart and dumb renderers. A dumb renderer -- one with
+no knowledge of the business rules for rendering concepts, bibliographic sources, or
+autonumbering -- renders entirely from the `fmt-*` channels. A smart renderer may
+ignore the channels and apply the business rules itself to the semantic content.
+
+The contract between the two channels is:
+
+. *Ownership*: `fmt-*` elements are emitter-owned rendering cache. They are generated
+  by the presentation layer and are never authored or edited. Regeneration of the
+  presentation layer overwrites them wholesale.
+. *Precedence*: semantic elements are authoritative for data; `fmt-*` elements are
+  authoritative for rendered text when present. When a consumer derives rendering from
+  semantic content because a channel is absent, it does so as a complete substitution
+  for that rendering -- derived and channel fragments are never mixed within one
+  rendering.
+. *Closure*: the `fmt-*` vocabulary is closed by these grammars. A new rendering
+  channel is added by a grammar change in this repository, in the same change as the
+  emitter that produces it; an emitter must not emit a `fmt-*` element that the
+  grammar does not define.
+. *Coverage*: every renderable semantic element either carries its rendering channel
+  (asset captions via `fmt-name`/`fmt-xref-label`, clause titles via `fmt-title`,
+  requirements via `fmt-provision`, term notes and examples via `fmt-name`/
+  `fmt-xref-label`, deprecations via `fmt-deprecates`, and so on), or is documented
+  in the overlay as passing through to Presentation XML unchanged.
